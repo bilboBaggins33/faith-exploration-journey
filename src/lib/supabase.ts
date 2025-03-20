@@ -1,10 +1,10 @@
 
 import { supabase as supabaseClient } from '@/integrations/supabase/client';
-import { Database } from '@/integrations/supabase/types';
 import { createClient } from '@supabase/supabase-js';
+import { ExtendedDatabase } from '@/lib/supabase-types';
 
 // Export the configured supabase client with correct type
-export const supabase = supabaseClient as ReturnType<typeof createClient<Database>>;
+export const supabase = supabaseClient as ReturnType<typeof createClient<ExtendedDatabase>>;
 
 // Helper function to check if Supabase is properly configured
 export const isSupabaseConfigured = () => {
