@@ -39,6 +39,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         
         const { data: authListener } = supabase.auth.onAuthStateChange(
           async (_event, session) => {
+            console.log('Auth state changed:', _event, session?.user?.id);
             setSession(session);
             setUser(session?.user ?? null);
           }
@@ -68,10 +69,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       
-      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      const { error, data } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
       
+      console.log('Sign in successful:', data.user?.id);
+      
     } catch (error: any) {
+      console.error('Sign in error:', error.message);
       toast({
         title: "Login failed",
         description: error.message || "An error occurred during login",
@@ -122,7 +126,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       
-      const { error } = await supabase.auth.signUp({ 
+      const { error, data } = await supabase.auth.signUp({ 
         email, 
         password,
         options: {
@@ -134,23 +138,39 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       
       if (error) throw error;
       
-      // Create profile entry
-      await supabase.from('user_profiles').insert({
-        user_id: (await supabase.auth.getUser()).data.user?.id,
-        full_name: name,
-        streak: 0,
-        points: 0,
-        last_active: new Date().toISOString().split('T')[0],
-      });
+      console.log('Sign up successful, creating profile for user:', data.user?.id);
       
-      // Create bible progress entry
-      await supabase.from('bible_progress').insert({
-        user_id: (await supabase.auth.getUser()).data.user?.id,
-        challenges_completed: [],
-        verses_memorized: [],
-        total_points: 0,
-        books_progress: {},
-      });
+      if (data.user) {
+        // Create profile entry
+        const { error: profileError } = await supabase.from('user_profiles').insert({
+          user_id: data.user.id,
+          full_name: name,
+          streak: 0,
+          points: 0,
+          last_active: new Date().toISOString().split('T')[0],
+        });
+        
+        if (profileError) {
+          console.error('Error creating profile:', profileError);
+          throw profileError;
+        }
+        
+        // Create bible progress entry
+        const { error: progressError } = await supabase.from('bible_progress').insert({
+          user_id: data.user.id,
+          challenges_completed: [],
+          verses_memorized: [],
+          total_points: 0,
+          books_progress: {},
+          completed_chapters: [],
+          total_chapters_read: 0
+        });
+        
+        if (progressError) {
+          console.error('Error creating bible progress:', progressError);
+          throw progressError;
+        }
+      }
       
       toast({
         title: "Account created!",
@@ -158,6 +178,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
       
     } catch (error: any) {
+      console.error('Sign up error:', error.message);
       toast({
         title: "Registration failed",
         description: error.message || "An error occurred during registration",

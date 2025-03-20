@@ -17,11 +17,13 @@ import {
   BookOpen, AlertCircle, X, HelpCircle, Bookmark
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useAuth } from '@/context/AuthContext';
 
 const BibleChapterChallenge = () => {
   const { bookId, chapter } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { user } = useAuth();
   const { completeChallenge, isCompleted, progress } = useBibleProgress();
   
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -41,15 +43,22 @@ const BibleChapterChallenge = () => {
   ) || sampleChapterChallenges[0]; // Default to Genesis 1 for demo
   
   // Track whether this challenge is already completed
-  const challengeCompleted = isCompleted(`${bookId}-${chapter}`);
+  const challengeId = `${bookId}-${chapter}`;
+  const challengeCompleted = isCompleted(challengeId);
   
   useEffect(() => {
+    console.log('BibleChapterChallenge component mounted', { bookId, chapter });
+    console.log('Current user:', user?.id);
+    console.log('Current progress:', progress);
+    console.log('Challenge completed?', challengeCompleted);
+    
     // Check if the challenge exists and initialize
     if (challenge) {
       setLoading(false);
       
       // If already completed, show the summary screen and set the score
       if (challengeCompleted && progress?.completed_chapters) {
+        console.log('Challenge is already completed');
         setQuizCompleted(true);
         
         // Find the saved score for this chapter
@@ -58,9 +67,11 @@ const BibleChapterChallenge = () => {
         );
         
         if (chapterData && chapterData.score) {
+          console.log('Found saved score:', chapterData.score);
           setScore(chapterData.score);
         } else {
           // If no specific score saved, default to max points
+          console.log('No saved score found, defaulting to max points');
           setScore(challenge.questions.length);
         }
       }
@@ -73,7 +84,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted, progress, bookId, chapter]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter, user]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -106,8 +117,9 @@ const BibleChapterChallenge = () => {
       setQuizCompleted(true);
       
       if (!challengeCompleted) {
-        // Always pass the actual score earned, not the static challenge.points
-        completeChallenge(`${bookId}-${chapter}`, score);
+        console.log('Completing challenge with score:', score);
+        // Make sure challengeId is correct format: "bookId-chapter"
+        completeChallenge(challengeId, score + (isCorrect ? 1 : 0));
       }
     }
   };
@@ -147,6 +159,25 @@ const BibleChapterChallenge = () => {
             <p className="text-gray-600 mb-6">This Bible chapter challenge hasn't been created yet.</p>
             <Button onClick={() => navigate('/bible')}>
               Return to Bible Explorer
+            </Button>
+          </Card>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (!user) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center p-4">
+          <Card className="p-8 max-w-md text-center">
+            <AlertCircle className="mx-auto text-blue-500 mb-4" size={40} />
+            <h2 className="text-xl font-bold mb-2">Login Required</h2>
+            <p className="text-gray-600 mb-6">You need to be logged in to save your progress. Please log in to continue.</p>
+            <Button onClick={() => navigate('/auth')}>
+              Go to Login
             </Button>
           </Card>
         </div>
@@ -371,4 +402,3 @@ const BibleChapterChallenge = () => {
 };
 
 export default BibleChapterChallenge;
-

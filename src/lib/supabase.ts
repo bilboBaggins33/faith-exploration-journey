@@ -8,5 +8,7 @@ export const supabase = supabaseClient as ReturnType<typeof createClient<Extende
 
 // Helper function to check if Supabase is properly configured
 export const isSupabaseConfigured = () => {
-  return true; // Since we're now using the configured client
+  const url = process.env.SUPABASE_URL || import.meta.env?.VITE_SUPABASE_URL;
+  const key = process.env.SUPABASE_ANON_KEY || import.meta.env?.VITE_SUPABASE_ANON_KEY;
+  return Boolean(url && key && url.includes('supabase.co') && key.length > 20);
 };

@@ -34,9 +34,12 @@ export function useBibleProgress() {
 
   // Load initial progress
   useEffect(() => {
+    console.log('useBibleProgress hook initialized with user:', user?.id);
+    
     if (!user || !isSupabaseConfigured()) {
       // Create mock progress data for development when Supabase is not configured
       if (!isSupabaseConfigured()) {
+        console.log('Supabase not configured, using mock data');
         setProgress({
           challenges_completed: [],
           verses_memorized: [],
@@ -52,6 +55,7 @@ export function useBibleProgress() {
           full_name: 'Test User'
         });
       } else {
+        console.log('No user logged in');
         setProgress(null);
         setProfile(null);
       }
@@ -62,6 +66,8 @@ export function useBibleProgress() {
     async function loadProgress() {
       setLoading(true);
       try {
+        console.log('Loading progress for user:', user.id);
+        
         // Get user profile
         const { data: profileData, error: profileError } = await supabase
           .from('user_profiles')
@@ -69,8 +75,37 @@ export function useBibleProgress() {
           .eq('user_id', user.id)
           .single();
 
-        if (profileError) throw profileError;
-        setProfile(profileData);
+        if (profileError) {
+          console.error('Error loading profile:', profileError);
+          
+          // If the profile doesn't exist yet, create it
+          if (profileError.code === 'PGRST116') {
+            console.log('Profile not found, creating new profile');
+            const { data: newProfile, error: createError } = await supabase
+              .from('user_profiles')
+              .insert({
+                user_id: user.id,
+                full_name: user.user_metadata?.full_name || 'User',
+                streak: 0,
+                points: 0,
+                last_active: new Date().toISOString().split('T')[0]
+              })
+              .select()
+              .single();
+              
+            if (createError) {
+              console.error('Error creating profile:', createError);
+              throw createError;
+            }
+            
+            setProfile(newProfile);
+          } else {
+            throw profileError;
+          }
+        } else {
+          console.log('Profile loaded successfully:', profileData);
+          setProfile(profileData);
+        }
 
         // Get bible progress
         const { data: progressData, error: progressError } = await supabase
@@ -79,33 +114,69 @@ export function useBibleProgress() {
           .eq('user_id', user.id)
           .single();
 
-        if (progressError) throw progressError;
-        
-        // Initialize completed_chapters if it doesn't exist
-        if (progressData && !progressData.completed_chapters) {
-          progressData.completed_chapters = [];
+        if (progressError) {
+          console.error('Error loading progress:', progressError);
+          
+          // If the progress record doesn't exist yet, create it
+          if (progressError.code === 'PGRST116') {
+            console.log('Progress not found, creating new progress record');
+            const { data: newProgress, error: createError } = await supabase
+              .from('bible_progress')
+              .insert({
+                user_id: user.id,
+                challenges_completed: [],
+                verses_memorized: [],
+                total_points: 0,
+                books_progress: {},
+                completed_chapters: [],
+                total_chapters_read: 0
+              })
+              .select()
+              .single();
+              
+            if (createError) {
+              console.error('Error creating progress:', createError);
+              throw createError;
+            }
+            
+            setProgress(newProgress);
+          } else {
+            throw progressError;
+          }
+        } else {
+          console.log('Progress loaded successfully:', progressData);
+          
+          // Initialize completed_chapters if it doesn't exist
+          if (progressData && !progressData.completed_chapters) {
+            progressData.completed_chapters = [];
+          }
+          
+          // Initialize total_chapters_read if it doesn't exist
+          if (progressData && !progressData.total_chapters_read) {
+            progressData.total_chapters_read = 0;
+          }
+          
+          // Initialize books_progress if it doesn't exist
+          if (progressData && !progressData.books_progress) {
+            progressData.books_progress = {};
+          }
+          
+          setProgress(progressData);
         }
-        
-        // Initialize total_chapters_read if it doesn't exist
-        if (progressData && !progressData.total_chapters_read) {
-          progressData.total_chapters_read = 0;
-        }
-        
-        // Initialize books_progress if it doesn't exist
-        if (progressData && !progressData.books_progress) {
-          progressData.books_progress = {};
-        }
-        
-        setProgress(progressData);
       } catch (error) {
         console.error('Error loading progress:', error);
+        toast({
+          title: "Error loading progress",
+          description: "There was an issue loading your progress. Please try again.",
+          variant: "destructive",
+        });
       } finally {
         setLoading(false);
       }
     }
 
     loadProgress();
-  }, [user]);
+  }, [user, toast]);
 
   // Mock function for when Supabase is not configured
   const mockSaveProgress = (message: string) => {
@@ -119,6 +190,7 @@ export function useBibleProgress() {
 
   // Update books_progress when a chapter is completed
   const updateBookProgress = (bookId: string, currentProgress: BibleProgress) => {
+    console.log('Updating book progress for:', bookId);
     const bookChapters = new Set<number>();
     
     // Find all completed chapters for this book
@@ -139,6 +211,8 @@ export function useBibleProgress() {
       ? Math.round((bookChapters.size / totalBookChapters) * 100) 
       : 0;
     
+    console.log(`Book progress: ${bookChapters.size}/${totalBookChapters} chapters (${completedPercentage}%)`);
+    
     return {
       ...currentProgress.books_progress,
       [bookId]: completedPercentage
@@ -147,9 +221,14 @@ export function useBibleProgress() {
 
   // Mark a challenge as completed
   const completeChallenge = async (challengeId: string, pointsEarned: number) => {
+    console.log(`Completing challenge ${challengeId} for ${pointsEarned} points`);
+    
     if (!isSupabaseConfigured()) {
       // Mock implementation for development
-      if (!progress) return;
+      if (!progress) {
+        console.log('No progress data available');
+        return;
+      }
       
       if (!progress.challenges_completed.includes(challengeId)) {
         const newChallenges = [...progress.challenges_completed, challengeId];
@@ -221,13 +300,20 @@ export function useBibleProgress() {
           title: "Challenge completed!",
           description: `You earned ${pointsEarned} points.`,
         });
+      } else {
+        console.log('Challenge already completed');
       }
       return;
     }
 
-    if (!user || !progress) return;
+    if (!user || !progress) {
+      console.error('No user or progress data available');
+      return;
+    }
 
     try {
+      console.log('Saving challenge completion to Supabase');
+      
       // Update only if not already completed
       if (!progress.challenges_completed.includes(challengeId)) {
         const newChallenges = [...progress.challenges_completed, challengeId];
@@ -243,6 +329,8 @@ export function useBibleProgress() {
           const chapter = parseInt(chapterStr);
           
           if (!isNaN(chapter)) {
+            console.log(`Processing chapter challenge: ${bookId} chapter ${chapter}`);
+            
             // Check if this chapter is already in completed_chapters
             const existingChapterIndex = newCompletedChapters.findIndex(
               c => c.book_id === bookId && c.chapter === chapter
@@ -250,9 +338,11 @@ export function useBibleProgress() {
             
             if (existingChapterIndex >= 0) {
               // Update existing chapter entry
+              console.log('Updating existing chapter completion');
               newCompletedChapters[existingChapterIndex].score = pointsEarned;
             } else {
               // Add to completed chapters if it's a Bible chapter
+              console.log('Adding new chapter completion');
               newCompletedChapters = [
                 ...newCompletedChapters,
                 {
@@ -285,16 +375,19 @@ export function useBibleProgress() {
           const yesterdayStr = yesterday.toISOString().split('T')[0];
 
           if (profile.last_active === yesterdayStr) {
+            console.log('Continuing streak');
             newStreak += 1;
           } else {
             // Streak broken
+            console.log('Starting new streak');
             newStreak = 1;
           }
           updatedLastActive = today;
         }
 
+        console.log('Updating bible_progress table...');
         // Update bible progress
-        const { error: progressError } = await supabase
+        const { error: progressError, data: updatedProgress } = await supabase
           .from('bible_progress')
           .update({
             challenges_completed: newChallenges,
@@ -303,21 +396,34 @@ export function useBibleProgress() {
             total_chapters_read: newTotalChaptersRead,
             books_progress: newBooksProgress
           })
-          .eq('user_id', user.id);
+          .eq('user_id', user.id)
+          .select();
 
-        if (progressError) throw progressError;
+        if (progressError) {
+          console.error('Error updating bible progress:', progressError);
+          throw progressError;
+        }
+        
+        console.log('Bible progress updated successfully:', updatedProgress);
 
+        console.log('Updating user_profiles table...');
         // Update user profile
-        const { error: profileError } = await supabase
+        const { error: profileError, data: updatedProfile } = await supabase
           .from('user_profiles')
           .update({
             streak: newStreak,
             points: (profile?.points || 0) + pointsEarned,
             last_active: updatedLastActive
           })
-          .eq('user_id', user.id);
+          .eq('user_id', user.id)
+          .select();
 
-        if (profileError) throw profileError;
+        if (profileError) {
+          console.error('Error updating user profile:', profileError);
+          throw profileError;
+        }
+        
+        console.log('User profile updated successfully:', updatedProfile);
 
         // Update local state
         setProgress({
@@ -342,6 +448,8 @@ export function useBibleProgress() {
           title: "Challenge completed!",
           description: `You earned ${pointsEarned} points.`,
         });
+      } else {
+        console.log('Challenge already completed, skipping update');
       }
     } catch (error) {
       console.error('Error completing challenge:', error);
