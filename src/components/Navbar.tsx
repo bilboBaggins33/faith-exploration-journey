@@ -2,13 +2,15 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, BookOpen, User, Map } from 'lucide-react';
+import { Menu, X, BookOpen, User, Map, LogOut } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { useAuth } from '@/context/AuthContext';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
+  const { user, signOut } = useAuth();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -33,6 +35,10 @@ const Navbar = () => {
   const toggleMenu = () => setIsOpen(!isOpen);
   
   const isActive = (path: string) => location.pathname === path;
+
+  const handleSignOut = async () => {
+    await signOut();
+  };
   
   return (
     <nav 
@@ -65,11 +71,19 @@ const Navbar = () => {
               <NavLink to="/profile" active={isActive('/profile')}>
                 Profile
               </NavLink>
-              <Link to="/auth">
-                <Button variant="outline" size="sm" className="ml-4">
-                  Sign In
+              
+              {user ? (
+                <Button variant="outline" size="sm" className="ml-4 flex items-center" onClick={handleSignOut}>
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
                 </Button>
-              </Link>
+              ) : (
+                <Link to="/auth">
+                  <Button variant="outline" size="sm" className="ml-4">
+                    Sign In
+                  </Button>
+                </Link>
+              )}
             </div>
           </div>
           
@@ -106,9 +120,21 @@ const Navbar = () => {
             <MobileNavLink to="/profile" icon={<User className="h-5 w-5 mr-2" />} active={isActive('/profile')}>
               Profile
             </MobileNavLink>
-            <Link to="/auth" className="w-full">
-              <Button className="w-full bg-bible-blue hover:bg-bible-deepBlue text-white">Sign In</Button>
-            </Link>
+            
+            {user ? (
+              <Button 
+                className="w-full flex items-center justify-center"
+                variant="destructive"
+                onClick={handleSignOut}
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Sign Out
+              </Button>
+            ) : (
+              <Link to="/auth" className="w-full">
+                <Button className="w-full bg-bible-blue hover:bg-bible-deepBlue text-white">Sign In</Button>
+              </Link>
+            )}
           </div>
         </motion.div>
       )}

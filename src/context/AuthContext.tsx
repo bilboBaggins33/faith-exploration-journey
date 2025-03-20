@@ -32,19 +32,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         console.log('Supabase configured:', isConfigured);
         
         if (!isConfigured) {
-          console.log('Supabase not configured, skipping auth initialization');
+          console.error('Supabase not configured properly, auth will not work');
           setIsLoading(false);
           return;
         }
         
-        // Get the session
-        const { data } = await supabase.auth.getSession();
-        console.log('Initial session:', data.session ? 'Found' : 'Not found');
-        
-        setSession(data.session);
-        setUser(data.session?.user ?? null);
-        
-        // Setup auth listener
+        // Set up the auth listener before checking the session
         const { data: authListener } = supabase.auth.onAuthStateChange(
           async (_event, session) => {
             console.log('Auth state changed:', _event, session?.user?.id);
@@ -53,11 +46,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           }
         );
         
+        // Get the session
+        const { data } = await supabase.auth.getSession();
+        console.log('Initial session check:', data.session ? 'Found session' : 'No session found');
+        
+        setSession(data.session);
+        setUser(data.session?.user ?? null);
+        
         return () => {
           authListener.subscription.unsubscribe();
         };
       } catch (error) {
-        console.error('Error getting session:', error);
+        console.error('Error initializing auth:', error);
       } finally {
         setIsLoading(false);
       }
