@@ -1,0 +1,333 @@
+
+import { useState, useEffect } from 'react';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { bibleBooks, bibleChapters, sampleChapterChallenges } from '@/data/bibleData';
+import Navbar from '@/components/Navbar';
+import Footer from '@/components/Footer';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { Card } from '@/components/ui/card';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { Label } from '@/components/ui/label';
+import { Separator } from '@/components/ui/separator';
+import { useToast } from '@/hooks/use-toast';
+import { 
+  Book, CheckCircle, ArrowRight, ArrowLeft, Award, 
+  BookOpen, AlertCircle, X, HelpCircle, Bookmark
+} from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+
+const BibleChapterChallenge = () => {
+  const { bookId, chapter } = useParams();
+  const navigate = useNavigate();
+  const { toast } = useToast();
+  const { completeChallenge, isCompleted } = useBibleProgress();
+  
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
+  const [score, setScore] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [loading, setLoading] = useState(true);
+  
+  // Find challenge data
+  const book = bibleBooks.find(b => b.id === bookId);
+  
+  // For demonstration, we'll use the sample challenges for Genesis 1 and 2
+  // In a real implementation, you would fetch challenges from your database
+  const challenge = sampleChapterChallenges.find(
+    c => c.bookId === bookId && c.chapter === Number(chapter)
+  ) || sampleChapterChallenges[0]; // Default to Genesis 1 for demo
+  
+  // Track whether this challenge is already completed
+  const challengeCompleted = isCompleted(`${bookId}-${chapter}`);
+  
+  useEffect(() => {
+    // Check if the challenge exists and initialize
+    if (challenge) {
+      setLoading(false);
+      
+      // If already completed, show the summary screen
+      if (challengeCompleted) {
+        setQuizCompleted(true);
+        setScore(challenge.points);
+      }
+    } else {
+      // Challenge doesn't exist, show error or redirect
+      toast({
+        title: "Challenge Not Found",
+        description: "This Bible chapter challenge is not available yet.",
+        variant: "destructive",
+      });
+      setLoading(false);
+    }
+  }, [challenge, challengeCompleted]);
+  
+  const handleAnswerSelect = (answer: string) => {
+    setSelectedAnswer(answer);
+  };
+  
+  const checkAnswer = () => {
+    if (!selectedAnswer) return;
+    
+    const currentQ = challenge.questions[currentQuestion];
+    const correct = selectedAnswer === currentQ.correctAnswer;
+    
+    setIsCorrect(correct);
+    setShowExplanation(true);
+    
+    if (correct) {
+      setScore(score + Math.ceil(challenge.points / challenge.questions.length));
+    }
+  };
+  
+  const nextQuestion = () => {
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setIsCorrect(null);
+    
+    if (currentQuestion < challenge.questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      // Complete the challenge
+      setQuizCompleted(true);
+      
+      if (!challengeCompleted) {
+        completeChallenge(`${bookId}-${chapter}`, score);
+      }
+    }
+  };
+  
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setIsCorrect(null);
+    setScore(0);
+    setQuizCompleted(false);
+  };
+  
+  if (loading) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center">
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-bible-blue mx-auto mb-4"></div>
+            <p>Loading challenge...</p>
+          </div>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  if (!challenge) {
+    return (
+      <div className="min-h-screen flex flex-col">
+        <Navbar />
+        <div className="flex-1 flex items-center justify-center p-4">
+          <Card className="p-8 max-w-md text-center">
+            <AlertCircle className="mx-auto text-red-500 mb-4" size={40} />
+            <h2 className="text-xl font-bold mb-2">Challenge Not Available</h2>
+            <p className="text-gray-600 mb-6">This Bible chapter challenge hasn't been created yet.</p>
+            <Button onClick={() => navigate('/bible')}>
+              Return to Bible Explorer
+            </Button>
+          </Card>
+        </div>
+        <Footer />
+      </div>
+    );
+  }
+  
+  const currentQuestionData = challenge.questions[currentQuestion];
+  
+  return (
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      
+      <main className="flex-1 pt-16 pb-24">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <div className="mb-8 text-center">
+            <div className="flex items-center justify-center mb-2">
+              <Book className="mr-2 text-bible-blue" size={20} />
+              <h3 className="text-lg font-medium">{book?.name || 'Bible'} {chapter}</h3>
+            </div>
+            <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
+              {challenge.title}
+            </h1>
+            
+            {!quizCompleted && (
+              <div className="mb-6">
+                <div className="flex justify-between text-sm text-gray-600 mb-2">
+                  <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
+                  <span>{score} points earned</span>
+                </div>
+                <Progress value={((currentQuestion + 1) / challenge.questions.length) * 100} className="h-2" />
+              </div>
+            )}
+          </div>
+          
+          {/* Quiz content */}
+          {!quizCompleted ? (
+            <div className="glass-card p-6 rounded-xl">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={currentQuestion}
+                  initial={{ opacity: 0, x: 20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  exit={{ opacity: 0, x: -20 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <h2 className="text-xl font-medium mb-6">
+                    {currentQuestionData.question}
+                  </h2>
+                  
+                  <RadioGroup
+                    value={selectedAnswer || ""}
+                    onValueChange={handleAnswerSelect}
+                    className="space-y-3 mb-6"
+                    disabled={showExplanation}
+                  >
+                    {currentQuestionData.options.map((option, index) => (
+                      <div key={index}>
+                        <div className={`
+                          flex items-center rounded-lg border p-4 cursor-pointer transition-all
+                          ${selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200'}
+                          ${showExplanation && option === currentQuestionData.correctAnswer ? 'border-green-500 bg-green-50' : ''}
+                          ${showExplanation && selectedAnswer === option && option !== currentQuestionData.correctAnswer ? 'border-red-500 bg-red-50' : ''}
+                        `}>
+                          <RadioGroupItem 
+                            value={option} 
+                            id={`option-${index}`} 
+                            className="mr-2"
+                          />
+                          <Label 
+                            htmlFor={`option-${index}`}
+                            className="flex-1 cursor-pointer"
+                          >
+                            {option}
+                          </Label>
+                        </div>
+                      </div>
+                    ))}
+                  </RadioGroup>
+                  
+                  {showExplanation && (
+                    <motion.div
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className={`p-4 rounded-lg mb-6 ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}
+                    >
+                      <div className="flex items-start">
+                        {isCorrect ? (
+                          <CheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" size={20} />
+                        ) : (
+                          <X className="text-red-500 mr-2 mt-1 flex-shrink-0" size={20} />
+                        )}
+                        <div>
+                          <h3 className="font-medium mb-1">
+                            {isCorrect ? 'Correct!' : 'Incorrect'}
+                          </h3>
+                          <p className="text-sm">{currentQuestionData.explanation}</p>
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                  
+                  <div className="flex justify-between">
+                    <Button
+                      variant="outline"
+                      onClick={() => navigate(-1)}
+                      className="flex items-center"
+                    >
+                      <ArrowLeft className="mr-2" size={16} />
+                      Back
+                    </Button>
+                    
+                    {!showExplanation ? (
+                      <Button 
+                        disabled={!selectedAnswer}
+                        onClick={checkAnswer}
+                      >
+                        Check Answer
+                      </Button>
+                    ) : (
+                      <Button onClick={nextQuestion}>
+                        {currentQuestion < challenge.questions.length - 1 ? (
+                          <>
+                            Next Question
+                            <ArrowRight className="ml-2" size={16} />
+                          </>
+                        ) : (
+                          <>
+                            Complete Challenge
+                            <CheckCircle className="ml-2" size={16} />
+                          </>
+                        )}
+                      </Button>
+                    )}
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          ) : (
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+            >
+              <Card className="p-8 text-center">
+                <Award className="mx-auto text-bible-gold mb-4" size={60} />
+                <h2 className="text-2xl font-bold mb-2">Challenge Completed!</h2>
+                <p className="text-gray-600 mb-6">
+                  You've earned {score} points for completing this chapter.
+                </p>
+                
+                <div className="bg-gray-50 p-4 rounded-lg mb-6">
+                  <h3 className="font-medium mb-2 flex items-center justify-center">
+                    <Bookmark className="mr-2 text-bible-blue" size={16} />
+                    Key Verse to Remember
+                  </h3>
+                  <p className="italic text-gray-700 mb-2">"{challenge.key_verse_text}"</p>
+                  <p className="text-sm text-gray-500">{challenge.key_verse}</p>
+                </div>
+                
+                <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
+                  <Button 
+                    onClick={restartQuiz}
+                    variant="outline"
+                  >
+                    Retake Challenge
+                  </Button>
+                  
+                  <Button onClick={() => navigate('/bible')}>
+                    Continue Reading
+                  </Button>
+                </div>
+                
+                <div className="mt-6">
+                  <Button 
+                    variant="link" 
+                    className="text-gray-500"
+                    onClick={() => navigate(`/bible/${bookId}`)}
+                  >
+                    <BookOpen className="mr-2" size={16} />
+                    Back to {book?.name || 'Book'}
+                  </Button>
+                </div>
+              </Card>
+            </motion.div>
+          )}
+        </div>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default BibleChapterChallenge;

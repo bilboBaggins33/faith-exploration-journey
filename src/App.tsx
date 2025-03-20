@@ -13,11 +13,13 @@ import Challenge from "./pages/Challenge";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
+import BibleExplorer from "./pages/BibleExplorer";
 
 // Challenge Components
 import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
 import NoahArkChallenge from "@/components/challenges/NoahArkChallenge";
 import AbrahamFaithChallenge from "@/components/challenges/AbrahamFaithChallenge";
+import BibleChapterChallenge from "@/components/challenges/BibleChapterChallenge";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -37,6 +39,9 @@ const App = () => (
             <Route path="/challenge/creation-quiz" element={<GenesisDaysChallenge />} />
             <Route path="/challenge/noah-quiz" element={<NoahArkChallenge />} />
             <Route path="/challenge/abraham-quiz" element={<AbrahamFaithChallenge />} />
+            <Route path="/challenge/bible/:bookId/:chapter" element={<BibleChapterChallenge />} />
+            <Route path="/bible" element={<BibleExplorer />} />
+            <Route path="/bible/:bookId" element={<BibleExplorer />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/auth" element={<Auth />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
