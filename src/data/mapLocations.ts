@@ -1,4 +1,3 @@
-
 // Define a type for location status to ensure consistent usage
 export type LocationStatus = 'locked' | 'unlocked' | 'completed';
 
@@ -65,7 +64,7 @@ export const mapLocations: MapLocationData[] = [
     title: 'Noah and the Flood',
     description: 'Discover the story of Noah\'s ark and God\'s covenant.',
     position: { x: '30%', y: '45%' },
-    status: 'locked',
+    status: 'unlocked',
     content: {
       title: 'Noah and the Flood',
       description: 'This section covers Genesis 6-9, the story of how God saved Noah and his family while judging the wickedness of humanity through the flood.',
@@ -87,7 +86,7 @@ export const mapLocations: MapLocationData[] = [
     title: 'Abraham and the Patriarchs',
     description: 'Follow the journey of faith through Abraham, Isaac, and Jacob.',
     position: { x: '45%', y: '55%' },
-    status: 'locked',
+    status: 'unlocked',
     content: {
       title: 'Abraham and the Patriarchs',
       description: 'This area covers Genesis 12-50, following the stories of Abraham, Isaac, Jacob, and Joseph, and how God worked through them to establish His covenant people.',
@@ -243,5 +242,133 @@ export const genesisCreationQuiz: QuizQuestion[] = [
     ],
     correctAnswer: 'Rested and made it holy',
     explanation: 'On the seventh day, God rested from all His work and blessed the day, making it holy. (Genesis 2:2-3)'
+  }
+];
+
+// Noah's Ark Quiz
+export const noahArkQuiz: QuizQuestion[] = [
+  {
+    id: 'noah1',
+    question: 'Why did God decide to send the flood?',
+    options: [
+      'Because there were too many people on earth',
+      'Because of the wickedness of humanity',
+      'Because Noah asked Him to',
+      'Because the earth needed water'
+    ],
+    correctAnswer: 'Because of the wickedness of humanity',
+    explanation: 'God saw that the wickedness of man was great in the earth, and that every intention of the thoughts of his heart was only evil continually. (Genesis 6:5)'
+  },
+  {
+    id: 'noah2',
+    question: 'How many people were saved on the ark?',
+    options: [
+      '4',
+      '6',
+      '8',
+      '12'
+    ],
+    correctAnswer: '8',
+    explanation: 'Eight people were saved: Noah, his wife, his three sons (Shem, Ham, and Japheth), and their wives. (Genesis 7:13, 1 Peter 3:20)'
+  },
+  {
+    id: 'noah3',
+    question: 'How long did it rain during the flood?',
+    options: [
+      '7 days',
+      '40 days and 40 nights',
+      '100 days',
+      '1 year'
+    ],
+    correctAnswer: '40 days and 40 nights',
+    explanation: 'The rain fell upon the earth for forty days and forty nights. (Genesis 7:12)'
+  },
+  {
+    id: 'noah4',
+    question: 'What did Noah send out first to see if the waters had receded?',
+    options: [
+      'A dove',
+      'A raven',
+      'A sparrow',
+      'A pigeon'
+    ],
+    correctAnswer: 'A raven',
+    explanation: 'Noah first sent out a raven, which kept flying back and forth until the waters had dried up. (Genesis 8:7)'
+  },
+  {
+    id: 'noah5',
+    question: 'What was the sign of God\'s covenant with Noah after the flood?',
+    options: [
+      'A star',
+      'A rainbow',
+      'A dove',
+      'An olive branch'
+    ],
+    correctAnswer: 'A rainbow',
+    explanation: 'God set His rainbow in the cloud as a sign of the covenant between Him and the earth, promising never again to destroy all life with a flood. (Genesis 9:13-15)'
+  }
+];
+
+// Abraham Faith Quiz
+export const abrahamFaithQuiz: QuizQuestion[] = [
+  {
+    id: 'abraham1',
+    question: 'What was Abraham\'s name before God changed it?',
+    options: [
+      'Abram',
+      'Ibrahim',
+      'Avram',
+      'Abiram'
+    ],
+    correctAnswer: 'Abram',
+    explanation: 'His name was Abram before God changed it to Abraham, which means "father of many nations." (Genesis 17:5)'
+  },
+  {
+    id: 'abraham2',
+    question: 'What did God ask Abraham to do to demonstrate his faith?',
+    options: [
+      'Build an altar',
+      'Leave his homeland',
+      'Sacrifice his son Isaac',
+      'All of the above'
+    ],
+    correctAnswer: 'All of the above',
+    explanation: 'Abraham demonstrated his faith in multiple ways: by leaving his homeland (Genesis 12:1-4), building altars to worship God (Genesis 12:7-8), and being willing to sacrifice Isaac (Genesis 22:1-18).'
+  },
+  {
+    id: 'abraham3',
+    question: 'How old was Abraham when Isaac was born?',
+    options: [
+      '75 years old',
+      '86 years old',
+      '99 years old',
+      '100 years old'
+    ],
+    correctAnswer: '100 years old',
+    explanation: 'Abraham was a hundred years old when his son Isaac was born to him. (Genesis 21:5)'
+  },
+  {
+    id: 'abraham4',
+    question: 'Which city did Abraham plead with God to spare for the sake of the righteous?',
+    options: [
+      'Jericho',
+      'Sodom',
+      'Gomorrah',
+      'Babylon'
+    ],
+    correctAnswer: 'Sodom',
+    explanation: 'Abraham pleaded with God to spare Sodom if even ten righteous people could be found there. (Genesis 18:16-33)'
+  },
+  {
+    id: 'abraham5',
+    question: 'What was the name of Abraham\'s nephew who lived in Sodom?',
+    options: [
+      'Lot',
+      'Laban',
+      'Ishmael',
+      'Esau'
+    ],
+    correctAnswer: 'Lot',
+    explanation: 'Lot was Abraham\'s nephew who chose to live in Sodom before it was destroyed. Abraham helped rescue him when the city was attacked. (Genesis 13:10-12, 14:12-16)'
   }
 ];

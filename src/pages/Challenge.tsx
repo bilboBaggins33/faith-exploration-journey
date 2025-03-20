@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -109,7 +108,6 @@ const ChallengePage = () => {
   const filterChallenges = () => {
     let filtered = challenges;
     
-    // Apply search term
     if (searchTerm) {
       filtered = filtered.filter(challenge => 
         challenge.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
@@ -117,14 +115,12 @@ const ChallengePage = () => {
       );
     }
     
-    // Apply difficulty filter
     if (difficultyFilter.length > 0) {
       filtered = filtered.filter(challenge => 
         difficultyFilter.includes(challenge.difficulty)
       );
     }
     
-    // Apply category filter
     if (categoryFilter.length > 0) {
       filtered = filtered.filter(challenge => 
         categoryFilter.includes(challenge.category)
@@ -195,7 +191,6 @@ const ChallengePage = () => {
                 </Button>
               </div>
               
-              {/* Filters */}
               {showFilters && (
                 <motion.div
                   initial={{ opacity: 0, height: 0 }}
