@@ -42,7 +42,7 @@ import { Skeleton } from '@/components/ui/skeleton';
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
-  const { user, signOut, loading: authLoading } = useAuth();
+  const { user, signOut, isLoading: authLoading } = useAuth();
   const { profile, progress, loading: progressLoading } = useBibleProgress();
   
   if (!authLoading && !user) {
