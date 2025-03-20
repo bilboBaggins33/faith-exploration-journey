@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
@@ -91,6 +92,11 @@ export function useBibleProgress() {
           progressData.total_chapters_read = 0;
         }
         
+        // Initialize books_progress if it doesn't exist
+        if (!progressData.books_progress) {
+          progressData.books_progress = {};
+        }
+        
         setProgress(progressData);
       } catch (error) {
         console.error('Error loading progress:', error);
@@ -112,6 +118,34 @@ export function useBibleProgress() {
     return Promise.resolve();
   };
 
+  // Update books_progress when a chapter is completed
+  const updateBookProgress = (bookId: string, currentProgress: BibleProgress) => {
+    const bookChapters = new Set<number>();
+    
+    // Find all completed chapters for this book
+    if (currentProgress.completed_chapters) {
+      currentProgress.completed_chapters.forEach(chapter => {
+        if (chapter.book_id === bookId) {
+          bookChapters.add(chapter.chapter);
+        }
+      });
+    }
+    
+    // Find the corresponding book in bibleBooks to get total chapters
+    const book = require('@/data/bibleData').bibleBooks.find((b: any) => b.id === bookId);
+    if (!book) return 0;
+    
+    const totalBookChapters = book.chapters;
+    const completedPercentage = totalBookChapters > 0 
+      ? Math.round((bookChapters.size / totalBookChapters) * 100) 
+      : 0;
+    
+    return {
+      ...currentProgress.books_progress,
+      [bookId]: completedPercentage
+    };
+  };
+
   // Mark a challenge as completed
   const completeChallenge = async (challengeId: string, pointsEarned: number) => {
     if (!isSupabaseConfigured()) {
@@ -125,23 +159,40 @@ export function useBibleProgress() {
         // Handle chapter challenges (format: "bookId-chapter")
         let newCompletedChapters = progress.completed_chapters || [];
         let newTotalChaptersRead = progress.total_chapters_read || 0;
+        let newBooksProgress = { ...progress.books_progress };
         
         if (challengeId.includes('-')) {
           const [bookId, chapterStr] = challengeId.split('-');
           const chapter = parseInt(chapterStr);
           
           if (!isNaN(chapter)) {
-            // Add to completed chapters
-            newCompletedChapters = [
-              ...newCompletedChapters,
-              {
-                book_id: bookId,
-                chapter: chapter,
-                completed_at: new Date().toISOString(),
-                score: pointsEarned
-              }
-            ];
-            newTotalChaptersRead += 1;
+            // Check if this chapter is already in completed_chapters
+            const existingChapterIndex = newCompletedChapters.findIndex(
+              c => c.book_id === bookId && c.chapter === chapter
+            );
+            
+            if (existingChapterIndex >= 0) {
+              // Update existing chapter entry
+              newCompletedChapters[existingChapterIndex].score = pointsEarned;
+            } else {
+              // Add new chapter entry
+              newCompletedChapters = [
+                ...newCompletedChapters,
+                {
+                  book_id: bookId,
+                  chapter: chapter,
+                  completed_at: new Date().toISOString(),
+                  score: pointsEarned
+                }
+              ];
+              newTotalChaptersRead += 1;
+            }
+            
+            // Update book progress percentage
+            newBooksProgress = updateBookProgress(bookId, {
+              ...progress,
+              completed_chapters: newCompletedChapters
+            });
           }
         }
         
@@ -151,7 +202,8 @@ export function useBibleProgress() {
           challenges_completed: newChallenges,
           total_points: newTotalPoints,
           completed_chapters: newCompletedChapters,
-          total_chapters_read: newTotalChaptersRead
+          total_chapters_read: newTotalChaptersRead,
+          books_progress: newBooksProgress
         });
         
         if (profile) {
@@ -185,23 +237,40 @@ export function useBibleProgress() {
         // Handle chapter challenges (format: "bookId-chapter")
         let newCompletedChapters = progress.completed_chapters || [];
         let newTotalChaptersRead = progress.total_chapters_read || 0;
+        let newBooksProgress = { ...progress.books_progress };
         
         if (challengeId.includes('-')) {
           const [bookId, chapterStr] = challengeId.split('-');
           const chapter = parseInt(chapterStr);
           
           if (!isNaN(chapter)) {
-            // Add to completed chapters if it's a Bible chapter
-            newCompletedChapters = [
-              ...newCompletedChapters,
-              {
-                book_id: bookId,
-                chapter: chapter,
-                completed_at: new Date().toISOString(),
-                score: pointsEarned
-              }
-            ];
-            newTotalChaptersRead += 1;
+            // Check if this chapter is already in completed_chapters
+            const existingChapterIndex = newCompletedChapters.findIndex(
+              c => c.book_id === bookId && c.chapter === chapter
+            );
+            
+            if (existingChapterIndex >= 0) {
+              // Update existing chapter entry
+              newCompletedChapters[existingChapterIndex].score = pointsEarned;
+            } else {
+              // Add to completed chapters if it's a Bible chapter
+              newCompletedChapters = [
+                ...newCompletedChapters,
+                {
+                  book_id: bookId,
+                  chapter: chapter,
+                  completed_at: new Date().toISOString(),
+                  score: pointsEarned
+                }
+              ];
+              newTotalChaptersRead += 1;
+            }
+            
+            // Update book progress percentage
+            newBooksProgress = updateBookProgress(bookId, {
+              ...progress,
+              completed_chapters: newCompletedChapters
+            });
           }
         }
 
@@ -232,7 +301,8 @@ export function useBibleProgress() {
             challenges_completed: newChallenges,
             total_points: newTotalPoints,
             completed_chapters: newCompletedChapters,
-            total_chapters_read: newTotalChaptersRead
+            total_chapters_read: newTotalChaptersRead,
+            books_progress: newBooksProgress
           })
           .eq('user_id', user.id);
 
@@ -256,7 +326,8 @@ export function useBibleProgress() {
           challenges_completed: newChallenges,
           total_points: newTotalPoints,
           completed_chapters: newCompletedChapters,
-          total_chapters_read: newTotalChaptersRead
+          total_chapters_read: newTotalChaptersRead,
+          books_progress: newBooksProgress
         });
 
         if (profile) {
@@ -375,6 +446,12 @@ export function useBibleProgress() {
     return calculateBibleProgress(progress.total_chapters_read);
   };
 
+  // Get book completion percentage directly from books_progress
+  const getBookProgress = (bookId: string) => {
+    if (!progress || !progress.books_progress) return 0;
+    return progress.books_progress[bookId] || 0;
+  };
+
   return {
     progress,
     profile,
@@ -386,5 +463,6 @@ export function useBibleProgress() {
     isMemorized: (verseReference: string) => 
       progress?.verses_memorized.includes(verseReference) || false,
     getBibleReadingPercentage,
+    getBookProgress,
   };
 }

@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -23,7 +22,7 @@ const BibleChapterChallenge = () => {
   const { bookId, chapter } = useParams();
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { completeChallenge, isCompleted } = useBibleProgress();
+  const { completeChallenge, isCompleted, progress } = useBibleProgress();
   
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
@@ -36,8 +35,7 @@ const BibleChapterChallenge = () => {
   // Find challenge data
   const book = bibleBooks.find(b => b.id === bookId);
   
-  // For demonstration, we'll use the sample challenges for Genesis 1 and 2
-  // In a real implementation, you would fetch challenges from your database
+  // For demonstration, we'll use the sample challenges
   const challenge = sampleChapterChallenges.find(
     c => c.bookId === bookId && c.chapter === Number(chapter)
   ) || sampleChapterChallenges[0]; // Default to Genesis 1 for demo
@@ -50,10 +48,21 @@ const BibleChapterChallenge = () => {
     if (challenge) {
       setLoading(false);
       
-      // If already completed, show the summary screen
-      if (challengeCompleted) {
+      // If already completed, show the summary screen and set the score
+      if (challengeCompleted && progress?.completed_chapters) {
         setQuizCompleted(true);
-        setScore(challenge.points);
+        
+        // Find the saved score for this chapter
+        const chapterData = progress.completed_chapters.find(
+          c => c.book_id === bookId && c.chapter === Number(chapter)
+        );
+        
+        if (chapterData && chapterData.score) {
+          setScore(chapterData.score);
+        } else {
+          // If no specific score saved, default to max points
+          setScore(challenge.questions.length);
+        }
       }
     } else {
       // Challenge doesn't exist, show error or redirect
@@ -64,7 +73,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -97,8 +106,7 @@ const BibleChapterChallenge = () => {
       setQuizCompleted(true);
       
       if (!challengeCompleted) {
-        // Pass the earned score to the completeChallenge function
-        // Making sure we're passing the actual score earned
+        // Always pass the actual score earned, not the static challenge.points
         completeChallenge(`${bookId}-${chapter}`, score);
       }
     }
@@ -147,7 +155,7 @@ const BibleChapterChallenge = () => {
     );
   }
   
-  const currentQuestionData = challenge.questions[currentQuestion];
+  const currentQuestionData = challenge?.questions[currentQuestion];
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -162,10 +170,10 @@ const BibleChapterChallenge = () => {
               <h3 className="text-lg font-medium">{book?.name || 'Bible'} {chapter}</h3>
             </div>
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
-              {challenge.title}
+              {challenge?.title}
             </h1>
             
-            {!quizCompleted && (
+            {!quizCompleted && challenge && (
               <div className="mb-6">
                 <div className="flex justify-between text-sm text-gray-600 mb-2">
                   <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
@@ -177,7 +185,7 @@ const BibleChapterChallenge = () => {
           </div>
           
           {/* Quiz content */}
-          {!quizCompleted ? (
+          {!quizCompleted && currentQuestionData ? (
             <div className="glass-card p-6 rounded-xl">
               <AnimatePresence mode="wait">
                 <motion.div
@@ -199,12 +207,12 @@ const BibleChapterChallenge = () => {
                   >
                     {currentQuestionData.options.map((option, index) => (
                       <div key={index}>
-                        <div className={`
-                          flex items-center rounded-lg border p-4 cursor-pointer transition-all
-                          ${selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200'}
-                          ${showExplanation && option === currentQuestionData.correctAnswer ? 'border-green-500 bg-green-50' : ''}
-                          ${showExplanation && selectedAnswer === option && option !== currentQuestionData.correctAnswer ? 'border-red-500 bg-red-50' : ''}
-                        `}>
+                        <div className={cn(
+                          "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
+                          selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
+                          showExplanation && option === currentQuestionData.correctAnswer ? 'border-green-500 bg-green-50' : '',
+                          showExplanation && selectedAnswer === option && option !== currentQuestionData.correctAnswer ? 'border-red-500 bg-red-50' : ''
+                        )}>
                           <RadioGroupItem 
                             value={option} 
                             id={`option-${index}`} 
@@ -225,7 +233,10 @@ const BibleChapterChallenge = () => {
                     <motion.div
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
-                      className={`p-4 rounded-lg mb-6 ${isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'}`}
+                      className={cn(
+                        "p-4 rounded-lg mb-6",
+                        isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
+                      )}
                     >
                       <div className="flex items-start">
                         {isCorrect ? (
@@ -279,7 +290,7 @@ const BibleChapterChallenge = () => {
                 </motion.div>
               </AnimatePresence>
             </div>
-          ) : (
+          ) : quizCompleted && challenge ? (
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -345,6 +356,11 @@ const BibleChapterChallenge = () => {
                 </div>
               </Card>
             </motion.div>
+          ) : (
+            <div className="text-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-bible-blue mx-auto mb-4"></div>
+              <p>Loading challenge...</p>
+            </div>
           )}
         </div>
       </main>
@@ -355,3 +371,4 @@ const BibleChapterChallenge = () => {
 };
 
 export default BibleChapterChallenge;
+

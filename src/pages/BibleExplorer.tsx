@@ -1,4 +1,5 @@
-import { useState } from 'react';
+
+import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -26,7 +27,7 @@ const BibleExplorer = () => {
   const { bookId } = useParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTestament, setActiveTestament] = useState('all');
-  const { progress, loading } = useBibleProgress();
+  const { progress, loading, getBookProgress } = useBibleProgress();
   
   // Filter books based on search and testament filter
   const filteredBooks = bibleBooks.filter(book => {
@@ -43,7 +44,7 @@ const BibleExplorer = () => {
   
   // Check if a chapter is completed and get its score
   const getChapterInfo = (bookId: string, chapter: number) => {
-    if (!progress) return { isCompleted: false, score: 0, maxScore: 0 };
+    if (!progress || !progress.completed_chapters) return { isCompleted: false, score: 0, maxScore: 0 };
     
     const challengeKey = `${bookId}-${chapter}`;
     const isCompleted = progress.challenges_completed.includes(challengeKey);
@@ -52,46 +53,28 @@ const BibleExplorer = () => {
     let score = 0;
     let maxScore = 0;
     
-    if (progress.completed_chapters) {
-      const chapterData = progress.completed_chapters.find(
-        c => c.book_id === bookId && c.chapter === chapter
-      );
-      
-      if (chapterData && chapterData.score) {
-        score = chapterData.score;
-      }
-      
-      // Find the challenge to get maxScore
-      const challenge = sampleChapterChallenges.find(
-        c => c.bookId === bookId && c.chapter === chapter
-      );
-      
-      if (challenge) {
-        maxScore = challenge.questions.length; // 1 point per question
-      }
+    const chapterData = progress.completed_chapters.find(
+      c => c.book_id === bookId && c.chapter === chapter
+    );
+    
+    if (chapterData && chapterData.score) {
+      score = chapterData.score;
+    }
+    
+    // Find the challenge to get maxScore
+    const challenge = sampleChapterChallenges.find(
+      c => c.bookId === bookId && c.chapter === chapter
+    );
+    
+    if (challenge) {
+      maxScore = challenge.questions.length; // 1 point per question
     }
     
     return { isCompleted, score, maxScore };
   };
   
-  // Calculate book completion percentage
-  const getBookProgress = (bookId: string) => {
-    if (!progress) return 0;
-    const book = bibleBooks.find(b => b.id === bookId);
-    if (!book) return 0;
-    
-    let completedCount = 0;
-    for (let i = 1; i <= book.chapters; i++) {
-      if (isChapterCompleted(bookId, i)) {
-        completedCount++;
-      }
-    }
-    
-    return Math.round((completedCount / book.chapters) * 100);
-  };
-  
   const isChapterCompleted = (bookId: string, chapter: number) => {
-    if (!progress) return false;
+    if (!progress || !progress.challenges_completed) return false;
     return progress.challenges_completed.includes(`${bookId}-${chapter}`);
   };
   
@@ -161,32 +144,37 @@ const BibleExplorer = () => {
               
               <ScrollArea className="h-[500px] pr-4">
                 <div className="space-y-2">
-                  {filteredBooks.map(book => (
-                    <motion.div
-                      key={book.id}
-                      whileHover={{ x: 4 }}
-                      className={`p-3 rounded-lg flex items-center justify-between cursor-pointer
-                        ${bookId === book.id ? 'bg-bible-blue/10 border-l-4 border-bible-blue' : 'hover:bg-gray-100'}`}
-                      onClick={() => navigate(`/bible/${book.id}`)}
-                    >
-                      <div className="flex items-center">
-                        <Book className="mr-3 text-bible-blue" size={18} />
-                        <div>
-                          <h3 className="font-medium">{book.name}</h3>
-                          <p className="text-xs text-gray-500">{book.chapters} chapters</p>
-                        </div>
-                      </div>
-                      
-                      <div className="flex items-center">
-                        {!loading && (
-                          <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-2">
-                            <span className="text-xs font-medium">{getBookProgress(book.id)}%</span>
+                  {filteredBooks.map(book => {
+                    // Get book progress from the hook
+                    const bookProgressPercent = getBookProgress(book.id);
+                    
+                    return (
+                      <motion.div
+                        key={book.id}
+                        whileHover={{ x: 4 }}
+                        className={`p-3 rounded-lg flex items-center justify-between cursor-pointer
+                          ${bookId === book.id ? 'bg-bible-blue/10 border-l-4 border-bible-blue' : 'hover:bg-gray-100'}`}
+                        onClick={() => navigate(`/bible/${book.id}`)}
+                      >
+                        <div className="flex items-center">
+                          <Book className="mr-3 text-bible-blue" size={18} />
+                          <div>
+                            <h3 className="font-medium">{book.name}</h3>
+                            <p className="text-xs text-gray-500">{book.chapters} chapters</p>
                           </div>
-                        )}
-                        <ChevronRight size={16} className="text-gray-400" />
-                      </div>
-                    </motion.div>
-                  ))}
+                        </div>
+                        
+                        <div className="flex items-center">
+                          {!loading && (
+                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-2">
+                              <span className="text-xs font-medium">{bookProgressPercent}%</span>
+                            </div>
+                          )}
+                          <ChevronRight size={16} className="text-gray-400" />
+                        </div>
+                      </motion.div>
+                    );
+                  })}
                   
                   {filteredBooks.length === 0 && (
                     <div className="text-center py-8">
