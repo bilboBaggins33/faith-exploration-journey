@@ -1,9 +1,8 @@
-
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
-import { calculateBibleProgress } from '@/data/bibleData';
+import { calculateBibleProgress } from '@/data/bible/utils';
 
 export interface BibleProgress {
   challenges_completed: string[];
@@ -83,17 +82,17 @@ export function useBibleProgress() {
         if (progressError) throw progressError;
         
         // Initialize completed_chapters if it doesn't exist
-        if (!progressData.completed_chapters) {
+        if (progressData && !progressData.completed_chapters) {
           progressData.completed_chapters = [];
         }
         
         // Initialize total_chapters_read if it doesn't exist
-        if (!progressData.total_chapters_read) {
+        if (progressData && !progressData.total_chapters_read) {
           progressData.total_chapters_read = 0;
         }
         
         // Initialize books_progress if it doesn't exist
-        if (!progressData.books_progress) {
+        if (progressData && !progressData.books_progress) {
           progressData.books_progress = {};
         }
         
