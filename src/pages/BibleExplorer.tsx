@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -10,10 +11,16 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Book, Search, BookOpen, CheckCircle, Circle, 
-  ChevronRight, Filter, BookMarked 
+  ChevronRight, Filter, BookMarked, BarChart 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
+import { 
+  ChartContainer,
+  ChartTooltip,
+  ChartTooltipContent
+} from '@/components/ui/chart';
+import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
 
 const BibleExplorer = () => {
   const navigate = useNavigate();
@@ -90,6 +97,34 @@ const BibleExplorer = () => {
   
   const navigateToChapter = (bookId: string, chapter: number) => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
+  };
+
+  // Chart data preparation for chapters
+  const prepareChartData = (bookId: string, chapter: number) => {
+    const { score, maxScore } = getChapterInfo(bookId, chapter);
+    const completed = score > 0;
+    const isPerfect = score === maxScore && maxScore > 0;
+    
+    // For not started chapters
+    if (!completed) {
+      return [
+        { name: 'Remaining', value: 100, color: '#e5e7eb' }
+      ];
+    }
+    
+    // For perfect scores
+    if (isPerfect) {
+      return [
+        { name: 'Complete', value: 100, color: '#a855f7' }
+      ];
+    }
+    
+    // For partially completed chapters
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    return [
+      { name: 'Complete', value: percentage, color: '#22c55e' },
+      { name: 'Remaining', value: 100 - percentage, color: '#e5e7eb' }
+    ];
   };
   
   return (
@@ -185,6 +220,7 @@ const BibleExplorer = () => {
                       const { isCompleted, score, maxScore } = getChapterInfo(selectedBook.id, chapter);
                       const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
                       const isPerfectScore = scorePercentage === 100;
+                      const chartData = prepareChartData(selectedBook.id, chapter);
                       
                       return (
                         <motion.div
@@ -203,21 +239,56 @@ const BibleExplorer = () => {
                           <div className="text-center">
                             {isCompleted ? (
                               <div>
-                                <CheckCircle className={cn(
-                                  "mx-auto mb-1",
-                                  isPerfectScore ? "text-purple-500" : "text-green-500"
-                                )} size={20} />
-                                <span className="font-medium">Chapter {chapter}</span>
+                                <div className="h-14 w-14 mx-auto mb-2">
+                                  <ResponsiveContainer width="100%" height="100%">
+                                    <PieChart>
+                                      <Pie
+                                        data={chartData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={15}
+                                        outerRadius={25}
+                                        paddingAngle={0}
+                                        dataKey="value"
+                                        strokeWidth={0}
+                                      >
+                                        {chartData.map((entry, index) => (
+                                          <Cell key={`cell-${index}`} fill={entry.color} />
+                                        ))}
+                                      </Pie>
+                                    </PieChart>
+                                  </ResponsiveContainer>
+                                </div>
+                                <span className="font-medium block mb-1">Chapter {chapter}</span>
                                 {score > 0 && (
-                                  <p className="text-xs mt-1 text-gray-500">
+                                  <p className="text-xs text-gray-500">
                                     Score: {score}/{maxScore}
                                   </p>
                                 )}
                               </div>
                             ) : (
                               <div>
-                                <Circle className="mx-auto mb-1 text-gray-300" size={20} />
-                                <span className="font-medium">Chapter {chapter}</span>
+                                <div className="h-14 w-14 mx-auto mb-2">
+                                  <ResponsiveContainer width="100%" height="100%">
+                                    <PieChart>
+                                      <Pie
+                                        data={chartData}
+                                        cx="50%"
+                                        cy="50%"
+                                        innerRadius={15}
+                                        outerRadius={25}
+                                        paddingAngle={0}
+                                        dataKey="value"
+                                        strokeWidth={0}
+                                      >
+                                        {chartData.map((entry, index) => (
+                                          <Cell key={`cell-${index}`} fill={entry.color} />
+                                        ))}
+                                      </Pie>
+                                    </PieChart>
+                                  </ResponsiveContainer>
+                                </div>
+                                <span className="font-medium block">Chapter {chapter}</span>
                               </div>
                             )}
                           </div>
