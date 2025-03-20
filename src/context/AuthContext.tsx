@@ -9,6 +9,7 @@ type AuthContextType = {
   session: Session | null;
   isLoading: boolean;
   signIn: (email: string, password: string) => Promise<void>;
+  signInWithGoogle: () => Promise<void>;
   signUp: (email: string, password: string, name: string) => Promise<void>;
   signOut: () => Promise<void>;
 };
@@ -74,6 +75,36 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       toast({
         title: "Login failed",
         description: error.message || "An error occurred during login",
+        variant: "destructive",
+      });
+      throw error;
+    }
+  };
+
+  const signInWithGoogle = async () => {
+    try {
+      if (!isSupabaseConfigured()) {
+        toast({
+          title: "Authentication unavailable",
+          description: "Supabase is not configured properly. Please set up your environment variables.",
+          variant: "destructive",
+        });
+        return;
+      }
+      
+      const { error } = await supabase.auth.signInWithOAuth({
+        provider: 'google',
+        options: {
+          redirectTo: `${window.location.origin}/profile`,
+        },
+      });
+      
+      if (error) throw error;
+      
+    } catch (error: any) {
+      toast({
+        title: "Google login failed",
+        description: error.message || "An error occurred during Google login",
         variant: "destructive",
       });
       throw error;
@@ -164,6 +195,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     session,
     isLoading,
     signIn,
+    signInWithGoogle,
     signUp,
     signOut,
   };
