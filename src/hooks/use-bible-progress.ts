@@ -133,7 +133,7 @@ export function useBibleProgress() {
     
     // Find the corresponding book in bibleBooks to get total chapters
     const book = require('@/data/bibleData').bibleBooks.find((b: any) => b.id === bookId);
-    if (!book) return 0;
+    if (!book) return {}; // Return empty object instead of 0
     
     const totalBookChapters = book.chapters;
     const completedPercentage = totalBookChapters > 0 
