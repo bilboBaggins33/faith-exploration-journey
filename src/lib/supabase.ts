@@ -8,7 +8,16 @@ export const supabase = supabaseClient as ReturnType<typeof createClient<Extende
 
 // Helper function to check if Supabase is properly configured
 export const isSupabaseConfigured = () => {
-  const url = process.env.SUPABASE_URL || import.meta.env?.VITE_SUPABASE_URL;
-  const key = process.env.SUPABASE_ANON_KEY || import.meta.env?.VITE_SUPABASE_ANON_KEY;
+  // In Vite, environment variables are accessed through import.meta.env
+  const url = import.meta.env.VITE_SUPABASE_URL;
+  const key = import.meta.env.VITE_SUPABASE_ANON_KEY;
+  
+  console.log('Checking Supabase config:', { 
+    isUrlDefined: !!url, 
+    isKeyDefined: !!key,
+    urlValid: url && url.includes('supabase.co'), 
+    keyValid: key && key.length > 20 
+  });
+  
   return Boolean(url && key && url.includes('supabase.co') && key.length > 20);
 };

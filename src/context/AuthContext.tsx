@@ -27,16 +27,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       setIsLoading(true);
       
       try {
-        if (!isSupabaseConfigured()) {
+        // Check Supabase configuration
+        const isConfigured = isSupabaseConfigured();
+        console.log('Supabase configured:', isConfigured);
+        
+        if (!isConfigured) {
           console.log('Supabase not configured, skipping auth initialization');
           setIsLoading(false);
           return;
         }
         
+        // Get the session
         const { data } = await supabase.auth.getSession();
+        console.log('Initial session:', data.session ? 'Found' : 'Not found');
+        
         setSession(data.session);
         setUser(data.session?.user ?? null);
         
+        // Setup auth listener
         const { data: authListener } = supabase.auth.onAuthStateChange(
           async (_event, session) => {
             console.log('Auth state changed:', _event, session?.user?.id);
