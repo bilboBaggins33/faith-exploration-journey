@@ -1,4 +1,3 @@
-
 export interface BibleBook {
   id: string;
   name: string;
@@ -273,6 +272,69 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'easy',
     points: 10
+  },
+  {
+    id: 'matthew-1',
+    bookId: 'matthew',
+    chapter: 1,
+    title: 'The Genealogy of Jesus Christ',
+    questions: [
+      {
+        id: 'matt1-q1',
+        question: 'Whose genealogy does Matthew begin with?',
+        options: ['Moses', 'David', 'Abraham', 'Adam'],
+        correctAnswer: 'Abraham',
+        explanation: 'Matthew 1:1 begins "The book of the genealogy of Jesus Christ, the son of David, the son of Abraham."'
+      },
+      {
+        id: 'matt1-q2',
+        question: 'How many generations does Matthew list from Abraham to Jesus?',
+        options: ['14', '28', '42', '70'],
+        correctAnswer: '42',
+        explanation: 'Matthew 1:17 states there were 14 generations from Abraham to David, 14 from David to the Babylonian exile, and 14 from the exile to Christ, totaling 42 generations.'
+      },
+      {
+        id: 'matt1-q3',
+        question: 'What unusual feature is found in Jesus\'s genealogy that was rare for Jewish genealogies?',
+        options: [
+          'It includes Gentiles', 
+          'It includes women', 
+          'It skips generations', 
+          'It includes Roman officials'
+        ],
+        correctAnswer: 'It includes women',
+        explanation: 'Matthew\'s genealogy unusually includes several women: Tamar, Rahab, Ruth, "the wife of Uriah" (Bathsheba), and Mary.'
+      },
+      {
+        id: 'matt1-q4',
+        question: 'What does the name "Jesus" mean according to the angel\'s message to Joseph?',
+        options: [
+          'King of kings', 
+          'God with us', 
+          'He will save his people from their sins', 
+          'Light of the world'
+        ],
+        correctAnswer: 'He will save his people from their sins',
+        explanation: 'In Matthew 1:21, the angel tells Joseph: "She will bear a son, and you shall call his name Jesus, for he will save his people from their sins."'
+      },
+      {
+        id: 'matt1-q5',
+        question: 'What prophecy does Matthew cite as being fulfilled by Jesus\'s virgin birth?',
+        options: [
+          'A prophecy from Micah', 
+          'A prophecy from Isaiah', 
+          'A prophecy from Jeremiah', 
+          'A prophecy from Daniel'
+        ],
+        correctAnswer: 'A prophecy from Isaiah',
+        explanation: 'Matthew 1:22-23 cites Isaiah 7:14: "Behold, the virgin shall conceive and bear a son, and they shall call his name Immanuel."'
+      }
+    ],
+    key_verse: 'Matthew 1:21',
+    key_verse_text: 'She will bear a son, and you shall call his name Jesus, for he will save his people from their sins.',
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 15
   }
 ];
 
