@@ -95,6 +95,7 @@ const BibleChapterChallenge = () => {
       setQuizCompleted(true);
       
       if (!challengeCompleted) {
+        // Pass the earned score to the completeChallenge function
         completeChallenge(`${bookId}-${chapter}`, score);
       }
     }
@@ -281,11 +282,31 @@ const BibleChapterChallenge = () => {
               animate={{ opacity: 1, y: 0 }}
             >
               <Card className="p-8 text-center">
-                <Award className="mx-auto text-bible-gold mb-4" size={60} />
-                <h2 className="text-2xl font-bold mb-2">Challenge Completed!</h2>
-                <p className="text-gray-600 mb-6">
-                  You've earned {score} points for completing this chapter.
+                <Award className={cn(
+                  "mx-auto mb-4", 
+                  score === challenge.points ? "text-purple-500" : "text-bible-gold"
+                )} size={60} />
+                
+                <h2 className="text-2xl font-bold mb-2">
+                  {score === challenge.points ? "Perfect Score!" : "Challenge Completed!"}
+                </h2>
+                
+                <p className="text-gray-600 mb-2">
+                  You've earned {score} out of {challenge.points} possible points.
                 </p>
+                
+                <div className="w-full max-w-xs mx-auto mb-6">
+                  <Progress 
+                    value={(score / challenge.points) * 100} 
+                    className={cn(
+                      "h-3 rounded-full",
+                      score === challenge.points ? "bg-purple-200" : ""
+                    )}
+                  />
+                  <p className="text-sm text-gray-500 mt-1">
+                    {Math.round((score / challenge.points) * 100)}% complete
+                  </p>
+                </div>
                 
                 <div className="bg-gray-50 p-4 rounded-lg mb-6">
                   <h3 className="font-medium mb-2 flex items-center justify-center">

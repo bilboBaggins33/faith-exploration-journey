@@ -1,9 +1,8 @@
-
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { bibleBooks, bibleChapters } from '@/data/bibleData';
+import { bibleBooks, bibleChapters, sampleChapterChallenges } from '@/data/bibleData';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -14,6 +13,7 @@ import {
   ChevronRight, Filter, BookMarked 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { cn } from '@/lib/utils';
 
 const BibleExplorer = () => {
   const navigate = useNavigate();
@@ -35,10 +35,36 @@ const BibleExplorer = () => {
     ? Array.from({ length: selectedBook.chapters }, (_, i) => i + 1)
     : [];
   
-  // Check if a chapter is completed
-  const isChapterCompleted = (bookId: string, chapter: number) => {
-    if (!progress) return false;
-    return progress.challenges_completed.includes(`${bookId}-${chapter}`);
+  // Check if a chapter is completed and get its score
+  const getChapterInfo = (bookId: string, chapter: number) => {
+    if (!progress) return { isCompleted: false, score: 0, maxScore: 0 };
+    
+    const isCompleted = progress.challenges_completed.includes(`${bookId}-${chapter}`);
+    
+    // Get score from completed_chapters if available
+    let score = 0;
+    let maxScore = 0;
+    
+    if (progress.completed_chapters) {
+      const chapterData = progress.completed_chapters.find(
+        c => c.book_id === bookId && c.chapter === chapter
+      );
+      
+      if (chapterData && chapterData.score) {
+        score = chapterData.score;
+      }
+      
+      // Find the challenge to get maxScore
+      const challenge = sampleChapterChallenges.find(
+        c => c.bookId === bookId && c.chapter === chapter
+      );
+      
+      if (challenge) {
+        maxScore = challenge.points;
+      }
+    }
+    
+    return { isCompleted, score, maxScore };
   };
   
   // Calculate book completion percentage
@@ -55,6 +81,11 @@ const BibleExplorer = () => {
     }
     
     return Math.round((completedCount / book.chapters) * 100);
+  };
+  
+  const isChapterCompleted = (bookId: string, chapter: number) => {
+    if (!progress) return false;
+    return progress.challenges_completed.includes(`${bookId}-${chapter}`);
   };
   
   const navigateToChapter = (bookId: string, chapter: number) => {
@@ -150,27 +181,49 @@ const BibleExplorer = () => {
                   </div>
                   
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    {bookChapters.map(chapter => (
-                      <motion.div
-                        key={chapter}
-                        whileHover={{ y: -5 }}
-                        className={`p-4 rounded-lg border ${
-                          isChapterCompleted(selectedBook.id, chapter)
-                            ? 'bg-green-50 border-green-200'
-                            : 'bg-white border-gray-200 hover:border-bible-blue hover:bg-blue-50'
-                        } cursor-pointer transition-all shadow-sm`}
-                        onClick={() => navigateToChapter(selectedBook.id, chapter)}
-                      >
-                        <div className="text-center">
-                          {isChapterCompleted(selectedBook.id, chapter) ? (
-                            <CheckCircle className="mx-auto mb-1 text-green-500" size={20} />
-                          ) : (
-                            <Circle className="mx-auto mb-1 text-gray-300" size={20} />
+                    {bookChapters.map(chapter => {
+                      const { isCompleted, score, maxScore } = getChapterInfo(selectedBook.id, chapter);
+                      const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+                      const isPerfectScore = scorePercentage === 100;
+                      
+                      return (
+                        <motion.div
+                          key={chapter}
+                          whileHover={{ y: -5 }}
+                          className={cn(
+                            "p-4 rounded-lg border cursor-pointer transition-all shadow-sm",
+                            isPerfectScore 
+                              ? "bg-purple-50 border-purple-200" 
+                              : isCompleted
+                                ? "bg-green-50 border-green-200"
+                                : "bg-white border-gray-200 hover:border-bible-blue hover:bg-blue-50"
                           )}
-                          <span className="font-medium">Chapter {chapter}</span>
-                        </div>
-                      </motion.div>
-                    ))}
+                          onClick={() => navigateToChapter(selectedBook.id, chapter)}
+                        >
+                          <div className="text-center">
+                            {isCompleted ? (
+                              <div>
+                                <CheckCircle className={cn(
+                                  "mx-auto mb-1",
+                                  isPerfectScore ? "text-purple-500" : "text-green-500"
+                                )} size={20} />
+                                <span className="font-medium">Chapter {chapter}</span>
+                                {score > 0 && (
+                                  <p className="text-xs mt-1 text-gray-500">
+                                    Score: {score}/{maxScore}
+                                  </p>
+                                )}
+                              </div>
+                            ) : (
+                              <div>
+                                <Circle className="mx-auto mb-1 text-gray-300" size={20} />
+                                <span className="font-medium">Chapter {chapter}</span>
+                              </div>
+                            )}
+                          </div>
+                        </motion.div>
+                      );
+                    })}
                   </div>
                 </div>
               ) : (

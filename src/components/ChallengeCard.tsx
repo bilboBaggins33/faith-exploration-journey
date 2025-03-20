@@ -1,6 +1,6 @@
 
 import { motion } from 'framer-motion';
-import { Award, Clock, BookOpen, Star } from 'lucide-react';
+import { Award, Clock, BookOpen, Star, BarChart } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Link } from 'react-router-dom';
 import { cn } from '@/lib/utils';
@@ -14,6 +14,8 @@ interface ChallengeCardProps {
   duration: string;
   imageUrl: string;
   isCompleted?: boolean;
+  score?: number;
+  maxScore?: number;
 }
 
 const ChallengeCard = ({
@@ -24,7 +26,9 @@ const ChallengeCard = ({
   category,
   duration,
   imageUrl,
-  isCompleted = false
+  isCompleted = false,
+  score = 0,
+  maxScore = 0
 }: ChallengeCardProps) => {
   
   const getDifficultyColor = () => {
@@ -53,13 +57,18 @@ const ChallengeCard = ({
     }
   };
   
+  // Calculate score percentage if maxScore is provided
+  const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+  const isPerfectScore = scorePercentage === 100;
+  
   return (
     <motion.div
       whileHover={{ y: -5 }}
       className={cn(
         "glass-card overflow-hidden rounded-lg shadow-lg",
         "transition-all duration-300",
-        isCompleted && "border-l-4 border-l-green-500"
+        isCompleted && !isPerfectScore && "border-l-4 border-l-green-500",
+        isCompleted && isPerfectScore && "border-l-4 border-l-purple-500 bg-purple-50/30"
       )}
     >
       <div className="relative h-48 overflow-hidden">
@@ -91,9 +100,21 @@ const ChallengeCard = ({
         </div>
         
         {isCompleted && (
-          <div className="absolute bottom-3 right-3 bg-green-500 text-white text-xs font-medium py-1 px-2 rounded-full flex items-center">
-            <Award size={12} className="mr-1" />
-            Completed
+          <div className={cn(
+            "absolute bottom-3 right-3 text-white text-xs font-medium py-1 px-2 rounded-full flex items-center",
+            isPerfectScore ? "bg-purple-500" : "bg-green-500"
+          )}>
+            {isPerfectScore ? (
+              <>
+                <Award size={12} className="mr-1" />
+                Perfect Score!
+              </>
+            ) : (
+              <>
+                <BarChart size={12} className="mr-1" />
+                Score: {scorePercentage}%
+              </>
+            )}
           </div>
         )}
       </div>
@@ -117,7 +138,9 @@ const ChallengeCard = ({
           <Button
             className={cn(
               "w-full",
-              isCompleted ? "bg-green-500 hover:bg-green-600" : "bg-bible-blue hover:bg-bible-deepBlue"
+              isPerfectScore ? "bg-purple-500 hover:bg-purple-600" : 
+              isCompleted ? "bg-green-500 hover:bg-green-600" : 
+              "bg-bible-blue hover:bg-bible-deepBlue"
             )}
           >
             {isCompleted ? "Review Challenge" : "Start Challenge"}
