@@ -12,6 +12,7 @@ import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Separator } from '@/components/ui/separator';
 import { useToast } from '@/hooks/use-toast';
+import { cn } from '@/lib/utils';
 import { 
   Book, CheckCircle, ArrowRight, ArrowLeft, Award, 
   BookOpen, AlertCircle, X, HelpCircle, Bookmark
