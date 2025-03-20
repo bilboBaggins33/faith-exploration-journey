@@ -80,7 +80,8 @@ const BibleChapterChallenge = () => {
     setShowExplanation(true);
     
     if (correct) {
-      setScore(score + Math.ceil(challenge.points / challenge.questions.length));
+      // 1 point per correct question
+      setScore(score + 1);
     }
   };
   
@@ -97,6 +98,7 @@ const BibleChapterChallenge = () => {
       
       if (!challengeCompleted) {
         // Pass the earned score to the completeChallenge function
+        // Making sure we're passing the actual score earned
         completeChallenge(`${bookId}-${chapter}`, score);
       }
     }
@@ -285,27 +287,27 @@ const BibleChapterChallenge = () => {
               <Card className="p-8 text-center">
                 <Award className={cn(
                   "mx-auto mb-4", 
-                  score === challenge.points ? "text-purple-500" : "text-bible-gold"
+                  score === challenge.questions.length ? "text-purple-500" : "text-bible-gold"
                 )} size={60} />
                 
                 <h2 className="text-2xl font-bold mb-2">
-                  {score === challenge.points ? "Perfect Score!" : "Challenge Completed!"}
+                  {score === challenge.questions.length ? "Perfect Score!" : "Challenge Completed!"}
                 </h2>
                 
                 <p className="text-gray-600 mb-2">
-                  You've earned {score} out of {challenge.points} possible points.
+                  You've earned {score} out of {challenge.questions.length} possible points.
                 </p>
                 
                 <div className="w-full max-w-xs mx-auto mb-6">
                   <Progress 
-                    value={(score / challenge.points) * 100} 
+                    value={(score / challenge.questions.length) * 100} 
                     className={cn(
                       "h-3 rounded-full",
-                      score === challenge.points ? "bg-purple-200" : ""
+                      score === challenge.questions.length ? "bg-purple-200" : ""
                     )}
                   />
                   <p className="text-sm text-gray-500 mt-1">
-                    {Math.round((score / challenge.points) * 100)}% complete
+                    {Math.round((score / challenge.questions.length) * 100)}% complete
                   </p>
                 </div>
                 

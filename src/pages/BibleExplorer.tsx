@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -46,7 +45,8 @@ const BibleExplorer = () => {
   const getChapterInfo = (bookId: string, chapter: number) => {
     if (!progress) return { isCompleted: false, score: 0, maxScore: 0 };
     
-    const isCompleted = progress.challenges_completed.includes(`${bookId}-${chapter}`);
+    const challengeKey = `${bookId}-${chapter}`;
+    const isCompleted = progress.challenges_completed.includes(challengeKey);
     
     // Get score from completed_chapters if available
     let score = 0;
@@ -67,7 +67,7 @@ const BibleExplorer = () => {
       );
       
       if (challenge) {
-        maxScore = challenge.points;
+        maxScore = challenge.questions.length; // 1 point per question
       }
     }
     
@@ -101,19 +101,17 @@ const BibleExplorer = () => {
 
   // Chart data preparation for chapters
   const prepareChartData = (bookId: string, chapter: number) => {
-    const { score, maxScore } = getChapterInfo(bookId, chapter);
-    const completed = score > 0;
-    const isPerfect = score === maxScore && maxScore > 0;
+    const { isCompleted, score, maxScore } = getChapterInfo(bookId, chapter);
     
     // For not started chapters
-    if (!completed) {
+    if (!isCompleted) {
       return [
         { name: 'Remaining', value: 100, color: '#e5e7eb' }
       ];
     }
     
     // For perfect scores
-    if (isPerfect) {
+    if (score === maxScore && maxScore > 0) {
       return [
         { name: 'Complete', value: 100, color: '#a855f7' }
       ];
@@ -219,7 +217,7 @@ const BibleExplorer = () => {
                     {bookChapters.map(chapter => {
                       const { isCompleted, score, maxScore } = getChapterInfo(selectedBook.id, chapter);
                       const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-                      const isPerfectScore = scorePercentage === 100;
+                      const isPerfectScore = score > 0 && score === maxScore;
                       const chartData = prepareChartData(selectedBook.id, chapter);
                       
                       return (
@@ -237,59 +235,31 @@ const BibleExplorer = () => {
                           onClick={() => navigateToChapter(selectedBook.id, chapter)}
                         >
                           <div className="text-center">
-                            {isCompleted ? (
-                              <div>
-                                <div className="h-14 w-14 mx-auto mb-2">
-                                  <ResponsiveContainer width="100%" height="100%">
-                                    <PieChart>
-                                      <Pie
-                                        data={chartData}
-                                        cx="50%"
-                                        cy="50%"
-                                        innerRadius={15}
-                                        outerRadius={25}
-                                        paddingAngle={0}
-                                        dataKey="value"
-                                        strokeWidth={0}
-                                      >
-                                        {chartData.map((entry, index) => (
-                                          <Cell key={`cell-${index}`} fill={entry.color} />
-                                        ))}
-                                      </Pie>
-                                    </PieChart>
-                                  </ResponsiveContainer>
-                                </div>
-                                <span className="font-medium block mb-1">Chapter {chapter}</span>
-                                {score > 0 && (
-                                  <p className="text-xs text-gray-500">
-                                    Score: {score}/{maxScore}
-                                  </p>
-                                )}
-                              </div>
-                            ) : (
-                              <div>
-                                <div className="h-14 w-14 mx-auto mb-2">
-                                  <ResponsiveContainer width="100%" height="100%">
-                                    <PieChart>
-                                      <Pie
-                                        data={chartData}
-                                        cx="50%"
-                                        cy="50%"
-                                        innerRadius={15}
-                                        outerRadius={25}
-                                        paddingAngle={0}
-                                        dataKey="value"
-                                        strokeWidth={0}
-                                      >
-                                        {chartData.map((entry, index) => (
-                                          <Cell key={`cell-${index}`} fill={entry.color} />
-                                        ))}
-                                      </Pie>
-                                    </PieChart>
-                                  </ResponsiveContainer>
-                                </div>
-                                <span className="font-medium block">Chapter {chapter}</span>
-                              </div>
+                            <div className="h-14 w-14 mx-auto mb-2">
+                              <ResponsiveContainer width="100%" height="100%">
+                                <PieChart>
+                                  <Pie
+                                    data={chartData}
+                                    cx="50%"
+                                    cy="50%"
+                                    innerRadius={15}
+                                    outerRadius={25}
+                                    paddingAngle={0}
+                                    dataKey="value"
+                                    strokeWidth={0}
+                                  >
+                                    {chartData.map((entry, index) => (
+                                      <Cell key={`cell-${index}`} fill={entry.color} />
+                                    ))}
+                                  </Pie>
+                                </PieChart>
+                              </ResponsiveContainer>
+                            </div>
+                            <span className="font-medium block mb-1">Chapter {chapter}</span>
+                            {score > 0 && (
+                              <p className="text-xs text-gray-500">
+                                Score: {score}/{maxScore}
+                              </p>
                             )}
                           </div>
                         </motion.div>

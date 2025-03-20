@@ -121,6 +121,8 @@ export function useBibleProgress() {
       if (!progress.challenges_completed.includes(challengeId)) {
         const newChallenges = [...progress.challenges_completed, challengeId];
         const newTotalPoints = progress.total_points + pointsEarned;
+        
+        // Handle chapter challenges (format: "bookId-chapter")
         let newCompletedChapters = progress.completed_chapters || [];
         let newTotalChaptersRead = progress.total_chapters_read || 0;
         
@@ -129,6 +131,7 @@ export function useBibleProgress() {
           const chapter = parseInt(chapterStr);
           
           if (!isNaN(chapter)) {
+            // Add to completed chapters
             newCompletedChapters = [
               ...newCompletedChapters,
               {
@@ -142,6 +145,7 @@ export function useBibleProgress() {
           }
         }
         
+        // Update local state immediately
         setProgress({
           ...progress,
           challenges_completed: newChallenges,
@@ -160,6 +164,12 @@ export function useBibleProgress() {
         }
         
         await mockSaveProgress(`Challenge ${challengeId} completed for ${pointsEarned} points`);
+        
+        // Show toast confirmation
+        toast({
+          title: "Challenge completed!",
+          description: `You earned ${pointsEarned} points.`,
+        });
       }
       return;
     }
