@@ -2,9 +2,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-
-// Define the LocationStatus type to ensure consistency
-type LocationStatus = 'locked' | 'unlocked' | 'completed';
+import { LocationStatus } from '@/data/mapLocations';
 
 interface MapLocationProps {
   id: string;
