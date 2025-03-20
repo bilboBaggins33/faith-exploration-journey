@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { supabase } from '@/lib/supabase';
+import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { calculateBibleProgress } from '@/data/bibleData';
@@ -35,9 +34,27 @@ export function useBibleProgress() {
 
   // Load initial progress
   useEffect(() => {
-    if (!user) {
-      setProgress(null);
-      setProfile(null);
+    if (!user || !isSupabaseConfigured()) {
+      // Create mock progress data for development when Supabase is not configured
+      if (!isSupabaseConfigured()) {
+        setProgress({
+          challenges_completed: [],
+          verses_memorized: [],
+          total_points: 0,
+          books_progress: {},
+          completed_chapters: [],
+          total_chapters_read: 0
+        });
+        setProfile({
+          streak: 0,
+          points: 0,
+          last_active: new Date().toISOString().split('T')[0],
+          full_name: 'Test User'
+        });
+      } else {
+        setProgress(null);
+        setProfile(null);
+      }
       setLoading(false);
       return;
     }
@@ -85,8 +102,68 @@ export function useBibleProgress() {
     loadProgress();
   }, [user]);
 
+  // Mock function for when Supabase is not configured
+  const mockSaveProgress = (message: string) => {
+    console.log('Mock save progress:', message);
+    toast({
+      title: "Development Mode",
+      description: "Progress saved locally (Supabase not configured)",
+    });
+    return Promise.resolve();
+  };
+
   // Mark a challenge as completed
   const completeChallenge = async (challengeId: string, pointsEarned: number) => {
+    if (!isSupabaseConfigured()) {
+      // Mock implementation for development
+      if (!progress) return;
+      
+      if (!progress.challenges_completed.includes(challengeId)) {
+        const newChallenges = [...progress.challenges_completed, challengeId];
+        const newTotalPoints = progress.total_points + pointsEarned;
+        let newCompletedChapters = progress.completed_chapters || [];
+        let newTotalChaptersRead = progress.total_chapters_read || 0;
+        
+        if (challengeId.includes('-')) {
+          const [bookId, chapterStr] = challengeId.split('-');
+          const chapter = parseInt(chapterStr);
+          
+          if (!isNaN(chapter)) {
+            newCompletedChapters = [
+              ...newCompletedChapters,
+              {
+                book_id: bookId,
+                chapter: chapter,
+                completed_at: new Date().toISOString(),
+                score: pointsEarned
+              }
+            ];
+            newTotalChaptersRead += 1;
+          }
+        }
+        
+        setProgress({
+          ...progress,
+          challenges_completed: newChallenges,
+          total_points: newTotalPoints,
+          completed_chapters: newCompletedChapters,
+          total_chapters_read: newTotalChaptersRead
+        });
+        
+        if (profile) {
+          setProfile({
+            ...profile,
+            points: profile.points + pointsEarned,
+            streak: profile.streak + 1,
+            last_active: new Date().toISOString().split('T')[0]
+          });
+        }
+        
+        await mockSaveProgress(`Challenge ${challengeId} completed for ${pointsEarned} points`);
+      }
+      return;
+    }
+
     if (!user || !progress) return;
 
     try {
@@ -198,6 +275,32 @@ export function useBibleProgress() {
 
   // Add a memorized verse
   const memorizeVerse = async (verseReference: string, pointsEarned: number) => {
+    if (!isSupabaseConfigured()) {
+      // Mock implementation for development
+      if (!progress) return;
+      
+      if (!progress.verses_memorized.includes(verseReference)) {
+        const newVerses = [...progress.verses_memorized, verseReference];
+        const newTotalPoints = progress.total_points + pointsEarned;
+        
+        setProgress({
+          ...progress,
+          verses_memorized: newVerses,
+          total_points: newTotalPoints
+        });
+        
+        if (profile) {
+          setProfile({
+            ...profile,
+            points: profile.points + pointsEarned
+          });
+        }
+        
+        await mockSaveProgress(`Verse ${verseReference} memorized for ${pointsEarned} points`);
+      }
+      return;
+    }
+
     if (!user || !progress) return;
 
     try {

@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2, XCircle, HelpCircle, ChevronRight, ArrowLeft, Award } from 'lucide-react';
@@ -7,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { genesisCreationQuiz } from '@/data/mapLocations';
 import { useToast } from '@/hooks/use-toast';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
 
 const GenesisDaysChallenge = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -16,6 +16,17 @@ const GenesisDaysChallenge = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { completeChallenge, isCompleted } = useBibleProgress();
+  const [alreadyCompleted, setAlreadyCompleted] = useState(false);
+
+  useEffect(() => {
+    const checkCompletion = async () => {
+      const completed = isCompleted('creation-quiz');
+      setAlreadyCompleted(completed);
+    };
+    
+    checkCompletion();
+  }, [isCompleted]);
 
   const currentQuestion = genesisCreationQuiz[currentQuestionIndex];
   
@@ -50,11 +61,18 @@ const GenesisDaysChallenge = () => {
     } else {
       setQuizCompleted(true);
       
-      // In a real app, you would save the progress to the user's account
-      toast({
-        title: "Challenge completed!",
-        description: `You got ${correctAnswers + (selectedOption === currentQuestion.correctAnswer ? 1 : 0)} out of ${genesisCreationQuiz.length} correct.`,
-      });
+      const finalScore = correctAnswers + (selectedOption === currentQuestion.correctAnswer ? 1 : 0);
+      const percentage = (finalScore / genesisCreationQuiz.length) * 100;
+      const earnedPoints = Math.round((percentage / 100) * 50);
+      
+      if (!alreadyCompleted) {
+        completeChallenge('creation-quiz', earnedPoints);
+      } else {
+        toast({
+          title: "Challenge already completed",
+          description: "You've already earned points for this challenge before.",
+        });
+      }
     }
   };
   
