@@ -3,12 +3,15 @@ import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 
+// Define the LocationStatus type to ensure consistency
+type LocationStatus = 'locked' | 'unlocked' | 'completed';
+
 interface MapLocationProps {
   id: string;
   title: string;
   description: string;
   position: { x: string; y: string };
-  status: 'locked' | 'unlocked' | 'completed';
+  status: LocationStatus;
   onClick: (id: string) => void;
   isActive: boolean;
 }

@@ -16,13 +16,16 @@ import {
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
+// Define a type for location status to ensure consistent usage
+type LocationStatus = 'locked' | 'unlocked' | 'completed';
+
 const locations = [
   {
     id: 'creation',
     title: 'Creation and Fall',
     description: 'Explore the beginning of everything and the entrance of sin.',
     position: { x: '20%', y: '30%' },
-    status: 'unlocked' as const,
+    status: 'unlocked' as LocationStatus,
     content: {
       title: 'Creation and Fall',
       description: 'In the beginning, God created the heavens and the earth. This area covers Genesis 1-3, including the creation of the world, Adam and Eve, and the entrance of sin into the world.',
@@ -51,7 +54,7 @@ const locations = [
     title: 'Noah and the Flood',
     description: 'Discover the story of Noah\'s ark and God\'s covenant.',
     position: { x: '30%', y: '45%' },
-    status: 'locked' as const,
+    status: 'locked' as LocationStatus,
     content: {
       title: 'Noah and the Flood',
       description: 'This section covers Genesis 6-9, the story of how God saved Noah and his family while judging the wickedness of humanity through the flood.',
@@ -73,7 +76,7 @@ const locations = [
     title: 'Abraham and the Patriarchs',
     description: 'Follow the journey of faith through Abraham, Isaac, and Jacob.',
     position: { x: '45%', y: '55%' },
-    status: 'locked' as const,
+    status: 'locked' as LocationStatus,
     content: {
       title: 'Abraham and the Patriarchs',
       description: 'This area covers Genesis 12-50, following the stories of Abraham, Isaac, Jacob, and Joseph, and how God worked through them to establish His covenant people.',
@@ -95,7 +98,7 @@ const locations = [
     title: 'Exodus and the Law',
     description: 'Experience the liberation from Egypt and the giving of the Law.',
     position: { x: '60%', y: '35%' },
-    status: 'locked' as const,
+    status: 'locked' as LocationStatus,
     content: {
       title: 'Exodus and the Law',
       description: 'This area covers Exodus through Deuteronomy, including Israel\'s deliverance from Egypt, the giving of the Ten Commandments, and the journey to the Promised Land.',
@@ -117,7 +120,7 @@ const locations = [
     title: 'Conquest of Promised Land',
     description: 'Follow Joshua\'s leadership as Israel claims their inheritance.',
     position: { x: '75%', y: '45%' },
-    status: 'locked' as const,
+    status: 'locked' as LocationStatus,
     content: {
       title: 'Conquest of Promised Land',
       description: 'This section covers the book of Joshua, detailing how the Israelites conquered and settled in the Promised Land under Joshua\'s leadership.',
