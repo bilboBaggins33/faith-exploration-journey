@@ -149,3 +149,99 @@ export const mapLocations: MapLocationData[] = [
     }
   }
 ];
+
+// For the Genesis Days challenge, define the questions and answers
+export interface QuizQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+}
+
+export const genesisCreationQuiz: QuizQuestion[] = [
+  {
+    id: 'day1',
+    question: 'What did God create on the first day?',
+    options: [
+      'Plants and trees',
+      'Light',
+      'Sun and moon',
+      'Animals'
+    ],
+    correctAnswer: 'Light',
+    explanation: 'On the first day, God said, "Let there be light," and separated the light from the darkness. (Genesis 1:3-5)'
+  },
+  {
+    id: 'day2',
+    question: 'What did God create on the second day?',
+    options: [
+      'Birds and fish',
+      'Dry land',
+      'The sky (firmament)',
+      'Humans'
+    ],
+    correctAnswer: 'The sky (firmament)',
+    explanation: 'On the second day, God created the sky (firmament) and separated the waters above from the waters below. (Genesis 1:6-8)'
+  },
+  {
+    id: 'day3',
+    question: 'What did God create on the third day?',
+    options: [
+      'Dry land and plants',
+      'Sun, moon and stars',
+      'Birds and fish',
+      'Animals'
+    ],
+    correctAnswer: 'Dry land and plants',
+    explanation: 'On the third day, God gathered the waters together to create seas and dry land, and then made vegetation and plants. (Genesis 1:9-13)'
+  },
+  {
+    id: 'day4',
+    question: 'What did God create on the fourth day?',
+    options: [
+      'Birds and fish',
+      'Humans',
+      'Animals',
+      'Sun, moon and stars'
+    ],
+    correctAnswer: 'Sun, moon and stars',
+    explanation: 'On the fourth day, God created the sun, moon, and stars to mark seasons, days, and years. (Genesis 1:14-19)'
+  },
+  {
+    id: 'day5',
+    question: 'What did God create on the fifth day?',
+    options: [
+      'Birds and sea creatures',
+      'Land animals',
+      'Humans',
+      'Plants and trees'
+    ],
+    correctAnswer: 'Birds and sea creatures',
+    explanation: 'On the fifth day, God created sea creatures and birds to fill the waters and sky. (Genesis 1:20-23)'
+  },
+  {
+    id: 'day6',
+    question: 'What did God create on the sixth day?',
+    options: [
+      'Plants and trees',
+      'Land animals and humans',
+      'Sun and moon',
+      'Fish and birds'
+    ],
+    correctAnswer: 'Land animals and humans',
+    explanation: 'On the sixth day, God created land animals and then created humans in His own image. (Genesis 1:24-31)'
+  },
+  {
+    id: 'day7',
+    question: 'What did God do on the seventh day?',
+    options: [
+      'Created more animals',
+      'Created the Garden of Eden',
+      'Rested and made it holy',
+      'Created Adam and Eve'
+    ],
+    correctAnswer: 'Rested and made it holy',
+    explanation: 'On the seventh day, God rested from all His work and blessed the day, making it holy. (Genesis 2:2-3)'
+  }
+];

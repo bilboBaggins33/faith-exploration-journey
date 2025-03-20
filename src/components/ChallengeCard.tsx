@@ -109,7 +109,7 @@ const ChallengeCard = ({
           </div>
           <div className="flex items-center text-sm text-gray-500">
             <BookOpen size={16} className="mr-1" />
-            5 Questions
+            {id === 'creation-quiz' ? '7 Questions' : '5 Questions'}
           </div>
         </div>
         

@@ -13,6 +13,9 @@ import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 
+// Challenge Components
+import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
+
 // Create a client
 const queryClient = new QueryClient();
 
@@ -27,6 +30,7 @@ const App = () => (
           <Route path="/map" element={<Map />} />
           <Route path="/challenge" element={<Challenge />} />
           <Route path="/challenge/:id" element={<Challenge />} />
+          <Route path="/challenge/creation-quiz" element={<GenesisDaysChallenge />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/auth" element={<Auth />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
