@@ -1,5 +1,4 @@
-
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { CheckCircle2, XCircle, HelpCircle, ChevronRight, ArrowLeft, Award } from 'lucide-react';
@@ -7,6 +6,8 @@ import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { noahArkQuiz } from '@/data/mapLocations';
 import { useToast } from '@/hooks/use-toast';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { useAuth } from '@/context/AuthContext';
 
 const NoahArkChallenge = () => {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -16,6 +17,11 @@ const NoahArkChallenge = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { completeChallenge, isCompleted } = useBibleProgress();
+  const { user } = useAuth();
+  
+  const challengeId = 'noah-quiz';
+  const alreadyCompleted = isCompleted(challengeId);
 
   const currentQuestion = noahArkQuiz[currentQuestionIndex];
   
@@ -50,9 +56,21 @@ const NoahArkChallenge = () => {
     } else {
       setQuizCompleted(true);
       
+      const finalScore = correctAnswers + (selectedOption === currentQuestion.correctAnswer ? 1 : 0);
+      const pointsEarned = Math.round((finalScore / noahArkQuiz.length) * 100);
+      
+      if (user && !alreadyCompleted) {
+        completeChallenge(challengeId, pointsEarned);
+      } else if (!user) {
+        toast({
+          title: "Not signed in",
+          description: "Sign in to save your progress and earn points!",
+        });
+      }
+      
       toast({
         title: "Challenge completed!",
-        description: `You got ${correctAnswers + (selectedOption === currentQuestion.correctAnswer ? 1 : 0)} out of ${noahArkQuiz.length} correct.`,
+        description: `You got ${finalScore} out of ${noahArkQuiz.length} correct.`,
       });
     }
   };
@@ -100,6 +118,11 @@ const NoahArkChallenge = () => {
           <p className="text-lg text-bible-dark/80">
             You've completed the Noah's Ark quiz
           </p>
+          {!user && (
+            <p className="text-sm text-bible-dark/60 mt-2">
+              <a href="/auth" className="text-bible-blue hover-link">Sign in</a> to save your progress and earn points!
+            </p>
+          )}
         </div>
         
         <div className="glass-card p-8 rounded-xl mb-8">

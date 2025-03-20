@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -13,6 +12,8 @@ import {
 } from "@/components/ui/tabs";
 import { Eye, EyeOff, User, Key, Mail, ShieldCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/context/AuthContext';
+import { useToast } from '@/hooks/use-toast';
 
 const AuthPage = () => {
   return (
@@ -70,16 +71,30 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
   const navigate = useNavigate();
+  const { signIn } = useAuth();
+  const { toast } = useToast();
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoggingIn(true);
     
-    // Simulate login process
-    setTimeout(() => {
-      setLoggingIn(false);
+    if (!email || !password) {
+      toast({
+        title: "Missing information",
+        description: "Please enter both email and password.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    try {
+      setLoggingIn(true);
+      await signIn(email, password);
       navigate('/profile');
-    }, 1500);
+    } catch (error) {
+      console.error('Login error:', error);
+    } finally {
+      setLoggingIn(false);
+    }
   };
   
   return (
@@ -240,22 +255,48 @@ const RegisterForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [registering, setRegistering] = useState(false);
   const navigate = useNavigate();
+  const { signUp } = useAuth();
+  const { toast } = useToast();
   
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (password !== confirmPassword) {
-      alert('Passwords do not match!');
+    if (!name || !email || !password || !confirmPassword) {
+      toast({
+        title: "Missing information",
+        description: "Please fill out all fields.",
+        variant: "destructive",
+      });
       return;
     }
     
-    setRegistering(true);
+    if (password !== confirmPassword) {
+      toast({
+        title: "Passwords do not match",
+        description: "Please make sure your passwords match.",
+        variant: "destructive",
+      });
+      return;
+    }
     
-    // Simulate registration process
-    setTimeout(() => {
-      setRegistering(false);
+    if (password.length < 8) {
+      toast({
+        title: "Password too short",
+        description: "Password must be at least 8 characters long.",
+        variant: "destructive",
+      });
+      return;
+    }
+    
+    try {
+      setRegistering(true);
+      await signUp(email, password, name);
       navigate('/profile');
-    }, 1500);
+    } catch (error) {
+      console.error('Registration error:', error);
+    } finally {
+      setRegistering(false);
+    }
   };
   
   return (
