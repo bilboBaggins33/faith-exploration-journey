@@ -202,17 +202,23 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
       );
       
       const now = new Date().toISOString();
+      let newPointsAdded = 0;
       
       // Either update existing chapter entry or add a new one
       if (existingChapterIndex >= 0) {
-        // Only update score if it's better than the existing one
         const currentScore = completedChapters[existingChapterIndex].score || 0;
+        // Only update score if it's better than the existing one
         if (pointsEarned > currentScore) {
+          // Calculate the additional points earned (new score minus old score)
+          newPointsAdded = pointsEarned - currentScore;
           completedChapters[existingChapterIndex] = {
             ...completedChapters[existingChapterIndex],
             completed_at: now,
             score: pointsEarned
           };
+        } else {
+          // If not updating the score, don't add new points
+          newPointsAdded = 0;
         }
       } else {
         // Add new completed chapter entry
@@ -222,17 +228,17 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
           completed_at: now,
           score: pointsEarned
         });
+        // If this is a new completion, add the full points
+        newPointsAdded = wasAlreadyCompleted ? 0 : pointsEarned;
       }
       
-      // Calculate new total points
+      // Calculate new total points, only adding the new points earned
       const existingPoints = progress.total_points || 0;
-      const newPoints = wasAlreadyCompleted 
-        ? existingPoints // Keep existing points if already completed
-        : existingPoints + pointsEarned;
+      const newPoints = existingPoints + newPointsAdded;
       
-      // Update total chapters read count
+      // Update total chapters read count, only increment if it's a new chapter
       const existingChaptersRead = progress.total_chapters_read || 0;
-      const newTotalChaptersRead = wasAlreadyCompleted 
+      const newTotalChaptersRead = existingChapterIndex >= 0 
         ? existingChaptersRead 
         : existingChaptersRead + 1;
       
@@ -250,13 +256,13 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
       await updateProgress(updateData);
       
       // Also update user profile points
-      if (profile && !wasAlreadyCompleted) {
+      if (profile && newPointsAdded > 0) {
         await updateProfile({
-          points: (profile.points || 0) + pointsEarned
+          points: (profile.points || 0) + newPointsAdded
         });
       }
       
-      console.log("Challenge completed successfully");
+      console.log("Challenge completed successfully, added points:", newPointsAdded);
     } catch (error) {
       console.error('Error completing challenge:', error);
       throw error;
