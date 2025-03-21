@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -27,80 +26,47 @@ const BibleExplorer = () => {
   const { bookId } = useParams();
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTestament, setActiveTestament] = useState('all');
-  const { progress, loading, getBookProgress } = useBibleProgress();
+  const { progress, loading, getBookProgress, getChapterStatus } = useBibleProgress();
   
-  // Filter books based on search and testament filter
   const filteredBooks = bibleBooks.filter(book => {
     const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase());
     const matchesTestament = activeTestament === 'all' || book.testament === activeTestament;
     return matchesSearch && matchesTestament;
   });
   
-  // Get chapters for selected book
   const selectedBook = bibleBooks.find(book => book.id === bookId);
   const bookChapters = selectedBook 
     ? Array.from({ length: selectedBook.chapters }, (_, i) => i + 1)
     : [];
   
-  // Check if a chapter is completed and get its score
   const getChapterInfo = (bookId: string, chapter: number) => {
-    if (!progress || !progress.completed_chapters) return { isCompleted: false, score: 0, maxScore: 0 };
-    
-    const challengeKey = `${bookId}-${chapter}`;
-    const isCompleted = progress.challenges_completed.includes(challengeKey);
-    
-    // Get score from completed_chapters if available
-    let score = 0;
-    let maxScore = 0;
-    
-    const chapterData = progress.completed_chapters.find(
-      c => c.book_id === bookId && c.chapter === chapter
-    );
-    
-    if (chapterData && chapterData.score) {
-      score = chapterData.score;
-    }
-    
-    // Find the challenge to get maxScore
-    const challenge = sampleChapterChallenges.find(
-      c => c.bookId === bookId && c.chapter === chapter
-    );
-    
-    if (challenge) {
-      maxScore = challenge.questions.length; // 1 point per question
-    }
-    
-    return { isCompleted, score, maxScore };
+    return getChapterStatus(bookId, chapter);
   };
   
   const isChapterCompleted = (bookId: string, chapter: number) => {
-    if (!progress || !progress.challenges_completed) return false;
-    return progress.challenges_completed.includes(`${bookId}-${chapter}`);
+    const { isCompleted } = getChapterStatus(bookId, chapter);
+    return isCompleted;
   };
   
   const navigateToChapter = (bookId: string, chapter: number) => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
 
-  // Chart data preparation for chapters
   const prepareChartData = (bookId: string, chapter: number) => {
     const { isCompleted, score, maxScore } = getChapterInfo(bookId, chapter);
     
-    // For not started chapters
     if (!isCompleted) {
       return [
         { name: 'Remaining', value: 100, color: '#e5e7eb' }
       ];
     }
     
-    // For perfect scores
     if (score === maxScore && maxScore > 0) {
       return [
         { name: 'Complete', value: 100, color: '#a855f7' }
       ];
     }
     
-    // For partially completed chapters
     const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
     return [
       { name: 'Complete', value: percentage, color: '#22c55e' },
@@ -115,7 +81,6 @@ const BibleExplorer = () => {
       <main className="flex-1 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-8">
-            {/* Bible Books Panel */}
             <div className="md:w-1/3 glass-card p-6 rounded-xl">
               <div className="mb-4">
                 <h2 className="text-2xl font-serif font-bold text-bible-dark mb-4">
@@ -145,7 +110,6 @@ const BibleExplorer = () => {
               <ScrollArea className="h-[500px] pr-4">
                 <div className="space-y-2">
                   {filteredBooks.map(book => {
-                    // Get book progress from the hook
                     const bookProgressPercent = getBookProgress(book.id);
                     
                     return (
@@ -186,7 +150,6 @@ const BibleExplorer = () => {
               </ScrollArea>
             </div>
             
-            {/* Chapters Panel */}
             <div className="md:w-2/3">
               {selectedBook ? (
                 <div className="glass-card p-6 rounded-xl">
