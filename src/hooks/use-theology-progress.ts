@@ -5,12 +5,14 @@ import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { theologyBooks } from '@/data/theology/books';
 import { TheologyReadingProgress } from '@/data/theology/types';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
 
 export function useTheologyProgress() {
   const { user } = useAuth();
   const [progress, setProgress] = useState<TheologyReadingProgress | null>(null);
   const [loading, setLoading] = useState(true);
   const { toast } = useToast();
+  const { progress: bibleProgress } = useBibleProgress();
 
   // Load initial progress
   useEffect(() => {
@@ -60,14 +62,35 @@ export function useTheologyProgress() {
           // If the progress record doesn't exist yet, create it
           if (progressError.code === 'PGRST116') {
             console.log('Theology progress not found, creating new progress record');
+            
+            // Check if there are any theology chapters completed in the bible_progress table
+            let initialCompletedChapters = [];
+            let initialBooksStarted = [];
+            let totalChaptersRead = 0;
+            
+            if (bibleProgress && bibleProgress.completed_chapters) {
+              // Filter chapters that belong to theology books
+              const theologyBookIds = theologyBooks.map(book => book.id);
+              initialCompletedChapters = bibleProgress.completed_chapters.filter(
+                chapter => theologyBookIds.includes(chapter.book_id)
+              );
+              
+              // Calculate books started
+              initialBooksStarted = Array.from(
+                new Set(initialCompletedChapters.map(chapter => chapter.book_id))
+              );
+              
+              totalChaptersRead = initialCompletedChapters.length;
+            }
+            
             const { data: newProgress, error: createError } = await supabase
               .from('theology_progress')
               .insert({
                 user_id: user.id,
-                completed_chapters: [],
-                books_started: [],
+                completed_chapters: initialCompletedChapters,
+                books_started: initialBooksStarted,
                 books_completed: [],
-                total_chapters_read: 0
+                total_chapters_read: totalChaptersRead
               })
               .select()
               .single();
@@ -77,12 +100,53 @@ export function useTheologyProgress() {
               throw createError;
             }
             
+            console.log('Created new theology progress with chapters from bible progress:', newProgress);
             setProgress(newProgress);
           } else {
             throw progressError;
           }
         } else {
           console.log('Theology progress loaded successfully:', progressData);
+          
+          // Check if theology progress is out of sync with bible progress
+          if (bibleProgress && bibleProgress.completed_chapters) {
+            const theologyBookIds = theologyBooks.map(book => book.id);
+            const theologyChaptersInBibleProgress = bibleProgress.completed_chapters.filter(
+              chapter => theologyBookIds.includes(chapter.book_id)
+            );
+            
+            // Check if there are theology chapters in bible_progress not in theology_progress
+            if (theologyChaptersInBibleProgress.length > 0 && 
+                (!progressData.completed_chapters || progressData.completed_chapters.length === 0)) {
+              
+              console.log('Found theology chapters in bible_progress, syncing with theology_progress');
+              
+              const booksStarted = Array.from(
+                new Set(theologyChaptersInBibleProgress.map(chapter => chapter.book_id))
+              );
+              
+              const updatedProgress = {
+                ...progressData,
+                completed_chapters: theologyChaptersInBibleProgress,
+                books_started: booksStarted,
+                total_chapters_read: theologyChaptersInBibleProgress.length
+              };
+              
+              const { error: updateError } = await supabase
+                .from('theology_progress')
+                .update(updatedProgress)
+                .eq('user_id', user.id);
+                
+              if (updateError) {
+                console.error('Error updating theology progress:', updateError);
+              } else {
+                console.log('Successfully synced theology progress:', updatedProgress);
+                setProgress(updatedProgress);
+                return;
+              }
+            }
+          }
+          
           setProgress(progressData);
         }
       } catch (error) {
@@ -107,7 +171,7 @@ export function useTheologyProgress() {
     }
 
     loadProgress();
-  }, [user, toast]);
+  }, [user, toast, bibleProgress]);
 
   // Get book completion percentage
   const getBookProgress = (bookId: string) => {
