@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -68,7 +69,9 @@ const BibleChapterChallenge = () => {
         
         if (chapterData && chapterData.score) {
           console.log('Found saved score:', chapterData.score);
-          setScore(chapterData.score);
+          // Ensure score doesn't exceed max possible points
+          const maxPossibleScore = challenge.questions.length;
+          setScore(Math.min(chapterData.score, maxPossibleScore));
         } else {
           // If no specific score saved, default to max points
           console.log('No saved score found, defaulting to max points');
@@ -84,7 +87,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted, progress, bookId, chapter, user]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -119,7 +122,12 @@ const BibleChapterChallenge = () => {
       if (!challengeCompleted) {
         console.log('Completing challenge with score:', score);
         // Make sure challengeId is correct format: "bookId-chapter"
-        completeChallenge(challengeId, score + (isCorrect ? 1 : 0));
+        // Ensure score doesn't exceed maximum points possible
+        const finalScore = isCorrect ? score + 1 : score;
+        const maxPossibleScore = challenge.questions.length;
+        const cappedScore = Math.min(finalScore, maxPossibleScore);
+        
+        completeChallenge(challengeId, cappedScore);
       }
     }
   };
@@ -131,6 +139,10 @@ const BibleChapterChallenge = () => {
     setIsCorrect(null);
     setScore(0);
     setQuizCompleted(false);
+  };
+  
+  const navigateToBookPage = () => {
+    navigate(`/bible/${bookId}`);
   };
   
   if (loading) {
@@ -342,14 +354,14 @@ const BibleChapterChallenge = () => {
                 
                 <div className="w-full max-w-xs mx-auto mb-6">
                   <Progress 
-                    value={(score / challenge.questions.length) * 100} 
+                    value={Math.min((score / challenge.questions.length) * 100, 100)} 
                     className={cn(
                       "h-3 rounded-full",
                       score === challenge.questions.length ? "bg-purple-200" : ""
                     )}
                   />
                   <p className="text-sm text-gray-500 mt-1">
-                    {Math.round((score / challenge.questions.length) * 100)}% complete
+                    {Math.min(Math.round((score / challenge.questions.length) * 100), 100)}% complete
                   </p>
                 </div>
                 
@@ -370,8 +382,8 @@ const BibleChapterChallenge = () => {
                     Retake Challenge
                   </Button>
                   
-                  <Button onClick={() => navigate('/bible')}>
-                    Continue Reading
+                  <Button onClick={navigateToBookPage}>
+                    Return to {book?.name || 'Book'}
                   </Button>
                 </div>
                 
@@ -379,10 +391,10 @@ const BibleChapterChallenge = () => {
                   <Button 
                     variant="link" 
                     className="text-gray-500"
-                    onClick={() => navigate(`/bible/${bookId}`)}
+                    onClick={() => navigate('/bible')}
                   >
                     <BookOpen className="mr-2" size={16} />
-                    Back to {book?.name || 'Book'}
+                    Bible Explorer
                   </Button>
                 </div>
               </Card>
