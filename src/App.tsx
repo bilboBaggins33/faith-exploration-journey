@@ -8,7 +8,6 @@ import { AuthProvider } from "@/context/AuthContext";
 
 // Pages
 import Index from "./pages/Index";
-import Map from "./pages/Map";
 import Challenge from "./pages/Challenge";
 import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
@@ -33,7 +32,6 @@ const App = () => (
         <BrowserRouter>
           <Routes>
             <Route path="/" element={<Index />} />
-            <Route path="/map" element={<Map />} />
             <Route path="/challenge" element={<Challenge />} />
             <Route path="/challenge/:id" element={<Challenge />} />
             <Route path="/challenge/creation-quiz" element={<GenesisDaysChallenge />} />

@@ -1,8 +1,7 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, BookOpen, User, Map, LogOut, Book } from 'lucide-react';
+import { Menu, X, BookOpen, User, LogOut, Book } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 
@@ -62,9 +61,6 @@ const Navbar = () => {
               <NavLink to="/" active={isActive('/')}>
                 Home
               </NavLink>
-              <NavLink to="/map" active={isActive('/map')}>
-                World Map
-              </NavLink>
               <NavLink to="/challenge" active={isActive('/challenge')}>
                 Challenges
               </NavLink>
@@ -113,9 +109,6 @@ const Navbar = () => {
           <div className="flex flex-col space-y-4 pt-2 pb-3">
             <MobileNavLink to="/" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/')}>
               Home
-            </MobileNavLink>
-            <MobileNavLink to="/map" icon={<Map className="h-5 w-5 mr-2" />} active={isActive('/map')}>
-              World Map
             </MobileNavLink>
             <MobileNavLink to="/challenge" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/challenge')}>
               Challenges

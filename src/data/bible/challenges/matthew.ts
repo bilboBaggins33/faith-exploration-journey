@@ -341,5 +341,365 @@ export const matthewChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 20
+  },
+  {
+    id: 'matthew-6',
+    bookId: 'matthew',
+    chapter: 6,
+    title: 'The Lord\'s Prayer and Teachings on Worry',
+    questions: [
+      {
+        id: 'matt6-q1',
+        question: 'According to Jesus, what should NOT be our motivation when giving to the needy?',
+        options: [
+          'To help others', 
+          'To be seen by others', 
+          'To follow God\'s commands', 
+          'To reduce suffering'
+        ],
+        correctAnswer: 'To be seen by others',
+        explanation: 'In Matthew 6:1-4, Jesus warns against giving to be seen and praised by others.'
+      },
+      {
+        id: 'matt6-q2',
+        question: 'How does Jesus teach us to address God in prayer?',
+        options: [
+          'Almighty God', 
+          'Lord of hosts', 
+          'Our Father in heaven', 
+          'Creator of all things'
+        ],
+        correctAnswer: 'Our Father in heaven',
+        explanation: 'Matthew 6:9 begins the Lord\'s Prayer with "Our Father in heaven..."'
+      },
+      {
+        id: 'matt6-q3',
+        question: 'What does Jesus teach about forgiveness in the Lord\'s Prayer?',
+        options: [
+          'We should forgive only if we are forgiven', 
+          'God forgives us as we forgive others', 
+          'Forgiveness is optional', 
+          'We should seek revenge on our enemies'
+        ],
+        correctAnswer: 'God forgives us as we forgive others',
+        explanation: 'In Matthew 6:12, Jesus teaches to pray "forgive us our debts, as we also have forgiven our debtors," and reinforces this in verses 14-15.'
+      },
+      {
+        id: 'matt6-q4',
+        question: 'What does Jesus say about storing up treasures?',
+        options: [
+          'Store treasures on earth for security', 
+          'Avoid all forms of wealth', 
+          'Store treasures in heaven, not on earth', 
+          'Give away everything you own'
+        ],
+        correctAnswer: 'Store treasures in heaven, not on earth',
+        explanation: 'In Matthew 6:19-21, Jesus instructs not to store up treasures on earth but in heaven.'
+      },
+      {
+        id: 'matt6-q5',
+        question: 'What example from nature does Jesus use to illustrate God\'s provision?',
+        options: [
+          'Trees and their fruit', 
+          'Birds of the air and lilies of the field', 
+          'Fish in the sea', 
+          'Stars in the sky'
+        ],
+        correctAnswer: 'Birds of the air and lilies of the field',
+        explanation: 'In Matthew 6:26-29, Jesus points to how God feeds the birds and clothes the lilies as evidence of His care for us.'
+      }
+    ],
+    key_verse: 'Matthew 6:33',
+    key_verse_text: 'But seek first the kingdom of God and his righteousness, and all these things will be added to you.',
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 15
+  },
+  {
+    id: 'matthew-7',
+    bookId: 'matthew',
+    chapter: 7,
+    title: 'Judging Others and the Wise Builder',
+    questions: [
+      {
+        id: 'matt7-q1',
+        question: 'What warning does Jesus give about judging others?',
+        options: [
+          'Judge others fairly', 
+          'Do not judge, or you will be judged', 
+          'Only religious leaders can judge', 
+          'Judge according to appearances'
+        ],
+        correctAnswer: 'Do not judge, or you will be judged',
+        explanation: 'Matthew 7:1-2 states, "Judge not, that you be not judged. For with the judgment you pronounce you will be judged."'
+      },
+      {
+        id: 'matt7-q2',
+        question: 'What metaphor does Jesus use about seeing others\' faults?',
+        options: [
+          'Picking fruit from trees', 
+          'Speck and log in the eye', 
+          'Wheat and tares', 
+          'Sheep and goats'
+        ],
+        correctAnswer: 'Speck and log in the eye',
+        explanation: 'In Matthew 7:3-5, Jesus speaks of trying to remove a speck from another\'s eye while having a log in your own.'
+      },
+      {
+        id: 'matt7-q3',
+        question: 'What is the "Golden Rule" as taught by Jesus?',
+        options: [
+          'Love God above all else', 
+          'Whoever has the gold makes the rules', 
+          'Do to others what you would have them do to you', 
+          'Give to everyone who asks of you'
+        ],
+        correctAnswer: 'Do to others what you would have them do to you',
+        explanation: 'Matthew 7:12 gives the Golden Rule: "So whatever you wish that others would do to you, do also to them."'
+      },
+      {
+        id: 'matt7-q4',
+        question: 'What imagery does Jesus use to describe the way to life versus destruction?',
+        options: [
+          'Light and darkness', 
+          'Mountain and valley', 
+          'Narrow gate/road and wide gate/road', 
+          'Bridge and river'
+        ],
+        correctAnswer: 'Narrow gate/road and wide gate/road',
+        explanation: 'In Matthew 7:13-14, Jesus describes a narrow gate and road leading to life, and a wide gate and road leading to destruction.'
+      },
+      {
+        id: 'matt7-q5',
+        question: 'What foundation metaphor does Jesus use for those who obey His teachings?',
+        options: [
+          'Building on rock versus sand', 
+          'Planting in good soil versus rocky ground', 
+          'Drawing water from a well versus a cistern', 
+          'Walking on a paved road versus a muddy path'
+        ],
+        correctAnswer: 'Building on rock versus sand',
+        explanation: 'In Matthew 7:24-27, Jesus compares those who hear and act on His words to a wise man who built his house on rock, and those who don\'t to a foolish man who built on sand.'
+      }
+    ],
+    key_verse: 'Matthew 7:7',
+    key_verse_text: 'Ask, and it will be given to you; seek, and you will find; knock, and it will be opened to you.',
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 15
+  },
+  {
+    id: 'matthew-8',
+    bookId: 'matthew',
+    chapter: 8,
+    title: 'Jesus Performs Miracles',
+    questions: [
+      {
+        id: 'matt8-q1',
+        question: 'What was the first miracle recorded in Matthew chapter 8?',
+        options: [
+          'Calming the storm', 
+          'Healing a paralytic', 
+          'Healing a leper', 
+          'Casting out demons'
+        ],
+        correctAnswer: 'Healing a leper',
+        explanation: 'Matthew 8:1-4 records Jesus healing a man with leprosy as the first miracle in this chapter.'
+      },
+      {
+        id: 'matt8-q2',
+        question: 'Whose servant did Jesus heal without even visiting their home?',
+        options: [
+          'A Pharisee\'s', 
+          'A centurion\'s', 
+          'A merchant\'s', 
+          'A priest\'s'
+        ],
+        correctAnswer: 'A centurion\'s',
+        explanation: 'In Matthew 8:5-13, Jesus healed a Roman centurion\'s servant from a distance.'
+      },
+      {
+        id: 'matt8-q3',
+        question: 'What did Jesus say about the centurion\'s faith?',
+        options: [
+          'It was weak but growing', 
+          'It was typical of Roman converts', 
+          'He had not found such great faith in Israel', 
+          'It needed to be tested'
+        ],
+        correctAnswer: 'He had not found such great faith in Israel',
+        explanation: 'In Matthew 8:10, Jesus says, "Truly, I tell you, with no one in Israel have I found such faith."'
+      },
+      {
+        id: 'matt8-q4',
+        question: 'What miracle did Jesus perform on the Sea of Galilee?',
+        options: [
+          'He walked on water', 
+          'He caught a miraculous haul of fish', 
+          'He calmed a storm', 
+          'He turned the water into wine'
+        ],
+        correctAnswer: 'He calmed a storm',
+        explanation: 'Matthew 8:23-27 describes Jesus calming a violent storm on the Sea of Galilee while in a boat with His disciples.'
+      },
+      {
+        id: 'matt8-q5',
+        question: 'What happened to the herd of pigs after Jesus cast demons out of the two men?',
+        options: [
+          'They were given to the men as a gift', 
+          'They immediately became healthy', 
+          'They rushed down the bank into the sea and drowned', 
+          'They ran away into the wilderness'
+        ],
+        correctAnswer: 'They rushed down the bank into the sea and drowned',
+        explanation: 'Matthew 8:32 records that after the demons entered the pigs, the whole herd rushed down the steep bank into the sea and drowned.'
+      }
+    ],
+    key_verse: 'Matthew 8:17',
+    key_verse_text: 'This was to fulfill what was spoken by the prophet Isaiah: "He took our illnesses and bore our diseases."',
+    memory_challenge: true,
+    difficulty: 'easy',
+    points: 10
+  },
+  {
+    id: 'matthew-9',
+    bookId: 'matthew',
+    chapter: 9,
+    title: 'Healing and Calling Disciples',
+    questions: [
+      {
+        id: 'matt9-q1',
+        question: 'What did Jesus say to the paralytic before healing him physically?',
+        options: [
+          '"Be healed!"', 
+          '"Take up your bed and walk"', 
+          '"Your sins are forgiven"', 
+          '"Do you want to be made well?"'
+        ],
+        correctAnswer: '"Your sins are forgiven"',
+        explanation: 'In Matthew 9:2, Jesus first told the paralytic, "Take heart, my son; your sins are forgiven."'
+      },
+      {
+        id: 'matt9-q2',
+        question: 'Which disciple was called by Jesus while sitting at a tax booth?',
+        options: [
+          'Peter', 
+          'Andrew', 
+          'Matthew', 
+          'John'
+        ],
+        correctAnswer: 'Matthew',
+        explanation: 'Matthew 9:9 records Jesus calling Matthew (also called Levi) while he was sitting at the tax booth.'
+      },
+      {
+        id: 'matt9-q3',
+        question: 'What did Jesus mean when He said, "Those who are well have no need of a physician, but those who are sick"?',
+        options: [
+          'He only came to heal physical illnesses', 
+          'He came to call sinners to repentance, not the righteous', 
+          'The Pharisees needed medical attention', 
+          'His disciples should become doctors'
+        ],
+        correctAnswer: 'He came to call sinners to repentance, not the righteous',
+        explanation: 'In Matthew 9:12-13, Jesus explains that He came to call sinners, not the righteous, using the physician metaphor.'
+      },
+      {
+        id: 'matt9-q4',
+        question: 'What miracle did Jesus perform for the woman who touched His garment?',
+        options: [
+          'He restored her sight', 
+          'He healed her hemorrhage', 
+          'He cast out a demon', 
+          'He raised her from the dead'
+        ],
+        correctAnswer: 'He healed her hemorrhage',
+        explanation: 'Matthew 9:20-22 describes a woman with a 12-year hemorrhage being healed after touching Jesus\' garment.'
+      },
+      {
+        id: 'matt9-q5',
+        question: 'What did Jesus say was needed for the harvest?',
+        options: [
+          'More time', 
+          'Better weather', 
+          'More workers', 
+          'More fields'
+        ],
+        correctAnswer: 'More workers',
+        explanation: 'In Matthew 9:37-38, Jesus tells His disciples, "The harvest is plentiful, but the laborers are few; therefore pray earnestly to the Lord of the harvest to send out laborers into his harvest."'
+      }
+    ],
+    key_verse: 'Matthew 9:13',
+    key_verse_text: 'Go and learn what this means: "I desire mercy, and not sacrifice." For I came not to call the righteous, but sinners.',
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 15
+  },
+  {
+    id: 'matthew-10',
+    bookId: 'matthew',
+    chapter: 10,
+    title: 'The Twelve Apostles Sent Out',
+    questions: [
+      {
+        id: 'matt10-q1',
+        question: 'How many apostles did Jesus call and send out?',
+        options: ['7', '10', '12', '24'],
+        correctAnswer: '12',
+        explanation: 'Matthew 10:1-4 lists the twelve apostles whom Jesus called and sent out.'
+      },
+      {
+        id: 'matt10-q2',
+        question: 'To whom did Jesus specifically instruct His apostles to go?',
+        options: [
+          'To all nations', 
+          'To the lost sheep of Israel', 
+          'To the Gentiles', 
+          'To the Samaritans'
+        ],
+        correctAnswer: 'To the lost sheep of Israel',
+        explanation: 'In Matthew 10:5-6, Jesus instructed them not to go to Gentiles or Samaritans but "to the lost sheep of the house of Israel."'
+      },
+      {
+        id: 'matt10-q3',
+        question: 'What were the apostles instructed to do on their mission?',
+        options: [
+          'Build synagogues', 
+          'Collect money for the poor', 
+          'Proclaim the kingdom and heal the sick', 
+          'Write down Jesus\' teachings'
+        ],
+        correctAnswer: 'Proclaim the kingdom and heal the sick',
+        explanation: 'Matthew 10:7-8 shows Jesus instructing them to proclaim that the kingdom of heaven is at hand, and to heal the sick, raise the dead, cleanse lepers, and cast out demons.'
+      },
+      {
+        id: 'matt10-q4',
+        question: 'What did Jesus say about how they should prepare financially for their journey?',
+        options: [
+          'Take gold and silver for emergencies', 
+          'Earn your keep by working along the way', 
+          'Acquire no gold, silver, or copper; the worker deserves his food', 
+          'Ask for donations from each town'
+        ],
+        correctAnswer: 'Acquire no gold, silver, or copper; the worker deserves his food',
+        explanation: 'In Matthew 10:9-10, Jesus told them not to acquire gold, silver, or copper, and explained that "the worker deserves his food."'
+      },
+      {
+        id: 'matt10-q5',
+        question: 'What did Jesus promise would happen to those who acknowledge Him before others?',
+        options: [
+          'They will be first in the kingdom', 
+          'They will be acknowledged by Him before the Father', 
+          'They will receive rewards on earth', 
+          'They will perform miracles'
+        ],
+        correctAnswer: 'They will be acknowledged by Him before the Father',
+        explanation: 'Matthew 10:32 states, "So everyone who acknowledges me before men, I also will acknowledge before my Father who is in heaven."'
+      }
+    ],
+    key_verse: 'Matthew 10:16',
+    key_verse_text: 'Behold, I am sending you out as sheep in the midst of wolves, so be wise as serpents and innocent as doves.',
+    memory_challenge: true,
+    difficulty: 'hard',
+    points: 20
   }
 ];
