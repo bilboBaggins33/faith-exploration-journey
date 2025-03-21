@@ -1,9 +1,13 @@
-
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { X, Download, SmartphoneIcon } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+// Define a type for Safari's non-standard navigator property
+interface SafariNavigator extends Navigator {
+  standalone?: boolean;
+}
 
 const InstallAppBanner = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -24,8 +28,9 @@ const InstallAppBanner = () => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
 
     // Check if the app is already installed
+    // Cast navigator to SafariNavigator to access the standalone property
     const isStandalone = 
-      window.navigator.standalone || 
+      (navigator as SafariNavigator).standalone || 
       window.matchMedia('(display-mode: standalone)').matches;
 
     // Show banner if on mobile and not already installed
