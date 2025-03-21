@@ -1,4 +1,3 @@
-
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,12 +12,14 @@ import Profile from "./pages/Profile";
 import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import BibleExplorer from "./pages/BibleExplorer";
+import TheologyExplorer from "./pages/TheologyExplorer";
 
 // Challenge Components
 import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
 import NoahArkChallenge from "@/components/challenges/NoahArkChallenge";
 import AbrahamFaithChallenge from "@/components/challenges/AbrahamFaithChallenge";
 import BibleChapterChallenge from "@/components/challenges/BibleChapterChallenge";
+import TheologyChapterChallenge from "./components/challenges/TheologyChapterChallenge";
 
 // Create a client
 const queryClient = new QueryClient();
@@ -42,7 +43,9 @@ const App = () => (
             <Route path="/bible/:bookId" element={<BibleExplorer />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/auth" element={<Auth />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+            <Route path="/theology" element={<TheologyExplorer />} />
+            <Route path="/theology/:bookId" element={<TheologyExplorer />} />
+            <Route path="/theology/:bookId/:chapter" element={<TheologyChapterChallenge />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
