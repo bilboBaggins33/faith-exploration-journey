@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -32,6 +31,7 @@ const TheologyChapterChallenge = () => {
   const [previouslyCompletedScore, setPreviouslyCompletedScore] = useState<number | null>(null);
   const [hasReadPassage, setHasReadPassage] = useState(false);
   const [isRetaking, setIsRetaking] = useState(false);
+  const [isReadConfirmationOpen, setIsReadConfirmationOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
 
@@ -109,7 +109,13 @@ const TheologyChapterChallenge = () => {
         setIsSubmitted(false);
       }
     }
-  }, [challenge, previouslyCompletedScore, isRetaking]);
+    
+    // Open the read confirmation sheet when component loads 
+    // but only if we haven't marked as read and aren't retaking
+    if (!hasReadPassage && !isRetaking && previouslyCompletedScore === null) {
+      setIsReadConfirmationOpen(true);
+    }
+  }, [challenge, previouslyCompletedScore, isRetaking, hasReadPassage]);
 
   // Handle answer selection
   const handleSelectAnswer = (answer: string) => {
@@ -228,6 +234,7 @@ const TheologyChapterChallenge = () => {
     setIsSubmitted(false);
     setShowResults(false);
     setHasReadPassage(false);
+    setIsReadConfirmationOpen(true);
   };
 
   // Calculate score percentage
@@ -310,13 +317,14 @@ const TheologyChapterChallenge = () => {
             </div>
           </div>
 
-          {!hasReadPassage && !showResults && !isRetaking && previouslyCompletedScore === null && (
-            <ReadConfirmationSheet
-              bookName={bookInfo.title}
-              chapter={parseInt(chapter)}
-              onConfirm={() => setHasReadPassage(true)}
-            />
-          )}
+          {/* Read Confirmation Sheet */}
+          <ReadConfirmationSheet
+            open={isReadConfirmationOpen}
+            onOpenChange={setIsReadConfirmationOpen}
+            onConfirm={() => setHasReadPassage(true)}
+            bookName={bookInfo.title}
+            chapter={parseInt(chapter)}
+          />
 
           {(hasReadPassage || isRetaking || previouslyCompletedScore !== null) && (
             <>
