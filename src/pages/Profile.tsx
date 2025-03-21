@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -701,5 +702,299 @@ interface ProfileHeaderProps {
     daysActive: number;
     badges: number;
     rank: string;
-    theology
+    theologyChaptersRead: number;
+    theologyBooksStarted: number;
+    theologyBooksCompleted: number;
+  };
+  onLogout: () => void;
+  userName: string;
+}
 
+// Add missing component implementations
+const ProfileHeader = ({ userStats, onLogout, userName }: ProfileHeaderProps) => {
+  return (
+    <div className="relative">
+      <div className="h-48 bg-gradient-to-r from-bible-lightBlue to-bible-blue rounded-t-xl"></div>
+      <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
+        <div className="flex flex-col md:flex-row md:items-end -mt-16 mb-6">
+          <Avatar className="w-32 h-32 border-4 border-white bg-white shadow-lg">
+            <AvatarImage src="https://avatars.githubusercontent.com/u/1234567?v=4" alt={userName} />
+            <AvatarFallback className="text-3xl">{userName.charAt(0)}</AvatarFallback>
+          </Avatar>
+          <div className="mt-4 md:mt-0 flex-1 md:ml-6">
+            <div className="flex flex-col md:flex-row md:items-center justify-between">
+              <div>
+                <h1 className="text-2xl font-bold font-serif">{userName}</h1>
+                <p className="text-bible-blue font-medium">{userStats.rank}</p>
+              </div>
+              <div className="mt-4 md:mt-0 flex space-x-2">
+                <Button variant="outline" className="flex items-center border-gray-300">
+                  <Edit className="h-4 w-4 mr-2" />
+                  Edit Profile
+                </Button>
+                <Button variant="outline" onClick={onLogout} className="flex items-center border-gray-300">
+                  <LogOut className="h-4 w-4 mr-2" />
+                  Sign Out
+                </Button>
+              </div>
+            </div>
+            <div className="mt-4 grid grid-cols-3 gap-4">
+              <div className="text-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+                <p className="text-xl font-semibold text-bible-deepBlue">{userStats.points}</p>
+                <p className="text-xs text-gray-500">Points</p>
+              </div>
+              <div className="text-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+                <p className="text-xl font-semibold text-bible-deepBlue">{userStats.streak}</p>
+                <p className="text-xs text-gray-500">Day Streak</p>
+              </div>
+              <div className="text-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+                <p className="text-xl font-semibold text-bible-deepBlue">{userStats.completedChallenges}</p>
+                <p className="text-xs text-gray-500">Challenges</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+interface StatsCardProps {
+  userStats: {
+    completedChallenges: number;
+    streak: number;
+    points: number;
+    versesMemorized: number;
+    daysActive: number;
+    badges: number;
+    rank: string;
+    theologyChaptersRead: number;
+    theologyBooksStarted: number;
+    theologyBooksCompleted: number;
+  };
+}
+
+const StatsCard = ({ userStats }: StatsCardProps) => {
+  return (
+    <Card className="glass-card shadow-md">
+      <CardHeader>
+        <CardTitle className="text-xl font-serif">Your Stats</CardTitle>
+        <CardDescription>Scripture learning progress</CardDescription>
+      </CardHeader>
+      <CardContent className="space-y-6">
+        <div className="grid grid-cols-2 gap-4">
+          <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+            <Award className="h-6 w-6 text-yellow-500 mb-1" />
+            <span className="text-xl font-semibold">{userStats.completedChallenges}</span>
+            <span className="text-xs text-gray-500">Challenges</span>
+          </div>
+          
+          <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+            <Calendar className="h-6 w-6 text-green-500 mb-1" />
+            <span className="text-xl font-semibold">{userStats.streak}</span>
+            <span className="text-xs text-gray-500">Day Streak</span>
+          </div>
+          
+          <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+            <BookOpen className="h-6 w-6 text-purple-500 mb-1" />
+            <span className="text-xl font-semibold">{userStats.versesMemorized}</span>
+            <span className="text-xs text-gray-500">Verses</span>
+          </div>
+          
+          <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+            <Medal className="h-6 w-6 text-bible-blue mb-1" />
+            <span className="text-xl font-semibold">{userStats.points}</span>
+            <span className="text-xs text-gray-500">Points</span>
+          </div>
+        </div>
+        
+        <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="flex items-center mb-2">
+            <BookText className="h-5 w-5 text-bible-blue mr-2" />
+            <h3 className="text-sm font-medium">Theology Reading</h3>
+          </div>
+          <div className="grid grid-cols-3 gap-2 text-center">
+            <div>
+              <p className="text-lg font-semibold">{userStats.theologyChaptersRead}</p>
+              <p className="text-xs text-gray-500">Chapters</p>
+            </div>
+            <div>
+              <p className="text-lg font-semibold">{userStats.theologyBooksStarted}</p>
+              <p className="text-xs text-gray-500">Books Started</p>
+            </div>
+            <div>
+              <p className="text-lg font-semibold">{userStats.theologyBooksCompleted}</p>
+              <p className="text-xs text-gray-500">Books Completed</p>
+            </div>
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  );
+};
+
+interface ActivityItemProps {
+  activity: {
+    id: number;
+    type: string;
+    title: string;
+    date: string;
+    result: string;
+    points: number;
+  };
+}
+
+const ActivityItem = ({ activity }: ActivityItemProps) => {
+  const getIcon = () => {
+    switch (activity.type) {
+      case 'challenge':
+        return <Award className="h-6 w-6 text-yellow-500" />;
+      case 'verse':
+        return <BookOpen className="h-6 w-6 text-purple-500" />;
+      case 'reading':
+        return <BookText className="h-6 w-6 text-blue-500" />;
+      default:
+        return <Clock className="h-6 w-6 text-gray-500" />;
+    }
+  };
+  
+  return (
+    <div className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+      <div className="flex-shrink-0 mr-3 bg-gray-100 rounded-full p-2">
+        {getIcon()}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium truncate">{activity.title}</p>
+        <p className="text-xs text-gray-500">{activity.result}</p>
+      </div>
+      <div className="flex-shrink-0 text-right">
+        <p className="text-sm font-medium text-bible-blue">+{activity.points}</p>
+        <p className="text-xs text-gray-500">{activity.date}</p>
+      </div>
+    </div>
+  );
+};
+
+interface RecommendedChallengeProps {
+  title: string;
+  difficulty: string;
+  type: string;
+  id: string;
+}
+
+const RecommendedChallenge = ({ title, difficulty, type, id }: RecommendedChallengeProps) => {
+  const getDifficultyColor = () => {
+    switch (difficulty) {
+      case 'easy':
+        return 'text-green-500';
+      case 'medium':
+        return 'text-yellow-500';
+      case 'hard':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
+  };
+  
+  const getTypeIcon = () => {
+    switch (type) {
+      case 'quiz':
+        return <Award className="h-5 w-5 text-yellow-500" />;
+      case 'memorization':
+        return <BookOpen className="h-5 w-5 text-purple-500" />;
+      case 'reading':
+        return <BookText className="h-5 w-5 text-blue-500" />;
+      default:
+        return <Clock className="h-5 w-5 text-gray-500" />;
+    }
+  };
+  
+  return (
+    <Link to={`/challenge/${id}`} className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
+      <div className="flex-shrink-0 mr-3 bg-gray-100 rounded-full p-2">
+        {getTypeIcon()}
+      </div>
+      <div className="flex-1 min-w-0">
+        <p className="text-sm font-medium truncate">{title}</p>
+        <p className={`text-xs ${getDifficultyColor()}`}>
+          {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} • {type.charAt(0).toUpperCase() + type.slice(1)}
+        </p>
+      </div>
+      <div className="flex-shrink-0">
+        <Button size="sm" className="h-8 bg-bible-blue hover:bg-bible-deepBlue">
+          Start
+        </Button>
+      </div>
+    </Link>
+  );
+};
+
+interface BadgeCardProps {
+  badge: {
+    id: number;
+    name: string;
+    description: string;
+    icon: React.ReactNode;
+    earned: boolean;
+  };
+}
+
+const BadgeCard = ({ badge }: BadgeCardProps) => {
+  return (
+    <div className={`p-4 rounded-lg text-center ${badge.earned ? 'bg-white' : 'bg-gray-50 opacity-60'} border border-gray-100 transition-all hover:shadow-md`}>
+      <div className="flex justify-center mb-3">
+        {badge.icon}
+      </div>
+      <h4 className="text-sm font-medium mb-1">{badge.name}</h4>
+      <p className="text-xs text-gray-500">{badge.description}</p>
+      {!badge.earned && (
+        <div className="mt-2 inline-block px-2 py-1 bg-gray-200 rounded text-xs">
+          Locked
+        </div>
+      )}
+    </div>
+  );
+};
+
+interface StatItemProps {
+  icon: React.ReactNode;
+  label: string;
+  value: number;
+}
+
+const StatItem = ({ icon, label, value }: StatItemProps) => {
+  return (
+    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+      <div className="mb-2">
+        {icon}
+      </div>
+      <p className="text-lg font-semibold">{value}</p>
+      <p className="text-xs text-gray-500 text-center">{label}</p>
+    </div>
+  );
+};
+
+interface MemorizationItemProps {
+  reference: string;
+  text: string;
+  progress: number;
+}
+
+const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) => {
+  return (
+    <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+      <div className="flex justify-between items-start mb-2">
+        <div>
+          <h4 className="text-sm font-medium">{reference}</h4>
+          <p className="text-xs text-gray-500 my-1 line-clamp-2">{text}</p>
+        </div>
+        <div className="ml-4 flex-shrink-0 px-2 py-1 bg-bible-sky text-bible-blue text-xs font-medium rounded">
+          {progress}%
+        </div>
+      </div>
+      <Progress value={progress} className="h-1.5 bg-gray-200" />
+    </div>
+  );
+};
+
+export default ProfilePage;
