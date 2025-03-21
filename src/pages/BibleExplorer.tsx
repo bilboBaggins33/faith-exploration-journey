@@ -9,17 +9,12 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
-  Book, Search, BookOpen, CheckCircle, Circle, 
-  ChevronRight, Filter, BookMarked, BarChart 
+  Book, Search, BookOpen, 
+  ChevronRight, BookMarked 
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
-import { 
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent
-} from '@/components/ui/chart';
-import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import BibleChapterCard from '@/components/bible/BibleChapterCard';
 
 const BibleExplorer = () => {
   const navigate = useNavigate();
@@ -39,52 +34,10 @@ const BibleExplorer = () => {
     ? Array.from({ length: selectedBook.chapters }, (_, i) => i + 1)
     : [];
   
-  const getChapterInfo = (bookId: string, chapter: number) => {
-    return getChapterStatus(bookId, chapter);
-  };
-  
-  const isChapterCompleted = (bookId: string, chapter: number) => {
-    const { isCompleted } = getChapterStatus(bookId, chapter);
-    return isCompleted;
-  };
-  
   const navigateToChapter = (bookId: string, chapter: number) => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
 
-  const getProgressColor = (scorePercentage: number) => {
-    if (scorePercentage < 50) {
-      return '#ea384c'; // red
-    } else if (scorePercentage < 100) {
-      return '#F97316'; // orange
-    } else {
-      return '#22c55e'; // green
-    }
-  };
-  
-  const prepareChartData = (bookId: string, chapter: number) => {
-    const { isCompleted, score, maxScore } = getChapterInfo(bookId, chapter);
-    
-    if (!isCompleted) {
-      return [
-        { name: 'Remaining', value: 100, color: '#e5e7eb' }
-      ];
-    }
-    
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-    
-    if (percentage === 100) {
-      return [
-        { name: 'Complete', value: 100, color: '#22c55e' } // Always green for 100%
-      ];
-    }
-    
-    return [
-      { name: 'Complete', value: percentage, color: getProgressColor(percentage) },
-      { name: 'Remaining', value: 100 - percentage, color: '#e5e7eb' }
-    ];
-  };
-  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -177,55 +130,18 @@ const BibleExplorer = () => {
                   
                   <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
                     {bookChapters.map(chapter => {
-                      const { isCompleted, score, maxScore } = getChapterInfo(selectedBook.id, chapter);
-                      const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-                      const chartData = prepareChartData(selectedBook.id, chapter);
+                      const { isCompleted, score, maxScore } = getChapterStatus(selectedBook.id, chapter);
                       
                       return (
-                        <motion.div
+                        <BibleChapterCard
                           key={chapter}
-                          whileHover={{ y: -5 }}
-                          className={cn(
-                            "p-4 rounded-lg border cursor-pointer transition-all shadow-sm",
-                            isCompleted && scorePercentage === 100
-                              ? "bg-green-50 border-green-200" 
-                              : isCompleted && scorePercentage >= 50
-                                ? "bg-orange-50 border-orange-200"
-                                : isCompleted
-                                  ? "bg-red-50 border-red-200"
-                                  : "bg-white border-gray-200 hover:border-bible-blue hover:bg-blue-50"
-                          )}
+                          bookId={selectedBook.id}
+                          chapter={chapter}
+                          isCompleted={isCompleted}
+                          score={score}
+                          maxScore={maxScore}
                           onClick={() => navigateToChapter(selectedBook.id, chapter)}
-                        >
-                          <div className="text-center">
-                            <div className="h-14 w-14 mx-auto mb-2">
-                              <ResponsiveContainer width="100%" height="100%">
-                                <PieChart>
-                                  <Pie
-                                    data={chartData}
-                                    cx="50%"
-                                    cy="50%"
-                                    innerRadius={15}
-                                    outerRadius={25}
-                                    paddingAngle={0}
-                                    dataKey="value"
-                                    strokeWidth={0}
-                                  >
-                                    {chartData.map((entry, index) => (
-                                      <Cell key={`cell-${index}`} fill={entry.color} />
-                                    ))}
-                                  </Pie>
-                                </PieChart>
-                              </ResponsiveContainer>
-                            </div>
-                            <span className="font-medium block mb-1">Chapter {chapter}</span>
-                            {isCompleted && (
-                              <p className="text-xs text-gray-500">
-                                Score: {score}/{maxScore}
-                              </p>
-                            )}
-                          </div>
-                        </motion.div>
+                        />
                       );
                     })}
                   </div>
