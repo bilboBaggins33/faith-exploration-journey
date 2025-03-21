@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const heroBackgroundUrls = [
-  'https://images.unsplash.com/photo-1504052434569-70c99356bba1?ixlib=rb-4.0.3',
+  'assets/hero-bg.jpg',
   'https://images.unsplash.com/photo-1602610411365-76e8c2a88e18?ixlib=rb-4.0.3',
   'https://images.unsplash.com/photo-1537799943037-f5da89a08a77?ixlib=rb-4.0.3'
 ];
