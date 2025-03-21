@@ -4,6 +4,7 @@ import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import Features from '@/components/Features';
 import Footer from '@/components/Footer';
+import InstallAppBanner from '@/components/InstallAppBanner';
 import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
@@ -43,6 +44,7 @@ const Index = () => {
       <Testimonials />
       <CallToAction />
       <Footer />
+      <InstallAppBanner />
     </div>
   );
 };

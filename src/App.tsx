@@ -1,3 +1,4 @@
+
 import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
@@ -13,6 +14,7 @@ import Auth from "./pages/Auth";
 import NotFound from "./pages/NotFound";
 import BibleExplorer from "./pages/BibleExplorer";
 import TheologyExplorer from "./pages/TheologyExplorer";
+import InstallApp from "./pages/InstallApp";
 
 // Challenge Components
 import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
@@ -46,6 +48,7 @@ const App = () => (
             <Route path="/theology" element={<TheologyExplorer />} />
             <Route path="/theology/:bookId" element={<TheologyExplorer />} />
             <Route path="/theology/:bookId/:chapter" element={<TheologyChapterChallenge />} />
+            <Route path="/install-app" element={<InstallApp />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
