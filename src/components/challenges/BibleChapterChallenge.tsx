@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -34,6 +33,7 @@ const BibleChapterChallenge = () => {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [restartInProgress, setRestartInProgress] = useState(false);
   
   // Find challenge data
   const book = bibleBooks.find(b => b.id === bookId);
@@ -57,13 +57,17 @@ const BibleChapterChallenge = () => {
     if (challenge) {
       setLoading(false);
       
-      // If already completed, show the summary screen and set the score
-      if (challengeCompleted && progress?.completed_chapters) {
+      // Check if the user is explicitly restarting via URL params
+      const urlParams = new URLSearchParams(window.location.search);
+      const forceRestart = urlParams.get('restart') === 'true' || restartInProgress;
+      
+      // If already completed and not forcing restart, show the summary screen and set the score
+      if (challengeCompleted && !forceRestart) {
         console.log('Challenge is already completed');
         setQuizCompleted(true);
         
         // Find the saved score for this chapter
-        const chapterData = progress.completed_chapters.find(
+        const chapterData = progress?.completed_chapters.find(
           c => c.book_id === bookId && c.chapter === Number(chapter)
         );
         
@@ -77,6 +81,15 @@ const BibleChapterChallenge = () => {
           console.log('No saved score found, defaulting to max points');
           setScore(challenge.questions.length);
         }
+      } else if (forceRestart) {
+        // Reset all states if we're restarting
+        setCurrentQuestion(0);
+        setSelectedAnswer(null);
+        setShowExplanation(false);
+        setIsCorrect(null);
+        setScore(0);
+        setQuizCompleted(false);
+        setRestartInProgress(false);
       }
     } else {
       // Challenge doesn't exist, show error or redirect
@@ -87,7 +100,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast, restartInProgress]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -133,6 +146,7 @@ const BibleChapterChallenge = () => {
   };
   
   const restartQuiz = () => {
+    setRestartInProgress(true);
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
