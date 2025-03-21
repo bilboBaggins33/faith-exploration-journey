@@ -39,6 +39,30 @@ export type Database = {
         }
         Relationships: []
       }
+      theology_progress: {
+        Row: {
+          books_completed: string[] | null
+          books_started: string[] | null
+          completed_chapters: Json | null
+          total_chapters_read: number | null
+          user_id: string
+        }
+        Insert: {
+          books_completed?: string[] | null
+          books_started?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          user_id: string
+        }
+        Update: {
+          books_completed?: string[] | null
+          books_started?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
       user_profiles: {
         Row: {
           full_name: string | null
