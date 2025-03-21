@@ -8,6 +8,8 @@ export interface TheologyBook {
   chapters: number;
   year: number;
   category: string;
+  coverImage: string;
+  description?: string;
 }
 
 export interface TheologyChapter {
