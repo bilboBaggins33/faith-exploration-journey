@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, Book, Map, Award, Users } from 'lucide-react';
+import { ArrowRight, BookOpen, BookText, GraduationCap, Heart } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
@@ -50,13 +50,13 @@ const Hero = () => {
           className="mb-8"
         >
           <span className="inline-block text-bible-gold bg-bible-dark/60 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wider mb-4">
-            Interactive Bible Learning
+            Spiritual Growth Through Reading
           </span>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-            Embark on a Journey Through Scripture
+            Deepen Your Faith Through Scripture & Theology
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 mb-8">
-            Explore biblical lands, complete challenges, and grow your knowledge and faith through an engaging, interactive adventure.
+            Track your reading progress, grow in knowledge and faith, and connect with others through an engaging Bible and theology reading experience.
           </p>
         </motion.div>
         
@@ -66,9 +66,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
-          <Link to="/map">
+          <Link to="/bible">
             <Button size="lg" className="bg-bible-blue hover:bg-bible-deepBlue text-white px-8 h-12 rounded-md font-medium transition-all duration-300 transform hover:scale-105">
-              Start Your Journey
+              Start Reading
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
@@ -87,20 +87,20 @@ const Hero = () => {
           className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
         >
           <FeatureIcon
-            icon={<Book className="h-8 w-8 text-bible-gold" />}
-            text="Interactive Learning"
+            icon={<BookOpen className="h-8 w-8 text-bible-gold" />}
+            text="Bible Reading"
           />
           <FeatureIcon
-            icon={<Map className="h-8 w-8 text-bible-gold" />}
-            text="Biblical World Map"
+            icon={<BookText className="h-8 w-8 text-bible-gold" />}
+            text="Theology Study"
           />
           <FeatureIcon
-            icon={<Award className="h-8 w-8 text-bible-gold" />}
-            text="Challenges & Rewards"
+            icon={<GraduationCap className="h-8 w-8 text-bible-gold" />}
+            text="Track Growth"
           />
           <FeatureIcon
-            icon={<Users className="h-8 w-8 text-bible-gold" />}
-            text="Community"
+            icon={<Heart className="h-8 w-8 text-bible-gold" />}
+            text="Share With Friends"
           />
         </motion.div>
       </div>

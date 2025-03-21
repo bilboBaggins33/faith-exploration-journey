@@ -9,7 +9,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, Map, Award } from 'lucide-react';
+import { ArrowRight, BookOpen, BookText, GraduationCap, Users } from 'lucide-react';
 
 const Index = () => {
   // Initialize scroll reveal
@@ -82,10 +82,10 @@ const HowItWorks = () => {
         <div className="text-center mb-16">
           <p className="text-bible-blue font-medium mb-3">HOW IT WORKS</p>
           <h2 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-6">
-            Your Journey Through Scripture
+            Your Path to Spiritual Growth
           </h2>
           <p className="max-w-3xl mx-auto text-lg text-bible-dark/80">
-            Bible Adventure Quest takes you through a step-by-step journey that makes learning Scripture engaging and meaningful.
+            Our platform helps you consistently engage with Scripture and theology through a structured, rewarding approach.
           </p>
         </div>
         
@@ -104,7 +104,7 @@ const HowItWorks = () => {
               Create Your Account
             </h3>
             <p className="text-bible-dark/70 mb-4">
-              Sign up for a free account to track your progress, earn rewards, and connect with other learners.
+              Sign up for a free account to track your reading progress, earn rewards, and connect with other readers.
             </p>
             <Link to="/auth" className="text-bible-blue hover-link">
               Get Started
@@ -116,13 +116,13 @@ const HowItWorks = () => {
               <span className="text-2xl font-bold text-bible-deepBlue">2</span>
             </div>
             <h3 className="text-xl font-serif font-semibold text-bible-dark mb-3">
-              Explore the Biblical World
+              Choose Your Reading
             </h3>
             <p className="text-bible-dark/70 mb-4">
-              Navigate through an interactive map of biblical lands and eras, unlocking new areas as you progress.
+              Browse our collection of Scripture and theology books, selecting what you want to read and grow in.
             </p>
-            <Link to="/map" className="text-bible-blue hover-link">
-              View Map
+            <Link to="/theology" className="text-bible-blue hover-link">
+              Explore Books
             </Link>
           </motion.div>
           
@@ -131,13 +131,13 @@ const HowItWorks = () => {
               <span className="text-2xl font-bold text-bible-deepBlue">3</span>
             </div>
             <h3 className="text-xl font-serif font-semibold text-bible-dark mb-3">
-              Complete Challenges
+              Track Your Progress
             </h3>
             <p className="text-bible-dark/70 mb-4">
-              Take on quizzes, memorization tasks, and interactive activities to deepen your understanding and earn rewards.
+              Mark chapters as read, take quizzes to test your understanding, and watch your knowledge and faith grow.
             </p>
-            <Link to="/challenge" className="text-bible-blue hover-link">
-              See Challenges
+            <Link to="/profile" className="text-bible-blue hover-link">
+              View Progress
             </Link>
           </motion.div>
         </motion.div>
@@ -149,19 +149,19 @@ const HowItWorks = () => {
 const Testimonials = () => {
   const testimonials = [
     {
-      quote: "Bible Adventure Quest has transformed how our family engages with Scripture. The kids look forward to our Bible study time now!",
+      quote: "This platform has transformed my Bible reading habit. I'm more consistent and feel like I'm actually growing in my understanding of Scripture.",
       author: "Sarah J.",
-      role: "Parent of three",
+      role: "Daily Reader",
       image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
     },
     {
-      quote: "As a Sunday school teacher, this has been an incredible resource. The interactive map and quizzes keep my students engaged and excited to learn.",
+      quote: "As a theology student, this has been an invaluable resource. The tracking system keeps me accountable, and the quizzes help reinforce what I'm learning.",
       author: "Michael T.",
-      role: "Sunday School Teacher",
+      role: "Seminary Student",
       image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
     },
     {
-      quote: "I've been a Christian for years, but this platform has helped me discover new insights and connections in the Bible I never noticed before.",
+      quote: "I've been a Christian for years, but this platform has helped me dive deeper into theological concepts I've always wanted to understand better.",
       author: "Rebecca L.",
       role: "Bible Study Group Leader",
       image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
@@ -225,10 +225,10 @@ const CallToAction = () => {
             {/* Content */}
             <div className="relative z-10 flex-1 text-center md:text-left mb-8 md:mb-0">
               <h2 className="text-2xl md:text-3xl lg:text-4xl font-serif font-bold text-white mb-4">
-                Ready to Begin Your Biblical Adventure?
+                Ready to Deepen Your Spiritual Journey?
               </h2>
               <p className="text-white/80 mb-8 max-w-2xl">
-                Create your free account today and start exploring the world of Scripture through our interactive learning platform.
+                Create your free account today and start tracking your Bible and theology reading progress with our thoughtfully designed platform.
               </p>
               <div className="flex flex-col sm:flex-row items-center justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
                 <Link to="/auth">
@@ -237,9 +237,9 @@ const CallToAction = () => {
                     <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                 </Link>
-                <Link to="/map">
+                <Link to="/bible">
                   <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 transition-colors duration-300">
-                    Explore the Map
+                    Browse Reading List
                   </Button>
                 </Link>
               </div>
@@ -252,14 +252,14 @@ const CallToAction = () => {
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
                       src="https://images.unsplash.com/photo-1504052434569-70c99356bba1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                      alt="Biblical landscape"
+                      alt="Open Bible"
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
                       src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                      alt="Open Bible"
+                      alt="Reading Scripture"
                       className="h-full w-full object-cover"
                     />
                   </div>
@@ -268,14 +268,14 @@ const CallToAction = () => {
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
                       src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                      alt="Digital learning"
+                      alt="Digital reading"
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
                       src="https://images.unsplash.com/photo-1555116505-38ab61800975?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                      alt="Community group"
+                      alt="Study group"
                       className="h-full w-full object-cover"
                     />
                   </div>
