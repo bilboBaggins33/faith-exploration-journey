@@ -60,9 +60,9 @@ export const useTheologyProgress = () => {
     if (!book) return 0;
     
     const chaptersCompleted = getBookChaptersRead(bookId);
-    const progress = Math.round((chaptersCompleted / book.chapters) * 100);
+    const bookProgress = Math.round((chaptersCompleted / book.chapters) * 100);
     
-    return progress > 100 ? 100 : progress;
+    return bookProgress > 100 ? 100 : bookProgress;
   };
 
   const getBookChaptersRead = (bookId: string) => {
@@ -91,20 +91,87 @@ export const useTheologyProgress = () => {
     return Math.round(totalScore / completedForBook.length);
   };
 
+  // Helper function to check if a challenge is completed
+  const isCompleted = (bookId: string, chapter: number) => {
+    if (!progress?.completed_chapters) return false;
+    
+    return progress.completed_chapters.some(
+      (ch: any) => ch.book_id === bookId && ch.chapter === chapter
+    );
+  };
+
+  // Helper function to complete a challenge
+  const completeChallenge = async (bookId: string, chapter: number, score: number) => {
+    if (!user || !progress) return;
+    
+    // Create a new completed chapter entry
+    const newEntry = {
+      book_id: bookId,
+      chapter,
+      completed_at: new Date().toISOString(),
+      score
+    };
+    
+    // Check if this chapter is already completed
+    const completedChapters = [...(progress.completed_chapters || [])];
+    const existingIndex = completedChapters.findIndex(
+      (ch: any) => ch.book_id === bookId && ch.chapter === chapter
+    );
+    
+    // If exists, update the entry; otherwise add a new one
+    if (existingIndex >= 0) {
+      completedChapters[existingIndex] = newEntry;
+    } else {
+      completedChapters.push(newEntry);
+    }
+    
+    // Update books_started if needed
+    let booksStarted = [...(progress.books_started || [])];
+    if (!booksStarted.includes(bookId)) {
+      booksStarted.push(bookId);
+    }
+    
+    // Update books_completed if all chapters are completed
+    const book = theologyBooks.find(b => b.id === bookId);
+    if (book) {
+      const completedChaptersForBook = completedChapters.filter(
+        (ch: any) => ch.book_id === bookId
+      ).length;
+      
+      let booksCompleted = [...(progress.books_completed || [])];
+      if (completedChaptersForBook >= book.chapters && !booksCompleted.includes(bookId)) {
+        booksCompleted.push(bookId);
+      }
+      
+      // Update the progress in Supabase
+      await updateProgress({
+        completed_chapters: completedChapters,
+        books_started: booksStarted,
+        books_completed: booksCompleted,
+        total_chapters_read: completedChapters.length
+      });
+    }
+  };
+
   // Helper function to update progress
   const updateProgress = async (data: any) => {
     if (!user) return;
 
-    const { error } = await supabase
-      .from('theology_progress')
-      .update(data)
-      .eq('user_id', user.id);
+    try {
+      const { error } = await supabase
+        .from('theology_progress')
+        .update(data)
+        .eq('user_id', user.id);
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      await fetchData();
+    } catch (error) {
+      console.error('Error updating theology progress:', error);
       throw error;
     }
-
-    await fetchData();
   };
 
   return {
@@ -114,6 +181,8 @@ export const useTheologyProgress = () => {
     getBookChaptersRead,
     getBookAverageScore,
     refreshProgress,
-    updateProgress
+    updateProgress,
+    isCompleted,
+    completeChallenge
   };
 };

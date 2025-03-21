@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
+import { bibleBooks } from '@/data/bible/books';
 
 export const useBibleProgress = () => {
   const { user } = useAuth();
@@ -67,36 +68,102 @@ export const useBibleProgress = () => {
     await fetchData();
   };
 
+  // Helper function to get book progress percentage
+  const getBookProgress = (bookId: string) => {
+    if (!progress || !progress.completed_chapters) return 0;
+    
+    const book = bibleBooks.find(b => b.id === bookId);
+    if (!book) return 0;
+    
+    // Count completed chapters for this book
+    const completedChapters = progress.completed_chapters.filter(
+      (ch: any) => ch.book_id === bookId
+    ).length;
+    
+    const bookProgress = Math.round((completedChapters / book.chapters) * 100);
+    return bookProgress > 100 ? 100 : bookProgress;
+  };
+
+  // Helper function to check if a challenge is completed
+  const isCompleted = (challengeId: string) => {
+    if (!progress || !progress.challenges_completed) return false;
+    return progress.challenges_completed.includes(challengeId);
+  };
+
+  // Helper function to complete a challenge
+  const completeChallenge = async (challengeId: string, pointsEarned: number = 10) => {
+    if (!user || !progress) return;
+    
+    try {
+      // Add to completed challenges if not already there
+      let challenges = [...(progress.challenges_completed || [])];
+      if (!challenges.includes(challengeId)) {
+        challenges.push(challengeId);
+      }
+      
+      // Update total points
+      const newPoints = (progress.total_points || 0) + pointsEarned;
+      
+      // Update the progress in Supabase
+      await updateProgress({
+        challenges_completed: challenges,
+        total_points: newPoints
+      });
+      
+      // Also update user profile points
+      if (profile) {
+        await updateProfile({
+          points: (profile.points || 0) + pointsEarned
+        });
+      }
+      
+      await fetchData();
+    } catch (error) {
+      console.error('Error completing challenge:', error);
+      throw error;
+    }
+  };
+
   // Helper function to update profile data
   const updateProfile = async (data: any) => {
     if (!user) return;
 
-    const { error } = await supabase
-      .from('user_profiles')
-      .update(data)
-      .eq('user_id', user.id);
+    try {
+      const { error } = await supabase
+        .from('user_profiles')
+        .update(data)
+        .eq('user_id', user.id);
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      await fetchData();
+    } catch (error) {
+      console.error('Error updating profile:', error);
       throw error;
     }
-
-    await fetchData();
   };
 
   // Helper function to update progress data
   const updateProgress = async (data: any) => {
     if (!user) return;
 
-    const { error } = await supabase
-      .from('bible_progress')
-      .update(data)
-      .eq('user_id', user.id);
+    try {
+      const { error } = await supabase
+        .from('bible_progress')
+        .update(data)
+        .eq('user_id', user.id);
 
-    if (error) {
+      if (error) {
+        throw error;
+      }
+
+      await fetchData();
+    } catch (error) {
+      console.error('Error updating Bible progress:', error);
       throw error;
     }
-
-    await fetchData();
   };
 
   return {
@@ -105,6 +172,9 @@ export const useBibleProgress = () => {
     loading,
     refreshProfile,
     updateProfile,
-    updateProgress
+    updateProgress,
+    getBookProgress,
+    isCompleted,
+    completeChallenge
   };
 };
