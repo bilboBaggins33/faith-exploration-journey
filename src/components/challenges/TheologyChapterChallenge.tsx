@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
@@ -16,6 +17,7 @@ import ChallengeResults from './theology/ChallengeResults';
 import ChallengeProgress from './theology/ChallengeProgress';
 import ChallengeLoading from './theology/ChallengeLoading';
 import ChallengeError from './theology/ChallengeError';
+import { useTheologyProgress } from '@/hooks/use-theology-progress';
 
 const TheologyChapterChallenge = () => {
   const { bookId = '', chapter = '' } = useParams();
@@ -31,6 +33,7 @@ const TheologyChapterChallenge = () => {
   const [isReadConfirmationOpen, setIsReadConfirmationOpen] = useState(false);
   const { toast } = useToast();
   const navigate = useNavigate();
+  const { completeChallenge, getChapterStatus } = useTheologyProgress();
 
   const { data: challenge, isLoading, error } = useQuery({
     queryKey: ['theology-challenge', bookId, chapter],
@@ -48,21 +51,12 @@ const TheologyChapterChallenge = () => {
         const { data: { session } } = await supabase.auth.getSession();
         
         if (session?.user) {
-          const { data: progressData } = await supabase
-            .from('bible_progress')
-            .select('*')
-            .eq('user_id', session.user.id)
-            .maybeSingle();
+          // Check if the user has already completed this chapter
+          const status = getChapterStatus(bookId, chapterNum);
           
-          if (progressData && progressData.completed_chapters) {
-            const completedChapter = progressData.completed_chapters.find(
-              (cc: any) => cc.book_id === bookId && cc.chapter === chapterNum
-            );
-            
-            if (completedChapter && !isRetaking) {
-              setPreviouslyCompletedScore(completedChapter.score || 0);
-              setMaxScore(found.points);
-            }
+          if (status.completed && !isRetaking) {
+            setPreviouslyCompletedScore(status.score || 0);
+            setMaxScore(found.points);
           }
         }
       }
@@ -143,63 +137,16 @@ const TheologyChapterChallenge = () => {
   const handleFinish = async () => {
     setShowResults(true);
 
-    if (isSupabaseConfigured()) {
-      const { data: { session } } = await supabase.auth.getSession();
-      
-      if (session?.user) {
-        const { data: progressData } = await supabase
-          .from('bible_progress')
-          .select('*')
-          .eq('user_id', session.user.id)
-          .maybeSingle();
-        
-        if (progressData) {
-          const completedChapters = progressData.completed_chapters || [];
-          const chapterIndex = completedChapters.findIndex(
-            (cc: any) => cc.book_id === bookId && cc.chapter === parseInt(chapter)
-          );
-          
-          const newChapterEntry = {
-            book_id: bookId,
-            chapter: parseInt(chapter),
-            completed_at: new Date().toISOString(),
-            score: score
-          };
-          
-          let updatedChapters;
-          
-          if (chapterIndex >= 0) {
-            if (score > completedChapters[chapterIndex].score || isRetaking) {
-              updatedChapters = [...completedChapters];
-              updatedChapters[chapterIndex] = newChapterEntry;
-            } else {
-              updatedChapters = completedChapters;
-            }
-          } else {
-            updatedChapters = [...completedChapters, newChapterEntry];
-          }
-          
-          await supabase
-            .from('bible_progress')
-            .update({
-              completed_chapters: updatedChapters,
-              total_chapters_read: updatedChapters.length
-            })
-            .eq('user_id', session.user.id);
-        } else {
-          await supabase
-            .from('bible_progress')
-            .insert({
-              user_id: session.user.id,
-              completed_chapters: [{
-                book_id: bookId,
-                chapter: parseInt(chapter),
-                completed_at: new Date().toISOString(),
-                score: score
-              }],
-              total_chapters_read: 1
-            });
-        }
+    if (isSupabaseConfigured() && challenge) {
+      try {
+        await completeChallenge(bookId, parseInt(chapter), score);
+      } catch (error) {
+        console.error('Error saving challenge results:', error);
+        toast({
+          title: "Error",
+          description: "There was a problem saving your progress.",
+          variant: "destructive"
+        });
       }
     }
   };
@@ -214,9 +161,6 @@ const TheologyChapterChallenge = () => {
     setHasReadPassage(false);
     setIsReadConfirmationOpen(true);
   };
-
-  const scorePercentage = maxScore > 0 ? (score / maxScore) * 100 : 0;
-  const displayPercentage = Math.min(Math.round(scorePercentage), 100);
 
   const chapterTitle = chapterInfo?.title || `Chapter ${chapter}`;
   const passageText = `This is a placeholder for the text of ${bookInfo?.title || 'the book'}, chapter ${chapter}. In a real application, this would contain the actual text of the chapter from the theological work.`;
