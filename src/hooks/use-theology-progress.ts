@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
 import { supabase } from '@/lib/supabase';
@@ -100,6 +99,25 @@ export const useTheologyProgress = () => {
     );
   };
 
+  // Helper function to get chapter status (completed, score)
+  const getChapterStatus = (bookId: string, chapter: number) => {
+    if (!progress?.completed_chapters) return { completed: false, score: 0 };
+    
+    const completedChapter = progress.completed_chapters.find(
+      (ch: any) => ch.book_id === bookId && ch.chapter === chapter
+    );
+    
+    if (!completedChapter) {
+      return { completed: false, score: 0 };
+    }
+    
+    return { 
+      completed: true, 
+      score: completedChapter.score || 0,
+      completedAt: completedChapter.completed_at
+    };
+  };
+
   // Helper function to complete a challenge
   const completeChallenge = async (bookId: string, chapter: number, score: number) => {
     if (!user || !progress) return;
@@ -180,6 +198,7 @@ export const useTheologyProgress = () => {
     getBookProgress,
     getBookChaptersRead,
     getBookAverageScore,
+    getChapterStatus,
     refreshProgress,
     updateProgress,
     isCompleted,
