@@ -1,15 +1,10 @@
 
-import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
-import { theologyChapterChallenges, theologyChapters, theologyBooks } from '@/data/theology';
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { useToast } from '@/hooks/use-toast';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import { supabase } from '@/lib/supabase';
-import { isSupabaseConfigured } from '@/lib/supabase';
 import ReadConfirmationSheet from '@/components/challenges/ReadConfirmationSheet';
 import ChallengeHeader from './theology/ChallengeHeader';
 import ChallengeQuestion from './theology/ChallengeQuestion';
@@ -17,153 +12,41 @@ import ChallengeResults from './theology/ChallengeResults';
 import ChallengeProgress from './theology/ChallengeProgress';
 import ChallengeLoading from './theology/ChallengeLoading';
 import ChallengeError from './theology/ChallengeError';
-import { useTheologyProgress } from '@/hooks/use-theology-progress';
+import { useTheologyChallenge } from '@/hooks/theology/use-theology-challenge';
 
 const TheologyChapterChallenge = () => {
-  const { bookId = '', chapter = '' } = useParams();
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
-  const [isSubmitted, setIsSubmitted] = useState(false);
-  const [score, setScore] = useState(0);
-  const [maxScore, setMaxScore] = useState(0);
-  const [showResults, setShowResults] = useState(false);
-  const [previouslyCompletedScore, setPreviouslyCompletedScore] = useState<number | null>(null);
-  const [hasReadPassage, setHasReadPassage] = useState(false);
-  const [isRetaking, setIsRetaking] = useState(false);
-  const [isReadConfirmationOpen, setIsReadConfirmationOpen] = useState(false);
-  const { toast } = useToast();
   const navigate = useNavigate();
-  const { completeChallenge, getChapterStatus } = useTheologyProgress();
-
-  const { data: challenge, isLoading, error } = useQuery({
-    queryKey: ['theology-challenge', bookId, chapter],
-    queryFn: async () => {
-      const chapterNum = parseInt(chapter);
-      const found = theologyChapterChallenges.find(
-        c => c.bookId === bookId && c.chapter === chapterNum
-      );
-      
-      if (!found) {
-        throw new Error('Challenge not found');
-      }
-      
-      if (isSupabaseConfigured()) {
-        const { data: { session } } = await supabase.auth.getSession();
-        
-        if (session?.user) {
-          // Check if the user has already completed this chapter
-          const status = getChapterStatus(bookId, chapterNum);
-          
-          if (status.completed && !isRetaking) {
-            setPreviouslyCompletedScore(status.score || 0);
-            setMaxScore(found.points);
-          }
-        }
-      }
-      
-      return found;
-    }
-  });
-
-  const { data: bookInfo } = useQuery({
-    queryKey: ['theology-book', bookId],
-    queryFn: () => {
-      return theologyBooks.find(b => b.id === bookId);
-    }
-  });
-
-  const { data: chapterInfo } = useQuery({
-    queryKey: ['theology-chapter', bookId, chapter],
-    queryFn: () => {
-      const chapterNum = parseInt(chapter);
-      return theologyChapters[bookId as string]?.find(c => c.chapter === chapterNum);
-    }
-  });
-
-  useEffect(() => {
-    if (challenge) {
-      setMaxScore(challenge.points);
-      setSelectedAnswers(new Array(challenge.questions.length).fill(''));
-      
-      if (previouslyCompletedScore !== null && !isRetaking) {
-        setScore(previouslyCompletedScore);
-        setShowResults(true);
-      } else {
-        setScore(0);
-        setShowResults(false);
-        setCurrentQuestion(0);
-        setIsSubmitted(false);
-      }
-    }
+  const {
+    // Data
+    challenge,
+    bookInfo,
+    chapterInfo,
+    chapterTitle,
+    passageText,
     
-    if (!hasReadPassage && !isRetaking && previouslyCompletedScore === null) {
-      setIsReadConfirmationOpen(true);
-    }
-  }, [challenge, previouslyCompletedScore, isRetaking, hasReadPassage]);
-
-  const handleSelectAnswer = (answer: string) => {
-    const newSelectedAnswers = [...selectedAnswers];
-    newSelectedAnswers[currentQuestion] = answer;
-    setSelectedAnswers(newSelectedAnswers);
-  };
-
-  const handleSubmitAnswer = () => {
-    if (selectedAnswers[currentQuestion] === '') {
-      toast({
-        title: "Select an answer",
-        description: "Please select an answer before submitting.",
-        variant: "destructive"
-      });
-      return;
-    }
-
-    setIsSubmitted(true);
-
-    if (selectedAnswers[currentQuestion] === challenge?.questions[currentQuestion].correctAnswer) {
-      const pointsPerQuestion = challenge.points / challenge.questions.length;
-      setScore(prevScore => prevScore + pointsPerQuestion);
-    }
-  };
-
-  const handleNextQuestion = () => {
-    if (currentQuestion < (challenge?.questions.length || 0) - 1) {
-      setCurrentQuestion(prev => prev + 1);
-      setIsSubmitted(false);
-    } else {
-      handleFinish();
-    }
-  };
-
-  const handleFinish = async () => {
-    setShowResults(true);
-
-    if (isSupabaseConfigured() && challenge) {
-      try {
-        await completeChallenge(bookId, parseInt(chapter), score);
-      } catch (error) {
-        console.error('Error saving challenge results:', error);
-        toast({
-          title: "Error",
-          description: "There was a problem saving your progress.",
-          variant: "destructive"
-        });
-      }
-    }
-  };
-
-  const handleRetake = () => {
-    setIsRetaking(true);
-    setSelectedAnswers(new Array(challenge?.questions.length || 0).fill(''));
-    setCurrentQuestion(0);
-    setScore(0);
-    setIsSubmitted(false);
-    setShowResults(false);
-    setHasReadPassage(false);
-    setIsReadConfirmationOpen(true);
-  };
-
-  const chapterTitle = chapterInfo?.title || `Chapter ${chapter}`;
-  const passageText = `This is a placeholder for the text of ${bookInfo?.title || 'the book'}, chapter ${chapter}. In a real application, this would contain the actual text of the chapter from the theological work.`;
+    // State
+    currentQuestion,
+    selectedAnswers,
+    isSubmitted,
+    score,
+    maxScore,
+    showResults,
+    hasReadPassage,
+    isReadConfirmationOpen,
+    
+    // Loading states
+    isLoading,
+    error,
+    
+    // Actions
+    handleSelectAnswer,
+    handleSubmitAnswer,
+    handleNextQuestion,
+    handleRetake,
+    setHasReadPassage,
+    setIsReadConfirmationOpen,
+    navigateToBook
+  } = useTheologyChallenge();
 
   if (isLoading) {
     return <ChallengeLoading />;
@@ -179,11 +62,11 @@ const TheologyChapterChallenge = () => {
       <main className="flex-1 py-10 px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           <ChallengeHeader 
-            bookId={bookId}
+            bookId={bookInfo.id}
             bookTitle={bookInfo.title}
             chapterTitle={chapterTitle}
             author={bookInfo.author}
-            chapter={parseInt(chapter)}
+            chapter={parseInt(chapterInfo?.chapter?.toString() || '1')}
             passageText={passageText}
           />
 
@@ -192,10 +75,10 @@ const TheologyChapterChallenge = () => {
             onOpenChange={setIsReadConfirmationOpen}
             onConfirm={() => setHasReadPassage(true)}
             bookName={bookInfo.title}
-            chapter={parseInt(chapter)}
+            chapter={parseInt(chapterInfo?.chapter?.toString() || '1')}
           />
 
-          {(hasReadPassage || isRetaking || previouslyCompletedScore !== null) && (
+          {(hasReadPassage || showResults) && (
             <>
               {showResults ? (
                 <Card className="mb-6">
@@ -210,7 +93,7 @@ const TheologyChapterChallenge = () => {
                       score={score}
                       maxScore={maxScore}
                       onRetake={handleRetake}
-                      onContinue={() => navigate(`/theology/${bookId}`)}
+                      onContinue={navigateToBook}
                       bookTitle={bookInfo.title}
                       chapterTitle={chapterTitle}
                       keyQuote={challenge.key_quote}
@@ -243,7 +126,7 @@ const TheologyChapterChallenge = () => {
                   <CardFooter className="flex justify-between">
                     <Button 
                       variant="outline" 
-                      onClick={() => navigate(`/theology/${bookId}`)}
+                      onClick={() => navigate(`/theology/${bookInfo.id}`)}
                     >
                       Exit
                     </Button>
