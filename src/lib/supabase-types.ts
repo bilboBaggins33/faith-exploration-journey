@@ -72,6 +72,44 @@ export interface ExtendedDatabase extends OriginalDatabase {
           total_chapters_read?: number | null;
         };
       };
+      theology_progress: {
+        Row: {
+          user_id: string;
+          completed_chapters: {
+            book_id: string;
+            chapter: number;
+            completed_at: string;
+            score?: number;
+          }[] | null;
+          books_started: string[] | null;
+          books_completed: string[] | null;
+          total_chapters_read: number | null;
+        };
+        Insert: {
+          user_id: string;
+          completed_chapters?: {
+            book_id: string;
+            chapter: number;
+            completed_at: string;
+            score?: number;
+          }[] | null;
+          books_started?: string[] | null;
+          books_completed?: string[] | null;
+          total_chapters_read?: number | null;
+        };
+        Update: {
+          user_id?: string;
+          completed_chapters?: {
+            book_id: string;
+            chapter: number;
+            completed_at: string;
+            score?: number;
+          }[] | null;
+          books_started?: string[] | null;
+          books_completed?: string[] | null;
+          total_chapters_read?: number | null;
+        };
+      };
     } & OriginalDatabase['public']['Tables'];
     Views: OriginalDatabase['public']['Views'];
     Functions: OriginalDatabase['public']['Functions'];
