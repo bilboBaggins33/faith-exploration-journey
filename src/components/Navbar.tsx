@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, BookOpen, User, Map, LogOut } from 'lucide-react';
+import { Menu, X, BookOpen, User, Map, LogOut, Book } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 
@@ -68,6 +68,9 @@ const Navbar = () => {
               <NavLink to="/challenge" active={isActive('/challenge')}>
                 Challenges
               </NavLink>
+              <NavLink to="/bible" active={isActive('/bible')}>
+                Bible
+              </NavLink>
               <NavLink to="/profile" active={isActive('/profile')}>
                 Profile
               </NavLink>
@@ -116,6 +119,9 @@ const Navbar = () => {
             </MobileNavLink>
             <MobileNavLink to="/challenge" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/challenge')}>
               Challenges
+            </MobileNavLink>
+            <MobileNavLink to="/bible" icon={<Book className="h-5 w-5 mr-2" />} active={isActive('/bible')}>
+              Bible
             </MobileNavLink>
             <MobileNavLink to="/profile" icon={<User className="h-5 w-5 mr-2" />} active={isActive('/profile')}>
               Profile

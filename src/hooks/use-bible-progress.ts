@@ -1,8 +1,10 @@
+
 import { useState, useEffect } from 'react';
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
 import { useAuth } from '@/context/AuthContext';
 import { useToast } from '@/hooks/use-toast';
 import { calculateBibleProgress } from '@/data/bible/utils';
+import { bibleBooks } from '@/data/bibleData';
 
 export interface BibleProgress {
   challenges_completed: string[];
@@ -203,7 +205,7 @@ export function useBibleProgress() {
     }
     
     // Find the corresponding book in bibleBooks to get total chapters
-    const book = require('@/data/bibleData').bibleBooks.find((b: any) => b.id === bookId);
+    const book = bibleBooks.find(b => b.id === bookId);
     if (!book) return {}; // Return empty object instead of 0
     
     const totalBookChapters = book.chapters;
