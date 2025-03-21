@@ -31,15 +31,14 @@ const ChallengeProgress = ({
   };
 
   const getProgressColor = () => {
-    switch (difficulty.toLowerCase()) {
-      case 'easy':
-        return 'bg-green-500';
-      case 'medium':
-        return 'bg-yellow-500';
-      case 'hard':
-        return 'bg-red-500';
-      default:
-        return '';
+    const percentage = (currentQuestion / totalQuestions) * 100;
+    
+    if (percentage < 50) {
+      return 'bg-red-500';
+    } else if (percentage < 100) {
+      return 'bg-orange-500';
+    } else {
+      return 'bg-green-500';
     }
   };
 

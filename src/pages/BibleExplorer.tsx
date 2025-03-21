@@ -52,6 +52,16 @@ const BibleExplorer = () => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
 
+  const getProgressColor = (scorePercentage: number) => {
+    if (scorePercentage < 50) {
+      return '#ea384c'; // red
+    } else if (scorePercentage < 100) {
+      return '#F97316'; // orange
+    } else {
+      return '#22c55e'; // green
+    }
+  };
+  
   const prepareChartData = (bookId: string, chapter: number) => {
     const { isCompleted, score, maxScore } = getChapterInfo(bookId, chapter);
     
@@ -61,15 +71,16 @@ const BibleExplorer = () => {
       ];
     }
     
-    if (score === maxScore && maxScore > 0) {
+    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    
+    if (percentage === 100) {
       return [
-        { name: 'Complete', value: 100, color: '#a855f7' }
+        { name: 'Complete', value: 100, color: '#22c55e' } // Always green for 100%
       ];
     }
     
-    const percentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
     return [
-      { name: 'Complete', value: percentage, color: '#22c55e' },
+      { name: 'Complete', value: percentage, color: getProgressColor(percentage) },
       { name: 'Remaining', value: 100 - percentage, color: '#e5e7eb' }
     ];
   };
@@ -168,7 +179,6 @@ const BibleExplorer = () => {
                     {bookChapters.map(chapter => {
                       const { isCompleted, score, maxScore } = getChapterInfo(selectedBook.id, chapter);
                       const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
-                      const isPerfectScore = score > 0 && score === maxScore;
                       const chartData = prepareChartData(selectedBook.id, chapter);
                       
                       return (
@@ -177,11 +187,13 @@ const BibleExplorer = () => {
                           whileHover={{ y: -5 }}
                           className={cn(
                             "p-4 rounded-lg border cursor-pointer transition-all shadow-sm",
-                            isPerfectScore 
-                              ? "bg-purple-50 border-purple-200" 
-                              : isCompleted
-                                ? "bg-green-50 border-green-200"
-                                : "bg-white border-gray-200 hover:border-bible-blue hover:bg-blue-50"
+                            isCompleted && scorePercentage === 100
+                              ? "bg-green-50 border-green-200" 
+                              : isCompleted && scorePercentage >= 50
+                                ? "bg-orange-50 border-orange-200"
+                                : isCompleted
+                                  ? "bg-red-50 border-red-200"
+                                  : "bg-white border-gray-200 hover:border-bible-blue hover:bg-blue-50"
                           )}
                           onClick={() => navigateToChapter(selectedBook.id, chapter)}
                         >
@@ -207,7 +219,7 @@ const BibleExplorer = () => {
                               </ResponsiveContainer>
                             </div>
                             <span className="font-medium block mb-1">Chapter {chapter}</span>
-                            {score > 0 && (
+                            {isCompleted && (
                               <p className="text-xs text-gray-500">
                                 Score: {score}/{maxScore}
                               </p>
