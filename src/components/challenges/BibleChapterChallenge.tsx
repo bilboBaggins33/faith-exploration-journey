@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -18,6 +19,8 @@ import {
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
+import ReadConfirmationSheet from './ReadConfirmationSheet';
+import BiblePassageDialog from './BiblePassageDialog';
 
 const BibleChapterChallenge = () => {
   const { bookId, chapter } = useParams();
@@ -33,7 +36,9 @@ const BibleChapterChallenge = () => {
   const [score, setScore] = useState(0);
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
-  const [restartInProgress, setRestartInProgress] = useState(false);
+  const [retakeInProgress, setRetakeInProgress] = useState(false);
+  const [readConfirmationOpen, setReadConfirmationOpen] = useState(false);
+  const [hasConfirmedReading, setHasConfirmedReading] = useState(false);
   
   // Find challenge data
   const book = bibleBooks.find(b => b.id === bookId);
@@ -57,21 +62,20 @@ const BibleChapterChallenge = () => {
     if (challenge) {
       setLoading(false);
       
-      // Check if the user is explicitly restarting via URL params
+      // Check if we're explicitly restarting via URL params or state
       const urlParams = new URLSearchParams(window.location.search);
-      const forceRestart = urlParams.get('restart') === 'true' || restartInProgress;
+      const forceRestart = urlParams.get('restart') === 'true' || retakeInProgress;
       
-      // If already completed and not forcing restart, show the summary screen and set the score
+      // If already completed and not forcing restart, load the saved score but don't auto-show the results
       if (challengeCompleted && !forceRestart) {
         console.log('Challenge is already completed');
-        setQuizCompleted(true);
         
         // Find the saved score for this chapter
-        const chapterData = progress?.completed_chapters.find(
+        const chapterData = progress?.completed_chapters?.find(
           c => c.book_id === bookId && c.chapter === Number(chapter)
         );
         
-        if (chapterData && chapterData.score) {
+        if (chapterData && chapterData.score !== undefined) {
           console.log('Found saved score:', chapterData.score);
           // Ensure score doesn't exceed max possible points
           const maxPossibleScore = challenge.questions.length;
@@ -81,15 +85,34 @@ const BibleChapterChallenge = () => {
           console.log('No saved score found, defaulting to max points');
           setScore(challenge.questions.length);
         }
+        
+        // Show the read confirmation first instead of immediately showing the quiz
+        if (!hasConfirmedReading) {
+          setReadConfirmationOpen(true);
+        }
       } else if (forceRestart) {
         // Reset all states if we're restarting
+        console.log('Restarting challenge');
         setCurrentQuestion(0);
         setSelectedAnswer(null);
         setShowExplanation(false);
         setIsCorrect(null);
         setScore(0);
         setQuizCompleted(false);
-        setRestartInProgress(false);
+        setRetakeInProgress(false);
+        
+        // Show the read confirmation first
+        if (!hasConfirmedReading) {
+          setReadConfirmationOpen(true);
+        }
+      } else {
+        // First time taking challenge
+        console.log('First time taking challenge');
+        
+        // Show the read confirmation dialog
+        if (!hasConfirmedReading) {
+          setReadConfirmationOpen(true);
+        }
       }
     } else {
       // Challenge doesn't exist, show error or redirect
@@ -100,7 +123,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast, restartInProgress]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast, retakeInProgress, hasConfirmedReading]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -132,7 +155,8 @@ const BibleChapterChallenge = () => {
       // Complete the challenge
       setQuizCompleted(true);
       
-      if (!challengeCompleted) {
+      // Only update score if it's a new score or better than previous
+      if (!challengeCompleted || retakeInProgress) {
         console.log('Completing challenge with score:', score);
         // Make sure challengeId is correct format: "bookId-chapter"
         // Ensure score doesn't exceed maximum points possible
@@ -140,13 +164,18 @@ const BibleChapterChallenge = () => {
         const maxPossibleScore = challenge.questions.length;
         const cappedScore = Math.min(finalScore, maxPossibleScore);
         
-        completeChallenge(challengeId, cappedScore);
+        // Only update if it's a new completion or a better score
+        if (!challengeCompleted || cappedScore > (score || 0)) {
+          completeChallenge(challengeId, cappedScore);
+        } else {
+          console.log('Not updating score as new score is not better than previous');
+        }
       }
     }
   };
   
   const restartQuiz = () => {
-    setRestartInProgress(true);
+    setRetakeInProgress(true);
     setCurrentQuestion(0);
     setSelectedAnswer(null);
     setShowExplanation(false);
@@ -157,6 +186,11 @@ const BibleChapterChallenge = () => {
   
   const navigateToBookPage = () => {
     navigate(`/bible/${bookId}`);
+  };
+
+  const handleReadingConfirmed = () => {
+    setHasConfirmedReading(true);
+    setReadConfirmationOpen(false);
   };
   
   if (loading) {
@@ -218,6 +252,15 @@ const BibleChapterChallenge = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
+      {/* Reading Confirmation Sheet */}
+      <ReadConfirmationSheet
+        open={readConfirmationOpen}
+        onOpenChange={setReadConfirmationOpen}
+        onConfirm={handleReadingConfirmed}
+        bookName={book?.name || ''}
+        chapter={Number(chapter) || 1}
+      />
+      
       <main className="flex-1 pt-16 pb-24">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Header */}
@@ -239,6 +282,15 @@ const BibleChapterChallenge = () => {
                 <Progress value={((currentQuestion + 1) / challenge.questions.length) * 100} className="h-2" />
               </div>
             )}
+            
+            {/* Bible Passage Link */}
+            <div className="mb-4">
+              <BiblePassageDialog
+                bookName={book?.name || ''}
+                chapter={Number(chapter) || 1}
+                passageText={""}
+              />
+            </div>
           </div>
           
           {/* Quiz content */}
