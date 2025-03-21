@@ -1,4 +1,3 @@
-
 import { TheologyChallenge } from '../types';
 
 export const mereChristianityChallenges: TheologyChallenge[] = [
@@ -267,5 +266,153 @@ export const mereChristianityChallenges: TheologyChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 20
+  },
+  {
+    id: 'mere-christianity-3',
+    bookId: 'mere-christianity',
+    chapter: 3,
+    title: 'The Reality of the Law',
+    questions: [
+      {
+        id: 'mc3-q1',
+        question: 'What does Lewis suggest about the reality of the Moral Law?',
+        options: [
+          'It is merely a human invention',
+          'It is a biological adaptation for survival',
+          'It is something real that humans did not invent',
+          'It varies completely from person to person'
+        ],
+        correctAnswer: 'It is something real that humans did not invent',
+        explanation: 'Lewis argues that the Moral Law is something objectively real that humans discover rather than invent.'
+      },
+      {
+        id: 'mc3-q2',
+        question: 'According to Lewis, what is the relationship between the Moral Law and the material universe?',
+        options: [
+          'The Moral Law is a product of material processes',
+          'The Moral Law is completely separate from the material universe',
+          'The Moral Law governs the material universe',
+          'The Moral Law is something above and beyond the material universe'
+        ],
+        correctAnswer: 'The Moral Law is something above and beyond the material universe',
+        explanation: 'Lewis suggests that the Moral Law exists independently of the material universe and cannot be explained by material processes alone.'
+      },
+      {
+        id: 'mc3-q3',
+        question: 'What analogy does Lewis use to describe how humans perceive the Moral Law?',
+        options: [
+          'It is like seeing with our eyes',
+          'It is like touching with our hands',
+          'It is like hearing music with our ears',
+          'It is like sensing a direction with a compass'
+        ],
+        correctAnswer: 'It is like hearing music with our ears',
+        explanation: 'Lewis uses the analogy of perceiving music to describe how we perceive the Moral Law - we recognize it through a faculty that allows us to perceive non-material reality.'
+      }
+    ],
+    key_quote: "If the universe is not governed by an absolute goodness, then all our efforts are in the long run hopeless. But if it is, then we are making ourselves enemies to that goodness every day, and are not in the least likely to do any better tomorrow, and so our case is hopeless again.",
+    key_quote_location: "Book I, Chapter 3",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-4',
+    bookId: 'mere-christianity',
+    chapter: 4,
+    title: 'What Lies Behind the Law',
+    questions: [
+      {
+        id: 'mc4-q1',
+        question: 'What conclusion does Lewis draw about what lies behind the Moral Law?',
+        options: [
+          'Nothing - it exists on its own',
+          'Social conditioning',
+          'An intelligent mind - God',
+          'Evolutionary processes'
+        ],
+        correctAnswer: 'An intelligent mind - God',
+        explanation: 'Lewis argues that the Moral Law points to an intelligent Mind behind the universe - what we call God.'
+      },
+      {
+        id: 'mc4-q2',
+        question: 'What analogy does Lewis use to explain how the Moral Law points to God?',
+        options: [
+          'A mathematician discovering equations',
+          'A painter creating art',
+          'A driver following traffic laws',
+          'A composer writing music'
+        ],
+        correctAnswer: 'A composer writing music',
+        explanation: 'Lewis suggests that the Moral Law is like music that reveals the presence of a Composer (God) who wrote it.'
+      },
+      {
+        id: 'mc4-q3',
+        question: 'According to Lewis, what does science tell us about the ultimate reality?',
+        options: [
+          'Science disproves the existence of God',
+          'Science can explain everything without God',
+          'Science cannot answer the ultimate question of why anything exists',
+          'Science proves that matter is all that exists'
+        ],
+        correctAnswer: 'Science cannot answer the ultimate question of why anything exists',
+        explanation: 'Lewis argues that science describes how the material universe works but cannot explain why anything exists at all or why there are natural laws.'
+      }
+    ],
+    key_quote: "We want to know whether the universe simply happens to be what it is for no reason or whether there is a power behind it that makes it what it is.",
+    key_quote_location: "Book I, Chapter 4",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-5',
+    bookId: 'mere-christianity',
+    chapter: 5,
+    title: 'We Have Cause to Be Uneasy',
+    questions: [
+      {
+        id: 'mc5-q1',
+        question: 'According to Lewis, why should humans be uneasy about their relationship with God?',
+        options: [
+          'Because God is arbitrary in His judgments',
+          'Because we consistently fail to live up to the Moral Law we know',
+          'Because God is distant and uninterested in humans',
+          'Because the universe is random and meaningless'
+        ],
+        correctAnswer: 'Because we consistently fail to live up to the Moral Law we know',
+        explanation: 'Lewis argues that we have cause to be uneasy because we recognize the Moral Law but consistently fail to keep it.'
+      },
+      {
+        id: 'mc5-q2',
+        question: 'What does Lewis suggest is the state of humanity in relation to God?',
+        options: [
+          'We are in a state of harmony with God',
+          'We are neutral in our relationship with God',
+          'We are in a state of rebellion against God',
+          'We have no relationship with God at all'
+        ],
+        correctAnswer: 'We are in a state of rebellion against God',
+        explanation: 'Lewis suggests that humanity is in a state of rebellion against God, having turned away from Him and the Moral Law He established.'
+      },
+      {
+        id: 'mc5-q3',
+        question: 'What does Lewis say we should do about our failure to keep the Moral Law?',
+        options: [
+          'Ignore it and live however we want',
+          'Create our own standards that we can meet',
+          'Realize our need for help from God',
+          'Abandon the concept of morality altogether'
+        ],
+        correctAnswer: 'Realize our need for help from God',
+        explanation: 'Lewis argues that our failure to keep the Moral Law should lead us to realize our need for God\'s help and forgiveness.'
+      }
+    ],
+    key_quote: "The conclusion I dread is not 'So there\'s no God after all,' but 'So this is what God's really like. Deceive yourself no longer.'",
+    key_quote_location: "Book I, Chapter 5",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
   }
 ];
+
