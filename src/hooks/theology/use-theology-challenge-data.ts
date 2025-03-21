@@ -5,6 +5,12 @@ import { theologyChapterChallenges, theologyChapters, theologyBooks } from '@/da
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
+import { TheologyChallenge } from '@/data/theology/types';
+
+// Extend TheologyChallenge type to include previouslyCompletedScore
+interface TheologyChallengeWithScore extends TheologyChallenge {
+  previouslyCompletedScore?: number;
+}
 
 export const useTheologyChallengeData = () => {
   const { bookId = '', chapter = '' } = useParams();
@@ -34,12 +40,12 @@ export const useTheologyChallengeData = () => {
             return {
               ...found,
               previouslyCompletedScore: status.score || 0
-            };
+            } as TheologyChallengeWithScore;
           }
         }
       }
       
-      return found;
+      return found as TheologyChallengeWithScore;
     }
   });
 

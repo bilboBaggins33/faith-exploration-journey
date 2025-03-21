@@ -11,6 +11,7 @@ export const useTheologyChallengeState = () => {
     chapter,
     challenge,
     bookInfo,
+    chapterInfo,
     previouslyCompletedScore
   } = useTheologyChallengeData();
   
@@ -74,6 +75,7 @@ export const useTheologyChallengeState = () => {
     bookId,
     chapter,
     challenge,
-    bookInfo
+    bookInfo,
+    chapterInfo
   };
 };
