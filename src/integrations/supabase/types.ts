@@ -45,6 +45,7 @@ export type Database = {
           books_started: string[] | null
           completed_chapters: Json | null
           total_chapters_read: number | null
+          total_points: number | null
           user_id: string
         }
         Insert: {
@@ -52,6 +53,7 @@ export type Database = {
           books_started?: string[] | null
           completed_chapters?: Json | null
           total_chapters_read?: number | null
+          total_points?: number | null
           user_id: string
         }
         Update: {
@@ -59,6 +61,7 @@ export type Database = {
           books_started?: string[] | null
           completed_chapters?: Json | null
           total_chapters_read?: number | null
+          total_points?: number | null
           user_id?: string
         }
         Relationships: []

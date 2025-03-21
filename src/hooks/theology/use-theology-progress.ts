@@ -31,10 +31,9 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
         .from('theology_progress')
         .select('*')
         .eq('user_id', user.id)
-        .single();
+        .maybeSingle();
 
-      if (error && error.code !== 'PGRST116') {
-        // PGRST116 is the code for no rows returned, which is fine for new users
+      if (error) {
         throw error;
       }
 
@@ -43,7 +42,8 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
         completed_chapters: [],
         books_started: [],
         books_completed: [],
-        total_chapters_read: 0
+        total_chapters_read: 0,
+        total_points: 0
       });
     } catch (error) {
       console.error('Error fetching theology progress data:', error);
@@ -100,7 +100,8 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
         throw error;
       }
 
-      await fetchData();
+      // Update local state immediately for a better UX
+      setProgress(prev => prev ? { ...prev, ...data } : null);
     } catch (error) {
       console.error('Error updating theology progress:', error);
       throw error;
@@ -125,12 +126,28 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
       (ch: any) => ch.book_id === bookId && ch.chapter === chapter
     );
     
-    // If exists, update the entry; otherwise add a new one
+    // Calculate points to add
+    let pointsToAdd = score;
+    
+    // If exists, update the entry and only add the difference in points if the new score is higher
     if (existingIndex >= 0) {
-      completedChapters[existingIndex] = newEntry;
+      const existingScore = completedChapters[existingIndex].score || 0;
+      
+      // Only add the additional points if the new score is higher
+      if (score > existingScore) {
+        pointsToAdd = score - existingScore;
+        completedChapters[existingIndex] = newEntry;
+      } else {
+        // If the new score is not higher, don't add points but still update the timestamp
+        pointsToAdd = 0;
+        completedChapters[existingIndex].completed_at = newEntry.completed_at;
+      }
     } else {
       completedChapters.push(newEntry);
     }
+    
+    // Calculate new total points
+    const newTotalPoints = (progress.total_points || 0) + pointsToAdd;
     
     // Update books_started if needed
     let booksStarted = [...(progress.books_started || [])];
@@ -151,12 +168,15 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
       }
       
       // Update the progress in Supabase
-      await updateProgress({
+      const updatedData = {
         completed_chapters: completedChapters,
         books_started: booksStarted,
         books_completed: booksCompleted,
-        total_chapters_read: completedChapters.length
-      });
+        total_chapters_read: completedChapters.length,
+        total_points: newTotalPoints
+      };
+      
+      await updateProgress(updatedData);
     }
   };
 

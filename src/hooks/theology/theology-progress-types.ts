@@ -10,6 +10,7 @@ export interface TheologyProgressData {
   books_started: string[];
   books_completed: string[];
   total_chapters_read: number;
+  total_points: number;
 }
 
 export interface UseTheologyProgressReturn {
