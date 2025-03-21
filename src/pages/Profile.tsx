@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -43,19 +42,27 @@ import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { theologyBooks } from '@/data/theology/books';
 import { Skeleton } from '@/components/ui/skeleton';
+import ProfileEditForm from '@/components/ProfileEditForm';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
-  const { user, signOut, isLoading: authLoading } = useAuth();
-  const { profile, progress, loading: progressLoading } = useBibleProgress();
+  const { user, signOut, isLoading: authLoading, refreshUserProfile, getUserAvatar } = useAuth();
+  const { profile, progress, loading: progressLoading, refreshProfile } = useBibleProgress();
   const { 
     progress: theologyProgress, 
     loading: theologyLoading,
     getBookProgress,
     getBookAverageScore,
-    getBookChaptersRead
+    getBookChaptersRead,
+    refreshProgress
   } = useTheologyProgress();
+  
+  const handleProfileUpdated = async () => {
+    await refreshUserProfile();
+    await refreshProfile();
+    await refreshProgress();
+  };
   
   if (!authLoading && !user) {
     return <Navigate to="/auth" />;
@@ -155,6 +162,7 @@ const ProfilePage = () => {
                     userStats={userStats} 
                     onLogout={handleLogout}
                     userName={profile?.full_name || user?.email?.split('@')[0] || 'Bible Explorer'}
+                    avatarUrl={getUserAvatar()}
                   />
                 </div>
                 
@@ -574,80 +582,18 @@ const ProfilePage = () => {
                         <CardDescription>Manage your profile and preferences</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <div className="space-y-6">
-                          <div className="space-y-2">
-                            <h3 className="text-lg font-medium">Profile Information</h3>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                              <div>
-                                <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">
-                                  Name
-                                </label>
-                                <input
-                                  type="text"
-                                  id="name"
-                                  className="glass-input w-full rounded-md"
-                                  defaultValue="John Doe"
-                                />
-                              </div>
-                              
-                              <div>
-                                <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">
-                                  Email
-                                </label>
-                                <input
-                                  type="email"
-                                  id="email"
-                                  className="glass-input w-full rounded-md"
-                                  defaultValue="john.doe@example.com"
-                                />
-                              </div>
-                            </div>
-                          </div>
-                          
-                          <div className="space-y-2">
-                            <h3 className="text-lg font-medium">Preferences</h3>
-                            <div className="space-y-4">
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <span className="block text-sm font-medium text-gray-700">Email Notifications</span>
-                                  <span className="block text-sm text-gray-500">Receive updates about challenges and features</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <input
-                                    type="checkbox"
-                                    id="notifications"
-                                    className="h-4 w-4 rounded border-gray-300 text-bible-blue focus:ring-bible-blue"
-                                    defaultChecked
-                                  />
-                                </div>
-                              </div>
-                              
-                              <div className="flex items-center justify-between">
-                                <div>
-                                  <span className="block text-sm font-medium text-gray-700">Daily Reminder</span>
-                                  <span className="block text-sm text-gray-500">Get daily notifications to maintain your streak</span>
-                                </div>
-                                <div className="flex items-center">
-                                  <input
-                                    type="checkbox"
-                                    id="reminders"
-                                    className="h-4 w-4 rounded border-gray-300 text-bible-blue focus:ring-bible-blue"
-                                    defaultChecked
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
+                        <ProfileEditForm 
+                          user={user}
+                          fullName={profile?.full_name || ''}
+                          email={user?.email}
+                          avatarUrl={getUserAvatar()}
+                          onProfileUpdated={handleProfileUpdated}
+                        />
                       </CardContent>
                       <CardFooter className="border-t border-gray-100 px-6 py-4 flex justify-between">
                         <Button variant="outline" onClick={handleLogout} className="border-red-500 text-red-500 hover:bg-red-50">
                           <LogOut className="h-4 w-4 mr-2" />
                           Sign Out
-                        </Button>
-                        
-                        <Button className="bg-bible-blue hover:bg-bible-deepBlue">
-                          Save Changes
                         </Button>
                       </CardFooter>
                     </Card>
@@ -708,18 +654,21 @@ interface ProfileHeaderProps {
   };
   onLogout: () => void;
   userName: string;
+  avatarUrl?: string | null;
 }
 
-// Add missing component implementations
-const ProfileHeader = ({ userStats, onLogout, userName }: ProfileHeaderProps) => {
+const ProfileHeader = ({ userStats, onLogout, userName, avatarUrl }: ProfileHeaderProps) => {
   return (
     <div className="relative">
       <div className="h-48 bg-gradient-to-r from-bible-lightBlue to-bible-blue rounded-t-xl"></div>
       <div className="relative max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pb-6">
         <div className="flex flex-col md:flex-row md:items-end -mt-16 mb-6">
           <Avatar className="w-32 h-32 border-4 border-white bg-white shadow-lg">
-            <AvatarImage src="https://avatars.githubusercontent.com/u/1234567?v=4" alt={userName} />
-            <AvatarFallback className="text-3xl">{userName.charAt(0)}</AvatarFallback>
+            {avatarUrl ? (
+              <AvatarImage src={avatarUrl} alt={userName} />
+            ) : (
+              <AvatarFallback className="text-3xl bg-bible-sky text-bible-blue">{userName.charAt(0)}</AvatarFallback>
+            )}
           </Avatar>
           <div className="mt-4 md:mt-0 flex-1 md:ml-6">
             <div className="flex flex-col md:flex-row md:items-center justify-between">

@@ -12,6 +12,8 @@ type AuthContextType = {
   signInWithGoogle: () => Promise<void>;
   signUp: (email: string, password: string, name: string) => Promise<void>;
   signOut: () => Promise<void>;
+  refreshUserProfile: () => Promise<void>;
+  getUserAvatar: () => string | null;
 };
 
 export const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -21,6 +23,23 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   const { toast } = useToast();
+
+  const refreshUserProfile = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+      if (session) {
+        setSession(session);
+        setUser(session.user);
+      }
+    } catch (error) {
+      console.error('Error refreshing user profile:', error);
+    }
+  };
+
+  const getUserAvatar = () => {
+    if (!user) return null;
+    return user.user_metadata?.avatar_url || null;
+  };
 
   useEffect(() => {
     async function getInitialSession() {
@@ -227,6 +246,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     signInWithGoogle,
     signUp,
     signOut,
+    refreshUserProfile,
+    getUserAvatar,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
