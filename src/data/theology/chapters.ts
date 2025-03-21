@@ -1,3 +1,4 @@
+
 import { TheologyChapter } from './types';
 
 export const theologyChapters: Record<string, TheologyChapter[]> = {
@@ -49,14 +50,78 @@ export const theologyChapters: Record<string, TheologyChapter[]> = {
     {
       bookId: 'knowing-god',
       chapter: 4,
-      title: 'The Only True God',
-      key_themes: ['Monotheism', 'God\'s Character', 'Idolatry']
+      title: 'God Incarnate',
+      key_themes: ['Incarnation', 'Christ\'s Divinity', 'Humanity of Jesus']
     },
     {
       bookId: 'knowing-god',
       chapter: 5,
       title: 'God Incarnate',
       key_themes: ['Incarnation', 'Christ\'s Divinity', 'Humanity of Jesus']
+    }
+  ],
+  'westminster-confession': [
+    {
+      bookId: 'westminster-confession',
+      chapter: 1,
+      title: 'Of the Holy Scripture',
+      key_themes: ['Scripture Authority', 'Divine Inspiration', 'Canon of Scripture']
+    },
+    {
+      bookId: 'westminster-confession',
+      chapter: 2,
+      title: 'Of God, and of the Holy Trinity',
+      key_themes: ['Attributes of God', 'Trinity', 'Divine Nature']
+    },
+    {
+      bookId: 'westminster-confession',
+      chapter: 3,
+      title: 'Of God\'s Eternal Decree',
+      key_themes: ['Predestination', 'Providence', 'God\'s Sovereignty']
+    },
+    {
+      bookId: 'westminster-confession',
+      chapter: 4,
+      title: 'Of Creation',
+      key_themes: ['Creation', 'God\'s Work', 'Man\'s Purpose']
+    },
+    {
+      bookId: 'westminster-confession',
+      chapter: 5,
+      title: 'Of Providence',
+      key_themes: ['Divine Providence', 'God\'s Governance', 'Secondary Causes']
+    }
+  ],
+  'desiring-god': [
+    {
+      bookId: 'desiring-god',
+      chapter: 1,
+      title: 'The Happiness of God',
+      key_themes: ['God\'s Joy', 'Divine Happiness', 'God\'s Self-Sufficiency']
+    },
+    {
+      bookId: 'desiring-god',
+      chapter: 2,
+      title: 'Conversion',
+      key_themes: ['Christian Hedonism', 'Joy in Christ', 'Salvation']
+    },
+    {
+      bookId: 'desiring-god',
+      chapter: 3,
+      title: 'Worship',
+      key_themes: ['True Worship', 'Delight in God', 'Spiritual Experience']
+    },
+    {
+      bookId: 'desiring-god',
+      chapter: 4,
+      title: 'Love',
+      key_themes: ['Christian Love', 'Sacrifice', 'Joy in Loving Others']
+    },
+    {
+      bookId: 'desiring-god',
+      chapter: 5,
+      title: 'Prayer',
+      key_themes: ['Prayer as Fellowship', 'Communion with God', 'Petition']
     }
   ]
 };
