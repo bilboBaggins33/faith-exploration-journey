@@ -2,6 +2,7 @@
 import React from 'react';
 import { Badge } from "@/components/ui/badge";
 import { Progress } from "@/components/ui/progress";
+import { cn } from "@/lib/utils";
 
 interface ChallengeProgressProps {
   currentQuestion: number;
@@ -16,19 +17,48 @@ const ChallengeProgress = ({
   difficulty,
   points
 }: ChallengeProgressProps) => {
+  const getDifficultyColor = () => {
+    switch (difficulty.toLowerCase()) {
+      case 'easy':
+        return 'bg-green-500 text-white';
+      case 'medium':
+        return 'bg-yellow-500 text-black';
+      case 'hard':
+        return 'bg-red-500 text-white';
+      default:
+        return 'bg-muted text-muted-foreground';
+    }
+  };
+
+  const getProgressColor = () => {
+    switch (difficulty.toLowerCase()) {
+      case 'easy':
+        return 'bg-green-500';
+      case 'medium':
+        return 'bg-yellow-500';
+      case 'hard':
+        return 'bg-red-500';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div>
       <div className="flex justify-between items-center mb-2">
-        <Badge variant="outline">
+        <Badge variant="outline" className="animate-pulse">
           Question {currentQuestion + 1} of {totalQuestions}
         </Badge>
-        <Badge variant="secondary">
+        <Badge 
+          variant="secondary" 
+          className={cn("font-medium", getDifficultyColor())}
+        >
           {difficulty} • {points} points
         </Badge>
       </div>
       <Progress 
         value={(currentQuestion / totalQuestions) * 100} 
-        className="h-2"
+        className={cn("h-2", getProgressColor())}
       />
     </div>
   );
