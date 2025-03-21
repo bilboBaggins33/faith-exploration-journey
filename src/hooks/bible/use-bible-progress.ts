@@ -118,15 +118,50 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
     if (!user) return;
 
     try {
-      const { error } = await supabase
+      // Check if record exists first
+      const { data: existingData, error: checkError } = await supabase
         .from('bible_progress')
-        .update(data)
-        .eq('user_id', user.id);
+        .select('user_id')
+        .eq('user_id', user.id)
+        .maybeSingle();
 
-      if (error) {
-        throw error;
+      if (checkError) {
+        throw checkError;
       }
 
+      let updateError;
+      
+      if (existingData) {
+        // Update existing record
+        const { error } = await supabase
+          .from('bible_progress')
+          .update(data)
+          .eq('user_id', user.id);
+        
+        updateError = error;
+      } else {
+        // Insert new record
+        const { error } = await supabase
+          .from('bible_progress')
+          .insert({
+            user_id: user.id,
+            ...data
+          });
+        
+        updateError = error;
+      }
+
+      if (updateError) {
+        throw updateError;
+      }
+
+      // Immediately update local state to reflect changes
+      setProgress(prev => {
+        if (!prev) return data as BibleProgressData;
+        return { ...prev, ...data };
+      });
+      
+      // Also fetch fresh data from the server to ensure everything is in sync
       await fetchData();
     } catch (error) {
       console.error('Error updating Bible progress:', error);
@@ -139,29 +174,89 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
     if (!user || !progress) return;
     
     try {
+      console.log("Completing challenge:", challengeId, "with points:", pointsEarned);
+      
+      // Extract bookId and chapter from challengeId (format: "bookId-chapter")
+      const [bookId, chapterStr] = challengeId.split('-');
+      const chapter = parseInt(chapterStr, 10);
+      
+      if (!bookId || isNaN(chapter)) {
+        console.error("Invalid challenge ID format:", challengeId);
+        return;
+      }
+      
       // Add to completed challenges if not already there
       let challenges = [...(progress.challenges_completed || [])];
-      if (!challenges.includes(challengeId)) {
+      const wasAlreadyCompleted = challenges.includes(challengeId);
+      
+      if (!wasAlreadyCompleted) {
         challenges.push(challengeId);
       }
       
-      // Update total points
-      const newPoints = (progress.total_points || 0) + pointsEarned;
+      // Update completed_chapters array with the new score
+      let completedChapters = [...(progress.completed_chapters || [])];
+      
+      // Find if chapter is already in completed_chapters
+      const existingChapterIndex = completedChapters.findIndex(
+        ch => ch.book_id === bookId && ch.chapter === chapter
+      );
+      
+      const now = new Date().toISOString();
+      
+      // Either update existing chapter entry or add a new one
+      if (existingChapterIndex >= 0) {
+        // Only update score if it's better than the existing one
+        const currentScore = completedChapters[existingChapterIndex].score || 0;
+        if (pointsEarned > currentScore) {
+          completedChapters[existingChapterIndex] = {
+            ...completedChapters[existingChapterIndex],
+            completed_at: now,
+            score: pointsEarned
+          };
+        }
+      } else {
+        // Add new completed chapter entry
+        completedChapters.push({
+          book_id: bookId,
+          chapter: chapter,
+          completed_at: now,
+          score: pointsEarned
+        });
+      }
+      
+      // Calculate new total points
+      const existingPoints = progress.total_points || 0;
+      const newPoints = wasAlreadyCompleted 
+        ? existingPoints // Keep existing points if already completed
+        : existingPoints + pointsEarned;
+      
+      // Update total chapters read count
+      const existingChaptersRead = progress.total_chapters_read || 0;
+      const newTotalChaptersRead = wasAlreadyCompleted 
+        ? existingChaptersRead 
+        : existingChaptersRead + 1;
+      
+      // Prepare the update data
+      const updateData = {
+        challenges_completed: challenges,
+        completed_chapters: completedChapters,
+        total_points: newPoints,
+        total_chapters_read: newTotalChaptersRead
+      };
+      
+      console.log("Updating progress with:", updateData);
       
       // Update the progress in Supabase
-      await updateProgress({
-        challenges_completed: challenges,
-        total_points: newPoints
-      });
+      await updateProgress(updateData);
       
       // Also update user profile points
-      if (profile) {
+      if (profile && !wasAlreadyCompleted) {
         await updateProfile({
           points: (profile.points || 0) + pointsEarned
         });
       }
       
-      await fetchData();
+      console.log("Challenge completed successfully");
     } catch (error) {
       console.error('Error completing challenge:', error);
       throw error;
