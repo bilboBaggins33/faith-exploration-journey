@@ -41,10 +41,10 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
       onClick={onClick}
     >
       <div className="text-center">
-        <div className="h-14 w-14 mx-auto mb-2">
+        <span className="font-medium block mb-2">Chapter {chapter}</span>
+        <div className="mb-2">
           <ChapterProgressChart percentage={scorePercentage} />
         </div>
-        <span className="font-medium block mb-1">Chapter {chapter}</span>
         {isCompleted && (
           <p className="text-xs text-gray-500">
             Score: {score}/{maxScore}
