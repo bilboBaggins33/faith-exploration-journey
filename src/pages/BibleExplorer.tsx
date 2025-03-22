@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -30,7 +29,6 @@ import {
   DropdownMenuContent, 
   DropdownMenuItem, 
   DropdownMenuLabel,
-
   DropdownMenuSeparator, 
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
@@ -75,14 +73,12 @@ const BibleExplorer = () => {
                   Bible Books
                 </h2>
                 
-                <Select onValueChange={handleBookChange} value={bookId || ""}>
+                <Select onValueChange={handleBookChange} value={bookId || "select-book"}>
                   <SelectTrigger className="w-full">
                     <SelectValue placeholder="Select a book" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="">Choose a book...</SelectItem>
-                    
-                    <SelectItem value="old-testament" disabled className="font-bold">
+                    <SelectItem value="old-testament-header" disabled className="font-bold">
                       Old Testament
                     </SelectItem>
                     {bibleBooks
@@ -93,7 +89,7 @@ const BibleExplorer = () => {
                         </SelectItem>
                       ))}
                     
-                    <SelectItem value="new-testament" disabled className="font-bold">
+                    <SelectItem value="new-testament-header" disabled className="font-bold">
                       New Testament
                     </SelectItem>
                     {bibleBooks
