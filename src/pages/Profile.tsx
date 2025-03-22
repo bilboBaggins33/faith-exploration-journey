@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -46,6 +47,173 @@ import { theologyBooks } from '@/data/theology/books';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProfileEditForm from '@/components/ProfileEditForm';
 import { bibleBooks, sampleChapterChallenges } from '@/data/bibleData';
+
+// Interface for activity items
+interface ActivityItemProps {
+  activity: {
+    id: number;
+    type: string;
+    title: string;
+    date: string;
+    result: string;
+    points: number;
+  };
+}
+
+// Activity Item Component
+const ActivityItem = ({ activity }: ActivityItemProps) => {
+  const getIcon = () => {
+    switch (activity.type) {
+      case 'challenge':
+        return <Award className="h-8 w-8 text-yellow-500" />;
+      case 'verse':
+        return <BookOpen className="h-8 w-8 text-purple-500" />;
+      default:
+        return <Medal className="h-8 w-8 text-bible-blue" />;
+    }
+  };
+
+  return (
+    <div className="flex items-center p-3 rounded-lg bg-white shadow-sm border border-gray-100">
+      <div className="flex-shrink-0 mr-4">
+        {getIcon()}
+      </div>
+      <div className="flex-1">
+        <h4 className="font-medium">{activity.title}</h4>
+        <p className="text-sm text-gray-500">{activity.date} • {activity.result}</p>
+      </div>
+      <div className="flex-shrink-0 text-bible-blue font-medium">
+        +{activity.points} pts
+      </div>
+    </div>
+  );
+};
+
+// Interface for recommended challenge
+interface RecommendedChallengeProps {
+  title: string;
+  difficulty: string;
+  type: string;
+  id: string;
+}
+
+// Recommended Challenge Component
+const RecommendedChallenge = ({ title, difficulty, type, id }: RecommendedChallengeProps) => {
+  const getDifficultyColor = () => {
+    switch (difficulty) {
+      case 'easy':
+        return 'text-green-500';
+      case 'medium':
+        return 'text-yellow-500';
+      case 'hard':
+        return 'text-red-500';
+      default:
+        return 'text-gray-500';
+    }
+  };
+
+  return (
+    <div className="p-3 rounded-lg bg-white shadow-sm border border-gray-100">
+      <div className="flex items-center">
+        <div className="flex-1">
+          <h4 className="font-medium">{title}</h4>
+          <div className="flex items-center space-x-2 text-xs">
+            <span className={getDifficultyColor()}>
+              {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+            </span>
+            <span>•</span>
+            <span>{type.charAt(0).toUpperCase() + type.slice(1)}</span>
+          </div>
+        </div>
+        <Link to={`/challenge/${id}`}>
+          <Button size="sm" className="bg-bible-blue hover:bg-bible-deepBlue">
+            Start
+          </Button>
+        </Link>
+      </div>
+    </div>
+  );
+};
+
+// Interface for badge card
+interface BadgeCardProps {
+  badge: {
+    id: number;
+    name: string;
+    description: string;
+    icon: JSX.Element;
+    earned: boolean;
+  };
+}
+
+// Badge Card Component
+const BadgeCard = ({ badge }: BadgeCardProps) => {
+  return (
+    <div className={`flex flex-col items-center p-4 rounded-lg ${badge.earned ? 'bg-white' : 'bg-gray-50'} shadow-sm border ${badge.earned ? 'border-gray-100' : 'border-gray-200'}`}>
+      <div className="mb-3">
+        {badge.icon}
+      </div>
+      <h4 className={`text-sm font-medium text-center mb-1 ${badge.earned ? 'text-gray-900' : 'text-gray-500'}`}>
+        {badge.name}
+      </h4>
+      <p className="text-xs text-gray-500 text-center">
+        {badge.description}
+      </p>
+      {badge.earned ? (
+        <span className="mt-2 text-xs text-green-500 flex items-center">
+          <CheckCircle className="h-3 w-3 mr-1" />
+          Earned
+        </span>
+      ) : (
+        <span className="mt-2 text-xs text-gray-400 flex items-center">
+          <AlertCircle className="h-3 w-3 mr-1" />
+          Locked
+        </span>
+      )}
+    </div>
+  );
+};
+
+// Interface for stat item
+interface StatItemProps {
+  icon: JSX.Element;
+  label: string;
+  value: number;
+}
+
+// Stat Item Component
+const StatItem = ({ icon, label, value }: StatItemProps) => {
+  return (
+    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+      <div className="mb-2">
+        {icon}
+      </div>
+      <p className="text-xl font-semibold text-bible-deepBlue">{value}</p>
+      <p className="text-xs text-gray-500 text-center">{label}</p>
+    </div>
+  );
+};
+
+// Interface for memorization item
+interface MemorizationItemProps {
+  reference: string;
+  text: string;
+  progress: number;
+}
+
+// Memorization Item Component
+const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) => {
+  return (
+    <div className="p-3 rounded-lg bg-white shadow-sm border border-gray-100">
+      <div className="flex items-center mb-2">
+        <h4 className="font-medium text-bible-blue">{reference}</h4>
+        <span className="ml-auto text-sm text-gray-500">{progress}%</span>
+      </div>
+      <p className="text-sm text-gray-700 mb-2 line-clamp-2">{text}</p>
+      <Progress value={progress} className="h-1 bg-gray-200" />
+    </div>
+  );
+};
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -626,6 +794,9 @@ const ProfilePage = () => {
     </div>
   );
 };
+
+// Make sure there's a default export
+export default ProfilePage;
 
 const ProfileSkeleton = () => (
   <div className="space-y-8">
