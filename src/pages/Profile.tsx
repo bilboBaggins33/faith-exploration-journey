@@ -48,7 +48,6 @@ import { Skeleton } from '@/components/ui/skeleton';
 import ProfileEditForm from '@/components/ProfileEditForm';
 import { bibleBooks, sampleChapterChallenges } from '@/data/bibleData';
 
-// Function to get the maximum score for a chapter
 const getMaxScoreForChapter = (bookId: string, chapter: number) => {
   const challenge = sampleChapterChallenges.find(
     c => c.bookId === bookId && c.chapter === chapter
@@ -56,7 +55,6 @@ const getMaxScoreForChapter = (bookId: string, chapter: number) => {
   return challenge ? challenge.questions.length : 0;
 };
 
-// Interface for activity items
 interface ActivityItemProps {
   activity: {
     id: number;
@@ -68,7 +66,6 @@ interface ActivityItemProps {
   };
 }
 
-// Activity Item Component
 const ActivityItem = ({ activity }: ActivityItemProps) => {
   const getIcon = () => {
     switch (activity.type) {
@@ -97,7 +94,6 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
   );
 };
 
-// Interface for recommended challenge
 interface RecommendedChallengeProps {
   title: string;
   difficulty: string;
@@ -105,7 +101,6 @@ interface RecommendedChallengeProps {
   id: string;
 }
 
-// Recommended Challenge Component
 const RecommendedChallenge = ({ title, difficulty, type, id }: RecommendedChallengeProps) => {
   const getDifficultyColor = () => {
     switch (difficulty) {
@@ -143,7 +138,6 @@ const RecommendedChallenge = ({ title, difficulty, type, id }: RecommendedChalle
   );
 };
 
-// Interface for badge card
 interface BadgeCardProps {
   badge: {
     id: number;
@@ -154,7 +148,6 @@ interface BadgeCardProps {
   };
 }
 
-// Badge Card Component
 const BadgeCard = ({ badge }: BadgeCardProps) => {
   return (
     <div className={`flex flex-col items-center p-4 rounded-lg ${badge.earned ? 'bg-white' : 'bg-gray-50'} shadow-sm border ${badge.earned ? 'border-gray-100' : 'border-gray-200'}`}>
@@ -182,14 +175,12 @@ const BadgeCard = ({ badge }: BadgeCardProps) => {
   );
 };
 
-// Interface for stat item
 interface StatItemProps {
   icon: JSX.Element;
   label: string;
   value: number;
 }
 
-// Stat Item Component
 const StatItem = ({ icon, label, value }: StatItemProps) => {
   return (
     <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
@@ -202,14 +193,12 @@ const StatItem = ({ icon, label, value }: StatItemProps) => {
   );
 };
 
-// Interface for memorization item
 interface MemorizationItemProps {
   reference: string;
   text: string;
   progress: number;
 }
 
-// Memorization Item Component
 const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) => {
   return (
     <div className="p-3 rounded-lg bg-white shadow-sm border border-gray-100">
@@ -223,7 +212,6 @@ const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) 
   );
 };
 
-// Interface for Bible Book Card
 interface BibleBookCardProps {
   book: {
     id: string;
@@ -235,7 +223,6 @@ interface BibleBookCardProps {
   perfectChapters: number;
 }
 
-// Bible Book Card Component
 const BibleBookCard = ({ book, progress, completedChapters, perfectChapters }: BibleBookCardProps) => {
   return (
     <div className="p-4 rounded-lg bg-white shadow-sm border border-gray-100">
@@ -272,7 +259,6 @@ const BibleBookCard = ({ book, progress, completedChapters, perfectChapters }: B
   );
 };
 
-// Interface for Book Card
 interface TheologyBookCardProps {
   book: {
     id: string;
@@ -286,7 +272,6 @@ interface TheologyBookCardProps {
   averageScore: number;
 }
 
-// Theology Book Card Component
 const TheologyBookCard = ({ book, progress, chaptersRead, averageScore }: TheologyBookCardProps) => {
   return (
     <div className="p-4 rounded-lg bg-white shadow-sm border border-gray-100">
@@ -483,7 +468,7 @@ const StatsCard = ({ userStats }: StatsCardProps) => {
                 <BookOpen className="h-6 w-6 text-green-500" />
               </div>
               <p className="text-2xl font-semibold">{userStats.bibleChaptersPerfect}</p>
-              <p className="text-xs text-gray-500">Chapters Perfect</p>
+              <p className="text-xs text-gray-500">Perfect Scores</p>
             </div>
             
             <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
@@ -560,7 +545,6 @@ const ProfilePage = () => {
     navigate('/');
   };
   
-  // Get the bibles books with some reading progress
   const bibleStartedBooks = bibleBooks
     .map(book => {
       const progressPercentage = getBibleBookProgress(book.id);
@@ -584,7 +568,6 @@ const ProfilePage = () => {
     .filter(item => item.completedChapters > 0)
     .sort((a, b) => b.progress - a.progress);
   
-  // Get theology books with some reading progress
   const theologyStartedBooks = theologyBooks
     .map(book => {
       const progressPercentage = getBookProgress(book.id);
@@ -712,7 +695,6 @@ const ProfilePage = () => {
                     <TabsTrigger value="settings">Settings</TabsTrigger>
                   </TabsList>
                   
-                  {/* Overview Tab */}
                   <TabsContent value="overview" className="space-y-6">
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                       <StatsCard userStats={userStats} />
@@ -788,7 +770,6 @@ const ProfilePage = () => {
                     </div>
                   </TabsContent>
                   
-                  {/* Bible Tab */}
                   <TabsContent value="bible" className="space-y-6">
                     <Card className="glass-card shadow-md">
                       <CardHeader>
@@ -822,4 +803,118 @@ const ProfilePage = () => {
                           </div>
                         </div>
                         
-                        <div className="rounded-lg bg-white shadow-sm border border-gray-1
+                        <div className="space-y-4 mt-6">
+                          <h3 className="text-lg font-medium">Your Progress</h3>
+                          {bibleStartedBooks.length > 0 ? (
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                              {bibleStartedBooks.map(item => (
+                                <BibleBookCard
+                                  key={item.book.id}
+                                  book={item.book}
+                                  progress={item.progress}
+                                  completedChapters={item.completedChapters}
+                                  perfectChapters={item.perfectChapters}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-8 bg-white rounded-lg border border-gray-200">
+                              <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                              <p className="text-lg font-medium text-gray-500">No Bible books started yet</p>
+                              <p className="text-sm text-gray-400 mb-4">Start your reading journey today!</p>
+                              <Link to="/bible">
+                                <Button>Explore Bible</Button>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="books" className="space-y-6">
+                    <Card className="glass-card shadow-md">
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Theological Books Progress</CardTitle>
+                        <CardDescription>Your theological reading journey</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-6">
+                          <div className="text-center p-4 rounded-lg bg-white shadow-sm border border-gray-100">
+                            <div className="flex justify-center mb-2">
+                              <BookText className="h-6 w-6 text-bible-blue" />
+                            </div>
+                            <p className="text-2xl font-semibold">{userStats.theologyChaptersRead}</p>
+                            <p className="text-xs text-gray-500">Chapters Read</p>
+                          </div>
+                          
+                          <div className="text-center p-4 rounded-lg bg-white shadow-sm border border-gray-100">
+                            <div className="flex justify-center mb-2">
+                              <BookOpen className="h-6 w-6 text-green-500" />
+                            </div>
+                            <p className="text-2xl font-semibold">{userStats.theologyBooksStarted}</p>
+                            <p className="text-xs text-gray-500">Books Started</p>
+                          </div>
+                          
+                          <div className="text-center p-4 rounded-lg bg-white shadow-sm border border-gray-100">
+                            <div className="flex justify-center mb-2">
+                              <CheckCircle className="h-6 w-6 text-yellow-500" />
+                            </div>
+                            <p className="text-2xl font-semibold">{userStats.theologyBooksCompleted}</p>
+                            <p className="text-xs text-gray-500">Books Completed</p>
+                          </div>
+                        </div>
+                        
+                        <div className="space-y-4 mt-6">
+                          <h3 className="text-lg font-medium">Your Books</h3>
+                          {theologyStartedBooks.length > 0 ? (
+                            <div className="space-y-4">
+                              {theologyStartedBooks.map(item => (
+                                <TheologyBookCard
+                                  key={item.book.id}
+                                  book={item.book}
+                                  progress={item.progress}
+                                  chaptersRead={item.chaptersRead}
+                                  averageScore={item.averageScore}
+                                />
+                              ))}
+                            </div>
+                          ) : (
+                            <div className="text-center py-8 bg-white rounded-lg border border-gray-200">
+                              <BookText className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                              <p className="text-lg font-medium text-gray-500">No theology books started yet</p>
+                              <p className="text-sm text-gray-400 mb-4">Start exploring theological writings!</p>
+                              <Link to="/theology">
+                                <Button>Explore Books</Button>
+                              </Link>
+                            </div>
+                          )}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="settings" className="space-y-6">
+                    <Card className="glass-card shadow-md">
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Profile Settings</CardTitle>
+                        <CardDescription>Manage your account and preferences</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <ProfileEditForm onProfileUpdated={handleProfileUpdated} />
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+              </>
+            )}
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default ProfilePage;
