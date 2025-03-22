@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -10,11 +11,29 @@ import { Input } from '@/components/ui/input';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Book, Search, BookOpen, 
-  ChevronRight, BookMarked 
+  ChevronRight, BookMarked, 
+  ChevronDown
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
+import { useIsMobile } from '@/hooks/use-mobile';
+import { 
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue
+} from '@/components/ui/select';
+import { 
+  DropdownMenu, 
+  DropdownMenuContent, 
+  DropdownMenuItem, 
+  DropdownMenuLabel,
+
+  DropdownMenuSeparator, 
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 
 const BibleExplorer = () => {
   const navigate = useNavigate();
@@ -22,6 +41,7 @@ const BibleExplorer = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [activeTestament, setActiveTestament] = useState('all');
   const { progress, loading, getBookProgress, getChapterStatus } = useBibleProgress();
+  const isMobile = useIsMobile();
   
   const filteredBooks = bibleBooks.filter(book => {
     const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase());
@@ -38,6 +58,10 @@ const BibleExplorer = () => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
 
+  const handleBookChange = (value: string) => {
+    navigate(`/bible/${value}`);
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -45,76 +69,115 @@ const BibleExplorer = () => {
       <main className="flex-1 py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row gap-8">
-            <div className="md:w-1/3 glass-card p-6 rounded-xl">
-              <div className="mb-4">
+            {isMobile ? (
+              <div className="w-full glass-card p-6 rounded-xl">
                 <h2 className="text-2xl font-serif font-bold text-bible-dark mb-4">
                   Bible Books
                 </h2>
                 
-                <div className="relative mb-4">
-                  <Input
-                    type="text"
-                    placeholder="Search books..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="pl-10"
-                  />
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                <Select onValueChange={handleBookChange} value={bookId || ""}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select a book" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectItem value="">Choose a book...</SelectItem>
+                    
+                    <SelectItem value="old-testament" disabled className="font-bold">
+                      Old Testament
+                    </SelectItem>
+                    {bibleBooks
+                      .filter(book => book.testament === 'old')
+                      .map(book => (
+                        <SelectItem key={book.id} value={book.id}>
+                          {book.name}
+                        </SelectItem>
+                      ))}
+                    
+                    <SelectItem value="new-testament" disabled className="font-bold">
+                      New Testament
+                    </SelectItem>
+                    {bibleBooks
+                      .filter(book => book.testament === 'new')
+                      .map(book => (
+                        <SelectItem key={book.id} value={book.id}>
+                          {book.name}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </div>
+            ) : (
+              <div className="md:w-1/3 glass-card p-6 rounded-xl">
+                <div className="mb-4">
+                  <h2 className="text-2xl font-serif font-bold text-bible-dark mb-4">
+                    Bible Books
+                  </h2>
+                  
+                  <div className="relative mb-4">
+                    <Input
+                      type="text"
+                      placeholder="Search books..."
+                      value={searchTerm}
+                      onChange={(e) => setSearchTerm(e.target.value)}
+                      className="pl-10"
+                    />
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                  </div>
+                  
+                  <Tabs defaultValue="all" onValueChange={setActiveTestament} className="mb-4">
+                    <TabsList className="grid grid-cols-3 w-full">
+                      <TabsTrigger value="all">All</TabsTrigger>
+                      <TabsTrigger value="old">Old Testament</TabsTrigger>
+                      <TabsTrigger value="new">New Testament</TabsTrigger>
+                    </TabsList>
+                  </Tabs>
                 </div>
                 
-                <Tabs defaultValue="all" onValueChange={setActiveTestament} className="mb-4">
-                  <TabsList className="grid grid-cols-3 w-full">
-                    <TabsTrigger value="all">All</TabsTrigger>
-                    <TabsTrigger value="old">Old Testament</TabsTrigger>
-                    <TabsTrigger value="new">New Testament</TabsTrigger>
-                  </TabsList>
-                </Tabs>
-              </div>
-              
-              <ScrollArea className="h-[500px] pr-4">
-                <div className="space-y-2">
-                  {filteredBooks.map(book => {
-                    const bookProgressPercent = getBookProgress(book.id);
-                    
-                    return (
-                      <motion.div
-                        key={book.id}
-                        whileHover={{ x: 4 }}
-                        className={`p-3 rounded-lg flex items-center justify-between cursor-pointer
-                          ${bookId === book.id ? 'bg-bible-blue/10 border-l-4 border-bible-blue' : 'hover:bg-gray-100'}`}
-                        onClick={() => navigate(`/bible/${book.id}`)}
-                      >
-                        <div className="flex items-center">
-                          <Book className="mr-3 text-bible-blue" size={18} />
-                          <div>
-                            <h3 className="font-medium">{book.name}</h3>
-                            <p className="text-xs text-gray-500">{book.chapters} chapters</p>
-                          </div>
-                        </div>
-                        
-                        <div className="flex items-center">
-                          {!loading && (
-                            <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-2">
-                              <span className="text-xs font-medium">{bookProgressPercent}%</span>
+                <ScrollArea className="h-[500px] pr-4">
+                  <div className="space-y-2">
+                    {filteredBooks.map(book => {
+                      const bookProgressPercent = getBookProgress(book.id);
+                      
+                      return (
+                        <motion.div
+                          key={book.id}
+                          whileHover={{ x: 4 }}
+                          className={`p-3 rounded-lg flex items-center justify-between cursor-pointer
+                            ${bookId === book.id ? 'bg-bible-blue/10 border-l-4 border-bible-blue' : 'hover:bg-gray-100'}`}
+                          onClick={() => navigate(`/bible/${book.id}`)}
+                        >
+                          <div className="flex items-center">
+                            <Book className="mr-3 text-bible-blue" size={18} />
+                            <div>
+                              <h3 className="font-medium">{book.name}</h3>
+                              <p className="text-xs text-gray-500">{book.chapters} chapters</p>
                             </div>
-                          )}
-                          <ChevronRight size={16} className="text-gray-400" />
-                        </div>
-                      </motion.div>
-                    );
-                  })}
-                  
-                  {filteredBooks.length === 0 && (
-                    <div className="text-center py-8">
-                      <BookOpen className="mx-auto text-gray-300 mb-2" size={40} />
-                      <p className="text-gray-500">No books found</p>
-                    </div>
-                  )}
-                </div>
-              </ScrollArea>
-            </div>
+                          </div>
+                          
+                          <div className="flex items-center">
+                            {!loading && (
+                              <div className="w-10 h-10 rounded-full bg-gray-100 flex items-center justify-center mr-2">
+                                <span className="text-xs font-medium">{bookProgressPercent}%</span>
+                              </div>
+                            )}
+                            <ChevronRight size={16} className="text-gray-400" />
+                          </div>
+                        </motion.div>
+                      );
+                    })}
+                    
+                    {filteredBooks.length === 0 && (
+                      <div className="text-center py-8">
+                        <BookOpen className="mx-auto text-gray-300 mb-2" size={40} />
+                        <p className="text-gray-500">No books found</p>
+                      </div>
+                    )}
+                  </div>
+                </ScrollArea>
+              </div>
+            )}
             
-            <div className="md:w-2/3">
+            <div className={isMobile ? "w-full" : "md:w-2/3"}>
               {selectedBook ? (
                 <div className="glass-card p-6 rounded-xl">
                   <div className="mb-6">
