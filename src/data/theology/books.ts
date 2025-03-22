@@ -59,7 +59,7 @@ export const theologyBooks: TheologyBook[] = [
     chapters: 5,
     year: 2003,
     category: 'Christian Living',
-    coverImage: '/assets/dont-waste-your-life-cover.jpg,
+    coverImage: '/assets/dont-waste-your-life-cover.jpg',
     description: "John Piper writes, \"I will tell you what a tragedy is. I will show you how to waste your life. Consider this story from the February 1998 Reader's Digest: A couple took early retirement from their jobs in the Northeast five years ago when he was 59 and she was 51. Now they live in Punta Gorda, Florida, where they cruise on their 30-foot trawler, play softball and collect shells... Picture them before Christ at the great day of judgment: 'Look, Lord. See my shells.'\"" 
   },
   {
