@@ -894,6 +894,7 @@ const ProfilePage = () => {
                     </Card>
                   </TabsContent>
                   
+                  {/* Settings Tab */}
                   <TabsContent value="settings" className="space-y-6">
                     <Card className="glass-card shadow-md">
                       <CardHeader>
@@ -901,7 +902,13 @@ const ProfilePage = () => {
                         <CardDescription>Manage your account and preferences</CardDescription>
                       </CardHeader>
                       <CardContent>
-                        <ProfileEditForm onProfileUpdated={handleProfileUpdated} />
+                        <ProfileEditForm 
+                          user={user} 
+                          fullName={profile?.full_name || ''} 
+                          email={user?.email || ''} 
+                          avatarUrl={getUserAvatar()} 
+                          onProfileUpdated={handleProfileUpdated} 
+                        />
                       </CardContent>
                     </Card>
                   </TabsContent>
