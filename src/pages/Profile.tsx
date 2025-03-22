@@ -215,6 +215,14 @@ const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) 
   );
 };
 
+// Function to get the maximum score for a chapter
+const getMaxScoreForChapter = (bookId: string, chapter: number) => {
+  const challenge = sampleChapterChallenges.find(
+    c => c.bookId === bookId && c.chapter === chapter
+  );
+  return challenge ? challenge.questions.length : 0;
+};
+
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
   const navigate = useNavigate();
@@ -264,13 +272,6 @@ const ProfilePage = () => {
     bibleChaptersPartial: progress?.completed_chapters?.filter(ch => 
       ch.score && ch.score < getMaxScoreForChapter(ch.book_id, ch.chapter)
     ).length || 0
-  };
-  
-  const getMaxScoreForChapter = (bookId: string, chapter: number) => {
-    const challenge = sampleChapterChallenges.find(
-      c => c.bookId === bookId && c.chapter === chapter
-    );
-    return challenge ? challenge.questions.length : 0;
   };
   
   const recentActivity = [
