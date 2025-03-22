@@ -16,7 +16,9 @@ import {
   Edit,
   LogOut,
   BookText,
-  GraduationCap
+  GraduationCap,
+  CheckCircle,
+  AlertCircle
 } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { Progress } from '@/components/ui/progress';
@@ -43,6 +45,7 @@ import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { theologyBooks } from '@/data/theology/books';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProfileEditForm from '@/components/ProfileEditForm';
+import { bibleBooks, sampleChapterChallenges } from '@/data/bibleData';
 
 const ProfilePage = () => {
   const [activeTab, setActiveTab] = useState("overview");
@@ -85,7 +88,21 @@ const ProfilePage = () => {
     rank: 'Scripture Explorer',
     theologyChaptersRead: theologyProgress?.total_chapters_read || 0,
     theologyBooksStarted: theologyProgress?.books_started.length || 0,
-    theologyBooksCompleted: theologyProgress?.books_completed.length || 0
+    theologyBooksCompleted: theologyProgress?.books_completed.length || 0,
+    bibleChaptersCompleted: progress?.completed_chapters?.length || 0,
+    bibleChaptersPerfect: progress?.completed_chapters?.filter(ch => 
+      ch.score && ch.score === getMaxScoreForChapter(ch.book_id, ch.chapter)
+    ).length || 0,
+    bibleChaptersPartial: progress?.completed_chapters?.filter(ch => 
+      ch.score && ch.score < getMaxScoreForChapter(ch.book_id, ch.chapter)
+    ).length || 0
+  };
+  
+  const getMaxScoreForChapter = (bookId: string, chapter: number) => {
+    const challenge = sampleChapterChallenges.find(
+      c => c.bookId === bookId && c.chapter === chapter
+    );
+    return challenge ? challenge.questions.length : 0;
   };
   
   const recentActivity = [
@@ -651,6 +668,9 @@ interface ProfileHeaderProps {
     theologyChaptersRead: number;
     theologyBooksStarted: number;
     theologyBooksCompleted: number;
+    bibleChaptersCompleted: number;
+    bibleChaptersPerfect: number;
+    bibleChaptersPartial: number;
   };
   onLogout: () => void;
   userName: string;
@@ -720,6 +740,9 @@ interface StatsCardProps {
     theologyChaptersRead: number;
     theologyBooksStarted: number;
     theologyBooksCompleted: number;
+    bibleChaptersCompleted: number;
+    bibleChaptersPerfect: number;
+    bibleChaptersPartial: number;
   };
 }
 
@@ -758,22 +781,34 @@ const StatsCard = ({ userStats }: StatsCardProps) => {
         </div>
         
         <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-          <div className="flex items-center mb-2">
-            <BookText className="h-5 w-5 text-bible-blue mr-2" />
-            <h3 className="text-sm font-medium">Theology Reading</h3>
+          <div className="flex items-center mb-3">
+            <BookOpen className="h-5 w-5 text-bible-blue mr-2" />
+            <h3 className="text-sm font-medium">Bible Reading Progress</h3>
           </div>
-          <div className="grid grid-cols-3 gap-2 text-center">
-            <div>
-              <p className="text-lg font-semibold">{userStats.theologyChaptersRead}</p>
-              <p className="text-xs text-gray-500">Chapters</p>
+          
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <BookOpen className="h-6 w-6 text-yellow-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.bibleChaptersCompleted}</p>
+              <p className="text-xs text-gray-500">Chapters Completed</p>
             </div>
-            <div>
-              <p className="text-lg font-semibold">{userStats.theologyBooksStarted}</p>
-              <p className="text-xs text-gray-500">Books Started</p>
+            
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <BookOpen className="h-6 w-6 text-green-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.bibleChaptersPerfect}</p>
+              <p className="text-xs text-gray-500">Chapters Perfect</p>
             </div>
-            <div>
-              <p className="text-lg font-semibold">{userStats.theologyBooksCompleted}</p>
-              <p className="text-xs text-gray-500">Books Completed</p>
+            
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <BookOpen className="h-6 w-6 text-red-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.bibleChaptersPartial}</p>
+              <p className="text-xs text-gray-500">Chapters Partial</p>
             </div>
           </div>
         </div>
@@ -781,169 +816,3 @@ const StatsCard = ({ userStats }: StatsCardProps) => {
     </Card>
   );
 };
-
-interface ActivityItemProps {
-  activity: {
-    id: number;
-    type: string;
-    title: string;
-    date: string;
-    result: string;
-    points: number;
-  };
-}
-
-const ActivityItem = ({ activity }: ActivityItemProps) => {
-  const getIcon = () => {
-    switch (activity.type) {
-      case 'challenge':
-        return <Award className="h-6 w-6 text-yellow-500" />;
-      case 'verse':
-        return <BookOpen className="h-6 w-6 text-purple-500" />;
-      case 'reading':
-        return <BookText className="h-6 w-6 text-blue-500" />;
-      default:
-        return <Clock className="h-6 w-6 text-gray-500" />;
-    }
-  };
-  
-  return (
-    <div className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
-      <div className="flex-shrink-0 mr-3 bg-gray-100 rounded-full p-2">
-        {getIcon()}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium truncate">{activity.title}</p>
-        <p className="text-xs text-gray-500">{activity.result}</p>
-      </div>
-      <div className="flex-shrink-0 text-right">
-        <p className="text-sm font-medium text-bible-blue">+{activity.points}</p>
-        <p className="text-xs text-gray-500">{activity.date}</p>
-      </div>
-    </div>
-  );
-};
-
-interface RecommendedChallengeProps {
-  title: string;
-  difficulty: string;
-  type: string;
-  id: string;
-}
-
-const RecommendedChallenge = ({ title, difficulty, type, id }: RecommendedChallengeProps) => {
-  const getDifficultyColor = () => {
-    switch (difficulty) {
-      case 'easy':
-        return 'text-green-500';
-      case 'medium':
-        return 'text-yellow-500';
-      case 'hard':
-        return 'text-red-500';
-      default:
-        return 'text-gray-500';
-    }
-  };
-  
-  const getTypeIcon = () => {
-    switch (type) {
-      case 'quiz':
-        return <Award className="h-5 w-5 text-yellow-500" />;
-      case 'memorization':
-        return <BookOpen className="h-5 w-5 text-purple-500" />;
-      case 'reading':
-        return <BookText className="h-5 w-5 text-blue-500" />;
-      default:
-        return <Clock className="h-5 w-5 text-gray-500" />;
-    }
-  };
-  
-  return (
-    <Link to={`/challenge/${id}`} className="flex items-center p-3 rounded-lg hover:bg-gray-50 transition-colors border border-gray-100">
-      <div className="flex-shrink-0 mr-3 bg-gray-100 rounded-full p-2">
-        {getTypeIcon()}
-      </div>
-      <div className="flex-1 min-w-0">
-        <p className="text-sm font-medium truncate">{title}</p>
-        <p className={`text-xs ${getDifficultyColor()}`}>
-          {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)} • {type.charAt(0).toUpperCase() + type.slice(1)}
-        </p>
-      </div>
-      <div className="flex-shrink-0">
-        <Button size="sm" className="h-8 bg-bible-blue hover:bg-bible-deepBlue">
-          Start
-        </Button>
-      </div>
-    </Link>
-  );
-};
-
-interface BadgeCardProps {
-  badge: {
-    id: number;
-    name: string;
-    description: string;
-    icon: React.ReactNode;
-    earned: boolean;
-  };
-}
-
-const BadgeCard = ({ badge }: BadgeCardProps) => {
-  return (
-    <div className={`p-4 rounded-lg text-center ${badge.earned ? 'bg-white' : 'bg-gray-50 opacity-60'} border border-gray-100 transition-all hover:shadow-md`}>
-      <div className="flex justify-center mb-3">
-        {badge.icon}
-      </div>
-      <h4 className="text-sm font-medium mb-1">{badge.name}</h4>
-      <p className="text-xs text-gray-500">{badge.description}</p>
-      {!badge.earned && (
-        <div className="mt-2 inline-block px-2 py-1 bg-gray-200 rounded text-xs">
-          Locked
-        </div>
-      )}
-    </div>
-  );
-};
-
-interface StatItemProps {
-  icon: React.ReactNode;
-  label: string;
-  value: number;
-}
-
-const StatItem = ({ icon, label, value }: StatItemProps) => {
-  return (
-    <div className="flex flex-col items-center p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-      <div className="mb-2">
-        {icon}
-      </div>
-      <p className="text-lg font-semibold">{value}</p>
-      <p className="text-xs text-gray-500 text-center">{label}</p>
-    </div>
-  );
-};
-
-interface MemorizationItemProps {
-  reference: string;
-  text: string;
-  progress: number;
-}
-
-const MemorizationItem = ({ reference, text, progress }: MemorizationItemProps) => {
-  return (
-    <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
-      <div className="flex justify-between items-start mb-2">
-        <div>
-          <h4 className="text-sm font-medium">{reference}</h4>
-          <p className="text-xs text-gray-500 my-1 line-clamp-2">{text}</p>
-        </div>
-        <div className="ml-4 flex-shrink-0 px-2 py-1 bg-bible-sky text-bible-blue text-xs font-medium rounded">
-          {progress}%
-        </div>
-      </div>
-      <Progress value={progress} className="h-1.5 bg-gray-200" />
-    </div>
-  );
-};
-
-export default ProfilePage;
