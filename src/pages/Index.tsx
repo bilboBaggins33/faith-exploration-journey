@@ -7,7 +7,7 @@ import { motion, useAnimation } from 'framer-motion';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, BookText, GraduationCap, Users, Award, Trophy, Download, Smartphone } from 'lucide-react';
+import { ArrowRight, BookOpen, BookText, GraduationCap, Users, Award, Trophy, Download, Smartphone, CalendarDays } from 'lucide-react';
 
 const Index = () => {
   // Initialize scroll reveal
@@ -93,7 +93,7 @@ const ChallengeTypes = () => {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid md:grid-cols-2 gap-12"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
         >
           <motion.div variants={itemVariants} className="glass-card p-8 rounded-lg">
             <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
@@ -158,6 +158,16 @@ const ChallengeTypes = () => {
               </Button>
             </Link>
           </motion.div>
+          
+          <ChallengeCard
+            title="Daily Bible Reading"
+            description="Follow the M'Cheyne reading plan to read through the Bible in a year"
+            icon={<CalendarDays className="h-6 w-6" />}
+            link="/daily-reading"
+            bgColor="bg-gradient-to-br from-blue-100 to-blue-50"
+            progress={0}
+            isNew={true}
+          />
         </motion.div>
       </div>
     </section>
@@ -477,6 +487,30 @@ const CallToAction = () => {
         </div>
       </div>
     </section>
+  );
+};
+
+const ChallengeCard = ({ title, description, icon, link, bgColor, progress, isNew }) => {
+  return (
+    <motion.div
+      className={`glass-card p-8 rounded-lg ${bgColor}`}
+    >
+      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
+        {icon}
+      </div>
+      <h3 className="text-2xl font-serif font-semibold text-bible-dark mb-3">
+        {title}
+      </h3>
+      <p className="text-bible-dark/70 mb-6">
+        {description}
+      </p>
+      <Link to={link}>
+        <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
+          Explore {title}
+          <ArrowRight className="ml-2 h-4 w-4" />
+        </Button>
+      </Link>
+    </motion.div>
   );
 };
 

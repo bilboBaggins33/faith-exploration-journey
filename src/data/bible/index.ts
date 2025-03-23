@@ -5,3 +5,4 @@ export * from './books';
 export * from './chapters';
 export * from './challenges/index';
 export * from './utils';
+export * from './reading-plans/mcheyne';

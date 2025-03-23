@@ -50,3 +50,16 @@ export interface ChapterChallenge {
   difficulty: 'easy' | 'medium' | 'hard';
   points: number;
 }
+
+// New interfaces for reading plans
+export interface BibleReading {
+  bookId: string;
+  chapter: number;
+}
+
+export interface ReadingPlan {
+  id: string;
+  name: string;
+  description: string;
+  readings: Record<string, BibleReading[]>;
+}
