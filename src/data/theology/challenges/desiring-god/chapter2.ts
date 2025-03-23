@@ -17,7 +17,7 @@ export const chapter2Challenge: TheologyChallenge = {
         'To create Christian Hedonists who delight in God',
         'To increase church membership'
       ],
-      correctAnswerIndex: 2,
+      correctAnswer: 'To create Christian Hedonists who delight in God',
       explanation: 'Piper argues that the goal of conversion is to create Christian Hedonists - people who find their ultimate pleasure and satisfaction in God himself.'
     },
     {
@@ -30,7 +30,7 @@ export const chapter2Challenge: TheologyChallenge = {
         'That joy and self-denial cannot coexist',
         'That self-denial is actually the pursuit of greater joy in God'
       ],
-      correctAnswerIndex: 3,
+      correctAnswer: 'That self-denial is actually the pursuit of greater joy in God',
       explanation: 'Piper argues that genuine Christian self-denial is actually the pursuit of greater joy in God. It's not giving up happiness but pursuing ultimate happiness in God.'
     },
     {
@@ -43,7 +43,7 @@ export const chapter2Challenge: TheologyChallenge = {
         'Faith and satisfaction in God are unrelated concepts',
         'Faith and satisfaction in God are identical concepts'
       ],
-      correctAnswerIndex: 0,
+      correctAnswer: 'Faith precedes satisfaction in God',
       explanation: 'Piper teaches that faith comes first - it is the trust that if we come to God, we will find satisfaction. The actual experience of satisfaction follows faith.'
     },
     {
@@ -56,7 +56,7 @@ export const chapter2Challenge: TheologyChallenge = {
         'A treasuring of Christ as supremely valuable',
         'Following a strict moral code'
       ],
-      correctAnswerIndex: 2,
+      correctAnswer: 'A treasuring of Christ as supremely valuable',
       explanation: 'Piper defines saving faith as essentially a treasuring of Christ as supremely valuable - it is seeing and savoring Christ as our greatest treasure.'
     },
     {
@@ -69,10 +69,13 @@ export const chapter2Challenge: TheologyChallenge = {
         'Repentance is primarily about feeling guilty for sin',
         'Repentance and pleasure are opposing concepts'
       ],
-      correctAnswerIndex: 1,
+      correctAnswer: 'Repentance is turning from lesser joys to ultimate joy in God',
       explanation: 'Piper explains that true repentance is not merely feeling bad about sin, but turning from the lesser joys of sin to the ultimate joy found in God.'
     }
   ],
-  introText: 'In this chapter, John Piper explores how conversion creates Christian Hedonists - people who find their highest joy in God. He examines the paradoxical relationship between self-denial and joy, the nature of saving faith, and how repentance relates to our ultimate satisfaction in God.',
-  conclusionText: 'Piper challenges us to see that genuine conversion transforms our desires so that we find our greatest pleasure in God himself. This reorientation of our desires is at the heart of what it means to be a Christian Hedonist.'
+  key_quote: "God is most glorified in us when we are most satisfied in Him.",
+  key_quote_location: "Desiring God, Chapter 2",
+  memory_challenge: true,
+  difficulty: 'medium',
+  points: 30
 };
