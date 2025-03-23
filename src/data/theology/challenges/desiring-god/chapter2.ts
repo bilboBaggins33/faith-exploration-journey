@@ -13,7 +13,7 @@ export const chapter2Challenge: TheologyChallenge = {
       question: 'According to John Piper, what is the ultimate goal of conversion?',
       options: [
         'To make people morally upright',
-        'To satisfy God's justice',
+        'To satisfy God\'s justice',
         'To create Christian Hedonists who delight in God',
         'To increase church membership'
       ],
@@ -31,7 +31,7 @@ export const chapter2Challenge: TheologyChallenge = {
         'That self-denial is actually the pursuit of greater joy in God'
       ],
       correctAnswer: 'That self-denial is actually the pursuit of greater joy in God',
-      explanation: 'Piper argues that genuine Christian self-denial is actually the pursuit of greater joy in God. It's not giving up happiness but pursuing ultimate happiness in God.'
+      explanation: 'Piper argues that genuine Christian self-denial is actually the pursuit of greater joy in God. It\'s not giving up happiness but pursuing ultimate happiness in God.'
     },
     {
       id: 'desiring-god-2-3',
