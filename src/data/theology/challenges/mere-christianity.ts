@@ -413,6 +413,671 @@ export const mereChristianityChallenges: TheologyChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 20
+  },
+  {
+    id: 'mere-christianity-6',
+    bookId: 'mere-christianity',
+    chapter: 6,
+    title: 'The Rival Conceptions of God',
+    questions: [
+      {
+        id: 'mc6-q1',
+        question: 'What are the two primary views of God that Lewis contrasts?',
+        options: [
+          'Monotheism and atheism',
+          'Theism and pantheism',
+          'Christianity and Hinduism',
+          'Materialism and spiritualism'
+        ],
+        correctAnswer: 'Theism and pantheism',
+        explanation: 'Lewis contrasts the Materialist (atheist) view, the Christian (theistic) view, and the Pantheist view, focusing primarily on the distinction between theism and pantheism.'
+      },
+      {
+        id: 'mc6-q2',
+        question: 'According to Lewis, what does the pantheist believe about God?',
+        options: [
+          'God is wholly separate from the universe',
+          'God is a personal being distinct from creation',
+          'God is identical with the universe',
+          'God does not exist'
+        ],
+        correctAnswer: 'God is identical with the universe',
+        explanation: 'Lewis explains that pantheists believe God is the universe, or that everything is part of God.'
+      },
+      {
+        id: 'mc6-q3',
+        question: 'What does Lewis identify as a key difference between the Christian view and the Pantheist view?',
+        options: [
+          'Christians believe in heaven while pantheists do not',
+          'Christians believe God created the universe while pantheists believe God is the universe',
+          'Christians believe in Jesus while pantheists believe in Buddha',
+          'Christians believe in good and evil while pantheists do not'
+        ],
+        correctAnswer: 'Christians believe God created the universe while pantheists believe God is the universe',
+        explanation: 'Lewis highlights that in Christianity, God is separate from and created the universe, while in Pantheism, God and the universe are the same thing.'
+      },
+      {
+        id: 'mc6-q4',
+        question: 'What does Lewis say about the Pantheist view of good and evil?',
+        options: [
+          'Good and evil are clearly defined opposites',
+          'There is no good or evil, only matter',
+          'Good and evil are just different aspects of the same thing',
+          'Evil is more powerful than good'
+        ],
+        correctAnswer: 'Good and evil are just different aspects of the same thing',
+        explanation: 'Lewis points out that in Pantheism, since everything is part of God, good and evil become merely different aspects of the same ultimate reality.'
+      },
+      {
+        id: 'mc6-q5',
+        question: 'Why does Lewis argue that Christianity has a more satisfying view of good and evil than Pantheism?',
+        options: [
+          'Christianity is more ancient',
+          'Christianity recognizes evil as a real problem to be overcome, not just an illusion',
+          'Christianity is more popular worldwide',
+          'Christianity is easier to understand'
+        ],
+        correctAnswer: 'Christianity recognizes evil as a real problem to be overcome, not just an illusion',
+        explanation: 'Lewis argues that Christianity takes evil seriously as a real problem, whereas Pantheism ultimately reduces evil to an illusion or misunderstanding.'
+      },
+      {
+        id: 'mc6-q6',
+        question: 'What does Lewis suggest is a problem with the materialist (atheist) view?',
+        options: [
+          'It cannot account for human reason and thought',
+          'It is too old-fashioned',
+          'It is not scientific enough',
+          'It is too complex for most people'
+        ],
+        correctAnswer: 'It cannot account for human reason and thought',
+        explanation: 'Lewis argues that if materialism were true and the universe is just matter in motion, then human thoughts would just be random chemical events, not rational processes.'
+      },
+      {
+        id: 'mc6-q7',
+        question: 'How does Lewis describe God\'s relationship to time in the Christian view?',
+        options: [
+          'God is subject to time like humans',
+          'God exists at a particular point in time',
+          'God is outside time and sees all times as equally present',
+          'God exists only in the future'
+        ],
+        correctAnswer: 'God is outside time and sees all times as equally present',
+        explanation: 'Lewis explains that in the Christian view, God is not within time but outside it, seeing all of history as eternally present to Him.'
+      },
+      {
+        id: 'mc6-q8',
+        question: 'What does Lewis say about the personality of God in the Christian view?',
+        options: [
+          'God is an impersonal force',
+          'God is a personal being',
+          'God has no definable attributes',
+          'God\'s personality is unknowable'
+        ],
+        correctAnswer: 'God is a personal being',
+        explanation: 'Lewis emphasizes that in Christianity, God is a personal being with consciousness and intentionality, not an impersonal force or energy.'
+      },
+      {
+        id: 'mc6-q9',
+        question: 'According to Lewis, what is the significance of God being beyond good and evil in Pantheism?',
+        options: [
+          'It means morality is subjective',
+          'It means God is perfect',
+          'It leaves no basis for moral judgments',
+          'It means humans cannot understand God'
+        ],
+        correctAnswer: 'It leaves no basis for moral judgments',
+        explanation: 'Lewis points out that if God is beyond good and evil (as in Pantheism), then there can be no ultimate standard for moral judgments.'
+      },
+      {
+        id: 'mc6-q10',
+        question: 'What metaphor does Lewis use to describe the difference between God\'s existence and our existence?',
+        options: [
+          'A page and an author',
+          'A painting and an artist',
+          'A two-dimensional versus a three-dimensional being',
+          'A plant and a gardener'
+        ],
+        correctAnswer: 'A two-dimensional versus a three-dimensional being',
+        explanation: 'Lewis uses the analogy of a two-dimensional being trying to understand a three-dimensional being to illustrate how our limited minds try to comprehend God\'s unlimited nature.'
+      }
+    ],
+    key_quote: "If you are a Christian you do not have to believe that all the other religions are simply wrong all through. If you are an atheist you do have to believe that the main point in all the religions of the whole world is simply one huge mistake.",
+    key_quote_location: "Book I, Chapter 6",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-7',
+    bookId: 'mere-christianity',
+    chapter: 7,
+    title: 'The Invasion',
+    questions: [
+      {
+        id: 'mc7-q1',
+        question: 'What "invasion" is Lewis referring to in this chapter?',
+        options: [
+          'The Roman invasion of Britain',
+          'Sin\'s invasion of human nature',
+          'God\'s invasion of the world through Christ',
+          'The invasion of rational thought by religion'
+        ],
+        correctAnswer: 'God\'s invasion of the world through Christ',
+        explanation: 'Lewis uses "invasion" as a metaphor for God entering human history through the incarnation of Christ.'
+      },
+      {
+        id: 'mc7-q2',
+        question: 'According to Lewis, what is the central story of Christianity?',
+        options: [
+          'The teachings of Jesus',
+          'The miracles Jesus performed',
+          'How God became a man to rescue humanity',
+          'The establishment of the church'
+        ],
+        correctAnswer: 'How God became a man to rescue humanity',
+        explanation: 'Lewis emphasizes that the core of Christianity is the story of God becoming incarnate in Jesus Christ to rescue humanity from sin and death.'
+      },
+      {
+        id: 'mc7-q3',
+        question: 'What analogy does Lewis use to describe the spiritual war on earth?',
+        options: [
+          'A game of chess',
+          'A civil war',
+          'An occupied territory',
+          'A medical operation'
+        ],
+        correctAnswer: 'An occupied territory',
+        explanation: 'Lewis compares earth to a territory occupied by enemy forces (Satan), which God is now reclaiming through a kind of secret invasion.'
+      },
+      {
+        id: 'mc7-q4',
+        question: 'According to Lewis, what was God\'s strategy in the "invasion"?',
+        options: [
+          'A frontal assault with armies of angels',
+          'A landing behind enemy lines in human form',
+          'A diplomatic negotiation with evil forces',
+          'A gradual evolution of human consciousness'
+        ],
+        correctAnswer: 'A landing behind enemy lines in human form',
+        explanation: 'Lewis describes God\'s strategy as coming in human form, "landing behind enemy lines" through the incarnation.'
+      },
+      {
+        id: 'mc7-q5',
+        question: 'What does Lewis say about how Christians view paganism?',
+        options: [
+          'All pagan beliefs are completely false',
+          'Paganism contains glimpses of truth that are fulfilled in Christianity',
+          'Paganism is equal to Christianity as a path to God',
+          'Paganism was a direct revelation from God'
+        ],
+        correctAnswer: 'Paganism contains glimpses of truth that are fulfilled in Christianity',
+        explanation: 'Lewis suggests that paganism often contains shadows or reflections of the truth, which Christianity fulfills and completes.'
+      },
+      {
+        id: 'mc7-q6',
+        question: 'According to Lewis, how is Christianity different from myths about dying gods?',
+        options: [
+          'Christianity is historically verifiable while myths are not',
+          'Christianity teaches different moral lessons',
+          'Christianity has better literary quality',
+          'Christianity has more followers'
+        ],
+        correctAnswer: 'Christianity is historically verifiable while myths are not',
+        explanation: 'Lewis points out that unlike myths, Christianity claims that its central story actually happened in history, at a specific time and place.'
+      },
+      {
+        id: 'mc7-q7',
+        question: 'What does Lewis suggest about the relationship between myth and fact in Christianity?',
+        options: [
+          'Myth and fact are completely unrelated',
+          'Christianity replaces myth with fact',
+          'In Christianity, a myth became fact while remaining mythically powerful',
+          'Facts are more important than myths'
+        ],
+        correctAnswer: 'In Christianity, a myth became fact while remaining mythically powerful',
+        explanation: 'Lewis suggests that in Christianity, the mythic themes that resonate with human imagination actually became fact in history without losing their mythic power.'
+      },
+      {
+        id: 'mc7-q8',
+        question: 'What purpose does Lewis attribute to the Jewish people in God\'s plan?',
+        options: [
+          'They were chosen randomly',
+          'They were morally superior to other peoples',
+          'They were prepared specifically to receive God\'s revelation',
+          'They were more intelligent than other ancient peoples'
+        ],
+        correctAnswer: 'They were prepared specifically to receive God\'s revelation',
+        explanation: 'Lewis suggests that God prepared the Jewish people through their history and law to be the vehicle through which He would reveal himself more fully.'
+      },
+      {
+        id: 'mc7-q9',
+        question: 'What does Lewis mean by calling Christianity "the completion of something begun in all religions"?',
+        options: [
+          'All religions are equally valid paths to God',
+          'Christianity is just a more evolved form of paganism',
+          'The deep human yearnings expressed in all religions find their fulfillment in Christ',
+          'Christianity borrowed its core ideas from other religions'
+        ],
+        correctAnswer: 'The deep human yearnings expressed in all religions find their fulfillment in Christ',
+        explanation: 'Lewis suggests that all religions contain some yearning for or shadows of the truth, which Christianity claims is fully revealed in Christ.'
+      },
+      {
+        id: 'mc7-q10',
+        question: 'What contrast does Lewis draw between mythic gods and the God of Christianity?',
+        options: [
+          'Mythic gods are more powerful',
+          'Mythic gods are fictional while the Christian God is real',
+          'The Christian God is more morally perfect',
+          'Mythic gods are more relatable to humans'
+        ],
+        correctAnswer: 'Mythic gods are fictional while the Christian God is real',
+        explanation: 'Lewis emphasizes that unlike mythic gods, Christianity claims that God actually entered history as a real person in a specific time and place.'
+      }
+    ],
+    key_quote: "The heart of Christianity is a myth which is also a fact. The old myth of the Dying God, without ceasing to be myth, comes down from the heaven of legend and imagination to the earth of history.",
+    key_quote_location: "Book II, Chapter 7",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-8',
+    bookId: 'mere-christianity',
+    chapter: 8,
+    title: 'The Shocking Alternative',
+    questions: [
+      {
+        id: 'mc8-q1',
+        question: 'What "shocking alternative" does Lewis present in this chapter?',
+        options: [
+          'Either Jesus was divine or he was evil',
+          'Either God exists or life is meaningless',
+          'Either Christianity is true or all religions are false',
+          'Either humans have free will or they are robots'
+        ],
+        correctAnswer: 'Either Jesus was divine or he was evil',
+        explanation: 'Lewis presents the famous "trilemma": Jesus was either a liar, a lunatic, or the Lord (God), eliminating the comfortable option of seeing him as just a great moral teacher.'
+      },
+      {
+        id: 'mc8-q2',
+        question: 'According to Lewis, what claim did Jesus make that forces us to make a decision about him?',
+        options: [
+          'His claim to perform miracles',
+          'His claim to forgive sins',
+          'His claim to fulfill prophecy',
+          'His claim to rise from the dead'
+        ],
+        correctAnswer: 'His claim to forgive sins',
+        explanation: 'Lewis notes that Jesus claimed to forgive sins, which would be nonsensical unless He was God, since only the person wronged can forgive an offense.'
+      },
+      {
+        id: 'mc8-q3',
+        question: 'What does Lewis say is the reason God gave humans free will?',
+        options: [
+          'To test who deserves heaven',
+          'Because He couldn\'t control everything',
+          'To create beings who could freely love Him',
+          'To make life more interesting'
+        ],
+        correctAnswer: 'To create beings who could freely love Him',
+        explanation: 'Lewis argues that God gave humans free will because love requires freedom; automatic "love" would be meaningless.'
+      },
+      {
+        id: 'mc8-q4',
+        question: 'What does Lewis identify as the consequence of human free will?',
+        options: [
+          'Human creativity',
+          'Human happiness',
+          'Human sin and evil in the world',
+          'Human intelligence'
+        ],
+        correctAnswer: 'Human sin and evil in the world',
+        explanation: 'Lewis states that the consequence of free will is the possibility of evil choices, which humans have consistently made.'
+      },
+      {
+        id: 'mc8-q5',
+        question: 'How does Lewis describe the state of the world in relation to God?',
+        options: [
+          'A perfect reflection of God\'s will',
+          'A territory occupied by a hostile power',
+          'An experiment that failed',
+          'A place God has abandoned'
+        ],
+        correctAnswer: 'A territory occupied by a hostile power',
+        explanation: 'Lewis describes the world as a territory occupied by enemy forces (Satan), in rebellion against its rightful king (God).'
+      },
+      {
+        id: 'mc8-q6',
+        question: 'According to Lewis, what was Jesus\'s primary mission on earth?',
+        options: [
+          'To teach moral principles',
+          'To perform miracles',
+          'To suffer and die to defeat sin and death',
+          'To establish a new religion'
+        ],
+        correctAnswer: 'To suffer and die to defeat sin and death',
+        explanation: 'Lewis emphasizes that Jesus came primarily to suffer and die as a sacrifice to defeat sin and death, not merely to teach or set an example.'
+      },
+      {
+        id: 'mc8-q7',
+        question: 'What option does Lewis reject about Jesus\'s identity?',
+        options: [
+          'That Jesus was God',
+          'That Jesus was a good moral teacher but not divine',
+          'That Jesus was deluded',
+          'That Jesus was deliberately deceptive'
+        ],
+        correctAnswer: 'That Jesus was a good moral teacher but not divine',
+        explanation: 'Lewis rejects the "patronizing nonsense" that Jesus was just a great moral teacher, arguing that his claims about himself don\'t allow that option.'
+      },
+      {
+        id: 'mc8-q8',
+        question: 'What analogy does Lewis use to describe God\'s entry into the world?',
+        options: [
+          'A king visiting his subjects',
+          'A doctor treating a patient',
+          'A diver plunging into deep water',
+          'A teacher entering a classroom'
+        ],
+        correctAnswer: 'A diver plunging into deep water',
+        explanation: 'Lewis compares God becoming human to a diver stripping down and plunging into cold, dark waters to recover something valuable.'
+      },
+      {
+        id: 'mc8-q9',
+        question: 'What does Lewis say is required for humanity to regain its proper relationship with God?',
+        options: [
+          'Perfect moral behavior',
+          'Intellectual understanding of theology',
+          'Surrender and repentance',
+          'Religious rituals and ceremonies'
+        ],
+        correctAnswer: 'Surrender and repentance',
+        explanation: 'Lewis argues that humans must surrender to God, admit their rebellion, and repent to restore their proper relationship with Him.'
+      },
+      {
+        id: 'mc8-q10',
+        question: 'According to Lewis, what obstacle prevents many people from accepting Christianity?',
+        options: [
+          'Lack of evidence',
+          'Religious trauma',
+          'Pride and the unwillingness to surrender to God',
+          'Intellectual objections to specific doctrines'
+        ],
+        correctAnswer: 'Pride and the unwillingness to surrender to God',
+        explanation: 'Lewis suggests that pride—the unwillingness to kneel and surrender to God—is often the real obstacle to faith, not intellectual objections.'
+      }
+    ],
+    key_quote: "I am trying here to prevent anyone saying the really foolish thing that people often say about Him: 'I'm ready to accept Jesus as a great moral teacher, but I don't accept His claim to be God.' That is the one thing we must not say.",
+    key_quote_location: "Book II, Chapter 8",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-9',
+    bookId: 'mere-christianity',
+    chapter: 9,
+    title: 'The Perfect Penitent',
+    questions: [
+      {
+        id: 'mc9-q1',
+        question: 'Who does Lewis identify as the "perfect penitent"?',
+        options: [
+          'The Virgin Mary',
+          'Saint Francis of Assisi',
+          'The Apostle Paul',
+          'Jesus Christ'
+        ],
+        correctAnswer: 'Jesus Christ',
+        explanation: 'Lewis explains that Jesus, though he had no sins of his own, perfectly offered the repentance, suffering, and humility that humans owed to God but couldn\'t give.'
+      },
+      {
+        id: 'mc9-q2',
+        question: 'According to Lewis, why can\'t humans make proper repentance on their own?',
+        options: [
+          'Humans don\'t know how to properly repent',
+          'The debt is too large for any human to pay',
+          'Humans are too sinful and self-centered to repent perfectly',
+          'Repentance requires divine intervention'
+        ],
+        correctAnswer: 'Humans are too sinful and self-centered to repent perfectly',
+        explanation: 'Lewis argues that our sinful nature prevents us from making a perfect, selfless repentance; our repentance itself is flawed by self-interest.'
+      },
+      {
+        id: 'mc9-q3',
+        question: 'What does Lewis say Christ does for us that we cannot do for ourselves?',
+        options: [
+          'He performs miracles',
+          'He teaches us moral truths',
+          'He offers perfect repentance and surrender to God on our behalf',
+          'He shows us what heaven is like'
+        ],
+        correctAnswer: 'He offers perfect repentance and surrender to God on our behalf',
+        explanation: 'Lewis explains that Christ offers the perfect repentance, submission, and suffering to God that we owe but cannot give.'
+      },
+      {
+        id: 'mc9-q4',
+        question: 'According to Lewis, why did Christ have to be both God and man?',
+        options: [
+          'To communicate with both parties',
+          'To satisfy biblical prophecy',
+          'To perform both physical and spiritual miracles',
+          'To represent both heaven and earth'
+        ],
+        correctAnswer: 'To communicate with both parties',
+        explanation: 'Lewis argues that Christ needed to be God to have the strength to bear the weight of sin, and man to represent humanity in offering perfect repentance.'
+      },
+      {
+        id: 'mc9-q5',
+        question: 'What aspect of atonement does Lewis emphasize most in this chapter?',
+        options: [
+          'Substitutionary punishment',
+          'Victory over Satan',
+          'Perfect repentance and surrender',
+          'Moral example'
+        ],
+        correctAnswer: 'Perfect repentance and surrender',
+        explanation: 'While acknowledging other aspects of atonement, Lewis focuses on Christ offering the perfect repentance and surrender to God that humanity could not give.'
+      },
+      {
+        id: 'mc9-q6',
+        question: 'What analogy does Lewis use to explain how we participate in Christ\'s death?',
+        options: [
+          'A financial transaction',
+          'A legal pardon',
+          'Good infection or good pretending',
+          'A medical operation'
+        ],
+        correctAnswer: 'Good infection or good pretending',
+        explanation: 'Lewis suggests that we participate in Christ\'s perfect offering through "good infection" (Christ\'s life in us) or "good pretending" (acting as if we were Christ).'
+      },
+      {
+        id: 'mc9-q7',
+        question: 'What does Lewis mean by Christians being "in Christ"?',
+        options: [
+          'Physically present with Jesus',
+          'Thinking about Jesus all the time',
+          'Sharing in Christ\'s life through a kind of spiritual union',
+          'Following Jesus\'s teachings'
+        ],
+        correctAnswer: 'Sharing in Christ\'s life through a kind of spiritual union',
+        explanation: 'Lewis describes being "in Christ" as sharing in His life through a kind of spiritual union or "good infection," where His life becomes active within us.'
+      },
+      {
+        id: 'mc9-q8',
+        question: 'According to Lewis, why is pretending to be like Christ valuable?',
+        options: [
+          'It impresses other people',
+          'It earns God\'s favor',
+          'Eventually, the pretense can become reality',
+          'It makes us feel better about ourselves'
+        ],
+        correctAnswer: 'Eventually, the pretense can become reality',
+        explanation: 'Lewis suggests that by "pretending" to be Christ (acting as He would), we can gradually be transformed to actually become more like Him.'
+      },
+      {
+        id: 'mc9-q9',
+        question: 'What does Lewis say about the purpose of Christ\'s sacrifice?',
+        options: [
+          'To appease God\'s anger',
+          'To pay a debt to Satan',
+          'To offer perfect repentance and surrender on humanity\'s behalf',
+          'To demonstrate God\'s love'
+        ],
+        correctAnswer: 'To offer perfect repentance and surrender on humanity\'s behalf',
+        explanation: 'Lewis emphasizes that Christ\'s sacrifice was about offering the perfect surrender, submission, and repentance that humans owed God but couldn\'t give.'
+      },
+      {
+        id: 'mc9-q10',
+        question: 'What distinction does Lewis make between Christ\'s sacrifice and common views of punishment?',
+        options: [
+          'Christ\'s sacrifice was voluntary, not forced',
+          'Christ\'s sacrifice was temporary, not eternal',
+          'Christ\'s sacrifice was public, not private',
+          'Christ\'s sacrifice was symbolic, not literal'
+        ],
+        correctAnswer: 'Christ\'s sacrifice was voluntary, not forced',
+        explanation: 'Lewis emphasizes that Christ voluntarily offered Himself, distinguishing this from the common view of someone being punished against their will.'
+      }
+    ],
+    key_quote: "The perfect submission, the perfect suffering, the perfect death were not only easier to Jesus because He was God, but were possible only because He was God. But they were still human... The human life was replaced by the kind of life which has been going on in Jesus for ever and ever.",
+    key_quote_location: "Book II, Chapter 9",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
+  },
+  {
+    id: 'mere-christianity-10',
+    bookId: 'mere-christianity',
+    chapter: 10,
+    title: 'The Practical Conclusion',
+    questions: [
+      {
+        id: 'mc10-q1',
+        question: 'What practical conclusion does Lewis draw about Christianity in this chapter?',
+        options: [
+          'Christianity requires intellectual agreement with doctrines',
+          'Christianity requires joining a church',
+          'Christianity requires surrendering oneself to Christ',
+          'Christianity requires performing good deeds'
+        ],
+        correctAnswer: 'Christianity requires surrendering oneself to Christ',
+        explanation: 'Lewis concludes that Christianity is ultimately about surrendering oneself to Christ, allowing Him to live through you.'
+      },
+      {
+        id: 'mc10-q2',
+        question: 'What distinction does Lewis make between believing in Christianity and practicing it?',
+        options: [
+          'Believing is important, practicing is optional',
+          'Practicing is more difficult than believing',
+          'Believing leads to salvation, practicing to rewards',
+          'Believing without practicing is nearly worthless'
+        ],
+        correctAnswer: 'Believing without practicing is nearly worthless',
+        explanation: 'Lewis emphasizes that merely believing Christianity intellectually without putting it into practice is of little value, like admiring a soap without washing with it.'
+      },
+      {
+        id: 'mc10-q3',
+        question: 'What metaphor does Lewis use for the process of becoming a Christian?',
+        options: [
+          'Building a house',
+          'Climbing a mountain',
+          'Crossing a bridge',
+          'Being remodeled by God'
+        ],
+        correctAnswer: 'Being remodeled by God',
+        explanation: 'Lewis compares becoming a Christian to having your house (life) completely remodeled by God—a process that often involves uncomfortable demolition work.'
+      },
+      {
+        id: 'mc10-q4',
+        question: 'What does Lewis say about the cost of becoming a Christian?',
+        options: [
+          'It costs nothing at all',
+          'It costs money to join a church',
+          'It costs everything you have',
+          'The cost varies depending on your circumstances'
+        ],
+        correctAnswer: 'It costs everything you have',
+        explanation: 'Lewis states that Christianity costs "nothing less than your whole self"—complete surrender to Christ.'
+      },
+      {
+        id: 'mc10-q5',
+        question: 'What promise does Lewis say Christ offers to those who surrender to Him?',
+        options: [
+          'Immediate happiness and prosperity',
+          'A life free from problems',
+          'Complete transformation into something better',
+          'Special spiritual powers'
+        ],
+        correctAnswer: 'Complete transformation into something better',
+        explanation: 'Lewis explains that Christ promises to transform those who surrender to Him into something far better, though the process may be difficult.'
+      },
+      {
+        id: 'mc10-q6',
+        question: 'According to Lewis, what is Christ\'s goal for humanity?',
+        options: [
+          'To make everyone financially prosperous',
+          'To create a perfect society on earth',
+          'To transform humans into perfect sons of God',
+          'To establish a powerful church'
+        ],
+        correctAnswer: 'To transform humans into perfect sons of God',
+        explanation: 'Lewis states that Christ wants to transform humans into beings like Himself—perfect sons of God.'
+      },
+      {
+        id: 'mc10-q7',
+        question: 'What analogy does Lewis use to describe humanity\'s current state?',
+        options: [
+          'A broken machine',
+          'A disobedient child',
+          'A rebellious kingdom',
+          'A work in progress'
+        ],
+        correctAnswer: 'A rebellious kingdom',
+        explanation: 'Lewis compares humanity to a kingdom that has rebelled against its rightful king and needs to be reclaimed.'
+      },
+      {
+        id: 'mc10-q8',
+        question: 'According to Lewis, what attitude should Christians have toward their own progress?',
+        options: [
+          'Pride in their spiritual achievements',
+          'Constant dissatisfaction with themselves',
+          'Concern for their progress, but trust in God\'s work',
+          'Indifference to their spiritual state'
+        ],
+        correctAnswer: 'Concern for their progress, but trust in God\'s work',
+        explanation: 'Lewis suggests Christians should be concerned about their progress but ultimately trust God\'s work in them, like patients following a doctor\'s orders.'
+      },
+      {
+        id: 'mc10-q9',
+        question: 'What does Lewis say about the difficulty of becoming a Christian?',
+        options: [
+          'It\'s easy if you try hard enough',
+          'It\'s impossible without God\'s help',
+          'It\'s mainly about following rules',
+          'It\'s a gradual process of self-improvement'
+        ],
+        correctAnswer: 'It\'s impossible without God\'s help',
+        explanation: 'Lewis emphasizes that becoming truly Christian is impossible through human effort alone; it requires God\'s help and transformation.'
+      },
+      {
+        id: 'mc10-q10',
+        question: 'What final encouragement does Lewis offer to those considering Christianity?',
+        options: [
+          'Try it for a while to see if it works',
+          'Join a church to learn more',
+          'Take the first step of surrendering to Christ',
+          'Read more books about Christianity'
+        ],
+        correctAnswer: 'Take the first step of surrendering to Christ',
+        explanation: 'Lewis encourages readers to take the first step by surrendering to Christ, even if they don\'t fully understand everything.'
+      }
+    ],
+    key_quote: "Give up yourself, and you will find your real self. Lose your life and you will save it. Submit to death, death of your ambitions and favourite wishes every day and death of your whole body in the end: submit with every fibre of your being, and you will find eternal life.",
+    key_quote_location: "Book II, Chapter 10",
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 20
   }
 ];
 
