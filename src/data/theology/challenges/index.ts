@@ -1,6 +1,6 @@
 
 import { TheologyChallenge } from '../types';
-import { mereChristianityChallenges } from './mere-christianity';
+import { mereChristianityChallenges } from './mere-christianity/index';
 import { knowingGodChallenges } from './knowing-god';
 import { westminsterConfessionChallenges } from './westminster-confession';
 import { desiringGodChallenges } from './desiring-god';
