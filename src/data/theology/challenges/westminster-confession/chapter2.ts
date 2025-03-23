@@ -68,6 +68,9 @@ export const chapter2Challenge: TheologyChallenge = {
       explanation: 'The Confession affirms that both the Son and the Holy Spirit are fully God, equal with the Father in substance, power, and eternity, though distinguished by their personal properties.'
     }
   ],
-  introText: 'Chapter 2 of the Westminster Confession of Faith explores the doctrine of God and the Trinity. It presents a comprehensive understanding of God\'s nature, attributes, and the relationship between the three persons of the Godhead.',
-  conclusionText: 'This foundational chapter establishes who God is - infinite, eternal, and unchangeable in His being, wisdom, power, holiness, justice, goodness and truth - and how He exists as one God in three persons: Father, Son, and Holy Spirit. Understanding these truths is essential for all other Christian doctrines.'
+  key_quote: "In the unity of the Godhead there be three persons, of one substance, power, and eternity.",
+  key_quote_location: "Westminster Confession of Faith, Chapter 2",
+  memory_challenge: true,
+  difficulty: 'medium',
+  points: 25
 };
