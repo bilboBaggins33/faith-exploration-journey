@@ -9,7 +9,6 @@ export const chapter2Challenge: TheologyChallenge = {
   questions: [
     {
       id: 'desiring-god-2-1',
-      type: 'multiple-choice',
       question: 'According to John Piper, what is the ultimate goal of conversion?',
       options: [
         'To make people morally upright',
@@ -22,7 +21,6 @@ export const chapter2Challenge: TheologyChallenge = {
     },
     {
       id: 'desiring-god-2-2',
-      type: 'multiple-choice',
       question: 'What paradox does Piper present about joy and self-denial in conversion?',
       options: [
         'That true joy comes through complete self-denial',
@@ -35,7 +33,6 @@ export const chapter2Challenge: TheologyChallenge = {
     },
     {
       id: 'desiring-god-2-3',
-      type: 'multiple-choice',
       question: 'How does Piper describe the relationship between faith and satisfaction in God?',
       options: [
         'Faith precedes satisfaction in God',
@@ -48,7 +45,6 @@ export const chapter2Challenge: TheologyChallenge = {
     },
     {
       id: 'desiring-god-2-4',
-      type: 'multiple-choice',
       question: 'According to Piper, what is the essential nature of saving faith?',
       options: [
         'Intellectual assent to theological propositions',
@@ -61,7 +57,6 @@ export const chapter2Challenge: TheologyChallenge = {
     },
     {
       id: 'desiring-god-2-5',
-      type: 'multiple-choice',
       question: 'How does Piper argue that Christian Hedonism relates to repentance?',
       options: [
         'Repentance is unnecessary for Christian Hedonists',
