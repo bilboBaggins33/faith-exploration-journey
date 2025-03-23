@@ -1,11 +1,11 @@
 
 import { TheologyChallenge } from '../types';
 import { mereChristianityChallenges } from './mere-christianity/index';
-import { knowingGodChallenges } from './knowing-god';
-import { westminsterConfessionChallenges } from './westminster-confession';
-import { desiringGodChallenges } from './desiring-god';
+import { knowingGodChallenges } from './knowing-god/index';
+import { westminsterConfessionChallenges } from './westminster-confession/index';
+import { desiringGodChallenges } from './desiring-god/index';
 // Add imports for other book challenges as they are created
-// import { tacticsChallengess } from './tactics';
+// import { tacticsChallengess } from './tactics/index';
 // etc.
 
 // Combine all challenges
