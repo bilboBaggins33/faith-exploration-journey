@@ -47,6 +47,7 @@ import { theologyBooks } from '@/data/theology/books';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProfileEditForm from '@/components/ProfileEditForm';
 import { bibleBooks, sampleChapterChallenges } from '@/data/bibleData';
+import { format, formatDistance, parseISO } from 'date-fns';
 
 const getMaxScoreForChapter = (bookId: string, chapter: number) => {
   const challenge = sampleChapterChallenges.find(
@@ -57,12 +58,13 @@ const getMaxScoreForChapter = (bookId: string, chapter: number) => {
 
 interface ActivityItemProps {
   activity: {
-    id: number;
-    type: string;
+    id: string;
+    type: 'bible' | 'theology' | 'challenge' | 'verse';
     title: string;
     date: string;
     result: string;
     points: number;
+    link: string;
   };
 }
 
@@ -73,24 +75,30 @@ const ActivityItem = ({ activity }: ActivityItemProps) => {
         return <Award className="h-8 w-8 text-yellow-500" />;
       case 'verse':
         return <BookOpen className="h-8 w-8 text-purple-500" />;
+      case 'bible':
+        return <BookText className="h-8 w-8 text-bible-blue" />;
+      case 'theology':
+        return <GraduationCap className="h-8 w-8 text-green-600" />;
       default:
         return <Medal className="h-8 w-8 text-bible-blue" />;
     }
   };
 
   return (
-    <div className="flex items-center p-3 rounded-lg bg-white shadow-sm border border-gray-100">
-      <div className="flex-shrink-0 mr-4">
-        {getIcon()}
+    <Link to={activity.link} className="block">
+      <div className="flex items-center p-3 rounded-lg bg-white shadow-sm border border-gray-100 hover:bg-gray-50 transition-colors">
+        <div className="flex-shrink-0 mr-4">
+          {getIcon()}
+        </div>
+        <div className="flex-1">
+          <h4 className="font-medium">{activity.title}</h4>
+          <p className="text-sm text-gray-500">{activity.date} • {activity.result}</p>
+        </div>
+        <div className="flex-shrink-0 text-bible-blue font-medium">
+          +{activity.points} pts
+        </div>
       </div>
-      <div className="flex-1">
-        <h4 className="font-medium">{activity.title}</h4>
-        <p className="text-sm text-gray-500">{activity.date} • {activity.result}</p>
-      </div>
-      <div className="flex-shrink-0 text-bible-blue font-medium">
-        +{activity.points} pts
-      </div>
-    </div>
+    </Link>
   );
 };
 
@@ -480,6 +488,39 @@ const StatsCard = ({ userStats }: StatsCardProps) => {
             </div>
           </div>
         </div>
+        
+        <div className="p-4 bg-white rounded-lg shadow-sm border border-gray-100">
+          <div className="flex items-center mb-3">
+            <BookText className="h-5 w-5 text-green-600 mr-2" />
+            <h3 className="text-sm font-medium">Book Reading Progress</h3>
+          </div>
+          
+          <div className="grid grid-cols-3 gap-4">
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <BookText className="h-6 w-6 text-yellow-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.theologyChaptersRead}</p>
+              <p className="text-xs text-gray-500">Chapters Read</p>
+            </div>
+            
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <BookText className="h-6 w-6 text-green-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.theologyBooksStarted}</p>
+              <p className="text-xs text-gray-500">Books Started</p>
+            </div>
+            
+            <div className="flex flex-col items-center p-3 bg-white rounded-lg shadow-sm border border-gray-100">
+              <div className="flex justify-center mb-2">
+                <CheckCircle className="h-6 w-6 text-purple-500" />
+              </div>
+              <p className="text-2xl font-semibold">{userStats.theologyBooksCompleted}</p>
+              <p className="text-xs text-gray-500">Books Completed</p>
+            </div>
+          </div>
+        </div>
       </CardContent>
     </Card>
   );
@@ -584,52 +625,140 @@ const ProfilePage = () => {
     .filter(item => item.chaptersRead > 0)
     .sort((a, b) => b.progress - a.progress);
   
+  // Generate recent activity from completed chapters
+  const generateRecentActivity = () => {
+    const activities = [];
+    
+    // Add bible chapters
+    if (progress?.completed_chapters && progress.completed_chapters.length > 0) {
+      progress.completed_chapters.forEach((chapter: any, index: number) => {
+        const bookInfo = bibleBooks.find(b => b.id === chapter.book_id);
+        if (bookInfo) {
+          const activityDate = chapter.completed_at ? 
+            formatDistance(parseISO(chapter.completed_at), new Date(), { addSuffix: true }) : 
+            'Recently';
+          
+          activities.push({
+            id: `bible-${chapter.book_id}-${chapter.chapter}-${index}`,
+            type: 'bible' as const,
+            title: `${bookInfo.name} Chapter ${chapter.chapter}`,
+            date: activityDate,
+            result: chapter.score ? `Score: ${chapter.score}` : 'Completed',
+            points: chapter.score || 5,
+            link: `/bible/${chapter.book_id}/${chapter.chapter}`
+          });
+        }
+      });
+    }
+    
+    // Add theology chapters
+    if (theologyProgress?.completed_chapters && theologyProgress.completed_chapters.length > 0) {
+      theologyProgress.completed_chapters.forEach((chapter: any, index: number) => {
+        const bookInfo = theologyBooks.find(b => b.id === chapter.book_id);
+        if (bookInfo) {
+          const activityDate = chapter.completed_at ? 
+            formatDistance(parseISO(chapter.completed_at), new Date(), { addSuffix: true }) : 
+            'Recently';
+          
+          activities.push({
+            id: `theology-${chapter.book_id}-${chapter.chapter}-${index}`,
+            type: 'theology' as const,
+            title: `${bookInfo.title} Chapter ${chapter.chapter}`,
+            date: activityDate,
+            result: chapter.score ? `Score: ${chapter.score}%` : 'Read',
+            points: chapter.score || 5,
+            link: `/theology/${chapter.book_id}/${chapter.chapter}`
+          });
+        }
+      });
+    }
+    
+    // Add completed challenges if any
+    if (progress?.challenges_completed && progress.challenges_completed.length > 0) {
+      progress.challenges_completed.forEach((challengeId: string, index: number) => {
+        // Extract book and chapter from challenge ID (format: bookId-chapter)
+        const [bookId, chapter] = challengeId.split('-');
+        const bookInfo = bibleBooks.find(b => b.id === bookId);
+        
+        if (bookInfo) {
+          activities.push({
+            id: `challenge-${challengeId}-${index}`,
+            type: 'challenge' as const,
+            title: `${bookInfo.name} ${chapter} Challenge`,
+            date: 'Recently',
+            result: 'Completed',
+            points: 10,
+            link: `/challenge/${challengeId}`
+          });
+        }
+      });
+    }
+    
+    // Sort by date (most recent first) and take only the 5 most recent
+    return activities
+      .sort((a, b) => {
+        // Try to compare dates if available
+        if (a.date === 'Recently' && b.date !== 'Recently') return -1;
+        if (a.date !== 'Recently' && b.date === 'Recently') return 1;
+        return 0; // Otherwise keep original order
+      })
+      .slice(0, 5);
+  };
+  
+  const recentActivity = generateRecentActivity();
+  
+  // Updated user stats including real streak calculation
+  const calculateStreak = () => {
+    if (!profile?.last_active) return 0;
+    
+    const lastActive = new Date(profile.last_active);
+    const today = new Date();
+    
+    // Set hours, minutes, seconds to 0 for date comparison
+    lastActive.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+    
+    // Calculate difference in days
+    const diffTime = Math.abs(today.getTime() - lastActive.getTime());
+    const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+    
+    // If last active was today or yesterday, maintain the streak
+    // Otherwise, streak should be reset
+    if (diffDays <= 1) {
+      return profile.streak || 1; // At least 1 if they're active
+    }
+    
+    return 0; // Streak broken
+  };
+  
   const userStats = {
-    completedChallenges: progress?.challenges_completed.length || 0,
-    streak: profile?.streak || 0,
+    completedChallenges: progress?.challenges_completed?.length || 0,
+    streak: calculateStreak(),
     points: profile?.points || 0,
-    versesMemorized: progress?.verses_memorized.length || 0,
+    versesMemorized: progress?.verses_memorized?.length || 0,
     daysActive: 1,
     badges: 0,
     rank: 'Scripture Explorer',
     theologyChaptersRead: theologyProgress?.total_chapters_read || 0,
-    theologyBooksStarted: theologyProgress?.books_started.length || 0,
-    theologyBooksCompleted: theologyProgress?.books_completed.length || 0,
+    theologyBooksStarted: theologyProgress?.books_started?.length || 0,
+    theologyBooksCompleted: theologyProgress?.books_completed?.length || 0,
     bibleChaptersCompleted: progress?.completed_chapters?.length || 0,
-    bibleChaptersPerfect: progress?.completed_chapters?.filter(ch => 
+    bibleChaptersPerfect: progress?.completed_chapters?.filter((ch: any) => 
       ch.score && ch.score === getMaxScoreForChapter(ch.book_id, ch.chapter)
     ).length || 0,
-    bibleChaptersPartial: progress?.completed_chapters?.filter(ch => 
+    bibleChaptersPartial: progress?.completed_chapters?.filter((ch: any) => 
       ch.score && ch.score < getMaxScoreForChapter(ch.book_id, ch.chapter)
     ).length || 0
   };
   
-  const recentActivity = [
-    {
-      id: 1,
-      type: 'challenge',
-      title: 'Creation Quiz',
-      date: '2 days ago',
-      result: '8/10 correct',
-      points: 80
-    },
-    {
-      id: 2,
-      type: 'verse',
-      title: 'Genesis 1:1',
-      date: '3 days ago',
-      result: 'Memorized',
-      points: 50
-    },
-    {
-      id: 3,
-      type: 'challenge',
-      title: 'Adam and Eve',
-      date: '5 days ago',
-      result: '7/10 correct',
-      points: 70
-    }
-  ];
+  // Get unfinished books - books that are started but not completed
+  const unfinishedBibleBooks = bibleStartedBooks.filter(item => 
+    item.completedChapters < item.book.chapters
+  ).slice(0, 3);
+  
+  const unfinishedTheologyBooks = theologyStartedBooks.filter(item => 
+    item.chaptersRead < item.book.chapters
+  ).slice(0, 3);
   
   const badges = [
     {
@@ -703,16 +832,30 @@ const ProfilePage = () => {
                         <CardHeader>
                           <div className="flex justify-between items-center">
                             <CardTitle className="text-xl font-serif">Recent Activity</CardTitle>
-                            <Link to="/challenge" className="text-bible-blue text-sm hover-link">
-                              View All
-                            </Link>
+                            <div className="flex space-x-2">
+                              <Link to="/bible" className="text-bible-blue text-sm hover-link">
+                                Bible
+                              </Link>
+                              <span>•</span>
+                              <Link to="/theology" className="text-bible-blue text-sm hover-link">
+                                Books
+                              </Link>
+                            </div>
                           </div>
                         </CardHeader>
                         <CardContent>
                           <div className="space-y-4">
-                            {recentActivity.map((activity) => (
-                              <ActivityItem key={activity.id} activity={activity} />
-                            ))}
+                            {recentActivity.length > 0 ? (
+                              recentActivity.map((activity) => (
+                                <ActivityItem key={activity.id} activity={activity} />
+                              ))
+                            ) : (
+                              <div className="text-center py-6">
+                                <BookOpen className="h-12 w-12 text-gray-300 mx-auto mb-3" />
+                                <p className="text-gray-500">No recent activity yet</p>
+                                <p className="text-sm text-gray-400 mb-4">Start reading to see your activity here!</p>
+                              </div>
+                            )}
                           </div>
                         </CardContent>
                       </Card>
@@ -740,32 +883,70 @@ const ProfilePage = () => {
                       
                       <Card className="glass-card shadow-md">
                         <CardHeader>
-                          <CardTitle className="text-xl font-serif">Recommended Challenges</CardTitle>
-                          <CardDescription>Based on your progress and interests</CardDescription>
+                          <CardTitle className="text-xl font-serif">Continue Reading</CardTitle>
+                          <CardDescription>Pick up where you left off</CardDescription>
                         </CardHeader>
                         <CardContent>
                           <div className="space-y-4">
-                            <RecommendedChallenge 
-                              title="Noah and the Flood"
-                              difficulty="medium"
-                              type="quiz"
-                              id="noah-quiz"
-                            />
-                            <RecommendedChallenge 
-                              title="Ten Commandments"
-                              difficulty="hard"
-                              type="memorization"
-                              id="ten-commandments"
-                            />
+                            {unfinishedBibleBooks.length > 0 && (
+                              <div className="mb-4">
+                                <h3 className="text-sm font-medium text-gray-500 mb-2">Bible Books</h3>
+                                {unfinishedBibleBooks.map(item => (
+                                  <Link key={item.book.id} to={`/bible/${item.book.id}`} className="block mb-2">
+                                    <div className="flex items-center p-2 rounded-lg bg-white shadow-sm border border-gray-100 hover:bg-gray-50 transition-colors">
+                                      <BookText className="h-6 w-6 text-bible-blue mr-3" />
+                                      <div className="flex-1">
+                                        <h4 className="font-medium">{item.book.name}</h4>
+                                        <div className="flex items-center text-xs text-gray-500">
+                                          <span>{item.completedChapters}/{item.book.chapters} chapters</span>
+                                          <span className="mx-2">•</span>
+                                          <span>{item.progress}% complete</span>
+                                        </div>
+                                      </div>
+                                      <ArrowRight className="h-4 w-4 text-gray-400" />
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {unfinishedTheologyBooks.length > 0 && (
+                              <div>
+                                <h3 className="text-sm font-medium text-gray-500 mb-2">Theology Books</h3>
+                                {unfinishedTheologyBooks.map(item => (
+                                  <Link key={item.book.id} to={`/theology/${item.book.id}`} className="block mb-2">
+                                    <div className="flex items-center p-2 rounded-lg bg-white shadow-sm border border-gray-100 hover:bg-gray-50 transition-colors">
+                                      <GraduationCap className="h-6 w-6 text-green-600 mr-3" />
+                                      <div className="flex-1">
+                                        <h4 className="font-medium">{item.book.title}</h4>
+                                        <div className="flex items-center text-xs text-gray-500">
+                                          <span>{item.chaptersRead}/{item.book.chapters} chapters</span>
+                                          <span className="mx-2">•</span>
+                                          <span>{item.progress}% complete</span>
+                                        </div>
+                                      </div>
+                                      <ArrowRight className="h-4 w-4 text-gray-400" />
+                                    </div>
+                                  </Link>
+                                ))}
+                              </div>
+                            )}
+                            
+                            {unfinishedBibleBooks.length === 0 && unfinishedTheologyBooks.length === 0 && (
+                              <div className="text-center py-4">
+                                <p className="text-gray-500">No books in progress</p>
+                                <div className="flex justify-center space-x-2 mt-2">
+                                  <Link to="/bible">
+                                    <Button variant="outline" size="sm">Start Bible Reading</Button>
+                                  </Link>
+                                  <Link to="/theology">
+                                    <Button variant="outline" size="sm">Browse Theology Books</Button>
+                                  </Link>
+                                </div>
+                              </div>
+                            )}
                           </div>
                         </CardContent>
-                        <CardFooter className="justify-center border-t border-gray-100 px-6 py-4">
-                          <Link to="/challenge">
-                            <Button variant="outline" className="border-bible-blue text-bible-blue hover:bg-bible-blue/10">
-                              View All Challenges
-                            </Button>
-                          </Link>
-                        </CardFooter>
                       </Card>
                     </div>
                   </TabsContent>
@@ -894,7 +1075,6 @@ const ProfilePage = () => {
                     </Card>
                   </TabsContent>
                   
-                  {/* Settings Tab */}
                   <TabsContent value="settings" className="space-y-6">
                     <Card className="glass-card shadow-md">
                       <CardHeader>
