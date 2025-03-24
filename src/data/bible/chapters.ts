@@ -1282,7 +1282,8 @@ export const bibleChapters: Record<string, BibleChapter[]> = {
     },
     {
       bookId: 'luke',
-       verses: 34,
+      chapter: 15,
+      verses: 34,
       key_themes: ['Lost sheep, coin, son', 'Parable of the shrewd manager', 'Lazarus and the rich man']
     },
     {
