@@ -545,6 +545,224 @@ export const bibleChapters: Record<string, BibleChapter[]> = {
       key_themes: ['Tabernacle erected', 'God\'s glory fills it', 'Journey begins']
     }
   ],
+  'numbers': [
+    {
+      bookId: 'numbers',
+      chapter: 1,
+      verses: 54,
+      key_themes: ['Census of Israel', 'Tribal leaders', 'God’s command']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 2,
+      verses: 34,
+      key_themes: ['Camp arrangement', 'Tribal order', 'Marching formation']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 3,
+      verses: 51,
+      key_themes: ['Levites’ census', 'Duties assigned', 'Redemption of firstborn']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 4,
+      verses: 49,
+      key_themes: ['Levite clans’ duties', 'Tabernacle service', 'Numbering workers']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 5,
+      verses: 31,
+      key_themes: ['Purity in camp', 'Jealousy ordeal', 'Restitution for wrongs']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 6,
+      verses: 27,
+      key_themes: ['Nazirite vow', 'Priestly blessing', 'Separation to God']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 7,
+      verses: 89,
+      key_themes: ['Tribal offerings', 'Dedication of altar', 'God speaks to Moses']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 8,
+      verses: 26,
+      key_themes: ['Lampstand set up', 'Levites consecrated', 'Service begins']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 9,
+      verses: 23,
+      key_themes: ['Passover observed', 'Cloud of guidance', 'God’s leading']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 10,
+      verses: 36,
+      key_themes: ['Silver trumpets', 'Departure from Sinai', 'Journey begins']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 11,
+      verses: 35,
+      key_themes: ['People complain', 'Elders appointed', 'Quail and plague']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 12,
+      verses: 16,
+      key_themes: ['Miriam and Aaron rebel', 'Moses’ humility', 'God’s judgment']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 13,
+      verses: 33,
+      key_themes: ['Spies sent out', 'Land explored', 'Fearful report']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 14,
+      verses: 45,
+      key_themes: ['Rebellion against God', 'Moses intercedes', 'Wandering decreed']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 15,
+      verses: 41,
+      key_themes: ['Offerings restated', 'Sabbath breaker stoned', 'Tassels for memory']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 16,
+      verses: 50,
+      key_themes: ['Korah’s rebellion', 'Earth swallows rebels', 'God’s authority']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 17,
+      verses: 13,
+      key_themes: ['Aaron’s staff buds', 'Priesthood confirmed', 'Rebellion ends']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 18,
+      verses: 32,
+      key_themes: ['Priests’ and Levites’ duties', 'Tithes assigned', 'Support for ministry']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 19,
+      verses: 22,
+      key_themes: ['Red heifer ritual', 'Water of cleansing', 'Purification laws']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 20,
+      verses: 29,
+      key_themes: ['Water from rock', 'Edom denies passage', 'Aaron’s death']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 21,
+      verses: 35,
+      key_themes: ['Bronze snake', 'Victories over kings', 'Journey continues']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 22,
+      verses: 41,
+      key_themes: ['Balak summons Balaam', 'Donkey speaks', 'Angel of the Lord']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 23,
+      verses: 30,
+      key_themes: ['Balaam’s first oracles', 'Blessing on Israel', 'Balak’s anger']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 24,
+      verses: 25,
+      key_themes: ['Balaam’s final oracles', 'Star from Jacob', 'Israel blessed']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 25,
+      verses: 18,
+      key_themes: ['Moabite seduction', 'Phinehas’ zeal', 'Plague stopped']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 26,
+      verses: 65,
+      key_themes: ['Second census', 'New generation', 'Inheritance laws']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 27,
+      verses: 23,
+      key_themes: ['Zelophehad’s daughters', 'Joshua appointed', 'Leadership transition']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 28,
+      verses: 31,
+      key_themes: ['Daily and monthly offerings', 'Feast sacrifices', 'Worship schedule']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 29,
+      verses: 40,
+      key_themes: ['Feasts of trumpets', 'Day of Atonement', 'Tabernacles offerings']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 30,
+      verses: 16,
+      key_themes: ['Vows and oaths', 'Women’s vows', 'Binding commitments']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 31,
+      verses: 54,
+      key_themes: ['War against Midian', 'Spoils divided', 'Purification after battle']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 32,
+      verses: 42,
+      key_themes: ['Reuben and Gad settle', 'Land east of Jordan', 'Covenant upheld']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 33,
+      verses: 56,
+      key_themes: ['Journey recap', 'Camps listed', 'Canaan instructions']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 34,
+      verses: 29,
+      key_themes: ['Canaan’s boundaries', 'Tribal leaders', 'Land division']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 35,
+      verses: 34,
+      key_themes: ['Cities of refuge', 'Levite towns', 'Justice for bloodshed']
+    },
+    {
+      bookId: 'numbers',
+      chapter: 36,
+      verses: 13,
+      key_themes: ['Inheritance for daughters', 'Tribal land preserved', 'Laws finalized']
+    }
+  ],
   'leviticus': [
     {
       bookId: 'leviticus',
