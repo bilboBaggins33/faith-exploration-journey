@@ -208,6 +208,7 @@ const BibleChapterChallenge = () => {
           <QuestionCard
             question={currentQuestionData.question}
             options={currentQuestionData.options}
+            correctAnswer={currentQuestionData.correctAnswer}
             selectedAnswer={selectedAnswer}
             showExplanation={showExplanation}
             isCorrect={isCorrect}

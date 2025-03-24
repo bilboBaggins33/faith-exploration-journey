@@ -24,6 +24,7 @@ interface QuestionCardProps {
 const QuestionCard = ({
   question,
   options,
+  correctAnswer,
   selectedAnswer,
   showExplanation,
   isCorrect,
@@ -35,11 +36,8 @@ const QuestionCard = ({
   onNavigateBack
 }: QuestionCardProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
-  
+
   const toggleShowAnswer = () => setShowAnswer(!showAnswer);
-  
-  // Find the correct answer (it's the first option in the array)
-  const correctAnswer = options[0];
   
   return (
     <div className="glass-card p-6 rounded-xl">
@@ -64,7 +62,7 @@ const QuestionCard = ({
               <div className={cn(
                 "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
                 selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
-                showExplanation && option === correctAnswer ? 'border-green-500 bg-green-50' : '',
+                showExplanation && option === correctAnswer && selectedAnswer === option ? 'border-green-500 bg-green-50' : '',
                 showExplanation && selectedAnswer === option && option !== correctAnswer ? 'border-red-500 bg-red-50' : ''
               )}>
                 <RadioGroupItem 
