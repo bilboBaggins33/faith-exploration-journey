@@ -1,7 +1,7 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, X } from 'lucide-react';
+import { CheckCircle, X, Eye, EyeOff } from 'lucide-react';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { Label } from '@/components/ui/label';
 import { Button } from '@/components/ui/button';
@@ -34,6 +34,12 @@ const QuestionCard = ({
   isLastQuestion,
   onNavigateBack
 }: QuestionCardProps) => {
+  const [showAnswer, setShowAnswer] = useState(false);
+  
+  const toggleShowAnswer = () => setShowAnswer(!showAnswer);
+  
+  const correctAnswer = showExplanation ? options.find((_, i) => i === 0) : null;
+  
   return (
     <div className="glass-card p-6 rounded-xl">
       <motion.div
@@ -57,8 +63,8 @@ const QuestionCard = ({
               <div className={cn(
                 "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
                 selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
-                showExplanation && option === options.find((_, i) => i === 0) ? 'border-green-500 bg-green-50' : '',
-                showExplanation && selectedAnswer === option && option !== options.find((_, i) => i === 0) ? 'border-red-500 bg-red-50' : ''
+                showExplanation && option === correctAnswer ? 'border-green-500 bg-green-50' : '',
+                showExplanation && selectedAnswer === option && option !== correctAnswer ? 'border-red-500 bg-red-50' : ''
               )}>
                 <RadioGroupItem 
                   value={option} 
@@ -85,19 +91,40 @@ const QuestionCard = ({
               isCorrect ? 'bg-green-50 border border-green-200' : 'bg-red-50 border border-red-200'
             )}
           >
-            <div className="flex items-start">
-              {isCorrect ? (
-                <CheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" size={20} />
-              ) : (
-                <X className="text-red-500 mr-2 mt-1 flex-shrink-0" size={20} />
-              )}
-              <div>
-                <h3 className="font-medium mb-1">
-                  {isCorrect ? 'Correct!' : 'Incorrect'}
-                </h3>
-                <p className="text-sm">{explanation}</p>
+            {showAnswer ? (
+              <div className="flex items-start">
+                {isCorrect ? (
+                  <CheckCircle className="text-green-500 mr-2 mt-1 flex-shrink-0" size={20} />
+                ) : (
+                  <X className="text-red-500 mr-2 mt-1 flex-shrink-0" size={20} />
+                )}
+                <div>
+                  <h3 className="font-medium mb-1">
+                    {isCorrect ? 'Correct!' : 'Incorrect'}
+                  </h3>
+                  <p className="text-sm">{explanation}</p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <p className="text-sm">Answer explanation is hidden. Click "Show Answer" to reveal.</p>
+            )}
+            
+            <Button 
+              variant="outline" 
+              size="sm" 
+              onClick={toggleShowAnswer} 
+              className="mt-2 flex items-center gap-1"
+            >
+              {showAnswer ? (
+                <>
+                  <EyeOff size={16} /> Hide Answer
+                </>
+              ) : (
+                <>
+                  <Eye size={16} /> Show Answer
+                </>
+              )}
+            </Button>
           </motion.div>
         )}
         

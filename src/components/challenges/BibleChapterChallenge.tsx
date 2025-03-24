@@ -15,7 +15,6 @@ import ResultsCard from './bible/ResultsCard';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import LoginRequired from './bible/LoginRequired';
-import ReadConfirmationSheet from './ReadConfirmationSheet';
 
 const BibleChapterChallenge = () => {
   const { bookId, chapter } = useParams();
@@ -32,8 +31,6 @@ const BibleChapterChallenge = () => {
   const [quizCompleted, setQuizCompleted] = useState(false);
   const [loading, setLoading] = useState(true);
   const [retakeInProgress, setRetakeInProgress] = useState(false);
-  const [readConfirmationOpen, setReadConfirmationOpen] = useState(false);
-  const [hasConfirmedReading, setHasConfirmedReading] = useState(false);
   
   // Find challenge data
   const book = bibleBooks.find(b => b.id === bookId);
@@ -80,11 +77,6 @@ const BibleChapterChallenge = () => {
           console.log('No saved score found, defaulting to max points');
           setScore(challenge.questions.length);
         }
-        
-        // Show the read confirmation first instead of immediately showing the quiz
-        if (!hasConfirmedReading) {
-          setReadConfirmationOpen(true);
-        }
       } else if (forceRestart) {
         // Reset all states if we're restarting
         console.log('Restarting challenge');
@@ -95,20 +87,7 @@ const BibleChapterChallenge = () => {
         setScore(0);
         setQuizCompleted(false);
         setRetakeInProgress(false);
-        
-        // Show the read confirmation first
-        if (!hasConfirmedReading) {
-          setReadConfirmationOpen(true);
-        }
-      } else {
-        // First time taking challenge
-        console.log('First time taking challenge');
-        
-        // Show the read confirmation dialog
-        if (!hasConfirmedReading) {
-          setReadConfirmationOpen(true);
-        }
-      }
+      } 
     } else {
       // Challenge doesn't exist, show error or redirect
       toast({
@@ -118,7 +97,7 @@ const BibleChapterChallenge = () => {
       });
       setLoading(false);
     }
-  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast, retakeInProgress, hasConfirmedReading]);
+  }, [challenge, challengeCompleted, progress, bookId, chapter, user, toast, retakeInProgress]);
   
   const handleAnswerSelect = (answer: string) => {
     setSelectedAnswer(answer);
@@ -186,11 +165,6 @@ const BibleChapterChallenge = () => {
   const navigateToBibleExplorer = () => {
     navigate('/bible');
   };
-
-  const handleReadingConfirmed = () => {
-    setHasConfirmedReading(true);
-    setReadConfirmationOpen(false);
-  };
   
   // ------------ Render conditional states ------------
   
@@ -217,15 +191,6 @@ const BibleChapterChallenge = () => {
   
   return (
     <ChallengeSkeleton>
-      {/* Reading Confirmation Sheet */}
-      <ReadConfirmationSheet
-        open={readConfirmationOpen}
-        onOpenChange={setReadConfirmationOpen}
-        onConfirm={handleReadingConfirmed}
-        bookName={book?.name || ''}
-        chapter={Number(chapter) || 1}
-      />
-      
       {/* Challenge Header */}
       <ChallengeHeader
         bookName={book?.name || ''}
