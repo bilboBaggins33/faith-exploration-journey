@@ -56,19 +56,22 @@ export const completeChallenge = async (
       ch => ch.book_id === bookId && ch.chapter === chapter
     );
     
+    const currentTime = new Date().toISOString();
+    
     if (existingIndex >= 0) {
       // Update the existing entry with the score if it's higher
       if (!completedChapters[existingIndex].score || 
           completedChapters[existingIndex].score < pointsEarned) {
         completedChapters[existingIndex].score = pointsEarned;
       }
-      completedChapters[existingIndex].completed_at = new Date().toISOString();
+      // Always update the completed_at timestamp to keep track of most recent readings
+      completedChapters[existingIndex].completed_at = currentTime;
     } else {
       // Add a new completed chapter entry
       completedChapters.push({
         book_id: bookId,
         chapter: chapter,
-        completed_at: new Date().toISOString(),
+        completed_at: currentTime,
         score: pointsEarned
       });
       
