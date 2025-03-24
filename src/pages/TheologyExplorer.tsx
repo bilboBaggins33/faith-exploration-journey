@@ -9,6 +9,7 @@ import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import BookList from '@/components/theology/BookList';
 import ChapterList from '@/components/theology/ChapterList';
 import BookDetail from '@/components/theology/BookDetail';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const TheologyExplorer: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();

@@ -17,7 +17,10 @@ import {
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
+import BibleBookCard from '@/components/bible/BibleBookCard';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { getBookImage } from '@/data/bible/book-images';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { 
   Select,
   SelectContent,
@@ -241,19 +244,29 @@ const BibleExplorer = () => {
                             <motion.div
                               key={book.id}
                               whileHover={{ y: -5 }}
-                              className="bg-white shadow-sm rounded-lg p-4 flex items-center justify-between cursor-pointer"
+                              className="bg-white shadow-sm rounded-lg overflow-hidden flex flex-col cursor-pointer"
                               onClick={() => navigateToChapter(book.id, recentChapter)}
                             >
-                              <div className="flex items-center">
-                                <BookMarked className="mr-3 text-bible-blue" size={24} />
+                              <AspectRatio ratio={16/9} className="bg-muted">
+                                <img 
+                                  src={getBookImage(book.id)} 
+                                  alt={`${book.name} book cover`}
+                                  className="w-full h-full object-cover"
+                                  onError={(e) => {
+                                    const target = e.target as HTMLImageElement;
+                                    target.src = '/placeholder.svg';
+                                  }}
+                                />
+                              </AspectRatio>
+                              <div className="p-4 flex items-center justify-between">
                                 <div>
                                   <h3 className="font-medium">{book.name}</h3>
                                   <p className="text-xs text-gray-500">Chapter {recentChapter}</p>
                                 </div>
+                                <Button variant="ghost" size="icon">
+                                  <ArrowRight size={16} />
+                                </Button>
                               </div>
-                              <Button variant="ghost" size="icon">
-                                <ArrowRight size={16} />
-                              </Button>
                             </motion.div>
                           );
                         })}
@@ -287,34 +300,50 @@ const BibleExplorer = () => {
               )}
               
               {selectedBook ? (
-                <div className="glass-card p-6 rounded-xl">
-                  <div className="mb-6">
-                    <h2 className="text-2xl font-serif font-bold text-bible-dark flex items-center">
-                      <BookMarked className="mr-2 text-bible-blue" />
-                      {selectedBook.name}
-                    </h2>
-                    <p className="text-gray-600">
-                      {selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'} • 
-                      {selectedBook.chapters} chapters
-                    </p>
+                <div className="glass-card rounded-xl overflow-hidden">
+                  <div className="relative">
+                    <AspectRatio ratio={16/9} className="bg-muted">
+                      <img 
+                        src={getBookImage(selectedBook.id)} 
+                        alt={`${selectedBook.name} book cover`}
+                        className="w-full h-full object-cover"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/placeholder.svg';
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
+                    </AspectRatio>
+                    <div className="absolute bottom-0 left-0 p-6">
+                      <h2 className="text-2xl font-serif font-bold text-white flex items-center">
+                        <BookMarked className="mr-2 text-white" />
+                        {selectedBook.name}
+                      </h2>
+                      <p className="text-white/80">
+                        {selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'} • 
+                        {selectedBook.chapters} chapters
+                      </p>
+                    </div>
                   </div>
                   
-                  <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
-                    {bookChapters.map(chapter => {
-                      const { isCompleted, score, maxScore } = getChapterStatus(selectedBook.id, chapter);
-                      
-                      return (
-                        <BibleChapterCard
-                          key={chapter}
-                          bookId={selectedBook.id}
-                          chapter={chapter}
-                          isCompleted={isCompleted}
-                          score={score}
-                          maxScore={maxScore}
-                          onClick={() => navigateToChapter(selectedBook.id, chapter)}
-                        />
-                      );
-                    })}
+                  <div className="p-6">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+                      {bookChapters.map(chapter => {
+                        const { isCompleted, score, maxScore } = getChapterStatus(selectedBook.id, chapter);
+                        
+                        return (
+                          <BibleChapterCard
+                            key={chapter}
+                            bookId={selectedBook.id}
+                            chapter={chapter}
+                            isCompleted={isCompleted}
+                            score={score}
+                            maxScore={maxScore}
+                            onClick={() => navigateToChapter(selectedBook.id, chapter)}
+                          />
+                        );
+                      })}
+                    </div>
                   </div>
                 </div>
               ) : !isMobile && (
@@ -323,30 +352,15 @@ const BibleExplorer = () => {
                     const bookProgressPercent = getBookProgress(book.id);
                     
                     return (
-                      <motion.div
+                      <BibleBookCard
                         key={book.id}
-                        whileHover={{ y: -5 }}
-                        className="glass-card p-4 rounded-xl flex flex-col cursor-pointer h-full"
+                        bookId={book.id}
+                        bookName={book.name}
+                        totalChapters={book.chapters}
+                        progressPercent={bookProgressPercent}
+                        testament={book.testament}
                         onClick={() => navigate(`/bible/${book.id}`)}
-                      >
-                        <div className="flex items-center mb-2">
-                          <Book className="mr-2 text-bible-blue" size={18} />
-                          <h3 className="font-medium truncate">{book.name}</h3>
-                        </div>
-                        
-                        <div className="mt-auto">
-                          <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
-                            <div 
-                              className="bg-bible-blue h-2 rounded-full" 
-                              style={{ width: `${bookProgressPercent}%` }} 
-                            />
-                          </div>
-                          <div className="flex justify-between text-xs text-gray-500">
-                            <span>{book.chapters} chapters</span>
-                            <span>{bookProgressPercent}% complete</span>
-                          </div>
-                        </div>
-                      </motion.div>
+                      />
                     );
                   })}
                 </div>
