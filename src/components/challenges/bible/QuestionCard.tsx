@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 interface QuestionCardProps {
   question: string;
   options: string[];
+  correctAnswer
   selectedAnswer: string | null;
   showExplanation: boolean;
   isCorrect: boolean | null;
