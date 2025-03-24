@@ -38,7 +38,8 @@ const QuestionCard = ({
   
   const toggleShowAnswer = () => setShowAnswer(!showAnswer);
   
-  const correctAnswer = showExplanation ? options.find((_, i) => i === 0) : null;
+  // Find the correct answer (it's the first option in the array)
+  const correctAnswer = options[0];
   
   return (
     <div className="glass-card p-6 rounded-xl">
