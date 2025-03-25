@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -8,6 +7,7 @@ import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Input } from '@/components/ui/input';
+import { InputGroup } from '@/components/ui/input-group';
 import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Book, Search, BookOpen, 
@@ -70,25 +70,21 @@ const BibleExplorer = () => {
     ? Array.from({ length: selectedBook.chapters }, (_, i) => i + 1)
     : [];
   
-  // Get recently read books based on completed chapters
   const recentlyReadBooks = useMemo(() => {
     if (!progress || !progress.completed_chapters || progress.completed_chapters.length === 0) {
       return [];
     }
 
-    // Get unique book IDs from completed chapters, sorted by most recent
     const bookIds = progress.completed_chapters
       .sort((a, b) => new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime())
       .map(chapter => chapter.book_id)
       .filter((id, index, self) => self.indexOf(id) === index)
-      .slice(0, 5); // Get top 5 recent books
+      .slice(0, 5);
 
-    // Map book IDs to full book objects
     return bookIds.map(id => bibleBooks.find(book => book.id === id))
       .filter(book => book !== undefined) as typeof bibleBooks;
   }, [progress]);
 
-  // Navigation between books
   const navigateToAdjacentBook = (direction: 'prev' | 'next') => {
     if (!selectedBook) return;
     
@@ -110,7 +106,6 @@ const BibleExplorer = () => {
     navigate(`/bible/${value}`);
   };
 
-  // Find the most recently read chapter for a book
   const getRecentChapter = (bookId: string) => {
     if (!progress || !progress.completed_chapters) return 1;
 
@@ -126,9 +121,9 @@ const BibleExplorer = () => {
       <Navbar />
       
       <SidebarProvider defaultOpen={!isMobile}>
-        <div className="flex-1 flex w-full py-20">
+        <div className="flex-1 flex w-full pt-24">
           <Sidebar variant="inset" collapsible="icon">
-            <SidebarHeader>
+            <SidebarHeader className="mt-2">
               <div className="flex items-center px-2">
                 <BookOpen className="mr-2 text-bible-blue" size={20} />
                 <h3 className="font-semibold">Bible Explorer</h3>
@@ -311,14 +306,16 @@ const BibleExplorer = () => {
                   </div>
                   
                   <div className="relative mb-4">
-                    <Input
-                      type="text"
-                      placeholder="Search books..."
-                      value={searchTerm}
-                      onChange={(e) => setSearchTerm(e.target.value)}
-                      className="pl-10"
-                    />
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                    <InputGroup>
+                      <Input
+                        type="text"
+                        placeholder="Search books..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="pl-10"
+                      />
+                      <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
+                    </InputGroup>
                   </div>
                   
                   <Tabs defaultValue="all" onValueChange={setActiveTestament} className="mb-4">
@@ -346,7 +343,6 @@ const BibleExplorer = () => {
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
                       
-                      {/* Book navigation arrows */}
                       <div className="absolute inset-0 flex items-center justify-between px-3">
                         <Button 
                           variant="ghost" 
@@ -384,15 +380,16 @@ const BibleExplorer = () => {
                         const { isCompleted, score, maxScore } = getChapterStatus(selectedBook.id, chapter);
                         
                         return (
-                          <BibleChapterCard
-                            key={chapter}
-                            bookId={selectedBook.id}
-                            chapter={chapter}
-                            isCompleted={isCompleted}
-                            score={score}
-                            maxScore={maxScore}
-                            onClick={() => navigateToChapter(selectedBook.id, chapter)}
-                          />
+                          <div key={chapter} className="w-full aspect-square">
+                            <BibleChapterCard
+                              bookId={selectedBook.id}
+                              chapter={chapter}
+                              isCompleted={isCompleted}
+                              score={score}
+                              maxScore={maxScore}
+                              onClick={() => navigateToChapter(selectedBook.id, chapter)}
+                            />
+                          </div>
                         );
                       })}
                     </div>
@@ -404,15 +401,16 @@ const BibleExplorer = () => {
                     const bookProgressPercent = getBookProgress(book.id);
                     
                     return (
-                      <BibleBookCard
-                        key={book.id}
-                        bookId={book.id}
-                        bookName={book.name}
-                        totalChapters={book.chapters}
-                        progressPercent={bookProgressPercent}
-                        testament={book.testament}
-                        onClick={() => navigate(`/bible/${book.id}`)}
-                      />
+                      <div key={book.id} className="w-full">
+                        <BibleBookCard
+                          bookId={book.id}
+                          bookName={book.name}
+                          totalChapters={book.chapters}
+                          progressPercent={bookProgressPercent}
+                          testament={book.testament}
+                          onClick={() => navigate(`/bible/${book.id}`)}
+                        />
+                      </div>
                     );
                   })}
                 </div>

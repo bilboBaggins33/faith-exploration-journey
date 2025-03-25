@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+  const isHomePage = location.pathname === '/';
   
   useEffect(() => {
     const handleScroll = () => {
@@ -40,11 +41,14 @@ const Navbar = () => {
     await signOut();
   };
   
+  // Determine navbar colors based on isHomePage and isScrolled
+  const navbarBgClass = isHomePage 
+    ? isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90' : 'bg-transparent'
+    : 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90';
+  
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90' : 'bg-transparent'
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarBgClass}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -52,12 +56,12 @@ const Navbar = () => {
             <Link to="/" className="flex items-center">
               <BookOpen 
                 className={`transition-all duration-300 ${
-                  isScrolled ? 'h-6 w-6 text-bible-dark dark:text-white' : 'h-8 w-8 text-white'
+                  isHomePage && !isScrolled ? 'h-8 w-8 text-white' : 'h-6 w-6 text-bible-dark dark:text-white'
                 }`} 
               />
               <span 
                 className={`ml-2 font-serif font-semibold tracking-tight transition-all duration-300 ${
-                  isScrolled ? 'text-lg text-bible-dark dark:text-white' : 'text-xl text-white'
+                  isHomePage && !isScrolled ? 'text-xl text-white' : 'text-lg text-bible-dark dark:text-white'
                 }`}
               >
                 Bible Adventure Quest
@@ -67,22 +71,22 @@ const Navbar = () => {
           
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
-              <NavLink to="/" active={isActive('/')} isScrolled={isScrolled}>
+              <NavLink to="/" active={isActive('/')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 Home
               </NavLink>
-              <NavLink to="/challenge" active={isActive('/challenge')} isScrolled={isScrolled}>
+              <NavLink to="/challenge" active={isActive('/challenge')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 Challenges
               </NavLink>
-              <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled}>
+              <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 Bible
               </NavLink>
-              <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled}>
+              <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 <div className="flex items-center">
                   <BookText className="h-4 w-4 mr-1" />
                   Books
                 </div>
               </NavLink>
-              <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled}>
+              <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 Profile
               </NavLink>
               
@@ -91,7 +95,7 @@ const Navbar = () => {
                   variant="outline" 
                   size="sm" 
                   className={`ml-4 flex items-center transition-colors duration-300 ${
-                    isScrolled ? 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white' : 'border-white text-white hover:bg-white/10'
+                    isHomePage && !isScrolled ? 'border-white text-white hover:bg-white/10' : 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white'
                   }`} 
                   onClick={handleSignOut}
                 >
@@ -104,7 +108,7 @@ const Navbar = () => {
                     variant="outline" 
                     size="sm" 
                     className={`ml-4 transition-colors duration-300 ${
-                      isScrolled ? 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white' : 'border-white text-white hover:bg-white/10'
+                      isHomePage && !isScrolled ? 'border-white text-white hover:bg-white/10' : 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white'
                     }`}
                   >
                     Sign In
@@ -118,9 +122,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
-                isScrolled 
-                  ? 'text-bible-dark dark:text-white hover:text-bible-blue' 
-                  : 'text-white hover:text-bible-sky'
+                isHomePage && !isScrolled ? 'text-white hover:text-bible-sky' : 'text-bible-dark dark:text-white hover:text-bible-blue'
               }`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -180,18 +182,19 @@ interface NavLinkProps {
   to: string;
   active: boolean;
   isScrolled: boolean;
+  isHomePage: boolean;
   children: React.ReactNode;
 }
 
-const NavLink = ({ to, active, isScrolled, children }: NavLinkProps) => (
+const NavLink = ({ to, active, isScrolled, isHomePage, children }: NavLinkProps) => (
   <Link 
     to={to} 
     className={`hover-link font-medium transition-colors duration-300 ${
       active 
         ? 'text-bible-blue after:scale-x-100' 
-        : isScrolled
-          ? 'text-bible-dark dark:text-white'
-          : 'text-white'
+        : isHomePage && !isScrolled
+          ? 'text-white'
+          : 'text-bible-dark dark:text-white'
     }`}
   >
     {children}

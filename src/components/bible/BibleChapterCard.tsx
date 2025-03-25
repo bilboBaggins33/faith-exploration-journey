@@ -35,7 +35,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     <motion.div
       whileHover={{ y: -5 }}
       className={cn(
-        "p-4 rounded-lg border cursor-pointer transition-all shadow-sm",
+        "p-4 rounded-lg border cursor-pointer transition-all shadow-sm w-full h-full",
         getBorderColorClass()
       )}
       onClick={onClick}
