@@ -69,8 +69,9 @@ const BibleChapterChallenge = () => {
         
         if (chapterData && chapterData.score !== undefined) {
           console.log('Found saved score:', chapterData.score);
-          // Ensure score doesn't exceed max possible points
+          // Calculate max possible score from the challenge
           const maxPossibleScore = challenge.questions.length;
+          // Ensure score doesn't exceed max possible points
           setScore(Math.min(chapterData.score, maxPossibleScore));
         } else {
           // If no specific score saved, default to max points
@@ -133,14 +134,12 @@ const BibleChapterChallenge = () => {
       if (!challengeCompleted || retakeInProgress) {
         console.log('Completing challenge with score:', score);
         // Make sure challengeId is correct format: "bookId-chapter"
-        // Ensure score doesn't exceed maximum points possible
+        // Calculate final score based on current result
         const finalScore = isCorrect ? score + 1 : score;
-        const maxPossibleScore = challenge.questions.length;
-        const cappedScore = Math.min(finalScore, maxPossibleScore);
         
         // Only update if it's a new completion or a better score
-        if (!challengeCompleted || cappedScore > (score || 0)) {
-          completeChallenge(challengeId, cappedScore);
+        if (!challengeCompleted || finalScore > (score || 0)) {
+          completeChallenge(challengeId, finalScore);
         } else {
           console.log('Not updating score as new score is not better than previous');
         }
@@ -221,7 +220,7 @@ const BibleChapterChallenge = () => {
           />
         ) : quizCompleted && challenge ? (
           <ResultsCard
-            score={score}
+            score={isCorrect ? score + 1 : score}
             totalQuestions={challenge.questions.length}
             keyVerseText={challenge.key_verse_text}
             keyVerse={challenge.key_verse}

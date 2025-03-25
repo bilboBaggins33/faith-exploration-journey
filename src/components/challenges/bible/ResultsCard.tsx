@@ -28,9 +28,13 @@ const ResultsCard = ({
   onNavigateToBible,
   bookName
 }: ResultsCardProps) => {
+  // Ensure score and totalQuestions are valid numbers
+  const safeScore = Math.max(0, score || 0);
+  const safeTotalQuestions = Math.max(1, totalQuestions || 1); // Prevent division by zero
+  
   // Ensure that score doesn't exceed totalQuestions
-  const normalizedScore = Math.min(score, totalQuestions);
-  const percentage = totalQuestions > 0 ? Math.round((normalizedScore / totalQuestions) * 100) : 0;
+  const normalizedScore = Math.min(safeScore, safeTotalQuestions);
+  const percentage = Math.round((normalizedScore / safeTotalQuestions) * 100);
   
   return (
     <motion.div
@@ -40,27 +44,27 @@ const ResultsCard = ({
       <Card className="p-8 text-center">
         <Award className={cn(
           "mx-auto mb-4", 
-          normalizedScore === totalQuestions ? "text-purple-500" : "text-bible-gold"
+          normalizedScore === safeTotalQuestions ? "text-purple-500" : "text-bible-gold"
         )} size={60} />
         
         <h2 className="text-2xl font-bold mb-2">
-          {normalizedScore === totalQuestions ? "Perfect Score!" : "Challenge Completed!"}
+          {normalizedScore === safeTotalQuestions ? "Perfect Score!" : "Challenge Completed!"}
         </h2>
         
         <p className="text-gray-600 mb-2">
-          You've earned {normalizedScore} out of {totalQuestions} possible points.
+          You've earned {normalizedScore} out of {safeTotalQuestions} possible points.
         </p>
         
         <div className="w-full max-w-xs mx-auto mb-6">
           <Progress 
-            value={Math.min(percentage, 100)} 
+            value={percentage} 
             className={cn(
               "h-3 rounded-full",
-              normalizedScore === totalQuestions ? "bg-purple-200" : ""
+              normalizedScore === safeTotalQuestions ? "bg-purple-200" : ""
             )}
           />
           <p className="text-sm text-gray-500 mt-1">
-            {Math.min(percentage, 100)}% complete
+            {percentage}% complete
           </p>
         </div>
         
