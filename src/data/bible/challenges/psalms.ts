@@ -1,7 +1,6 @@
+import { ChapterChallenge } from '../types';
 
-import { BibleChapterChallenge } from '../types';
-
-export const psalmsChallenges: BibleChapterChallenge[] = [
+export const psalmsChallenges: ChapterChallenge[] = [
   {
     bookId: 'psalms',
     chapter: 1,
