@@ -1,8 +1,9 @@
 
-import { BibleChapterChallenge } from '../types';
+import { ChapterChallenge } from '../types';
 
-export const proverbsChallenges: BibleChapterChallenge[] = [
+export const proverbsChallenges: ChapterChallenge[] = [
   {
+    id: 'proverbs-1',
     bookId: 'proverbs',
     chapter: 1,
     title: 'The Beginning of Wisdom',
@@ -10,6 +11,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
     key_verse_text: 'The fear of the LORD is the beginning of knowledge, but fools despise wisdom and instruction.',
     questions: [
       {
+        id: 'prov1-q1',
         question: 'Who wrote most of the book of Proverbs?',
         options: [
           'David',
@@ -21,6 +23,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 1:1 identifies Solomon, son of David and king of Israel, as the primary author of Proverbs.'
       },
       {
+        id: 'prov1-q2',
         question: 'According to Proverbs 1, what is the purpose of the book?',
         options: [
           'To entertain with stories',
@@ -32,6 +35,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 1:2-6 explains that the proverbs are for gaining wisdom, instruction, understanding prudent behavior, and discretion.'
       },
       {
+        id: 'prov1-q3',
         question: 'What does Proverbs 1:7 identify as "the beginning of knowledge"?',
         options: [
           'Education',
@@ -43,6 +47,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 1:7 clearly states, "The fear of the LORD is the beginning of knowledge, but fools despise wisdom and instruction."'
       },
       {
+        id: 'prov1-q4',
         question: 'What warning does Proverbs 1 give about bad company?',
         options: [
           'There is no warning about bad company',
@@ -54,6 +59,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 1:10-19 warns against being enticed by sinners and joining them in their wrongdoing, showing the destructive path it leads to.'
       },
       {
+        id: 'prov1-q5',
         question: 'How is wisdom personified in Proverbs 1?',
         options: [
           'As a king on a throne',
@@ -64,9 +70,13 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         correctAnswer: 'As a woman calling out in public places',
         explanation: 'In Proverbs 1:20-33, wisdom is personified as a woman who "calls aloud in the street, she raises her voice in the public squares" trying to get people to listen to her guidance.'
       }
-    ]
+    ],
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 10
   },
   {
+    id: 'proverbs-2',
     bookId: 'proverbs',
     chapter: 2,
     title: 'The Value of Wisdom',
@@ -74,6 +84,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
     key_verse_text: 'For the LORD gives wisdom; from his mouth come knowledge and understanding.',
     questions: [
       {
+        id: 'prov2-q1',
         question: 'According to Proverbs 2, how should one seek wisdom?',
         options: [
           'By traveling around the world',
@@ -85,6 +96,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 2:1-4 instructs to accept and store up God\'s commands, turning your ear to wisdom and applying your heart to understanding.'
       },
       {
+        id: 'prov2-q2',
         question: 'What is the source of wisdom according to Proverbs 2?',
         options: [
           'Human experience',
@@ -96,6 +108,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 2:6 clearly states, "For the LORD gives wisdom; from his mouth come knowledge and understanding."'
       },
       {
+        id: 'prov2-q3',
         question: 'What protection does wisdom offer according to Proverbs 2?',
         options: [
           'Physical strength',
@@ -107,6 +120,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 2:12-15 explains that wisdom will save you from the ways of wicked men and from those whose words are perverse.'
       },
       {
+        id: 'prov2-q4',
         question: 'Who does Proverbs 2 warn about in addition to evil men?',
         options: [
           'Wild animals',
@@ -118,6 +132,7 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         explanation: 'Proverbs 2:16-19 warns about the wayward woman "who has left the partner of her youth and ignored the covenant she made before God."'
       },
       {
+        id: 'prov2-q5',
         question: 'What is the ultimate outcome for the righteous and wicked according to Proverbs 2?',
         options: [
           'They will both prosper in the end',
@@ -128,7 +143,10 @@ export const proverbsChallenges: BibleChapterChallenge[] = [
         correctAnswer: 'The righteous will dwell in the land but the wicked will be uprooted',
         explanation: 'Proverbs 2:21-22 states that "the upright will live in the land, and the blameless will remain in it; but the wicked will be cut off from the land, and the unfaithful will be torn from it."'
       }
-    ]
+    ],
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 10
   }
 ];
 

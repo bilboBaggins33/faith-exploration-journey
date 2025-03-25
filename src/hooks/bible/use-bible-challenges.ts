@@ -31,15 +31,10 @@ export const completeChallenge = async (
   const [bookId, chapterStr] = challengeId.split('-');
   const chapter = parseInt(chapterStr, 10);
   
-  // Find the challenge data to get the max possible score
-  const challengeData = await supabase
-    .from('bible_challenges')
-    .select('max_score')
-    .eq('challenge_id', challengeId)
-    .single();
-  
-  // Default max score is 10 if not specified, but we'll cap the earned points
-  const maxPossibleScore = challengeData?.data?.max_score || 10;
+  // Determine the max score - typically the number of questions in the challenge
+  // Since we don't have a bible_challenges table, we'll use the pointsEarned as default
+  // and cap it at a reasonable value (e.g., 10 points per challenge)
+  const maxPossibleScore = 10;
   
   // Ensure points earned never exceeds max possible score
   const cappedPointsEarned = Math.min(pointsEarned, maxPossibleScore);

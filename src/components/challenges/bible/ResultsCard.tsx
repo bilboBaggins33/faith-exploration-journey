@@ -30,6 +30,7 @@ const ResultsCard = ({
 }: ResultsCardProps) => {
   // Ensure that score doesn't exceed totalQuestions
   const normalizedScore = Math.min(score, totalQuestions);
+  const percentage = totalQuestions > 0 ? Math.round((normalizedScore / totalQuestions) * 100) : 0;
   
   return (
     <motion.div
@@ -52,14 +53,14 @@ const ResultsCard = ({
         
         <div className="w-full max-w-xs mx-auto mb-6">
           <Progress 
-            value={Math.min((normalizedScore / totalQuestions) * 100, 100)} 
+            value={Math.min(percentage, 100)} 
             className={cn(
               "h-3 rounded-full",
               normalizedScore === totalQuestions ? "bg-purple-200" : ""
             )}
           />
           <p className="text-sm text-gray-500 mt-1">
-            {Math.min(Math.round((normalizedScore / totalQuestions) * 100), 100)}% complete
+            {Math.min(percentage, 100)}% complete
           </p>
         </div>
         
