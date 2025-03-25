@@ -1,4 +1,3 @@
-
 import type { Config } from "tailwindcss";
 
 export default {
@@ -72,7 +71,7 @@ export default {
 					sand: '#E8DCC9',
 					stone: '#B9B0A2',
 					sky: '#C4DFFA',
-					deepBlue: '#4A7AA8',
+					deepBlue: '#1A365D',
 				}
 			},
 			borderRadius: {
