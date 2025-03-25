@@ -18,6 +18,8 @@ import { ezraChallenges } from './ezra';
 import { nehemiahChallenges } from './nehemiah';
 import { estherChallenges } from './esther';
 import { jobChallenges } from './job';
+import { psalmsChallenges } from './psalms';
+import { proverbsChallenges } from './proverbs';
 import { matthewChallenges } from './matthew';
 import { markChallenges } from './mark';
 import { lukeChallenges } from './luke';
@@ -66,6 +68,8 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...nehemiahChallenges,
   ...estherChallenges,
   ...jobChallenges,
+  ...psalmsChallenges,
+  ...proverbsChallenges,
   ...matthewChallenges,
   ...markChallenges,
   ...lukeChallenges,
