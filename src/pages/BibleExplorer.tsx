@@ -12,7 +12,8 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { 
   Book, Search, BookOpen, 
   ChevronRight, BookMarked, 
-  ChevronDown, Clock, ArrowRight
+  ChevronDown, Clock, ArrowRight,
+  ArrowLeft, ArrowLeftCircle, ArrowRightCircle
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
@@ -86,6 +87,20 @@ const BibleExplorer = () => {
     return bookIds.map(id => bibleBooks.find(book => book.id === id))
       .filter(book => book !== undefined) as typeof bibleBooks;
   }, [progress]);
+
+  // Navigation between books
+  const navigateToAdjacentBook = (direction: 'prev' | 'next') => {
+    if (!selectedBook) return;
+    
+    const currentIndex = bibleBooks.findIndex(book => book.id === selectedBook.id);
+    if (currentIndex === -1) return;
+    
+    const newIndex = direction === 'prev' 
+      ? (currentIndex - 1 + bibleBooks.length) % bibleBooks.length 
+      : (currentIndex + 1) % bibleBooks.length;
+      
+    navigate(`/bible/${bibleBooks[newIndex].id}`);
+  };
 
   const navigateToChapter = (bookId: string, chapter: number) => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
@@ -193,9 +208,26 @@ const BibleExplorer = () => {
           <SidebarInset className="p-4 md:p-6">
             <div className="max-w-7xl mx-auto">
               <div className="flex justify-between items-center mb-6">
-                <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
-                  {selectedBook ? selectedBook.name : 'Bible Books'}
-                </h1>
+                {selectedBook ? (
+                  <div className="flex items-center">
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      onClick={() => navigate('/bible')}
+                      className="mr-2"
+                    >
+                      <ArrowLeft size={16} className="mr-1" />
+                      Back
+                    </Button>
+                    <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
+                      {selectedBook.name}
+                    </h1>
+                  </div>
+                ) : (
+                  <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
+                    Bible Books
+                  </h1>
+                )}
                 <SidebarTrigger className="md:hidden" />
               </div>
               
@@ -313,6 +345,26 @@ const BibleExplorer = () => {
                         }}
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
+                      
+                      {/* Book navigation arrows */}
+                      <div className="absolute inset-0 flex items-center justify-between px-3">
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          onClick={() => navigateToAdjacentBook('prev')}
+                          className="bg-white/20 hover:bg-white/40 backdrop-blur-sm transition-colors h-10 w-10 rounded-full"
+                        >
+                          <ArrowLeftCircle className="text-white" size={24} />
+                        </Button>
+                        <Button 
+                          variant="ghost" 
+                          size="icon"
+                          onClick={() => navigateToAdjacentBook('next')}
+                          className="bg-white/20 hover:bg-white/40 backdrop-blur-sm transition-colors h-10 w-10 rounded-full"
+                        >
+                          <ArrowRightCircle className="text-white" size={24} />
+                        </Button>
+                      </div>
                     </AspectRatio>
                     <div className="absolute bottom-0 left-0 p-6">
                       <h2 className="text-2xl font-serif font-bold text-white flex items-center">

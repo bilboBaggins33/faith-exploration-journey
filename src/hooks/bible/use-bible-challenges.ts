@@ -27,27 +27,84 @@ export const completeChallenge = async (
 ): Promise<BibleProgressData> => {
   console.log(`Completing challenge ${challengeId} for user ${userId}`);
   
-  // If the challenge is already completed, just return the current progress
+  // Extract book ID and chapter from the challenge ID (assuming format: bookId-chapter)
+  const [bookId, chapterStr] = challengeId.split('-');
+  const chapter = parseInt(chapterStr, 10);
+  
+  // Find the challenge data to get the max possible score
+  const challengeData = await supabase
+    .from('bible_challenges')
+    .select('max_score')
+    .eq('challenge_id', challengeId)
+    .single();
+  
+  // Default max score is 10 if not specified, but we'll cap the earned points
+  const maxPossibleScore = challengeData?.data?.max_score || 10;
+  
+  // Ensure points earned never exceeds max possible score
+  const cappedPointsEarned = Math.min(pointsEarned, maxPossibleScore);
+  
+  // If the challenge is already completed, check if we should update the score
   if (isChallengeCompleted(challengeId, currentProgress)) {
-    console.log('Challenge already completed, returning current progress');
+    console.log('Challenge already completed, checking if score should be updated');
+    
+    // Find the existing chapter entry
+    const existingChapterIndex = currentProgress.completed_chapters?.findIndex(
+      ch => ch.book_id === bookId && ch.chapter === chapter
+    );
+    
+    if (existingChapterIndex !== undefined && existingChapterIndex >= 0) {
+      // Only update if new score is higher than previous
+      const currentScore = currentProgress.completed_chapters[existingChapterIndex].score || 0;
+      
+      if (cappedPointsEarned > currentScore) {
+        console.log(`Updating score from ${currentScore} to ${cappedPointsEarned}`);
+        
+        // Create a deep copy of the completed chapters
+        const updatedChapters = [...(currentProgress.completed_chapters || [])];
+        updatedChapters[existingChapterIndex] = {
+          ...updatedChapters[existingChapterIndex],
+          score: cappedPointsEarned,
+          completed_at: new Date().toISOString()
+        };
+        
+        // Update the progress data
+        const { error } = await supabase
+          .from('bible_progress')
+          .update({ completed_chapters: updatedChapters })
+          .eq('user_id', userId);
+          
+        if (error) throw error;
+        
+        // Return updated progress
+        return {
+          ...currentProgress,
+          completed_chapters: updatedChapters
+        };
+      } else {
+        console.log('New score not higher than previous, no update needed');
+        return currentProgress;
+      }
+    }
+    
+    // If we somehow don't have the chapter entry, return current progress
     return currentProgress;
   }
+  
+  // If not completed yet, proceed with completing the challenge
+  console.log('Challenge not completed yet, proceeding with completion');
   
   // Get the current challenges completed array or initialize if null
   const challengesCompleted = [...(currentProgress.challenges_completed || [])];
   challengesCompleted.push(challengeId);
   
-  // Extract book ID and chapter from the challenge ID (assuming format: bookId-chapter)
-  const [bookId, chapterStr] = challengeId.split('-');
-  const chapter = parseInt(chapterStr, 10);
-  
   // Prepare updated progress data
   const updatedProgress: Partial<BibleProgressData> = {
     challenges_completed: challengesCompleted,
-    total_points: (currentProgress.total_points || 0) + pointsEarned
+    total_points: (currentProgress.total_points || 0) + cappedPointsEarned
   };
   
-  // Update the completed chapters if we have a valid bookId and chapter
+  // Update the completed chapters
   if (bookId && !isNaN(chapter)) {
     const completedChapters = [...(currentProgress.completed_chapters || [])];
     
@@ -61,8 +118,8 @@ export const completeChallenge = async (
     if (existingIndex >= 0) {
       // Update the existing entry with the score if it's higher
       if (!completedChapters[existingIndex].score || 
-          completedChapters[existingIndex].score < pointsEarned) {
-        completedChapters[existingIndex].score = pointsEarned;
+          completedChapters[existingIndex].score < cappedPointsEarned) {
+        completedChapters[existingIndex].score = cappedPointsEarned;
       }
       // Always update the completed_at timestamp to keep track of most recent readings
       completedChapters[existingIndex].completed_at = currentTime;
@@ -72,7 +129,7 @@ export const completeChallenge = async (
         book_id: bookId,
         chapter: chapter,
         completed_at: currentTime,
-        score: pointsEarned
+        score: cappedPointsEarned
       });
       
       // Also update the total chapters read count
@@ -127,7 +184,7 @@ export const completeChallenge = async (
     const { error: profileError } = await supabase
       .from('user_profiles')
       .update({
-        points: (userProfile?.points || 0) + pointsEarned,
+        points: (userProfile?.points || 0) + cappedPointsEarned,
         streak: streak,
         last_active: today.toISOString().split('T')[0] // Format as YYYY-MM-DD
       })

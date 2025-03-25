@@ -28,6 +28,9 @@ const ResultsCard = ({
   onNavigateToBible,
   bookName
 }: ResultsCardProps) => {
+  // Ensure that score doesn't exceed totalQuestions
+  const normalizedScore = Math.min(score, totalQuestions);
+  
   return (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -36,27 +39,27 @@ const ResultsCard = ({
       <Card className="p-8 text-center">
         <Award className={cn(
           "mx-auto mb-4", 
-          score === totalQuestions ? "text-purple-500" : "text-bible-gold"
+          normalizedScore === totalQuestions ? "text-purple-500" : "text-bible-gold"
         )} size={60} />
         
         <h2 className="text-2xl font-bold mb-2">
-          {score === totalQuestions ? "Perfect Score!" : "Challenge Completed!"}
+          {normalizedScore === totalQuestions ? "Perfect Score!" : "Challenge Completed!"}
         </h2>
         
         <p className="text-gray-600 mb-2">
-          You've earned {score} out of {totalQuestions} possible points.
+          You've earned {normalizedScore} out of {totalQuestions} possible points.
         </p>
         
         <div className="w-full max-w-xs mx-auto mb-6">
           <Progress 
-            value={Math.min((score / totalQuestions) * 100, 100)} 
+            value={Math.min((normalizedScore / totalQuestions) * 100, 100)} 
             className={cn(
               "h-3 rounded-full",
-              score === totalQuestions ? "bg-purple-200" : ""
+              normalizedScore === totalQuestions ? "bg-purple-200" : ""
             )}
           />
           <p className="text-sm text-gray-500 mt-1">
-            {Math.min(Math.round((score / totalQuestions) * 100), 100)}% complete
+            {Math.min(Math.round((normalizedScore / totalQuestions) * 100), 100)}% complete
           </p>
         </div>
         
