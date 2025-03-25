@@ -50,8 +50,16 @@ const Navbar = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link to="/" className="flex items-center">
-              <BookOpen className="h-8 w-8 text-bible-blue" />
-              <span className="ml-2 text-xl font-serif font-semibold tracking-tight">
+              <BookOpen 
+                className={`transition-all duration-300 ${
+                  isScrolled ? 'h-6 w-6 text-bible-dark dark:text-white' : 'h-8 w-8 text-white'
+                }`} 
+              />
+              <span 
+                className={`ml-2 font-serif font-semibold tracking-tight transition-all duration-300 ${
+                  isScrolled ? 'text-lg text-bible-dark dark:text-white' : 'text-xl text-white'
+                }`}
+              >
                 Bible Adventure Quest
               </span>
             </Link>
@@ -59,33 +67,46 @@ const Navbar = () => {
           
           <div className="hidden md:block">
             <div className="flex items-center space-x-8">
-              <NavLink to="/" active={isActive('/')}>
+              <NavLink to="/" active={isActive('/')} isScrolled={isScrolled}>
                 Home
               </NavLink>
-              <NavLink to="/challenge" active={isActive('/challenge')}>
+              <NavLink to="/challenge" active={isActive('/challenge')} isScrolled={isScrolled}>
                 Challenges
               </NavLink>
-              <NavLink to="/bible" active={isActive('/bible')}>
+              <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled}>
                 Bible
               </NavLink>
-              <NavLink to="/theology" active={isActive('/theology')}>
+              <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled}>
                 <div className="flex items-center">
                   <BookText className="h-4 w-4 mr-1" />
                   Books
                 </div>
               </NavLink>
-              <NavLink to="/profile" active={isActive('/profile')}>
+              <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled}>
                 Profile
               </NavLink>
               
               {user ? (
-                <Button variant="outline" size="sm" className="ml-4 flex items-center" onClick={handleSignOut}>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  className={`ml-4 flex items-center transition-colors duration-300 ${
+                    isScrolled ? 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white' : 'border-white text-white hover:bg-white/10'
+                  }`} 
+                  onClick={handleSignOut}
+                >
                   <LogOut className="h-4 w-4 mr-2" />
                   Sign Out
                 </Button>
               ) : (
                 <Link to="/auth">
-                  <Button variant="outline" size="sm" className="ml-4">
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className={`ml-4 transition-colors duration-300 ${
+                      isScrolled ? 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white' : 'border-white text-white hover:bg-white/10'
+                    }`}
+                  >
                     Sign In
                   </Button>
                 </Link>
@@ -96,7 +117,11 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className="inline-flex items-center justify-center p-2 rounded-md text-bible-dark dark:text-white hover:text-bible-blue"
+              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
+                isScrolled 
+                  ? 'text-bible-dark dark:text-white hover:text-bible-blue' 
+                  : 'text-white hover:text-bible-sky'
+              }`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
@@ -154,14 +179,19 @@ const Navbar = () => {
 interface NavLinkProps {
   to: string;
   active: boolean;
+  isScrolled: boolean;
   children: React.ReactNode;
 }
 
-const NavLink = ({ to, active, children }: NavLinkProps) => (
+const NavLink = ({ to, active, isScrolled, children }: NavLinkProps) => (
   <Link 
     to={to} 
     className={`hover-link font-medium transition-colors duration-300 ${
-      active ? 'text-bible-blue after:scale-x-100' : 'text-bible-dark dark:text-white'
+      active 
+        ? 'text-bible-blue after:scale-x-100' 
+        : isScrolled
+          ? 'text-bible-dark dark:text-white'
+          : 'text-white'
     }`}
   >
     {children}
