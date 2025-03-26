@@ -12,13 +12,15 @@ const buttonVariants = cva(
       variant: {
         default: "bg-[#1A365D] text-primary-foreground hover:bg-[#1A365D]/90 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Deep navy with parchment texture
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90",
+          "bg-destructive text-destructive-foreground hover:bg-destructive/90 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
           "bg-secondary text-secondary-foreground hover:bg-secondary/80",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
+        warning: "bg-amber-600 text-white hover:bg-amber-700 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Added warning variant with parchment texture
+        danger: "bg-red-600 text-white hover:bg-red-700 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Added danger variant with parchment texture
       },
       size: {
         default: "h-10 px-4 py-2",

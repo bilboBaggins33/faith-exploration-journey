@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -46,6 +47,7 @@ import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { theologyBooks } from '@/data/theology/books';
 import { Skeleton } from '@/components/ui/skeleton';
 import ProfileEditForm from '@/components/ProfileEditForm';
+import ResetProgressSection from '@/components/profile/ResetProgressSection';
 import { bibleBooks, sampleChapterChallenges } from '@/data/bibleData';
 import { format, formatDistance, parseISO } from 'date-fns';
 
@@ -625,11 +627,9 @@ const ProfilePage = () => {
     .filter(item => item.chaptersRead > 0)
     .sort((a, b) => b.progress - a.progress);
   
-  // Generate recent activity from completed chapters
   const generateRecentActivity = () => {
     const activities = [];
     
-    // Add bible chapters
     if (progress?.completed_chapters && progress.completed_chapters.length > 0) {
       progress.completed_chapters.forEach((chapter: any, index: number) => {
         const bookInfo = bibleBooks.find(b => b.id === chapter.book_id);
@@ -651,7 +651,6 @@ const ProfilePage = () => {
       });
     }
     
-    // Add theology chapters
     if (theologyProgress?.completed_chapters && theologyProgress.completed_chapters.length > 0) {
       theologyProgress.completed_chapters.forEach((chapter: any, index: number) => {
         const bookInfo = theologyBooks.find(b => b.id === chapter.book_id);
@@ -673,11 +672,9 @@ const ProfilePage = () => {
       });
     }
     
-    // Add completed challenges if any
     if (progress?.challenges_completed && progress.challenges_completed.length > 0) {
       progress.challenges_completed.forEach((challengeId: string, index: number) => {
-        // Extract book and chapter from challenge ID (format: bookId-chapter)
-        const [bookId, chapter] = challengeId.split('-');
+        [bookId, chapter] = challengeId.split('-');
         const bookInfo = bibleBooks.find(b => b.id === bookId);
         
         if (bookInfo) {
@@ -694,41 +691,34 @@ const ProfilePage = () => {
       });
     }
     
-    // Sort by date (most recent first) and take only the 5 most recent
     return activities
       .sort((a, b) => {
-        // Try to compare dates if available
         if (a.date === 'Recently' && b.date !== 'Recently') return -1;
         if (a.date !== 'Recently' && b.date === 'Recently') return 1;
-        return 0; // Otherwise keep original order
+        return 0;
       })
       .slice(0, 5);
   };
   
   const recentActivity = generateRecentActivity();
   
-  // Updated user stats including real streak calculation
   const calculateStreak = () => {
     if (!profile?.last_active) return 0;
     
     const lastActive = new Date(profile.last_active);
     const today = new Date();
     
-    // Set hours, minutes, seconds to 0 for date comparison
     lastActive.setHours(0, 0, 0, 0);
     today.setHours(0, 0, 0, 0);
     
-    // Calculate difference in days
     const diffTime = Math.abs(today.getTime() - lastActive.getTime());
     const diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
     
-    // If last active was today or yesterday, maintain the streak
-    // Otherwise, streak should be reset
     if (diffDays <= 1) {
-      return profile.streak || 1; // At least 1 if they're active
+      return profile.streak || 1;
     }
     
-    return 0; // Streak broken
+    return 0;
   };
   
   const userStats = {
@@ -751,7 +741,6 @@ const ProfilePage = () => {
     ).length || 0
   };
   
-  // Get unfinished books - books that are started but not completed
   const unfinishedBibleBooks = bibleStartedBooks.filter(item => 
     item.completedChapters < item.book.chapters
   ).slice(0, 3);
@@ -1089,6 +1078,16 @@ const ProfilePage = () => {
                           avatarUrl={getUserAvatar()} 
                           onProfileUpdated={handleProfileUpdated} 
                         />
+                      </CardContent>
+                    </Card>
+                    
+                    <Card className="glass-card shadow-md">
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Data Management</CardTitle>
+                        <CardDescription>Reset your progress data</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <ResetProgressSection />
                       </CardContent>
                     </Card>
                   </TabsContent>
