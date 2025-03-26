@@ -377,7 +377,10 @@ const ProfileHeader = ({ userStats, onLogout, userName, avatarUrl }: ProfileHead
                 <Button 
                   variant="outline" 
                   className="flex items-center border-gray-300"
-                  onClick={() => document.querySelector('[data-value="settings"]')?.click()}
+                  onClick={() => {
+                    const settingsTab = document.querySelector('[data-value="settings"]') as HTMLElement;
+                    if (settingsTab) settingsTab.click();
+                  }}
                 >
                   <Edit className="h-4 w-4 mr-2" />
                   Edit Profile
