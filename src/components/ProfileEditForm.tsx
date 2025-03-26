@@ -134,7 +134,17 @@ const ProfileEditForm = ({ user, fullName, email, avatarUrl, onProfileUpdated }:
       let avatarBucketExists = buckets?.some(bucket => bucket.name === 'avatars');
       
       if (!avatarBucketExists) {
-        console.log('Avatars bucket does not exist, profile pictures will use fallback');
+        // Try to create the bucket
+        try {
+          const { error } = await supabase.storage.createBucket('avatars', {
+            public: true
+          });
+          if (error) throw error;
+          avatarBucketExists = true;
+        } catch (bucketError) {
+          console.error('Error creating avatars bucket:', bucketError);
+          // Continue anyway, since we'll inform the user if upload fails
+        }
       }
       
       // Upload the file

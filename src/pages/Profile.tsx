@@ -1,4 +1,3 @@
-
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -375,7 +374,11 @@ const ProfileHeader = ({ userStats, onLogout, userName, avatarUrl }: ProfileHead
                 <p className="text-bible-blue font-medium">{userStats.rank}</p>
               </div>
               <div className="mt-4 md:mt-0 flex space-x-2">
-                <Button variant="outline" className="flex items-center border-gray-300">
+                <Button 
+                  variant="outline" 
+                  className="flex items-center border-gray-300"
+                  onClick={() => document.querySelector('[data-value="settings"]')?.click()}
+                >
                   <Edit className="h-4 w-4 mr-2" />
                   Edit Profile
                 </Button>
@@ -674,7 +677,6 @@ const ProfilePage = () => {
     
     if (progress?.challenges_completed && progress.challenges_completed.length > 0) {
       progress.challenges_completed.forEach((challengeId: string, index: number) => {
-        // Fix: Properly declare bookId and chapter variables
         const challengeParts = challengeId.split('-');
         const bookId = challengeParts[0];
         const chapter = challengeParts[1];
