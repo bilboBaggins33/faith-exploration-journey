@@ -674,7 +674,11 @@ const ProfilePage = () => {
     
     if (progress?.challenges_completed && progress.challenges_completed.length > 0) {
       progress.challenges_completed.forEach((challengeId: string, index: number) => {
-        [bookId, chapter] = challengeId.split('-');
+        // Fix: Properly declare bookId and chapter variables
+        const challengeParts = challengeId.split('-');
+        const bookId = challengeParts[0];
+        const chapter = challengeParts[1];
+        
         const bookInfo = bibleBooks.find(b => b.id === bookId);
         
         if (bookInfo) {
