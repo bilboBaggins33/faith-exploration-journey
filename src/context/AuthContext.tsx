@@ -123,16 +123,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         return;
       }
       
-      const { error } = await supabase.auth.signInWithOAuth({
+      console.log('Initiating Google sign-in...');
+      const { data, error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/profile`,
         },
       });
       
+      console.log('Google sign-in result:', { data, error });
+      
       if (error) throw error;
       
     } catch (error: any) {
+      console.error('Google sign-in error:', error.message);
       toast({
         title: "Google login failed",
         description: error.message || "An error occurred during Google login",
