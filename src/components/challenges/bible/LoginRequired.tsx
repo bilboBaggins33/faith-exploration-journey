@@ -25,7 +25,7 @@ const LoginRequired = () => {
   
   return (
     <ChallengeSkeleton>
-      <div className="flex-1 flex items-center justify-center p-4">
+      <div className="flex-1 flex items-center justify-center p-4 pt-24">
         <Card className="p-8 max-w-md text-center">
           <AlertCircle className="mx-auto text-blue-500 mb-4" size={40} />
           <h2 className="text-xl font-bold mb-2">Login Required</h2>
