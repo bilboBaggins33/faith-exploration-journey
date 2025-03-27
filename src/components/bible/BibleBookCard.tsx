@@ -26,7 +26,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="glass-card rounded-xl flex flex-col cursor-pointer h-full overflow-hidden w-full"
+      className="glass-card rounded-xl flex flex-col cursor-pointer h-full overflow-hidden w-full min-w-[240px]" // Increased minimum width
       onClick={onClick}
     >
       <div className="relative">
@@ -45,7 +45,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         <div className="absolute bottom-0 left-0 p-3">
           <div className="flex items-center">
             <Book className="mr-2 text-white" size={18} />
-            <h3 className="font-medium text-white truncate">{bookName}</h3>
+            <h3 className="font-medium text-white truncate max-w-[180px]">{bookName}</h3>
           </div>
         </div>
       </div>
