@@ -1,3 +1,4 @@
+
 import { useEffect, useState } from 'react';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -804,4 +805,225 @@ const ProfilePage = () => {
                   <ProfileHeader 
                     userStats={userStats} 
                     onLogout={handleLogout}
-                    userName={profile?.full_name || user
+                    userName={profile?.full_name || user?.email?.split('@')[0] || 'User'}
+                    avatarUrl={getUserAvatar()}
+                  />
+                </div>
+                
+                <Tabs defaultValue="overview" value={activeTab} onValueChange={setActiveTab} className="max-w-5xl mx-auto">
+                  <TabsList className="bg-white shadow-sm mb-6">
+                    <TabsTrigger value="overview">Overview</TabsTrigger>
+                    <TabsTrigger value="bible">Bible</TabsTrigger>
+                    <TabsTrigger value="theology">Books</TabsTrigger>
+                    <TabsTrigger value="stats">Stats</TabsTrigger>
+                    <TabsTrigger value="badges">Badges</TabsTrigger>
+                    <TabsTrigger value="settings" data-value="settings">Settings</TabsTrigger>
+                  </TabsList>
+                  
+                  <TabsContent value="overview" className="space-y-6">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                      <Card>
+                        <CardHeader>
+                          <CardTitle className="text-xl font-serif">Recent Activity</CardTitle>
+                          <CardDescription>Your latest learning progress</CardDescription>
+                        </CardHeader>
+                        <CardContent className="space-y-3">
+                          {recentActivity.length > 0 ? (
+                            recentActivity.map(activity => (
+                              <ActivityItem key={activity.id} activity={activity} />
+                            ))
+                          ) : (
+                            <div className="p-4 text-center">
+                              <p className="text-gray-500">No recent activity</p>
+                              <Button asChild className="mt-3 bg-bible-blue hover:bg-bible-deepBlue">
+                                <Link to="/bible">Start Learning</Link>
+                              </Button>
+                            </div>
+                          )}
+                        </CardContent>
+                      </Card>
+                      
+                      <div className="space-y-6 md:col-span-2">
+                        {bibleStartedBooks.length > 0 && (
+                          <Card>
+                            <CardHeader>
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <CardTitle className="text-xl font-serif">Continue Bible Reading</CardTitle>
+                                  <CardDescription>Pick up where you left off</CardDescription>
+                                </div>
+                                <Button asChild variant="outline" size="sm">
+                                  <Link to="/bible">See All</Link>
+                                </Button>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                                {unfinishedBibleBooks.map(({ book, progress, completedChapters, perfectChapters }) => (
+                                  <BibleBookCard 
+                                    key={book.id}
+                                    book={book}
+                                    progress={progress}
+                                    completedChapters={completedChapters}
+                                    perfectChapters={perfectChapters}
+                                  />
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )}
+                        
+                        {theologyStartedBooks.length > 0 && (
+                          <Card>
+                            <CardHeader>
+                              <div className="flex justify-between items-center">
+                                <div>
+                                  <CardTitle className="text-xl font-serif">Continue Theology Reading</CardTitle>
+                                  <CardDescription>Pick up where you left off</CardDescription>
+                                </div>
+                                <Button asChild variant="outline" size="sm">
+                                  <Link to="/theology">See All</Link>
+                                </Button>
+                              </div>
+                            </CardHeader>
+                            <CardContent>
+                              <div className="space-y-4">
+                                {unfinishedTheologyBooks.map(({ book, progress, chaptersRead, averageScore }) => (
+                                  <TheologyBookCard 
+                                    key={book.id}
+                                    book={book}
+                                    progress={progress}
+                                    chaptersRead={chaptersRead}
+                                    averageScore={averageScore}
+                                  />
+                                ))}
+                              </div>
+                            </CardContent>
+                          </Card>
+                        )}
+                      </div>
+                    </div>
+                  </TabsContent>
+                  
+                  <TabsContent value="bible" className="space-y-6">
+                    <Card>
+                      <CardHeader>
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <CardTitle className="text-xl font-serif">Bible Progress</CardTitle>
+                            <CardDescription>Your scripture study journey</CardDescription>
+                          </div>
+                          <Button asChild variant="outline">
+                            <Link to="/bible">
+                              Explore Bible <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                          {bibleStartedBooks.map(({ book, progress, completedChapters, perfectChapters }) => (
+                            <BibleBookCard 
+                              key={book.id}
+                              book={book}
+                              progress={progress}
+                              completedChapters={completedChapters}
+                              perfectChapters={perfectChapters}
+                            />
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="theology" className="space-y-6">
+                    <Card>
+                      <CardHeader>
+                        <div className="flex justify-between items-center">
+                          <div>
+                            <CardTitle className="text-xl font-serif">Book Progress</CardTitle>
+                            <CardDescription>Your theology reading journey</CardDescription>
+                          </div>
+                          <Button asChild variant="outline">
+                            <Link to="/theology">
+                              Explore Books <ArrowRight className="ml-2 h-4 w-4" />
+                            </Link>
+                          </Button>
+                        </div>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="space-y-4">
+                          {theologyStartedBooks.map(({ book, progress, chaptersRead, averageScore }) => (
+                            <TheologyBookCard 
+                              key={book.id}
+                              book={book}
+                              progress={progress}
+                              chaptersRead={chaptersRead}
+                              averageScore={averageScore}
+                            />
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="stats" className="space-y-6">
+                    <StatsCard userStats={userStats} />
+                  </TabsContent>
+                  
+                  <TabsContent value="badges" className="space-y-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Badges & Achievements</CardTitle>
+                        <CardDescription>Rewards for your progress</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                          {badges.map(badge => (
+                            <BadgeCard key={badge.id} badge={badge} />
+                          ))}
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                  
+                  <TabsContent value="settings" className="space-y-6">
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Account Settings</CardTitle>
+                        <CardDescription>Manage your profile and preferences</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <ProfileEditForm 
+                          user={user}
+                          fullName={profile?.full_name || ''}
+                          email={user?.email}
+                          avatarUrl={getUserAvatar()}
+                          onProfileUpdated={handleProfileUpdated}
+                        />
+                      </CardContent>
+                    </Card>
+                    
+                    <Card>
+                      <CardHeader>
+                        <CardTitle className="text-xl font-serif">Learning Progress</CardTitle>
+                        <CardDescription>Manage your learning data</CardDescription>
+                      </CardHeader>
+                      <CardContent>
+                        <ResetProgressSection />
+                      </CardContent>
+                    </Card>
+                  </TabsContent>
+                </Tabs>
+              </>
+            )}
+          </div>
+        </section>
+      </main>
+      
+      <Footer />
+    </div>
+  );
+};
+
+export default ProfilePage;
