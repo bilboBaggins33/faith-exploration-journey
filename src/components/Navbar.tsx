@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -41,7 +40,6 @@ const Navbar = () => {
     await signOut();
   };
   
-  // Determine navbar colors based on isHomePage and isScrolled
   const navbarBgClass = isHomePage 
     ? isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90' : 'bg-transparent'
     : 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90';
@@ -131,7 +129,6 @@ const Navbar = () => {
         </div>
       </div>
       
-      {/* Mobile menu */}
       {isOpen && (
         <motion.div 
           className="md:hidden bg-white dark:bg-bible-dark p-4 shadow-lg"
