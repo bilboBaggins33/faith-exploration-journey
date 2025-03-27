@@ -13,7 +13,7 @@ import {
 } from "@/components/ui/tabs";
 import { Eye, EyeOff, User, Key, Mail, ShieldCheck } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from '@/context/auth'; // Updated import
 import { useToast } from '@/hooks/use-toast';
 
 const AuthPage = () => {
