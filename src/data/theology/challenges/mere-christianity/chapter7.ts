@@ -11,65 +11,125 @@ export const chapter7Challenge: TheologyChallenge = {
       id: 'mc7-q1',
       question: 'What "invasion" is Lewis referring to in this chapter?',
       options: [
-        'The Romans invading Israel',
-        'God entering the human world in the person of Jesus',
-        'Evil invading a perfect world',
-        'The church invading society'
+        'The Roman invasion of Britain',
+        'Sin\'s invasion of human nature',
+        'God\'s invasion of the world through Christ',
+        'The invasion of rational thought by religion'
       ],
-      correctAnswer: 'God entering the human world in the person of Jesus',
-      explanation: 'Lewis describes the Incarnation as God\'s "invasion" of enemy-occupied territory (our world) in human form.'
+      correctAnswer: 'God\'s invasion of the world through Christ',
+      explanation: 'Lewis uses "invasion" as a metaphor for God entering human history through the incarnation of Christ.'
     },
     {
       id: 'mc7-q2',
-      question: 'According to Lewis, why did God become a man?',
+      question: 'According to Lewis, what is the central story of Christianity?',
       options: [
-        'To experience what it\'s like to be human',
-        'To start a new religion',
-        'To rescue humanity from the enemy (Satan)',
-        'To demonstrate his power'
+        'The teachings of Jesus',
+        'The miracles Jesus performed',
+        'How God became a man to rescue humanity',
+        'The establishment of the church'
       ],
-      correctAnswer: 'To rescue humanity from the enemy (Satan)',
-      explanation: 'Lewis explains that God entered the world to rescue humanity from the power of the devil, like a king might go in disguise to help his subjects in occupied territory.'
+      correctAnswer: 'How God became a man to rescue humanity',
+      explanation: 'Lewis emphasizes that the core of Christianity is the story of God becoming incarnate in Jesus Christ to rescue humanity from sin and death.'
     },
     {
       id: 'mc7-q3',
-      question: 'What analogy does Lewis use to describe the world\'s situation?',
+      question: 'What analogy does Lewis use to describe the spiritual war on earth?',
       options: [
-        'A broken machine',
-        'A rebellious child',
-        'A territory occupied by an enemy',
-        'A sinking ship'
+        'A game of chess',
+        'A civil war',
+        'An occupied territory',
+        'A medical operation'
       ],
-      correctAnswer: 'A territory occupied by an enemy',
-      explanation: 'Lewis portrays Earth as a territory that has been invaded and occupied by a hostile power, which God enters to begin liberation.'
+      correctAnswer: 'An occupied territory',
+      explanation: 'Lewis compares earth to a territory occupied by enemy forces (Satan), which God is now reclaiming through a kind of secret invasion.'
     },
     {
       id: 'mc7-q4',
-      question: 'What does Lewis say about Christianity compared to other religions?',
+      question: 'According to Lewis, what was God\'s strategy in the "invasion"?',
       options: [
-        'Christianity is the only true religion',
-        'Christianity fulfills what other religions hint at',
-        'All religions are equally valid',
-        'Christianity is newer than other religions'
+        'A frontal assault with armies of angels',
+        'A landing behind enemy lines in human form',
+        'A diplomatic negotiation with evil forces',
+        'A gradual evolution of human consciousness'
       ],
-      correctAnswer: 'Christianity fulfills what other religions hint at',
-      explanation: 'Lewis suggests that other religions contain "good dreams" or glimpses of the truth that is fully revealed in Christianity.'
+      correctAnswer: 'A landing behind enemy lines in human form',
+      explanation: 'Lewis describes God\'s strategy as coming in human form, "landing behind enemy lines" through the incarnation.'
     },
     {
       id: 'mc7-q5',
-      question: 'How does Lewis describe God\'s strategy in dealing with humanity?',
+      question: 'What does Lewis say about how Christians view paganism?',
       options: [
-        'Sudden and overwhelming force',
-        'A gradual revelation over time',
-        'Random interventions in history',
-        'Abandoning humans to figure things out themselves'
+        'All pagan beliefs are completely false',
+        'Paganism contains glimpses of truth that are fulfilled in Christianity',
+        'Paganism is equal to Christianity as a path to God',
+        'Paganism was a direct revelation from God'
       ],
-      correctAnswer: 'A gradual revelation over time',
-      explanation: 'Lewis describes God\'s strategy as one that unfolds gradually through history, beginning with one people (Jews), then one man (Christ), and spreading from there.'
+      correctAnswer: 'Paganism contains glimpses of truth that are fulfilled in Christianity',
+      explanation: 'Lewis suggests that paganism often contains shadows or reflections of the truth, which Christianity fulfills and completes.'
+    },
+    {
+      id: 'mc7-q6',
+      question: 'According to Lewis, how is Christianity different from myths about dying gods?',
+      options: [
+        'Christianity is historically verifiable while myths are not',
+        'Christianity teaches different moral lessons',
+        'Christianity has better literary quality',
+        'Christianity has more followers'
+      ],
+      correctAnswer: 'Christianity is historically verifiable while myths are not',
+      explanation: 'Lewis points out that unlike myths, Christianity claims that its central story actually happened in history, at a specific time and place.'
+    },
+    {
+      id: 'mc7-q7',
+      question: 'What does Lewis suggest about the relationship between myth and fact in Christianity?',
+      options: [
+        'Myth and fact are completely unrelated',
+        'Christianity replaces myth with fact',
+        'In Christianity, a myth became fact while remaining mythically powerful',
+        'Facts are more important than myths'
+      ],
+      correctAnswer: 'In Christianity, a myth became fact while remaining mythically powerful',
+      explanation: 'Lewis suggests that in Christianity, the mythic themes that resonate with human imagination actually became fact in history without losing their mythic power.'
+    },
+    {
+      id: 'mc7-q8',
+      question: 'What purpose does Lewis attribute to the Jewish people in God\'s plan?',
+      options: [
+        'They were chosen randomly',
+        'They were morally superior to other peoples',
+        'They were prepared specifically to receive God\'s revelation',
+        'They were more intelligent than other ancient peoples'
+      ],
+      correctAnswer: 'They were prepared specifically to receive God\'s revelation',
+      explanation: 'Lewis suggests that God prepared the Jewish people through their history and law to be the vehicle through which He would reveal himself more fully.'
+    },
+    {
+      id: 'mc7-q9',
+      question: 'What does Lewis mean by calling Christianity "the completion of something begun in all religions"?',
+      options: [
+        'All religions are equally valid paths to God',
+        'Christianity is just a more evolved form of paganism',
+        'The deep human yearnings expressed in all religions find their fulfillment in Christ',
+        'Christianity borrowed its core ideas from other religions'
+      ],
+      correctAnswer: 'The deep human yearnings expressed in all religions find their fulfillment in Christ',
+      explanation: 'Lewis suggests that all religions contain some yearning for or shadows of the truth, which Christianity claims is fully revealed in Christ.'
+    },
+    {
+      id: 'mc7-q10',
+      question: 'What contrast does Lewis draw between mythic gods and the God of Christianity?',
+      options: [
+        'Mythic gods are more powerful',
+        'Mythic gods are fictional while the Christian God is real',
+        'The Christian God is more morally perfect',
+        'Mythic gods are more relatable to humans'
+      ],
+      correctAnswer: 'Mythic gods are fictional while the Christian God is real',
+      explanation: 'Lewis emphasizes that unlike mythic gods, Christianity claims that God actually entered history as a real person in a specific time and place.'
     }
   ],
-  key_quote: "Enemy-occupied territory—that is what this world is. Christianity is the story of how the rightful king has landed, you might say landed in disguise, and is calling us all to take part in a great campaign of sabotage.",
-  key_quote_location: "Book II, Chapter 2",
+  key_quote: "The heart of Christianity is a myth which is also a fact. The old myth of the Dying God, without ceasing to be myth, comes down from the heaven of legend and imagination to the earth of history.",
+  key_quote_location: "Book II, Chapter 7",
   memory_challenge: true,
   difficulty: 'medium',
   points: 20

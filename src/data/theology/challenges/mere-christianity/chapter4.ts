@@ -9,54 +9,42 @@ export const chapter4Challenge: TheologyChallenge = {
   questions: [
     {
       id: 'mc4-q1',
-      question: 'According to Lewis, what lies behind the Moral Law?',
+      question: 'What conclusion does Lewis draw about what lies behind the Moral Law?',
       options: [
-        'Evolution and natural selection',
-        'Cultural traditions',
-        'Something that is more like a mind than anything else',
-        'Random chance'
+        'Nothing - it exists on its own',
+        'Social conditioning',
+        'An intelligent mind - God',
+        'Evolutionary processes'
       ],
-      correctAnswer: 'Something that is more like a mind than anything else',
-      explanation: 'Lewis argues that the Moral Law must come from something that resembles a mind - a rational Power or Mind behind the universe.'
+      correctAnswer: 'An intelligent mind - God',
+      explanation: 'Lewis argues that the Moral Law points to an intelligent Mind behind the universe - what we call God.'
     },
     {
       id: 'mc4-q2',
-      question: 'What comparison does Lewis make between the universe and a building?',
+      question: 'What analogy does Lewis use to explain how the Moral Law points to God?',
       options: [
-        'The universe is as chaotic as a construction site',
-        'The universe shows evidence of a designer, just as a building shows evidence of an architect',
-        'The universe is as temporary as a building',
-        'The universe is as structured as a skyscraper'
+        'A mathematician discovering equations',
+        'A painter creating art',
+        'A driver following traffic laws',
+        'A composer writing music'
       ],
-      correctAnswer: 'The universe shows evidence of a designer, just as a building shows evidence of an architect',
-      explanation: 'Lewis uses the analogy that just as we can infer an architect from examining a building, we can infer a Designer from examining the universe.'
+      correctAnswer: 'A composer writing music',
+      explanation: 'Lewis suggests that the Moral Law is like music that reveals the presence of a Composer (God) who wrote it.'
     },
     {
       id: 'mc4-q3',
-      question: 'Why does Lewis argue we should be concerned about the Power behind the Moral Law?',
+      question: 'According to Lewis, what does science tell us about the ultimate reality?',
       options: [
-        'Because it might punish us',
-        'Because it can make us wealthy',
-        'Because it is the source of right and wrong and is interested in our behavior',
-        'Because it controls the weather'
+        'Science disproves the existence of God',
+        'Science can explain everything without God',
+        'Science cannot answer the ultimate question of why anything exists',
+        'Science proves that matter is all that exists'
       ],
-      correctAnswer: 'Because it is the source of right and wrong and is interested in our behavior',
-      explanation: 'Lewis argues that the Power behind the Moral Law is interested in right conduct - in fair play, unselfishness, courage, honesty, and truthfulness.'
-    },
-    {
-      id: 'mc4-q4',
-      question: 'What does Lewis say about our inability to meet the standards of the Moral Law?',
-      options: [
-        'We should ignore it since no one can meet it',
-        'It suggests we need help from outside ourselves',
-        'It proves the Moral Law is false',
-        'It means we should create our own standards'
-      ],
-      correctAnswer: 'It suggests we need help from outside ourselves',
-      explanation: 'Lewis suggests that our consistent failure to meet the Moral Law indicates we may need help from the Power behind it.'
+      correctAnswer: 'Science cannot answer the ultimate question of why anything exists',
+      explanation: 'Lewis argues that science describes how the material universe works but cannot explain why anything exists at all or why there are natural laws.'
     }
   ],
-  key_quote: "If the universe is not governed by an absolute goodness, then all our efforts are in the long run hopeless. But if it is, then we are making ourselves enemies to that goodness every day, and are not in the least likely to do any better tomorrow, and so our case is hopeless again.",
+  key_quote: "We want to know whether the universe simply happens to be what it is for no reason or whether there is a power behind it that makes it what it is.",
   key_quote_location: "Book I, Chapter 4",
   memory_challenge: true,
   difficulty: 'medium',

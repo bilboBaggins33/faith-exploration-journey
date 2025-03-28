@@ -9,54 +9,42 @@ export const chapter5Challenge: TheologyChallenge = {
   questions: [
     {
       id: 'mc5-q1',
-      question: 'Why does Lewis say we have "cause to be uneasy"?',
+      question: 'According to Lewis, why should humans be uneasy about their relationship with God?',
       options: [
-        'Because the future is uncertain',
-        'Because we have broken the Moral Law and are confronted by a Power behind that law',
-        'Because science has disproven religion',
-        'Because modern life is too complex'
+        'Because God is arbitrary in His judgments',
+        'Because we consistently fail to live up to the Moral Law we know',
+        'Because God is distant and uninterested in humans',
+        'Because the universe is random and meaningless'
       ],
-      correctAnswer: 'Because we have broken the Moral Law and are confronted by a Power behind that law',
-      explanation: 'Lewis argues that we should be uneasy because we have failed to keep the Moral Law and must face the Power that established it.'
+      correctAnswer: 'Because we consistently fail to live up to the Moral Law we know',
+      explanation: 'Lewis argues that we have cause to be uneasy because we recognize the Moral Law but consistently fail to keep it.'
     },
     {
       id: 'mc5-q2',
-      question: 'What does Lewis say about atheism in this chapter?',
+      question: 'What does Lewis suggest is the state of humanity in relation to God?',
       options: [
-        'It is the only rational position',
-        'It is comfortable but not based on evidence',
-        'It was his former position, which he abandoned because it was too simple',
-        'It offers the best explanation for morality'
+        'We are in a state of harmony with God',
+        'We are neutral in our relationship with God',
+        'We are in a state of rebellion against God',
+        'We have no relationship with God at all'
       ],
-      correctAnswer: 'It was his former position, which he abandoned because it was too simple',
-      explanation: 'Lewis describes how he was once an atheist but found that position too simple to account for the evidence of the Moral Law and the universe.'
+      correctAnswer: 'We are in a state of rebellion against God',
+      explanation: 'Lewis suggests that humanity is in a state of rebellion against God, having turned away from Him and the Moral Law He established.'
     },
     {
       id: 'mc5-q3',
-      question: 'According to Lewis, what is the consequence of acknowledging a Power behind the Moral Law?',
+      question: 'What does Lewis say we should do about our failure to keep the Moral Law?',
       options: [
-        'We can ignore it as it doesn\'t affect daily life',
-        'We must confront our failure to keep this law and our need for help',
-        'We should create our own moral standards',
-        'We should focus on scientific explanations instead'
+        'Ignore it and live however we want',
+        'Create our own standards that we can meet',
+        'Realize our need for help from God',
+        'Abandon the concept of morality altogether'
       ],
-      correctAnswer: 'We must confront our failure to keep this law and our need for help',
-      explanation: 'Lewis argues that once we acknowledge the Power behind the Moral Law, we must face our failure to live up to it and recognize our need for help.'
-    },
-    {
-      id: 'mc5-q4',
-      question: 'What journey does Lewis say Christianity will take us on?',
-      options: [
-        'A journey of self-discovery',
-        'A comfortable journey of prosperity',
-        'A journey to the Power behind the universe who is also the moral lawgiver',
-        'A scientific journey of discovery'
-      ],
-      correctAnswer: 'A journey to the Power behind the universe who is also the moral lawgiver',
-      explanation: 'Lewis indicates that Christianity will take us on a journey to meet and understand the Power behind the universe, who is also the source of the Moral Law.'
+      correctAnswer: 'Realize our need for help from God',
+      explanation: 'Lewis argues that our failure to keep the Moral Law should lead us to realize our need for God\'s help and forgiveness.'
     }
   ],
-  key_quote: "Christianity simply does not make sense until you have faced the sort of facts I have been describing. Christianity tells people to repent and promises them forgiveness. It therefore has nothing (as far as I know) to say to people who do not know they have done anything to repent of and who do not feel that they need any forgiveness.",
+  key_quote: "The conclusion I dread is not 'So there\'s no God after all,' but 'So this is what God's really like. Deceive yourself no longer.'",
   key_quote_location: "Book I, Chapter 5",
   memory_challenge: true,
   difficulty: 'medium',
