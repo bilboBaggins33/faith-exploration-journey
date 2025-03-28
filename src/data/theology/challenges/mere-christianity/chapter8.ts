@@ -9,127 +9,67 @@ export const chapter8Challenge: TheologyChallenge = {
   questions: [
     {
       id: 'mc8-q1',
-      question: 'What "shocking alternative" does Lewis present in this chapter?',
+      question: 'What "shocking alternative" does Lewis present about Jesus?',
       options: [
-        'Either Jesus was divine or he was evil',
-        'Either God exists or life is meaningless',
-        'Either Christianity is true or all religions are false',
-        'Either humans have free will or they are robots'
+        'Either Jesus was a liar or he was telling the truth',
+        'Either Jesus was God or a madman',
+        'Either Jesus existed or was a fictional character',
+        'Either Jesus performed miracles or was an ordinary teacher'
       ],
-      correctAnswer: 'Either Jesus was divine or he was evil',
-      explanation: 'Lewis presents the famous "trilemma": Jesus was either a liar, a lunatic, or the Lord (God), eliminating the comfortable option of seeing him as just a great moral teacher.'
+      correctAnswer: 'Either Jesus was God or a madman',
+      explanation: 'Lewis presents his famous trilemma: Jesus was either a liar, a lunatic, or Lord (God). Given Jesus\' claims, he could not simply be a good moral teacher.'
     },
     {
       id: 'mc8-q2',
-      question: 'According to Lewis, what claim did Jesus make that forces us to make a decision about him?',
+      question: 'According to Lewis, why couldn\'t Jesus simply be a great moral teacher?',
       options: [
-        'His claim to perform miracles',
-        'His claim to forgive sins',
-        'His claim to fulfill prophecy',
-        'His claim to rise from the dead'
+        'His teachings were too radical',
+        'His followers exaggerated his claims',
+        'He claimed to be God, which would be lunacy if false',
+        'He never intended to start a religion'
       ],
-      correctAnswer: 'His claim to forgive sins',
-      explanation: 'Lewis notes that Jesus claimed to forgive sins, which would be nonsensical unless He was God, since only the person wronged can forgive an offense.'
+      correctAnswer: 'He claimed to be God, which would be lunacy if false',
+      explanation: 'Lewis argues that Jesus claimed to be God, so he could not be merely a good teacher; that option is not available. Either his claims were true or he was deluded.'
     },
     {
       id: 'mc8-q3',
-      question: 'What does Lewis say is the reason God gave humans free will?',
+      question: 'What does Lewis say about God\'s forgiveness compared to human forgiveness?',
       options: [
-        'To test who deserves heaven',
-        'Because He couldn\'t control everything',
-        'To create beings who could freely love Him',
-        'To make life more interesting'
+        'God\'s forgiveness is conditional while human forgiveness is unconditional',
+        'God\'s forgiveness is less complete than human forgiveness',
+        'Only God has the right to forgive sins committed against himself',
+        'Humans are better at forgiving than God is'
       ],
-      correctAnswer: 'To create beings who could freely love Him',
-      explanation: 'Lewis argues that God gave humans free will because love requires freedom; automatic "love" would be meaningless.'
+      correctAnswer: 'Only God has the right to forgive sins committed against himself',
+      explanation: 'Lewis argues that only the person who has been wronged can offer forgiveness. Since all sins are ultimately against God, only God can truly forgive them.'
     },
     {
       id: 'mc8-q4',
-      question: 'What does Lewis identify as the consequence of human free will?',
+      question: 'What problem does Lewis identify with the idea that Jesus was just a great moral teacher?',
       options: [
-        'Human creativity',
-        'Human happiness',
-        'Human sin and evil in the world',
-        'Human intelligence'
+        'His moral teachings are outdated',
+        'A person who claimed to forgive sins would be either God or insane',
+        'He didn\'t write anything down himself',
+        'He didn\'t live long enough to fully develop his teachings'
       ],
-      correctAnswer: 'Human sin and evil in the world',
-      explanation: 'Lewis states that the consequence of free will is the possibility of evil choices, which humans have consistently made.'
+      correctAnswer: 'A person who claimed to forgive sins would be either God or insane',
+      explanation: 'Lewis points out that Jesus claimed to forgive sins, which would be absurd or blasphemous unless he was actually God, since sins are ultimately against God.'
     },
     {
       id: 'mc8-q5',
-      question: 'How does Lewis describe the state of the world in relation to God?',
+      question: 'What conclusion does Lewis draw about Jesus based on his claims?',
       options: [
-        'A perfect reflection of God\'s will',
-        'A territory occupied by a hostile power',
-        'An experiment that failed',
-        'A place God has abandoned'
+        'He was an influential teacher but nothing more',
+        'He was a myth created by his followers',
+        'He was either a deceiver, a lunatic, or truly divine',
+        'He never actually claimed to be divine'
       ],
-      correctAnswer: 'A territory occupied by a hostile power',
-      explanation: 'Lewis describes the world as a territory occupied by enemy forces (Satan), in rebellion against its rightful king (God).'
-    },
-    {
-      id: 'mc8-q6',
-      question: 'According to Lewis, what was Jesus\'s primary mission on earth?',
-      options: [
-        'To teach moral principles',
-        'To perform miracles',
-        'To suffer and die to defeat sin and death',
-        'To establish a new religion'
-      ],
-      correctAnswer: 'To suffer and die to defeat sin and death',
-      explanation: 'Lewis emphasizes that Jesus came primarily to suffer and die as a sacrifice to defeat sin and death, not merely to teach or set an example.'
-    },
-    {
-      id: 'mc8-q7',
-      question: 'What option does Lewis reject about Jesus\'s identity?',
-      options: [
-        'That Jesus was God',
-        'That Jesus was a good moral teacher but not divine',
-        'That Jesus was deluded',
-        'That Jesus was deliberately deceptive'
-      ],
-      correctAnswer: 'That Jesus was a good moral teacher but not divine',
-      explanation: 'Lewis rejects the "patronizing nonsense" that Jesus was just a great moral teacher, arguing that his claims about himself don\'t allow that option.'
-    },
-    {
-      id: 'mc8-q8',
-      question: 'What analogy does Lewis use to describe God\'s entry into the world?',
-      options: [
-        'A king visiting his subjects',
-        'A doctor treating a patient',
-        'A diver plunging into deep water',
-        'A teacher entering a classroom'
-      ],
-      correctAnswer: 'A diver plunging into deep water',
-      explanation: 'Lewis compares God becoming human to a diver stripping down and plunging into cold, dark waters to recover something valuable.'
-    },
-    {
-      id: 'mc8-q9',
-      question: 'What does Lewis say is required for humanity to regain its proper relationship with God?',
-      options: [
-        'Perfect moral behavior',
-        'Intellectual understanding of theology',
-        'Surrender and repentance',
-        'Religious rituals and ceremonies'
-      ],
-      correctAnswer: 'Surrender and repentance',
-      explanation: 'Lewis argues that humans must surrender to God, admit their rebellion, and repent to restore their proper relationship with Him.'
-    },
-    {
-      id: 'mc8-q10',
-      question: 'According to Lewis, what obstacle prevents many people from accepting Christianity?',
-      options: [
-        'Lack of evidence',
-        'Religious trauma',
-        'Pride and the unwillingness to surrender to God',
-        'Intellectual objections to specific doctrines'
-      ],
-      correctAnswer: 'Pride and the unwillingness to surrender to God',
-      explanation: 'Lewis suggests that pride—the unwillingness to kneel and surrender to God—is often the real obstacle to faith, not intellectual objections.'
+      correctAnswer: 'He was either a deceiver, a lunatic, or truly divine',
+      explanation: 'Lewis famously argues that Jesus must be one of three things: either a deliberate deceiver, a lunatic with delusions of grandeur, or truly the Son of God.'
     }
   ],
-  key_quote: "I am trying here to prevent anyone saying the really foolish thing that people often say about Him: 'I'm ready to accept Jesus as a great moral teacher, but I don't accept His claim to be God.' That is the one thing we must not say.",
-  key_quote_location: "Book II, Chapter 8",
+  key_quote: "I am trying here to prevent anyone saying the really foolish thing that people often say about Him: 'I'm ready to accept Jesus as a great moral teacher, but I don't accept His claim to be God.' That is the one thing we must not say. A man who was merely a man and said the sort of things Jesus said would not be a great moral teacher. He would either be a lunatic... or else he would be the Devil of Hell.",
+  key_quote_location: "Book II, Chapter 3",
   memory_challenge: true,
   difficulty: 'medium',
   points: 20

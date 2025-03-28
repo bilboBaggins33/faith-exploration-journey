@@ -9,127 +9,67 @@ export const chapter6Challenge: TheologyChallenge = {
   questions: [
     {
       id: 'mc6-q1',
-      question: 'What are the two primary views of God that Lewis contrasts?',
+      question: 'What are the two basic views of God that Lewis identifies?',
       options: [
-        'Monotheism and atheism',
-        'Theism and pantheism',
-        'Christianity and Hinduism',
-        'Materialism and spiritualism'
+        'Monotheism and polytheism',
+        'Christianity and Islam',
+        'Theism and atheism',
+        'Pantheism and Christianity (or Judaism)'
       ],
-      correctAnswer: 'Theism and pantheism',
-      explanation: 'Lewis contrasts the Materialist (atheist) view, the Christian (theistic) view, and the Pantheist view, focusing primarily on the distinction between theism and pantheism.'
+      correctAnswer: 'Pantheism and Christianity (or Judaism)',
+      explanation: 'Lewis contrasts the pantheistic view (God as beyond good and evil) with the Christian/Jewish view (God as distinctly good and opposed to evil).'
     },
     {
       id: 'mc6-q2',
-      question: 'According to Lewis, what does the pantheist believe about God?',
+      question: 'According to Lewis, what is the key difference between the Pantheist and Christian view of God?',
       options: [
-        'God is wholly separate from the universe',
-        'God is a personal being distinct from creation',
-        'God is identical with the universe',
-        'God does not exist'
+        'One believes in multiple gods, the other in one God',
+        'One sees God as beyond good and evil, the other sees God as definitely good',
+        'One believes God created the universe, the other does not',
+        'One believes in life after death, the other does not'
       ],
-      correctAnswer: 'God is identical with the universe',
-      explanation: 'Lewis explains that pantheists believe God is the universe, or that everything is part of God.'
+      correctAnswer: 'One sees God as beyond good and evil, the other sees God as definitely good',
+      explanation: 'Lewis explains that Pantheists tend to think God is beyond good and evil, while Christians believe God is definitely good and evil is the corruption of God\'s creation.'
     },
     {
       id: 'mc6-q3',
-      question: 'What does Lewis identify as a key difference between the Christian view and the Pantheist view?',
+      question: 'What problem does Lewis suggest atheists face when criticizing Christianity?',
       options: [
-        'Christians believe in heaven while pantheists do not',
-        'Christians believe God created the universe while pantheists believe God is the universe',
-        'Christians believe in Jesus while pantheists believe in Buddha',
-        'Christians believe in good and evil while pantheists do not'
+        'They have no scientific evidence',
+        'They cannot explain the origin of the universe',
+        'They invoke a standard of goodness that requires explanation',
+        'They have fewer followers'
       ],
-      correctAnswer: 'Christians believe God created the universe while pantheists believe God is the universe',
-      explanation: 'Lewis highlights that in Christianity, God is separate from and created the universe, while in Pantheism, God and the universe are the same thing.'
+      correctAnswer: 'They invoke a standard of goodness that requires explanation',
+      explanation: 'Lewis points out that atheists often criticize God as unjust, which requires them to have a standard of justice that itself needs explanation.'
     },
     {
       id: 'mc6-q4',
-      question: 'What does Lewis say about the Pantheist view of good and evil?',
+      question: 'What does Lewis say about the material universe?',
       options: [
-        'Good and evil are clearly defined opposites',
-        'There is no good or evil, only matter',
-        'Good and evil are just different aspects of the same thing',
-        'Evil is more powerful than good'
+        'It is all that exists',
+        'It is an illusion',
+        'It was created by God but exists on its own',
+        'It exists because God is constantly maintaining it'
       ],
-      correctAnswer: 'Good and evil are just different aspects of the same thing',
-      explanation: 'Lewis points out that in Pantheism, since everything is part of God, good and evil become merely different aspects of the same ultimate reality.'
+      correctAnswer: 'It exists because God is constantly maintaining it',
+      explanation: 'Lewis describes the Christian view that the universe exists moment by moment because God is constantly sustaining it, like a singer sustaining a note.'
     },
     {
       id: 'mc6-q5',
-      question: 'Why does Lewis argue that Christianity has a more satisfying view of good and evil than Pantheism?',
+      question: 'According to Lewis, what is free will?',
       options: [
-        'Christianity is more ancient',
-        'Christianity recognizes evil as a real problem to be overcome, not just an illusion',
-        'Christianity is more popular worldwide',
-        'Christianity is easier to understand'
+        'An illusion created by our brains',
+        'The ability to do whatever we want',
+        'The ability to choose between good and evil',
+        'A concept invented by theologians'
       ],
-      correctAnswer: 'Christianity recognizes evil as a real problem to be overcome, not just an illusion',
-      explanation: 'Lewis argues that Christianity takes evil seriously as a real problem, whereas Pantheism ultimately reduces evil to an illusion or misunderstanding.'
-    },
-    {
-      id: 'mc6-q6',
-      question: 'What does Lewis suggest is a problem with the materialist (atheist) view?',
-      options: [
-        'It cannot account for human reason and thought',
-        'It is too old-fashioned',
-        'It is not scientific enough',
-        'It is too complex for most people'
-      ],
-      correctAnswer: 'It cannot account for human reason and thought',
-      explanation: 'Lewis argues that if materialism were true and the universe is just matter in motion, then human thoughts would just be random chemical events, not rational processes.'
-    },
-    {
-      id: 'mc6-q7',
-      question: 'How does Lewis describe God\'s relationship to time in the Christian view?',
-      options: [
-        'God is subject to time like humans',
-        'God exists at a particular point in time',
-        'God is outside time and sees all times as equally present',
-        'God exists only in the future'
-      ],
-      correctAnswer: 'God is outside time and sees all times as equally present',
-      explanation: 'Lewis explains that in the Christian view, God is not within time but outside it, seeing all of history as eternally present to Him.'
-    },
-    {
-      id: 'mc6-q8',
-      question: 'What does Lewis say about the personality of God in the Christian view?',
-      options: [
-        'God is an impersonal force',
-        'God is a personal being',
-        'God has no definable attributes',
-        'God\'s personality is unknowable'
-      ],
-      correctAnswer: 'God is a personal being',
-      explanation: 'Lewis emphasizes that in Christianity, God is a personal being with consciousness and intentionality, not an impersonal force or energy.'
-    },
-    {
-      id: 'mc6-q9',
-      question: 'According to Lewis, what is the significance of God being beyond good and evil in Pantheism?',
-      options: [
-        'It means morality is subjective',
-        'It means God is perfect',
-        'It leaves no basis for moral judgments',
-        'It means humans cannot understand God'
-      ],
-      correctAnswer: 'It leaves no basis for moral judgments',
-      explanation: 'Lewis points out that if God is beyond good and evil (as in Pantheism), then there can be no ultimate standard for moral judgments.'
-    },
-    {
-      id: 'mc6-q10',
-      question: 'What metaphor does Lewis use to describe the difference between God\'s existence and our existence?',
-      options: [
-        'A page and an author',
-        'A painting and an artist',
-        'A two-dimensional versus a three-dimensional being',
-        'A plant and a gardener'
-      ],
-      correctAnswer: 'A two-dimensional versus a three-dimensional being',
-      explanation: 'Lewis uses the analogy of a two-dimensional being trying to understand a three-dimensional being to illustrate how our limited minds try to comprehend God\'s unlimited nature.'
+      correctAnswer: 'The ability to choose between good and evil',
+      explanation: 'Lewis describes free will as the ability to choose between right and wrong, and explains why God might have given humans this ability despite the risks.'
     }
   ],
-  key_quote: "If you are a Christian you do not have to believe that all the other religions are simply wrong all through. If you are an atheist you do have to believe that the main point in all the religions of the whole world is simply one huge mistake.",
-  key_quote_location: "Book I, Chapter 6",
+  key_quote: "A man who was merely a man and said the sort of things Jesus said would not be a great moral teacher. He would either be a lunatic—on the level with a man who says he is a poached egg—or he would be the devil of hell. You must take your choice.",
+  key_quote_location: "Book II, Chapter 3",
   memory_challenge: true,
   difficulty: 'medium',
   points: 20
