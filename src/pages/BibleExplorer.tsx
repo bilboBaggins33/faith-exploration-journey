@@ -1,3 +1,4 @@
+
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -19,6 +20,7 @@ import { motion } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import BibleBookCard from '@/components/bible/BibleBookCard';
+import BibleBooksList from '@/components/bible/BibleBooksList';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { getBookImage } from '@/data/bible/book-images';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -58,12 +60,6 @@ const BibleExplorer = () => {
   const [activeTestament, setActiveTestament] = useState('all');
   const { progress, loading, getBookProgress, getChapterStatus } = useBibleProgress();
   const isMobile = useIsMobile();
-  
-  const filteredBooks = bibleBooks.filter(book => {
-    const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTestament = activeTestament === 'all' || book.testament === activeTestament;
-    return matchesSearch && matchesTestament;
-  });
   
   const selectedBook = bibleBooks.find(book => book.id === bookId);
   const bookChapters = selectedBook 
@@ -395,32 +391,15 @@ const BibleExplorer = () => {
                     </div>
                   </div>
                 </div>
-              ) : !isMobile && (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                  {filteredBooks.map(book => {
-                    const bookProgressPercent = getBookProgress(book.id);
-                    
-                    return (
-                      <div key={book.id} className="w-full">
-                        <BibleBookCard
-                          bookId={book.id}
-                          bookName={book.name}
-                          totalChapters={book.chapters}
-                          progressPercent={bookProgressPercent}
-                          testament={book.testament}
-                          onClick={() => navigate(`/bible/${book.id}`)}
-                        />
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              
-              {!selectedBook && filteredBooks.length === 0 && (
-                <div className="text-center py-8">
-                  <BookOpen className="mx-auto text-gray-300 mb-2" size={40} />
-                  <p className="text-gray-500">No books found</p>
-                </div>
+              ) : (
+                // Display books list for both mobile and desktop
+                <BibleBooksList 
+                  books={bibleBooks}
+                  getBookProgress={getBookProgress}
+                  searchTerm={searchTerm}
+                  activeTestament={activeTestament}
+                  isMobile={isMobile}
+                />
               )}
             </div>
           </SidebarInset>
