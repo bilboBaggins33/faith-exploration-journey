@@ -26,7 +26,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   return (
     <motion.div
       whileHover={{ y: -5 }}
-      className="glass-card rounded-xl flex flex-col cursor-pointer h-full overflow-hidden w-full min-w-[240px]" // Increased minimum width
+      className="glass-card rounded-xl flex flex-col cursor-pointer h-full overflow-hidden w-full" // Removed min-width
       onClick={onClick}
     >
       <div className="relative">

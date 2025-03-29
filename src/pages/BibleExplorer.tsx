@@ -1,4 +1,3 @@
-
 import { useState, useEffect, useMemo } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -223,7 +222,7 @@ const BibleExplorer = () => {
               </div>
               
               {isMobile && !selectedBook && (
-                <div className="mb-6">
+                <div className="mb-6 sticky top-24 z-10 bg-background">
                   <Select onValueChange={handleBookChange} value={bookId || "select-book"}>
                     <SelectTrigger className="w-full">
                       <SelectValue placeholder="Select a book" />
@@ -392,7 +391,6 @@ const BibleExplorer = () => {
                   </div>
                 </div>
               ) : (
-                // Display books list for both mobile and desktop
                 <BibleBooksList 
                   books={bibleBooks}
                   getBookProgress={getBookProgress}
