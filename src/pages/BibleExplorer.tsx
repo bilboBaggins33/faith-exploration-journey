@@ -118,7 +118,7 @@ const BibleExplorer = () => {
       <SidebarProvider defaultOpen={!isMobile}>
         <div className="flex-1 flex w-full pt-24">
           <Sidebar variant="inset" collapsible="icon">
-            <SidebarHeader className="mt-2">
+            <SidebarHeader className="mt-8">
               <div className="flex items-center px-2">
                 <BookOpen className="mr-2 text-bible-blue" size={20} />
                 <h3 className="font-semibold">Bible Explorer</h3>
