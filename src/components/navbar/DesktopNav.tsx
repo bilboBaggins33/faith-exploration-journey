@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LogOut, BookText, Info } from 'lucide-react';
+import { LogOut, BookText, Info, Mail } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from './NavLink';
 import { User } from '@supabase/supabase-js';
@@ -39,6 +39,12 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
           <div className="flex items-center">
             <Info className="h-4 w-4 mr-1" />
             About
+          </div>
+        </NavLink>
+        <NavLink to="/contact" active={isActive('/contact')} isScrolled={isScrolled} isHomePage={isHomePage}>
+          <div className="flex items-center">
+            <Mail className="h-4 w-4 mr-1" />
+            Contact
           </div>
         </NavLink>
         <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled} isHomePage={isHomePage}>
