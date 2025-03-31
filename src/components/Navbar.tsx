@@ -1,7 +1,8 @@
+
 import { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Menu, X, BookOpen, User, LogOut, Book, BookText } from 'lucide-react';
+import { Menu, X, BookOpen, User, LogOut, Book, BookText, Info } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useAuth } from '@/context/AuthContext';
 
@@ -84,6 +85,12 @@ const Navbar = () => {
                   Books
                 </div>
               </NavLink>
+              <NavLink to="/about" active={isActive('/about')} isScrolled={isScrolled} isHomePage={isHomePage}>
+                <div className="flex items-center">
+                  <Info className="h-4 w-4 mr-1" />
+                  About
+                </div>
+              </NavLink>
               <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled} isHomePage={isHomePage}>
                 Profile
               </NavLink>
@@ -149,6 +156,9 @@ const Navbar = () => {
             </MobileNavLink>
             <MobileNavLink to="/theology" icon={<BookText className="h-5 w-5 mr-2" />} active={isActive('/theology')}>
               Books
+            </MobileNavLink>
+            <MobileNavLink to="/about" icon={<Info className="h-5 w-5 mr-2" />} active={isActive('/about')}>
+              About
             </MobileNavLink>
             <MobileNavLink to="/profile" icon={<User className="h-5 w-5 mr-2" />} active={isActive('/profile')}>
               Profile

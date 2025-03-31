@@ -16,6 +16,7 @@ import BibleExplorer from "./pages/BibleExplorer";
 import TheologyExplorer from "./pages/TheologyExplorer";
 import InstallApp from "./pages/InstallApp";
 import DailyReading from "./pages/DailyReading";
+import About from "./pages/About";
 
 // Challenge Components
 import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
@@ -47,6 +48,7 @@ const App = () => (
             <Route path="/daily-reading" element={<DailyReading />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/auth" element={<Auth />} />
+            <Route path="/about" element={<About />} />
             <Route path="/theology" element={<TheologyExplorer />} />
             <Route path="/theology/:bookId" element={<TheologyExplorer />} />
             <Route path="/theology/:bookId/:chapter" element={<TheologyChapterChallenge />} />
