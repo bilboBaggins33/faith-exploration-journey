@@ -1,12 +1,11 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { TheologyChapter } from '@/data/theology/types';
-import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { BookOpen, CheckCircle } from 'lucide-react';
+import { Card, CardContent, CardFooter, CardHeader } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
+import ChapterHeader from './chapterCard/ChapterHeader';
+import ChapterThemes from './chapterCard/ChapterThemes';
+import ChapterActionButton from './chapterCard/ChapterActionButton';
 
 interface ChapterCardProps {
   chapter: TheologyChapter;
@@ -31,26 +30,18 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter, status }) => {
   };
 
   return (
-    <Card className="glass-card">
+    <Card className="glass-card hover:shadow-lg transition-shadow duration-300">
       <CardHeader>
-        <div className="flex justify-between items-start mb-2">
-          <Badge variant="outline">Chapter {chapter.chapter}</Badge>
-          {status.completed && (
-            <Badge className={getProgressColor(status.score)}>
-              {Math.round((status.score || 0) * 10) / 10} points
-            </Badge>
-          )}
-        </div>
-        <CardTitle className="text-xl">{chapter.title}</CardTitle>
+        <ChapterHeader 
+          chapterNumber={chapter.chapter}
+          title={chapter.title}
+          isCompleted={status.completed}
+          score={status.score}
+        />
       </CardHeader>
+      
       <CardContent>
-        <div className="flex flex-wrap gap-1">
-          {chapter.key_themes.map((theme, index) => (
-            <Badge key={index} variant="secondary" className="mb-1">
-              {theme}
-            </Badge>
-          ))}
-        </div>
+        <ChapterThemes themes={chapter.key_themes} />
         
         {status.completed && (
           <div className="mt-3">
@@ -61,22 +52,13 @@ const ChapterCard: React.FC<ChapterCardProps> = ({ chapter, status }) => {
           </div>
         )}
       </CardContent>
-      <CardFooter className="flex justify-between">
-        <Link to={`/theology/${chapter.bookId}/${chapter.chapter}`}>
-          <Button className="flex items-center gap-2">
-            {status.completed ? (
-              <>
-                <CheckCircle className="h-4 w-4" />
-                Review Chapter
-              </>
-            ) : (
-              <>
-                <BookOpen className="h-4 w-4" />
-                Start Chapter
-              </>
-            )}
-          </Button>
-        </Link>
+      
+      <CardFooter>
+        <ChapterActionButton 
+          bookId={chapter.bookId}
+          chapter={chapter.chapter}
+          isCompleted={status.completed}
+        />
       </CardFooter>
     </Card>
   );
