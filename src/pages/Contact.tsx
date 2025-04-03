@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast } from "sonner";
 import { Mail, MessageSquare, User } from 'lucide-react';
+import { supabase } from "@/integrations/supabase/client";
 
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
@@ -45,16 +46,26 @@ const Contact = () => {
     },
   });
 
-  function onSubmit(values: z.infer<typeof formSchema>) {
+  async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
     
-    // Simulate form submission
-    setTimeout(() => {
-      console.log(values);
+    try {
+      const { data, error } = await supabase.functions.invoke('send-contact-email', {
+        body: values
+      });
+      
+      if (error) {
+        throw new Error(error.message);
+      }
+      
       toast.success("Message sent successfully! We'll get back to you soon.");
       form.reset();
+    } catch (error) {
+      console.error("Failed to send message:", error);
+      toast.error("Failed to send your message. Please try again later.");
+    } finally {
       setIsSubmitting(false);
-    }, 1500);
+    }
   }
 
   return (
