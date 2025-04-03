@@ -3,7 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import ChapterProgressChart from './ChapterProgressChart';
-import { BookOpen, CheckCircle, PlusCircle } from 'lucide-react';
+import { BookOpen, CheckCircle, PlusCircle, Lock, Unlock } from 'lucide-react';
 import { getProgressColorClass } from '@/lib/color-utils';
 
 interface BibleChapterCardProps {
@@ -24,6 +24,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   onClick,
 }) => {
   const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+  const isFirstChapter = chapter === 1;
 
   const getBorderColorClass = () => {
     if (!isCompleted) return "border-gray-200 hover:border-bible-blue hover:bg-blue-50";
@@ -56,6 +57,8 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
         >
           {isCompleted ? (
             <CheckCircle className="w-4 h-4 text-green-500" />
+          ) : isFirstChapter ? (
+            <Unlock className="w-4 h-4 text-bible-blue" />
           ) : (
             <PlusCircle className="w-4 h-4 text-gray-400" />
           )}
@@ -75,6 +78,16 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
             className="text-xs text-gray-500"
           >
             Score: {score}/{maxScore}
+          </motion.p>
+        )}
+        
+        {isFirstChapter && !isCompleted && (
+          <motion.p
+            initial={{ y: 5, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            className="text-xs text-bible-blue mt-1"
+          >
+            Try without login!
           </motion.p>
         )}
       </div>

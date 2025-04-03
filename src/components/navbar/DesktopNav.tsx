@@ -1,6 +1,7 @@
+
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LogOut, BookText, Info, Mail } from 'lucide-react';
+import { LogOut, BookText, Info, Mail, LogIn } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from './NavLink';
 import { User } from '@supabase/supabase-js';
@@ -18,9 +19,9 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
   
   const getSignInButtonClasses = () => {
     if (isHomePage && !isScrolled) {
-      return 'border-bible-blue text-bible-blue hover:bg-bible-blue/10';
+      return 'bg-bible-blue text-white hover:bg-bible-deepBlue';
     }
-    return 'border-bible-dark text-bible-dark dark:border-white dark:text-white hover:bg-bible-dark/10 dark:hover:bg-white/10';
+    return 'bg-bible-dark text-white dark:bg-white dark:text-bible-dark hover:bg-bible-dark/90 dark:hover:bg-white/90';
   };
 
   return (
@@ -61,7 +62,7 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
           <Button 
             variant="outline" 
             size="sm" 
-            className={`ml-4 flex items-center transition-colors duration-300 ${getSignInButtonClasses()}`} 
+            className="ml-4 flex items-center transition-colors duration-300 border-bible-dark text-bible-dark dark:border-white dark:text-white hover:bg-bible-dark/10 dark:hover:bg-white/10" 
             onClick={handleSignOut}
           >
             <LogOut className="h-4 w-4 mr-2" />
@@ -70,10 +71,10 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
         ) : (
           <Link to="/auth">
             <Button 
-              variant="outline" 
               size="sm" 
-              className={`ml-4 transition-colors duration-300 ${getSignInButtonClasses()}`}
+              className={`ml-4 transition-colors duration-300 flex items-center ${getSignInButtonClasses()}`}
             >
+              <LogIn className="h-4 w-4 mr-2" />
               Sign In
             </Button>
           </Link>

@@ -32,7 +32,7 @@ export const useChallengeState = () => {
   
   // Track whether this challenge is already completed
   const challengeId = `${bookId}-${chapter}`;
-  const challengeCompleted = isCompleted(challengeId);
+  const challengeCompleted = user ? isCompleted(challengeId) : false;
   
   useEffect(() => {
     console.log('BibleChapterChallenge component mounted', { bookId, chapter });
@@ -120,8 +120,8 @@ export const useChallengeState = () => {
       // Complete the challenge
       setQuizCompleted(true);
       
-      // Only update score if it's a new score or better than previous
-      if (!challengeCompleted || retakeInProgress) {
+      // Only update score if user is logged in and it's a new score or better than previous
+      if (user && (!challengeCompleted || retakeInProgress)) {
         console.log('Completing challenge with score:', score);
         // Make sure challengeId is correct format: "bookId-chapter"
         // Calculate final score based on current result

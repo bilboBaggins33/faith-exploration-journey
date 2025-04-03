@@ -57,7 +57,11 @@ const BibleChapterChallenge = () => {
     );
   }
   
-  if (!user) {
+  // Allow non-logged in users to access chapter 1 of any book
+  const isFirstChapter = Number(challenge.chapter) === 1;
+  
+  // Only require login for non-first chapters
+  if (!user && !isFirstChapter) {
     return <LoginRequired />;
   }
   
@@ -101,6 +105,7 @@ const BibleChapterChallenge = () => {
             onNavigateToBook={navigateToBookPage}
             onNavigateToBible={navigateToBibleExplorer}
             bookName={book?.name || ''}
+            showSignUpPrompt={!user}
           />
         ) : (
           <div className="text-center py-12">

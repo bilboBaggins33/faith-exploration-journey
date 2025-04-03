@@ -1,11 +1,12 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Award, Bookmark, BookOpen } from 'lucide-react';
+import { Award, Bookmark, BookOpen, LogIn } from 'lucide-react';
 import { Card } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
+import { Link } from 'react-router-dom';
 
 interface ResultsCardProps {
   score: number;
@@ -16,6 +17,7 @@ interface ResultsCardProps {
   onNavigateToBook: () => void;
   onNavigateToBible: () => void;
   bookName: string;
+  showSignUpPrompt?: boolean;
 }
 
 const ResultsCard = ({
@@ -26,7 +28,8 @@ const ResultsCard = ({
   onRestartQuiz,
   onNavigateToBook,
   onNavigateToBible,
-  bookName
+  bookName,
+  showSignUpPrompt = false
 }: ResultsCardProps) => {
   // Ensure score and totalQuestions are valid numbers
   const safeScore = Math.max(0, score || 0);
@@ -76,6 +79,28 @@ const ResultsCard = ({
           <p className="italic text-gray-700 mb-2">"{keyVerseText}"</p>
           <p className="text-sm text-gray-500">{keyVerse}</p>
         </div>
+        
+        {showSignUpPrompt && (
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+            className="bg-bible-blue/10 border border-bible-blue/20 p-5 rounded-lg mb-6"
+          >
+            <h3 className="text-lg font-medium text-bible-blue mb-2">
+              Unlock Your Bible Journey
+            </h3>
+            <p className="text-gray-600 mb-4">
+              Sign up to track your progress, unlock all chapters, and continue your Bible adventure. Your scores and achievements will be saved!
+            </p>
+            <Link to="/auth">
+              <Button className="bg-bible-blue text-white hover:bg-bible-deepBlue">
+                <LogIn className="mr-2 h-4 w-4" />
+                Sign Up Now
+              </Button>
+            </Link>
+          </motion.div>
+        )}
         
         <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
           <Button 
