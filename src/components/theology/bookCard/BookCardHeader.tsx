@@ -8,24 +8,35 @@ interface BookCardHeaderProps {
   author: string;
   category: string;
   coverImage: string;
+  thumbnailImage?: string;
 }
 
 const BookCardHeader: React.FC<BookCardHeaderProps> = ({
   title,
   author,
   category,
-  coverImage
+  coverImage,
+  thumbnailImage
 }) => {
+  // If thumbnail is provided, use it, otherwise fallback to original
+  const imageToUse = thumbnailImage || coverImage;
+  
   return (
     <div className="relative overflow-hidden">
       <AspectRatio ratio={2/3} className="bg-muted">
         <img 
-          src={coverImage} 
+          src={imageToUse} 
           alt={title}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
+          loading="lazy"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
-            target.src = '/placeholder.svg';
+            // If thumbnail fails, try original image
+            if (thumbnailImage && target.src !== coverImage) {
+              target.src = coverImage;
+            } else {
+              target.src = '/placeholder.svg';
+            }
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-3">

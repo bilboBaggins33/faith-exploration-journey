@@ -72,7 +72,22 @@ export const bibleBookImages: Record<string, string> = {
   'revelation': '/assets/bible/revelation.jpg',
 };
 
+// Define thumbnail images (paths are derived from main images)
+export const bibleBookThumbnails: Record<string, string> = Object.entries(bibleBookImages).reduce(
+  (acc, [key, value]) => {
+    // Convert "/path/image.jpg" to "/path/image-thumb.jpg"
+    acc[key] = value.replace('.jpg', '-thumb.jpg');
+    return acc;
+  },
+  {} as Record<string, string>
+);
+
 // Get book image or fallback to a default image
 export const getBookImage = (bookId: string): string => {
   return bibleBookImages[bookId] || '/assets/bible/default.jpg';
+};
+
+// Get book thumbnail or fallback to full image
+export const getBookThumbnail = (bookId: string): string => {
+  return bibleBookThumbnails[bookId] || getBookImage(bookId);
 };

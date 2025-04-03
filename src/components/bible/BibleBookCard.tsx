@@ -3,7 +3,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Book } from 'lucide-react';
 import { cn } from '@/lib/utils';
-import { getBookImage } from '@/data/bible/book-images';
+import { getBookImage, getBookThumbnail } from '@/data/bible/book-images';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 interface BibleBookCardProps {
@@ -33,14 +33,20 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       <div className="relative">
         <AspectRatio ratio={16/9} className="bg-muted overflow-hidden">
           <motion.img 
-            src={getBookImage(bookId)} 
+            src={getBookThumbnail(bookId)} 
             alt={`${bookName} book cover`}
             className="w-full h-full object-cover"
+            loading="lazy"
             whileHover={{ scale: 1.1 }}
             transition={{ duration: 0.5 }}
             onError={(e) => {
               const target = e.target as HTMLImageElement;
-              target.src = '/placeholder.svg';
+              // Try the full-sized image if thumbnail fails
+              if (target.src !== getBookImage(bookId)) {
+                target.src = getBookImage(bookId);
+              } else {
+                target.src = '/placeholder.svg';
+              }
             }}
           />
           <motion.div

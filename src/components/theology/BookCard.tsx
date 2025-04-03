@@ -22,6 +22,9 @@ const BookCard: React.FC<BookCardProps> = ({
 }) => {
   const isMobile = useIsMobile();
   
+  // Generate thumbnail URL (using smaller version of the image)
+  const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
+  
   return (
     <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300">
       <BookCardHeader 
@@ -29,6 +32,7 @@ const BookCard: React.FC<BookCardProps> = ({
         author={book.author}
         category={book.category}
         coverImage={book.coverImage}
+        thumbnailImage={thumbnailImage}
       />
       
       <CardContent className="flex-grow pt-4 px-3 sm:px-4">
