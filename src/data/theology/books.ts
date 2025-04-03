@@ -6,7 +6,7 @@ export const theologyBooks: TheologyBook[] = [
     id: 'mere-christianity',
     title: 'Mere Christianity',
     author: 'C.S. Lewis',
-    chapters: 10,
+    chapters: 33,
     year: 1952,
     category: 'Apologetics',
     coverImage: '/assets/mere-christianity-cover.jpg',
