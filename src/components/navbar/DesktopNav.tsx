@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LogOut, BookText, Info, Mail } from 'lucide-react';
@@ -17,6 +16,13 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   
+  const getSignInButtonClasses = () => {
+    if (isHomePage && !isScrolled) {
+      return 'border-bible-blue text-bible-blue hover:bg-bible-blue/10';
+    }
+    return 'border-bible-dark text-bible-dark dark:border-white dark:text-white hover:bg-bible-dark/10 dark:hover:bg-white/10';
+  };
+
   return (
     <div className="hidden md:block">
       <div className="flex items-center space-x-8">
@@ -55,9 +61,7 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
           <Button 
             variant="outline" 
             size="sm" 
-            className={`ml-4 flex items-center transition-colors duration-300 ${
-              isHomePage && !isScrolled ? 'border-white text-white hover:bg-white/10' : 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white'
-            }`} 
+            className={`ml-4 flex items-center transition-colors duration-300 ${getSignInButtonClasses()}`} 
             onClick={handleSignOut}
           >
             <LogOut className="h-4 w-4 mr-2" />
@@ -68,9 +72,7 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
             <Button 
               variant="outline" 
               size="sm" 
-              className={`ml-4 transition-colors duration-300 ${
-                isHomePage && !isScrolled ? 'border-white text-white hover:bg-white/10' : 'border-bible-dark text-bible-dark hover:bg-bible-dark/10 dark:border-white dark:text-white'
-              }`}
+              className={`ml-4 transition-colors duration-300 ${getSignInButtonClasses()}`}
             >
               Sign In
             </Button>

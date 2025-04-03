@@ -9,12 +9,6 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft } from 'lucide-react';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BibleBooksList from '@/components/bible/BibleBooksList';
-import {
-  SidebarProvider,
-  Sidebar,
-  SidebarInset,
-  SidebarTrigger
-} from '@/components/ui/sidebar';
 
 // Import refactored components
 import BookSelector from '@/components/bible/explorer/BookSelector';
@@ -22,7 +16,6 @@ import RecentBooksSection from '@/components/bible/explorer/RecentBooksSection';
 import BookHeader from '@/components/bible/explorer/BookHeader';
 import ChaptersGrid from '@/components/bible/explorer/ChaptersGrid';
 import BookSearchFilter from '@/components/bible/explorer/BookSearchFilter';
-import BibleSidebar from '@/components/bible/explorer/BibleSidebar';
 
 const BibleExplorer = () => {
   const navigate = useNavigate();
@@ -66,83 +59,71 @@ const BibleExplorer = () => {
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <SidebarProvider defaultOpen={!isMobile}>
-        <div className="flex-1 flex w-full pt-24">
-          <Sidebar variant="inset" collapsible="icon">
-            <BibleSidebar 
-              recentlyReadBooks={recentlyReadBooks} 
-              currentBookId={bookId}
-            />
-          </Sidebar>
-          
-          <SidebarInset className="p-4 md:p-6">
-            <div className="max-w-7xl mx-auto">
-              <div className="flex justify-between items-center mb-6">
-                {selectedBook ? (
-                  <div className="flex items-center">
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      onClick={() => navigate('/bible')}
-                      className="mr-2"
-                    >
-                      <ArrowLeft size={16} className="mr-1" />
-                      Back
-                    </Button>
-                    <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
-                      {selectedBook.name}
-                    </h1>
-                  </div>
-                ) : (
-                  <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
-                    Bible Books
-                  </h1>
-                )}
-                <SidebarTrigger className="md:hidden" />
+      <div className="flex-1 flex w-full pt-24 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto w-full">
+          <div className="flex justify-between items-center mb-6">
+            {selectedBook ? (
+              <div className="flex items-center">
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate('/bible')}
+                  className="mr-2"
+                >
+                  <ArrowLeft size={16} className="mr-1" />
+                  Back
+                </Button>
+                <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
+                  {selectedBook.name}
+                </h1>
               </div>
+            ) : (
+              <h1 className="text-2xl md:text-3xl font-serif font-bold text-bible-dark">
+                Bible Books
+              </h1>
+            )}
+          </div>
+          
+          {isMobile && !selectedBook && (
+            <BookSelector currentBookId={bookId} />
+          )}
+          
+          {!isMobile && !selectedBook && (
+            <div className="mb-6">
+              <RecentBooksSection 
+                recentlyReadBooks={recentlyReadBooks}
+                getRecentChapter={getRecentChapter}
+              />
               
-              {isMobile && !selectedBook && (
-                <BookSelector currentBookId={bookId} />
-              )}
-              
-              {!isMobile && !selectedBook && (
-                <div className="mb-6">
-                  <RecentBooksSection 
-                    recentlyReadBooks={recentlyReadBooks}
-                    getRecentChapter={getRecentChapter}
-                  />
-                  
-                  <BookSearchFilter 
-                    searchTerm={searchTerm}
-                    setSearchTerm={setSearchTerm}
-                    setActiveTestament={setActiveTestament}
-                  />
-                </div>
-              )}
-              
-              {!loading && selectedBook ? (
-                <div className="glass-card rounded-xl overflow-hidden">
-                  <BookHeader selectedBook={selectedBook} />
-                  
-                  <ChaptersGrid 
-                    bookId={selectedBook.id}
-                    bookChapters={bookChapters}
-                    getChapterStatus={getChapterStatus}
-                  />
-                </div>
-              ) : (
-                <BibleBooksList 
-                  books={bibleBooks}
-                  getBookProgress={getBookProgress}
-                  searchTerm={searchTerm}
-                  activeTestament={activeTestament}
-                  isMobile={isMobile}
-                />
-              )}
+              <BookSearchFilter 
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+                setActiveTestament={setActiveTestament}
+              />
             </div>
-          </SidebarInset>
+          )}
+          
+          {!loading && selectedBook ? (
+            <div className="glass-card rounded-xl overflow-hidden">
+              <BookHeader selectedBook={selectedBook} />
+              
+              <ChaptersGrid 
+                bookId={selectedBook.id}
+                bookChapters={bookChapters}
+                getChapterStatus={getChapterStatus}
+              />
+            </div>
+          ) : (
+            <BibleBooksList 
+              books={bibleBooks}
+              getBookProgress={getBookProgress}
+              searchTerm={searchTerm}
+              activeTestament={activeTestament}
+              isMobile={isMobile}
+            />
+          )}
         </div>
-      </SidebarProvider>
+      </div>
       
       <Footer />
     </div>
