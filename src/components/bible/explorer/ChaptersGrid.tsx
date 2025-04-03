@@ -21,8 +21,8 @@ const ChaptersGrid = ({ bookId, bookChapters, getChapterStatus }: ChaptersGridPr
   };
 
   return (
-    <div className="p-6">
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-3">
+    <div className="p-4">
+      <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {bookChapters.map(chapter => {
           const { isCompleted, score, maxScore } = getChapterStatus(bookId, chapter);
           

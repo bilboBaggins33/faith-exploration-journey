@@ -3,8 +3,7 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import ChapterProgressChart from './ChapterProgressChart';
-import { BookOpen, CheckCircle, PlusCircle, Lock, Unlock } from 'lucide-react';
-import { getProgressColorClass } from '@/lib/color-utils';
+import { BookOpen, CheckCircle, PlusCircle, Unlock } from 'lucide-react';
 
 interface BibleChapterCardProps {
   bookId: string;
@@ -35,60 +34,47 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
 
   return (
     <motion.div
-      whileHover={{ y: -5, boxShadow: "0 10px 15px rgba(0, 0, 0, 0.1)" }}
+      whileHover={{ y: -3, boxShadow: "0 5px 10px rgba(0, 0, 0, 0.1)" }}
       transition={{ duration: 0.2 }}
       className={cn(
-        "p-4 rounded-lg border cursor-pointer transition-all shadow-sm w-full h-full backdrop-blur-sm",
-        "bg-opacity-80 overflow-hidden relative",
+        "p-2 rounded-md border cursor-pointer transition-all shadow-sm w-full h-full",
+        "bg-opacity-80 overflow-hidden relative text-center",
         getBorderColorClass()
       )}
       onClick={onClick}
     >
-      <div className="absolute top-0 right-0 opacity-10">
-        <BookOpen className="w-16 h-16 text-gray-900" />
-      </div>
-      
-      <div className="text-center relative z-10">
-        <motion.div 
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          transition={{ delay: 0.1, duration: 0.3 }}
-          className="absolute top-0 right-0 mt-1 mr-1"
-        >
-          {isCompleted ? (
-            <CheckCircle className="w-4 h-4 text-green-500" />
-          ) : isFirstChapter ? (
-            <Unlock className="w-4 h-4 text-bible-blue" />
-          ) : (
-            <PlusCircle className="w-4 h-4 text-gray-400" />
-          )}
-        </motion.div>
+      <div className="flex flex-col items-center justify-center h-full">
+        <div className="relative w-full">
+          <span className="text-xs font-medium block mb-1">Ch {chapter}</span>
+          
+          <div className="absolute top-0 right-0">
+            {isCompleted ? (
+              <CheckCircle className="w-3 h-3 text-green-500" />
+            ) : isFirstChapter ? (
+              <Unlock className="w-3 h-3 text-bible-blue" />
+            ) : (
+              <PlusCircle className="w-3 h-3 text-gray-400" />
+            )}
+          </div>
+        </div>
         
-        <span className="font-medium block mb-2">Chapter {chapter}</span>
-        <div className="mb-2">
+        <div className="w-full mb-1">
           <ChapterProgressChart 
             percentage={scorePercentage} 
-            showPercentage={true}
+            showPercentage={false}
           />
         </div>
+        
         {isCompleted && (
-          <motion.p 
-            initial={{ y: 5, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-xs text-gray-500"
-          >
-            Score: {score}/{maxScore}
-          </motion.p>
+          <p className="text-[10px] text-gray-500">
+            {score}/{maxScore}
+          </p>
         )}
         
         {isFirstChapter && !isCompleted && (
-          <motion.p
-            initial={{ y: 5, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-xs text-bible-blue mt-1"
-          >
-            Try without login!
-          </motion.p>
+          <p className="text-[10px] text-bible-blue mt-1">
+            Free Chapter
+          </p>
         )}
       </div>
     </motion.div>
