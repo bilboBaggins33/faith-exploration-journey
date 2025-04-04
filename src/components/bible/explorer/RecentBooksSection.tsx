@@ -34,8 +34,12 @@ const RecentBooksSection: React.FC<RecentBooksSectionProps> = ({
             onClick={() => onBookSelect(book.id)}
           >
             <BibleBookCard 
-              book={book}
-              progress={0}
+              bookId={book.id}
+              bookName={book.name}
+              totalChapters={book.chapters}
+              progressPercent={0}  // Default to 0 for recently read books
+              testament={book.testament}
+              onClick={() => onBookSelect(book.id)}
             />
           </div>
         ))}
