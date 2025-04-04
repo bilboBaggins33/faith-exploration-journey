@@ -41,7 +41,7 @@ const BookHeader = ({ book, onBack }: BookHeaderProps) => {
 
   return (
     <div className="relative">
-      <AspectRatio ratio={16/9} className="bg-muted">
+      <AspectRatio ratio={3/1} className="bg-muted">
         <img 
           src={getBookImage(book.id)} 
           alt={`${book.name} book cover`}

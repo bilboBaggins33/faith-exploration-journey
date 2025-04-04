@@ -31,9 +31,6 @@ const MobileNav = ({ isOpen, user, handleSignOut }: MobileNavProps) => {
         <MobileNavLink to="/" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/')}>
           Home
         </MobileNavLink>
-        <MobileNavLink to="/challenge" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/challenge')}>
-          Challenges
-        </MobileNavLink>
         <MobileNavLink to="/bible" icon={<Book className="h-5 w-5 mr-2" />} active={isActive('/bible')}>
           Bible
         </MobileNavLink>

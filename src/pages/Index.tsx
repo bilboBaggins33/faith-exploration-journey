@@ -452,14 +452,14 @@ const CallToAction = () => {
                 <div className="flex flex-col space-y-4">
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
-                      src="https://images.unsplash.com/photo-1504052434569-70c99356bba1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                      src="/assets/bible/genesis.jpg" 
                       alt="Open Bible"
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
-                      src="https://images.unsplash.com/photo-1590247813693-5541d1c609fd?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                      src="/assets/bible/exodus.jpg" 
                       alt="Reading Scripture"
                       className="h-full w-full object-cover"
                     />
@@ -468,14 +468,14 @@ const CallToAction = () => {
                 <div className="flex flex-col space-y-4 pt-6">
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform -rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
-                      src="https://images.unsplash.com/photo-1501612780327-45045538702b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                      src="/assets/bible/matthew.jpg" 
                       alt="Digital reading"
                       className="h-full w-full object-cover"
                     />
                   </div>
                   <div className="h-24 w-24 md:h-32 md:w-32 rounded-lg overflow-hidden shadow-lg transform rotate-3 hover:rotate-0 transition-transform duration-300">
                     <img 
-                      src="https://images.unsplash.com/photo-1555116505-38ab61800975?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                      src="/assets/bible/mark.jpg" 
                       alt="Study group"
                       className="h-full w-full object-cover"
                     />

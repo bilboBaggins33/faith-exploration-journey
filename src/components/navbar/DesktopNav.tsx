@@ -30,9 +30,6 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
         <NavLink to="/" active={isActive('/')} isScrolled={isScrolled} isHomePage={isHomePage}>
           Home
         </NavLink>
-        <NavLink to="/challenge" active={isActive('/challenge')} isScrolled={isScrolled} isHomePage={isHomePage}>
-          Challenges
-        </NavLink>
         <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled} isHomePage={isHomePage}>
           Bible
         </NavLink>

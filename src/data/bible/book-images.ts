@@ -2,7 +2,7 @@
 // Maps Bible book IDs to their respective image paths
 export const bibleBookImages: Record<string, string> = {
   // Old Testament
-  'genesis': '/assets/bible/genesis.jpg',
+  'genesis': '/assets/bible/1280/genesis.webp',
   'exodus': '/assets/bible/exodus.jpg',
   'leviticus': '/assets/bible/leviticus.jpg',
   'numbers': '/assets/bible/numbers.jpg',
@@ -23,7 +23,7 @@ export const bibleBookImages: Record<string, string> = {
   'psalms': '/assets/bible/psalms.jpg',
   'proverbs': '/assets/bible/proverbs.jpg',
   'ecclesiastes': '/assets/bible/ecclesiastes.jpg',
-  'song': '/assets/bible/song.jpg',
+  'songofsolomon': '/assets/bible/song.jpg',
   'isaiah': '/assets/bible/isaiah.jpg',
   'jeremiah': '/assets/bible/jeremiah.jpg',
   'lamentations': '/assets/bible/lamentations.jpg',
