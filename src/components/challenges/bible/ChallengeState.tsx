@@ -1,8 +1,10 @@
 
 import React from 'react';
 import { useBibleChallenges } from '@/hooks/bible/use-bible-challenges';
+import { useAuth } from '@/context/auth';
 import LoadingState from './LoadingState';
 import ErrorState from './ErrorState';
+import LoginRequired from './LoginRequired';
 
 interface ChallengeStateProps {
   bookId: string;
@@ -12,6 +14,15 @@ interface ChallengeStateProps {
 
 const ChallengeState = ({ bookId, chapter, children }: ChallengeStateProps) => {
   const { data, isLoading, isError } = useBibleChallenges(bookId, chapter);
+  const { user } = useAuth();
+
+  // Allow access to first chapter of each book without login
+  const isFirstChapter = chapter === 1;
+  
+  // If not logged in and not the first chapter, require login
+  if (!user && !isFirstChapter) {
+    return <LoginRequired />;
+  }
 
   if (isLoading) {
     return <LoadingState />;

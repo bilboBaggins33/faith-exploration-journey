@@ -18,6 +18,7 @@ const BibleExplorer = () => {
   const navigate = useNavigate();
   const { bookId } = useParams();
   const selectedBook = selectedBookId ? bibleBooks.find(book => book.id === selectedBookId) : null;
+  const { user } = useAuth();
   
   // Mock data for recently read books - in a real app this would come from user data
   const recentlyReadBooks = bibleBooks.slice(0, 3);
@@ -32,8 +33,6 @@ const BibleExplorer = () => {
     setSelectedBookId(bookId);
     navigate(`/bible/${bookId}`);
   };
-
-  // No authentication check needed for Bible explorer
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -54,6 +53,7 @@ const BibleExplorer = () => {
               {selectedBookId ? (
                 <SubscriptionRequired
                   message="Access to complete Bible chapters requires a premium subscription"
+                  allowViewOnly={true}
                 >
                   <div className="max-w-7xl mx-auto">
                     <BookHeader

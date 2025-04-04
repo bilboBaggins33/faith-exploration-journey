@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '@/context/auth';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { bibleBooks } from '@/data/bible';
 
@@ -10,6 +11,7 @@ interface ChaptersGridProps {
 
 const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigate = useNavigate();
+  const { user } = useAuth();
   
   if (!bookId) return null;
   
@@ -25,10 +27,14 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   // Mock function to return chapter status
   const getChapterStatus = (bookId: string, chapter: number) => {
     // In a real app, this would fetch from a user progress store/API
+    // First chapter is always free
+    const isFree = chapter === 1;
+    
     return {
       isCompleted: false,
       score: 0,
-      maxScore: 10
+      maxScore: 10,
+      isFree
     };
   };
 
@@ -36,7 +42,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
     <div className="p-4">
       <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {bookChapters.map(chapter => {
-          const { isCompleted, score, maxScore } = getChapterStatus(bookId, chapter);
+          const { isCompleted, score, maxScore, isFree } = getChapterStatus(bookId, chapter);
           
           return (
             <div key={chapter} className="w-full aspect-square">
@@ -46,6 +52,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
                 isCompleted={isCompleted}
                 score={score}
                 maxScore={maxScore}
+                isUnlocked={user ? true : isFree} // Free to all users if chapter 1, otherwise requires login
                 onClick={() => navigateToChapter(bookId, chapter)}
               />
             </div>
