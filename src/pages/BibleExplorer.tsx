@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -9,14 +10,13 @@ import BookSelector from '@/components/bible/explorer/BookSelector';
 import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import { useAuth } from '@/context/auth';
-import { getBibleBooks } from '@/data/bible';
+import { bibleBooks } from '@/data/bible';
 
 const BibleExplorer = () => {
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const { bookId } = useParams();
-  const bibleBooks = getBibleBooks();
   const selectedBook = selectedBookId ? bibleBooks.find(book => book.id === selectedBookId) : null;
 
   useEffect(() => {
@@ -45,7 +45,6 @@ const BibleExplorer = () => {
       <main className="flex-1 pt-16">
         <div className="flex flex-col md:flex-row">
           <BibleSidebar
-            selectedBookId={selectedBookId}
             onBookSelect={handleBookSelect}
             isMobileOpen={isSidebarOpen}
             onMobileClose={() => setIsSidebarOpen(false)}
@@ -58,19 +57,18 @@ const BibleExplorer = () => {
               >
                 <div className="max-w-7xl mx-auto">
                   <BookHeader
-                    selectedBook={selectedBook}
-                    onBackClick={() => setSelectedBookId(null)}
+                    book={selectedBook}
+                    onBack={() => setSelectedBookId(null)}
                   />
                   <ChaptersGrid 
-                    selectedBook={selectedBook}
-                    selectedBookId={selectedBookId}
+                    bookId={selectedBookId}
                   />
                 </div>
               </SubscriptionRequired>
             ) : (
               <div className="max-w-7xl mx-auto">
                 <h1 className="text-3xl font-serif font-bold mb-8">Bible Explorer</h1>
-                <BookSelector onBookSelect={handleBookSelect} />
+                <BookSelector onSelect={handleBookSelect} />
               </div>
             )}
           </div>
