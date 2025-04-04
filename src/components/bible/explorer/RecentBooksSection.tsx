@@ -1,46 +1,46 @@
 
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { BibleBook } from '@/data/bible/types';
-import BibleBookCard from '@/components/bible/BibleBookCard';
+import BibleBookCard from '../BibleBookCard';
+import { Separator } from '@/components/ui/separator';
 
 interface RecentBooksSectionProps {
-  books: BibleBook[];
-  title?: string;
-  emptyMessage?: string;
+  recentBooks: BibleBook[];
+  onBookSelect: (bookId: string) => void;
 }
 
-const RecentBooksSection = ({
-  books = [],
-  title = "Recently Read",
-  emptyMessage = "No recently read books yet. Start exploring!"
-}: RecentBooksSectionProps) => {
-  if (!books || books.length === 0) {
+const RecentBooksSection: React.FC<RecentBooksSectionProps> = ({
+  recentBooks,
+  onBookSelect
+}) => {
+  if (!recentBooks || recentBooks.length === 0) {
     return (
-      <div className="p-4 text-center">
-        <h3 className="font-medium text-lg mb-2">{title}</h3>
-        <p className="text-gray-500">{emptyMessage}</p>
+      <div className="py-4">
+        <p className="text-sm text-muted-foreground">
+          No recently read books yet. Start exploring to see your reading history here.
+        </p>
       </div>
     );
   }
-  
+
   return (
-    <div className="p-4">
-      <h3 className="font-medium text-lg mb-4">{title}</h3>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        {books.map((book) => (
-          <Link to={`/bible/${book.id}`} key={book.id}>
-            <div className="h-full">
-              <BibleBookCard 
-                bookId={book.id}
-                name={book.name}
-                testament={book.testament}
-                chapters={book.chapters}
-              />
-            </div>
-          </Link>
+    <div className="py-4">
+      <h3 className="text-sm font-semibold mb-3">Recently Read</h3>
+      <div className="space-y-3">
+        {recentBooks.map((book) => (
+          <div 
+            key={book.id} 
+            className="cursor-pointer"
+            onClick={() => onBookSelect(book.id)}
+          >
+            <BibleBookCard 
+              book={book}
+              progress={0}
+            />
+          </div>
         ))}
       </div>
+      <Separator className="my-4" />
     </div>
   );
 };

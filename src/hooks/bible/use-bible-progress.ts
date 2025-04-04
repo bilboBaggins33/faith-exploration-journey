@@ -9,7 +9,7 @@ import {
   updateUserProfile, 
   updateBibleProgress 
 } from './use-bible-data';
-import { completeChallenge as completeUserChallenge, isChallengeCompleted } from './use-bible-challenges';
+import { completeChallenge, isChallengeCompleted } from './use-bible-challenges';
 
 export const useBibleProgress = (): UseBibleProgressReturn => {
   const { user } = useAuth();
@@ -105,11 +105,11 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
   };
 
   // Helper function to complete a challenge
-  const completeChallenge = async (challengeId: string, pointsEarned: number = 10) => {
+  const completeUserChallenge = async (challengeId: string, pointsEarned: number = 10) => {
     if (!user || !progress) return;
     
     try {
-      const updatedProgress = await completeUserChallenge(
+      const updatedProgress = await completeChallenge(
         user.id,
         challengeId,
         pointsEarned,
@@ -133,7 +133,7 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
     updateProgress,
     getBookProgress,
     isCompleted,
-    completeChallenge,
+    completeChallenge: completeUserChallenge,
     getChapterStatus: getChapterStatusWrapper
   };
 };
