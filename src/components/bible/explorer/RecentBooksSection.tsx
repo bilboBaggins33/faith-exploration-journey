@@ -1,69 +1,38 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { ArrowRight } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
-import { getBookImage } from '@/data/bible/book-images';
-import { BibleBook } from '@/data/bibleData';
+import { ArrowRight } from 'lucide-react';
+import BibleBookCard from '@/components/bible/BibleBookCard';
+import { bibleBooks } from '@/data/bible';
+import { BibleBook } from '@/data/bible/types';
 
-interface RecentBooksSectionProps {
-  recentlyReadBooks: BibleBook[];
-  getRecentChapter: (bookId: string) => number;
-}
-
-const RecentBooksSection = ({ recentlyReadBooks, getRecentChapter }: RecentBooksSectionProps) => {
-  const navigate = useNavigate();
+const RecentBooksSection = ({ recentBooks = [] }: { recentBooks?: BibleBook[] }) => {
+  // If no recent books provided, use some default ones
+  const booksToShow = recentBooks.length > 0 ? recentBooks : bibleBooks.slice(0, 3);
   
-  const navigateToChapter = (bookId: string, chapter: number) => {
-    navigate(`/challenge/bible/${bookId}/${chapter}`);
-  };
-
   return (
-    <div className="glass-card p-5 rounded-xl mb-6">
-      <h2 className="text-xl font-bold mb-3">Continue Reading</h2>
-      {recentlyReadBooks.length > 0 ? (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-          {recentlyReadBooks.slice(0, 3).map(book => {
-            const recentChapter = getRecentChapter(book.id);
-            return (
-              <motion.div
-                key={book.id}
-                whileHover={{ y: -5 }}
-                className="bg-white shadow-sm rounded-lg overflow-hidden flex flex-col cursor-pointer"
-                onClick={() => navigateToChapter(book.id, recentChapter)}
-              >
-                <AspectRatio ratio={16/9} className="bg-muted">
-                  <img 
-                    src={getBookImage(book.id)} 
-                    alt={`${book.name} book cover`}
-                    className="w-full h-full object-cover"
-                    onError={(e) => {
-                      const target = e.target as HTMLImageElement;
-                      target.src = '/placeholder.svg';
-                    }}
-                  />
-                </AspectRatio>
-                <div className="p-4 flex items-center justify-between">
-                  <div>
-                    <h3 className="font-medium">{book.name}</h3>
-                    <p className="text-xs text-gray-500">Chapter {recentChapter}</p>
-                  </div>
-                  <Button variant="ghost" size="icon">
-                    <ArrowRight size={16} />
-                  </Button>
-                </div>
-              </motion.div>
-            );
-          })}
+    <Card className="mb-8">
+      <CardContent className="p-6">
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="text-xl font-semibold">Recently Read</h3>
+          <Button variant="link" asChild>
+            <Link to="/bible" className="flex items-center">
+              View All <ArrowRight className="ml-1 h-4 w-4" />
+            </Link>
+          </Button>
         </div>
-      ) : (
-        <p className="text-gray-500">
-          Start reading the Bible to see your recent books here.
-        </p>
-      )}
-    </div>
+        
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          {booksToShow.map(book => (
+            <Link key={book.id} to={`/bible/${book.id}`}>
+              <BibleBookCard book={book} />
+            </Link>
+          ))}
+        </div>
+      </CardContent>
+    </Card>
   );
 };
 

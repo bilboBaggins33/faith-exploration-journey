@@ -53,7 +53,7 @@ const BibleSidebar = ({
       </SidebarHeader>
       
       <SidebarContent>
-        {recentlyReadBooks.length > 0 && (
+        {recentlyReadBooks && recentlyReadBooks.length > 0 && (
           <SidebarGroup>
             <SidebarGroupLabel>
               <Clock size={16} className="mr-1" />

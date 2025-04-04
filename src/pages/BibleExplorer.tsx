@@ -10,7 +10,8 @@ import BookSelector from '@/components/bible/explorer/BookSelector';
 import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import { useAuth } from '@/context/auth';
-import { bibleBooks } from '@/data/bible';
+import { bibleBooks } from '@/data/bible'; 
+import { SidebarProvider } from '@/components/ui/sidebar';
 
 const BibleExplorer = () => {
   const [selectedBookId, setSelectedBookId] = useState<string | null>(null);
@@ -46,38 +47,40 @@ const BibleExplorer = () => {
       <Navbar />
       
       <main className="flex-1 pt-16">
-        <div className="flex flex-col md:flex-row">
-          <BibleSidebar
-            recentlyReadBooks={recentlyReadBooks}
-            currentBookId={selectedBookId || undefined}
-            onBookSelect={handleBookSelect}
-            isMobileOpen={isSidebarOpen}
-            onMobileClose={() => setIsSidebarOpen(false)}
-          />
-          
-          <div className="flex-1 p-4 md:p-8">
-            {selectedBookId ? (
-              <SubscriptionRequired
-                message="Access to complete Bible chapters requires a premium subscription"
-              >
+        <SidebarProvider>
+          <div className="flex flex-col md:flex-row w-full">
+            <BibleSidebar
+              recentlyReadBooks={recentlyReadBooks}
+              currentBookId={selectedBookId || undefined}
+              onBookSelect={handleBookSelect}
+              isMobileOpen={isSidebarOpen}
+              onMobileClose={() => setIsSidebarOpen(false)}
+            />
+            
+            <div className="flex-1 p-4 md:p-8">
+              {selectedBookId ? (
+                <SubscriptionRequired
+                  message="Access to complete Bible chapters requires a premium subscription"
+                >
+                  <div className="max-w-7xl mx-auto">
+                    <BookHeader
+                      book={selectedBook}
+                      onBack={() => setSelectedBookId(null)}
+                    />
+                    <ChaptersGrid 
+                      bookId={selectedBookId}
+                    />
+                  </div>
+                </SubscriptionRequired>
+              ) : (
                 <div className="max-w-7xl mx-auto">
-                  <BookHeader
-                    book={selectedBook}
-                    onBack={() => setSelectedBookId(null)}
-                  />
-                  <ChaptersGrid 
-                    bookId={selectedBookId}
-                  />
+                  <h1 className="text-3xl font-serif font-bold mb-8">Bible Explorer</h1>
+                  <BookSelector onSelect={handleBookSelect} />
                 </div>
-              </SubscriptionRequired>
-            ) : (
-              <div className="max-w-7xl mx-auto">
-                <h1 className="text-3xl font-serif font-bold mb-8">Bible Explorer</h1>
-                <BookSelector onSelect={handleBookSelect} />
-              </div>
-            )}
+              )}
+            </div>
           </div>
-        </div>
+        </SidebarProvider>
       </main>
       
       <Footer />
