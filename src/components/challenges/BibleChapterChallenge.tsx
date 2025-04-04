@@ -10,7 +10,7 @@ import ResultsCard from './bible/ResultsCard';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import LoginRequired from './bible/LoginRequired';
-import { useChallengeState } from './bible/ChallengeState';
+import ChallengeState, { useChallengeState } from './bible/ChallengeState';
 import { useNavigate } from 'react-router-dom';
 
 const BibleChapterChallenge = () => {
