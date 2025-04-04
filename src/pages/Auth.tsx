@@ -11,7 +11,7 @@ import {
   TabsList, 
   TabsTrigger 
 } from "@/components/ui/tabs";
-import { Eye, EyeOff, User, Key, Mail, ShieldCheck } from 'lucide-react';
+import { Eye, EyeOff, User, Key, Mail, ShieldCheck, CreditCard } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth'; // Updated import
 import { useToast } from '@/hooks/use-toast';
@@ -328,6 +328,26 @@ const RegisterForm = () => {
           </p>
         </div>
         
+        {/* Subscription information */}
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
+          <div className="flex items-start">
+            <CreditCard className="text-bible-blue mt-1 mr-3 flex-shrink-0" size={18} />
+            <div>
+              <h3 className="font-medium text-bible-blue">Premium Membership</h3>
+              <p className="text-sm text-gray-600">
+                Your subscription includes full access to all Bible challenges and theology books.
+              </p>
+              <div className="mt-2 flex items-baseline">
+                <span className="text-lg font-bold text-bible-blue">$2.99</span>
+                <span className="ml-1 text-sm text-gray-500">/month</span>
+              </div>
+              <p className="text-xs text-gray-500 mt-1">
+                First payment will be processed after sign up. Cancel anytime.
+              </p>
+            </div>
+          </div>
+        </div>
+        
         <form onSubmit={handleSubmit} className="space-y-4">
           <div className="space-y-2">
             <label 
@@ -464,7 +484,7 @@ const RegisterForm = () => {
                 Creating account...
               </span>
             ) : (
-              'Create Account'
+              'Sign Up & Subscribe - $2.99/month'
             )}
           </Button>
         </form>
