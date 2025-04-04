@@ -7,7 +7,6 @@ import BibleSidebar from '@/components/bible/explorer/BibleSidebar';
 import BookHeader from '@/components/bible/explorer/BookHeader';
 import ChaptersGrid from '@/components/bible/explorer/ChaptersGrid';
 import BookSelector from '@/components/bible/explorer/BookSelector';
-import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import { useAuth } from '@/context/auth';
 import { bibleBooks } from '@/data/bible'; 
@@ -34,13 +33,7 @@ const BibleExplorer = () => {
     navigate(`/bible/${bookId}`);
   };
 
-  const { user, isLoading } = useAuth();
-  
-  // If the user is not logged in and we've finished loading auth state,
-  // show the login required component
-  if (!isLoading && !user) {
-    return <LoginRequired />;
-  }
+  // No authentication check needed for Bible explorer
   
   return (
     <div className="min-h-screen flex flex-col">
