@@ -9,11 +9,13 @@ import { useAuth } from '@/context/auth';
 interface SubscriptionRequiredProps {
   children: React.ReactNode;
   message?: string;
+  allowViewOnly?: boolean; // Added optional prop
 }
 
 const SubscriptionRequired = ({ 
   children, 
-  message = "This content requires a premium subscription" 
+  message = "This content requires a premium subscription",
+  allowViewOnly = false // Default to false if not specified
 }: SubscriptionRequiredProps) => {
   const { hasSubscription, checkingSubscription, createSubscription } = useAuth();
   const navigate = useNavigate();
@@ -46,36 +48,38 @@ const SubscriptionRequired = ({
     );
   }
   
-  if (!hasSubscription) {
-    return (
-      <Card className="p-6">
-        <div className="text-center">
-          <CreditCard className="h-10 w-10 text-bible-blue mx-auto mb-4" />
-          <h3 className="text-xl font-bold mb-2">Premium Content</h3>
-          <p className="text-gray-600 mb-6">{message}</p>
-          <Button 
-            onClick={handleSubscribe} 
-            className="bg-bible-blue hover:bg-bible-deepBlue"
-            disabled={isCreatingSubscription}
-          >
-            {isCreatingSubscription ? (
-              <>
-                <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                Processing...
-              </>
-            ) : (
-              'Subscribe Now - $2.99/month'
-            )}
-          </Button>
-          <p className="text-sm text-gray-500 mt-4">
-            Your subscription gives you full access to all premium content and features.
-          </p>
-        </div>
-      </Card>
-    );
+  // If allowViewOnly is true, always show children, even without subscription
+  if (allowViewOnly || hasSubscription) {
+    return <>{children}</>;
   }
   
-  return <>{children}</>;
+  return (
+    <Card className="p-6">
+      <div className="text-center">
+        <CreditCard className="h-10 w-10 text-bible-blue mx-auto mb-4" />
+        <h3 className="text-xl font-bold mb-2">Premium Content</h3>
+        <p className="text-gray-600 mb-6">{message}</p>
+        <Button 
+          onClick={handleSubscribe} 
+          className="bg-bible-blue hover:bg-bible-deepBlue"
+          disabled={isCreatingSubscription}
+        >
+          {isCreatingSubscription ? (
+            <>
+              <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+              Processing...
+            </>
+          ) : (
+            'Subscribe Now - $2.99/month'
+          )}
+        </Button>
+        <p className="text-sm text-gray-500 mt-4">
+          Your subscription gives you full access to all premium content and features.
+        </p>
+      </div>
+    </Card>
+  );
 };
 
 export default SubscriptionRequired;
+
