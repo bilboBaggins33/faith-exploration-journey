@@ -2,7 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Book, BookOpen, Clock } from 'lucide-react';
-import { bibleBooks } from '@/data/bibleData';
+import { bibleBooks } from '@/data/bible';
 import { 
   SidebarHeader, 
   SidebarContent, 
@@ -12,15 +12,36 @@ import {
   SidebarMenuItem, 
   SidebarMenuButton 
 } from '@/components/ui/sidebar';
-import { BibleBook } from '@/data/bibleData';
+import { BibleBook } from '@/data/bible/types';
 
 interface BibleSidebarProps {
-  recentlyReadBooks: BibleBook[];
+  recentlyReadBooks?: BibleBook[];
   currentBookId?: string;
+  onBookSelect: (bookId: string) => void;
+  isMobileOpen?: boolean;
+  onMobileClose?: () => void;
 }
 
-const BibleSidebar = ({ recentlyReadBooks, currentBookId }: BibleSidebarProps) => {
+const BibleSidebar = ({ 
+  recentlyReadBooks = [], 
+  currentBookId,
+  onBookSelect,
+  isMobileOpen,
+  onMobileClose
+}: BibleSidebarProps) => {
   const navigate = useNavigate();
+  
+  const handleBookSelect = (bookId: string) => {
+    if (onBookSelect) {
+      onBookSelect(bookId);
+    } else {
+      navigate(`/bible/${bookId}`);
+    }
+    
+    if (isMobileOpen && onMobileClose) {
+      onMobileClose();
+    }
+  };
   
   return (
     <>
@@ -43,7 +64,7 @@ const BibleSidebar = ({ recentlyReadBooks, currentBookId }: BibleSidebarProps) =
                 <SidebarMenuItem key={book.id}>
                   <SidebarMenuButton
                     isActive={currentBookId === book.id} 
-                    onClick={() => navigate(`/bible/${book.id}`)}
+                    onClick={() => handleBookSelect(book.id)}
                     tooltip={`${book.name} (${book.testament === 'old' ? 'OT' : 'NT'})`}
                   >
                     <Book size={16} />
@@ -66,7 +87,7 @@ const BibleSidebar = ({ recentlyReadBooks, currentBookId }: BibleSidebarProps) =
                 <SidebarMenuItem key={book.id}>
                   <SidebarMenuButton 
                     isActive={currentBookId === book.id}
-                    onClick={() => navigate(`/bible/${book.id}`)}
+                    onClick={() => handleBookSelect(book.id)}
                     tooltip={`${book.name} (${book.chapters} chapters)`}
                   >
                     <Book size={16} />
@@ -88,7 +109,7 @@ const BibleSidebar = ({ recentlyReadBooks, currentBookId }: BibleSidebarProps) =
                 <SidebarMenuItem key={book.id}>
                   <SidebarMenuButton 
                     isActive={currentBookId === book.id}
-                    onClick={() => navigate(`/bible/${book.id}`)}
+                    onClick={() => handleBookSelect(book.id)}
                     tooltip={`${book.name} (${book.chapters} chapters)`}
                   >
                     <Book size={16} />

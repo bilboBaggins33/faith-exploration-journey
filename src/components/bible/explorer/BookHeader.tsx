@@ -5,24 +5,21 @@ import { Button } from '@/components/ui/button';
 import { ArrowLeft, ArrowLeftCircle, ArrowRightCircle, BookMarked } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { getBookImage } from '@/data/bible/book-images';
-import { bibleBooks } from '@/data/bibleData';
+import { bibleBooks } from '@/data/bible';
+import { BibleBook } from '@/data/bible/types';
 
 interface BookHeaderProps {
-  selectedBook: {
-    id: string;
-    name: string;
-    testament: string;
-    chapters: number;
-  } | undefined;
+  book: BibleBook | null | undefined;
+  onBack?: () => void;
 }
 
-const BookHeader = ({ selectedBook }: BookHeaderProps) => {
+const BookHeader = ({ book, onBack }: BookHeaderProps) => {
   const navigate = useNavigate();
 
   const navigateToAdjacentBook = (direction: 'prev' | 'next') => {
-    if (!selectedBook) return;
+    if (!book) return;
     
-    const currentIndex = bibleBooks.findIndex(book => book.id === selectedBook.id);
+    const currentIndex = bibleBooks.findIndex(b => b.id === book.id);
     if (currentIndex === -1) return;
     
     const newIndex = direction === 'prev' 
@@ -32,14 +29,22 @@ const BookHeader = ({ selectedBook }: BookHeaderProps) => {
     navigate(`/bible/${bibleBooks[newIndex].id}`);
   };
 
-  if (!selectedBook) return null;
+  const handleBack = () => {
+    if (onBack) {
+      onBack();
+    } else {
+      navigate('/bible');
+    }
+  };
+
+  if (!book) return null;
 
   return (
     <div className="relative">
       <AspectRatio ratio={16/9} className="bg-muted">
         <img 
-          src={getBookImage(selectedBook.id)} 
-          alt={`${selectedBook.name} book cover`}
+          src={getBookImage(book.id)} 
+          alt={`${book.name} book cover`}
           className="w-full h-full object-cover"
           onError={(e) => {
             const target = e.target as HTMLImageElement;
@@ -70,11 +75,11 @@ const BookHeader = ({ selectedBook }: BookHeaderProps) => {
       <div className="absolute bottom-0 left-0 p-6">
         <h2 className="text-2xl font-serif font-bold text-white flex items-center">
           <BookMarked className="mr-2 text-white" />
-          {selectedBook.name}
+          {book.name}
         </h2>
         <p className="text-white/80">
-          {selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'} • 
-          {selectedBook.chapters} chapters
+          {book.testament === 'old' ? 'Old Testament' : 'New Testament'} • 
+          {book.chapters} chapters
         </p>
       </div>
     </div>

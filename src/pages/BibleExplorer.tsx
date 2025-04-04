@@ -18,6 +18,9 @@ const BibleExplorer = () => {
   const navigate = useNavigate();
   const { bookId } = useParams();
   const selectedBook = selectedBookId ? bibleBooks.find(book => book.id === selectedBookId) : null;
+  
+  // Mock data for recently read books - in a real app this would come from user data
+  const recentlyReadBooks = bibleBooks.slice(0, 3);
 
   useEffect(() => {
     if (bookId) {
@@ -45,6 +48,8 @@ const BibleExplorer = () => {
       <main className="flex-1 pt-16">
         <div className="flex flex-col md:flex-row">
           <BibleSidebar
+            recentlyReadBooks={recentlyReadBooks}
+            currentBookId={selectedBookId || undefined}
             onBookSelect={handleBookSelect}
             isMobileOpen={isSidebarOpen}
             onMobileClose={() => setIsSidebarOpen(false)}

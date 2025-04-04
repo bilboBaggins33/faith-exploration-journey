@@ -2,22 +2,34 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
+import { bibleBooks } from '@/data/bible';
 
 interface ChaptersGridProps {
-  bookId: string;
-  bookChapters: number[];
-  getChapterStatus: (bookId: string, chapter: number) => {
-    isCompleted: boolean;
-    score: number;
-    maxScore: number;
-  };
+  bookId: string | null;
 }
 
-const ChaptersGrid = ({ bookId, bookChapters, getChapterStatus }: ChaptersGridProps) => {
+const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigate = useNavigate();
-
-  const navigateToChapter = (bookId: string, chapter: number) => {
-    navigate(`/challenge/bible/${bookId}/${chapter}`);
+  
+  if (!bookId) return null;
+  
+  const book = bibleBooks.find(book => book.id === bookId);
+  if (!book) return null;
+  
+  const bookChapters = Array.from({ length: book.chapters }, (_, i) => i + 1);
+  
+  const navigateToChapter = (chapterBookId: string, chapter: number) => {
+    navigate(`/challenge/bible/${chapterBookId}/${chapter}`);
+  };
+  
+  // Mock function to return chapter status
+  const getChapterStatus = (bookId: string, chapter: number) => {
+    // In a real app, this would fetch from a user progress store/API
+    return {
+      isCompleted: false,
+      score: 0,
+      maxScore: 10
+    };
   };
 
   return (
