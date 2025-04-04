@@ -3,3 +3,9 @@ project_id = "fwjfbenicnnprhkmnsmm"
 
 [functions.send-contact-email]
 verify_jwt = false
+
+[functions.create-subscription]
+verify_jwt = true
+
+[functions.check-subscription]
+verify_jwt = true

@@ -125,7 +125,7 @@ export const useAuthOperations = () => {
       
       toast({
         title: "Account created!",
-        description: "Please verify your email address to complete registration",
+        description: "Redirecting to payment...",
       });
       
     } catch (error: any) {
@@ -162,10 +162,54 @@ export const useAuthOperations = () => {
     }
   };
 
+  const createSubscription = async (): Promise<string | null> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('create-subscription');
+      
+      if (error) {
+        console.error('Error creating subscription:', error);
+        toast({
+          title: "Subscription error",
+          description: "Failed to create subscription. Please try again.",
+          variant: "destructive",
+        });
+        return null;
+      }
+      
+      return data.url;
+    } catch (error: any) {
+      console.error('Create subscription error:', error.message);
+      toast({
+        title: "Subscription error",
+        description: error.message || "An error occurred while creating subscription",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
+  const checkSubscription = async (): Promise<boolean> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('check-subscription');
+      
+      if (error) {
+        console.error('Error checking subscription:', error);
+        return false;
+      }
+      
+      return data.subscribed;
+    } catch (error: any) {
+      console.error('Check subscription error:', error.message);
+      return false;
+    }
+  };
+
   return {
     signIn,
     signInWithGoogle,
     signUp,
-    signOut
+    signOut,
+    createSubscription,
+    checkSubscription
   };
 };
