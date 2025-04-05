@@ -1,112 +1,156 @@
-
-import { AnimatePresence } from 'framer-motion';
-import { useAuth } from '@/context/AuthContext';
-import { useState, useEffect } from 'react';
-import { ChapterChallenge } from '@/data/bible/types';
-import { BibleBook } from '@/data/bible/books';
-
-// Import our components
+import React, { useState, useEffect } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
+import { useAuth } from '@/context/auth';
+import { useToast } from '@/hooks/use-toast';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { bibleBooks } from '@/data/bible/books'; // Changed from BibleBook to bibleBooks
+import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
+import LoginRequired from './bible/LoginRequired';
 import ChallengeSkeleton from './bible/ChallengeSkeleton';
-import ChallengeHeader from './bible/ChallengeHeader';
-import QuestionCard from './bible/QuestionCard';
-import ResultsCard from './bible/ResultsCard';
+import ChallengeState from './bible/ChallengeState';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
-import LoginRequired from './bible/LoginRequired';
-import { useChallengeState } from './bible/ChallengeState';
-import { useNavigate } from 'react-router-dom';
 
-interface BibleChapterChallengeProps {
-  book?: BibleBook;
-  challenge: ChapterChallenge;
+interface Params {
+  bookId?: string;
+  chapter?: string;
 }
 
-const BibleChapterChallenge = ({ book, challenge }: BibleChapterChallengeProps) => {
-  const { user } = useAuth();
+const BibleChapterChallenge: React.FC = () => {
+  const { bookId, chapter } = useParams<Params>();
   const navigate = useNavigate();
+  const { user } = useAuth();
+  const { toast } = useToast();
+  const { saveChallengeProgress } = useBibleProgress();
   
-  const {
-    // Data
-    loading,
-    currentQuestion,
-    quizCompleted,
-    selectedAnswer,
-    showExplanation,
-    isCorrect,
-    score,
-    currentQuestionData,
+  const [challenge, setChallenge] = useState<any>(null);
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [userAnswers, setUserAnswers] = useState<any>({});
+  const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
+  const [completed, setCompleted] = useState(false);
+  
+  useEffect(() => {
+    if (!bookId || !chapter) {
+      setError("Invalid book or chapter.");
+      setLoading(false);
+      return;
+    }
     
-    // Actions
-    handleAnswerSelect,
-    checkAnswer,
-    nextQuestion,
-    restartQuiz,
-    navigateToBookPage,
-    navigateToBibleExplorer
-  } = useChallengeState({ challenge });
+    const loadChallenge = async () => {
+      setLoading(true);
+      setError(null);
+      try {
+        const chapterNumber = parseInt(chapter, 10);
+        if (isNaN(chapterNumber)) {
+          throw new Error("Invalid chapter number.");
+        }
+        
+        const loadedChallenge = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
+        if (!loadedChallenge) {
+          setError("Challenge not found for this book and chapter.");
+          setLoading(false);
+          return;
+        }
+        
+        setChallenge(loadedChallenge);
+        setLoading(false);
+      } catch (err: any) {
+        setError(err.message || "Failed to load challenge.");
+        setLoading(false);
+      }
+    };
+    
+    loadChallenge();
+  }, [bookId, chapter]);
   
-  // Conditional rendering logic
+  useEffect(() => {
+    if (challenge && completed) {
+      const book = bibleBooks.find(b => b.id === bookId);
+      if (user && bookId && chapter) {
+        saveChallengeProgress(bookId, parseInt(chapter), score === challenge.questions.length);
+        toast({
+          title: "Challenge Completed!",
+          description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
+        });
+      }
+    }
+  }, [completed, score, challenge, bookId, chapter, saveChallengeProgress, toast, user]);
+  
+  const handleAnswer = (questionIndex: number, answer: string) => {
+    setUserAnswers(prev => ({ ...prev, [questionIndex]: answer }));
+  };
+  
+  const handleSubmit = () => {
+    if (!challenge) return;
+    
+    let newScore = 0;
+    challenge.questions.forEach((question, index) => {
+      if (userAnswers[index] === question.correctAnswer) {
+        newScore++;
+      }
+    });
+    
+    setScore(newScore);
+    setCompleted(true);
+  };
+  
+  const handleNextQuestion = () => {
+    if (currentQuestion < challenge.questions.length - 1) {
+      setCurrentQuestion(currentQuestion + 1);
+    } else {
+      handleSubmit();
+    }
+  };
+  
+  const handleRetry = () => {
+    setCurrentQuestion(0);
+    setUserAnswers({});
+    setScore(0);
+    setCompleted(false);
+  };
+  
+  const handleGoBack = () => {
+    navigate(`/bible/${bookId}`);
+  };
+  
+  if (!user) {
+    return <LoginRequired />;
+  }
+  
   if (loading) {
     return <LoadingState />;
   }
   
+  if (error) {
+    return <ErrorState description={error} onGoBack={handleGoBack} />;
+  }
+  
   if (!challenge) {
-    return (
-      <ErrorState 
-        title="Challenge Not Available"
-        description="This Bible chapter challenge hasn't been created yet."
-        actionText="Return to Bible Explorer"
-        actionRoute="/bible"
-      />
-    );
+    return <ErrorState description="Challenge not found." onGoBack={handleGoBack} />;
   }
   
-  // Allow non-logged in users to access chapter 1 of any book
-  const isFirstChapter = Number(challenge.chapter) === 1;
-  
-  // Only require login for non-first chapters
-  if (!user && !isFirstChapter) {
-    return <LoginRequired />;
-  }
+  const book = bibleBooks.find(b => b.id === bookId);
   
   return (
     <ChallengeSkeleton>
-      {/* Challenge content */}
-      <AnimatePresence mode="wait">
-        {!quizCompleted && currentQuestionData ? (
-          <QuestionCard
-            question={currentQuestionData.question}
-            options={currentQuestionData.options}
-            correctAnswer={currentQuestionData.correctAnswer}
-            selectedAnswer={selectedAnswer}
-            showExplanation={showExplanation}
-            isCorrect={isCorrect}
-            explanation={currentQuestionData.explanation}
-            onSelectAnswer={handleAnswerSelect}
-            onCheckAnswer={checkAnswer}
-            onNextQuestion={nextQuestion}
-            isLastQuestion={currentQuestion === challenge.questions.length - 1}
-            onNavigateBack={() => navigate(-1)}
-          />
-        ) : quizCompleted && challenge ? (
-          <ResultsCard
-            score={isCorrect ? score + 1 : score}
-            totalQuestions={challenge.questions.length}
-            keyVerseText={challenge.key_verse_text}
-            keyVerse={challenge.key_verse}
-            onRestartQuiz={restartQuiz}
-            onNavigateToBook={navigateToBookPage}
-            onNavigateToBible={navigateToBibleExplorer}
-            bookName={book?.name || ''}
-            showSignUpPrompt={!user}
-          />
-        ) : (
-          <div className="text-center py-12">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-bible-blue mx-auto mb-4"></div>
-            <p>Loading challenge...</p>
-          </div>
-        )}
-      </AnimatePresence>
+      <ChallengeState 
+        bookName={book?.name || 'Unknown'}
+        chapter={parseInt(chapter || '0', 10)}
+        title={challenge.title}
+        currentQuestion={currentQuestion}
+        totalQuestions={challenge.questions.length}
+        score={score}
+        questions={challenge.questions}
+        userAnswers={userAnswers}
+        completed={completed}
+        onAnswer={handleAnswer}
+        onNextQuestion={handleNextQuestion}
+        onSubmit={handleSubmit}
+        onRetry={handleRetry}
+        onGoBack={handleGoBack}
+      />
     </ChallengeSkeleton>
   );
 };

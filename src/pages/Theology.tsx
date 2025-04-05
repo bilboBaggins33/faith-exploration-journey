@@ -1,21 +1,27 @@
 
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookList from '@/components/theology/BookList';
-import { theologyBooks } from '@/data/theology';
 import BookDetail from '@/components/theology/BookDetail';
+import { theologyBooks } from '@/data/theology';
 
 const Theology = () => {
-  const [selectedBook, setSelectedBook] = useState<string | null>(null);
+  const { bookId } = useParams<{ bookId?: string }>();
+  const [selectedBookId, setSelectedBookId] = useState<string | null>(bookId || null);
   
-  const handleBookSelect = (bookId: string) => {
-    setSelectedBook(bookId);
+  const handleBookSelect = (id: string) => {
+    setSelectedBookId(id);
   };
   
-  const handleBackToList = () => {
-    setSelectedBook(null);
+  const handleBackClick = () => {
+    setSelectedBookId(null);
   };
+  
+  const selectedBook = selectedBookId 
+    ? theologyBooks.find(book => book.id === selectedBookId) 
+    : null;
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -23,19 +29,16 @@ const Theology = () => {
       
       <main className="flex-grow py-8 bg-bible-beige">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {!selectedBook ? (
-            <>
-              <div className="mb-8">
-                <h1 className="text-3xl font-serif font-bold">Theology Books</h1>
-                <p className="text-gray-600">
-                  Explore classic works of Christian theology to deepen your understanding of faith.
-                </p>
-              </div>
-              
-              <BookList books={theologyBooks} onBookSelect={handleBookSelect} />
-            </>
+          {selectedBook ? (
+            <BookDetail 
+              book={selectedBook} 
+              onBackClick={handleBackClick}
+            />
           ) : (
-            <BookDetail bookId={selectedBook} onBackClick={handleBackToList} />
+            <div>
+              <h1 className="text-3xl font-serif font-bold mb-6">Theology Books</h1>
+              <BookList books={theologyBooks} />
+            </div>
           )}
         </div>
       </main>

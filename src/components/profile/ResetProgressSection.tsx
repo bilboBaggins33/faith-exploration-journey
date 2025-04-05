@@ -1,5 +1,8 @@
+
 import React, { useState } from 'react';
-import {
+import { Button } from '@/components/ui/button';
+import { AlertTriangle } from 'lucide-react';
+import { 
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
@@ -8,141 +11,76 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-  AlertDialogTrigger,
-} from "@/components/ui/alert-dialog";
-import { Button } from "@/components/ui/button";
-import { RotateCcw, BookOpen, BookText } from 'lucide-react';
+} from '@/components/ui/alert-dialog';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { useTheologyProgress } from '@/hooks/theology/use-theology-progress';
-import { useToast } from '@/hooks/use-toast';
+import { useTheologyProgress } from '@/hooks/use-theology-progress';
 
 const ResetProgressSection = () => {
-  const { updateProgress: updateBibleProgress } = useBibleProgress();
-  const { updateProgress: updateTheologyProgress } = useTheologyProgress();
-  const { toast } = useToast();
-  const [isResettingBible, setIsResettingBible] = useState(false);
-  const [isResettingBooks, setIsResettingBooks] = useState(false);
-
-  const handleResetBibleProgress = async () => {
+  const [resetting, setResetting] = useState(false);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const { resetProgress: resetBibleProgress } = useBibleProgress();
+  const { resetProgress: resetTheologyProgress } = useTheologyProgress();
+  
+  const handleResetProgress = async () => {
+    setResetting(true);
+    
     try {
-      setIsResettingBible(true);
-      await updateBibleProgress({
-        completed_chapters: [],
-        challenges_completed: [],
-        books_progress: {},
-        total_chapters_read: 0
-      });
-      toast({
-        title: "Bible progress reset",
-        description: "Your Bible reading progress has been reset successfully.",
-      });
+      // Reset Bible progress
+      await resetBibleProgress();
+      
+      // Reset Theology progress
+      await resetTheologyProgress();
+      
+      setDialogOpen(false);
     } catch (error) {
-      console.error('Error resetting Bible progress:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to reset Bible progress. Please try again.",
-      });
+      console.error('Error resetting progress:', error);
     } finally {
-      setIsResettingBible(false);
+      setResetting(false);
     }
   };
-
-  const handleResetTheologyProgress = async () => {
-    try {
-      setIsResettingBooks(true);
-      await updateTheologyProgress({
-        completed_chapters: [],
-        books_started: [],
-        books_completed: [],
-        total_chapters_read: 0,
-        total_points: 0
-      });
-      toast({
-        title: "Books progress reset",
-        description: "Your theological books reading progress has been reset successfully.",
-      });
-    } catch (error) {
-      console.error('Error resetting theology progress:', error);
-      toast({
-        variant: "destructive",
-        title: "Error",
-        description: "Failed to reset books progress. Please try again.",
-      });
-    } finally {
-      setIsResettingBooks(false);
-    }
-  };
-
+  
   return (
     <div className="space-y-6">
-      <div>
-        <h3 className="text-lg font-medium">Reset Progress</h3>
-        <p className="text-sm text-gray-500 mb-4">
-          Resetting your progress will permanently delete all your reading records.
-          This action cannot be undone.
-        </p>
-
-        <div className="space-y-4">
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button 
-                variant="warning" 
-                className="w-full sm:w-auto flex items-center"
-                disabled={isResettingBible}
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                <BookOpen className="h-4 w-4 mr-2" />
-                Reset Bible Progress
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Reset Bible Progress</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This will reset all your Bible reading progress, including completed chapters and challenges.
-                  This action cannot be undone.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleResetBibleProgress}>
-                  Yes, Reset Progress
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <Button 
-                variant="danger" 
-                className="w-full sm:w-auto flex items-center"
-                disabled={isResettingBooks}
-              >
-                <RotateCcw className="h-4 w-4 mr-2" />
-                <BookText className="h-4 w-4 mr-2" />
-                Reset Books Progress
-              </Button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Reset Books Progress</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This will reset all your theological books reading progress, including completed chapters and books.
-                  This action cannot be undone.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={handleResetTheologyProgress}>
-                  Yes, Reset Progress
-                </AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
+      <div className="flex justify-between items-start">
+        <div>
+          <h3 className="text-lg font-medium">Reset Progress</h3>
+          <p className="text-sm text-gray-600">
+            Reset all your Bible reading and Theology course progress. This action cannot be undone.
+          </p>
         </div>
+        
+        <Button 
+          variant="destructive" 
+          onClick={() => setDialogOpen(true)}
+        >
+          Reset Progress
+        </Button>
       </div>
+      
+      <AlertDialog open={dialogOpen} onOpenChange={setDialogOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle className="flex items-center">
+              <AlertTriangle className="mr-2 h-5 w-5 text-red-500" />
+              Are you absolutely sure?
+            </AlertDialogTitle>
+            <AlertDialogDescription>
+              This action cannot be undone. This will permanently delete all your Bible reading progress, 
+              completed challenges, and course completions.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleResetProgress}
+              className="bg-red-500 hover:bg-red-600"
+              disabled={resetting}
+            >
+              {resetting ? "Resetting..." : "Yes, reset everything"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

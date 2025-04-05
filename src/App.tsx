@@ -3,7 +3,6 @@ import React from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Navigate,
 } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Auth from '@/pages/Auth';
@@ -18,6 +17,7 @@ import About from '@/pages/About';
 import NotFound from '@/pages/NotFound';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
+import { AuthProvider } from '@/context/auth';
 
 // Create the router outside the component
 const router = createBrowserRouter([
@@ -99,12 +99,14 @@ function App() {
 
   return (
     <>
-      <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
-        <div className="app">
-          <RouterProvider router={router} />
-        </div>
-        <Toaster />
-      </ThemeProvider>
+      <AuthProvider>
+        <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
+          <div className="app">
+            <RouterProvider router={router} />
+          </div>
+          <Toaster />
+        </ThemeProvider>
+      </AuthProvider>
     </>
   );
 }
