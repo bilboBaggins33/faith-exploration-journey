@@ -1,21 +1,21 @@
 
 import React, { useState, useEffect } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { bibleBooks } from '@/data/bible'; 
+import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import LoginRequired from './bible/LoginRequired';
 import ChallengeSkeleton from './bible/ChallengeSkeleton';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import { ChapterChallenge } from '@/data/bible/types';
-import QuestionCard from './bible/QuestionCard';
+import ChallengeState from './bible/ChallengeState';
 import ResultsCard from './bible/ResultsCard';
 
 const BibleChapterChallenge: React.FC = () => {
-  const params = useParams<{ bookId: string; chapter: string }>();
-  const { bookId, chapter } = params;
+  const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
@@ -45,11 +45,7 @@ const BibleChapterChallenge: React.FC = () => {
           throw new Error("Invalid chapter number.");
         }
 
-        // Import the challenges dynamically
-        const challengesModule = await import('@/data/bible/challenges');
-        const loadedChallenge = challengesModule.sampleChapterChallenges.find(
-          c => c.bookId === bookId && c.chapter === chapterNumber
-        );
+        const loadedChallenge = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
         
         if (!loadedChallenge) {
           setError("Challenge not found for this book and chapter.");
@@ -73,7 +69,7 @@ const BibleChapterChallenge: React.FC = () => {
       const book = bibleBooks.find(b => b.id === bookId);
       if (user && bookId && chapter) {
         // Update challenge progress
-        updateProgress('update', {
+        updateProgress("update", {
           challenges_completed: [`${bookId}${chapter}`],
           total_points: score
         });
@@ -123,6 +119,14 @@ const BibleChapterChallenge: React.FC = () => {
   const handleGoBack = () => {
     navigate(`/bible/${bookId}`);
   };
+
+  const handleNavigateToBook = () => {
+    navigate(`/bible/${bookId}`);
+  };
+  
+  const handleNavigateToBible = () => {
+    navigate('/bible');
+  };
   
   if (!user) {
     return <LoginRequired />;
@@ -148,18 +152,29 @@ const BibleChapterChallenge: React.FC = () => {
         <ResultsCard
           score={score}
           totalQuestions={challenge.questions.length}
-          onRetry={handleRetry}
-          onGoBack={handleGoBack}
+          keyVerseText={challenge.key_verse_text}
+          keyVerse={challenge.key_verse}
+          onRestartQuiz={handleRetry}
+          onNavigateToBook={handleNavigateToBook}
+          onNavigateToBible={handleNavigateToBible}
+          bookName={book?.name || ''}
         />
       ) : (
-        <QuestionCard
-          question={challenge.questions[currentQuestion]}
-          questionNumber={currentQuestion + 1}
+        <ChallengeState
+          bookName={book?.name || ''}
+          chapter={parseInt(chapter, 10)}
+          title={challenge.title}
+          currentQuestion={currentQuestion}
           totalQuestions={challenge.questions.length}
-          selectedAnswer={userAnswers[currentQuestion] || ''}
-          onSelectAnswer={(answer) => handleAnswer(currentQuestion, answer)}
-          onNext={handleNextQuestion}
-          isLastQuestion={currentQuestion === challenge.questions.length - 1}
+          score={score}
+          questions={challenge.questions}
+          userAnswers={userAnswers}
+          completed={completed}
+          onAnswer={handleAnswer}
+          onNextQuestion={handleNextQuestion}
+          onSubmit={handleSubmit}
+          onRetry={handleRetry}
+          onGoBack={handleGoBack}
         />
       )}
     </ChallengeSkeleton>

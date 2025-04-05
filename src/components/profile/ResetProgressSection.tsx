@@ -28,8 +28,8 @@ const ResetProgressSection = () => {
       // Reset Bible progress
       await updateBibleProgress('reset');
       
-      // Reset Theology progress
-      await updateTheologyProgress('reset');
+      // Reset Theology progress - passing an empty object as data
+      await updateTheologyProgress({});
       
       setDialogOpen(false);
     } catch (error) {

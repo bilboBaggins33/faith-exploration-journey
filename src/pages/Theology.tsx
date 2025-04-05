@@ -34,6 +34,8 @@ const Theology = () => {
           {selectedBook ? (
             <BookDetail 
               book={selectedBook}
+              bookProgress={getBookProgress(selectedBook.id)}
+              bookAverageScore={getBookAverageScore(selectedBook.id)}
             />
           ) : (
             <div>
