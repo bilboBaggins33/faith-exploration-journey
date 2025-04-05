@@ -1,6 +1,8 @@
 
 import { bibleBooks } from '@/data/bible';
 import { useAuth } from '@/context/auth';
+import { useState } from 'react';
+import { useToast } from '@/hooks/use-toast';
 
 interface ChapterProgress {
   book_id: string;
@@ -20,6 +22,8 @@ interface BibleProgress {
 
 export const useBibleProgress = () => {
   const { user } = useAuth();
+  const { toast } = useToast();
+  const [isUpdating, setIsUpdating] = useState(false);
   
   // Mock data - replace with actual API call in production
   const mockProgress: BibleProgress = {
@@ -128,6 +132,94 @@ export const useBibleProgress = () => {
       (a, b) => new Date(b.lastReadDate).getTime() - new Date(a.lastReadDate).getTime()
     );
   };
+  
+  // Add missing methods for challenges
+  const completeChallenge = async (challengeId: string, score: number) => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "You need to sign in to save your progress.",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    setIsUpdating(true);
+    
+    try {
+      // In a real app, you would make an API call to save the progress
+      console.log(`Completing challenge ${challengeId} with score ${score}`);
+      
+      // Mock success
+      toast({
+        title: "Challenge Completed!",
+        description: `You scored ${score} points`,
+      });
+      
+      setIsUpdating(false);
+      return true;
+    } catch (error) {
+      console.error("Failed to complete challenge:", error);
+      toast({
+        title: "Failed to save progress",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+      setIsUpdating(false);
+      return false;
+    }
+  };
+  
+  const isCompleted = (challengeId: string) => {
+    return mockProgress.challenges_completed?.includes(challengeId) || false;
+  };
+  
+  // Add method to reset progress
+  const updateProgress = async (action: 'reset' | 'update', data?: any) => {
+    if (!user) {
+      toast({
+        title: "Authentication Required",
+        description: "You need to sign in to manage your progress.",
+        variant: "destructive"
+      });
+      return false;
+    }
+    
+    setIsUpdating(true);
+    
+    try {
+      if (action === 'reset') {
+        // In a real app, you would make an API call to reset the progress
+        console.log("Resetting user progress");
+        
+        // Mock success
+        toast({
+          title: "Progress Reset",
+          description: "Your reading progress has been reset successfully.",
+        });
+      } else {
+        // Handle other update types
+        console.log("Updating progress with data:", data);
+        
+        toast({
+          title: "Progress Updated",
+          description: "Your reading progress has been updated.",
+        });
+      }
+      
+      setIsUpdating(false);
+      return true;
+    } catch (error) {
+      console.error("Failed to update progress:", error);
+      toast({
+        title: "Operation Failed",
+        description: "Please try again later.",
+        variant: "destructive"
+      });
+      setIsUpdating(false);
+      return false;
+    }
+  };
 
   return {
     loading: false,
@@ -135,6 +227,9 @@ export const useBibleProgress = () => {
     getBookProgress,
     getBookAverageScore,
     getChapterStatus,
-    getRecentlyReadBooks
+    getRecentlyReadBooks,
+    completeChallenge,
+    isCompleted,
+    updateProgress
   };
 };
