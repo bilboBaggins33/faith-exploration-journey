@@ -49,7 +49,11 @@ const Chapter = () => {
     
     try {
       const challengeData = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
-      setChallenge(challengeData);
+      if (!challengeData) {
+        setError('Challenge not found for this chapter');
+      } else {
+        setChallenge(challengeData);
+      }
       setLoading(false);
     } catch (err) {
       setError('Failed to load challenge data');
@@ -74,19 +78,24 @@ const Chapter = () => {
           {loading ? (
             <LoadingState />
           ) : error ? (
-            <ErrorState error={error} onGoBack={handleGoBack} />
+            <ErrorState 
+              title="Error" 
+              description={error} 
+              actionText="Go Back" 
+              actionRoute={bookId ? `/bible/${bookId}` : '/bible'} 
+            />
           ) : !user ? (
             <LoginRequired />
           ) : (
             <>
               <ChallengeHeader 
-                bookId={bookId || ''} 
-                chapterNumber={parseInt(chapter || '0', 10)} 
-                onGoBack={handleGoBack} 
+                bookName={bibleBooks.find(b => b.id === bookId)?.name || ''}
+                chapter={parseInt(chapter || '0', 10)} 
+                title={challenge?.title || ''}
+                onBackClick={handleGoBack}
               />
               <BibleChapterChallenge 
-                bookId={bookId || ''} 
-                chapterNumber={parseInt(chapter || '0', 10)}
+                book={bibleBooks.find(b => b.id === bookId)}
                 challenge={challenge}
               />
             </>

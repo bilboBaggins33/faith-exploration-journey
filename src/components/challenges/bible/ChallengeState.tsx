@@ -1,78 +1,123 @@
 
-import React from 'react';
-import { useBibleChallenges } from '@/hooks/bible/use-bible-challenges';
-import { useAuth } from '@/context/auth';
-import LoadingState from './LoadingState';
-import ErrorState from './ErrorState';
-import LoginRequired from './LoginRequired';
+import { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { ChapterChallenge } from '@/data/bible/types';
+import { useToast } from '@/hooks/use-toast';
 
 interface ChallengeStateProps {
-  bookId: string;
-  chapter: number;
-  children: React.ReactNode;
+  challenge: ChapterChallenge;
 }
 
-const ChallengeState = ({ bookId, chapter, children }: ChallengeStateProps) => {
-  const { data, isLoading, isError } = useBibleChallenges(bookId, chapter);
-  const { user } = useAuth();
-
-  // Allow access to first chapter of each book without login
-  const isFirstChapter = chapter === 1;
+export const useChallengeState = ({ challenge }: ChallengeStateProps) => {
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+  const [quizCompleted, setQuizCompleted] = useState(false);
+  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isCorrect, setIsCorrect] = useState(false);
+  const [score, setScore] = useState(0);
+  const [loading, setLoading] = useState(true);
   
-  // If not logged in and not the first chapter, require login
-  if (!user && !isFirstChapter) {
-    return <LoginRequired />;
-  }
-
-  if (isLoading) {
-    return <LoadingState />;
-  }
-
-  if (isError) {
-    return <ErrorState 
-      title="Failed to load challenge"
-      description="There was a problem loading the challenge data. Please try again later."
-      actionText="Go back"
-      actionRoute={`/bible/${bookId}`}
-    />;
-  }
-
-  if (!data || !data.questions || data.questions.length === 0) {
-    return (
-      <ErrorState 
-        title="No Challenge Available"
-        description="There is no challenge available for this chapter yet."
-        actionText="Return to book"
-        actionRoute={`/bible/${bookId}`}
-      />
-    );
-  }
-
-  return <>{children}</>;
-};
-
-// Export a hook that can be used to access the challenge state
-export const useChallengeState = () => {
-  // This is a placeholder for future implementation
-  // In a real app, this would contain the challenge state management logic
+  const navigate = useNavigate();
+  const { completeChallenge } = useBibleProgress();
+  const { toast } = useToast();
+  
+  // Initialize the challenge state
+  useEffect(() => {
+    if (challenge) {
+      setLoading(false);
+    }
+  }, [challenge]);
+  
+  const currentQuestionData = challenge?.questions?.[currentQuestion];
+  
+  const handleAnswerSelect = (answer: string) => {
+    if (!showExplanation) {
+      setSelectedAnswer(answer);
+    }
+  };
+  
+  const checkAnswer = () => {
+    if (!selectedAnswer || !currentQuestionData) return;
+    
+    const correct = selectedAnswer === currentQuestionData.correctAnswer;
+    setIsCorrect(correct);
+    setShowExplanation(true);
+    
+    if (correct) {
+      setScore(prev => prev + 1);
+    }
+  };
+  
+  const nextQuestion = () => {
+    if (currentQuestion < challenge.questions.length - 1) {
+      setCurrentQuestion(prev => prev + 1);
+      setSelectedAnswer(null);
+      setShowExplanation(false);
+      setIsCorrect(false);
+    } else {
+      // Quiz completed
+      setQuizCompleted(true);
+      
+      // Save progress
+      if (challenge?.id) {
+        completeChallenge(challenge.id, score + (isCorrect ? 1 : 0))
+          .then(() => {
+            toast({
+              title: "Progress saved!",
+              description: `You completed this chapter challenge with a score of ${score + (isCorrect ? 1 : 0)}/${challenge.questions.length}`,
+            });
+          })
+          .catch((error) => {
+            console.error("Error saving progress:", error);
+            toast({
+              title: "Failed to save progress",
+              description: "Please try again later",
+              variant: "destructive",
+            });
+          });
+      }
+    }
+  };
+  
+  const restartQuiz = () => {
+    setCurrentQuestion(0);
+    setQuizCompleted(false);
+    setSelectedAnswer(null);
+    setShowExplanation(false);
+    setIsCorrect(false);
+    setScore(0);
+  };
+  
+  const navigateToBookPage = () => {
+    if (challenge?.bookId) {
+      navigate(`/bible/${challenge.bookId}`);
+    }
+  };
+  
+  const navigateToBibleExplorer = () => {
+    navigate('/bible');
+  };
+  
   return {
-    book: null,
-    challenge: null,
-    loading: true,
-    currentQuestion: 0,
-    quizCompleted: false,
-    selectedAnswer: null,
-    showExplanation: false,
-    isCorrect: false,
-    score: 0,
-    currentQuestionData: null,
-    handleAnswerSelect: () => {},
-    checkAnswer: () => {},
-    nextQuestion: () => {},
-    restartQuiz: () => {},
-    navigateToBookPage: () => {},
-    navigateToBibleExplorer: () => {},
+    // Data
+    loading,
+    currentQuestion,
+    quizCompleted,
+    selectedAnswer,
+    showExplanation,
+    isCorrect,
+    score,
+    currentQuestionData,
+    
+    // Actions
+    handleAnswerSelect,
+    checkAnswer,
+    nextQuestion,
+    restartQuiz,
+    navigateToBookPage,
+    navigateToBibleExplorer
   };
 };
 
-export default ChallengeState;
+export default useChallengeState;

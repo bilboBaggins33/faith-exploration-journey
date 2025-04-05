@@ -101,3 +101,21 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...john3Challenges,
   ...judeChallenges,
   ...revelationChallenges];
+
+/**
+ * Get a Bible chapter challenge by book ID and chapter number
+ * @param bookId The ID of the book (e.g., 'GEN', 'MAT')
+ * @param chapter The chapter number
+ * @returns The challenge data for the specified book and chapter
+ */
+export const getBibleChallengeByBookAndChapter = (bookId: string, chapter: number): ChapterChallenge | null => {
+  // First, convert bookId to lowercase for consistency with the stored challenges
+  const normalizedBookId = bookId.toLowerCase();
+  
+  // Find the challenge for the specified book and chapter
+  const challenge = sampleChapterChallenges.find(
+    (c) => c.bookId.toLowerCase() === normalizedBookId && c.chapter === chapter
+  );
+  
+  return challenge || null;
+};

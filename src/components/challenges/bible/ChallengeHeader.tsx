@@ -1,55 +1,59 @@
 
 import React from 'react';
-import { Book } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
-import BiblePassageDialog from '../BiblePassageDialog';
+import { ChevronLeft } from 'lucide-react';
 
 interface ChallengeHeaderProps {
   bookName: string;
   chapter: number;
   title: string;
-  currentQuestion: number;
-  totalQuestions: number;
-  score: number;
-  showProgress: boolean;
+  currentQuestion?: number;
+  totalQuestions?: number;
+  score?: number;
+  showProgress?: boolean;
+  onBackClick?: () => void;
 }
 
-const ChallengeHeader = ({ 
-  bookName, 
-  chapter, 
-  title, 
-  currentQuestion, 
-  totalQuestions, 
-  score, 
-  showProgress 
-}: ChallengeHeaderProps) => {
+const ChallengeHeader: React.FC<ChallengeHeaderProps> = ({
+  bookName,
+  chapter,
+  title,
+  currentQuestion = 0,
+  totalQuestions = 0,
+  score = 0,
+  showProgress = true,
+  onBackClick
+}) => {
   return (
-    <div className="mb-8 text-center">
-      <div className="flex items-center justify-center mb-2">
-        <Book className="mr-2 text-bible-blue" size={20} />
-        <h3 className="text-lg font-medium">{bookName || 'Bible'} {chapter}</h3>
+    <div className="mb-6">
+      <div className="flex items-center mb-4">
+        <button 
+          onClick={onBackClick}
+          className="mr-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+          aria-label="Go back"
+        >
+          <ChevronLeft className="h-5 w-5" />
+        </button>
+        <div>
+          <h2 className="text-2xl font-bold font-serif">{bookName} {chapter}</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300">{title}</p>
+        </div>
       </div>
-      <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
-        {title}
-      </h1>
       
       {showProgress && totalQuestions > 0 && (
-        <div className="mb-6">
-          <div className="flex justify-between text-sm text-gray-600 mb-2">
-            <span>Question {currentQuestion + 1} of {totalQuestions}</span>
-            <span>{score} points earned</span>
-          </div>
-          <Progress value={((currentQuestion + 1) / totalQuestions) * 100} className="h-2" />
+        <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+          <span>Question {currentQuestion + 1} of {totalQuestions}</span>
+          <span>Score: {score}/{totalQuestions}</span>
         </div>
       )}
       
-      <div className="mb-4">
-        <BiblePassageDialog
-          bookName={bookName || ''}
-          chapter={chapter || 1}
-          passageText={""}
-        />
-      </div>
+      {showProgress && totalQuestions > 0 && (
+        <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
+          <div 
+            className="bg-bible-gold h-2 rounded-full transition-all duration-300 ease-in-out"
+            style={{ width: `${((currentQuestion + 1) / totalQuestions) * 100}%` }}
+          ></div>
+        </div>
+      )}
     </div>
   );
 };

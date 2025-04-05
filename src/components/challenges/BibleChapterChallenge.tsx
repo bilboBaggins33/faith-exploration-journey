@@ -1,6 +1,9 @@
 
 import { AnimatePresence } from 'framer-motion';
 import { useAuth } from '@/context/AuthContext';
+import { useState, useEffect } from 'react';
+import { ChapterChallenge } from '@/data/bible/types';
+import { BibleBook } from '@/data/bible/books';
 
 // Import our components
 import ChallengeSkeleton from './bible/ChallengeSkeleton';
@@ -10,19 +13,20 @@ import ResultsCard from './bible/ResultsCard';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import LoginRequired from './bible/LoginRequired';
-import ChallengeState, { useChallengeState } from './bible/ChallengeState';
+import { useChallengeState } from './bible/ChallengeState';
 import { useNavigate } from 'react-router-dom';
 
-const BibleChapterChallenge = () => {
+interface BibleChapterChallengeProps {
+  book?: BibleBook;
+  challenge: ChapterChallenge;
+}
+
+const BibleChapterChallenge = ({ book, challenge }: BibleChapterChallengeProps) => {
   const { user } = useAuth();
   const navigate = useNavigate();
   
   const {
     // Data
-    book,
-    challenge,
-    
-    // State
     loading,
     currentQuestion,
     quizCompleted,
@@ -39,7 +43,7 @@ const BibleChapterChallenge = () => {
     restartQuiz,
     navigateToBookPage,
     navigateToBibleExplorer
-  } = useChallengeState();
+  } = useChallengeState({ challenge });
   
   // Conditional rendering logic
   if (loading) {
@@ -67,18 +71,7 @@ const BibleChapterChallenge = () => {
   
   return (
     <ChallengeSkeleton>
-      {/* Challenge Header */}
-      <ChallengeHeader
-        bookName={book?.name || ''}
-        chapter={Number(challenge.chapter) || 1}
-        title={challenge?.title || ''}
-        currentQuestion={currentQuestion}
-        totalQuestions={challenge?.questions.length || 0}
-        score={score}
-        showProgress={!quizCompleted}
-      />
-      
-      {/* Quiz content or results */}
+      {/* Challenge content */}
       <AnimatePresence mode="wait">
         {!quizCompleted && currentQuestionData ? (
           <QuestionCard

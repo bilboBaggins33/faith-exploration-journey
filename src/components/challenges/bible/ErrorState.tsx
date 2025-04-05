@@ -1,34 +1,43 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { Card } from '@/components/ui/card';
+import { AlertTriangle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { AlertCircle } from 'lucide-react';
-import ChallengeSkeleton from './ChallengeSkeleton';
+import { useNavigate } from 'react-router-dom';
 
 interface ErrorStateProps {
-  title: string;
-  description: string;
-  actionText: string;
-  actionRoute: string;
+  title?: string;
+  description?: string;
+  actionText?: string;
+  actionRoute?: string;
+  onGoBack?: () => void;
 }
 
-const ErrorState = ({ title, description, actionText, actionRoute }: ErrorStateProps) => {
+const ErrorState: React.FC<ErrorStateProps> = ({ 
+  title = "Error", 
+  description = "Something went wrong. Please try again.", 
+  actionText = "Go Back", 
+  actionRoute = "/bible",
+  onGoBack 
+}) => {
   const navigate = useNavigate();
   
+  const handleAction = () => {
+    if (onGoBack) {
+      onGoBack();
+    } else if (actionRoute) {
+      navigate(actionRoute);
+    }
+  };
+  
   return (
-    <ChallengeSkeleton>
-      <div className="flex-1 flex items-center justify-center p-4">
-        <Card className="p-8 max-w-md text-center">
-          <AlertCircle className="mx-auto text-red-500 mb-4" size={40} />
-          <h2 className="text-xl font-bold mb-2">{title}</h2>
-          <p className="text-gray-600 mb-6">{description}</p>
-          <Button onClick={() => navigate(actionRoute)}>
-            {actionText}
-          </Button>
-        </Card>
-      </div>
-    </ChallengeSkeleton>
+    <div className="flex flex-col items-center justify-center py-12 text-center">
+      <AlertTriangle className="h-12 w-12 text-red-500 mb-4" />
+      <h2 className="text-2xl font-bold mb-2">{title}</h2>
+      <p className="text-gray-600 dark:text-gray-300 mb-6 max-w-md">{description}</p>
+      <Button onClick={handleAction}>
+        {actionText}
+      </Button>
+    </div>
   );
 };
 
