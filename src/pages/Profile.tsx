@@ -1,6 +1,5 @@
-
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProfileEditForm from '@/components/ProfileEditForm';
@@ -11,7 +10,8 @@ import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Card } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, UserRound, Settings } from 'lucide-react';
+import { Loader2, UserRound, Settings, LayoutDashboard } from 'lucide-react';
+import { Button } from "@/components/ui/button";
 
 const Profile = () => {
   const { user, isLoading, session, refreshUserProfile } = useAuth();
@@ -21,17 +21,14 @@ const Profile = () => {
   const [fullName, setFullName] = useState<string>('');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   
-  // Get subscription query param
   const queryParams = new URLSearchParams(location.search);
   const subscriptionStatus = queryParams.get('subscription');
   
   useEffect(() => {
-    // Check if user is not logged in
     if (!isLoading && !user) {
       navigate('/auth');
     }
     
-    // Handle subscription status query parameter
     if (subscriptionStatus) {
       if (subscriptionStatus === 'success') {
         toast({
@@ -45,18 +42,15 @@ const Profile = () => {
         });
       }
       
-      // Clean URL by removing query params
       navigate('/profile', { replace: true });
     }
   }, [isLoading, user, navigate, subscriptionStatus, toast]);
   
-  // Update user profile data
   useEffect(() => {
     if (user) {
       setFullName(user.user_metadata?.full_name || '');
       setAvatarUrl(user.user_metadata?.avatar_url || null);
       
-      // Check if we need to fetch profile data
       if (!fullName && user) {
         // This is a placeholder where you would fetch additional user profile data if needed
       }
@@ -93,11 +87,23 @@ const Profile = () => {
       <main className="flex-1 pt-16">
         <section className="py-10 bg-bible-beige">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-10">
-              <h1 className="text-3xl font-serif font-bold">My Profile</h1>
-              <p className="text-gray-600">
-                Manage your account settings and track your reading journey.
-              </p>
+            <div className="mb-10 flex items-center justify-between">
+              <div>
+                <h1 className="text-3xl font-serif font-bold">My Profile</h1>
+                <p className="text-gray-600">
+                  Manage your account settings and track your reading journey.
+                </p>
+              </div>
+              <Button 
+                variant="outline" 
+                asChild 
+                className="flex items-center gap-2"
+              >
+                <Link to="/dashboard">
+                  <LayoutDashboard className="h-4 w-4" />
+                  View Dashboard
+                </Link>
+              </Button>
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">

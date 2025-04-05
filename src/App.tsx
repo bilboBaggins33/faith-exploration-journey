@@ -1,66 +1,124 @@
+import React, { useState, useEffect } from 'react';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  useNavigate,
+} from 'react-router-dom';
+import Index from '@/pages/Index';
+import Auth from '@/pages/Auth';
+import Profile from '@/pages/Profile';
+import Bible from '@/pages/Bible';
+import Chapter from '@/pages/Chapter';
+import DailyReading from '@/pages/DailyReading';
+import Dashboard from '@/pages/Dashboard';
+import Theology from '@/pages/Theology';
+import Contact from '@/pages/Contact';
+import About from '@/pages/About';
+import NotFound from '@/pages/NotFound';
+import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/toaster"
 
-import { Toaster } from "@/components/ui/toaster";
-import { Toaster as Sonner } from "@/components/ui/sonner";
-import { TooltipProvider } from "@/components/ui/tooltip";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { AuthProvider } from "@/context/AuthContext";
+function App() {
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+  const navigate = useNavigate();
 
-// Pages
-import Index from "./pages/Index";
-import Challenge from "./pages/Challenge";
-import Profile from "./pages/Profile";
-import Auth from "./pages/Auth";
-import NotFound from "./pages/NotFound";
-import BibleExplorer from "./pages/BibleExplorer";
-import TheologyExplorer from "./pages/TheologyExplorer";
-import InstallApp from "./pages/InstallApp";
-import DailyReading from "./pages/DailyReading";
-import About from "./pages/About";
-import Contact from "./pages/Contact";
+  useEffect(() => {
+    // Check if the user is online when the component mounts
+    setIsOnline(navigator.onLine);
 
-// Challenge Components
-import GenesisDaysChallenge from "@/components/challenges/GenesisDaysChallenge";
-import NoahArkChallenge from "@/components/challenges/NoahArkChallenge";
-import AbrahamFaithChallenge from "@/components/challenges/AbrahamFaithChallenge";
-import BibleChapterChallenge from "@/components/challenges/BibleChapterChallenge";
-import TheologyChapterChallenge from "./components/challenges/TheologyChapterChallenge";
+    // Update the online status when the user goes online or offline
+    window.addEventListener('online', handleOnline);
+    window.addEventListener('offline', handleOffline);
 
-// Create a client
-const queryClient = new QueryClient();
+    // Clean up the event listeners when the component unmounts
+    return () => {
+      window.removeEventListener('online', handleOnline);
+      window.removeEventListener('offline', handleOffline);
+    };
+  }, []);
 
-const App = () => (
-  <QueryClientProvider client={queryClient}>
-    <AuthProvider>
-      <TooltipProvider>
+  const handleOnline = () => {
+    setIsOnline(true);
+  };
+
+  const handleOffline = () => {
+    setIsOnline(false);
+  };
+
+  useEffect(() => {
+    if (!isOnline) {
+      // Redirect to the offline page
+      navigate('/not-found');
+    }
+  }, [isOnline, navigate]);
+
+  return (
+    <>
+      <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
+        <div className="app">
+          <RouterProvider
+            router={
+              createBrowserRouter([
+                {
+                  path: '/',
+                  element: <Index />,
+                },
+                {
+                  path: '/auth',
+                  element: <Auth />,
+                },
+                {
+                  path: '/profile',
+                  element: <Profile />,
+                },
+                {
+                  path: '/dashboard',
+                  element: <Dashboard />,
+                },
+                {
+                  path: '/bible',
+                  element: <Bible />,
+                },
+                {
+                  path: '/bible/:bookId',
+                  element: <Bible />,
+                },
+                {
+                  path: '/challenge/bible/:bookId/:chapter',
+                  element: <Chapter />,
+                },
+                {
+                  path: '/daily-reading',
+                  element: <DailyReading />,
+                },
+                {
+                  path: '/theology',
+                  element: <Theology />,
+                },
+                {
+                  path: '/contact',
+                  element: <Contact />,
+                },
+                {
+                  path: '/about',
+                  element: <About />,
+                },
+                {
+                  path: '/not-found',
+                  element: <NotFound />,
+                },
+                {
+                  path: '*',
+                  element: <NotFound />,
+                },
+              ])
+            }
+          />
+        </div>
         <Toaster />
-        <Sonner />
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/challenge" element={<Challenge />} />
-            <Route path="/challenge/:id" element={<Challenge />} />
-            <Route path="/challenge/creation-quiz" element={<GenesisDaysChallenge />} />
-            <Route path="/challenge/noah-quiz" element={<NoahArkChallenge />} />
-            <Route path="/challenge/abraham-quiz" element={<AbrahamFaithChallenge />} />
-            <Route path="/challenge/bible/:bookId/:chapter" element={<BibleChapterChallenge />} />
-            <Route path="/bible" element={<BibleExplorer />} />
-            <Route path="/bible/:bookId" element={<BibleExplorer />} />
-            <Route path="/daily-reading" element={<DailyReading />} />
-            <Route path="/profile" element={<Profile />} />
-            <Route path="/auth" element={<Auth />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/theology" element={<TheologyExplorer />} />
-            <Route path="/theology/:bookId" element={<TheologyExplorer />} />
-            <Route path="/theology/:bookId/:chapter" element={<TheologyChapterChallenge />} />
-            <Route path="/install-app" element={<InstallApp />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </BrowserRouter>
-      </TooltipProvider>
-    </AuthProvider>
-  </QueryClientProvider>
-);
+      </ThemeProvider>
+    </>
+  );
+}
 
 export default App;

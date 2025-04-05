@@ -2,7 +2,7 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, User, LogOut, Book, BookText, Info, Mail } from 'lucide-react';
+import { BookOpen, User, LogOut, Book, BookText, Info, Mail, LayoutDashboard } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MobileNavLink from './MobileNavLink';
 import { User as SupabaseUser } from '@supabase/supabase-js';
@@ -37,6 +37,13 @@ const MobileNav = ({ isOpen, user, handleSignOut }: MobileNavProps) => {
         <MobileNavLink to="/theology" icon={<BookText className="h-5 w-5 mr-2" />} active={isActive('/theology')}>
           Books
         </MobileNavLink>
+        
+        {user && (
+          <MobileNavLink to="/dashboard" icon={<LayoutDashboard className="h-5 w-5 mr-2" />} active={isActive('/dashboard')}>
+            Dashboard
+          </MobileNavLink>
+        )}
+        
         <MobileNavLink to="/about" icon={<Info className="h-5 w-5 mr-2" />} active={isActive('/about')}>
           About
         </MobileNavLink>
