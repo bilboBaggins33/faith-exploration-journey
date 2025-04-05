@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+
+import React from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  useNavigate,
+  Navigate,
 } from 'react-router-dom';
 import Index from '@/pages/Index';
 import Auth from '@/pages/Auth';
@@ -15,18 +16,77 @@ import Theology from '@/pages/Theology';
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 import NotFound from '@/pages/NotFound';
-import { ThemeProvider } from "@/components/theme-provider"
-import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+
+// Create the router outside the component
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Index />,
+  },
+  {
+    path: '/auth',
+    element: <Auth />,
+  },
+  {
+    path: '/profile',
+    element: <Profile />,
+  },
+  {
+    path: '/dashboard',
+    element: <Dashboard />,
+  },
+  {
+    path: '/bible',
+    element: <Bible />,
+  },
+  {
+    path: '/bible/:bookId',
+    element: <Bible />,
+  },
+  {
+    path: '/challenge/bible/:bookId/:chapter',
+    element: <Chapter />,
+  },
+  {
+    path: '/daily-reading',
+    element: <DailyReading />,
+  },
+  {
+    path: '/theology',
+    element: <Theology />,
+  },
+  {
+    path: '/contact',
+    element: <Contact />,
+  },
+  {
+    path: '/about',
+    element: <About />,
+  },
+  {
+    path: '/not-found',
+    element: <NotFound />,
+  },
+  {
+    path: '*',
+    element: <NotFound />,
+  },
+]);
 
 function App() {
-  const [isOnline, setIsOnline] = useState(navigator.onLine);
-  const navigate = useNavigate();
+  // Check online status without using navigation
+  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
 
-  useEffect(() => {
+  React.useEffect(() => {
     // Check if the user is online when the component mounts
     setIsOnline(navigator.onLine);
 
     // Update the online status when the user goes online or offline
+    const handleOnline = () => setIsOnline(true);
+    const handleOffline = () => setIsOnline(false);
+    
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
@@ -37,83 +97,11 @@ function App() {
     };
   }, []);
 
-  const handleOnline = () => {
-    setIsOnline(true);
-  };
-
-  const handleOffline = () => {
-    setIsOnline(false);
-  };
-
-  useEffect(() => {
-    if (!isOnline) {
-      // Redirect to the offline page
-      navigate('/not-found');
-    }
-  }, [isOnline, navigate]);
-
   return (
     <>
       <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
         <div className="app">
-          <RouterProvider
-            router={
-              createBrowserRouter([
-                {
-                  path: '/',
-                  element: <Index />,
-                },
-                {
-                  path: '/auth',
-                  element: <Auth />,
-                },
-                {
-                  path: '/profile',
-                  element: <Profile />,
-                },
-                {
-                  path: '/dashboard',
-                  element: <Dashboard />,
-                },
-                {
-                  path: '/bible',
-                  element: <Bible />,
-                },
-                {
-                  path: '/bible/:bookId',
-                  element: <Bible />,
-                },
-                {
-                  path: '/challenge/bible/:bookId/:chapter',
-                  element: <Chapter />,
-                },
-                {
-                  path: '/daily-reading',
-                  element: <DailyReading />,
-                },
-                {
-                  path: '/theology',
-                  element: <Theology />,
-                },
-                {
-                  path: '/contact',
-                  element: <Contact />,
-                },
-                {
-                  path: '/about',
-                  element: <About />,
-                },
-                {
-                  path: '/not-found',
-                  element: <NotFound />,
-                },
-                {
-                  path: '*',
-                  element: <NotFound />,
-                },
-              ])
-            }
-          />
+          <RouterProvider router={router} />
         </div>
         <Toaster />
       </ThemeProvider>
