@@ -8,14 +8,14 @@ import BibleChapterChallenge from '@/components/challenges/BibleChapterChallenge
 import LoadingState from '@/components/challenges/bible/LoadingState';
 import ErrorState from '@/components/challenges/bible/ErrorState';
 import { bibleBooks } from '@/data/bible';
-import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { useAuth } from '@/context/auth';
 import LoginRequired from '@/components/challenges/bible/LoginRequired';
+import { ChapterChallenge } from '@/data/bible/types';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
   const [loading, setLoading] = useState(true);
-  const [challenge, setChallenge] = useState<any>(null);
+  const [challenge, setChallenge] = useState<ChapterChallenge | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { user } = useAuth();
@@ -47,18 +47,26 @@ const Chapter = () => {
       return;
     }
     
-    try {
-      const challengeData = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
-      if (!challengeData) {
-        setError('Challenge not found for this chapter');
-      } else {
-        setChallenge(challengeData);
+    const loadChallenge = async () => {
+      try {
+        const challengesModule = await import('@/data/bible/challenges');
+        const challengeData = challengesModule.sampleChapterChallenges.find(
+          c => c.bookId === bookId && c.chapter === chapterNumber
+        );
+        
+        if (!challengeData) {
+          setError('Challenge not found for this chapter');
+        } else {
+          setChallenge(challengeData);
+        }
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load challenge data');
+        setLoading(false);
       }
-      setLoading(false);
-    } catch (err) {
-      setError('Failed to load challenge data');
-      setLoading(false);
-    }
+    };
+    
+    loadChallenge();
   }, [bookId, chapter]);
   
   const handleGoBack = () => {
@@ -94,10 +102,7 @@ const Chapter = () => {
                 title={challenge?.title || ''}
                 onBackClick={handleGoBack}
               />
-              <BibleChapterChallenge 
-                book={bibleBooks.find(b => b.id === bookId)}
-                challenge={challenge}
-              />
+              <BibleChapterChallenge />
             </>
           )}
         </div>

@@ -1,31 +1,29 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { bibleBooks } from '@/data/bible/books'; // Changed from BibleBook to bibleBooks
-import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
+import { bibleBooks } from '@/data/bible'; 
 import LoginRequired from './bible/LoginRequired';
 import ChallengeSkeleton from './bible/ChallengeSkeleton';
-import ChallengeState from './bible/ChallengeState';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
-
-interface Params {
-  bookId?: string;
-  chapter?: string;
-}
+import { ChapterChallenge } from '@/data/bible/types';
+import QuestionCard from './bible/QuestionCard';
+import ResultsCard from './bible/ResultsCard';
 
 const BibleChapterChallenge: React.FC = () => {
-  const { bookId, chapter } = useParams<Params>();
+  const params = useParams<{ bookId: string; chapter: string }>();
+  const { bookId, chapter } = params;
   const navigate = useNavigate();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { saveChallengeProgress } = useBibleProgress();
+  const { updateProgress } = useBibleProgress();
   
-  const [challenge, setChallenge] = useState<any>(null);
+  const [challenge, setChallenge] = useState<ChapterChallenge | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [userAnswers, setUserAnswers] = useState<any>({});
+  const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -46,8 +44,13 @@ const BibleChapterChallenge: React.FC = () => {
         if (isNaN(chapterNumber)) {
           throw new Error("Invalid chapter number.");
         }
+
+        // Import the challenges dynamically
+        const challengesModule = await import('@/data/bible/challenges');
+        const loadedChallenge = challengesModule.sampleChapterChallenges.find(
+          c => c.bookId === bookId && c.chapter === chapterNumber
+        );
         
-        const loadedChallenge = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
         if (!loadedChallenge) {
           setError("Challenge not found for this book and chapter.");
           setLoading(false);
@@ -69,14 +72,19 @@ const BibleChapterChallenge: React.FC = () => {
     if (challenge && completed) {
       const book = bibleBooks.find(b => b.id === bookId);
       if (user && bookId && chapter) {
-        saveChallengeProgress(bookId, parseInt(chapter), score === challenge.questions.length);
+        // Update challenge progress
+        updateProgress('update', {
+          challenges_completed: [`${bookId}${chapter}`],
+          total_points: score
+        });
+        
         toast({
           title: "Challenge Completed!",
           description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
         });
       }
     }
-  }, [completed, score, challenge, bookId, chapter, saveChallengeProgress, toast, user]);
+  }, [completed, score, challenge, bookId, chapter, updateProgress, toast, user]);
   
   const handleAnswer = (questionIndex: number, answer: string) => {
     setUserAnswers(prev => ({ ...prev, [questionIndex]: answer }));
@@ -97,6 +105,7 @@ const BibleChapterChallenge: React.FC = () => {
   };
   
   const handleNextQuestion = () => {
+    if (!challenge) return;
     if (currentQuestion < challenge.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
@@ -135,22 +144,24 @@ const BibleChapterChallenge: React.FC = () => {
   
   return (
     <ChallengeSkeleton>
-      <ChallengeState 
-        bookName={book?.name || 'Unknown'}
-        chapter={parseInt(chapter || '0', 10)}
-        title={challenge.title}
-        currentQuestion={currentQuestion}
-        totalQuestions={challenge.questions.length}
-        score={score}
-        questions={challenge.questions}
-        userAnswers={userAnswers}
-        completed={completed}
-        onAnswer={handleAnswer}
-        onNextQuestion={handleNextQuestion}
-        onSubmit={handleSubmit}
-        onRetry={handleRetry}
-        onGoBack={handleGoBack}
-      />
+      {completed ? (
+        <ResultsCard
+          score={score}
+          totalQuestions={challenge.questions.length}
+          onRetry={handleRetry}
+          onGoBack={handleGoBack}
+        />
+      ) : (
+        <QuestionCard
+          question={challenge.questions[currentQuestion]}
+          questionNumber={currentQuestion + 1}
+          totalQuestions={challenge.questions.length}
+          selectedAnswer={userAnswers[currentQuestion] || ''}
+          onSelectAnswer={(answer) => handleAnswer(currentQuestion, answer)}
+          onNext={handleNextQuestion}
+          isLastQuestion={currentQuestion === challenge.questions.length - 1}
+        />
+      )}
     </ChallengeSkeleton>
   );
 };

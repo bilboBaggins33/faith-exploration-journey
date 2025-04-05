@@ -10,6 +10,7 @@ import ChaptersGrid from '@/components/bible/explorer/ChaptersGrid';
 import RecentBooksSection from '@/components/bible/explorer/RecentBooksSection';
 import { bibleBooks } from '@/data/bible';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { BibleBook } from '@/data/bible/types';
 
 const Bible = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -19,15 +20,26 @@ const Bible = () => {
   const [activeTestament, setActiveTestament] = useState<'all' | 'old' | 'new'>('all');
   
   // Recent books handling
-  const [recentBooks, setRecentBooks] = useState<string[]>([]);
+  const [recentBookIds, setRecentBookIds] = useState<string[]>([]);
   
   const handleBookSelect = (bookId: string) => {
     // Update recent books when a book is selected
-    if (!recentBooks.includes(bookId)) {
-      setRecentBooks(prev => [bookId, ...prev.slice(0, 2)]);
+    if (!recentBookIds.includes(bookId)) {
+      setRecentBookIds(prev => [bookId, ...prev.slice(0, 2)]);
     }
   };
+
+  // Convert recentBookIds to actual book objects
+  const recentBooks = recentBookIds.map(id => 
+    bibleBooks.find(book => book.id === id)
+  ).filter(Boolean) as BibleBook[];
   
+  // Helper function to convert the book progress object to a number for the BooksList component
+  const getBookProgressPercentage = (bookId: string): number => {
+    const progress = getBookProgress(bookId);
+    return progress.percentage;
+  };
+
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -42,7 +54,7 @@ const Bible = () => {
                 <div className="md:col-span-2">
                   <BibleBooksList 
                     books={bibleBooks} 
-                    getBookProgress={getBookProgress}
+                    getBookProgress={getBookProgressPercentage}
                     searchTerm={searchTerm}
                     activeTestament={activeTestament}
                     isMobile={false}
@@ -66,7 +78,7 @@ const Bible = () => {
                 {selectedBook && (
                   <>
                     <BookHeader book={selectedBook} />
-                    {selectedBook && <ChaptersGrid book={selectedBook} />}
+                    {selectedBook && <ChaptersGrid bookId={selectedBook.id} />}
                   </>
                 )}
               </div>

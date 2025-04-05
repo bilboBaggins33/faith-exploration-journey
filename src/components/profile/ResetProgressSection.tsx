@@ -18,18 +18,18 @@ import { useTheologyProgress } from '@/hooks/use-theology-progress';
 const ResetProgressSection = () => {
   const [resetting, setResetting] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const { resetProgress: resetBibleProgress } = useBibleProgress();
-  const { resetProgress: resetTheologyProgress } = useTheologyProgress();
+  const { updateProgress: updateBibleProgress } = useBibleProgress();
+  const { updateProgress: updateTheologyProgress } = useTheologyProgress();
   
   const handleResetProgress = async () => {
     setResetting(true);
     
     try {
       // Reset Bible progress
-      await resetBibleProgress();
+      await updateBibleProgress('reset');
       
       // Reset Theology progress
-      await resetTheologyProgress();
+      await updateTheologyProgress('reset');
       
       setDialogOpen(false);
     } catch (error) {

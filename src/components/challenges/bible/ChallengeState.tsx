@@ -1,123 +1,115 @@
 
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useBibleProgress } from '@/hooks/use-bible-progress';
+import React from 'react';
+import { Button } from '@/components/ui/button';
 import { ChapterChallenge } from '@/data/bible/types';
-import { useToast } from '@/hooks/use-toast';
 
-interface ChallengeStateProps {
-  challenge: ChapterChallenge;
+interface ChallengeStateComponentProps {
+  bookName: string;
+  chapter: number;
+  title: string;
+  currentQuestion: number;
+  totalQuestions: number;
+  score: number;
+  questions: any[];
+  userAnswers: Record<number, string>;
+  completed: boolean;
+  onAnswer: (questionIndex: number, answer: string) => void;
+  onNextQuestion: () => void;
+  onSubmit: () => void;
+  onRetry: () => void;
+  onGoBack: () => void;
 }
 
-export const useChallengeState = ({ challenge }: ChallengeStateProps) => {
-  const [currentQuestion, setCurrentQuestion] = useState(0);
-  const [quizCompleted, setQuizCompleted] = useState(false);
-  const [selectedAnswer, setSelectedAnswer] = useState<string | null>(null);
-  const [showExplanation, setShowExplanation] = useState(false);
-  const [isCorrect, setIsCorrect] = useState(false);
-  const [score, setScore] = useState(0);
-  const [loading, setLoading] = useState(true);
+const ChallengeState: React.FC<ChallengeStateComponentProps> = ({
+  bookName,
+  chapter,
+  title,
+  currentQuestion,
+  totalQuestions,
+  score,
+  questions,
+  userAnswers,
+  completed,
+  onAnswer,
+  onNextQuestion,
+  onSubmit,
+  onRetry,
+  onGoBack,
+}) => {
+  const currentQuestionData = questions[currentQuestion];
+  const isLastQuestion = currentQuestion === totalQuestions - 1;
+  const selectedAnswer = userAnswers[currentQuestion] || '';
   
-  const navigate = useNavigate();
-  const { completeChallenge } = useBibleProgress();
-  const { toast } = useToast();
+  if (completed) {
+    // Show results view
+    return (
+      <div className="bg-white rounded-lg shadow-md p-6">
+        <h2 className="text-2xl font-bold mb-4">Challenge Results</h2>
+        
+        <div className="text-center py-6">
+          <p className="text-lg mb-2">You scored</p>
+          <div className="text-4xl font-bold mb-2">
+            {score} / {totalQuestions}
+          </div>
+          <p className="text-gray-600">
+            {score === totalQuestions 
+              ? "Perfect! Amazing job!" 
+              : score >= totalQuestions / 2 
+                ? "Good job! Keep studying." 
+                : "Keep studying and try again."}
+          </p>
+        </div>
+        
+        <div className="flex justify-between mt-6">
+          <Button
+            variant="outline"
+            onClick={onGoBack}
+          >
+            Return to Book
+          </Button>
+          
+          <Button onClick={onRetry}>
+            Try Again
+          </Button>
+        </div>
+      </div>
+    );
+  }
   
-  // Initialize the challenge state
-  useEffect(() => {
-    if (challenge) {
-      setLoading(false);
-    }
-  }, [challenge]);
-  
-  const currentQuestionData = challenge?.questions?.[currentQuestion];
-  
-  const handleAnswerSelect = (answer: string) => {
-    if (!showExplanation) {
-      setSelectedAnswer(answer);
-    }
-  };
-  
-  const checkAnswer = () => {
-    if (!selectedAnswer || !currentQuestionData) return;
-    
-    const correct = selectedAnswer === currentQuestionData.correctAnswer;
-    setIsCorrect(correct);
-    setShowExplanation(true);
-    
-    if (correct) {
-      setScore(prev => prev + 1);
-    }
-  };
-  
-  const nextQuestion = () => {
-    if (currentQuestion < challenge.questions.length - 1) {
-      setCurrentQuestion(prev => prev + 1);
-      setSelectedAnswer(null);
-      setShowExplanation(false);
-      setIsCorrect(false);
-    } else {
-      // Quiz completed
-      setQuizCompleted(true);
+  // Show question view
+  return (
+    <div className="bg-white rounded-lg shadow-md p-6">
+      <div className="mb-6">
+        <p className="text-sm text-gray-500 mb-1">Question {currentQuestion + 1} of {totalQuestions}</p>
+        <h3 className="text-xl font-medium">{currentQuestionData?.question}</h3>
+      </div>
       
-      // Save progress
-      if (challenge?.id) {
-        completeChallenge(challenge.id, score + (isCorrect ? 1 : 0))
-          .then(() => {
-            toast({
-              title: "Progress saved!",
-              description: `You completed this chapter challenge with a score of ${score + (isCorrect ? 1 : 0)}/${challenge.questions.length}`,
-            });
-          })
-          .catch((error) => {
-            console.error("Error saving progress:", error);
-            toast({
-              title: "Failed to save progress",
-              description: "Please try again later",
-              variant: "destructive",
-            });
-          });
-      }
-    }
-  };
-  
-  const restartQuiz = () => {
-    setCurrentQuestion(0);
-    setQuizCompleted(false);
-    setSelectedAnswer(null);
-    setShowExplanation(false);
-    setIsCorrect(false);
-    setScore(0);
-  };
-  
-  const navigateToBookPage = () => {
-    if (challenge?.bookId) {
-      navigate(`/bible/${challenge.bookId}`);
-    }
-  };
-  
-  const navigateToBibleExplorer = () => {
-    navigate('/bible');
-  };
-  
-  return {
-    // Data
-    loading,
-    currentQuestion,
-    quizCompleted,
-    selectedAnswer,
-    showExplanation,
-    isCorrect,
-    score,
-    currentQuestionData,
-    
-    // Actions
-    handleAnswerSelect,
-    checkAnswer,
-    nextQuestion,
-    restartQuiz,
-    navigateToBookPage,
-    navigateToBibleExplorer
-  };
+      <div className="space-y-3 mb-6">
+        {currentQuestionData?.options.map((option: string, index: number) => (
+          <div 
+            key={index}
+            className={`p-3 border rounded-md cursor-pointer ${
+              selectedAnswer === option 
+                ? 'bg-blue-50 border-blue-500' 
+                : 'hover:bg-gray-50'
+            }`}
+            onClick={() => onAnswer(currentQuestion, option)}
+          >
+            <p>{option}</p>
+          </div>
+        ))}
+      </div>
+      
+      <div className="flex justify-end mt-6">
+        <Button
+          onClick={isLastQuestion ? onSubmit : onNextQuestion}
+          disabled={!selectedAnswer}
+        >
+          {isLastQuestion ? 'Finish' : 'Next Question'}
+        </Button>
+      </div>
+    </div>
+  );
 };
 
-export default useChallengeState;
+export default ChallengeState;
