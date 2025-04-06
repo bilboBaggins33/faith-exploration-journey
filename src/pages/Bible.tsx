@@ -57,6 +57,12 @@ const Bible: React.FC = () => {
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
   
+  // Helper function to transform the book progress object to just return the percentage
+  const getBookProgressPercentage = (bookId: string): number => {
+    const progress = getBookProgress(bookId);
+    return progress.percentage;
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
@@ -79,28 +85,34 @@ const Bible: React.FC = () => {
                     <h1 className="text-3xl font-serif font-bold mb-6">Bible Study</h1>
                     <BibleBooksList 
                       books={bibleBooks}
-                      onSelectBook={handleBookSelect}
-                      getBookProgress={getBookProgress}
-                      getBookAverageScore={getBookAverageScore}
+                      getBookProgress={getBookProgressPercentage}
+                      searchTerm=""
+                      activeTestament="all"
+                      isMobile={false}
                     />
                   </div>
                 )}
                 
                 {selectedBook && !selectedChapter && (
                   <BibleBookCard 
-                    book={selectedBook}
-                    onBackClick={handleBackToBooks}
-                    onChapterSelect={handleChapterSelect}
-                    onGoToChallenge={handleGoToChallenge}
+                    bookId={selectedBook.id}
+                    bookName={selectedBook.name}
+                    totalChapters={selectedBook.chapters}
+                    progressPercent={getBookProgressPercentage(selectedBook.id)}
+                    testament={selectedBook.testament}
+                    onClick={() => {}} // Empty function as it's already selected
                   />
                 )}
                 
                 {selectedBook && selectedChapter && (
                   <BibleChapterCard
-                    book={selectedBook}
+                    bookId={selectedBook.id}
                     chapter={selectedChapter}
-                    onBack={() => setSelectedChapter(null)}
-                    onGoToChallenge={handleGoToChallenge}
+                    isCompleted={false}
+                    score={0}
+                    maxScore={0}
+                    isUnlocked={true}
+                    onClick={() => handleGoToChallenge(selectedBook.id, selectedChapter)}
                   />
                 )}
               </div>
