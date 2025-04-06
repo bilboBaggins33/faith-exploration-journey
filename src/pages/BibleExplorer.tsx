@@ -3,13 +3,10 @@ import { useState, useEffect, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import BibleSidebar from '@/components/bible/explorer/BibleSidebar';
 import BookHeader from '@/components/bible/explorer/BookHeader';
 import ChaptersGrid from '@/components/bible/explorer/ChaptersGrid';
-import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import { useAuth } from '@/context/auth';
 import { bibleBooks } from '@/data/bible';
-import { SidebarProvider } from '@/components/ui/sidebar';
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
@@ -55,7 +52,7 @@ const BibleExplorer = () => {
       <Navbar />
       
       <main className="flex-1 pt-24 pb-10 px-4 md:px-6 bg-bible-beige">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {!selectedBook && (
             <div className="mb-10 text-center">
               <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
@@ -81,84 +78,75 @@ const BibleExplorer = () => {
             </div>
           )}
           
-          <header className="text-center mb-12">
-            {selectedBook && (
-              <>
-                <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
-                  {selectedBook.name}
-                </h1>
-              </>
-            )}
-          </header>
+          {selectedBook && (
+            <div className="mb-6">
+              <BookHeader
+                book={selectedBook}
+                onBack={() => setSelectedBookId(null)}
+              />
+            </div>
+          )}
 
-          <SidebarProvider>
-            <div className="flex w-full">
-              {selectedBook ? (
-                <div className="max-w-7xl mx-auto">
-                  <BookHeader
-                    book={selectedBook}
-                    onBack={() => setSelectedBookId(null)}
-                  />
-                  <ChaptersGrid 
-                    bookId={selectedBookId}
-                  />
-                </div>
-              ) : (
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
-                  {filteredBooks.map((book) => {
-                    const progress = getBookProgress(book.id);
-                    const averageScore = getBookAverageScore(book.id);
-                    
-                    return (
-                      <button
-                        key={book.id}
-                        onClick={() => handleBookSelect(book.id)}
-                        className="overflow-hidden bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
-                      >
-                        <AspectRatio ratio={3/1}>
-                          <img
-                            src={`/assets/bible/thumbnail/${book.id.toLowerCase()}.jpg`}
-                            alt={`${book.name} cover`}
-                            className="object-cover w-full h-full"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = '/assets/bible/thumbnail/genesis.jpg';
-                            }}
-                          />
-                        </AspectRatio>
-                        <div className="p-6">
-                          <h3 className="text-2xl font-serif font-semibold mb-2">{book.name}</h3>
-                          
-                          {/* Progress section */}
-                          <div className="mt-4">
-                            <div className="flex justify-between text-sm mb-1">
-                              <span className="text-gray-600">Progress</span>
-                              <span className="text-gray-900 font-medium">{progress.percentage}%</span>
-                            </div>
-                            <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
-                              <div 
-                                className="h-full bg-bible-gold transition-all duration-300"
-                                style={{ width: `${progress.percentage}%` }}
-                              />
-                            </div>
-                            <div className="flex justify-between items-center mt-3 text-sm">
-                              <span className="text-gray-600">
-                                {progress.completed}/{progress.total} Chapters
+          <div className="w-full">
+            {selectedBook ? (
+              <ChaptersGrid 
+                bookId={selectedBookId}
+              />
+            ) : (
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                {filteredBooks.map((book) => {
+                  const progress = getBookProgress(book.id);
+                  const averageScore = getBookAverageScore(book.id);
+                  
+                  return (
+                    <button
+                      key={book.id}
+                      onClick={() => handleBookSelect(book.id)}
+                      className="overflow-hidden bg-white rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                    >
+                      <AspectRatio ratio={3/1}>
+                        <img
+                          src={`/assets/bible/thumbnail/${book.id.toLowerCase()}.jpg`}
+                          alt={`${book.name} cover`}
+                          className="object-cover w-full h-full"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = '/assets/bible/thumbnail/genesis.jpg';
+                          }}
+                        />
+                      </AspectRatio>
+                      <div className="p-6">
+                        <h3 className="text-2xl font-serif font-semibold mb-2">{book.name}</h3>
+                        
+                        {/* Progress section */}
+                        <div className="mt-4">
+                          <div className="flex justify-between text-sm mb-1">
+                            <span className="text-gray-600">Progress</span>
+                            <span className="text-gray-900 font-medium">{progress.percentage}%</span>
+                          </div>
+                          <div className="w-full h-2 bg-gray-100 rounded-full overflow-hidden">
+                            <div 
+                              className="h-full bg-bible-gold transition-all duration-300"
+                              style={{ width: `${progress.percentage}%` }}
+                            />
+                          </div>
+                          <div className="flex justify-between items-center mt-3 text-sm">
+                            <span className="text-gray-600">
+                              {progress.completed}/{progress.total} Chapters
+                            </span>
+                            {averageScore > 0 && (
+                              <span className="bg-bible-gold/10 text-bible-gold px-2 py-1 rounded">
+                                Avg. Score: {averageScore}%
                               </span>
-                              {averageScore > 0 && (
-                                <span className="bg-bible-gold/10 text-bible-gold px-2 py-1 rounded">
-                                  Avg. Score: {averageScore}%
-                                </span>
-                              )}
-                            </div>
+                            )}
                           </div>
                         </div>
-                      </button>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          </SidebarProvider>
+                      </div>
+                    </button>
+                  );
+                })}
+              </div>
+            )}
+          </div>
         </div>
       </main>
       
