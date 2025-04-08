@@ -95,14 +95,14 @@ const Chapter = () => {
       );
     }
     
-    if (!user) {
+    // Only require login for non-first chapters
+    if (!user && !isFirstChapter) {
       return <LoginRequired />;
     }
     
-    const shouldAllowView = isFirstChapter;
-    
+    // First chapter should be accessible to everyone
     return (
-      <SubscriptionRequired allowViewOnly={shouldAllowView}>
+      <SubscriptionRequired allowViewOnly={isFirstChapter}>
         <>
           <ChallengeHeader 
             bookName={bibleBooks.find(b => b.id === bookId)?.name || ''}

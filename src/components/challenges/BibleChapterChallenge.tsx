@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
@@ -136,6 +137,7 @@ const BibleChapterChallenge: React.FC = () => {
     navigate('/bible');
   };
   
+  // First chapter is always available without login
   if (!user && !isFirstChapter) {
     return <LoginRequired />;
   }
