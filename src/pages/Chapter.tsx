@@ -11,6 +11,7 @@ import { bibleBooks } from '@/data/bible';
 import { useAuth } from '@/context/auth';
 import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import { ChapterChallenge } from '@/data/bible/types';
+import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
@@ -19,6 +20,8 @@ const Chapter = () => {
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const { user } = useAuth();
+  
+  const isFirstChapter = parseInt(chapter || '0', 10) === 1;
   
   useEffect(() => {
     if (!bookId || !chapter) {
@@ -50,17 +53,16 @@ const Chapter = () => {
     const loadChallenge = async () => {
       try {
         const challengesModule = await import('@/data/bible/challenges');
-        const challengeData = challengesModule.sampleChapterChallenges.find(
-          c => c.bookId === bookId && c.chapter === chapterNumber
-        );
+        const challengeData = challengesModule.getBibleChallengeByBookAndChapter(bookId, chapterNumber);
         
         if (!challengeData) {
-          setError('Challenge not found for this chapter');
+          setError(`Challenge not found for ${book.name} chapter ${chapterNumber}`);
         } else {
           setChallenge(challengeData);
         }
         setLoading(false);
       } catch (err) {
+        console.error('Failed to load challenge:', err);
         setError('Failed to load challenge data');
         setLoading(false);
       }
@@ -77,34 +79,50 @@ const Chapter = () => {
     }
   };
   
+  const renderContent = () => {
+    if (loading) {
+      return <LoadingState />;
+    }
+    
+    if (error) {
+      return (
+        <ErrorState 
+          title="Error" 
+          description={error} 
+          actionText="Go Back" 
+          actionRoute={bookId ? `/bible/${bookId}` : '/bible'} 
+        />
+      );
+    }
+    
+    if (!user) {
+      return <LoginRequired />;
+    }
+    
+    const shouldAllowView = isFirstChapter;
+    
+    return (
+      <SubscriptionRequired allowViewOnly={shouldAllowView}>
+        <>
+          <ChallengeHeader 
+            bookName={bibleBooks.find(b => b.id === bookId)?.name || ''}
+            chapter={parseInt(chapter || '0', 10)} 
+            title={challenge?.title || ''}
+            onBackClick={handleGoBack}
+          />
+          <BibleChapterChallenge />
+        </>
+      </SubscriptionRequired>
+    );
+  };
+  
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
       
-      <main className="flex-grow py-8 bg-bible-beige">
+      <main className="flex-grow pt-24 pb-10 bg-bible-beige">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-          {loading ? (
-            <LoadingState />
-          ) : error ? (
-            <ErrorState 
-              title="Error" 
-              description={error} 
-              actionText="Go Back" 
-              actionRoute={bookId ? `/bible/${bookId}` : '/bible'} 
-            />
-          ) : !user ? (
-            <LoginRequired />
-          ) : (
-            <>
-              <ChallengeHeader 
-                bookName={bibleBooks.find(b => b.id === bookId)?.name || ''}
-                chapter={parseInt(chapter || '0', 10)} 
-                title={challenge?.title || ''}
-                onBackClick={handleGoBack}
-              />
-              <BibleChapterChallenge />
-            </>
-          )}
+          {renderContent()}
         </div>
       </main>
       

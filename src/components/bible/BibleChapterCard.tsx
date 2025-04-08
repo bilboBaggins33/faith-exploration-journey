@@ -26,9 +26,12 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
 }) => {
   const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const isFirstChapter = chapter === 1;
+  
+  // First chapter is always unlocked for everyone
+  const effectivelyUnlocked = isFirstChapter || isUnlocked;
 
   const getBorderColorClass = () => {
-    if (!isUnlocked) return "border-gray-200 hover:border-gray-300 bg-gray-50";
+    if (!effectivelyUnlocked) return "border-gray-200 hover:border-gray-300 bg-gray-50";
     if (!isCompleted) return "border-gray-200 hover:border-bible-blue hover:bg-blue-50";
     if (scorePercentage === 100) return "bg-green-50 border-green-200";
     if (scorePercentage >= 50) return "bg-orange-50 border-orange-200";
@@ -55,7 +58,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
               <CheckCircle className="w-3 h-3 text-green-500" />
             ) : isFirstChapter ? (
               <Unlock className="w-3 h-3 text-bible-blue" />
-            ) : !isUnlocked ? (
+            ) : !effectivelyUnlocked ? (
               <Lock className="w-3 h-3 text-gray-400" />
             ) : (
               <PlusCircle className="w-3 h-3 text-gray-400" />
@@ -82,7 +85,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           </p>
         )}
 
-        {!isUnlocked && !isFirstChapter && (
+        {!effectivelyUnlocked && !isFirstChapter && (
           <p className="text-[10px] text-gray-500 mt-1">
             Premium
           </p>

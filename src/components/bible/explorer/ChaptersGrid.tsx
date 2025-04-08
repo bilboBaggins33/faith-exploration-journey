@@ -43,6 +43,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
       <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {bookChapters.map(chapter => {
           const { isCompleted, score, maxScore, isFree } = getChapterStatus(bookId, chapter);
+          const isFirstChapter = chapter === 1;
           
           return (
             <div key={chapter} className="w-full aspect-square">
@@ -52,7 +53,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
                 isCompleted={isCompleted}
                 score={score}
                 maxScore={maxScore}
-                isUnlocked={user ? true : isFree} // Free to all users if chapter 1, otherwise requires login
+                isUnlocked={isFirstChapter || (user ? true : isFree)} // First chapter is always unlocked
                 onClick={() => navigateToChapter(bookId, chapter)}
               />
             </div>

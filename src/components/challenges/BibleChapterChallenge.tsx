@@ -29,6 +29,8 @@ const BibleChapterChallenge: React.FC = () => {
   const [error, setError] = useState<string | null>(null);
   const [completed, setCompleted] = useState(false);
   
+  const isFirstChapter = parseInt(chapter, 10) === 1;
+  
   useEffect(() => {
     if (!bookId || !chapter) {
       setError("Invalid book or chapter.");
@@ -48,7 +50,8 @@ const BibleChapterChallenge: React.FC = () => {
         const loadedChallenge = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
         
         if (!loadedChallenge) {
-          setError("Challenge not found for this book and chapter.");
+          const book = bibleBooks.find(b => b.id === bookId);
+          setError(`Challenge not found for ${book?.name || bookId} chapter ${chapterNumber}.`);
           setLoading(false);
           return;
         }
@@ -65,11 +68,11 @@ const BibleChapterChallenge: React.FC = () => {
   }, [bookId, chapter]);
   
   useEffect(() => {
-    if (challenge && completed) {
+    if (challenge && completed && user) {
       const book = bibleBooks.find(b => b.id === bookId);
-      if (user && bookId && chapter) {
+      if (bookId && chapter) {
         // Update challenge progress
-        updateProgress("update", {
+        updateProgress({
           challenges_completed: [`${bookId}${chapter}`],
           total_points: score
         });
@@ -128,7 +131,7 @@ const BibleChapterChallenge: React.FC = () => {
     navigate('/bible');
   };
   
-  if (!user) {
+  if (!user && !isFirstChapter) {
     return <LoginRequired />;
   }
   
