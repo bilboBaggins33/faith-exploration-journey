@@ -13,6 +13,7 @@ import ErrorState from './bible/ErrorState';
 import { ChapterChallenge } from '@/data/bible/types';
 import ChallengeState from './bible/ChallengeState';
 import ResultsCard from './bible/ResultsCard';
+import { BibleProgressData } from '@/hooks/bible/bible-progress-types';
 
 const BibleChapterChallenge: React.FC = () => {
   const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
@@ -74,10 +75,12 @@ const BibleChapterChallenge: React.FC = () => {
         // Update challenge progress with the proper data structure
         if (updateProgress) {
           try {
-            updateProgress({
+            const progressData: Partial<BibleProgressData> = {
               challenges_completed: [`${bookId}${chapter}`],
               total_points: score
-            });
+            };
+            
+            updateProgress(progressData);
             
             toast({
               title: "Challenge Completed!",

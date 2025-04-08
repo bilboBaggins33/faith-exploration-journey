@@ -1,9 +1,8 @@
 
 import { useQuery } from '@tanstack/react-query';
-import { BibleBook } from '@/data/bible/types';
+import { BibleProgressData } from './bible-progress-types';
 import { bibleBooks } from '@/data/bible';
 import { sampleChapterChallenges } from '@/data/bible/challenges';
-import { BibleProgressData } from './bible-progress-types';
 
 /**
  * Hook to fetch Bible challenge data for a specific book and chapter
