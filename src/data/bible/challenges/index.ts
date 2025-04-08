@@ -2,12 +2,14 @@
 // Export sample challenges data for use in the application
 import { judeChallenges } from './jude';
 import { philippiansChallenges } from './philippians';
+import { genesisChallenges } from './genesis';
 import { ChapterChallenge } from '../types';
 
 // Collect challenges from all books
 export const sampleChapterChallenges: ChapterChallenge[] = [
   ...judeChallenges,
   ...philippiansChallenges,
+  ...genesisChallenges,
   // Add more challenges as they are created
 ];
 

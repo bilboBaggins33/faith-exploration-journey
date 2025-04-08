@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
@@ -73,15 +72,19 @@ const BibleChapterChallenge: React.FC = () => {
       if (bookId && chapter) {
         // Update challenge progress with the proper data structure
         if (updateProgress) {
-          updateProgress({
-            challenges_completed: [`${bookId}${chapter}`],
-            total_points: score
-          });
-          
-          toast({
-            title: "Challenge Completed!",
-            description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
-          });
+          try {
+            updateProgress({
+              challenges_completed: [`${bookId}${chapter}`],
+              total_points: score
+            });
+            
+            toast({
+              title: "Challenge Completed!",
+              description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
+            });
+          } catch (error) {
+            console.error("Error updating progress:", error);
+          }
         }
       }
     }
