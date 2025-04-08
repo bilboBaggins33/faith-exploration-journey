@@ -50,7 +50,7 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
 
   // Helper function to get book progress percentage
   const getBookProgress = (bookId: string) => {
-    if (!progress || !progress.completed_chapters) return 0;
+    if (!progress || !progress.completed_chapters) return a;
     return calculateBookProgress(bookId, progress.completed_chapters);
   };
 

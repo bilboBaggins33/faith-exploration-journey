@@ -71,16 +71,18 @@ const BibleChapterChallenge: React.FC = () => {
     if (challenge && completed && user) {
       const book = bibleBooks.find(b => b.id === bookId);
       if (bookId && chapter) {
-        // Update challenge progress
-        updateProgress({
-          challenges_completed: [`${bookId}${chapter}`],
-          total_points: score
-        });
-        
-        toast({
-          title: "Challenge Completed!",
-          description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
-        });
+        // Update challenge progress - fix the argument type
+        if (updateProgress) {
+          updateProgress({
+            challenges_completed: [`${bookId}${chapter}`],
+            total_points: score
+          });
+          
+          toast({
+            title: "Challenge Completed!",
+            description: `You scored ${score} out of ${challenge.questions.length} in ${book?.name} ${chapter}.`,
+          });
+        }
       }
     }
   }, [completed, score, challenge, bookId, chapter, updateProgress, toast, user]);
