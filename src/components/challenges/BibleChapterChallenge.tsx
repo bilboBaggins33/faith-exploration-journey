@@ -71,7 +71,7 @@ const BibleChapterChallenge: React.FC = () => {
     if (challenge && completed && user) {
       const book = bibleBooks.find(b => b.id === bookId);
       if (bookId && chapter) {
-        // Update challenge progress - fix the argument type
+        // Update challenge progress with the proper data structure
         if (updateProgress) {
           updateProgress({
             challenges_completed: [`${bookId}${chapter}`],

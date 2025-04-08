@@ -174,8 +174,8 @@ export const useBibleProgress = () => {
     return mockProgress.challenges_completed?.includes(challengeId) || false;
   };
   
-  // Add method to reset progress
-  const updateProgress = async (action: 'reset' | 'update', data?: any) => {
+  // Update this method to accept progress data directly instead of action/data
+  const updateProgress = async (data: any) => {
     if (!user) {
       toast({
         title: "Authentication Required",
@@ -188,24 +188,13 @@ export const useBibleProgress = () => {
     setIsUpdating(true);
     
     try {
-      if (action === 'reset') {
-        // In a real app, you would make an API call to reset the progress
-        console.log("Resetting user progress");
-        
-        // Mock success
-        toast({
-          title: "Progress Reset",
-          description: "Your reading progress has been reset successfully.",
-        });
-      } else {
-        // Handle other update types
-        console.log("Updating progress with data:", data);
-        
-        toast({
-          title: "Progress Updated",
-          description: "Your reading progress has been updated.",
-        });
-      }
+      // Handle the update with the provided data
+      console.log("Updating progress with data:", data);
+      
+      toast({
+        title: "Progress Updated",
+        description: "Your reading progress has been updated.",
+      });
       
       setIsUpdating(false);
       return true;

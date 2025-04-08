@@ -2,6 +2,7 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { bibleBooks } from '@/data/bible';
 
@@ -12,6 +13,7 @@ interface ChaptersGridProps {
 const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
+  const { getChapterStatus } = useBibleProgress();
   
   if (!bookId) return null;
   
@@ -23,26 +25,12 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigateToChapter = (chapterBookId: string, chapter: number) => {
     navigate(`/challenge/bible/${chapterBookId}/${chapter}`);
   };
-  
-  // Mock function to return chapter status
-  const getChapterStatus = (bookId: string, chapter: number) => {
-    // In a real app, this would fetch from a user progress store/API
-    // First chapter is always free
-    const isFree = chapter === 1;
-    
-    return {
-      isCompleted: false,
-      score: 0,
-      maxScore: 10,
-      isFree
-    };
-  };
 
   return (
     <div className="p-4">
       <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {bookChapters.map(chapter => {
-          const { isCompleted, score, maxScore, isFree } = getChapterStatus(bookId, chapter);
+          const { isCompleted, score } = getChapterStatus(bookId, chapter);
           const isFirstChapter = chapter === 1;
           
           return (
@@ -52,8 +40,8 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
                 chapter={chapter}
                 isCompleted={isCompleted}
                 score={score}
-                maxScore={maxScore}
-                isUnlocked={isFirstChapter || (user ? true : isFree)} // First chapter is always unlocked
+                maxScore={10}
+                isUnlocked={isFirstChapter || (user ? true : false)} // First chapter is always unlocked
                 onClick={() => navigateToChapter(bookId, chapter)}
               />
             </div>
