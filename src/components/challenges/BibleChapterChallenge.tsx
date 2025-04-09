@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
@@ -204,7 +205,7 @@ const BibleChapterChallenge: React.FC = () => {
           onCheckAnswer={handleCheckAnswer}
           onNextQuestion={handleNextQuestion}
           isLastQuestion={currentQuestion === challenge.questions.length - 1}
-          onNavigateBack={handleGoBack}
+          onNavigateBack={null} // Remove the duplicate back button in the QuestionCard
         />
       </div>
     </ChallengeSkeleton>

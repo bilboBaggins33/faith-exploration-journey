@@ -19,7 +19,7 @@ interface QuestionCardProps {
   onCheckAnswer: () => void;
   onNextQuestion: () => void;
   isLastQuestion: boolean;
-  onNavigateBack: () => void;
+  onNavigateBack: (() => void) | null;
 }
 
 const QuestionCard = ({
@@ -135,24 +135,30 @@ const QuestionCard = ({
         )}
         
         <div className="flex justify-between">
-          <Button
-            variant="outline"
-            onClick={onNavigateBack}
-            className="flex items-center"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left mr-2" style={{width: 16, height: 16}}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-            Back
-          </Button>
+          {onNavigateBack && (
+            <Button
+              variant="outline"
+              onClick={onNavigateBack}
+              className="flex items-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left mr-2" style={{width: 16, height: 16}}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+              Back
+            </Button>
+          )}
           
           {!showExplanation ? (
             <Button 
               disabled={!selectedAnswer}
               onClick={onCheckAnswer}
+              className={cn(!onNavigateBack && 'ml-auto')}
             >
               Check Answer
             </Button>
           ) : (
-            <Button onClick={onNextQuestion}>
+            <Button 
+              onClick={onNextQuestion}
+              className={cn(!onNavigateBack && 'ml-auto')}
+            >
               {!isLastQuestion ? (
                 <>
                   Next Question

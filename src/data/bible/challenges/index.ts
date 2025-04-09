@@ -3,6 +3,7 @@
 import { judeChallenges } from './jude';
 import { philippiansChallenges } from './philippians';
 import { genesisChallenges } from './genesis';
+import { john2Challenges } from './2john';
 import { ChapterChallenge } from '../types';
 
 // Collect challenges from all books
@@ -10,6 +11,7 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...judeChallenges,
   ...philippiansChallenges,
   ...genesisChallenges,
+  ...john2Challenges,
   // Add more challenges as they are created
 ];
 

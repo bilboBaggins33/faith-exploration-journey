@@ -3,7 +3,6 @@ import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
-import ChallengeHeader from '@/components/challenges/bible/ChallengeHeader';
 import BibleChapterChallenge from '@/components/challenges/BibleChapterChallenge';
 import LoadingState from '@/components/challenges/bible/LoadingState';
 import ErrorState from '@/components/challenges/bible/ErrorState';
@@ -103,15 +102,7 @@ const Chapter = () => {
     // First chapter should be accessible to everyone
     return (
       <SubscriptionRequired allowViewOnly={isFirstChapter}>
-        <>
-          <ChallengeHeader 
-            bookName={bibleBooks.find(b => b.id === bookId)?.name || ''}
-            chapter={parseInt(chapter || '0', 10)} 
-            title={challenge?.title || ''}
-            onBackClick={handleGoBack}
-          />
-          <BibleChapterChallenge />
-        </>
+        <BibleChapterChallenge />
       </SubscriptionRequired>
     );
   };
