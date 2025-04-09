@@ -14,14 +14,21 @@ export interface BibleProgressData {
   total_chapters_read: number;
 }
 
+export interface BookProgressDetails {
+  percentage: number;
+  completed: number;
+  total: number;
+}
+
 export interface UseBibleProgressReturn {
   profile: any | null;
   progress: BibleProgressData | null;
   loading: boolean;
   refreshProfile: () => Promise<void>;
   updateProfile: (data: any) => Promise<void>;
-  updateProgress: (data: Partial<BibleProgressData>) => Promise<void>;
-  getBookProgress: (bookId: string) => number;
+  updateProgress: (data: Partial<BibleProgressData> | 'reset') => Promise<void>;
+  getBookProgress: (bookId: string) => BookProgressDetails;
+  getBookAverageScore: (bookId: string) => number;
   isCompleted: (challengeId: string) => boolean;
   completeChallenge: (challengeId: string, pointsEarned?: number) => Promise<void>;
   getChapterStatus: (bookId: string, chapter: number) => {

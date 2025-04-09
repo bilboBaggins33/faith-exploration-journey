@@ -25,7 +25,7 @@ const ResetProgressSection = () => {
     setResetting(true);
     
     try {
-      // Reset Bible progress
+      // Reset Bible progress - now properly typed to accept 'reset'
       await updateBibleProgress('reset');
       
       // Reset Theology progress - passing an empty object as data

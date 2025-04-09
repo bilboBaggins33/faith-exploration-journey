@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/context/AuthContext';
-import { BibleProgressData, UseBibleProgressReturn } from './bible-progress-types';
+import { BibleProgressData, BookProgressDetails, UseBibleProgressReturn } from './bible-progress-types';
 import { calculateBookProgress, getChapterStatus } from './bible-progress-utils';
 import { 
   fetchUserProfile, 
@@ -10,6 +10,7 @@ import {
   updateBibleProgress 
 } from './use-bible-data';
 import { completeChallenge, isChallengeCompleted } from './use-bible-challenges';
+import { bibleBooks } from '@/data/bible';
 
 export const useBibleProgress = (): UseBibleProgressReturn => {
   const { user } = useAuth();
@@ -49,9 +50,55 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
   };
 
   // Helper function to get book progress percentage
-  const getBookProgress = (bookId: string) => {
+  const getBookProgress = (bookId: string): BookProgressDetails => {
+    if (!progress || !progress.completed_chapters) {
+      const book = bibleBooks.find(b => b.id === bookId);
+      const totalChapters = book ? book.chapters : 0;
+      return {
+        percentage: 0,
+        completed: 0,
+        total: totalChapters
+      };
+    }
+    
+    const book = bibleBooks.find(b => b.id === bookId);
+    if (!book) {
+      return {
+        percentage: 0,
+        completed: 0,
+        total: 0
+      };
+    }
+    
+    const completedChapters = progress.completed_chapters.filter(
+      chapter => chapter.book_id === bookId
+    ).length;
+    
+    const percentage = Math.round((completedChapters / book.chapters) * 100);
+    
+    return {
+      percentage,
+      completed: completedChapters,
+      total: book.chapters
+    };
+  };
+
+  // Helper function to get average score for a book
+  const getBookAverageScore = (bookId: string): number => {
     if (!progress || !progress.completed_chapters) return 0;
-    return calculateBookProgress(bookId, progress.completed_chapters);
+    
+    const bookChapters = progress.completed_chapters.filter(
+      chapter => chapter.book_id === bookId && chapter.score !== undefined
+    );
+    
+    if (bookChapters.length === 0) return 0;
+    
+    const totalScore = bookChapters.reduce(
+      (sum, chapter) => sum + (chapter.score || 0), 
+      0
+    );
+    
+    return Math.round((totalScore / bookChapters.length) * 10);
   };
 
   // Helper function to check if a challenge is completed
@@ -84,17 +131,42 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
   };
 
   // Helper function to update progress data
-  const updateProgress = async (data: Partial<BibleProgressData>) => {
+  const updateProgress = async (data: Partial<BibleProgressData> | 'reset') => {
     if (!user) return;
 
     try {
-      await updateBibleProgress(user.id, data);
+      if (data === 'reset') {
+        // Reset all progress by creating a new empty progress object
+        await updateBibleProgress(user.id, {
+          completed_chapters: [],
+          challenges_completed: [],
+          verses_memorized: [],
+          total_points: 0,
+          books_progress: {},
+          total_chapters_read: 0
+        });
+      } else {
+        // Regular update with partial data
+        await updateBibleProgress(user.id, data);
+      }
       
       // Immediately update local state to reflect changes
-      setProgress(prev => {
-        if (!prev) return data as BibleProgressData;
-        return { ...prev, ...data };
-      });
+      if (data === 'reset') {
+        setProgress({
+          user_id: user.id,
+          completed_chapters: [],
+          challenges_completed: [],
+          verses_memorized: [],
+          total_points: 0,
+          books_progress: {},
+          total_chapters_read: 0
+        });
+      } else {
+        setProgress(prev => {
+          if (!prev) return data as BibleProgressData;
+          return { ...prev, ...data };
+        });
+      }
       
       // Also fetch fresh data from the server to ensure everything is in sync
       await fetchData();
@@ -132,6 +204,7 @@ export const useBibleProgress = (): UseBibleProgressReturn => {
     updateProfile,
     updateProgress,
     getBookProgress,
+    getBookAverageScore,
     isCompleted,
     completeChallenge: completeUserChallenge,
     getChapterStatus: getChapterStatusWrapper

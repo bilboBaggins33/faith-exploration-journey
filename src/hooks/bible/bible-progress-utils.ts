@@ -1,58 +1,46 @@
 
-import { bibleBooks } from '@/data/bible/books';
-import { sampleChapterChallenges } from '@/data/bible/challenges';
+import { bibleBooks } from "@/data/bible";
 
-export const calculateBookProgress = (bookId: string, completedChapters: any[] = []) => {
+/**
+ * Calculate the progress percentage for a specific book
+ */
+export const calculateBookProgress = (
+  bookId: string,
+  completedChapters: { book_id: string; chapter: number }[]
+) => {
   const book = bibleBooks.find(b => b.id === bookId);
+  
   if (!book) return 0;
   
-  // Count completed chapters for this book
-  const completedForBook = completedChapters.filter(
-    (ch) => ch.book_id === bookId
+  const completedCount = completedChapters.filter(
+    chapter => chapter.book_id === bookId
   ).length;
   
-  const bookProgress = Math.round((completedForBook / book.chapters) * 100);
-  return bookProgress > 100 ? 100 : bookProgress;
+  return Math.round((completedCount / book.chapters) * 100);
 };
 
-export const isChapterCompleted = (bookId: string, chapter: number, challengesCompleted: string[] = []) => {
-  if (!challengesCompleted) return false;
-  return challengesCompleted.includes(`${bookId}-${chapter}`);
-};
-
+/**
+ * Get the status of a specific chapter (completed, score)
+ */
 export const getChapterStatus = (
-  bookId: string, 
-  chapter: number, 
-  completedChapters: any[] = [], 
-  challengesCompleted: string[] = []
+  bookId: string,
+  chapter: number,
+  completedChapters: { book_id: string; chapter: number; score?: number }[] | undefined,
+  challengesCompleted: string[] | undefined
 ) => {
-  if (!completedChapters || !challengesCompleted) {
-    return { isCompleted: false, score: 0, maxScore: 0 };
+  if (!completedChapters) {
+    return { isCompleted: false, score: 0, maxScore: 10 };
   }
-  
-  const challengeKey = `${bookId}-${chapter}`;
-  const isCompleted = challengesCompleted.includes(challengeKey);
-  
-  // Get score from completed_chapters if available
-  let score = 0;
-  let maxScore = 0;
   
   const chapterData = completedChapters.find(
     c => c.book_id === bookId && c.chapter === chapter
   );
   
-  if (chapterData && chapterData.score) {
-    score = chapterData.score;
-  }
+  const challengeCompleted = challengesCompleted?.includes(`${bookId}${chapter}`);
   
-  // Find the challenge to get maxScore
-  const challenge = sampleChapterChallenges.find(
-    c => c.bookId === bookId && c.chapter === chapter
-  );
-  
-  if (challenge) {
-    maxScore = challenge.questions.length; // 1 point per question
-  }
-  
-  return { isCompleted, score, maxScore };
+  return {
+    isCompleted: !!chapterData || !!challengeCompleted,
+    score: chapterData?.score || 0,
+    maxScore: 10
+  };
 };
