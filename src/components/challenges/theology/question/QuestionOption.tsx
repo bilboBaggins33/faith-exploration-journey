@@ -21,10 +21,18 @@ const QuestionOption: React.FC<QuestionOptionProps> = ({
   isSubmitted,
   onSelect
 }) => {
+  // Determine the appropriate class based on state
   const getOptionClass = () => {
+    // When not submitted, just show the hover effect
     if (!isSubmitted) return 'hover:bg-accent';
+    
+    // When submitted and this is the correct answer, show green
     if (isCorrect) return 'border-green-500 bg-green-50';
+    
+    // When submitted, selected, but incorrect, show red
     if (isSelected && !isCorrect) return 'border-red-500 bg-red-50';
+    
+    // Default case
     return 'hover:bg-accent';
   };
 
