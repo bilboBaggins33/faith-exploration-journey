@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
@@ -75,7 +74,6 @@ const BibleChapterChallenge: React.FC = () => {
     if (challenge && completed && user) {
       const book = bibleBooks.find(b => b.id === bookId);
       if (bookId && chapter) {
-        // Update challenge progress with the proper data structure
         if (updateProgress) {
           try {
             const progressData: Partial<BibleProgressData> = {
@@ -144,7 +142,6 @@ const BibleChapterChallenge: React.FC = () => {
     navigate(`/bible/${bookId}`);
   };
 
-  // First chapter is always available without login
   if (!user && !isFirstChapter) {
     return <LoginRequired />;
   }
