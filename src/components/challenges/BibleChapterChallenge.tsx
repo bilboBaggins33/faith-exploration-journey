@@ -11,9 +11,10 @@ import ChallengeSkeleton from './bible/ChallengeSkeleton';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import { ChapterChallenge } from '@/data/bible/types';
-import ChallengeState from './bible/ChallengeState';
+import QuestionCard from './bible/QuestionCard';
 import ResultsCard from './bible/ResultsCard';
 import { BibleProgressData } from '@/hooks/bible/bible-progress-types';
+import ChallengeHeader from './bible/ChallengeHeader';
 
 const BibleChapterChallenge: React.FC = () => {
   const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
@@ -25,6 +26,8 @@ const BibleChapterChallenge: React.FC = () => {
   const [challenge, setChallenge] = useState<ChapterChallenge | null>(null);
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [userAnswers, setUserAnswers] = useState<Record<number, string>>({});
+  const [showExplanation, setShowExplanation] = useState(false);
+  const [isCorrect, setIsCorrect] = useState<boolean | null>(null);
   const [score, setScore] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -94,30 +97,37 @@ const BibleChapterChallenge: React.FC = () => {
     }
   }, [completed, score, challenge, bookId, chapter, updateProgress, toast, user]);
   
-  const handleAnswer = (questionIndex: number, answer: string) => {
-    setUserAnswers(prev => ({ ...prev, [questionIndex]: answer }));
+  const handleSelectAnswer = (answer: string) => {
+    if (showExplanation) return;
+    setUserAnswers(prev => ({ ...prev, [currentQuestion]: answer }));
   };
-  
-  const handleSubmit = () => {
+
+  const handleCheckAnswer = () => {
     if (!challenge) return;
     
-    let newScore = 0;
-    challenge.questions.forEach((question, index) => {
-      if (userAnswers[index] === question.correctAnswer) {
-        newScore++;
-      }
-    });
+    const currentQuestionData = challenge.questions[currentQuestion];
+    const selectedAnswer = userAnswers[currentQuestion];
     
-    setScore(newScore);
-    setCompleted(true);
+    if (!selectedAnswer) return;
+    
+    const correct = selectedAnswer === currentQuestionData.correctAnswer;
+    setIsCorrect(correct);
+    if (correct) {
+      setScore(prevScore => prevScore + 1);
+    }
+    setShowExplanation(true);
   };
   
   const handleNextQuestion = () => {
     if (!challenge) return;
+    
+    setShowExplanation(false);
+    setIsCorrect(null);
+    
     if (currentQuestion < challenge.questions.length - 1) {
       setCurrentQuestion(currentQuestion + 1);
     } else {
-      handleSubmit();
+      setCompleted(true);
     }
   };
   
@@ -126,20 +136,14 @@ const BibleChapterChallenge: React.FC = () => {
     setUserAnswers({});
     setScore(0);
     setCompleted(false);
+    setShowExplanation(false);
+    setIsCorrect(null);
   };
   
   const handleGoBack = () => {
     navigate(`/bible/${bookId}`);
   };
 
-  const handleNavigateToBook = () => {
-    navigate(`/bible/${bookId}`);
-  };
-  
-  const handleNavigateToBible = () => {
-    navigate('/bible');
-  };
-  
   // First chapter is always available without login
   if (!user && !isFirstChapter) {
     return <LoginRequired />;
@@ -159,37 +163,53 @@ const BibleChapterChallenge: React.FC = () => {
   
   const book = bibleBooks.find(b => b.id === bookId);
   
-  return (
-    <ChallengeSkeleton>
-      {completed ? (
+  if (completed) {
+    return (
+      <ChallengeSkeleton>
         <ResultsCard
           score={score}
           totalQuestions={challenge.questions.length}
           keyVerseText={challenge.key_verse_text}
           keyVerse={challenge.key_verse}
           onRestartQuiz={handleRetry}
-          onNavigateToBook={handleNavigateToBook}
-          onNavigateToBible={handleNavigateToBible}
+          onNavigateToBook={() => navigate(`/bible/${bookId}`)}
+          onNavigateToBible={() => navigate('/bible')}
           bookName={book?.name || ''}
         />
-      ) : (
-        <ChallengeState
+      </ChallengeSkeleton>
+    );
+  }
+
+  const currentQuestionData = challenge.questions[currentQuestion];
+  
+  return (
+    <ChallengeSkeleton>
+      <div>
+        <ChallengeHeader
           bookName={book?.name || ''}
           chapter={parseInt(chapter, 10)}
           title={challenge.title}
           currentQuestion={currentQuestion}
           totalQuestions={challenge.questions.length}
           score={score}
-          questions={challenge.questions}
-          userAnswers={userAnswers}
-          completed={completed}
-          onAnswer={handleAnswer}
-          onNextQuestion={handleNextQuestion}
-          onSubmit={handleSubmit}
-          onRetry={handleRetry}
-          onGoBack={handleGoBack}
+          onBackClick={handleGoBack}
         />
-      )}
+        
+        <QuestionCard
+          question={currentQuestionData.question}
+          options={currentQuestionData.options}
+          correctAnswer={currentQuestionData.correctAnswer}
+          selectedAnswer={userAnswers[currentQuestion] || null}
+          showExplanation={showExplanation}
+          isCorrect={isCorrect}
+          explanation={currentQuestionData.explanation}
+          onSelectAnswer={handleSelectAnswer}
+          onCheckAnswer={handleCheckAnswer}
+          onNextQuestion={handleNextQuestion}
+          isLastQuestion={currentQuestion === challenge.questions.length - 1}
+          onNavigateBack={handleGoBack}
+        />
+      </div>
     </ChallengeSkeleton>
   );
 };

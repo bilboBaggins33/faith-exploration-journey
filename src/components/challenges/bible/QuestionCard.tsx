@@ -10,7 +10,7 @@ import { cn } from '@/lib/utils';
 interface QuestionCardProps {
   question: string;
   options: string[];
-  correctAnswer
+  correctAnswer: string;
   selectedAnswer: string | null;
   showExplanation: boolean;
   isCorrect: boolean | null;
@@ -63,7 +63,7 @@ const QuestionCard = ({
               <div className={cn(
                 "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
                 selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
-                showExplanation && option === correctAnswer && selectedAnswer === option ? 'border-green-500 bg-green-50' : '',
+                showExplanation && option === correctAnswer ? 'border-green-500 bg-green-50' : '',
                 showExplanation && selectedAnswer === option && option !== correctAnswer ? 'border-red-500 bg-red-50' : ''
               )}>
                 <RadioGroupItem 
@@ -77,6 +77,12 @@ const QuestionCard = ({
                 >
                   {option}
                 </Label>
+                {showExplanation && option === correctAnswer && (
+                  <CheckCircle className="text-green-500 ml-2 flex-shrink-0" size={18} />
+                )}
+                {showExplanation && selectedAnswer === option && option !== correctAnswer && (
+                  <X className="text-red-500 ml-2 flex-shrink-0" size={18} />
+                )}
               </div>
             </div>
           ))}
@@ -106,7 +112,7 @@ const QuestionCard = ({
                 </div>
               </div>
             ) : (
-              <p className="text-sm">Answer explanation is hidden. Click "Show Answer" to reveal.</p>
+              <p className="text-sm">Answer explanation is available. Click "Show Answer" to reveal.</p>
             )}
             
             <Button 
