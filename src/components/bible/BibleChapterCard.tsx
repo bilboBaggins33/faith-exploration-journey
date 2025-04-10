@@ -38,6 +38,13 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     return "bg-red-50 border-red-200";
   };
 
+  // Custom color logic for score based on the specific business rules
+  const getScoreColor = () => {
+    if (score === 5) return "text-green-500"; // 5 correct answers
+    if (score >= 2 && score <= 4) return "text-amber-500"; // 2-4 correct answers
+    return "text-red-500"; // 1 or fewer correct answers
+  };
+
   return (
     <motion.div
       whileHover={{ y: -3, boxShadow: "0 5px 10px rgba(0, 0, 0, 0.1)" }}
@@ -66,17 +73,22 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           </div>
         </div>
         
-        <div className="w-full mb-1">
-          <ChapterProgressChart 
-            percentage={scorePercentage} 
-            showPercentage={false}
-          />
-        </div>
-        
         {isCompleted && (
-          <p className="text-[10px] text-gray-500">
-            {score}/{maxScore}
-          </p>
+          <div className="w-full mb-1">
+            <ChapterProgressChart 
+              percentage={scorePercentage} 
+              showPercentage={false}
+            />
+            <p className={`text-[10px] mt-1 ${getScoreColor()}`}>
+              {score}/{maxScore}
+            </p>
+          </div>
+        )}
+        
+        {!isCompleted && (
+          <div className="w-full mb-1">
+            <div className="w-full h-2 bg-gray-100 rounded-full"></div>
+          </div>
         )}
         
         {isFirstChapter && (
