@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { LogOut, BookText, Info, Mail, LogIn, LayoutDashboard, User, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
@@ -23,6 +23,7 @@ interface DesktopNavProps {
 const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavProps) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
+  const [isOpen, setIsOpen] = useState(false);
   
   const getSignInButtonClasses = () => {
     if (isHomePage && !isScrolled) {
@@ -61,8 +62,11 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
         </NavLink>
         
         {user ? (
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
+          <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
+            <DropdownMenuTrigger asChild
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+            >
               <button className={`flex items-center justify-center p-1 hover-link font-medium transition-colors duration-300 ${
                 isActive('/profile') || isActive('/dashboard')
                   ? 'text-bible-blue after:scale-x-100' 
@@ -74,7 +78,12 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
                 <span>Admin</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-bible-dark border border-gray-200 dark:border-gray-800">
+            <DropdownMenuContent 
+              align="end" 
+              className="w-56 bg-white dark:bg-bible-dark border border-gray-200 dark:border-gray-800"
+              onMouseEnter={() => setIsOpen(true)}
+              onMouseLeave={() => setIsOpen(false)}
+            >
               <DropdownMenuItem asChild>
                 <Link to="/profile" className="flex w-full items-center cursor-pointer">
                   <User className="mr-2 h-4 w-4" />

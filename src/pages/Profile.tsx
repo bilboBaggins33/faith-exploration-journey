@@ -3,14 +3,12 @@ import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import ProfileEditForm from '@/components/ProfileEditForm';
-import ReadingStats from '@/components/profile/ReadingStats';
-import ResetProgressSection from '@/components/profile/ResetProgressSection';
 import SubscriptionStatus from '@/components/profile/SubscriptionStatus';
+import ResetProgressSection from '@/components/profile/ResetProgressSection';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Card } from "@/components/ui/card";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Loader2, UserRound, Settings, LayoutDashboard } from 'lucide-react';
+import { Loader2, LayoutDashboard } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 
 const Profile = () => {
@@ -87,11 +85,11 @@ const Profile = () => {
       <main className="flex-1 pt-16">
         <section className="py-10 bg-bible-beige">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="mb-10 flex items-center justify-between">
+            <div className="mb-8 flex items-center justify-between">
               <div>
                 <h1 className="text-3xl font-serif font-bold">My Profile</h1>
                 <p className="text-gray-600">
-                  Manage your account settings and track your reading journey.
+                  Manage your account settings
                 </p>
               </div>
               <Button 
@@ -108,70 +106,24 @@ const Profile = () => {
             
             <div className="grid md:grid-cols-3 gap-8">
               <div className="md:col-span-2">
-                <Tabs defaultValue="profile" className="glass-card rounded-xl shadow-xl mb-8">
-                  <TabsList className="grid grid-cols-2 w-full">
-                    <TabsTrigger value="profile" className="flex items-center">
-                      <UserRound className="mr-2 h-4 w-4" />
-                      Profile
-                    </TabsTrigger>
-                    <TabsTrigger value="settings" className="flex items-center">
-                      <Settings className="mr-2 h-4 w-4" />
-                      Settings
-                    </TabsTrigger>
-                  </TabsList>
-                  
-                  <div className="p-6">
-                    <TabsContent value="profile">
-                      <ProfileEditForm
-                        user={user}
-                        fullName={fullName}
-                        email={user?.email}
-                        avatarUrl={avatarUrl}
-                        onProfileUpdated={handleProfileUpdated}
-                      />
-                    </TabsContent>
-                    
-                    <TabsContent value="settings">
-                      <ResetProgressSection />
-                    </TabsContent>
-                  </div>
-                </Tabs>
+                <Card className="p-6 shadow-lg rounded-xl mb-8">
+                  <h2 className="text-xl font-semibold mb-4">Account Information</h2>
+                  <ProfileEditForm
+                    user={user}
+                    fullName={fullName}
+                    email={user?.email}
+                    avatarUrl={avatarUrl}
+                    onProfileUpdated={handleProfileUpdated}
+                  />
+                </Card>
                 
-                <ReadingStats />
+                <Card className="p-6 shadow-lg rounded-xl">
+                  <ResetProgressSection />
+                </Card>
               </div>
               
-              <div className="space-y-8">
+              <div>
                 <SubscriptionStatus />
-                
-                <Card className="p-5">
-                  <h3 className="text-lg font-medium mb-4">Quick Links</h3>
-                  <ul className="space-y-2">
-                    <li>
-                      <a 
-                        href="/bible" 
-                        className="text-bible-blue hover:text-bible-deepBlue block p-2 hover:bg-blue-50 rounded"
-                      >
-                        Bible Explorer
-                      </a>
-                    </li>
-                    <li>
-                      <a 
-                        href="/theology" 
-                        className="text-bible-blue hover:text-bible-deepBlue block p-2 hover:bg-blue-50 rounded"
-                      >
-                        Theology Books
-                      </a>
-                    </li>
-                    <li>
-                      <a 
-                        href="/daily-reading" 
-                        className="text-bible-blue hover:text-bible-deepBlue block p-2 hover:bg-blue-50 rounded"
-                      >
-                        Daily Reading Plan
-                      </a>
-                    </li>
-                  </ul>
-                </Card>
               </div>
             </div>
           </div>
