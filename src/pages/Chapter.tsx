@@ -11,6 +11,7 @@ import { useAuth } from '@/context/auth';
 import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import { ChapterChallenge } from '@/data/bible/types';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
+import ChallengeSkeleton from '@/components/challenges/bible/ChallengeSkeleton';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();

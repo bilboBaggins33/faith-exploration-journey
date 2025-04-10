@@ -1,12 +1,14 @@
 
 import React from 'react';
-import { motion } from 'framer-motion';  // Remove Motion, use only motion
+import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
 import ChallengeHeader from './ChallengeHeader';
 import { ChapterChallenge } from '@/data/bible/types';
 import { bibleBooks } from '@/data/bible';
 import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { getBookImage } from '@/data/bible/book-images';
 
 interface ChallengeFeedbackProps {
   state: BibleChallengeState;
@@ -64,6 +66,21 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   
   return (
     <div>
+      <div className="mb-6">
+        <AspectRatio ratio={3/1} className="bg-muted rounded-lg overflow-hidden mb-4">
+          <img 
+            src={getBookImage(bookId)} 
+            alt={`${book?.name || 'Bible book'} cover`}
+            className="w-full h-full object-cover"
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/placeholder.svg';
+            }}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+        </AspectRatio>
+      </div>
+      
       <ChallengeHeader
         bookName={book?.name || ''}
         chapter={parseInt(chapter, 10)}

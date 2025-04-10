@@ -40,18 +40,16 @@ const BibleChapterChallenge: React.FC = () => {
   }
   
   return (
-    <ChallengeSkeleton>
-      <ChallengeFeedback
-        state={state}
-        bookId={bookId}
-        chapter={chapter}
-        onSelectAnswer={handleSelectAnswer}
-        onCheckAnswer={handleCheckAnswer}
-        onNextQuestion={handleNextQuestion}
-        onRetry={handleRetry}
-        onGoBack={handleGoBack}
-      />
-    </ChallengeSkeleton>
+    <ChallengeFeedback
+      state={state}
+      bookId={bookId}
+      chapter={chapter}
+      onSelectAnswer={handleSelectAnswer}
+      onCheckAnswer={handleCheckAnswer}
+      onNextQuestion={handleNextQuestion}
+      onRetry={handleRetry}
+      onGoBack={handleGoBack}
+    />
   );
 };
 
