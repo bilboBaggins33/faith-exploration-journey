@@ -2,7 +2,6 @@
 import React from 'react';
 import { Progress } from '@/components/ui/progress';
 import { motion } from 'framer-motion';
-import { getProgressColor, getProgressColorClass } from '@/lib/color-utils';
 
 interface ChapterProgressChartProps {
   percentage: number;
