@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { Motion, motion } from 'framer-motion';
+import { motion } from 'framer-motion';  // Remove Motion, use only motion
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
 import ChallengeHeader from './ChallengeHeader';
