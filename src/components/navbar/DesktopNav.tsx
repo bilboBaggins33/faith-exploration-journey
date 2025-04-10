@@ -1,15 +1,22 @@
 
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LogOut, BookText, Info, Mail, LogIn, LayoutDashboard } from 'lucide-react';
+import { LogOut, BookText, Info, Mail, LogIn, LayoutDashboard, User, Settings } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from './NavLink';
-import { User } from '@supabase/supabase-js';
+import { User as SupabaseUser } from '@supabase/supabase-js';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 
 interface DesktopNavProps {
   isHomePage: boolean;
   isScrolled: boolean;
-  user: User | null;
+  user: SupabaseUser | null;
   handleSignOut: () => Promise<void>;
 }
 
@@ -40,15 +47,6 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
           </div>
         </NavLink>
         
-        {user && (
-          <NavLink to="/dashboard" active={isActive('/dashboard')} isScrolled={isScrolled} isHomePage={isHomePage}>
-            <div className="flex items-center">
-              <LayoutDashboard className="h-4 w-4 mr-1" />
-              Dashboard
-            </div>
-          </NavLink>
-        )}
-        
         <NavLink to="/about" active={isActive('/about')} isScrolled={isScrolled} isHomePage={isHomePage}>
           <div className="flex items-center">
             <Info className="h-4 w-4 mr-1" />
@@ -61,20 +59,41 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
             Contact
           </div>
         </NavLink>
-        <NavLink to="/profile" active={isActive('/profile')} isScrolled={isScrolled} isHomePage={isHomePage}>
-          Profile
-        </NavLink>
         
         {user ? (
-          <Button 
-            variant="outline" 
-            size="sm" 
-            className="ml-4 flex items-center transition-colors duration-300 border-bible-dark text-bible-dark dark:border-white dark:text-white hover:bg-bible-dark/10 dark:hover:bg-white/10" 
-            onClick={handleSignOut}
-          >
-            <LogOut className="h-4 w-4 mr-2" />
-            Sign Out
-          </Button>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <button className={`flex items-center justify-center p-1 hover-link font-medium transition-colors duration-300 ${
+                isActive('/profile') || isActive('/dashboard')
+                  ? 'text-bible-blue after:scale-x-100' 
+                  : isHomePage && !isScrolled
+                    ? 'text-white'
+                    : 'text-bible-dark dark:text-white'
+              }`}>
+                <User className="h-4 w-4 mr-1" />
+                <span>Admin</span>
+              </button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end" className="w-56 bg-white dark:bg-bible-dark border border-gray-200 dark:border-gray-800">
+              <DropdownMenuItem asChild>
+                <Link to="/profile" className="flex w-full items-center cursor-pointer">
+                  <User className="mr-2 h-4 w-4" />
+                  <span>Profile</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuItem asChild>
+                <Link to="/dashboard" className="flex w-full items-center cursor-pointer">
+                  <LayoutDashboard className="mr-2 h-4 w-4" />
+                  <span>Dashboard</span>
+                </Link>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator />
+              <DropdownMenuItem onClick={handleSignOut} className="flex items-center cursor-pointer text-red-600 hover:text-red-700 dark:text-red-500 dark:hover:text-red-400">
+                <LogOut className="mr-2 h-4 w-4" />
+                <span>Sign Out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         ) : (
           <Link to="/auth">
             <Button 

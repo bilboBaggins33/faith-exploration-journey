@@ -2,10 +2,17 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, User, LogOut, Book, BookText, Info, Mail, LayoutDashboard } from 'lucide-react';
+import { BookOpen, User, LogOut, Book, BookText, Info, Mail, LayoutDashboard, ChevronDown } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MobileNavLink from './MobileNavLink';
 import { User as SupabaseUser } from '@supabase/supabase-js';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/dropdown-menu';
 
 interface MobileNavProps {
   isOpen: boolean;
@@ -37,32 +44,58 @@ const MobileNav = ({ isOpen, user, handleSignOut }: MobileNavProps) => {
         <MobileNavLink to="/theology" icon={<BookText className="h-5 w-5 mr-2" />} active={isActive('/theology')}>
           Books
         </MobileNavLink>
-        
-        {user && (
-          <MobileNavLink to="/dashboard" icon={<LayoutDashboard className="h-5 w-5 mr-2" />} active={isActive('/dashboard')}>
-            Dashboard
-          </MobileNavLink>
-        )}
-        
         <MobileNavLink to="/about" icon={<Info className="h-5 w-5 mr-2" />} active={isActive('/about')}>
           About
         </MobileNavLink>
         <MobileNavLink to="/contact" icon={<Mail className="h-5 w-5 mr-2" />} active={isActive('/contact')}>
           Contact
         </MobileNavLink>
-        <MobileNavLink to="/profile" icon={<User className="h-5 w-5 mr-2" />} active={isActive('/profile')}>
-          Profile
-        </MobileNavLink>
         
         {user ? (
-          <Button 
-            className="w-full flex items-center justify-center"
-            variant="destructive"
-            onClick={handleSignOut}
-          >
-            <LogOut className="h-5 w-5 mr-2" />
-            Sign Out
-          </Button>
+          <div className="space-y-2">
+            <div className={`flex items-center px-4 py-2 text-base font-medium rounded-md ${
+              isActive('/profile') || isActive('/dashboard') 
+                ? 'bg-bible-sky text-bible-blue' 
+                : 'text-bible-dark dark:text-white'
+            }`}>
+              <User className="h-5 w-5 mr-2" />
+              Admin
+              <div className="flex-grow"></div>
+              <ChevronDown className="h-4 w-4" />
+            </div>
+            <div className="pl-8 space-y-2">
+              <Link 
+                to="/profile" 
+                className={`flex items-center px-4 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+                  isActive('/profile') 
+                    ? 'bg-bible-sky text-bible-blue' 
+                    : 'text-bible-dark dark:text-white hover:bg-bible-beige dark:hover:bg-slate-800'
+                }`}
+              >
+                <User className="h-5 w-5 mr-2" />
+                Profile
+              </Link>
+              <Link 
+                to="/dashboard" 
+                className={`flex items-center px-4 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+                  isActive('/dashboard') 
+                    ? 'bg-bible-sky text-bible-blue' 
+                    : 'text-bible-dark dark:text-white hover:bg-bible-beige dark:hover:bg-slate-800'
+                }`}
+              >
+                <LayoutDashboard className="h-5 w-5 mr-2" />
+                Dashboard
+              </Link>
+              <Button 
+                className="w-full flex items-center justify-center"
+                variant="destructive"
+                onClick={handleSignOut}
+              >
+                <LogOut className="h-5 w-5 mr-2" />
+                Sign Out
+              </Button>
+            </div>
+          </div>
         ) : (
           <Link to="/auth" className="w-full">
             <Button className="w-full bg-bible-blue hover:bg-bible-deepBlue text-white">Sign In</Button>
