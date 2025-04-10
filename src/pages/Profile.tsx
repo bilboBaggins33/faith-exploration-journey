@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
@@ -105,8 +106,8 @@ const Profile = () => {
             </div>
             
             <div className="grid md:grid-cols-3 gap-8">
-              <div className="md:col-span-2">
-                <Card className="p-6 shadow-lg rounded-xl mb-8">
+              <div className="md:col-span-2 space-y-8">
+                <Card className="p-6 shadow-lg rounded-xl">
                   <h2 className="text-xl font-semibold mb-4">Account Information</h2>
                   <ProfileEditForm
                     user={user}
