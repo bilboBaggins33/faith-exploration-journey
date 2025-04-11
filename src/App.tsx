@@ -11,6 +11,7 @@ import Bible from '@/pages/Bible';
 import Chapter from '@/pages/Chapter';
 import DailyReading from '@/pages/DailyReading';
 import Dashboard from '@/pages/Dashboard';
+import Achievements from '@/pages/Achievements';
 import Theology from '@/pages/Theology';
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
@@ -36,6 +37,10 @@ const router = createBrowserRouter([
   {
     path: '/dashboard',
     element: <Dashboard />,
+  },
+  {
+    path: '/achievements',
+    element: <Achievements />,
   },
   {
     path: '/bible',

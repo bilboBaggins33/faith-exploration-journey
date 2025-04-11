@@ -1,22 +1,23 @@
 
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { CalendarDays, Trophy, BookOpen, Clock, BarChart2, Star } from 'lucide-react';
+import { useTheologyProgress } from '@/hooks/use-theology-progress';
+import { CalendarDays, Trophy, BookOpen, Clock, BarChart2, Star, Book, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { bibleBooks } from '@/data/bible';
-import { Link } from 'react-router-dom';
+import { theologyBooks } from '@/data/theology';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
   const { getBookProgress, progress } = useBibleProgress();
+  const { getBookProgress: getTheologyBookProgress } = useTheologyProgress();
   
   // Redirect to login if not authenticated
   React.useEffect(() => {
@@ -51,7 +52,7 @@ const Dashboard = () => {
     return Math.round((completedChapters / totalChapters) * 100);
   };
   
-  // Get recently read books
+  // Get recently read Bible books
   const getRecentlyReadBooks = () => {
     if (!progress || !progress.completed_chapters) return [];
     
@@ -74,8 +75,26 @@ const Dashboard = () => {
       };
     });
   };
+
+  // Get recently read theology books
+  const getRecentTheologyBooks = () => {
+    // Get first 3 theology books that have some progress
+    return theologyBooks.filter(book => {
+      const progress = getTheologyBookProgress(book.id);
+      return progress.completedChapters > 0;
+    }).slice(0, 3).map(book => {
+      const progress = getTheologyBookProgress(book.id);
+      return {
+        id: book.id,
+        name: book.title,
+        progress: progress.percentage,
+        author: book.author
+      };
+    });
+  };
   
   const recentlyReadBooks = getRecentlyReadBooks();
+  const recentTheologyBooks = getRecentTheologyBooks();
   const overallProgress = calculateOverallProgress();
   const totalChaptersRead = progress?.completed_chapters?.length || 0;
   
@@ -126,167 +145,126 @@ const Dashboard = () => {
               </CardHeader>
               <CardContent>
                 <div className="text-3xl font-bold">{progress?.challenges_completed?.length || 0}</div>
-                <p className="text-sm text-gray-500 mt-1">Challenges completed</p>
+                <div className="flex justify-between items-center">
+                  <p className="text-sm text-gray-500 mt-1">Challenges completed</p>
+                  <Button variant="ghost" size="sm" onClick={() => navigate('/achievements')} className="text-bible-blue">
+                    View All
+                    <ChevronRight className="ml-1 h-4 w-4" />
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           </div>
           
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2">
-              <Tabs defaultValue="recent">
-                <TabsList className="mb-4">
-                  <TabsTrigger value="recent">Recently Read</TabsTrigger>
-                  <TabsTrigger value="recommended">Recommended</TabsTrigger>
-                </TabsList>
-                
-                <TabsContent value="recent" className="space-y-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Continue Reading</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      {recentlyReadBooks.length > 0 ? (
-                        <div className="space-y-4">
-                          {recentlyReadBooks.map(book => (
-                            <div key={book.id} className="flex items-center justify-between p-2 border-b last:border-0">
-                              <div>
-                                <h3 className="font-medium">{book.name}</h3>
-                                <div className="flex items-center text-sm text-gray-500">
-                                  <Progress 
-                                    value={book.progress} 
-                                    className="w-24 h-2 mr-2"
-                                    color={book.progress === 100 ? "bg-green-500" : undefined}
-                                  />
-                                  {book.progress}% complete
-                                </div>
-                              </div>
-                              <Button 
-                                size="sm" 
-                                className="bg-bible-blue hover:bg-bible-deepBlue"
-                                onClick={() => navigate(`/bible/${book.id}`)}
-                              >
-                                Continue
-                              </Button>
-                            </div>
-                          ))}
-                        </div>
-                      ) : (
-                        <div className="text-center py-8">
-                          <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-2" />
-                          <p className="text-gray-500">You haven't started reading yet</p>
-                          <Button 
-                            className="mt-4 bg-bible-blue hover:bg-bible-deepBlue"
-                            onClick={() => navigate('/bible')}
-                          >
-                            Start Reading
-                          </Button>
-                        </div>
-                      )}
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-                
-                <TabsContent value="recommended" className="space-y-4">
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="text-lg">Recommended Books</CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-4">
-                        <div className="flex items-center justify-between p-2 border-b">
-                          <div>
-                            <h3 className="font-medium">Psalms</h3>
-                            <p className="text-sm text-gray-500">Poetry & Wisdom</p>
-                          </div>
-                          <Button 
-                            size="sm" 
-                            className="bg-bible-blue hover:bg-bible-deepBlue"
-                            onClick={() => navigate('/bible/PSA')}
-                          >
-                            Read
-                          </Button>
-                        </div>
-                        <div className="flex items-center justify-between p-2 border-b">
-                          <div>
-                            <h3 className="font-medium">John</h3>
-                            <p className="text-sm text-gray-500">New Testament</p>
-                          </div>
-                          <Button 
-                            size="sm" 
-                            className="bg-bible-blue hover:bg-bible-deepBlue"
-                            onClick={() => navigate('/bible/JHN')}
-                          >
-                            Read
-                          </Button>
-                        </div>
-                        <div className="flex items-center justify-between p-2">
-                          <div>
-                            <h3 className="font-medium">Romans</h3>
-                            <p className="text-sm text-gray-500">New Testament</p>
-                          </div>
-                          <Button 
-                            size="sm" 
-                            className="bg-bible-blue hover:bg-bible-deepBlue"
-                            onClick={() => navigate('/bible/ROM')}
-                          >
-                            Read
-                          </Button>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </TabsContent>
-              </Tabs>
-              
-              <Card className="mt-6">
+              {/* Bible Reading Card */}
+              <Card className="mb-6">
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center">
-                    <CalendarDays className="w-5 h-5 mr-2 text-bible-blue" />
-                    Daily Reading Plan
+                    <BookOpen className="w-5 h-5 mr-2 text-bible-blue" />
+                    Bible Reading
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex items-center justify-between mb-4">
-                    <div>
-                      <h3 className="font-medium">Today's Readings</h3>
-                      <p className="text-sm text-gray-500">M'Cheyne Reading Plan</p>
+                  {recentlyReadBooks.length > 0 ? (
+                    <div className="space-y-4">
+                      {recentlyReadBooks.map(book => (
+                        <div key={book.id} className="flex items-center justify-between p-2 border-b last:border-0">
+                          <div>
+                            <h3 className="font-medium">{book.name}</h3>
+                            <div className="flex items-center text-sm text-gray-500">
+                              <Progress 
+                                value={book.progress} 
+                                className="w-24 h-2 mr-2"
+                                color={book.progress === 100 ? "bg-green-500" : undefined}
+                              />
+                              {book.progress}% complete
+                            </div>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            className="bg-bible-blue hover:bg-bible-deepBlue"
+                            onClick={() => navigate(`/bible/${book.id}`)}
+                          >
+                            Continue
+                          </Button>
+                        </div>
+                      ))}
                     </div>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      onClick={() => navigate('/daily-reading')}
-                    >
-                      View Full Plan
+                  ) : (
+                    <div className="text-center py-8">
+                      <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-2" />
+                      <p className="text-gray-500">You haven't started reading yet</p>
+                      <Button 
+                        className="mt-4 bg-bible-blue hover:bg-bible-deepBlue"
+                        onClick={() => navigate('/bible')}
+                      >
+                        Start Reading
+                      </Button>
+                    </div>
+                  )}
+                  
+                  <div className="mt-4 text-right">
+                    <Button variant="outline" onClick={() => navigate('/bible')}>
+                      View All Bible Books
                     </Button>
                   </div>
+                </CardContent>
+              </Card>
+              
+              {/* Theology Books Card */}
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <Book className="w-5 h-5 mr-2 text-bible-blue" />
+                    Theology Books
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {recentTheologyBooks.length > 0 ? (
+                    <div className="space-y-4">
+                      {recentTheologyBooks.map(book => (
+                        <div key={book.id} className="flex items-center justify-between p-2 border-b last:border-0">
+                          <div>
+                            <h3 className="font-medium">{book.name}</h3>
+                            <p className="text-xs text-gray-500">{book.author}</p>
+                            <div className="flex items-center text-sm text-gray-500 mt-1">
+                              <Progress 
+                                value={book.progress} 
+                                className="w-24 h-2 mr-2"
+                                color={book.progress === 100 ? "bg-green-500" : undefined}
+                              />
+                              {book.progress}% complete
+                            </div>
+                          </div>
+                          <Button 
+                            size="sm" 
+                            className="bg-bible-blue hover:bg-bible-deepBlue"
+                            onClick={() => navigate('/theology')}
+                          >
+                            Continue
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <div className="text-center py-8">
+                      <Book className="h-12 w-12 mx-auto text-gray-300 mb-2" />
+                      <p className="text-gray-500">You haven't started reading any theology books yet</p>
+                      <Button 
+                        className="mt-4 bg-bible-blue hover:bg-bible-deepBlue"
+                        onClick={() => navigate('/theology')}
+                      >
+                        Explore Books
+                      </Button>
+                    </div>
+                  )}
                   
-                  <div className="space-y-2">
-                    <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
-                          <Clock className="h-4 w-4" />
-                        </div>
-                        <span>Genesis 1</span>
-                      </div>
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link to="/challenge/bible/GEN/1">
-                          Read
-                        </Link>
-                      </Button>
-                    </div>
-                    <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
-                      <div className="flex items-center">
-                        <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
-                          <Clock className="h-4 w-4" />
-                        </div>
-                        <span>Matthew 1</span>
-                      </div>
-                      <Button variant="ghost" size="sm" asChild>
-                        <Link to="/challenge/bible/MAT/1">
-                          Read
-                        </Link>
-                      </Button>
-                    </div>
+                  <div className="mt-4 text-right">
+                    <Button variant="outline" onClick={() => navigate('/theology')}>
+                      View All Theology Books
+                    </Button>
                   </div>
                 </CardContent>
               </Card>
@@ -297,7 +275,7 @@ const Dashboard = () => {
                 <CardHeader>
                   <CardTitle className="text-lg flex items-center">
                     <Trophy className="w-5 h-5 mr-2 text-bible-blue" />
-                    Achievements
+                    Recent Achievements
                   </CardTitle>
                 </CardHeader>
                 <CardContent>
@@ -333,7 +311,11 @@ const Dashboard = () => {
                     </div>
                   </div>
                   
-                  <Button variant="outline" className="w-full mt-4">
+                  <Button 
+                    variant="outline" 
+                    className="w-full mt-4"
+                    onClick={() => navigate('/achievements')}
+                  >
                     View All Achievements
                   </Button>
                 </CardContent>
@@ -365,6 +347,53 @@ const Dashboard = () => {
                       <Progress value={Math.round(overallProgress * 1.2)} className="h-2" />
                     </div>
                   </div>
+                </CardContent>
+              </Card>
+              
+              <Card className="mt-6">
+                <CardHeader>
+                  <CardTitle className="text-lg flex items-center">
+                    <CalendarDays className="w-5 h-5 mr-2 text-bible-blue" />
+                    Daily Reading Plan
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-2">
+                    <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
+                          <Clock className="h-4 w-4" />
+                        </div>
+                        <span>Genesis 1</span>
+                      </div>
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link to="/challenge/bible/GEN/1">
+                          Read
+                        </Link>
+                      </Button>
+                    </div>
+                    <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
+                      <div className="flex items-center">
+                        <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
+                          <Clock className="h-4 w-4" />
+                        </div>
+                        <span>Matthew 1</span>
+                      </div>
+                      <Button variant="ghost" size="sm" asChild>
+                        <Link to="/challenge/bible/MAT/1">
+                          Read
+                        </Link>
+                      </Button>
+                    </div>
+                  </div>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full mt-4"
+                    onClick={() => navigate('/daily-reading')}
+                  >
+                    View Full Plan
+                  </Button>
                 </CardContent>
               </Card>
             </div>
