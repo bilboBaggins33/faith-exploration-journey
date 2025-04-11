@@ -9,12 +9,16 @@ import BibleBooksList from '@/components/bible/BibleBooksList';
 import BibleBookCard from '@/components/bible/BibleBookCard';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
+import BookSearchFilter from '@/components/bible/explorer/BookSearchFilter';
+import { Card } from '@/components/ui/card';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
   const navigate = useNavigate();
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [activeTestament, setActiveTestament] = useState<string>('all');
   const { getBookProgress, getBookAverageScore } = useBibleProgress();
   const isMobile = useIsMobile();
   
@@ -72,7 +76,36 @@ const Bible: React.FC = () => {
           <div>
             {!selectedBook && (
               <div>
-                <h1 className="text-3xl font-serif font-bold mb-6 text-center">Bible Study</h1>
+                <h1 className="text-3xl font-serif font-bold mb-4 text-center">Bible Study</h1>
+                
+                {/* Introduction Card */}
+                <Card className="mb-8 p-6 bg-white/80 shadow-md">
+                  <div className="prose max-w-none">
+                    <h2 className="text-xl font-serif font-semibold mb-3">Welcome to Bible Study</h2>
+                    <p className="mb-2">
+                      Explore the Bible by selecting a book below. Each book is organized by chapters, 
+                      allowing you to study at your own pace and track your progress.
+                    </p>
+                    <ul className="list-disc pl-5 space-y-1 mb-2">
+                      <li>Click on any book to view its chapters</li>
+                      <li>Complete chapter challenges to track your progress</li>
+                      <li>Use the search bar below to find specific books</li>
+                      <li>Filter books by Old or New Testament</li>
+                    </ul>
+                    <p className="text-bible-gold text-sm font-medium">
+                      Your reading progress is automatically saved as you complete chapters.
+                    </p>
+                  </div>
+                </Card>
+                
+                {/* Search Filter */}
+                <div className="mb-6">
+                  <BookSearchFilter 
+                    searchTerm={searchTerm} 
+                    setSearchTerm={setSearchTerm} 
+                    setActiveTestament={setActiveTestament} 
+                  />
+                </div>
                 
                 {recentlyReadBooks.length > 0 && (
                   <div className="mb-8">
@@ -101,8 +134,8 @@ const Bible: React.FC = () => {
                 <BibleBooksList 
                   books={bibleBooks}
                   getBookProgress={getBookProgressPercentage}
-                  searchTerm=""
-                  activeTestament="all"
+                  searchTerm={searchTerm}
+                  activeTestament={activeTestament}
                   isMobile={isMobile}
                 />
               </div>
