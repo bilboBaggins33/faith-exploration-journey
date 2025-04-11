@@ -15,7 +15,7 @@ import DashboardLoading from '@/components/dashboard/DashboardLoading';
 const Dashboard = () => {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
-  const { getBookProgress, progress } = useBibleProgress();
+  const { getBookProgress, progress, profile } = useBibleProgress();
   const { getBookProgress: getTheologyBookProgress } = useTheologyProgress();
   
   // Redirect to login if not authenticated
@@ -89,6 +89,7 @@ const Dashboard = () => {
   const overallProgress = calculateOverallProgress();
   const totalChaptersRead = progress?.completed_chapters?.length || 0;
   const challengesCompleted = progress?.challenges_completed?.length || 0;
+  const streak = profile?.streak || 0;
   
   return (
     <div className="min-h-screen flex flex-col">
@@ -105,6 +106,7 @@ const Dashboard = () => {
             totalChaptersRead={totalChaptersRead}
             overallProgress={overallProgress}
             challengesCompleted={challengesCompleted}
+            streak={streak}
           />
           
           <ContentSection 
