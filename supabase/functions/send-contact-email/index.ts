@@ -33,7 +33,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to user
     const userEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest <ricmel111@gmail.com>",
+      from: "Bible Adventure Quest <noreply@bibleadventurequest.com>",
       to: [email],
       subject: "We received your message!",
       html: `
@@ -47,10 +47,12 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Send notification email to admin - Updated email address here
+    console.log("User confirmation email result:", userEmailResponse);
+
+    // Send notification email to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest Contact Form <ricmel111@gmail.com>",
-      to: ["ricmel111@gmail.com"], // Updated admin email
+      from: "Bible Adventure Quest Contact Form <noreply@bibleadventurequest.com>",
+      to: ["richard@melfam.com"], // Admin email address
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h1>New Contact Form Submission</h1>
@@ -63,7 +65,7 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    console.log("Emails sent successfully");
+    console.log("Admin notification email result:", adminEmailResponse);
 
     return new Response(
       JSON.stringify({ 
