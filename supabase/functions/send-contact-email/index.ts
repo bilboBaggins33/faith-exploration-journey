@@ -33,7 +33,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to user
     const userEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest <info@bibleadventurequest.com>",
+      from: "Bible Adventure Quest <ricmel111@gmail.com>",
       to: [email],
       subject: "We received your message!",
       html: `
@@ -49,7 +49,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to admin - Updated email address here
     const adminEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest Contact Form <info@bibleadventurequest.com>",
+      from: "Bible Adventure Quest Contact Form <ricmel111@gmail.com>",
       to: ["ricmel111@gmail.com"], // Updated admin email
       subject: `New Contact Form Submission from ${name}`,
       html: `
