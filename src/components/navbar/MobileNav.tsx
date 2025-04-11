@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { BookOpen, User, LogOut, Book, BookText, Info, Mail, LayoutDashboard, ChevronDown, ChevronUp } from 'lucide-react';
+import { BookOpen, User, LogOut, Book, BookText, Info, LayoutDashboard, ChevronDown, ChevronUp } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import MobileNavLink from './MobileNavLink';
 import { User as SupabaseUser } from '@supabase/supabase-js';
@@ -40,9 +40,6 @@ const MobileNav = ({ isOpen, user, handleSignOut }: MobileNavProps) => {
         </MobileNavLink>
         <MobileNavLink to="/about" icon={<Info className="h-5 w-5 mr-2" />} active={isActive('/about')}>
           About
-        </MobileNavLink>
-        <MobileNavLink to="/contact" icon={<Mail className="h-5 w-5 mr-2" />} active={isActive('/contact')}>
-          Contact
         </MobileNavLink>
         
         {user ? (

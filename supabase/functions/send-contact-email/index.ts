@@ -47,10 +47,10 @@ const handler = async (req: Request): Promise<Response> => {
       `,
     });
 
-    // Send notification email to admin
+    // Send notification email to admin - Updated email address here
     const adminEmailResponse = await resend.emails.send({
       from: "Bible Adventure Quest Contact Form <info@bibleadventurequest.com>",
-      to: ["admin@bibleadventurequest.com"], // Replace with actual admin email
+      to: ["richard@melfam.com"], // Updated admin email
       subject: `New Contact Form Submission from ${name}`,
       html: `
         <h1>New Contact Form Submission</h1>
