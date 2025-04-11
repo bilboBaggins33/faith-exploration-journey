@@ -81,13 +81,13 @@ const Dashboard = () => {
     // Get first 3 theology books that have some progress
     return theologyBooks.filter(book => {
       const progress = getTheologyBookProgress(book.id);
-      return progress.completedChapters > 0;
+      return progress && progress.completed > 0;
     }).slice(0, 3).map(book => {
       const progress = getTheologyBookProgress(book.id);
       return {
         id: book.id,
         name: book.title,
-        progress: progress.percentage,
+        progress: progress ? progress.percentage : 0,
         author: book.author
       };
     });
