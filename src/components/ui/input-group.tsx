@@ -2,7 +2,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 
-export interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
+interface InputGroupProps extends React.HTMLAttributes<HTMLDivElement> {}
 
 const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
   ({ className, ...props }, ref) => {
@@ -10,7 +10,7 @@ const InputGroup = React.forwardRef<HTMLDivElement, InputGroupProps>(
       <div
         ref={ref}
         className={cn(
-          "flex items-center relative w-full",
+          "flex relative items-center w-full rounded-md border border-input bg-background text-sm ring-offset-background",
           className
         )}
         {...props}

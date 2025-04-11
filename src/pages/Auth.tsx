@@ -90,7 +90,7 @@ const LoginForm = () => {
     try {
       setLoggingIn(true);
       await signIn(email, password);
-      navigate('/profile');
+      navigate('/dashboard');
     } catch (error) {
       console.error('Login error:', error);
     } finally {
