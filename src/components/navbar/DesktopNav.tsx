@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { LogOut, BookText, Info, LogIn, LayoutDashboard, User, Settings } from 'lucide-react';
+import { LogOut, BookText, Info, LogIn, LayoutDashboard, User, Settings, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from './NavLink';
 import { User as SupabaseUser } from '@supabase/supabase-js';
@@ -40,6 +39,12 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
         </NavLink>
         <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled} isHomePage={isHomePage}>
           Bible
+        </NavLink>
+        <NavLink to="/plans" active={isActive('/plans')} isScrolled={isScrolled} isHomePage={isHomePage}>
+          <div className="flex items-center">
+            <BookOpen className="h-4 w-4 mr-1" />
+            Plans
+          </div>
         </NavLink>
         <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled} isHomePage={isHomePage}>
           <div className="flex items-center">

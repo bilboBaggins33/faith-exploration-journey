@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -34,6 +33,9 @@ const MobileNav = ({ isOpen, user, handleSignOut }: MobileNavProps) => {
         </MobileNavLink>
         <MobileNavLink to="/bible" icon={<Book className="h-5 w-5 mr-2" />} active={isActive('/bible')}>
           Bible
+        </MobileNavLink>
+        <MobileNavLink to="/plans" icon={<BookOpen className="h-5 w-5 mr-2" />} active={isActive('/plans')}>
+          Plans
         </MobileNavLink>
         <MobileNavLink to="/theology" icon={<BookText className="h-5 w-5 mr-2" />} active={isActive('/theology')}>
           Books
