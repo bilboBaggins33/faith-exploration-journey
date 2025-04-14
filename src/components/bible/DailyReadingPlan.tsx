@@ -91,10 +91,7 @@ const DailyReadingPlan = () => {
   const isToday = selectedDate && format(selectedDate, 'MM-dd') === format(new Date(), 'MM-dd');
   
   const navigateToChapter = (bookId: string, chapter: number) => {
-    if (!user && chapter > 1) {
-      navigate('/auth');
-      return;
-    }
+    // Remove the authentication check for the first chapter
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
   
@@ -144,7 +141,7 @@ const DailyReadingPlan = () => {
           </Popover>
         </div>
         
-        {isToday && (
+        {isToday && user && (
           <div className="mt-4">
             <div className="flex justify-between items-center mb-2">
               <span className="text-sm font-medium">Today's Progress</span>
