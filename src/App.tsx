@@ -21,6 +21,8 @@ import CookiePolicy from '@/pages/CookiePolicy';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/auth';
+import { CookieProvider } from '@/context/CookieContext';
+import CookieConsent from '@/components/CookieConsent';
 
 const router = createBrowserRouter([
   {
@@ -113,14 +115,17 @@ function App() {
 
   return (
     <>
-      <AuthProvider>
-        <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
-          <div className="app">
-            <RouterProvider router={router} />
-          </div>
-          <Toaster />
-        </ThemeProvider>
-      </AuthProvider>
+      <CookieProvider>
+        <AuthProvider>
+          <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
+            <div className="app">
+              <RouterProvider router={router} />
+              <CookieConsent />
+            </div>
+            <Toaster />
+          </ThemeProvider>
+        </AuthProvider>
+      </CookieProvider>
     </>
   );
 }
