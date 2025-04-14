@@ -9,7 +9,7 @@ import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CalendarIcon, BookText, CheckCircle, BookOpen } from 'lucide-react';
+import { CalendarIcon, BookText, CheckCircle, BookOpen, Lock } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
 import {
   Popover,
@@ -17,22 +17,28 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { format } from 'date-fns';
+import { useAuth } from '@/context/auth';
 
 interface ReadingItemProps {
   reading: BibleReading;
   index: number;
   isCompleted: boolean;
+  isFirstChapter: boolean;
   onClick: () => void;
 }
 
-const ReadingItem = ({ reading, index, isCompleted, onClick }: ReadingItemProps) => {
+const ReadingItem = ({ reading, index, isCompleted, isFirstChapter, onClick }: ReadingItemProps) => {
+  const { user } = useAuth();
   const book = bibleBooks.find(b => b.id === reading.bookId);
+  const requiresAuth = !isFirstChapter && !user;
 
   return (
     <div 
-      className={`flex items-center justify-between p-4 rounded-lg mb-2 cursor-pointer transition-all
-        ${isCompleted ? 'bg-green-50 border border-green-200' : 'bg-gray-50 hover:bg-gray-100'}`}
-      onClick={onClick}
+      className={`flex items-center justify-between p-4 rounded-lg mb-2 ${
+        requiresAuth ? 'bg-gray-100' : 
+        isCompleted ? 'bg-green-50 border border-green-200' : 
+        'bg-gray-50 hover:bg-gray-100 cursor-pointer'
+      }`}
     >
       <div className="flex items-center flex-1">
         <div className="w-8 h-8 rounded-full bg-bible-blue/10 flex items-center justify-center mr-3 text-sm font-medium">
@@ -51,9 +57,23 @@ const ReadingItem = ({ reading, index, isCompleted, onClick }: ReadingItemProps)
           </p>
         </div>
       </div>
-      <Button variant="ghost" size="sm" className="ml-4">
-        <BookOpen className="h-4 w-4 mr-2" />
-        {isCompleted ? 'Review' : 'Read'}
+      <Button 
+        variant={requiresAuth ? "outline" : "ghost"} 
+        size="sm" 
+        className="ml-4"
+        onClick={onClick}
+      >
+        {requiresAuth ? (
+          <>
+            <Lock className="h-4 w-4 mr-2" />
+            Sign in to Read
+          </>
+        ) : (
+          <>
+            <BookOpen className="h-4 w-4 mr-2" />
+            {isCompleted ? 'Review' : 'Read'}
+          </>
+        )}
       </Button>
     </div>
   );
@@ -63,6 +83,7 @@ const DailyReadingPlan = () => {
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [open, setOpen] = useState(false);
+  const { user } = useAuth();
   const { getChapterStatus } = useBibleProgress();
   
   const readings = selectedDate ? getReadingForDate(selectedDate) : getTodaysReading();
@@ -70,16 +91,21 @@ const DailyReadingPlan = () => {
   const isToday = selectedDate && format(selectedDate, 'MM-dd') === format(new Date(), 'MM-dd');
   
   const navigateToChapter = (bookId: string, chapter: number) => {
+    if (!user && chapter > 1) {
+      navigate('/auth');
+      return;
+    }
     navigate(`/challenge/bible/${bookId}/${chapter}`);
   };
   
   const getCompletionStatus = (bookId: string, chapter: number) => {
+    if (!user) return false;
     const { isCompleted } = getChapterStatus(bookId, chapter);
     return isCompleted;
   };
   
   const getTodayCompletionPercentage = () => {
-    if (!todaysReadings.length) return 0;
+    if (!user || !todaysReadings.length) return 0;
     
     const completedCount = todaysReadings.filter(reading => 
       getCompletionStatus(reading.bookId, reading.chapter)
@@ -141,6 +167,7 @@ const DailyReadingPlan = () => {
                 reading={reading}
                 index={index}
                 isCompleted={getCompletionStatus(reading.bookId, reading.chapter)}
+                isFirstChapter={reading.chapter === 1}
                 onClick={() => navigateToChapter(reading.bookId, reading.chapter)}
               />
             ))}
