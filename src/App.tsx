@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   createBrowserRouter,
@@ -16,11 +15,12 @@ import Theology from '@/pages/Theology';
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 import NotFound from '@/pages/NotFound';
+import TermsOfService from '@/pages/TermsOfService';
+import PrivacyPolicy from '@/pages/PrivacyPolicy';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/auth';
 
-// Create the router outside the component
 const router = createBrowserRouter([
   {
     path: '/',
@@ -71,6 +71,14 @@ const router = createBrowserRouter([
     element: <About />,
   },
   {
+    path: '/terms',
+    element: <TermsOfService />,
+  },
+  {
+    path: '/privacy',
+    element: <PrivacyPolicy />,
+  },
+  {
     path: '/not-found',
     element: <NotFound />,
   },
@@ -81,21 +89,17 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-  // Check online status without using navigation
   const [isOnline, setIsOnline] = React.useState(navigator.onLine);
 
   React.useEffect(() => {
-    // Check if the user is online when the component mounts
     setIsOnline(navigator.onLine);
 
-    // Update the online status when the user goes online or offline
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
     
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
-    // Clean up the event listeners when the component unmounts
     return () => {
       window.removeEventListener('online', handleOnline);
       window.removeEventListener('offline', handleOffline);

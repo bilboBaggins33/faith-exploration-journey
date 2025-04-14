@@ -1,4 +1,3 @@
-
 import { Link } from 'react-router-dom';
 import { BookOpen, Facebook, Twitter, Instagram, Github, Mail } from 'lucide-react';
 
@@ -72,8 +71,8 @@ const Footer = () => {
             &copy; {currentYear} Bible Adventure Quest. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link to="#" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Privacy Policy</Link>
-            <Link to="#" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Terms of Service</Link>
+            <Link to="/privacy" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Privacy Policy</Link>
+            <Link to="/terms" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Terms of Service</Link>
             <Link to="#" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Cookie Policy</Link>
           </div>
         </div>
