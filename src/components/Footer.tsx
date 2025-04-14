@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Facebook, Twitter, Instagram, Github, Mail } from 'lucide-react';
+import { BookOpen, Facebook, Twitter, Instagram, Github, Mail, Cookie } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -71,9 +71,11 @@ const Footer = () => {
             &copy; {currentYear} Bible Adventure Quest. All rights reserved.
           </p>
           <div className="flex space-x-6">
-            <Link to="/privacy" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Privacy Policy</Link>
             <Link to="/terms" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Terms of Service</Link>
-            <Link to="#" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Cookie Policy</Link>
+            <Link to="/privacy" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Privacy Policy</Link>
+            <Link to="/cookie-policy" className="text-white/60 hover:text-white text-sm transition-colors duration-300 flex items-center">
+              <Cookie className="h-4 w-4 mr-1" /> Cookie Policy
+            </Link>
           </div>
         </div>
       </div>

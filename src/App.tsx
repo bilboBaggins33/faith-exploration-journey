@@ -17,6 +17,7 @@ import About from '@/pages/About';
 import NotFound from '@/pages/NotFound';
 import TermsOfService from '@/pages/TermsOfService';
 import PrivacyPolicy from '@/pages/PrivacyPolicy';
+import CookiePolicy from '@/pages/CookiePolicy';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/auth';
@@ -81,6 +82,10 @@ const router = createBrowserRouter([
   {
     path: '/not-found',
     element: <NotFound />,
+  },
+  {
+    path: '/cookie-policy',
+    element: <CookiePolicy />,
   },
   {
     path: '*',

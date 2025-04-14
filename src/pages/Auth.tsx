@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -16,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
+import { Link } from 'react-router-dom';
 
 const AuthPage = () => {
   return (
@@ -51,9 +51,9 @@ const AuthPage = () => {
                 <div className="text-center mt-8">
                   <p className="text-sm text-bible-dark/70">
                     By signing in or creating an account, you agree to our{' '}
-                    <a href="#" className="text-bible-blue hover-link">Terms of Service</a>{' '}
+                    <Link to="/terms" className="text-bible-blue hover-link">Terms of Service</Link>{' '}
                     and{' '}
-                    <a href="#" className="text-bible-blue hover-link">Privacy Policy</a>.
+                    <Link to="/privacy" className="text-bible-blue hover-link">Privacy Policy</Link>.
                   </p>
                 </div>
               </div>
@@ -506,9 +506,9 @@ const RegisterForm = () => {
             />
             <label htmlFor="terms" className="ml-2 block text-sm text-bible-dark/70">
               I agree to the{' '}
-              <a href="#" className="text-bible-blue hover-link">Terms of Service</a>
+              <Link to="/terms" className="text-bible-blue hover-link">Terms of Service</Link>
               {' '}and{' '}
-              <a href="#" className="text-bible-blue hover-link">Privacy Policy</a>
+              <Link to="/privacy" className="text-bible-blue hover-link">Privacy Policy</Link>
             </label>
           </div>
           
