@@ -10,17 +10,17 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-[#1A365D] text-primary-foreground hover:bg-[#1A365D]/90 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Deep navy with parchment texture
+        default: "bg-gradient-to-br from-[#1A365D] to-[#2A4C6F] text-primary-foreground hover:from-[#1A365D]/90 hover:to-[#2A4C6F]/90 shadow-md", // Deep navy gradient
         destructive:
-          "bg-destructive text-destructive-foreground hover:bg-destructive/90 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md",
+          "bg-gradient-to-br from-red-600 to-red-700 text-destructive-foreground hover:from-red-600/90 hover:to-red-700/90 shadow-md",
         outline:
           "border border-input bg-background hover:bg-accent hover:text-accent-foreground",
         secondary:
-          "bg-secondary text-secondary-foreground hover:bg-secondary/80",
+          "bg-gradient-to-br from-secondary to-secondary/80 text-secondary-foreground hover:from-secondary/90 hover:to-secondary/70",
         ghost: "hover:bg-accent hover:text-accent-foreground",
         link: "text-primary underline-offset-4 hover:underline",
-        warning: "bg-amber-600 text-white hover:bg-amber-700 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Added warning variant with parchment texture
-        danger: "bg-red-600 text-white hover:bg-red-700 bg-[url('/parchment-texture.png')] bg-blend-overlay bg-opacity-90 shadow-md", // Added danger variant with parchment texture
+        warning: "bg-gradient-to-br from-amber-600 to-amber-700 text-white hover:from-amber-600/90 hover:to-amber-700/90 shadow-md", // Gradient for warning
+        danger: "bg-gradient-to-br from-red-600 to-red-700 text-white hover:from-red-600/90 hover:to-red-700/90 shadow-md", // Gradient for danger
       },
       size: {
         default: "h-10 px-4 py-2",
