@@ -9,7 +9,8 @@ import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { CalendarIcon, BookOpen, CheckCircle } from 'lucide-react';
+import { CalendarIcon, BookText, CheckCircle, BookOpen } from 'lucide-react';
+import { Progress } from '@/components/ui/progress';
 import {
   Popover,
   PopoverContent,
@@ -29,22 +30,31 @@ const ReadingItem = ({ reading, index, isCompleted, onClick }: ReadingItemProps)
 
   return (
     <div 
-      className={`flex items-center justify-between p-3 rounded-lg mb-2 cursor-pointer
+      className={`flex items-center justify-between p-4 rounded-lg mb-2 cursor-pointer transition-all
         ${isCompleted ? 'bg-green-50 border border-green-200' : 'bg-gray-50 hover:bg-gray-100'}`}
       onClick={onClick}
     >
-      <div className="flex items-center">
-        <div className="w-6 h-6 rounded-full bg-bible-blue/10 flex items-center justify-center mr-3 text-xs font-medium">
+      <div className="flex items-center flex-1">
+        <div className="w-8 h-8 rounded-full bg-bible-blue/10 flex items-center justify-center mr-3 text-sm font-medium">
           {index + 1}
         </div>
         <div>
-          <h4 className="font-medium">{book?.name || reading.bookId}</h4>
-          <p className="text-sm text-gray-500">Chapter {reading.chapter}</p>
+          <h4 className="font-medium text-lg">{book?.name || reading.bookId}</h4>
+          <p className="text-sm text-gray-600">
+            Chapter {reading.chapter}
+            {isCompleted && (
+              <span className="inline-flex items-center text-green-600 ml-2">
+                <CheckCircle className="h-4 w-4 mr-1" />
+                Completed
+              </span>
+            )}
+          </p>
         </div>
       </div>
-      {isCompleted && (
-        <CheckCircle className="h-5 w-5 text-green-500" />
-      )}
+      <Button variant="ghost" size="sm" className="ml-4">
+        <BookOpen className="h-4 w-4 mr-2" />
+        {isCompleted ? 'Review' : 'Read'}
+      </Button>
     </div>
   );
 };
@@ -79,19 +89,19 @@ const DailyReadingPlan = () => {
   };
 
   return (
-    <Card className="mb-6">
+    <Card>
       <CardHeader>
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-xl font-serif">M'Cheyne Reading Plan</CardTitle>
-            <CardDescription>Read through the Bible in one year</CardDescription>
+            <CardTitle className="text-2xl font-serif">M'Cheyne Reading Plan</CardTitle>
+            <CardDescription>Readings for {format(selectedDate, 'MMMM d, yyyy')}</CardDescription>
           </div>
           
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
               <Button variant="outline" className="gap-2">
                 <CalendarIcon className="h-4 w-4" />
-                {selectedDate ? format(selectedDate, 'PPP') : 'Select date'}
+                Change Date
               </Button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
@@ -109,41 +119,35 @@ const DailyReadingPlan = () => {
         </div>
         
         {isToday && (
-          <div className="mt-2">
-            <div className="flex justify-between items-center mb-1">
-              <span className="text-sm font-medium">Today's progress</span>
-              <span className="text-sm">{getTodayCompletionPercentage()}%</span>
+          <div className="mt-4">
+            <div className="flex justify-between items-center mb-2">
+              <span className="text-sm font-medium">Today's Progress</span>
+              <span className="text-sm font-medium">{getTodayCompletionPercentage()}%</span>
             </div>
-            <div className="w-full h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div 
-                className="h-full bg-bible-blue rounded-full"
-                style={{ width: `${getTodayCompletionPercentage()}%` }}
-              ></div>
-            </div>
+            <Progress value={getTodayCompletionPercentage()} className="h-2" />
+            <p className="text-sm text-gray-500 mt-2">
+              {todaysReadings.filter(r => getCompletionStatus(r.bookId, r.chapter)).length} of {todaysReadings.length} readings completed
+            </p>
           </div>
         )}
       </CardHeader>
       
       <CardContent>
         {readings.length > 0 ? (
-          <div className="space-y-1">
-            {readings.map((reading, index) => {
-              const isCompleted = getCompletionStatus(reading.bookId, reading.chapter);
-              
-              return (
-                <ReadingItem
-                  key={`${reading.bookId}-${reading.chapter}`}
-                  reading={reading}
-                  index={index}
-                  isCompleted={isCompleted}
-                  onClick={() => navigateToChapter(reading.bookId, reading.chapter)}
-                />
-              );
-            })}
+          <div className="space-y-2">
+            {readings.map((reading, index) => (
+              <ReadingItem
+                key={`${reading.bookId}-${reading.chapter}`}
+                reading={reading}
+                index={index}
+                isCompleted={getCompletionStatus(reading.bookId, reading.chapter)}
+                onClick={() => navigateToChapter(reading.bookId, reading.chapter)}
+              />
+            ))}
           </div>
         ) : (
           <div className="text-center py-6">
-            <BookOpen className="mx-auto h-12 w-12 text-gray-300 mb-3" />
+            <BookText className="mx-auto h-12 w-12 text-gray-300 mb-3" />
             <p className="text-gray-500">No readings available for this date</p>
           </div>
         )}
