@@ -1,3 +1,4 @@
+
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Navbar from '@/components/Navbar';
@@ -14,6 +15,7 @@ import { Eye, EyeOff, User, Key, Mail, ShieldCheck, CreditCard } from 'lucide-re
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
+import { supabase } from '@/lib/supabase';
 
 const AuthPage = () => {
   return (
