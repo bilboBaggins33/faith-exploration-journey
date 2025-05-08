@@ -8,7 +8,7 @@ interface BibleBooksListProps {
   books: {
     id: string;
     name: string;
-    testament: string;
+    testament: 'old' | 'new';
     chapters: number;
   }[];
   getBookProgress: (bookId: string) => number;
@@ -53,7 +53,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
               bookName={book.name}
               totalChapters={book.chapters}
               progressPercent={bookProgressPercent}
-              testament={book.testament}
+              testament={book.testament as 'old' | 'new'}
               onClick={() => navigate(`/bible/${book.id}`)}
             />
           </div>
