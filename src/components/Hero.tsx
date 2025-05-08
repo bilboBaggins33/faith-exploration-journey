@@ -50,13 +50,13 @@ const Hero = () => {
           className="mb-8"
         >
           <span className="inline-block text-bible-gold bg-bible-dark/60 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wider mb-4">
-            Spiritual Growth Through Reading
+          Master Scripture Through Questions & Answers
           </span>
           <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
             Deepen Your Faith Through Scripture & Theology
           </h1>
           <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 mb-8">
-            Track your reading progress, grow in knowledge and faith, and connect with others through an engaging Bible and theology reading experience.
+          Follow your growth and have fun while you learn.
           </p>
         </motion.div>
         
@@ -73,18 +73,18 @@ const Hero = () => {
             </Button>
           </Link>
           <Link to="/auth">
-            <Button variant="outline" size="lg" className="bg-transparent border-white text-white hover:bg-white/10 px-8 h-12 rounded-md font-medium transition-all duration-300">
-              Sign Up Free
+            <Button variant="outline" size="lg" className="bg-white/20 border-white text-white hover:bg-white/40 px-8 h-12 rounded-md font-medium transition-all duration-300">
+              Sign Up
             </Button>
           </Link>
         </motion.div>
         
         {/* Feature Icons */}
-        <motion.div
+        {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8"
+          className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8"
         >
           <FeatureIcon
             icon={<BookOpen className="h-8 w-8 text-bible-gold" />}
@@ -98,39 +98,9 @@ const Hero = () => {
             icon={<GraduationCap className="h-8 w-8 text-bible-gold" />}
             text="Track Growth"
           />
-          <FeatureIcon
-            icon={<Heart className="h-8 w-8 text-bible-gold" />}
-            text="Share With Friends"
-          />
-        </motion.div>
+        </motion.div> */}
       </div>
       
-      {/* Scroll Indicator */}
-      {!isMobile && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1, duration: 1 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
-        >
-          <div className="flex flex-col items-center text-white/80">
-            <span className="text-sm uppercase tracking-wide mb-2">Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-white/60 rounded-full flex justify-center p-1">
-              <motion.div
-                animate={{ 
-                  y: [0, 12, 0],
-                }}
-                transition={{
-                  duration: 1.5,
-                  repeat: Infinity,
-                  ease: "easeInOut",
-                }}
-                className="w-1.5 h-1.5 bg-white rounded-full"
-              />
-            </div>
-          </div>
-        </motion.div>
-      )}
     </div>
   );
 };

@@ -8,6 +8,7 @@ import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { ArrowRight, BookOpen, BookText, GraduationCap, Users, Award, Trophy, Download, Smartphone, CalendarDays } from 'lucide-react';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 
 const Index = () => {
   // Initialize scroll reveal
@@ -38,9 +39,9 @@ const Index = () => {
       <Navbar />
       <Hero />
       <ChallengeTypes />
-      <Features />
+      {/* <Features /> */}
       <HowItWorks />
-      <Testimonials />
+      {/* <Testimonials /> */}
       <DownloadSection />
       <CallToAction />
       <Footer />
@@ -93,73 +94,97 @@ const ChallengeTypes = () => {
           variants={containerVariants}
           initial="hidden"
           animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-10 mb-8"
         >
-          <motion.div variants={itemVariants} className="glass-card p-8 rounded-lg">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-              <BookOpen className="h-8 w-8 text-bible-deepBlue" />
+          <motion.div variants={itemVariants} className="glass-card overflow-hidden rounded-lg">
+            <div className="relative">
+              <AspectRatio ratio={16/9}>
+                <img
+                  src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Bible Challenges"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 w-full p-8">
+                  <h3 className="text-2xl font-serif font-semibold text-white mb-2">
+                    Bible Challenges
+                  </h3>
+                  <p className="text-white/90 text-sm">
+                    Test your knowledge of biblical stories, characters, and teachings
+                  </p>
+                </div>
+              </AspectRatio>
             </div>
-            <h3 className="text-2xl font-serif font-semibold text-bible-dark mb-3">
-              Bible Challenges
-            </h3>
-            <p className="text-bible-dark/70 mb-6">
-              Test your knowledge of biblical stories, characters, and teachings with interactive quizzes and challenges.
-            </p>
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-start">
-                <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Chapter-by-chapter reading challenges</span>
-              </li>
-              <li className="flex items-start">
-                <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Quizzes on biblical events and figures</span>
-              </li>
-              <li className="flex items-start">
-                <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Track your Scripture reading progress</span>
-              </li>
-            </ul>
-            <Link to="/bible">
-              <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
-                Explore Bible Challenges
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            
+            <div className="p-8">
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Chapter-by-chapter reading challenges</span>
+                </li>
+                <li className="flex items-start">
+                  <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Quizzes on biblical events and figures</span>
+                </li>
+                <li className="flex items-start">
+                  <Award className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Track your Scripture reading progress</span>
+                </li>
+              </ul>
+              <Link to="/bible">
+                <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
+                  Explore Bible Challenges
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </motion.div>
           
-          <motion.div variants={itemVariants} className="glass-card p-8 rounded-lg">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-              <BookText className="h-8 w-8 text-bible-deepBlue" />
+          <motion.div variants={itemVariants} className="glass-card overflow-hidden rounded-lg">
+            <div className="relative">
+              <AspectRatio ratio={16/9}>
+                <img
+                  src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+                  alt="Theology Challenges"
+                  className="w-full h-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
+                <div className="absolute bottom-0 left-0 w-full p-8">
+                  <h3 className="text-2xl font-serif font-semibold text-white mb-2">
+                    Theology Book Challenges
+                  </h3>
+                  <p className="text-white/90 text-sm">
+                    Engage with classic and contemporary theological works
+                  </p>
+                </div>
+              </AspectRatio>
             </div>
-            <h3 className="text-2xl font-serif font-semibold text-bible-dark mb-3">
-              Theology Book Challenges
-            </h3>
-            <p className="text-bible-dark/70 mb-6">
-              Engage with classic and contemporary theological works through guided reading and thought-provoking questions.
-            </p>
-            <ul className="space-y-3 mb-6">
-              <li className="flex items-start">
-                <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Study classic theological works</span>
-              </li>
-              <li className="flex items-start">
-                <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Earn rewards for completed chapters</span>
-              </li>
-              <li className="flex items-start">
-                <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
-                <span>Connect theology to everyday life</span>
-              </li>
-            </ul>
-            <Link to="/theology">
-              <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
-                Explore Theology Challenges
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </Button>
-            </Link>
+            
+            <div className="p-8">
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Study classic theological works</span>
+                </li>
+                <li className="flex items-start">
+                  <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Earn rewards for completed chapters</span>
+                </li>
+                <li className="flex items-start">
+                  <Trophy className="h-5 w-5 text-bible-gold mr-2 mt-0.5" />
+                  <span>Connect theology to everyday life</span>
+                </li>
+              </ul>
+              <Link to="/theology">
+                <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
+                  Explore Theology Challenges
+                  <ArrowRight className="ml-2 h-4 w-4" />
+                </Button>
+              </Link>
+            </div>
           </motion.div>
           
-          <ChallengeCard
+          {/* <ChallengeCard
             title="Daily Bible Reading"
             description="Follow the M'Cheyne reading plan to read through the Bible in a year"
             icon={<CalendarDays className="h-6 w-6" />}
@@ -167,7 +192,7 @@ const ChallengeTypes = () => {
             bgColor="bg-gradient-to-br from-blue-100 to-blue-50"
             progress={0}
             isNew={true}
-          />
+          /> */}
         </motion.div>
       </div>
     </section>
@@ -202,7 +227,7 @@ const HowItWorks = () => {
   };
   
   return (
-    <section className="py-20 bg-white">
+    <section className="pb-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <p className="text-bible-blue font-medium mb-3">HOW IT WORKS</p>
@@ -229,7 +254,7 @@ const HowItWorks = () => {
               Create Your Account
             </h3>
             <p className="text-bible-dark/70 mb-4">
-              Sign up for a free account to track your reading progress, earn rewards, and connect with other readers.
+              Sign up for an account to track your reading progress, access challenges and earn rewards.
             </p>
             <Link to="/auth" className="text-bible-blue hover-link">
               Get Started
