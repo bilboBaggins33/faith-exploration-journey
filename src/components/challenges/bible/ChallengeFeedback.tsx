@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
@@ -31,6 +31,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   onRetry,
   onGoBack
 }) => {
+  const [imageError, setImageError] = useState(false);
   const { 
     challenge, 
     currentQuestion, 
@@ -69,13 +70,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       <div className="mb-6">
         <AspectRatio ratio={3/1} className="bg-muted rounded-lg overflow-hidden mb-4">
           <img 
-            src={getBookImage(bookId)} 
+            src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
             alt={`${book?.name || 'Bible book'} cover`}
             className="w-full h-full object-cover"
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              target.src = '/placeholder.svg';
-            }}
+            onError={() => setImageError(true)}
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
         </AspectRatio>

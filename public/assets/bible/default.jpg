@@ -1,2 +1,6 @@
 
-<!-- This will be a placeholder file, actual image content should be added -->
+<!-- 
+This is a placeholder file representing a default Bible image.
+In a real implementation, this would be an actual JPG image.
+For now, when the application runs, it will need an image at this path.
+-->

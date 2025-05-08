@@ -1,17 +1,15 @@
 
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Book } from 'lucide-react';
-import { cn } from '@/lib/utils';
-import { getBookImage, getBookThumbnail } from '@/data/bible/book-images';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
+import React, { useState } from 'react';
+import { getBookImage } from '@/data/bible/book-images';
+import { Progress } from '@/components/ui/progress';
+import { Card } from '@/components/ui/card';
 
 interface BibleBookCardProps {
   bookId: string;
   bookName: string;
   totalChapters: number;
   progressPercent: number;
-  testament: string;
+  testament: 'old' | 'new';
   onClick: () => void;
 }
 
@@ -21,78 +19,39 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   totalChapters,
   progressPercent,
   testament,
-  onClick,
+  onClick
 }) => {
+  const [imageError, setImageError] = useState(false);
+  
   return (
-    <motion.div
-      whileHover={{ y: -8, transition: { duration: 0.3 } }}
-      whileTap={{ scale: 0.98 }}
-      className="glass-card rounded-xl flex flex-col cursor-pointer h-full overflow-hidden w-full"
+    <Card 
+      className="overflow-hidden transition-shadow hover:shadow-md cursor-pointer h-full flex flex-col"
       onClick={onClick}
     >
-      <div className="relative">
-        <AspectRatio ratio={16/9} className="bg-muted overflow-hidden">
-          <motion.img 
-            src={getBookThumbnail(bookId)} 
-            alt={`${bookName} book cover`}
-            className="w-full h-full object-cover"
-            loading="lazy"
-            whileHover={{ scale: 1.1 }}
-            transition={{ duration: 0.5 }}
-            onError={(e) => {
-              const target = e.target as HTMLImageElement;
-              // Try the full-sized image if thumbnail fails
-              if (target.src !== getBookImage(bookId)) {
-                target.src = getBookImage(bookId);
-              } else {
-                target.src = '/placeholder.svg';
-              }
-            }}
-          />
-          <motion.div
-            initial={{ opacity: 0.5 }}
-            whileHover={{ opacity: 0.8 }}
-            transition={{ duration: 0.3 }}
-            className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent"
-          />
-        </AspectRatio>
+      <div className="relative pb-[66.67%]">
+        <img
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
+          alt={`${bookName} cover`}
+          className="absolute inset-0 object-cover w-full h-full"
+          onError={() => setImageError(true)}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
         <div className="absolute bottom-0 left-0 p-3">
-          <motion.div 
-            className="flex items-center"
-            initial={{ x: 0 }}
-            whileHover={{ x: 5 }}
-            transition={{ duration: 0.2 }}
-          >
-            <Book className="mr-2 text-white" size={18} />
-            <h3 className="font-medium text-white truncate max-w-[180px]">{bookName}</h3>
-          </motion.div>
+          <h3 className="font-serif font-semibold text-white text-sm">{bookName}</h3>
+          <p className="text-white/80 text-xs">
+            {testament === 'old' ? 'Old Testament' : 'New Testament'}
+          </p>
         </div>
       </div>
       
       <div className="p-3 mt-auto">
-        <div className="w-full bg-gray-200 rounded-full h-2 mb-1 overflow-hidden">
-          <motion.div 
-            className="bg-bible-blue h-2 rounded-full" 
-            style={{ width: `${progressPercent}%` }}
-            whileHover={{ 
-              backgroundColor: progressPercent < 100 ? "#4dabf7" : "#38d9a9",
-              transition: { duration: 0.3 }
-            }}
-            initial={{ width: 0 }}
-            animate={{ width: `${progressPercent}%` }}
-            transition={{ 
-              duration: 0.8, 
-              ease: "easeOut",
-              delay: 0.2
-            }}
-          />
+        <div className="flex justify-between items-center text-xs mb-1">
+          <span className="text-gray-600">{totalChapters} chapters</span>
+          <span className="font-medium">{progressPercent}%</span>
         </div>
-        <div className="flex justify-between text-xs text-gray-500">
-          <span>{totalChapters} chapters</span>
-          <span>{progressPercent}% complete</span>
-        </div>
+        <Progress value={progressPercent} className="h-1" />
       </div>
-    </motion.div>
+    </Card>
   );
 };
 

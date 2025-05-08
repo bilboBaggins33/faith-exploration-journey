@@ -15,6 +15,7 @@ interface BookHeaderProps {
 
 const BookHeader = ({ book, onBack }: BookHeaderProps) => {
   const navigate = useNavigate();
+  const [imageError, setImageError] = React.useState(false);
 
   const navigateToAdjacentBook = (direction: 'prev' | 'next') => {
     if (!book) return;
@@ -43,13 +44,10 @@ const BookHeader = ({ book, onBack }: BookHeaderProps) => {
     <div className="relative">
       <AspectRatio ratio={3/1} className="bg-muted">
         <img 
-          src={getBookImage(book.id)} 
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(book.id)} 
           alt={`${book.name} book cover`}
           className="w-full h-full object-cover"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            target.src = '/placeholder.svg';
-          }}
+          onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 to-transparent" />
         

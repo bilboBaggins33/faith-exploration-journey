@@ -12,6 +12,7 @@ const heroBackgroundUrls = [
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
   
   useEffect(() => {
@@ -32,10 +33,17 @@ const Hero = () => {
           key={url}
           className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
           style={{
-            backgroundImage: `url(${url})`,
+            backgroundImage: `url(${imageLoadError[url] ? '/assets/bible/default.jpg' : url})`,
             opacity: currentImageIndex === index ? 1 : 0,
           }}
-        />
+        >
+          <img 
+            src={url} 
+            className="hidden" 
+            alt="Preload" 
+            onError={() => setImageLoadError(prev => ({...prev, [url]: true}))}
+          />
+        </div>
       ))}
       
       {/* Overlay Gradient */}
