@@ -121,7 +121,7 @@ const Bible: React.FC = () => {
                             bookName={book.name}
                             totalChapters={book.chapters}
                             progressPercent={getBookProgressPercentage(book.id)}
-                            testament={book.testament}
+                            testament={book.testament as 'old' | 'new'}
                             onClick={() => handleBookSelect(book.id)}
                           />
                         );
@@ -159,7 +159,7 @@ const Bible: React.FC = () => {
                   bookName={selectedBook.name}
                   totalChapters={selectedBook.chapters}
                   progressPercent={getBookProgressPercentage(selectedBook.id)}
-                  testament={selectedBook.testament}
+                  testament={selectedBook.testament as 'old' | 'new'}
                   onClick={() => {}} // Empty function as it's already selected
                 />
                 

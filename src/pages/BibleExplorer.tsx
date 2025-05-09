@@ -108,7 +108,7 @@ const BibleExplorer = () => {
                           alt={`${book.name} cover`}
                           className="absolute inset-0 object-cover w-full h-full"
                           onError={(e) => {
-                            (e.target as HTMLImageElement).src = '/assets/bible/thumbnail/genesis.jpg';
+                            (e.target as HTMLImageElement).src = '/assets/bible/default.jpg';
                           }}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex flex-col justify-end p-3">
