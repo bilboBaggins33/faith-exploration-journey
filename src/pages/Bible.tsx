@@ -11,6 +11,7 @@ import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import BookSearchFilter from '@/components/bible/explorer/BookSearchFilter';
 import { Card } from '@/components/ui/card';
+import { useAuth } from '@/context/auth';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -21,6 +22,7 @@ const Bible: React.FC = () => {
   const [activeTestament, setActiveTestament] = useState<string>('all');
   const { getBookProgress, getBookAverageScore } = useBibleProgress();
   const isMobile = useIsMobile();
+  const { user } = useAuth();
   
   const selectedBook = bookId ? bibleBooks.find(book => book.id === bookId) : null;
   
@@ -28,8 +30,8 @@ const Bible: React.FC = () => {
     // Reset selected chapter when book changes
     setSelectedChapter(null);
     
-    // Store recently read books in localStorage
-    if (bookId) {
+    // Only store recently read books if user is authenticated
+    if (bookId && user) {
       const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
       if (!recent.includes(bookId)) {
         const newRecent = [bookId, ...recent].slice(0, 5);
@@ -38,12 +40,15 @@ const Bible: React.FC = () => {
       } else {
         setRecentlyReadBooks(recent);
       }
-    } else {
-      // Load recently read books from localStorage when on main Bible page
+    } else if (user) {
+      // Load recently read books from localStorage when on main Bible page and user is authenticated
       const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
       setRecentlyReadBooks(recent);
+    } else {
+      // Clear recent books if not authenticated
+      setRecentlyReadBooks([]);
     }
-  }, [bookId]);
+  }, [bookId, user]);
   
   const handleBookSelect = (id: string) => {
     navigate(`/bible/${id}`);
@@ -107,7 +112,7 @@ const Bible: React.FC = () => {
                   />
                 </div>
                 
-                {recentlyReadBooks.length > 0 && (
+                {user && recentlyReadBooks.length > 0 && (
                   <div className="mb-8">
                     <h2 className="text-xl font-serif font-semibold mb-4 text-center">Recently Read</h2>
                     <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">

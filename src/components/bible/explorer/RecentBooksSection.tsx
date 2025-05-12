@@ -14,13 +14,7 @@ const RecentBooksSection: React.FC<RecentBooksSectionProps> = ({
   onBookSelect
 }) => {
   if (!recentBooks || recentBooks.length === 0) {
-    return (
-      <div className="py-4">
-        <p className="text-sm text-muted-foreground">
-          No recently read books yet. Start exploring to see your reading history here.
-        </p>
-      </div>
-    );
+    return null; // Don't render anything if there are no recent books
   }
 
   return (
