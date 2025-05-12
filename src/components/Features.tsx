@@ -107,7 +107,7 @@ const FeatureHeading = () => {
         transition={{ duration: 0.5, delay: 0.2 }}
         className="max-w-3xl mx-auto text-lg text-bible-dark/80"
       >
-        Bible Adventure Quest offers multiple interactive features designed to make your Bible learning journey enjoyable, memorable, and spiritually enriching.
+        Bible Quest offers multiple interactive features designed to make your Bible learning journey enjoyable, memorable, and spiritually enriching.
       </motion.p>
     </div>
   );

@@ -75,7 +75,7 @@ const InstallAppBanner = () => {
             <SmartphoneIcon className="text-bible-blue h-8 w-8 mr-3" />
             <div>
               <h3 className="font-medium text-gray-900">Get the App</h3>
-              <p className="text-sm text-gray-600">Install Bible Adventure Quest on your device</p>
+              <p className="text-sm text-gray-600">Install Bible Quest on your device</p>
             </div>
           </div>
           <button 

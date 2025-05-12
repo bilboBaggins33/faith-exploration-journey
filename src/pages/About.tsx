@@ -59,13 +59,13 @@ const About = () => {
                   A Father's Mission
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  As a Christian parent with four children, I created Bible Adventure Quest with a simple vision: to make Bible reading and theological exploration engaging, interactive, and meaningful for families.
+                  As a Christian parent with four children, I created Bible Quest with a simple vision: to make Bible reading and theological exploration engaging, interactive, and meaningful for families.
                 </p>
                 <p className="text-gray-700 mb-4">
                   I noticed that while my children were naturally curious about faith, traditional Bible studies often failed to capture their imagination or encourage deeper thinking. I wanted to create something that would inspire them to not just read Scripture, but to engage with it thoughtfully.
                 </p>
                 <p className="text-gray-700 mb-6">
-                  This journey led to the creation of Bible Adventure Quest — a platform that combines Bible reading with interactive challenges, progress tracking, and thoughtful questions designed to spark meaningful conversations about faith.
+                  This journey led to the creation of Bible Quest — a platform that combines Bible reading with interactive challenges, progress tracking, and thoughtful questions designed to spark meaningful conversations about faith.
                 </p>
                 
                 <div className="flex items-center">
@@ -153,7 +153,7 @@ const About = () => {
                   For the Whole Family
                 </h2>
                 <p className="text-gray-700 mb-4">
-                  Bible Adventure Quest is designed for families to use together. Parents and children can read Scripture together, tackle challenges as a team, and have meaningful conversations about faith.
+                  Bible Quest is designed for families to use together. Parents and children can read Scripture together, tackle challenges as a team, and have meaningful conversations about faith.
                 </p>
                 <p className="text-gray-700 mb-4">
                   As children engage with both the Bible and classic theological books through our platform, they develop not just biblical literacy but critical thinking skills that will serve them throughout their faith journey.
@@ -185,7 +185,7 @@ const About = () => {
             <Users className="h-12 w-12 text-bible-gold mx-auto mb-6" />
             <h2 className="text-3xl font-serif font-bold mb-6">Join Our Community</h2>
             <p className="text-white/80 mb-8 text-lg">
-              Bible Adventure Quest is more than just an app—it's a community of families committed to growing in faith together. Start your family's adventure today.
+              Bible Quest is more than just an app—it's a community of families committed to growing in faith together. Start your family's adventure today.
             </p>
             <Link to="/auth">
               <Button className="bg-bible-gold hover:bg-bible-gold/90 text-bible-dark">

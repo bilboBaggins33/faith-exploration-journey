@@ -15,10 +15,10 @@ const InstallApp = () => {
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
-              Install Bible Adventure Quest on Your Device
+              Install Bible Quest on Your Device
             </h1>
             <p className="text-lg text-bible-dark/80 max-w-2xl mx-auto">
-              Follow these simple steps to add Bible Adventure Quest to your home screen for a native app-like experience.
+              Follow these simple steps to add Bible Quest to your home screen for a native app-like experience.
             </p>
           </div>
 

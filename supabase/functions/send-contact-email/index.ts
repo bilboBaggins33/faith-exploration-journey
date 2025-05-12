@@ -33,17 +33,17 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send confirmation email to user
     const userEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest <noreply@bibleadventurequest.com>",
+      from: "Bible Quest <noreply@bibleadventurequest.com>",
       to: [email],
       subject: "We received your message!",
       html: `
-        <h1>Thank you for contacting Bible Adventure Quest, ${name}!</h1>
+        <h1>Thank you for contacting Bible Quest, ${name}!</h1>
         <p>We have received your message and will get back to you as soon as possible.</p>
         <p>For your reference, here's a copy of your message:</p>
         <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p>${message.replace(/\n/g, '<br>')}</p>
         </div>
-        <p>Best regards,<br>The Bible Adventure Quest Team</p>
+        <p>Best regards,<br>The Bible Quest Team</p>
       `,
     });
 
@@ -51,7 +51,7 @@ const handler = async (req: Request): Promise<Response> => {
 
     // Send notification email to admin
     const adminEmailResponse = await resend.emails.send({
-      from: "Bible Adventure Quest Contact Form <noreply@bibleadventurequest.com>",
+      from: "Bible Quest Contact Form <noreply@bibleadventurequest.com>",
       to: ["richard@melfam.com"], // Admin email address
       subject: `New Contact Form Submission from ${name}`,
       html: `

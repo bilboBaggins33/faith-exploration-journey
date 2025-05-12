@@ -18,14 +18,14 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-xl font-semibold mb-3">1. Acceptance of Terms</h2>
                 <p className="text-gray-600">
-                  By accessing and using Bible Adventure Quest, you agree to be bound by these Terms of Service and all applicable laws and regulations.
+                  By accessing and using Bible Quest, you agree to be bound by these Terms of Service and all applicable laws and regulations.
                 </p>
               </section>
               
               <section>
                 <h2 className="text-xl font-semibold mb-3">2. Service Description</h2>
                 <p className="text-gray-600">
-                  Bible Adventure Quest is an interactive Bible learning platform that provides Bible study materials, challenges, and educational content.
+                  Bible Quest is an interactive Bible learning platform that provides Bible study materials, challenges, and educational content.
                 </p>
               </section>
               
@@ -60,7 +60,7 @@ const TermsOfService = () => {
               <section>
                 <h2 className="text-xl font-semibold mb-3">7. Intellectual Property</h2>
                 <p className="text-gray-600">
-                  All content, features, and functionality are owned by Bible Adventure Quest and are protected by international copyright laws.
+                  All content, features, and functionality are owned by Bible Quest and are protected by international copyright laws.
                 </p>
               </section>
               

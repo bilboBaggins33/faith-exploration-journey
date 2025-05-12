@@ -78,7 +78,7 @@ const Contact = () => {
               Contact Us
             </h1>
             <p className="mt-4 text-lg text-bible-dark/70 dark:text-white/70">
-              Have questions about Bible Adventure Quest? We'd love to hear from you!
+              Have questions about Bible Quest? We'd love to hear from you!
             </p>
           </div>
 

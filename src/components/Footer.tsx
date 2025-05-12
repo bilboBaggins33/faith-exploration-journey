@@ -12,7 +12,7 @@ const Footer = () => {
             <div className="flex items-center mb-4">
               <BookOpen className="h-8 w-8 text-bible-gold" />
               <span className="ml-2 text-xl font-serif font-semibold tracking-tight">
-                Bible Adventure Quest
+                Bible Quest
               </span>
             </div>
             <p className="text-white/70 mb-6">
@@ -68,7 +68,7 @@ const Footer = () => {
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center">
           <p className="text-white/60 text-sm mb-4 md:mb-0">
-            &copy; {currentYear} Bible Adventure Quest. All rights reserved.
+            &copy; {currentYear} Bible Quest. All rights reserved.
           </p>
           <div className="flex space-x-6">
             <Link to="/terms" className="text-white/60 hover:text-white text-sm transition-colors duration-300">Terms of Service</Link>

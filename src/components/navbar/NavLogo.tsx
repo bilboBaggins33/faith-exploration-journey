@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { BookOpen } from 'lucide-react';
 
 interface NavLogoProps {
   isHomePage: boolean;
@@ -10,20 +8,16 @@ interface NavLogoProps {
 
 const NavLogo = ({ isHomePage, isScrolled }: NavLogoProps) => {
   return (
-    <div className="flex items-center">
+    <div className={`flex items-center ${!isScrolled ? 'pt-5' : ''}`}>
       <Link to="/" className="flex items-center">
-        <BookOpen 
+        <img 
+          src="/BibleQuestLogo.png"
+          alt="Bible Quest Logo"
           className={`transition-all duration-300 ${
-            isHomePage && !isScrolled ? 'h-8 w-8 text-white' : 'h-6 w-6 text-bible-dark dark:text-white'
+            isHomePage && !isScrolled ? 'h-16 w-auto' : 'h-10 w-auto'
           }`} 
         />
-        <span 
-          className={`ml-2 font-serif font-semibold tracking-tight transition-all duration-300 ${
-            isHomePage && !isScrolled ? 'text-xl text-white' : 'text-lg text-bible-dark dark:text-white'
-          }`}
-        >
-          Bible Adventure Quest
-        </span>
+
       </Link>
     </div>
   );

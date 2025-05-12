@@ -76,6 +76,14 @@ const ChallengeTypes = () => {
     visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   };
   
+  // Use a reliable default image URL
+  const defaultImage = 'https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80';
+
+  const handleImageError = (e: React.SyntheticEvent<HTMLImageElement, Event>) => {
+    console.log('Image failed to load, using default');
+    e.currentTarget.src = defaultImage;
+  };
+  
   return (
     <section className="py-20 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -103,6 +111,7 @@ const ChallengeTypes = () => {
                   src="https://images.unsplash.com/photo-1504052434569-70ad5836ab65?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Bible Challenges"
                   className="w-full h-full object-cover"
+                  onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 w-full p-8">
@@ -147,6 +156,7 @@ const ChallengeTypes = () => {
                   src="https://images.unsplash.com/photo-1507842217343-583bb7270b66?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
                   alt="Theology Challenges"
                   className="w-full h-full object-cover"
+                  onError={handleImageError}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
                 <div className="absolute bottom-0 left-0 w-full p-8">
@@ -373,7 +383,7 @@ const DownloadSection = () => {
             Take Your Faith Journey Anywhere
           </h2>
           <p className="max-w-3xl mx-auto text-lg text-bible-dark/80">
-            Install Bible Adventure Quest on your device to access your challenges, track your progress, and continue growing in your faith wherever you go.
+            Install Bible Quest on your device to access your challenges, track your progress, and continue growing in your faith wherever you go.
           </p>
         </div>
         
