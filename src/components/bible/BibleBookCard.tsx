@@ -28,7 +28,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       className="overflow-hidden transition-shadow hover:shadow-md cursor-pointer h-full flex flex-col"
       onClick={onClick}
     >
-      <div className="relative pb-[66.67%]">
+      <div className="relative pb-[46.67%]">
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
           alt={`${bookName} cover`}
