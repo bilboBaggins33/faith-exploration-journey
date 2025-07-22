@@ -29,7 +29,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   const isFirstChapter = chapter === 1;
 
   const { user } = useAuth();
-  console.log('isCompleted', isCompleted)
+
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
 
