@@ -103,7 +103,8 @@ const Chapter = () => {
     
     // First chapter should be accessible to everyone
     return (
-      <SubscriptionRequired allowViewOnly={isFirstChapter}>
+      // TODO: decide who can see chapters
+      <SubscriptionRequired allowViewOnly={isFirstChapter || (!isFirstChapter)}>
         <BibleChapterChallenge />
       </SubscriptionRequired>
     );

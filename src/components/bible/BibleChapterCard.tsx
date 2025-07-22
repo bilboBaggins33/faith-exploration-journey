@@ -29,7 +29,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   const isFirstChapter = chapter === 1;
 
   const { user } = useAuth();
-  
+  console.log('isCompleted', isCompleted)
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
 
@@ -73,7 +73,6 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
             ) : null}
           </div>
         </div>
-        {isCompleted && (
           <div className="w-full mb-1">
             <ChapterProgressChart 
               percentage={scorePercentage} 
@@ -83,7 +82,6 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
               {score}/{maxScore}
             </p>
           </div>
-        )}
         {!isCompleted && (
           <div className="w-full mb-1">
             <div className="w-full h-2 bg-gray-200 rounded-full"></div>

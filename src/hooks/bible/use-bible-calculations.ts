@@ -53,8 +53,22 @@ export const useBibleCalculations = (progress: BibleProgressData | null) => {
     return Math.round((totalScore / bookChapters.length) * 10);
   };
 
+  const getChapterScore = (bookId: string, chapterNumber: number): number => {
+    if (!progress || !progress.completed_chapters) return 0;
+
+    const completed_chapters = progress.completed_chapters;
+
+    const chapterData = completed_chapters.find(
+      c => c.book_id === bookId && c.chapter === chapterNumber
+    );
+    const score = chapterData?.score || 0;
+
+    return score;
+  };
+
   return {
     getBookProgress,
     getBookAverageScore,
+    getChapterScore
   };
 };

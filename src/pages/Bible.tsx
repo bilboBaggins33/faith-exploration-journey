@@ -21,7 +21,7 @@ const Bible: React.FC = () => {
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeTestament, setActiveTestament] = useState<string>('all');
-  const { getBookProgress, getBookAverageScore } = useBibleProgress();
+  const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleProgress();
   const isMobile = useIsMobile();
   const { user } = useAuth();
   
@@ -179,8 +179,8 @@ const Bible: React.FC = () => {
                         bookId={selectedBook.id}
                         chapter={chapter}
                         isCompleted={false}
-                        score={0}
-                        maxScore={0}
+                        score={getChapterScore(selectedBook.id, chapter)}
+                        maxScore={5}
                         isUnlocked={!!user}
                         onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
                       />

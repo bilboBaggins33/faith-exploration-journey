@@ -7,7 +7,7 @@ import type { BibleProgressData } from './bible-progress-types';
 
 export const useBibleProgress = () => {
   const { profile, progress, loading, refreshData, setProgress } = useBibleFetch();
-  const { getBookProgress, getBookAverageScore } = useBibleCalculations(progress);
+  const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleCalculations(progress);
   const { isCompleted, getChapterStatus, completeChallenge } = useBibleStatus(progress, profile);
 
   const updateProfile = async (data: any) => {
@@ -59,6 +59,7 @@ export const useBibleProgress = () => {
     updateProgress,
     getBookProgress,
     getBookAverageScore,
+    getChapterScore,
     isCompleted,
     completeChallenge,
     getChapterStatus
