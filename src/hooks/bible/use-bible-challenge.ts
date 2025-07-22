@@ -82,8 +82,17 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       if (bookId && chapter) {
         if (updateProgress) {
           try {
+            const chapterNumber = parseInt(chapter, 10);
+            const completedChapter = {
+              book_id: bookId,
+              chapter: chapterNumber,
+              completed_at: new Date().toISOString(),
+              score: state.score
+            };
+
             const progressData: Partial<BibleProgressData> = {
               challenges_completed: [`${bookId}${chapter}`],
+              completed_chapters: [completedChapter],
               total_points: state.score
             };
             

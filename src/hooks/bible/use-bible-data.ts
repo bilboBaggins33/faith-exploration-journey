@@ -70,10 +70,10 @@ export const updateUserProfile = async (userId: string, data: any) => {
  * Updates a user's Bible progress data in Supabase
  */
 export const updateBibleProgress = async (userId: string, data: Partial<BibleProgressData>) => {
-  // Check if record exists first
+  // Get existing data to merge with new data
   const { data: existingData, error: checkError } = await supabase
     .from('bible_progress')
-    .select('user_id')
+    .select('*')
     .eq('user_id', userId)
     .maybeSingle();
 
@@ -81,29 +81,52 @@ export const updateBibleProgress = async (userId: string, data: Partial<BiblePro
     throw checkError;
   }
 
-  let updateError;
+  let updateData = { ...data };
   
   if (existingData) {
+    // Merge existing data with new data
+    if (data.completed_chapters && existingData.completed_chapters) {
+      const existingChapters = existingData.completed_chapters || [];
+      const newChapters = data.completed_chapters || [];
+      
+      // Remove any existing entry for the same book/chapter combination
+      const filteredExistingChapters = existingChapters.filter(
+        (existing: any) => !newChapters.some(
+          (newChapter: any) => existing.book_id === newChapter.book_id && existing.chapter === newChapter.chapter
+        )
+      );
+      
+      // Combine filtered existing chapters with new chapters
+      updateData.completed_chapters = [...filteredExistingChapters, ...newChapters];
+    }
+    
+    if (data.challenges_completed && existingData.challenges_completed) {
+      const existingChallenges = existingData.challenges_completed || [];
+      const newChallenges = data.challenges_completed || [];
+      const mergedChallenges = [...new Set([...existingChallenges, ...newChallenges])];
+      updateData.challenges_completed = mergedChallenges;
+    }
+    
+    if (data.total_points !== undefined && existingData.total_points) {
+      updateData.total_points = existingData.total_points + data.total_points;
+    }
+
     // Update existing record
     const { error } = await supabase
       .from('bible_progress')
-      .update(data)
+      .update(updateData)
       .eq('user_id', userId);
     
-    updateError = error;
+    if (error) throw error;
   } else {
     // Insert new record
     const { error } = await supabase
       .from('bible_progress')
       .insert({
         user_id: userId,
-        ...data
+        ...updateData
       });
     
-    updateError = error;
-  }
-
-  if (updateError) {
-    throw updateError;
+    if (error) throw error;
   }
 };
