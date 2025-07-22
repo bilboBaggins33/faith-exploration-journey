@@ -8,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { ToggleGroup, ToggleGroupItem } from '@/components/ui/toggle-group';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const challenges = [
   {
@@ -150,6 +151,7 @@ const ChallengePage = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navbar />
       
       <main className="flex-1 pt-16">

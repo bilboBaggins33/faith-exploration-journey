@@ -16,10 +16,12 @@ import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
 import { Link } from 'react-router-dom';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const AuthPage = () => {
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navbar />
       
       <main className="flex-1 pt-16">

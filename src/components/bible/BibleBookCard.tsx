@@ -37,8 +37,8 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
         <div className="absolute bottom-0 left-0 p-3">
-          <h3 className="font-serif font-semibold text-white text-sm">{bookName}</h3>
-          <p className="text-white/80 text-xs">
+          <h3 className="font-serif font-semibold text-white">{bookName}</h3>
+          <p className="text-white/80 text-xs ml-5">
             {testament === 'old' ? 'Old Testament' : 'New Testament'}
           </p>
         </div>

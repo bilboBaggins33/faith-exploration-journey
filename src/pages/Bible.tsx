@@ -12,6 +12,7 @@ import { useIsMobile } from '@/hooks/use-mobile';
 import BookSearchFilter from '@/components/bible/explorer/BookSearchFilter';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/context/auth';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -74,6 +75,7 @@ const Bible: React.FC = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navbar />
       
       <main className="flex-grow pt-24 pb-10 bg-bible-beige">
@@ -179,7 +181,7 @@ const Bible: React.FC = () => {
                         isCompleted={false}
                         score={0}
                         maxScore={0}
-                        isUnlocked={true}
+                        isUnlocked={!!user}
                         onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
                       />
                     ))}

@@ -3,7 +3,8 @@ import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import ChapterProgressChart from './ChapterProgressChart';
-import { BookOpen, CheckCircle, PlusCircle, Unlock, Lock } from 'lucide-react';
+import { BookOpen, CheckCircle, Unlock, Lock } from 'lucide-react';
+import { useAuth } from '@/context/auth';
 
 interface BibleChapterCardProps {
   bookId: string;
@@ -26,6 +27,8 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
 }) => {
   const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const isFirstChapter = chapter === 1;
+
+  const { user } = useAuth();
   
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
@@ -47,60 +50,50 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
 
   return (
     <motion.div
-      whileHover={{ y: -3, boxShadow: "0 5px 10px rgba(0, 0, 0, 0.1)" }}
-      transition={{ duration: 0.2 }}
+      whileHover={{ y: -4, scale: 1.025, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.10)" }}
+      transition={{ duration: 0.18 }}
       className={cn(
-        "p-2 rounded-md border cursor-pointer transition-all shadow-sm w-full h-full",
-        "bg-opacity-80 overflow-hidden relative text-center",
-        getBorderColorClass()
+        "p-3 rounded-xl border cursor-pointer transition-all shadow-sm w-full h-full",
+        "bg-opacity-90 overflow-hidden relative text-center",
+        getBorderColorClass(),
+        effectivelyUnlocked ? "bg-gradient-to-br from-white via-white-50 to-gray-50" : "bg-gray-50"
       )}
       onClick={onClick}
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="relative w-full">
-          <span className="text-xs font-medium block mb-1">Ch {chapter}</span>
-          
+          <span className="text-sm font-semibold block mb-1 text-gray-700"> Ch.{chapter}</span>
           <div className="absolute top-0 right-0">
             {isCompleted ? (
-              <CheckCircle className="w-3 h-3 text-green-500" />
-            ) : isFirstChapter ? (
-              <Unlock className="w-3 h-3 text-bible-blue" />
+              <CheckCircle className="w-4 h-4 text-green-500" />
+            ) : isFirstChapter && !user ? (
+              <Unlock className="w-4 h-4 text-bible-blue" />
             ) : !effectivelyUnlocked ? (
-              <Lock className="w-3 h-3 text-gray-400" />
-            ) : (
-              <PlusCircle className="w-3 h-3 text-gray-400" />
-            )}
+              <Lock className="w-4 h-4 text-gray-400" />
+            ) : null}
           </div>
         </div>
-        
         {isCompleted && (
           <div className="w-full mb-1">
             <ChapterProgressChart 
               percentage={scorePercentage} 
               showPercentage={false}
             />
-            <p className={`text-[10px] mt-1 ${getScoreColor()}`}>
+            <p className={`text-xs mt-1 font-medium ${getScoreColor()}`}>
               {score}/{maxScore}
             </p>
           </div>
         )}
-        
         {!isCompleted && (
           <div className="w-full mb-1">
-            <div className="w-full h-2 bg-gray-100 rounded-full"></div>
+            <div className="w-full h-2 bg-gray-200 rounded-full"></div>
           </div>
         )}
-        
-        {isFirstChapter && (
-          <p className="text-[10px] text-bible-blue mt-1">
-            Free Chapter
-          </p>
+        {(!user && isFirstChapter) && (
+          <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-1 border border-bible-blue/20">Free Chapter</span>
         )}
-
         {!effectivelyUnlocked && !isFirstChapter && (
-          <p className="text-[10px] text-gray-500 mt-1">
-            Premium
-          </p>
+          <span className="inline-block px-2 py-0.5 rounded-full bg-orange-300 text-gray-600 text-[10px] font-semibold mt-1 border border-gray-300">Premium</span>
         )}
       </div>
     </motion.div>

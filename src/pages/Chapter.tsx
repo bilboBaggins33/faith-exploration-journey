@@ -12,6 +12,7 @@ import LoginRequired from '@/components/challenges/bible/LoginRequired';
 import { ChapterChallenge } from '@/data/bible/types';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import ChallengeSkeleton from '@/components/challenges/bible/ChallengeSkeleton';
+import ScrollToTop from '@/components/ScrollToTop';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
@@ -110,6 +111,7 @@ const Chapter = () => {
   
   return (
     <div className="min-h-screen flex flex-col">
+      <ScrollToTop />
       <Navbar />
       
       <main className="flex-grow pt-24 pb-10 bg-bible-beige">
