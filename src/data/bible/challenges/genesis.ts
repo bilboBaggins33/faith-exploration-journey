@@ -28,6 +28,20 @@ export const genesisChallenges: ChapterChallenge[] = [
         options: ['And it was perfect', 'And God blessed it', 'And God saw that it was good', 'And it remained forever'],
         correctAnswer: 'And God saw that it was good',
         explanation: 'Throughout Genesis 1, God evaluates his creation and affirms its goodness.'
+      },
+      {
+        id: 'gen1-q4',
+        question: 'On which day did God create the sun, moon, and stars?',
+        options: ['First day', 'Second day', 'Fourth day', 'Sixth day'],
+        correctAnswer: 'Fourth day',
+        explanation: 'God made the sun, moon, and stars on the fourth day. (Genesis 1:14-19)'
+      },
+      {
+        id: 'gen1-q5',
+        question: 'What did God give to humans to rule over?',
+        options: ['The angels', 'The animals and the earth', 'The stars', 'The mountains only'],
+        correctAnswer: 'The animals and the earth',
+        explanation: 'God gave humans dominion over the fish, birds, livestock, and all the earth. (Genesis 1:26,28)'
       }
     ],
     key_verse: 'Genesis 1:1',
@@ -67,6 +81,20 @@ export const genesisChallenges: ChapterChallenge[] = [
         ],
         correctAnswer: 'Eat from any tree except the tree of knowledge of good and evil',
         explanation: 'God commanded Adam not to eat from the tree of the knowledge of good and evil. (Genesis 2:16-17)'
+      },
+      {
+        id: 'gen2-q4',
+        question: 'From what did God form man?',
+        options: ['Water', 'Dust of the ground', 'A rib', 'Fire'],
+        correctAnswer: 'Dust of the ground',
+        explanation: 'Then the LORD God formed a man from the dust of the ground. (Genesis 2:7)'
+      },
+      {
+        id: 'gen2-q5',
+        question: 'How did God create woman?',
+        options: ['From the dust', 'From Adam\'s rib', 'From a tree', 'From water'],
+        correctAnswer: 'From Adam\'s rib',
+        explanation: 'The LORD God made a woman from the rib he had taken out of the man. (Genesis 2:21-22)'
       }
     ],
     key_verse: 'Genesis 2:7',
