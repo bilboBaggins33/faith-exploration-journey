@@ -96,8 +96,8 @@ const Bible: React.FC = () => {
                     <ul className="list-disc pl-5 space-y-1 mb-2">
                       <li>Click on any book to view its chapters</li>
                       <li>Complete chapter challenges to track your progress</li>
-                      <li>Use the search bar below to find specific books</li>
-                      <li>Filter books by Old or New Testament</li>
+                      {/* <li>Use the search bar below to find specific books</li>
+                      <li>Filter books by Old or New Testament</li> */}
                     </ul>
                     <p className="text-bible-gold text-sm font-medium">
                       Your reading progress is automatically saved as you complete chapters.
@@ -106,13 +106,13 @@ const Bible: React.FC = () => {
                 </Card>
                 
                 {/* Search Filter */}
-                <div className="mb-6">
+                {/* <div className="mb-6">
                   <BookSearchFilter 
                     searchTerm={searchTerm} 
                     setSearchTerm={setSearchTerm} 
                     setActiveTestament={setActiveTestament} 
                   />
-                </div>
+                </div> */}
                 
                 {user && recentlyReadBooks.length > 0 && (
                   <div className="mb-8">

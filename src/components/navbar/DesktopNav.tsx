@@ -42,20 +42,20 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
         </NavLink>
         <NavLink to="/plans" active={isActive('/plans')} isScrolled={isScrolled} isHomePage={isHomePage}>
           <div className="flex items-center">
-            <BookOpen className="h-4 w-4 mr-1" />
+            {/* <BookOpen className="h-4 w-4 mr-1" /> */}
             Plans
           </div>
         </NavLink>
         <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled} isHomePage={isHomePage}>
           <div className="flex items-center">
-            <BookText className="h-4 w-4 mr-1" />
+            {/* <BookText className="h-4 w-4 mr-1" /> */}
             Books
           </div>
         </NavLink>
         
         <NavLink to="/about" active={isActive('/about')} isScrolled={isScrolled} isHomePage={isHomePage}>
           <div className="flex items-center">
-            <Info className="h-4 w-4 mr-1" />
+            {/* <Info className="h-4 w-4 mr-1" /> */}
             About
           </div>
         </NavLink>

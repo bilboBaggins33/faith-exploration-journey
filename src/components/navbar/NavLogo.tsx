@@ -13,7 +13,7 @@ const NavLogo = ({ isHomePage, isScrolled }: NavLogoProps) => {
       : '/BibleQuestLogoDark.png'; // smaller or alternative logo for all other cases
 
   return (
-    <div className={`flex items-center ${!isScrolled ? 'pt-5' : ''}`}>
+    <div className={`flex items-center ${(!isScrolled && isHomePage) ? 'pt-5' : ''}`}>
       <Link to="/" className="flex items-center">
         <img
           src={logoSrc}
