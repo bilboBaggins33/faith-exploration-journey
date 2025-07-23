@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
@@ -64,7 +63,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="relative w-full">
-          <span className="text-sm font-semibold block mb-1 text-gray-700">Ch.{chapter}</span>
+          <span className="text-sm font-semibold block mb-1 text-gray-700">{chapter}</span>
           {title && (
             <span className="text-xs text-gray-500 block mb-2 truncate" title={title}>
               {title}
@@ -80,12 +79,12 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
             ) : null}
           </div>
         </div>
-          <div className="w-full">
+          <div className="w-full flex items-center justify-between mt-1">
             <ChapterProgressChart 
               percentage={scorePercentage} 
               showPercentage={false}
             />
-            <p className={`text-sm mt-1 font-medium ${getScoreColor()}`}>
+            <p className={`text-sm font-medium ml-2 ${getScoreColor()}`}>
               {score}/{maxScore}
             </p>
           </div>
