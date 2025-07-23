@@ -97,6 +97,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
                 total_points: state.score
               };
               
+              // Update progress and ensure fresh data is loaded
               await updateProgress(progressData);
               
               toast({

@@ -39,8 +39,44 @@ export const useBibleProgress = () => {
         await updateBibleProgress(progress.user_id, resetData);
         setProgress({ ...progress, ...resetData });
       } else {
+        // Update local state immediately with the new data
+        setProgress(prev => {
+          if (!prev) return null;
+          
+          const updated = { ...prev };
+          
+          // Merge completed chapters
+          if (data.completed_chapters) {
+            const existing = prev.completed_chapters || [];
+            const newChapters = data.completed_chapters;
+            
+            // Remove any existing entry for the same book/chapter combination
+            const filteredExisting = existing.filter(
+              (existingChapter: any) => !newChapters.some(
+                (newChapter: any) => existingChapter.book_id === newChapter.book_id && existingChapter.chapter === newChapter.chapter
+              )
+            );
+            
+            updated.completed_chapters = [...filteredExisting, ...newChapters];
+          }
+          
+          // Merge challenges completed
+          if (data.challenges_completed) {
+            const existing = prev.challenges_completed || [];
+            const merged = [...new Set([...existing, ...data.challenges_completed])];
+            updated.challenges_completed = merged;
+          }
+          
+          // Add points
+          if (data.total_points !== undefined) {
+            updated.total_points = (prev.total_points || 0) + data.total_points;
+          }
+          
+          return updated;
+        });
+        
+        // Then update the database
         await updateBibleProgress(progress.user_id, data);
-        setProgress(prev => prev ? { ...prev, ...data } : null);
       }
       
       await refreshData();
