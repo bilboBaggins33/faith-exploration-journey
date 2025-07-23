@@ -81,30 +81,34 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       const book = bibleBooks.find(b => b.id === bookId);
       if (bookId && chapter) {
         if (updateProgress) {
-          try {
-            const chapterNumber = parseInt(chapter, 10);
-            const completedChapter = {
-              book_id: bookId,
-              chapter: chapterNumber,
-              completed_at: new Date().toISOString(),
-              score: state.score
-            };
+          const saveProgress = async () => {
+            try {
+              const chapterNumber = parseInt(chapter, 10);
+              const completedChapter = {
+                book_id: bookId,
+                chapter: chapterNumber,
+                completed_at: new Date().toISOString(),
+                score: state.score
+              };
 
-            const progressData: Partial<BibleProgressData> = {
-              challenges_completed: [`${bookId}${chapter}`],
-              completed_chapters: [completedChapter],
-              total_points: state.score
-            };
-            
-            updateProgress(progressData);
-            
-            toast({
-              title: "Challenge Completed!",
-              description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
-            });
-          } catch (error) {
-            console.error("Error updating progress:", error);
-          }
+              const progressData: Partial<BibleProgressData> = {
+                challenges_completed: [`${bookId}${chapter}`],
+                completed_chapters: [completedChapter],
+                total_points: state.score
+              };
+              
+              await updateProgress(progressData);
+              
+              toast({
+                title: "Challenge Completed!",
+                description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
+              });
+            } catch (error) {
+              console.error("Error updating progress:", error);
+            }
+          };
+          
+          saveProgress();
         }
       }
     }
