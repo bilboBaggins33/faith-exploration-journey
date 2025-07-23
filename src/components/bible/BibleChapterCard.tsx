@@ -73,20 +73,15 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
             ) : null}
           </div>
         </div>
-          <div className="w-full mb-1">
+          <div className="w-full">
             <ChapterProgressChart 
               percentage={scorePercentage} 
               showPercentage={false}
             />
-            <p className={`text-xs mt-1 font-medium ${getScoreColor()}`}>
+            <p className={`text-sm mt-1 font-medium ${getScoreColor()}`}>
               {score}/{maxScore}
             </p>
           </div>
-        {!isCompleted && (
-          <div className="w-full mb-1">
-            <div className="w-full h-2 bg-gray-200 rounded-full"></div>
-          </div>
-        )}
         {(!user && isFirstChapter) && (
           <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-1 border border-bible-blue/20">Free Chapter</span>
         )}
