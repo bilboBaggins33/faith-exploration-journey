@@ -157,8 +157,8 @@ const Bible: React.FC = () => {
                   >
                     <span className="mr-1">←</span> Back to All Books
                   </button>
-                  <h1 className="text-3xl font-serif font-bold mt-2">{selectedBook.name}</h1>
-                  <p className="text-gray-600">{selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}</p>
+                  {/* <h1 className="text-3xl font-serif font-bold mt-2">{selectedBook.name}</h1>
+                  <p className="text-gray-600">{selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}</p> */}
                 </div>
                 
                 <BibleBookCard 
