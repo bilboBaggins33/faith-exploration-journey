@@ -5,6 +5,7 @@ import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { bibleBooks } from '@/data/bible';
+import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 
 interface ChaptersGridProps {
   bookId: string | null;
@@ -32,12 +33,14 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
         {bookChapters.map(chapter => {
           const { isCompleted, score } = getChapterStatus(bookId, chapter);
           const isFirstChapter = chapter === 1;
+          const challengeData = getBibleChallengeByBookAndChapter(bookId, chapter);
           
           return (
             <div key={chapter} className="w-full aspect-square">
               <BibleChapterCard
                 bookId={bookId}
                 chapter={chapter}
+                title={challengeData?.title}
                 isCompleted={isCompleted}
                 score={score}
                 maxScore={10}

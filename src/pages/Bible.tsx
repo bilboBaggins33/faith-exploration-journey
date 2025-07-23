@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { bibleBooks } from '@/data/bible';
+import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import BibleBooksList from '@/components/bible/BibleBooksList';
 import BibleBookCard from '@/components/bible/BibleBookCard';
@@ -173,18 +174,22 @@ const Bible: React.FC = () => {
                 <div className="mt-6">
                   <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
                   <div className="grid grid-cols-3 sm:grid-cols-6 md:grid-cols-8 gap-2">
-                    {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => (
-                      <BibleChapterCard
-                        key={chapter}
-                        bookId={selectedBook.id}
-                        chapter={chapter}
-                        isCompleted={false}
-                        score={getChapterScore(selectedBook.id, chapter)}
-                        maxScore={5}
-                        isUnlocked={!!user}
-                        onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
-                      />
-                    ))}
+                    {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
+                      const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                      return (
+                        <BibleChapterCard
+                          key={chapter}
+                          bookId={selectedBook.id}
+                          chapter={chapter}
+                          title={challengeData?.title}
+                          isCompleted={false}
+                          score={getChapterScore(selectedBook.id, chapter)}
+                          maxScore={5}
+                          isUnlocked={!!user}
+                          onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
+                        />
+                      );
+                    })}
                   </div>
                 </div>
               </div>
@@ -194,6 +199,7 @@ const Bible: React.FC = () => {
               <BibleChapterCard
                 bookId={selectedBook.id}
                 chapter={selectedChapter}
+                title={getBibleChallengeByBookAndChapter(selectedBook.id, selectedChapter)?.title}
                 isCompleted={false}
                 score={0}
                 maxScore={0}

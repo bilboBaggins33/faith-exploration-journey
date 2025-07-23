@@ -9,6 +9,7 @@ import { useAuth } from '@/context/auth';
 interface BibleChapterCardProps {
   bookId: string;
   chapter: number;
+  title?: string;
   isCompleted: boolean;
   score: number;
   maxScore: number;
@@ -19,6 +20,7 @@ interface BibleChapterCardProps {
 const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   bookId,
   chapter,
+  title,
   isCompleted,
   score,
   maxScore,
@@ -62,7 +64,12 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="relative w-full">
-          <span className="text-sm font-semibold block mb-1 text-gray-700"> Ch.{chapter}</span>
+          <span className="text-sm font-semibold block mb-1 text-gray-700">Ch.{chapter}</span>
+          {title && (
+            <span className="text-xs text-gray-500 block mb-2 truncate" title={title}>
+              {title}
+            </span>
+          )}
           <div className="absolute top-0 right-0">
             {isCompleted ? (
               <CheckCircle className="w-4 h-4 text-green-500" />
