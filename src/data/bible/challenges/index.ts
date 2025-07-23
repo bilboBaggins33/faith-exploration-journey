@@ -34,11 +34,11 @@ import { ecclesiastesChallenges } from './ecclesiastes';
 // import { jonahChallenges } from './jonah';
 // import { micahChallenges } from './micah';
 // import { nahumChallenges } from './nahum';
-// import { habakkukChallenges } from './habakkuk';
+import { habakkukChallenges } from './habakkuk';
 // import { zephaniahChallenges } from './zephaniah';
-// import { haggaiChallenges } from './haggai';
-// import { zechariahChallenges } from './zechariah';
-// import { malachiChallenges } from './malachi';
+import { haggaiChallenges } from './haggai';
+import { zechariahChallenges } from './zechariah';
+import { malachiChallenges } from './malachi';
 import { matthewChallenges } from './matthew';
 import { markChallenges } from './mark';
 import { lukeChallenges } from './luke';
@@ -104,11 +104,11 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   // ...jonahChallenges,
   // ...micahChallenges, 
   // ...nahumChallenges,
-  // ...habakkukChallenges,
+  ...habakkukChallenges,
   // ...zephaniahChallenges,
-  // ...haggaiChallenges,
-  // ...zechariahChallenges,
-  // ...malachiChallenges,
+  ...haggaiChallenges,
+  ...zechariahChallenges,
+  ...malachiChallenges,
   ...matthewChallenges,
   ...markChallenges,
   ...lukeChallenges,

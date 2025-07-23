@@ -1,7 +1,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import ChapterProgressChart from './ChapterProgressChart';
 import { BookOpen, CheckCircle, Unlock, Lock } from 'lucide-react';
 import { useAuth } from '@/context/auth';
 
@@ -42,11 +41,23 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     return "bg-red-50 border-red-200";
   };
 
-  // Custom color logic for score based on the specific business rules
-  const getScoreColor = () => {
-    if (score === 5) return "text-green-500"; // 5 correct answers
-    if (score >= 2 && score <= 4) return "text-amber-500"; // 2-4 correct answers
-    return "text-red-500"; // 1 or fewer correct answers
+  // Color gradient for bars: amber to green based on score
+  const getBarColor = (index: number) => {
+    if (index >= score) return "bg-gray-200";
+    switch (score) {
+      case 1:
+        return "bg-red-400";
+      case 2:
+        return "bg-orange-400";
+      case 3:
+        return "bg-yellow-500";
+      case 4:
+        return "bg-lime-400";
+      case 5:
+        return "bg-green-500";
+      default:
+        return "bg-gray-200";
+    }
   };
 
   return (
@@ -79,15 +90,19 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
             ) : null}
           </div>
         </div>
-          <div className="w-full flex items-center justify-between mt-1">
-            <ChapterProgressChart 
-              percentage={scorePercentage} 
-              showPercentage={false}
-            />
-            <p className={`text-sm font-medium ml-2 ${getScoreColor()}`}>
-              {score}/{maxScore}
-            </p>
+        <div className="w-full flex items-center justify-between mt-1">
+          <div className="flex space-x-1 w-full">
+            {[...Array(5)].map((_, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "h-2 flex-1 rounded-full",
+                  getBarColor(index)
+                )}
+              />
+            ))}
           </div>
+        </div>
         {(!user && isFirstChapter) && (
           <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-1 border border-bible-blue/20">Free Chapter</span>
         )}

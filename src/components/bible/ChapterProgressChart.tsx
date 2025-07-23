@@ -15,18 +15,11 @@ const ChapterProgressChart: React.FC<ChapterProgressChartProps> = ({
   showPercentage = false,
   className = '',
 }) => {
-  const getProgressColor = () => {
-    if (percentage >= 100) return "bg-green-500";
-    if (percentage >= 75) return "bg-emerald-500";
-    if (percentage >= 50) return "bg-yellow-500";
-    if (percentage >= 25) return "bg-orange-500";
-    return "bg-red-500";
-  };
 
   return (
     <div className={`w-full ${className}`}>
       <div className="relative">
-        <Progress value={percentage} className="h-2" color={getProgressColor()} />
+        <Progress value={percentage} className="h-2" />
         {showPercentage && (
           <motion.p 
             initial={{ opacity: 0 }}

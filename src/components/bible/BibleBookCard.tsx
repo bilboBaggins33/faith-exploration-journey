@@ -49,7 +49,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
           <span className="text-gray-600">{totalChapters} chapters</span>
           <span className="font-medium">{progressPercent}%</span>
         </div>
-        <Progress value={progressPercent} className="h-1" />
+        <Progress value={progressPercent} className="h-2" />
       </div>
     </Card>
   );
