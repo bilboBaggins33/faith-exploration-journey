@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
@@ -67,47 +66,58 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   
   return (
     <div>
-        <div className="mb-6">
-    <AspectRatio ratio={16/9} className="bg-muted overflow-hidden mb-4 relative">
-      <img 
-        src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
-        alt={`${book?.name || 'Bible book'} cover`}
-        className="w-full h-full object-cover"
-        onError={() => setImageError(true)}
-      />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-      {/* Overlayed book name and chapter */}
-      <div className="absolute left-4 bottom-4 text-white drop-shadow font-serif">
-        <div className="text-4xl font-bold mb-1">{book?.name}</div>
-        <div className="text-lg">Chapter {parseInt(chapter, 10)}</div>
+      <div className="mb-6 relative">
+        {/* Back arrow button */}
+        <button
+          onClick={onGoBack}
+          className="absolute top-3 left-3 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow transition"
+          aria-label="Back to book"
+          type="button"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path d="M15 19l-7-7 7-7" />
+          </svg>
+        </button>
+        <AspectRatio ratio={16/9} className="bg-muted overflow-hidden mb-4 relative">
+          <img 
+            src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+            alt={`${book?.name || 'Bible book'} cover`}
+            className="w-full h-full object-cover"
+            onError={() => setImageError(true)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+          {/* Overlayed book name and chapter */}
+          <div className="absolute left-4 bottom-4 text-white drop-shadow font-serif">
+            <div className="text-4xl font-bold mb-1">{book?.name}</div>
+            <div className="text-lg">Chapter {parseInt(chapter, 10)}</div>
+          </div>
+        </AspectRatio>
       </div>
-    </AspectRatio>
-  </div>
       <div className="px-4">
-      <ChallengeHeader
-        bookName={book?.name || ''}
-        chapter={parseInt(chapter, 10)}
-        title={challenge.title}
-        currentQuestion={currentQuestion}
-        totalQuestions={challenge.questions.length}
-        score={score}
-        onBackClick={onGoBack}
-      />
-      
-      <QuestionCard
-        question={currentQuestionData.question}
-        options={currentQuestionData.options}
-        correctAnswer={currentQuestionData.correctAnswer}
-        selectedAnswer={userAnswers[currentQuestion] || null}
-        showExplanation={showExplanation}
-        isCorrect={isCorrect}
-        explanation={currentQuestionData.explanation}
-        onSelectAnswer={onSelectAnswer}
-        onCheckAnswer={onCheckAnswer}
-        onNextQuestion={onNextQuestion}
-        isLastQuestion={currentQuestion === challenge.questions.length - 1}
-        onNavigateBack={null}
-      />
+        <ChallengeHeader
+          bookName={book?.name || ''}
+          chapter={parseInt(chapter, 10)}
+          title={challenge.title}
+          currentQuestion={currentQuestion}
+          totalQuestions={challenge.questions.length}
+          score={score}
+          onBackClick={onGoBack}
+        />
+        
+        <QuestionCard
+          question={currentQuestionData.question}
+          options={currentQuestionData.options}
+          correctAnswer={currentQuestionData.correctAnswer}
+          selectedAnswer={userAnswers[currentQuestion] || null}
+          showExplanation={showExplanation}
+          isCorrect={isCorrect}
+          explanation={currentQuestionData.explanation}
+          onSelectAnswer={onSelectAnswer}
+          onCheckAnswer={onCheckAnswer}
+          onNextQuestion={onNextQuestion}
+          isLastQuestion={currentQuestion === challenge.questions.length - 1}
+          onNavigateBack={null}
+        />
       </div>
     </div>
   );

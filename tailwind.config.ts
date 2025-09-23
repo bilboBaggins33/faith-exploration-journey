@@ -141,6 +141,11 @@ export default {
 			fontFamily: {
 				sans: ['Poppins', 'sans-serif'],
 				serif: ['Poppins', 'sans-serif']
+			},
+			buttons: {
+				primary: 'bg-bible-blue text-white hover:bg-bible-blue/90',
+				secondary: 'bg-bible-beige text-bible-dark hover:bg-bible-beige/90 border border-bible-stone',
+				tertiary: 'bg-bible-gold text-bible-dark hover:bg-bible-gold/90 border border-bible-stone'
 			}
 		}
 	},

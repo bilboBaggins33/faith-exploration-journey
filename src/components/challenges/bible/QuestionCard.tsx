@@ -163,7 +163,7 @@ const QuestionCard = ({
             <Button 
               disabled={!selectedAnswer}
               onClick={onCheckAnswer}
-              className={cn(!onNavigateBack && 'ml-auto')}
+              className={cn(!onNavigateBack && 'ml-auto w-full sm:w-auto buttons-primary')}
             >
               Check Answer
             </Button>
