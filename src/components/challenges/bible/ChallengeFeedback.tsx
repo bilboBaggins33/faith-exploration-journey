@@ -45,7 +45,15 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
 
   const headerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    headerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!headerRef.current) return;
+    const el = headerRef.current;
+    // Scroll after layout settles to avoid scroll anchoring on Next
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        const y = el.getBoundingClientRect().top + window.scrollY - 8; // slight offset
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      });
+    });
   }, [currentQuestion]);
 
   if (!challenge) {
