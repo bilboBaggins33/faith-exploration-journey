@@ -162,6 +162,15 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     }
   };
   
+  const handlePreviousQuestion = () => {
+    if (state.currentQuestion > 0) {
+      setState(prev => ({
+        ...prev,
+        currentQuestion: prev.currentQuestion - 1
+      }));
+    }
+  };
+
   const handleRetry = () => {
     setState(prev => ({
       ...prev,
@@ -184,6 +193,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     handleSelectAnswer,
     handleCheckAnswer,
     handleNextQuestion,
+    handlePreviousQuestion,
     handleRetry,
     handleGoBack
   };

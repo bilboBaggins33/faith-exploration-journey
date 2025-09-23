@@ -16,6 +16,7 @@ interface ChallengeFeedbackProps {
   onSelectAnswer: (answer: string) => void;
   onCheckAnswer: () => void;
   onNextQuestion: () => void;
+  onPreviousQuestion: () => void;
   onRetry: () => void;
   onGoBack: () => void;
 }
@@ -27,6 +28,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   onSelectAnswer,
   onCheckAnswer,
   onNextQuestion,
+  onPreviousQuestion,
   onRetry,
   onGoBack
 }) => {
@@ -115,7 +117,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           onSelectAnswer={onSelectAnswer}
           onCheckAnswer={onCheckAnswer}
           onNextQuestion={onNextQuestion}
+          onPreviousQuestion={onPreviousQuestion}
           isLastQuestion={currentQuestion === challenge.questions.length - 1}
+          isNotFirstQuestion={currentQuestion > 0}
           onNavigateBack={null}
         />
       </div>

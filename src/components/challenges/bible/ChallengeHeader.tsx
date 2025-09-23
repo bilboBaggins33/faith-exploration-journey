@@ -40,16 +40,18 @@ const ChallengeHeader: React.FC<ChallengeHeaderProps> = ({
       </div> */}
       
       {showProgress && totalQuestions > 0 && (
-        <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
+        <div className="flex justify-between items-center text-md text-bible-deepBlue dark:text-gray-400 mb-2">
           <span>Question {currentQuestion + 1} of {totalQuestions}</span>
-          <span>Score: {score}/{totalQuestions}</span>
+          <span>
+            Score: <span className="font-bold text-bible-deepBlue">{score}/{totalQuestions}</span>
+          </span>
         </div>
       )}
       
       {showProgress && totalQuestions > 0 && (
         <div className="w-full bg-gray-200 dark:bg-gray-700 rounded-full h-2 mb-4">
           <div 
-            className="bg-bible-gold h-2 rounded-full transition-all duration-300 ease-in-out"
+            className="bg-bible-deepBlue h-2 rounded-full transition-all duration-300 ease-in-out"
             style={{ width: `${((currentQuestion + 1) / totalQuestions) * 100}%` }}
           ></div>
         </div>

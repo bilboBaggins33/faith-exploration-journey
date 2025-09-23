@@ -19,6 +19,7 @@ const BibleChapterChallenge: React.FC = () => {
     handleSelectAnswer,
     handleCheckAnswer,
     handleNextQuestion,
+    handlePreviousQuestion,
     handleRetry,
     handleGoBack
   } = useBibleChallenge(bookId, chapter);
@@ -47,6 +48,7 @@ const BibleChapterChallenge: React.FC = () => {
       onSelectAnswer={handleSelectAnswer}
       onCheckAnswer={handleCheckAnswer}
       onNextQuestion={handleNextQuestion}
+      onPreviousQuestion={handlePreviousQuestion}
       onRetry={handleRetry}
       onGoBack={handleGoBack}
     />

@@ -18,7 +18,9 @@ interface QuestionCardProps {
   onSelectAnswer: (answer: string) => void;
   onCheckAnswer: () => void;
   onNextQuestion: () => void;
+  onPreviousQuestion: () => void;
   isLastQuestion: boolean;
+  isNotFirstQuestion: boolean;
   onNavigateBack: (() => void) | null;
 }
 
@@ -33,7 +35,9 @@ const QuestionCard = ({
   onSelectAnswer,
   onCheckAnswer,
   onNextQuestion,
+  onPreviousQuestion,
   isLastQuestion,
+  isNotFirstQuestion,
   onNavigateBack
 }: QuestionCardProps) => {
   const [showAnswer, setShowAnswer] = useState(false);
@@ -125,7 +129,7 @@ const QuestionCard = ({
                 </div>
               </div>
             ) : (
-              <p className="text-sm">Answer explanation is available. Click "Show Answer" to reveal.</p>
+              <p className="text-sm"></p>
             )}
             
             <Button 
@@ -148,29 +152,19 @@ const QuestionCard = ({
         )}
         
         <div className="flex justify-between">
-          {onNavigateBack && (
-            <Button
-              variant="outline"
-              onClick={onNavigateBack}
-              className="flex items-center"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left mr-2" style={{width: 16, height: 16}}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
-              Back
-            </Button>
-          )}
           
           {!showExplanation ? (
             <Button 
               disabled={!selectedAnswer}
               onClick={onCheckAnswer}
-              className={cn(!onNavigateBack && 'ml-auto w-full sm:w-auto buttons-primary')}
+              className={cn(!onNavigateBack && 'ml-auto w-full sm:w-auto')}
             >
               Check Answer
             </Button>
           ) : (
             <Button 
               onClick={onNextQuestion}
-              className={cn(!onNavigateBack && 'ml-auto')}
+              className={cn(!onNavigateBack && 'ml-auto w-full sm:w-auto')}
             >
               {!isLastQuestion ? (
                 <>
@@ -186,6 +180,16 @@ const QuestionCard = ({
             </Button>
           )}
         </div>
+                  {isNotFirstQuestion && (
+            <Button
+              variant="link"
+              onClick={onPreviousQuestion}
+              className="flex items-center"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="lucide lucide-arrow-left mr-2" style={{width: 16, height: 16}}><path d="m12 19-7-7 7-7"/><path d="M19 12H5"/></svg>
+              Back
+            </Button>
+          )}
       </motion.div>
     </div>
   );

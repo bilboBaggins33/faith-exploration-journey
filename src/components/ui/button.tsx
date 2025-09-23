@@ -10,7 +10,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-gradient-to-br from-[#1A365D] to-[#2A4C6F] text-primary-foreground hover:from-[#1A365D]/90 hover:to-[#2A4C6F]/90 shadow-md", // Deep navy gradient
+        default: "bg-gradient-to-br from-[#4A7AA8] to-[#2A4C6F] text-primary-foreground hover:from-[#1A365D]/90 hover:to-[#2A4C6F]/90 shadow-md", // Deep navy gradient
         destructive:
           "bg-gradient-to-br from-red-600 to-red-700 text-destructive-foreground hover:from-red-600/90 hover:to-red-700/90 shadow-md",
         outline:
@@ -23,7 +23,7 @@ const buttonVariants = cva(
         danger: "bg-gradient-to-br from-red-600 to-red-700 text-white hover:from-red-600/90 hover:to-red-700/90 shadow-md", // Gradient for danger
       },
       size: {
-        default: "h-10 px-4 py-2",
+        default: "h-12 px-4 py-2",
         sm: "h-9 rounded-md px-3",
         lg: "h-11 rounded-md px-8",
         icon: "h-10 w-10",
