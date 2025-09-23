@@ -115,8 +115,8 @@ const Chapter = () => {
       <ScrollToTop />
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-10 bg-bible-beige">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow pt-16 pb-10 bg-bible-beige">
+        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
           {renderContent()}
         </div>
       </main>

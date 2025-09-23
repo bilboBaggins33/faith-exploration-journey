@@ -68,7 +68,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   return (
     <div>
         <div className="mb-6">
-    <AspectRatio ratio={3/1} className="bg-muted rounded-lg overflow-hidden mb-4 relative">
+    <AspectRatio ratio={16/9} className="bg-muted overflow-hidden mb-4 relative">
       <img 
         src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
         alt={`${book?.name || 'Bible book'} cover`}
@@ -78,12 +78,12 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
       {/* Overlayed book name and chapter */}
       <div className="absolute left-4 bottom-4 text-white drop-shadow font-serif">
-        <div className="text-lg font-bold">{book?.name}</div>
-        <div className="text-sm font-semibold">Chapter {parseInt(chapter, 10)}</div>
+        <div className="text-4xl font-bold mb-1">{book?.name}</div>
+        <div className="text-lg">Chapter {parseInt(chapter, 10)}</div>
       </div>
     </AspectRatio>
   </div>
-      
+      <div className="px-4">
       <ChallengeHeader
         bookName={book?.name || ''}
         chapter={parseInt(chapter, 10)}
@@ -108,6 +108,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         isLastQuestion={currentQuestion === challenge.questions.length - 1}
         onNavigateBack={null}
       />
+      </div>
     </div>
   );
 };
