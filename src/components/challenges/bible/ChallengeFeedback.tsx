@@ -47,11 +47,22 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   useEffect(() => {
     if (!headerRef.current) return;
     const el = headerRef.current;
+
+    // Blur the active element to avoid the browser keeping the clicked button in view
+    if (document.activeElement instanceof HTMLElement) {
+      document.activeElement.blur();
+    }
+
     // Scroll after layout settles to avoid scroll anchoring on Next
     requestAnimationFrame(() => {
       requestAnimationFrame(() => {
         const y = el.getBoundingClientRect().top + window.scrollY - 8; // slight offset
         window.scrollTo({ top: y, behavior: 'smooth' });
+
+        // Move focus to the header (without additional scrolling) for accessibility
+        setTimeout(() => {
+          el.focus?.({ preventScroll: true } as any);
+        }, 200);
       });
     });
   }, [currentQuestion]);
@@ -108,7 +119,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           </div>
         </AspectRatio>
       </div>
-      <div ref={headerRef} className="px-4">
+      <div ref={headerRef} className="px-4" tabIndex={-1}>
         <ChallengeHeader
           bookName={book?.name || ''}
           chapter={parseInt(chapter, 10)}
