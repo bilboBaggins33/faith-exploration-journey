@@ -162,8 +162,11 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         isCorrect: nextQuestionAnswered ? nextQuestionAnswered.isCorrect : null
       }));
       
-      // Scroll to top to show question header and score
+      // Try multiple scroll approaches
+      console.log('Attempting to scroll to top');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     } else {
       setState(prev => ({
         ...prev,
@@ -184,8 +187,11 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         isCorrect: prevQuestionAnswered ? prevQuestionAnswered.isCorrect : null
       }));
       
-      // Scroll to top to show question header and score
+      // Try multiple scroll approaches
+      console.log('Attempting to scroll to top');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
     }
   };
 
