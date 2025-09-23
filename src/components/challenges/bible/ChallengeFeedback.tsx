@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
@@ -42,6 +42,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     score, 
     completed 
   } = state;
+
+  const headerRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    headerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [currentQuestion]);
 
   if (!challenge) {
     return null;
@@ -95,7 +100,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           </div>
         </AspectRatio>
       </div>
-      <div className="px-4">
+      <div ref={headerRef} className="px-4">
         <ChallengeHeader
           bookName={book?.name || ''}
           chapter={parseInt(chapter, 10)}
