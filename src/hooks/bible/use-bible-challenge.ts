@@ -19,6 +19,7 @@ export interface BibleChallengeState {
   loading: boolean;
   error: string | null;
   completed: boolean;
+  answeredQuestions: Record<number, { isCorrect: boolean; hasBeenScored: boolean }>;
 }
 
 export function useBibleChallenge(bookId: string, chapter: string) {
@@ -36,7 +37,8 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     score: 0,
     loading: true,
     error: null,
-    completed: false
+    completed: false,
+    answeredQuestions: {}
   });
   
   const isFirstChapter = parseInt(chapter, 10) === 1;
@@ -132,27 +134,32 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     if (!selectedAnswer) return;
     
     const correct = selectedAnswer === currentQuestionData.correctAnswer;
+    const alreadyAnswered = state.answeredQuestions[state.currentQuestion];
+    
     setState(prev => ({
       ...prev,
       isCorrect: correct,
-      score: correct ? prev.score + 1 : prev.score,
-      showExplanation: true
+      score: correct && !alreadyAnswered?.hasBeenScored ? prev.score + 1 : prev.score,
+      showExplanation: true,
+      answeredQuestions: {
+        ...prev.answeredQuestions,
+        [prev.currentQuestion]: { isCorrect: correct, hasBeenScored: correct && !alreadyAnswered?.hasBeenScored }
+      }
     }));
   };
   
   const handleNextQuestion = () => {
     if (!state.challenge) return;
     
-    setState(prev => ({
-      ...prev,
-      showExplanation: false,
-      isCorrect: null
-    }));
-    
     if (state.currentQuestion < state.challenge.questions.length - 1) {
+      const nextQuestionIndex = state.currentQuestion + 1;
+      const nextQuestionAnswered = state.answeredQuestions[nextQuestionIndex];
+      
       setState(prev => ({
         ...prev,
-        currentQuestion: prev.currentQuestion + 1
+        currentQuestion: nextQuestionIndex,
+        showExplanation: nextQuestionAnswered ? true : false,
+        isCorrect: nextQuestionAnswered ? nextQuestionAnswered.isCorrect : null
       }));
     } else {
       setState(prev => ({
@@ -164,9 +171,14 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   
   const handlePreviousQuestion = () => {
     if (state.currentQuestion > 0) {
+      const prevQuestionIndex = state.currentQuestion - 1;
+      const prevQuestionAnswered = state.answeredQuestions[prevQuestionIndex];
+      
       setState(prev => ({
         ...prev,
-        currentQuestion: prev.currentQuestion - 1
+        currentQuestion: prevQuestionIndex,
+        showExplanation: prevQuestionAnswered ? true : false,
+        isCorrect: prevQuestionAnswered ? prevQuestionAnswered.isCorrect : null
       }));
     }
   };
@@ -179,7 +191,8 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       score: 0,
       completed: false,
       showExplanation: false,
-      isCorrect: null
+      isCorrect: null,
+      answeredQuestions: {}
     }));
   };
   
