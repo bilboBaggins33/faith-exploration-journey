@@ -59,33 +59,46 @@ const QuestionCard = ({
           disabled={showExplanation}
         >
           {options.map((option, index) => (
-            <div key={index}>
-              <div className={cn(
-                "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
-                selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
-                showExplanation && option === correctAnswer ? 'border-green-500 bg-green-50' : '',
-                showExplanation && selectedAnswer === option && option !== correctAnswer ? 'border-red-500 bg-red-50' : ''
-              )}>
-                <RadioGroupItem 
-                  value={option} 
-                  id={`option-${index}`} 
-                  className="mr-2"
-                />
-                <Label 
-                  htmlFor={`option-${index}`}
-                  className="flex-1 cursor-pointer"
-                >
-                  {option}
-                </Label>
-                {showExplanation && option === correctAnswer && (
-                  <CheckCircle className="text-green-500 ml-2 flex-shrink-0" size={18} />
-                )}
-                {showExplanation && selectedAnswer === option && option !== correctAnswer && (
-                  <X className="text-red-500 ml-2 flex-shrink-0" size={18} />
-                )}
-              </div>
-            </div>
-          ))}
+  <div
+    key={index}
+    onClick={() => !showExplanation && onSelectAnswer(option)}
+    className={cn(
+      "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
+      selectedAnswer === option ? 'border-bible-blue bg-bible-blue/5' : 'border-gray-200',
+      showExplanation && option === correctAnswer ? 'border-green-500 bg-green-50' : '',
+      showExplanation && selectedAnswer === option && option !== correctAnswer ? 'border-red-500 bg-red-50' : ''
+    )}
+    tabIndex={0}
+    role="button"
+    aria-pressed={selectedAnswer === option}
+    onKeyDown={e => {
+      if ((e.key === 'Enter' || e.key === ' ') && !showExplanation) {
+        onSelectAnswer(option);
+      }
+    }}
+  >
+    <RadioGroupItem 
+      value={option} 
+      id={`option-${index}`} 
+      className="mr-2"
+      // Prevent double event when clicking the radio itself
+      onClick={e => e.stopPropagation()}
+    />
+    <Label 
+      htmlFor={`option-${index}`}
+      className="flex-1 cursor-pointer"
+      onClick={e => e.stopPropagation()}
+    >
+      {option}
+    </Label>
+    {showExplanation && option === correctAnswer && (
+      <CheckCircle className="text-green-500 ml-2 flex-shrink-0" size={18} />
+    )}
+    {showExplanation && selectedAnswer === option && option !== correctAnswer && (
+      <X className="text-red-500 ml-2 flex-shrink-0" size={18} />
+    )}
+  </div>
+))}
         </RadioGroup>
         
         {showExplanation && (

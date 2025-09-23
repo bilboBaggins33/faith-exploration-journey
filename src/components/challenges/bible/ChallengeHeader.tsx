@@ -25,7 +25,7 @@ const ChallengeHeader: React.FC<ChallengeHeaderProps> = ({
 }) => {
   return (
     <div className="mb-6">
-      <div className="flex items-center mb-4">
+      {/* <div className="flex items-center mb-4">
         <button 
           onClick={onBackClick}
           className="mr-4 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
@@ -37,7 +37,7 @@ const ChallengeHeader: React.FC<ChallengeHeaderProps> = ({
           <h2 className="text-2xl font-bold font-serif">{bookName} {chapter}</h2>
           <p className="text-lg text-gray-600 dark:text-gray-300">{title}</p>
         </div>
-      </div>
+      </div> */}
       
       {showProgress && totalQuestions > 0 && (
         <div className="flex justify-between items-center text-sm text-gray-500 dark:text-gray-400 mb-2">
