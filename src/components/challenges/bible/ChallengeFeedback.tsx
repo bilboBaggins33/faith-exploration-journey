@@ -84,6 +84,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         onNavigateToBook={() => onGoBack()}
         onNavigateToBible={() => window.location.href = '/bible'}
         bookName={book?.name || ''}
+        bookId={bookId}
+        chapter={chapter}
       />
     );
   }
