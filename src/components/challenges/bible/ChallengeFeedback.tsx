@@ -91,45 +91,68 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const currentQuestionData = challenge.questions[currentQuestion];
   
   return (
-    <div className="min-h-screen bg-primary">
-      {/* Header area - matches mobile app design */}
-      <div className="bg-primary text-primary-foreground p-4">
-        <div className="flex justify-between items-center">
-          <div className="w-8 h-8 bg-primary-foreground/20 rounded-full flex items-center justify-center">
-            <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/>
-            </svg>
-          </div>
-          <div className="flex space-x-1">
-            <div className="w-6 h-1 bg-primary-foreground/80 rounded"></div>
-            <div className="w-6 h-1 bg-primary-foreground/80 rounded"></div>
-            <div className="w-6 h-1 bg-primary-foreground/80 rounded"></div>
-          </div>
-        </div>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Blurred background */}
+      <div className="fixed inset-0 -z-10">
+        <img 
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+          alt={`${book?.name || 'Bible book'} background`}
+          className="w-full h-full object-cover blur-sm scale-110"
+          onError={() => setImageError(true)}
+        />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Main content */}
-      <div className="px-4 pb-4 -mt-2">
-        <div ref={headerRef} className="bg-secondary rounded-t-2xl shadow-lg" tabIndex={-1}>
-          {/* Book title section */}
-          <div className="px-6 pt-6 pb-4">
-            <h1 className="text-3xl font-bold font-serif text-secondary-foreground">{book?.name}</h1>
-            <p className="text-lg text-secondary-foreground/80">Chapter {parseInt(chapter, 10)}</p>
-            
-            {/* Question and Score info */}
-            <div className="flex justify-between items-center mt-4 mb-3">
-              <span className="text-sm text-secondary-foreground/70">Question {currentQuestion + 1} of {challenge.questions.length}</span>
-              <span className="text-sm text-secondary-foreground/70">
-                Score: <span className="font-semibold text-secondary-foreground">{score}/{challenge.questions.length}</span>
-              </span>
+      {/* Back button */}
+      {/* <button
+        onClick={onGoBack}
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all"
+        aria-label="Back to book"
+        type="button"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path d="M15 19l-7-7 7-7" />
+        </svg>
+      </button> */}
+
+      {/* Main content card */}
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div ref={headerRef} className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden" tabIndex={-1}>
+          {/* Header section with book info */}
+          <div className="relative overflow-hidden">
+            {/* Background image */}
+            <div className="absolute inset-0">
+              <img 
+                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+                alt={`${book?.name || 'Bible book'} background`}
+                className="w-full h-full object-cover"
+                onError={() => setImageError(true)}
+              />
+              <div className="absolute inset-0 bg-black/60" />
             </div>
             
-            {/* Progress bar */}
-            <div className="w-full bg-secondary-foreground/20 rounded-full h-2">
-              <div 
-                className="bg-secondary-foreground h-2 rounded-full transition-all duration-300 ease-in-out"
-                style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
-              />
+            {/* Content over background */}
+            <div className="relative z-10 p-6 pb-4">
+              <div className="mb-4">
+                <h1 className="text-2xl font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
+                <p className="text-lg text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
+              </div>
+              
+              {/* Progress and Score */}
+              <div className="flex justify-between items-center text-sm text-white/80 mb-2">
+                <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
+                <span className="font-semibold">
+                  Score: <span className="text-white">{score}/{challenge.questions.length}</span>
+                </span>
+              </div>
+              
+              {/* Progress bar */}
+              <div className="w-full bg-white/20 rounded-full h-2">
+                <div 
+                  className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
+                  style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
+                />
+              </div>
             </div>
           </div>
 
@@ -149,7 +172,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
               onPreviousQuestion={onPreviousQuestion}
               isLastQuestion={currentQuestion === challenge.questions.length - 1}
               isNotFirstQuestion={currentQuestion > 0}
-              onNavigateBack={onGoBack}
+              onNavigateBack={null}
             />
           </div>
         </div>

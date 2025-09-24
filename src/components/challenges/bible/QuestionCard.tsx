@@ -1,6 +1,6 @@
-import React from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, X } from "lucide-react";
+import { CheckCircle, X, Eye, EyeOff } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
@@ -39,20 +39,24 @@ const QuestionCard = ({
   isNotFirstQuestion,
   onNavigateBack,
 }: QuestionCardProps) => {
+  const [showAnswer, setShowAnswer] = useState(false);
+
+  const toggleShowAnswer = () => setShowAnswer(!showAnswer);
+
   return (
-    <div className="space-y-6">
+    <div className="pt-6">
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -20 }}
         transition={{ duration: 0.3 }}
       >
-        <h2 className="text-xl font-semibold text-primary mb-6">{question}</h2>
+        <h2 className="text-lg font-medium mb-4">{question}</h2>
 
         <RadioGroup
           value={selectedAnswer || ""}
           onValueChange={onSelectAnswer}
-          className="space-y-3 mb-6"
+          className=" mb-6"
           disabled={showExplanation}
         >
           {options.map((option, index) => (
@@ -60,10 +64,10 @@ const QuestionCard = ({
               key={index}
               onClick={() => !showExplanation && onSelectAnswer(option)}
               className={cn(
-                "flex items-center rounded-full border px-4 py-3 cursor-pointer transition-all bg-card",
+                "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
                 selectedAnswer === option
-                  ? "border-primary bg-primary/5"
-                  : "border-border hover:border-primary/50",
+                  ? "border-bible-blue bg-bible-blue/5"
+                  : "border-gray-200",
                 showExplanation && option === correctAnswer
                   ? "border-green-500 bg-green-50"
                   : "",
@@ -85,12 +89,13 @@ const QuestionCard = ({
               <RadioGroupItem
                 value={option}
                 id={`option-${index}`}
-                className="mr-3"
+                className="mr-2"
+                // Prevent double event when clicking the radio itself
                 onClick={(e) => e.stopPropagation()}
               />
               <Label
                 htmlFor={`option-${index}`}
-                className="flex-1 cursor-pointer text-foreground"
+                className="flex-1 cursor-pointer"
                 onClick={(e) => e.stopPropagation()}
               >
                 {option}
@@ -121,57 +126,131 @@ const QuestionCard = ({
                 : "bg-red-50 border border-red-200"
             )}
           >
-            <div className="flex items-start">
-              {isCorrect ? (
-                <CheckCircle
-                  className="text-green-500 mr-2 mt-1 flex-shrink-0"
-                  size={20}
-                />
-              ) : (
-                <X
-                  className="text-red-500 mr-2 mt-1 flex-shrink-0"
-                  size={20}
-                />
-              )}
-              <div>
-                <h3 className="font-medium mb-1">
-                  {isCorrect ? "Correct!" : "Incorrect"}
-                </h3>
-                <p className="text-sm">{explanation}</p>
+            {showAnswer ? (
+              <div className="flex items-start">
+                {isCorrect ? (
+                  <CheckCircle
+                    className="text-green-500 mr-2 mt-1 flex-shrink-0"
+                    size={20}
+                  />
+                ) : (
+                  <X
+                    className="text-red-500 mr-2 mt-1 flex-shrink-0"
+                    size={20}
+                  />
+                )}
+                <div>
+                  <h3 className="font-medium mb-1">
+                    {isCorrect ? "Correct!" : "Incorrect"}
+                  </h3>
+                  <p className="text-sm">{explanation}</p>
+                </div>
               </div>
-            </div>
+            ) : (
+              <p className="text-sm"></p>
+            )}
+
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleShowAnswer}
+              className="mt-2 flex items-center gap-1"
+            >
+              {showAnswer ? (
+                <>
+                  <EyeOff size={16} /> Hide Answer
+                </>
+              ) : (
+                <>
+                  <Eye size={16} /> Show Answer
+                </>
+              )}
+            </Button>
           </motion.div>
         )}
 
-        {!showExplanation ? (
+        <div className="flex justify-between">
+          {!showExplanation ? (
+            <Button
+              disabled={!selectedAnswer}
+              onClick={onCheckAnswer}
+              className={cn(!onNavigateBack && "ml-auto w-full sm:w-auto")}
+            >
+              Check Answer
+            </Button>
+          ) : (
+            <Button
+              onClick={onNextQuestion}
+              className={cn(!onNavigateBack && "ml-auto w-full sm:w-auto")}
+            >
+              {!isLastQuestion ? (
+                <>
+                  Next Question
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-arrow-right ml-2"
+                    style={{ width: 16, height: 16 }}
+                  >
+                    <path d="M5 12h14" />
+                    <path d="m12 5 7 7-7 7" />
+                  </svg>
+                </>
+              ) : (
+                <>
+                  Complete Challenge
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="lucide lucide-check-circle ml-2"
+                    style={{ width: 16, height: 16 }}
+                  >
+                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                    <path d="m9 11 3 3L22 4" />
+                  </svg>
+                </>
+              )}
+            </Button>
+          )}
+        </div>
+        {isNotFirstQuestion && (
           <Button
-            disabled={!selectedAnswer}
-            onClick={onCheckAnswer}
-            className="w-full py-3 text-base font-medium"
-            size="lg"
+            variant="link"
+            onClick={onPreviousQuestion}
+            className="flex items-center"
           >
-            Check Answer
-          </Button>
-        ) : (
-          <Button
-            onClick={onNextQuestion}
-            className="w-full py-3 text-base font-medium"
-            size="lg"
-          >
-            {!isLastQuestion ? "Next Question" : "Complete Challenge"}
-          </Button>
-        )}
-
-        {onNavigateBack && (
-          <button
-            onClick={onNavigateBack}
-            className="flex items-center text-muted-foreground hover:text-foreground transition-colors mt-4"
-          >
-            <svg className="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="lucide lucide-arrow-left mr-2"
+              style={{ width: 16, height: 16 }}
+            >
+              <path d="m12 19-7-7 7-7" />
+              <path d="M19 12H5" />
             </svg>
             Back
-          </button>
+          </Button>
         )}
       </motion.div>
     </div>
