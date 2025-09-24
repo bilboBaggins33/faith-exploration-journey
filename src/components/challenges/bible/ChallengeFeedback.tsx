@@ -116,7 +116,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       </button> */}
 
       {/* Main content card */}
-      <div className="flex items-center justify-center p-4 pb-12">
+      <div className="flex items-center justify-center p-4 pt-2 pb-12">
         <div ref={headerRef} className="w-full max-w-2xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
           <div className="relative overflow-hidden">
@@ -132,10 +132,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             </div>
             
             {/* Content over background */}
-            <div className="relative z-10 p-6 pb-4">
+            <div className="relative z-10 p-5 pt-3 pb-4">
               <div className="mb-4">
-                <h1 className="text-2xl font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
-                <p className="text-lg text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
+                <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
+                <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
               </div>
               
               {/* Progress and Score */}

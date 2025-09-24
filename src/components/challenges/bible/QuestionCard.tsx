@@ -44,14 +44,14 @@ const QuestionCard = ({
   const toggleShowAnswer = () => setShowAnswer(!showAnswer);
 
   return (
-    <div className="pt-6">
+    <div className="pt-4">
       <motion.div
         initial={{ opacity: 0, x: 20 }}
         animate={{ opacity: 1, x: 0 }}
         exit={{ opacity: 0, x: -20 }}
         transition={{ duration: 0.3 }}
       >
-        <h2 className="text-lg font-medium mb-4">{question}</h2>
+        <h2 className="text-lg font-medium mb-2">{question}</h2>
 
         <RadioGroup
           value={selectedAnswer || ""}
