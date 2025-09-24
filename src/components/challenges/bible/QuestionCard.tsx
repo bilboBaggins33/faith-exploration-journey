@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, X, Eye, EyeOff } from "lucide-react";
+import { CheckCircle, X } from "lucide-react";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
 interface QuestionCardProps {
@@ -39,9 +40,7 @@ const QuestionCard = ({
   isNotFirstQuestion,
   onNavigateBack,
 }: QuestionCardProps) => {
-  const [showAnswer, setShowAnswer] = useState(false);
-
-  const toggleShowAnswer = () => setShowAnswer(!showAnswer);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className="pt-4">
@@ -120,52 +119,49 @@ const QuestionCard = ({
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             className={cn(
-              "p-4 rounded-lg mb-6",
+              "p-4 rounded-lg mb-6 flex items-center justify-between",
               isCorrect
                 ? "bg-green-50 border border-green-200"
                 : "bg-red-50 border border-red-200"
             )}
           >
-            {showAnswer ? (
-              <div className="flex items-start">
-                {isCorrect ? (
-                  <CheckCircle
-                    className="text-green-500 mr-2 mt-1 flex-shrink-0"
-                    size={20}
-                  />
-                ) : (
-                  <X
-                    className="text-red-500 mr-2 mt-1 flex-shrink-0"
-                    size={20}
-                  />
-                )}
-                <div>
-                  <h3 className="font-medium mb-1">
-                    {isCorrect ? "Correct!" : "Incorrect"}
-                  </h3>
-                  <p className="text-sm">{explanation}</p>
-                </div>
-              </div>
-            ) : (
-              <p className="text-sm"></p>
-            )}
-
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={toggleShowAnswer}
-              className="mt-2 flex items-center gap-1"
-            >
-              {showAnswer ? (
-                <>
-                  <EyeOff size={16} /> Hide Answer
-                </>
+            <div className="flex items-center">
+              {isCorrect ? (
+                <CheckCircle
+                  className="text-green-500 mr-2 flex-shrink-0"
+                  size={20}
+                />
               ) : (
-                <>
-                  <Eye size={16} /> Show Answer
-                </>
+                <X
+                  className="text-red-500 mr-2 flex-shrink-0"
+                  size={20}
+                />
               )}
-            </Button>
+              <span className="font-medium">
+                {isCorrect ? "Correct!" : "Incorrect"}
+              </span>
+            </div>
+            
+            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+              <DialogTrigger asChild>
+                <button 
+                  className="text-blue-600 hover:text-blue-800 underline text-sm font-medium"
+                  onClick={() => setIsModalOpen(true)}
+                >
+                  View Answer
+                </button>
+              </DialogTrigger>
+              <DialogContent className="max-w-lg">
+                <DialogHeader>
+                  <DialogTitle>
+                    {isCorrect ? "Correct Answer" : "Answer Explanation"}
+                  </DialogTitle>
+                </DialogHeader>
+                <div className="mt-4">
+                  <p className="text-sm leading-relaxed">{explanation}</p>
+                </div>
+              </DialogContent>
+            </Dialog>
           </motion.div>
         )}
 
