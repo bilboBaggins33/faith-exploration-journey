@@ -91,61 +91,87 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const currentQuestionData = challenge.questions[currentQuestion];
   
   return (
-    <div>
-      <div className="mb-6 relative">
-        {/* Back arrow button */}
-        <button
-          onClick={onGoBack}
-          className="absolute top-3 left-3 z-10 bg-white/80 hover:bg-white rounded-full p-2 shadow transition"
-          aria-label="Back to book"
-          type="button"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-            <path d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-        <AspectRatio ratio={16/9} className="bg-muted overflow-hidden mb-4 relative">
-          <img 
-            src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
-            alt={`${book?.name || 'Bible book'} cover`}
-            className="w-full h-full object-cover"
-            onError={() => setImageError(true)}
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-          {/* Overlayed book name and chapter */}
-          <div className="absolute left-4 bottom-4 text-white drop-shadow font-serif">
-            <div className="text-4xl font-bold mb-1">{book?.name}</div>
-            <div className="text-lg">Chapter {parseInt(chapter, 10)}</div>
-          </div>
-        </AspectRatio>
+    <div className="min-h-screen relative overflow-hidden">
+      {/* Blurred background */}
+      <div className="fixed inset-0 -z-10">
+        <img 
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+          alt={`${book?.name || 'Bible book'} background`}
+          className="w-full h-full object-cover blur-sm scale-110"
+          onError={() => setImageError(true)}
+        />
+        <div className="absolute inset-0 bg-black/50" />
       </div>
-      <div ref={headerRef} className="px-4" tabIndex={-1}>
-        <ChallengeHeader
-          bookName={book?.name || ''}
-          chapter={parseInt(chapter, 10)}
-          title={challenge.title}
-          currentQuestion={currentQuestion}
-          totalQuestions={challenge.questions.length}
-          score={score}
-          onBackClick={onGoBack}
-        />
-        
-        <QuestionCard
-          question={currentQuestionData.question}
-          options={currentQuestionData.options}
-          correctAnswer={currentQuestionData.correctAnswer}
-          selectedAnswer={userAnswers[currentQuestion] || null}
-          showExplanation={showExplanation}
-          isCorrect={isCorrect}
-          explanation={currentQuestionData.explanation}
-          onSelectAnswer={onSelectAnswer}
-          onCheckAnswer={onCheckAnswer}
-          onNextQuestion={onNextQuestion}
-          onPreviousQuestion={onPreviousQuestion}
-          isLastQuestion={currentQuestion === challenge.questions.length - 1}
-          isNotFirstQuestion={currentQuestion > 0}
-          onNavigateBack={null}
-        />
+
+      {/* Back button */}
+      <button
+        onClick={onGoBack}
+        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all"
+        aria-label="Back to book"
+        type="button"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+          <path d="M15 19l-7-7 7-7" />
+        </svg>
+      </button>
+
+      {/* Main content card */}
+      <div className="flex items-center justify-center min-h-screen p-4">
+        <div ref={headerRef} className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden" tabIndex={-1}>
+          {/* Header section with book info */}
+          <div className="relative p-6 pb-4">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-16 h-20 rounded-lg overflow-hidden shadow-md">
+                <img 
+                  src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+                  alt={`${book?.name || 'Bible book'} cover`}
+                  className="w-full h-full object-cover"
+                  onError={() => setImageError(true)}
+                />
+              </div>
+              <div>
+                <h1 className="text-2xl font-bold font-serif text-foreground">{book?.name}</h1>
+                <p className="text-lg text-muted-foreground">Chapter {parseInt(chapter, 10)}</p>
+              </div>
+            </div>
+            
+            {/* Progress and Score */}
+            <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
+              <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
+              <span className="font-semibold">
+                Score: <span className="text-primary">{score}/{challenge.questions.length}</span>
+              </span>
+            </div>
+            
+            {/* Progress bar */}
+            <div className="w-full bg-muted rounded-full h-2">
+              <div 
+                className="bg-primary h-2 rounded-full transition-all duration-300 ease-in-out"
+                style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          {/* Question content */}
+          <div className="px-6 pb-6">
+            <QuestionCard
+              question={currentQuestionData.question}
+              options={currentQuestionData.options}
+              correctAnswer={currentQuestionData.correctAnswer}
+              selectedAnswer={userAnswers[currentQuestion] || null}
+              showExplanation={showExplanation}
+              isCorrect={isCorrect}
+              explanation={currentQuestionData.explanation}
+              onSelectAnswer={onSelectAnswer}
+              onCheckAnswer={onCheckAnswer}
+              onNextQuestion={onNextQuestion}
+              onPreviousQuestion={onPreviousQuestion}
+              isLastQuestion={currentQuestion === challenge.questions.length - 1}
+              isNotFirstQuestion={currentQuestion > 0}
+              onNavigateBack={null}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
