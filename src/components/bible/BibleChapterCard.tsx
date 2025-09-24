@@ -83,10 +83,6 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           <div className="absolute top-0 right-0">
             {isCompleted ? (
               <CheckCircle className="w-4 h-4 text-green-500" />
-            ) : isFirstChapter && !user ? (
-              <Unlock className="w-4 h-4 text-bible-blue" />
-            ) : !effectivelyUnlocked ? (
-              <Lock className="w-4 h-4 text-gray-400" />
             ) : null}
           </div>
         </div>
@@ -104,10 +100,10 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           </div>
         </div>
         {(!user && isFirstChapter) && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-1 border border-bible-blue/20">Free Chapter</span>
+          <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-3 border border-bible-blue/20">Sample Chapter</span>
         )}
         {!effectivelyUnlocked && !isFirstChapter && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-orange-300 text-gray-600 text-[10px] font-semibold mt-1 border border-gray-300">Premium</span>
+          <span className="inline-block px-2 py-0.5 rounded-full bg-orange-300 text-gray-600 text-[10px] font-semibold mt-3 border border-gray-300">Sign in</span>
         )}
       </div>
     </motion.div>

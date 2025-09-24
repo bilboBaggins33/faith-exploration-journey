@@ -4,12 +4,13 @@ import { Link } from 'react-router-dom';
 interface NavLogoProps {
   isHomePage: boolean;
   isScrolled: boolean;
+  isBiblePage: boolean;
 }
 
-const NavLogo = ({ isHomePage, isScrolled }: NavLogoProps) => {
+const NavLogo = ({ isHomePage, isScrolled, isBiblePage }: NavLogoProps) => {
   const logoSrc =
-    isHomePage && !isScrolled
-      ? '/BibleQuestLogo.png' // default full homepage logo
+    isBiblePage
+      ? '/BibleQuestLogoDark.png' // default full homepage logo
       : '/BibleQuestLogo.png'; // smaller or alternative logo for all other cases
 
   return (

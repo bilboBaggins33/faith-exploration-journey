@@ -13,6 +13,7 @@ const Navbar = () => {
   const location = useLocation();
   const { user, signOut } = useAuth();
   const isHomePage = location.pathname === '/';
+  const isBiblePage = location.pathname.valueOf() === '/bible';
   
   useEffect(() => {
     const handleScroll = () => {
@@ -48,7 +49,7 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <NavLogo isHomePage={isHomePage} isScrolled={isScrolled} />
+          <NavLogo isHomePage={isHomePage} isScrolled={isScrolled} isBiblePage={isBiblePage}/>
           
           <DesktopNav 
             isHomePage={isHomePage} 
@@ -61,7 +62,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
-                isHomePage && !isScrolled ? 'text-white hover:text-bible-sky' : 'text-white dark:text-white hover:text-bible-blue'
+                isBiblePage ? 'text-bible-dark hover:text-bible-sky' : 'text-white dark:text-white hover:text-bible-blue'
               }`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -74,7 +75,7 @@ const Navbar = () => {
           isOpen={isOpen} 
           onOpenChange={setIsOpen}
           user={user} 
-          handleSignOut={handleSignOut} 
+          handleSignOut={handleSignOut}
         />
     </nav>
   );

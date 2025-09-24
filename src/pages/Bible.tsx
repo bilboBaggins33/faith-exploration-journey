@@ -76,16 +76,15 @@ const Bible: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col p-4">
       <ScrollToTop />
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-10 bg-bible-beige relative">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <main className="flex-grow pb-10 relative">
+        <div className="max-w-7xl mx-auto">
           <div>
             {!selectedBook && (
               <div>
-                <h1 className="text-3xl font-serif font-bold mb-4 text-center">Bible Study</h1>
                 
                 {/* Introduction Card */}
                 <Card className="mb-8 p-6 bg-white/80 shadow-md">
@@ -192,8 +191,7 @@ const Bible: React.FC = () => {
                           >
                             <span className="mr-1">←</span> Back to All Books
                           </button>
-                          <h1 className="text-3xl leading-tight font-bold font-serif text-white drop-shadow-lg">{selectedBook.name}</h1>
-                          <p className="text-lg leading-tight text-white/90 drop-shadow">{selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}</p>
+                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{selectedBook.name}</h1>
                         </div>
                         
                         {/* Progress info */}
