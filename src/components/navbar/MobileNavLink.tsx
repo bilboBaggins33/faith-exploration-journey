@@ -7,15 +7,17 @@ interface MobileNavLinkProps {
   active: boolean;
   icon: React.ReactNode;
   children: React.ReactNode;
+  onClick?: () => void;
 }
 
-const MobileNavLink = ({ to, active, icon, children }: MobileNavLinkProps) => (
+const MobileNavLink = ({ to, active, icon, children, onClick }: MobileNavLinkProps) => (
   <Link 
     to={to} 
-    className={`flex items-center px-4 py-2 text-base font-medium rounded-md transition-colors duration-300 ${
+    onClick={onClick}
+    className={`flex items-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
       active 
-        ? 'bg-bible-sky text-bible-blue' 
-        : 'text-bible-dark dark:text-white hover:bg-bible-beige dark:hover:bg-slate-800'
+        ? 'bg-bible-sky/50 text-bible-blue shadow-sm' 
+        : 'text-bible-dark dark:text-white hover:bg-bible-sky/20 dark:hover:bg-slate-800'
     }`}
   >
     {icon}
