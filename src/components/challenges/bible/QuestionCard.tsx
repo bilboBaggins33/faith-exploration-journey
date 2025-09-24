@@ -64,7 +64,7 @@ const QuestionCard = ({
               key={index}
               onClick={() => !showExplanation && onSelectAnswer(option)}
               className={cn(
-                "flex items-center rounded-lg border p-4 cursor-pointer transition-all",
+                "flex items-center rounded-lg p-4 cursor-pointer transition-all",
                 selectedAnswer === option
                   ? "border-bible-blue bg-bible-blue/5"
                   : "border-gray-200",

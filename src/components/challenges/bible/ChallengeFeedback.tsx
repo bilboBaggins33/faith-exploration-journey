@@ -116,8 +116,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       </button> */}
 
       {/* Main content card */}
-      <div className="flex items-center justify-center p-4">
-        <div ref={headerRef} className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden" tabIndex={-1}>
+      <div className="flex items-center justify-center p-4 pb-12">
+        <div ref={headerRef} className="w-full max-w-2xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
           <div className="relative overflow-hidden">
             {/* Background image */}
@@ -128,7 +128,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                 className="w-full h-full object-cover"
                 onError={() => setImageError(true)}
               />
-              <div className="absolute inset-0 bg-black/60" />
+              <div className="absolute inset-0 bg-black/20" />
             </div>
             
             {/* Content over background */}
