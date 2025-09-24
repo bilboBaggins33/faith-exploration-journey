@@ -111,11 +111,11 @@ const Chapter = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col">
       <ScrollToTop />
       <Navbar />
       
-      <main className="flex-grow pt-16 pb-10 bg-bible-beige">
+      <main className="flex-grow">
         <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
           {renderContent()}
         </div>

@@ -10,7 +10,7 @@ const NavLogo = ({ isHomePage, isScrolled }: NavLogoProps) => {
   const logoSrc =
     isHomePage && !isScrolled
       ? '/BibleQuestLogo.png' // default full homepage logo
-      : '/BibleQuestLogoDark.png'; // smaller or alternative logo for all other cases
+      : '/BibleQuestLogo.png'; // smaller or alternative logo for all other cases
 
   return (
     <div className={`flex items-center ${(!isScrolled && isHomePage) ? 'pt-5' : ''}`}>

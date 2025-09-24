@@ -40,13 +40,11 @@ const Navbar = () => {
     await signOut();
   };
   
-  const navbarBgClass = isHomePage 
-    ? isScrolled ? 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90' : 'bg-transparent'
-    : 'bg-white/90 backdrop-blur-md shadow-md dark:bg-bible-dark/90';
+  const navbarBgClass = 'dark:bg-bible-dark/90';
   
   return (
     <nav 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${navbarBgClass}`}
+      className={`z-50 transition-all duration-300 ${navbarBgClass}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
@@ -63,7 +61,7 @@ const Navbar = () => {
             <button
               onClick={toggleMenu}
               className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
-                isHomePage && !isScrolled ? 'text-white hover:text-bible-sky' : 'text-bible-dark dark:text-white hover:text-bible-blue'
+                isHomePage && !isScrolled ? 'text-white hover:text-bible-sky' : 'text-white dark:text-white hover:text-bible-blue'
               }`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

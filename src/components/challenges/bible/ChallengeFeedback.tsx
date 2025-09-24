@@ -91,7 +91,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const currentQuestionData = challenge.questions[currentQuestion];
   
   return (
-    <div className="min-h-screen relative overflow-hidden">
+    <div className="relative overflow-hidden">
       {/* Blurred background */}
       <div className="fixed inset-0 -z-10">
         <img 
@@ -116,7 +116,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       </button> */}
 
       {/* Main content card */}
-      <div className="flex items-center justify-center min-h-screen p-4">
+      <div className="flex items-center justify-center p-4">
         <div ref={headerRef} className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
           <div className="relative overflow-hidden">
