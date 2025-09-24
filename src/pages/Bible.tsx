@@ -14,6 +14,7 @@ import BookSearchFilter from '@/components/bible/explorer/BookSearchFilter';
 import { Card } from '@/components/ui/card';
 import { useAuth } from '@/context/auth';
 import ScrollToTop from '@/components/ScrollToTop';
+import { getBookImage } from '@/data/bible/book-images';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -79,7 +80,7 @@ const Bible: React.FC = () => {
       <ScrollToTop />
       <Navbar />
       
-      <main className="flex-grow pt-24 pb-10 bg-bible-beige">
+      <main className="flex-grow pt-24 pb-10 bg-bible-beige relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div>
             {!selectedBook && (
@@ -150,46 +151,91 @@ const Bible: React.FC = () => {
             )}
             
             {selectedBook && !selectedChapter && (
-              <div>
-                <div className="mb-6 text-center">
-                  <button 
-                    onClick={handleBackToBooks}
-                    className="text-bible-blue hover:text-bible-gold transition-colors inline-flex items-center"
-                  >
-                    <span className="mr-1">←</span> Back to All Books
-                  </button>
-                  {/* <h1 className="text-3xl font-serif font-bold mt-2">{selectedBook.name}</h1>
-                  <p className="text-gray-600">{selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}</p> */}
+              <div className="relative overflow-hidden">
+                {/* Blurred background */}
+                <div className="fixed inset-0 -z-10">
+                  <img 
+                    src={getBookImage(selectedBook.id)} 
+                    alt={`${selectedBook.name} background`}
+                    className="w-full h-full object-cover blur-sm scale-110"
+                    onError={(e) => {
+                      e.currentTarget.src = '/assets/bible/default.jpg';
+                    }}
+                  />
+                  <div className="absolute inset-0 bg-black/50" />
                 </div>
-                
-                <BibleBookCard 
-                  bookId={selectedBook.id}
-                  bookName={selectedBook.name}
-                  totalChapters={selectedBook.chapters}
-                  progressPercent={getBookProgressPercentage(selectedBook.id)}
-                  testament={selectedBook.testament as 'old' | 'new'}
-                  onClick={() => {}} // Empty function as it's already selected
-                />
-                
-                <div className="mt-6">
-                  <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
-                  <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
-                    {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
-                      const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
-                      return (
-                        <BibleChapterCard
-                          key={chapter}
-                          bookId={selectedBook.id}
-                          chapter={chapter}
-                          title={challengeData?.title}
-                          isCompleted={false}
-                          score={getChapterScore(selectedBook.id, chapter)}
-                          maxScore={5}
-                          isUnlocked={!!user}
-                          onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
+
+                {/* Main content card */}
+                <div className="flex items-center justify-center p-4 pt-2 pb-12">
+                  <div className="w-full max-w-4xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+                    {/* Header section with book info */}
+                    <div className="relative overflow-hidden">
+                      {/* Background image */}
+                      <div className="absolute inset-0">
+                        <img 
+                          src={getBookImage(selectedBook.id)} 
+                          alt={`${selectedBook.name} background`}
+                          className="w-full h-full object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = '/assets/bible/default.jpg';
+                          }}
                         />
-                      );
-                    })}
+                        <div className="absolute inset-0 bg-black/20" />
+                      </div>
+                      
+                      {/* Content over background */}
+                      <div className="relative z-10 p-6 pt-4">
+                        <div className="mb-4">
+                          <button 
+                            onClick={handleBackToBooks}
+                            className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
+                          >
+                            <span className="mr-1">←</span> Back to All Books
+                          </button>
+                          <h1 className="text-3xl leading-tight font-bold font-serif text-white drop-shadow-lg">{selectedBook.name}</h1>
+                          <p className="text-lg leading-tight text-white/90 drop-shadow">{selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}</p>
+                        </div>
+                        
+                        {/* Progress info */}
+                        <div className="flex justify-between items-center text-sm text-white/80 mb-2">
+                          <span>{selectedBook.chapters} chapters</span>
+                          <span className="font-semibold">
+                            Progress: <span className="text-white">{getBookProgressPercentage(selectedBook.id)}%</span>
+                          </span>
+                        </div>
+                        
+                        {/* Progress bar */}
+                        <div className="w-full bg-white/20 rounded-full h-2">
+                          <div 
+                            className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
+                            style={{ width: `${getBookProgressPercentage(selectedBook.id)}%` }}
+                          />
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Chapters grid */}
+                    <div className="p-6">
+                      <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
+                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                        {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
+                          const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                          return (
+                            <BibleChapterCard
+                              key={chapter}
+                              bookId={selectedBook.id}
+                              chapter={chapter}
+                              title={challengeData?.title}
+                              isCompleted={false}
+                              score={getChapterScore(selectedBook.id, chapter)}
+                              maxScore={5}
+                              isUnlocked={!!user}
+                              onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
+                            />
+                          );
+                        })}
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
