@@ -89,7 +89,6 @@ const QuestionCard = ({
                 value={option}
                 id={`option-${index}`}
                 className="mr-2"
-                // Prevent double event when clicking the radio itself
                 onClick={(e) => e.stopPropagation()}
               />
               <Label
@@ -100,10 +99,33 @@ const QuestionCard = ({
                 {option}
               </Label>
               {showExplanation && option === correctAnswer && (
-                <CheckCircle
-                  className="text-green-500 ml-2 flex-shrink-0"
-                  size={18}
-                />
+                <>
+                  {/* Explanation link beside label */}
+                  <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
+                    <DialogTrigger asChild>
+                      <button
+                        className="text-green-600 hover:text-green-400 text-xs font-medium"
+                        onClick={() => setIsModalOpen(true)}
+                      >
+                        View Explanation
+                      </button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-sm">
+                      <DialogHeader>
+                        <DialogTitle>
+                          Answer Explanation
+                        </DialogTitle>
+                      </DialogHeader>
+                      <div className="mt-2">
+                        <p className="text-sm leading-relaxed">{explanation}</p>
+                      </div>
+                    </DialogContent>
+                  </Dialog>
+                  <CheckCircle
+                    className="text-green-500 ml-2 flex-shrink-0"
+                    size={18}
+                  />  
+                </>
               )}
               {showExplanation &&
                 selectedAnswer === option &&
@@ -113,57 +135,6 @@ const QuestionCard = ({
             </div>
           ))}
         </RadioGroup>
-
-        {showExplanation && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className={cn(
-              "p-4 rounded-lg mb-6 flex items-center justify-between",
-              isCorrect
-                ? "bg-green-50 border border-green-200"
-                : "bg-red-50 border border-red-200"
-            )}
-          >
-            <div className="flex items-center">
-              {isCorrect ? (
-                <CheckCircle
-                  className="text-green-500 mr-2 flex-shrink-0"
-                  size={20}
-                />
-              ) : (
-                <X
-                  className="text-red-500 mr-2 flex-shrink-0"
-                  size={20}
-                />
-              )}
-              <span className="font-medium">
-                {isCorrect ? "Correct!" : "Incorrect"}
-              </span>
-            </div>
-            
-            <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-              <DialogTrigger asChild>
-                <button 
-                  className="text-blue-600 hover:text-blue-800 underline text-sm font-medium"
-                  onClick={() => setIsModalOpen(true)}
-                >
-                  View Answer
-                </button>
-              </DialogTrigger>
-              <DialogContent className="max-w-lg">
-                <DialogHeader>
-                  <DialogTitle>
-                    {isCorrect ? "Correct Answer" : "Answer Explanation"}
-                  </DialogTitle>
-                </DialogHeader>
-                <div className="mt-4">
-                  <p className="text-sm leading-relaxed">{explanation}</p>
-                </div>
-              </DialogContent>
-            </Dialog>
-          </motion.div>
-        )}
 
         <div className="flex justify-between">
           {!showExplanation ? (
