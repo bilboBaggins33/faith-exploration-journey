@@ -125,7 +125,7 @@ const ResultsCard = ({
               <div className="bg-gray-50 p-4 rounded-lg mb-6">
                 <h3 className="font-medium mb-2 flex items-center justify-center">
                   <Bookmark className="mr-2 text-bible-blue" size={16} />
-                  Key Verse to Remember
+                  Key Verse
                 </h3>
                 <p className="italic text-gray-700 mb-2">"{keyVerseText}"</p>
                 <p className="text-sm text-gray-500">{keyVerse}</p>
@@ -156,26 +156,18 @@ const ResultsCard = ({
               <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
                 <Button 
                   onClick={onRestartQuiz}
-                  variant="outline"
                 >
                   Retake Challenge
                 </Button>
                 
-                <Button onClick={onNavigateToBook}>
+                <Button 
+                onClick={onNavigateToBook}
+                variant="outline"
+                >
                   Return to {bookName || 'Book'}
                 </Button>
               </div>
               
-              <div className="mt-6">
-                <Button 
-                  variant="link" 
-                  className="text-gray-500"
-                  onClick={onNavigateToBible}
-                >
-                  <BookOpen className="mr-2" size={16} />
-                  Bible Explorer
-                </Button>
-              </div>
             </div>
           </div>
         </motion.div>
