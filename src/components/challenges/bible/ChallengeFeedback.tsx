@@ -119,36 +119,40 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       <div className="flex items-center justify-center min-h-screen p-4">
         <div ref={headerRef} className="w-full max-w-2xl bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
-          <div className="relative p-6 pb-4">
-            <div className="flex items-center gap-4 mb-4">
-              <div className="w-16 h-20 rounded-lg overflow-hidden shadow-md">
-                <img 
-                  src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
-                  alt={`${book?.name || 'Bible book'} cover`}
-                  className="w-full h-full object-cover"
-                  onError={() => setImageError(true)}
+          <div className="relative overflow-hidden">
+            {/* Background image */}
+            <div className="absolute inset-0">
+              <img 
+                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+                alt={`${book?.name || 'Bible book'} background`}
+                className="w-full h-full object-cover"
+                onError={() => setImageError(true)}
+              />
+              <div className="absolute inset-0 bg-black/60" />
+            </div>
+            
+            {/* Content over background */}
+            <div className="relative z-10 p-6 pb-4">
+              <div className="mb-4">
+                <h1 className="text-2xl font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
+                <p className="text-lg text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
+              </div>
+              
+              {/* Progress and Score */}
+              <div className="flex justify-between items-center text-sm text-white/80 mb-2">
+                <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
+                <span className="font-semibold">
+                  Score: <span className="text-white">{score}/{challenge.questions.length}</span>
+                </span>
+              </div>
+              
+              {/* Progress bar */}
+              <div className="w-full bg-white/20 rounded-full h-2">
+                <div 
+                  className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
+                  style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
                 />
               </div>
-              <div>
-                <h1 className="text-2xl font-bold font-serif text-foreground">{book?.name}</h1>
-                <p className="text-lg text-muted-foreground">Chapter {parseInt(chapter, 10)}</p>
-              </div>
-            </div>
-            
-            {/* Progress and Score */}
-            <div className="flex justify-between items-center text-sm text-muted-foreground mb-2">
-              <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
-              <span className="font-semibold">
-                Score: <span className="text-primary">{score}/{challenge.questions.length}</span>
-              </span>
-            </div>
-            
-            {/* Progress bar */}
-            <div className="w-full bg-muted rounded-full h-2">
-              <div 
-                className="bg-primary h-2 rounded-full transition-all duration-300 ease-in-out"
-                style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
-              />
             </div>
           </div>
 
