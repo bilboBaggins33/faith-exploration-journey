@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
@@ -9,6 +9,7 @@ import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { getBookImage } from '@/data/bible/book-images';
 import { ProgressiveImage } from '@/components/ui/progressive-image';
+import BibleBookBackground from '@/components/bible/BibleBookBackground';
 
 interface ChallengeFeedbackProps {
   state: BibleChallengeState;
@@ -93,16 +94,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const currentQuestionData = challenge.questions[currentQuestion];
   
   return (
-    <div className="relative overflow-hidden">
-      {/* Blurred background */}
-      <div className="fixed inset-0 -z-10">
-        <ProgressiveImage
-          src={getBookImage(bookId)}
-          alt={`${book?.name || 'Bible book'} background`}
-          className="w-full h-full object-cover blur-sm scale-110"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+    <BibleBookBackground bookId={bookId} bookName={book?.name}>
+      <div className="relative overflow-hidden">
 
       {/* Back button */}
       {/* <button
@@ -177,7 +170,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           </div>
         </div>
       </div>
-    </div>
+      </div>
+    </BibleBookBackground>
   );
 };
 

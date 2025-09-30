@@ -9,6 +9,9 @@ interface ProgressiveImageProps extends React.ImgHTMLAttributes<HTMLImageElement
   className?: string;
 }
 
+// Global cache to persist loaded images across component remounts
+const imageCache = new Map<string, string>();
+
 export const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
   src,
   alt,
@@ -17,11 +20,24 @@ export const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
   className,
   ...props
 }) => {
-  const [imgSrc, setImgSrc] = useState(blurDataURL || src);
-  const [isLoading, setIsLoading] = useState(true);
+  const [imgSrc, setImgSrc] = useState(() => {
+    // Check cache first
+    if (imageCache.has(src)) {
+      return imageCache.get(src)!;
+    }
+    return blurDataURL || src;
+  });
+  const [isLoading, setIsLoading] = useState(() => !imageCache.has(src));
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
+    // If already cached, no need to reload
+    if (imageCache.has(src)) {
+      setImgSrc(imageCache.get(src)!);
+      setIsLoading(false);
+      return;
+    }
+
     setIsLoading(true);
     setHasError(false);
     
@@ -29,11 +45,13 @@ export const ProgressiveImage: React.FC<ProgressiveImageProps> = ({
     img.src = src;
     
     img.onload = () => {
+      imageCache.set(src, src); // Cache the successful load
       setImgSrc(src);
       setIsLoading(false);
     };
     
     img.onerror = () => {
+      imageCache.set(src, fallbackSrc); // Cache the fallback
       setImgSrc(fallbackSrc);
       setIsLoading(false);
       setHasError(true);

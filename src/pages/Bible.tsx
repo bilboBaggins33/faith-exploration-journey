@@ -16,6 +16,7 @@ import { useAuth } from '@/context/auth';
 import ScrollToTop from '@/components/ScrollToTop';
 import { getBookImage } from '@/data/bible/book-images';
 import { ProgressiveImage } from '@/components/ui/progressive-image';
+import BibleBookBackground from '@/components/bible/BibleBookBackground';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -151,17 +152,8 @@ const Bible: React.FC = () => {
             )}
             
             {selectedBook && !selectedChapter && (
-              <div className="relative overflow-hidden">
-                {/* Blurred background */}
-                <div className="fixed inset-0 -z-10">
-                  <ProgressiveImage
-                    src={getBookImage(selectedBook.id)}
-                    alt={`${selectedBook.name} background`}
-                    fallbackSrc="/assets/bible/default.jpg"
-                    className="w-full h-full object-cover blur-sm scale-110"
-                  />
-                  <div className="absolute inset-0 bg-black/50" />
-                </div>
+              <BibleBookBackground bookId={selectedBook.id} bookName={selectedBook.name}>
+                <div className="relative overflow-hidden">
 
                 {/* Main content card */}
                 <div className="flex items-center justify-center p-4 pt-2 pb-12">
@@ -233,7 +225,8 @@ const Bible: React.FC = () => {
                     </div>
                   </div>
                 </div>
-              </div>
+                </div>
+              </BibleBookBackground>
             )}
             
             {selectedBook && selectedChapter && (

@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { Award, Bookmark, BookOpen, LogIn } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -10,6 +10,7 @@ import { Link } from 'react-router-dom';
 import { getBookImage } from '@/data/bible/book-images';
 import { bibleBooks } from '@/data/bible';
 import { ProgressiveImage } from '@/components/ui/progressive-image';
+import BibleBookBackground from '@/components/bible/BibleBookBackground';
 
 interface ResultsCardProps {
   score: number;
@@ -49,16 +50,8 @@ const ResultsCard = ({
   const book = bibleBooks.find(b => b.id === bookId);
   
   return (
-    <div className="relative overflow-hidden">
-      {/* Blurred background */}
-      <div className="fixed inset-0 -z-10">
-        <ProgressiveImage
-          src={getBookImage(bookId)}
-          alt={`${book?.name || 'Bible book'} background`}
-          className="w-full h-full object-cover blur-sm scale-110"
-        />
-        <div className="absolute inset-0 bg-black/50" />
-      </div>
+    <BibleBookBackground bookId={bookId} bookName={book?.name}>
+      <div className="relative overflow-hidden">
 
       {/* Main content card */}
       <div className="flex items-center justify-center p-4 pt-2 pb-12">
@@ -170,7 +163,8 @@ const ResultsCard = ({
           </div>
         </motion.div>
       </div>
-    </div>
+      </div>
+    </BibleBookBackground>
   );
 };
 
