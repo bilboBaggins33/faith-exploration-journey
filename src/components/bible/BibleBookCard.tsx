@@ -34,6 +34,8 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
           alt={`${bookName} cover`}
           className="absolute inset-0 object-cover w-full h-full"
           onError={() => setImageError(true)}
+          loading="lazy"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
         <div className="absolute bottom-0 left-0 p-3">
