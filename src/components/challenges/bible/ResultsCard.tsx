@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import { getBookImage } from '@/data/bible/book-images';
 import { bibleBooks } from '@/data/bible';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
 
 interface ResultsCardProps {
   score: number;
@@ -37,7 +38,6 @@ const ResultsCard = ({
   chapter,
   showSignUpPrompt = false
 }: ResultsCardProps) => {
-  const [imageError, setImageError] = useState(false);
   // Ensure score and totalQuestions are valid numbers
   const safeScore = Math.max(0, score || 0);
   const safeTotalQuestions = Math.max(1, totalQuestions || 1); // Prevent division by zero
@@ -52,11 +52,10 @@ const ResultsCard = ({
     <div className="relative overflow-hidden">
       {/* Blurred background */}
       <div className="fixed inset-0 -z-10">
-        <img 
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+        <ProgressiveImage
+          src={getBookImage(bookId)}
           alt={`${book?.name || 'Bible book'} background`}
           className="w-full h-full object-cover blur-sm scale-110"
-          onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -72,11 +71,10 @@ const ResultsCard = ({
           <div className="relative overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0">
-              <img 
-                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+              <ProgressiveImage
+                src={getBookImage(bookId)}
                 alt={`${book?.name || 'Bible book'} background`}
                 className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>

@@ -8,6 +8,7 @@ import { bibleBooks } from '@/data/bible';
 import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { getBookImage } from '@/data/bible/book-images';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
 
 interface ChallengeFeedbackProps {
   state: BibleChallengeState;
@@ -32,8 +33,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   onRetry,
   onGoBack
 }) => {
-  const [imageError, setImageError] = useState(false);
-  const { 
+  const {
     challenge, 
     currentQuestion, 
     userAnswers, 
@@ -96,11 +96,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     <div className="relative overflow-hidden">
       {/* Blurred background */}
       <div className="fixed inset-0 -z-10">
-        <img 
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+        <ProgressiveImage
+          src={getBookImage(bookId)}
           alt={`${book?.name || 'Bible book'} background`}
           className="w-full h-full object-cover blur-sm scale-110"
-          onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-black/50" />
       </div>
@@ -124,11 +123,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           <div className="relative overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0">
-              <img 
-                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+              <ProgressiveImage
+                src={getBookImage(bookId)}
                 alt={`${book?.name || 'Bible book'} background`}
                 className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { Badge } from '@/components/ui/badge';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
 
 interface BookCardHeaderProps {
   title: string;
@@ -24,20 +25,11 @@ const BookCardHeader: React.FC<BookCardHeaderProps> = ({
   return (
     <div className="relative overflow-hidden">
       <AspectRatio ratio={2/3} className="bg-muted">
-        <img 
+        <ProgressiveImage
           src={imageToUse} 
           alt={title}
+          fallbackSrc={thumbnailImage ? coverImage : '/placeholder.svg'}
           className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
-          loading="lazy"
-          onError={(e) => {
-            const target = e.target as HTMLImageElement;
-            // If thumbnail fails, try original image
-            if (thumbnailImage && target.src !== coverImage) {
-              target.src = coverImage;
-            } else {
-              target.src = '/placeholder.svg';
-            }
-          }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-3">
           <Badge className="self-start mb-1" variant="outline">{category}</Badge>

@@ -1,7 +1,7 @@
 
 // This is the service worker with the Cache-first network
-const CACHE = "pwa-cache-v2";
-const IMAGE_CACHE = "pwa-images-v1";
+const CACHE = "pwa-cache-v3";
+const IMAGE_CACHE = "pwa-images-v2";
 
 // Add list of files to cache here.
 const precacheFiles = [
@@ -32,7 +32,7 @@ self.addEventListener('activate', function(evt) {
   evt.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(keyList.map(key => {
-        if (key !== CACHE) {
+        if (key !== CACHE && key !== IMAGE_CACHE) {
           console.log('[PWA] Removing old cache', key);
           return caches.delete(key);
         }

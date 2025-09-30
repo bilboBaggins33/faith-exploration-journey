@@ -5,6 +5,7 @@ import { ArrowRight, BookOpen, BookText, GraduationCap, Heart } from 'lucide-rea
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
 
 const heroBackgroundUrls = [
   'assets/hero-bg.jpg'
@@ -12,7 +13,6 @@ const heroBackgroundUrls = [
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
   
   useEffect(() => {
@@ -31,17 +31,15 @@ const Hero = () => {
       {heroBackgroundUrls.map((url, index) => (
         <div
           key={url}
-          className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
+          className="absolute inset-0 w-full h-full transition-opacity duration-1000"
           style={{
-            backgroundImage: `url(${imageLoadError[url] ? '/assets/bible/default.jpg' : url})`,
             opacity: currentImageIndex === index ? 1 : 0,
           }}
         >
-          <img 
-            src={url} 
-            className="hidden" 
-            alt="Preload" 
-            onError={() => setImageLoadError(prev => ({...prev, [url]: true}))}
+          <ProgressiveImage
+            src={url}
+            alt="Hero background"
+            className="w-full h-full object-cover"
           />
         </div>
       ))}

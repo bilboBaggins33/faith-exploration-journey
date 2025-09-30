@@ -1,8 +1,9 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { getBookImage } from '@/data/bible/book-images';
 import { Progress } from '@/components/ui/progress';
 import { Card } from '@/components/ui/card';
+import { ProgressiveImage } from '@/components/ui/progressive-image';
 
 interface BibleBookCardProps {
   bookId: string;
@@ -21,21 +22,16 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   testament,
   onClick
 }) => {
-  const [imageError, setImageError] = useState(false);
-  
   return (
     <Card 
       className="overflow-hidden transition-shadow hover:shadow-md cursor-pointer h-full flex flex-col"
       onClick={onClick}
     >
       <div className="relative pb-[46.67%]">
-        <img
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
+        <ProgressiveImage
+          src={getBookImage(bookId)}
           alt={`${bookName} cover`}
           className="absolute inset-0 object-cover w-full h-full"
-          onError={() => setImageError(true)}
-          loading="lazy"
-          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />
         <div className="absolute bottom-0 left-0 p-3">
