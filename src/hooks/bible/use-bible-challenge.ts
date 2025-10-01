@@ -1,5 +1,5 @@
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
@@ -27,6 +27,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   const { user } = useAuth();
   const { toast } = useToast();
   const { updateProgress } = useBibleProgress();
+  const progressSavedRef = useRef(false);
   
   const [state, setState] = useState<BibleChallengeState>({
     challenge: null,
@@ -79,43 +80,47 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   }, [bookId, chapter]);
   
   useEffect(() => {
-    if (state.challenge && state.completed && user) {
+    if (state.challenge && state.completed && user && !progressSavedRef.current) {
+      progressSavedRef.current = true;
       const book = bibleBooks.find(b => b.id === bookId);
-      if (bookId && chapter) {
-        if (updateProgress) {
-          const saveProgress = async () => {
-            try {
-              const chapterNumber = parseInt(chapter, 10);
-              const completedChapter = {
-                book_id: bookId,
-                chapter: chapterNumber,
-                completed_at: new Date().toISOString(),
-                score: state.score
-              };
+      
+      if (bookId && chapter && updateProgress) {
+        const saveProgress = async () => {
+          try {
+            const chapterNumber = parseInt(chapter, 10);
+            const completedChapter = {
+              book_id: bookId,
+              chapter: chapterNumber,
+              completed_at: new Date().toISOString(),
+              score: state.score
+            };
 
-              const progressData: Partial<BibleProgressData> = {
-                challenges_completed: [`${bookId}${chapter}`],
-                completed_chapters: [completedChapter],
-                total_points: state.score
-              };
-              
-              // Update progress and ensure fresh data is loaded
-              await updateProgress(progressData);
-              
-              toast({
-                title: "Challenge Completed!",
-                description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
-              });
-            } catch (error) {
-              console.error("Error updating progress:", error);
-            }
-          };
-          
-          saveProgress();
-        }
+            const progressData: Partial<BibleProgressData> = {
+              challenges_completed: [`${bookId}${chapter}`],
+              completed_chapters: [completedChapter],
+              total_points: state.score
+            };
+            
+            await updateProgress(progressData);
+            
+            toast({
+              title: "Challenge Completed!",
+              description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
+            });
+          } catch (error) {
+            console.error("Error updating progress:", error);
+            toast({
+              title: "Error",
+              description: "Failed to save your progress. Please try again.",
+              variant: "destructive"
+            });
+          }
+        };
+        
+        saveProgress();
       }
     }
-  }, [state.completed, state.score, state.challenge, bookId, chapter, updateProgress, toast, user]);
+  }, [state.completed, state.challenge, user]);
   
   const handleSelectAnswer = (answer: string) => {
     if (state.showExplanation) return;
@@ -188,6 +193,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   };
 
   const handleRetry = () => {
+    progressSavedRef.current = false;
     setState(prev => ({
       ...prev,
       currentQuestion: 0,
