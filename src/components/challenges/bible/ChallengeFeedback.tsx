@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import ResultsCard from './ResultsCard';
@@ -8,8 +8,6 @@ import { bibleBooks } from '@/data/bible';
 import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { getBookImage } from '@/data/bible/book-images';
-import { ProgressiveImage } from '@/components/ui/progressive-image';
-import BibleBookBackground from '@/components/bible/BibleBookBackground';
 
 interface ChallengeFeedbackProps {
   state: BibleChallengeState;
@@ -34,7 +32,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   onRetry,
   onGoBack
 }) => {
-  const {
+  const [imageError, setImageError] = useState(false);
+  const { 
     challenge, 
     currentQuestion, 
     userAnswers, 
@@ -94,8 +93,17 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const currentQuestionData = challenge.questions[currentQuestion];
   
   return (
-    <BibleBookBackground bookId={bookId} bookName={book?.name}>
-      <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden">
+      {/* Blurred background */}
+      <div className="fixed inset-0 -z-10">
+        <img 
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+          alt={`${book?.name || 'Bible book'} background`}
+          className="w-full h-full object-cover blur-sm scale-110"
+          onError={() => setImageError(true)}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
       {/* Back button */}
       {/* <button
@@ -116,10 +124,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           <div className="relative overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0">
-              <ProgressiveImage
-                src={getBookImage(bookId)}
+              <img 
+                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
                 alt={`${book?.name || 'Bible book'} background`}
                 className="w-full h-full object-cover"
+                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>
@@ -170,8 +179,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           </div>
         </div>
       </div>
-      </div>
-    </BibleBookBackground>
+    </div>
   );
 };
 

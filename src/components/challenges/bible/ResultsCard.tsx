@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Award, Bookmark, BookOpen, LogIn } from 'lucide-react';
 import { Card } from '@/components/ui/card';
@@ -9,8 +9,6 @@ import { cn } from '@/lib/utils';
 import { Link } from 'react-router-dom';
 import { getBookImage } from '@/data/bible/book-images';
 import { bibleBooks } from '@/data/bible';
-import { ProgressiveImage } from '@/components/ui/progressive-image';
-import BibleBookBackground from '@/components/bible/BibleBookBackground';
 
 interface ResultsCardProps {
   score: number;
@@ -39,6 +37,7 @@ const ResultsCard = ({
   chapter,
   showSignUpPrompt = false
 }: ResultsCardProps) => {
+  const [imageError, setImageError] = useState(false);
   // Ensure score and totalQuestions are valid numbers
   const safeScore = Math.max(0, score || 0);
   const safeTotalQuestions = Math.max(1, totalQuestions || 1); // Prevent division by zero
@@ -50,8 +49,17 @@ const ResultsCard = ({
   const book = bibleBooks.find(b => b.id === bookId);
   
   return (
-    <BibleBookBackground bookId={bookId} bookName={book?.name}>
-      <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden">
+      {/* Blurred background */}
+      <div className="fixed inset-0 -z-10">
+        <img 
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+          alt={`${book?.name || 'Bible book'} background`}
+          className="w-full h-full object-cover blur-sm scale-110"
+          onError={() => setImageError(true)}
+        />
+        <div className="absolute inset-0 bg-black/50" />
+      </div>
 
       {/* Main content card */}
       <div className="flex items-center justify-center p-4 pt-2 pb-12">
@@ -64,10 +72,11 @@ const ResultsCard = ({
           <div className="relative overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0">
-              <ProgressiveImage
-                src={getBookImage(bookId)}
+              <img 
+                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
                 alt={`${book?.name || 'Bible book'} background`}
                 className="w-full h-full object-cover"
+                onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>
@@ -163,8 +172,7 @@ const ResultsCard = ({
           </div>
         </motion.div>
       </div>
-      </div>
-    </BibleBookBackground>
+    </div>
   );
 };
 
