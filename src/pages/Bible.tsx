@@ -152,11 +152,13 @@ const Bible: React.FC = () => {
             {selectedBook && !selectedChapter && (
               <div className="relative overflow-hidden">
                 {/* Blurred background */}
-                <div className="fixed inset-0 -z-10">
+                <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
                   <img 
                     src={getBookImage(selectedBook.id)} 
                     alt={`${selectedBook.name} background`}
                     className="w-full h-full object-cover blur-sm scale-110"
+                    loading="eager"
+                    decoding="async"
                     onError={(e) => {
                       e.currentTarget.src = '/assets/bible/default.jpg';
                     }}
@@ -170,11 +172,13 @@ const Bible: React.FC = () => {
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
-                      <div className="absolute inset-0">
+                      <div className="absolute inset-0 bg-[#e8dcc4]">
                         <img 
                           src={getBookImage(selectedBook.id)} 
                           alt={`${selectedBook.name} background`}
                           className="w-full h-full object-cover"
+                          loading="eager"
+                          decoding="async"
                           onError={(e) => {
                             e.currentTarget.src = '/assets/bible/default.jpg';
                           }}

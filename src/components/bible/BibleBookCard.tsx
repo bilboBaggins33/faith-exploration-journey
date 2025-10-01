@@ -28,11 +28,13 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       className="overflow-hidden transition-shadow hover:shadow-md cursor-pointer h-full flex flex-col"
       onClick={onClick}
     >
-      <div className="relative pb-[46.67%]">
+      <div className="relative pb-[46.67%] bg-[#e8dcc4]">
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
           alt={`${bookName} cover`}
           className="absolute inset-0 object-cover w-full h-full"
+          loading="eager"
+          decoding="async"
           onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60" />

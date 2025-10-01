@@ -1,6 +1,7 @@
 
 // This is the service worker with the Cache-first network
-const CACHE = "pwa-cache-v1";
+const CACHE = "pwa-cache-v4";
+const IMAGE_CACHE = "pwa-images-v4";
 
 // Add list of files to cache here.
 const precacheFiles = [
@@ -44,9 +45,24 @@ self.addEventListener('activate', function(evt) {
 // Fetch event provides content when offline
 self.addEventListener('fetch', function(evt) {
   console.log('[PWA] The service worker is serving the asset.');
-  evt.respondWith(
-    caches.match(evt.request).then(function(response) {
-      return response || fetch(evt.request);
-    })
-  );
+  
+  // Cache images aggressively
+  if (evt.request.url.includes('/assets/bible/') || evt.request.url.includes('/assets/')) {
+    evt.respondWith(
+      caches.open(IMAGE_CACHE).then(function(cache) {
+        return cache.match(evt.request).then(function(response) {
+          return response || fetch(evt.request).then(function(fetchResponse) {
+            cache.put(evt.request, fetchResponse.clone());
+            return fetchResponse;
+          });
+        });
+      })
+    );
+  } else {
+    evt.respondWith(
+      caches.match(evt.request).then(function(response) {
+        return response || fetch(evt.request);
+      })
+    );
+  }
 });
