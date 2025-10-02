@@ -25,7 +25,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   
   return (
     <Card 
-      className="overflow-hidden transition-shadow hover:shadow-md cursor-pointer h-full flex flex-col"
+      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col border-0 rounded-xl"
       onClick={onClick}
     >
       <div className="relative pb-[46.67%] bg-[#e8dcc4]">

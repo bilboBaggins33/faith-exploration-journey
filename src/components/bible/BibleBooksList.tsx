@@ -3,6 +3,7 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
 import BibleBookCard from './BibleBookCard';
+import { Card } from '@/components/ui/card';
 
 interface BibleBooksListProps {
   books: {
@@ -26,39 +27,44 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
 }) => {
   const navigate = useNavigate();
   
-  const filteredBooks = books.filter(book => {
-    const matchesSearch = book.name.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesTestament = activeTestament === 'all' || book.testament === activeTestament;
-    return matchesSearch && matchesTestament;
-  });
-  
-  if (filteredBooks.length === 0) {
-    return (
-      <div className="text-center py-8">
-        <BookOpen className="mx-auto text-gray-300 mb-2" size={40} />
-        <p className="text-gray-500">No books found</p>
-      </div>
-    );
-  }
+  const oldTestamentBooks = books.filter(book => book.testament === 'old');
+  const newTestamentBooks = books.filter(book => book.testament === 'new');
   
   return (
-    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-      {filteredBooks.map(book => {
-        const bookProgressPercent = getBookProgress(book.id);
-        
-        return (
-          <div key={book.id} className="w-full">
+    <div className="space-y-8">
+      <Card className="p-6 bg-white/95 backdrop-blur-sm shadow-xl border-0 rounded-2xl">
+        <h2 className="text-2xl font-serif font-bold mb-6 text-foreground">Old Testament</h2>
+        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {oldTestamentBooks.map(book => (
             <BibleBookCard
+              key={book.id}
               bookId={book.id}
               bookName={book.name}
               totalChapters={book.chapters}
-              progressPercent={bookProgressPercent}
-              testament={book.testament as 'old' | 'new'}
+              progressPercent={getBookProgress(book.id)}
+              testament="old"
               onClick={() => navigate(`/bible/${book.id}`)}
             />
-          </div>
-        );
-      })}
+          ))}
+        </div>
+      </Card>
+      
+      <Card className="p-6 bg-white/95 backdrop-blur-sm shadow-xl border-0 rounded-2xl">
+        <h2 className="text-2xl font-serif font-bold mb-6 text-foreground">New Testament</h2>
+        <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {newTestamentBooks.map(book => (
+            <BibleBookCard
+              key={book.id}
+              bookId={book.id}
+              bookName={book.name}
+              totalChapters={book.chapters}
+              progressPercent={getBookProgress(book.id)}
+              testament="new"
+              onClick={() => navigate(`/bible/${book.id}`)}
+            />
+          ))}
+        </div>
+      </Card>
     </div>
   );
 };
