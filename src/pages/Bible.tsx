@@ -76,7 +76,7 @@ const Bible: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col p-4">
+    <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Navbar />
       

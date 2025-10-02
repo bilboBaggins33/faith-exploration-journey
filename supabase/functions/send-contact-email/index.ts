@@ -40,7 +40,7 @@ const handler = async (req: Request): Promise<Response> => {
         <h1>Thank you for contacting Bible Quest, ${name}!</h1>
         <p>We have received your message and will get back to you as soon as possible.</p>
         <p>For your reference, here's a copy of your message:</p>
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <div style="background-color: #c8a528; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p>${message.replace(/\n/g, '<br>')}</p>
         </div>
         <p>Best regards,<br>The Bible Quest Team</p>
@@ -59,7 +59,7 @@ const handler = async (req: Request): Promise<Response> => {
         <p><strong>Name:</strong> ${name}</p>
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Message:</strong></p>
-        <div style="background-color: #f5f5f5; padding: 15px; border-radius: 8px; margin: 20px 0;">
+        <div style="background-color: #c8a528; padding: 15px; border-radius: 8px; margin: 20px 0;">
           <p>${message.replace(/\n/g, '<br>')}</p>
         </div>
       `,
