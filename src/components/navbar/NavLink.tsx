@@ -16,9 +16,7 @@ const NavLink = ({ to, active, isScrolled, isHomePage, children }: NavLinkProps)
     className={`hover-link font-medium transition-colors duration-300 ${
       active 
         ? 'text-bible-blue after:scale-x-100' 
-        : isHomePage && !isScrolled
-          ? 'text-white'
-          : 'text-bible-dark dark:text-white'
+        : 'text-white'
     }`}
   >
     {children}
