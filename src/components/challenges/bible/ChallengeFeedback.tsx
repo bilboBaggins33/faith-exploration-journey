@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
+import { useNavigate } from 'react-router-dom';
 import ResultsCard from './ResultsCard';
-import ChallengeHeader from './ChallengeHeader';
-import { ChapterChallenge } from '@/data/bible/types';
 import { bibleBooks } from '@/data/bible';
 import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
-import { AspectRatio } from '@/components/ui/aspect-ratio';
 import { getBookImage } from '@/data/bible/book-images';
 
 interface ChallengeFeedbackProps {
@@ -42,6 +40,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     score, 
     completed 
   } = state;
+  const navigate = useNavigate();
 
   const headerRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -54,17 +53,17 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     }
 
     // Scroll after layout settles to avoid scroll anchoring on Next
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        const y = el.getBoundingClientRect().top + window.scrollY - 8; // slight offset
-        window.scrollTo({ top: y, behavior: 'smooth' });
+    // requestAnimationFrame(() => {
+    //   requestAnimationFrame(() => {
+    //     const y = el.getBoundingClientRect().top + window.scrollY - 8; // slight offset
+    //     window.scrollTo({ top: y, behavior: 'smooth' });
 
-        // Move focus to the header (without additional scrolling) for accessibility
-        setTimeout(() => {
-          el.focus?.({ preventScroll: true } as any);
-        }, 200);
-      });
-    });
+    //     // Move focus to the header (without additional scrolling) for accessibility
+    //     setTimeout(() => {
+    //       el.focus?.({ preventScroll: true } as any);
+    //     }, 200);
+    //   });
+    // });
   }, [currentQuestion]);
 
   if (!challenge) {
@@ -91,6 +90,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   }
 
   const currentQuestionData = challenge.questions[currentQuestion];
+
+  const handleBackToBookPage = () => {
+  navigate(`/bible/${(book?.name || '').toLowerCase().replace(/\s+/g, '')}`);
+};
   
   return (
     <div className="relative overflow-hidden">
@@ -134,8 +137,14 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             </div>
             
             {/* Content over background */}
-            <div className="relative z-10 p-5 pt-3 pb-4">
+            <div className="relative z-10 p-5 pt-2 pb-4">
               <div className="mb-4">
+              <button 
+                            onClick={handleBackToBookPage}
+                            className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
+                          >
+                            <span className="mr-1">←</span> Back
+                          </button>
                 <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
                 <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
               </div>

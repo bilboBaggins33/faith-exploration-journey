@@ -92,7 +92,7 @@ const Bible: React.FC = () => {
           </div>
         )}
         
-        <div className="max-w-7xl mx-auto px-4 pt-6">
+        <div className="max-w-7xl mx-auto">
           <div>
             {!selectedBook && (
               <div>
@@ -196,7 +196,7 @@ const Bible: React.FC = () => {
                       </div>
                       
                       {/* Content over background */}
-                      <div className="relative z-10 p-6 pt-4">
+                      <div className="relative z-10 p-5 pt-2 pb-4">
                         <div className="mb-4">
                           <button 
                             onClick={handleBackToBooks}
@@ -204,7 +204,7 @@ const Bible: React.FC = () => {
                           >
                             <span className="mr-1">←</span> Back to All Books
                           </button>
-                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{selectedBook.name}</h1>
+                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-9">{selectedBook.name}</h1>
                         </div>
                         
                         {/* Progress info */}
