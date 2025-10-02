@@ -9,27 +9,10 @@ import MobileNav from './navbar/MobileNav';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
   const isHomePage = location.pathname === '/';
   const isBiblePage = location.pathname.valueOf() === '/bible';
-  
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 20) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
   
   useEffect(() => {
     setIsOpen(false);
@@ -49,11 +32,10 @@ const Navbar = () => {
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <NavLogo isHomePage={isHomePage} isScrolled={isScrolled} isBiblePage={isBiblePage}/>
+          <NavLogo isHomePage={isHomePage} isBiblePage={isBiblePage}/>
           
           <DesktopNav 
-            isHomePage={isHomePage} 
-            isScrolled={isScrolled} 
+            isHomePage={isHomePage}
             user={user} 
             handleSignOut={handleSignOut}
           />

@@ -14,18 +14,17 @@ import {
 
 interface DesktopNavProps {
   isHomePage: boolean;
-  isScrolled: boolean;
   user: SupabaseUser | null;
   handleSignOut: () => Promise<void>;
 }
 
-const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavProps) => {
+const DesktopNav = ({ isHomePage, user, handleSignOut }: DesktopNavProps) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const [isOpen, setIsOpen] = useState(false);
   
   const getSignInButtonClasses = () => {
-    if (isHomePage && !isScrolled) {
+    if (isHomePage) {
       return 'bg-bible-blue text-white hover:bg-bible-deepBlue';
     }
     return 'bg-bible-dark text-white dark:bg-white dark:text-bible-dark hover:bg-bible-dark/90 dark:hover:bg-white/90';
@@ -34,26 +33,26 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
   return (
     <div className="hidden md:block">
       <div className="flex items-center space-x-8">
-        <NavLink to="/" active={isActive('/')} isScrolled={isScrolled} isHomePage={isHomePage}>
+        <NavLink to="/" active={isActive('/')} isHomePage={isHomePage}>
           Home
         </NavLink>
-        <NavLink to="/bible" active={isActive('/bible')} isScrolled={isScrolled} isHomePage={isHomePage}>
+        <NavLink to="/bible" active={isActive('/bible')} isHomePage={isHomePage}>
           Bible
         </NavLink>
-        <NavLink to="/plans" active={isActive('/plans')} isScrolled={isScrolled} isHomePage={isHomePage}>
+        <NavLink to="/plans" active={isActive('/plans')} isHomePage={isHomePage}>
           <div className="flex items-center">
             {/* <BookOpen className="h-4 w-4 mr-1" /> */}
             Plans
           </div>
         </NavLink>
-        <NavLink to="/theology" active={isActive('/theology')} isScrolled={isScrolled} isHomePage={isHomePage}>
+        <NavLink to="/theology" active={isActive('/theology')} isHomePage={isHomePage}>
           <div className="flex items-center">
             {/* <BookText className="h-4 w-4 mr-1" /> */}
             Books
           </div>
         </NavLink>
         
-        <NavLink to="/about" active={isActive('/about')} isScrolled={isScrolled} isHomePage={isHomePage}>
+        <NavLink to="/about" active={isActive('/about')} isHomePage={isHomePage}>
           <div className="flex items-center">
             {/* <Info className="h-4 w-4 mr-1" /> */}
             About
@@ -69,7 +68,7 @@ const DesktopNav = ({ isHomePage, isScrolled, user, handleSignOut }: DesktopNavP
               <button className={`flex items-center justify-center p-1 hover-link font-medium transition-colors duration-300 ${
                 isActive('/profile') || isActive('/dashboard')
                   ? 'text-bible-blue after:scale-x-100' 
-                  : isHomePage && !isScrolled
+                  : isHomePage
                     ? 'text-white'
                     : 'text-bible-dark dark:text-white'
               }`}>
