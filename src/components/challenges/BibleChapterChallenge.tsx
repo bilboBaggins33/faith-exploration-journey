@@ -2,7 +2,6 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
-import ChallengeSkeleton from './bible/ChallengeSkeleton';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import LoginRequired from './bible/LoginRequired';

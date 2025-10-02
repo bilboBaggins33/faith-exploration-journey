@@ -57,10 +57,6 @@ const Bible: React.FC = () => {
     navigate(`/bible/${id}`);
   };
   
-  const handleChapterSelect = (chapter: number) => {
-    setSelectedChapter(chapter);
-  };
-  
   const handleBackToBooks = () => {
     navigate('/bible');
   };
