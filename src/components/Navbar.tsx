@@ -45,7 +45,7 @@ const Navbar = () => {
   
   return (
     <nav 
-      className={`relative z-50 transition-all duration-300 ${navbarBgClass}`}
+      className={`z-50 transition-all duration-300 ${isHomePage ? 'absolute top-0 left-0 right-0 w-full' : 'relative'} ${navbarBgClass}`}
     >
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
