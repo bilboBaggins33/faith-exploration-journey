@@ -26,16 +26,16 @@ import { ecclesiastesChallenges } from './ecclesiastes';
 // import { jeremiahChallenges } from './jeremiah';
 // import { lamentationsChallenges } from './lamentations';
 // import { ezekielChallenges } from './ezekiel';
-// import { danielChallenges } from './daniel';
-// import { hoseaChallenges } from './hosea';
-// import { joelChallenges } from './joel';
+import { danielChallenges } from './daniel';
+import { hoseaChallenges } from './hosea';
+import { joelChallenges } from './joel';
 import { amosChallenges } from './amos';
 import { obadiahChallenges } from './obadiah';
-// import { jonahChallenges } from './jonah';
-// import { micahChallenges } from './micah';
-// import { nahumChallenges } from './nahum';
+import { jonahChallenges } from './jonah';
+import { micahChallenges } from './micah';
+import { nahumChallenges } from './nahum';
 import { habakkukChallenges } from './habakkuk';
-// import { zephaniahChallenges } from './zephaniah';
+import { zephaniahChallenges } from './zephaniah';
 import { haggaiChallenges } from './haggai';
 import { zechariahChallenges } from './zechariah';
 import { malachiChallenges } from './malachi';
@@ -96,16 +96,16 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   // ...jeremiahChallenges,
   // ...lamentationsChallenges,
   // ...ezekielChallenges,
-  // ...danielChallenges,
-  // ...hoseaChallenges,
-  // ...joelChallenges,
+  ...danielChallenges,
+  ...hoseaChallenges,
+  ...joelChallenges,
   ...amosChallenges,
   ...obadiahChallenges,
-  // ...jonahChallenges,
-  // ...micahChallenges, 
-  // ...nahumChallenges,
+  ...jonahChallenges,
+  ...micahChallenges, 
+  ...nahumChallenges,
   ...habakkukChallenges,
-  // ...zephaniahChallenges,
+  ...zephaniahChallenges,
   ...haggaiChallenges,
   ...zechariahChallenges,
   ...malachiChallenges,
