@@ -67,7 +67,7 @@ export default {
 					blue: '#6AADDF',
 					beige: '#F5F0E5',
 					gold: '#E6C988',
-					dark: '#333342',
+					dark: '#171727',
 					light: '#FFFFFF',
 					sand: '#E8DCC9',
 					stone: '#B9B0A2',

@@ -29,8 +29,8 @@ import { ecclesiastesChallenges } from './ecclesiastes';
 // import { danielChallenges } from './daniel';
 // import { hoseaChallenges } from './hosea';
 // import { joelChallenges } from './joel';
-// import { amosChallenges } from './amos';
-// import { obadiahChallenges } from './obadiah';
+import { amosChallenges } from './amos';
+import { obadiahChallenges } from './obadiah';
 // import { jonahChallenges } from './jonah';
 // import { micahChallenges } from './micah';
 // import { nahumChallenges } from './nahum';
@@ -99,8 +99,8 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   // ...danielChallenges,
   // ...hoseaChallenges,
   // ...joelChallenges,
-  // ...amosChallenges,
-  // ...obadiahChallenges,
+  ...amosChallenges,
+  ...obadiahChallenges,
   // ...jonahChallenges,
   // ...micahChallenges, 
   // ...nahumChallenges,
