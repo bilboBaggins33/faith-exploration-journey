@@ -79,7 +79,7 @@ const Bible: React.FC = () => {
       <main className="flex-grow pb-10 relative">
         {/* Background for main book list */}
         {!selectedBook && (
-          <div className="inset-0 -z-10 bg-[#e8dcc4]">
+          <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
             <div className="absolute inset-0 opacity-20" style={{
               backgroundImage: `url('/parchment-texture.png')`,
               backgroundSize: 'cover',

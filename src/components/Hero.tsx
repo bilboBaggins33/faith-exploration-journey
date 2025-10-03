@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const heroBackgroundUrls = [
-  'assets/hero-bg.jpg'
+  'assets/bible/exodus.jpg'
 ];
 
 const Hero = () => {
@@ -47,7 +47,7 @@ const Hero = () => {
       ))}
       
       {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/70 via-bible-dark/50 to-bible-dark/70" />
+      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/50 via-bible-dark/40 to-bible-dark/20" />
       
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -57,15 +57,9 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
-          <span className="inline-block text-bible-gold bg-bible-dark/60 backdrop-blur-sm px-4 py-1 rounded-full text-sm font-medium uppercase tracking-wider mb-4">
-          Master Scripture Through Questions & Answers
-          </span>
-          <h1 className="text-3xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-            Deepen Your Faith Through Scripture & Theology
+          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
+            Learn Scripture Through Questions and Answers
           </h1>
-          <p className="max-w-3xl mx-auto text-lg md:text-xl text-white/90 mb-8">
-          Follow your growth and have fun while you learn.
-          </p>
         </motion.div>
         
         <motion.div
@@ -76,13 +70,13 @@ const Hero = () => {
         >
           <Link to="/bible">
             <Button size="lg" className="bg-bible-blue hover:bg-bible-deepBlue text-white px-8 h-12 rounded-md font-medium transition-all duration-300 transform hover:scale-105">
-              Start Reading
+              Start the Journey
               <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </Link>
           <Link to="/auth">
             <Button variant="outline" size="lg" className="bg-white/20 border-white text-white hover:bg-white/40 px-8 h-12 rounded-md font-medium transition-all duration-300">
-              Sign Up
+              Free Sign Up
             </Button>
           </Link>
         </motion.div>
