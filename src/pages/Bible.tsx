@@ -120,7 +120,7 @@ const Bible: React.FC = () => {
                 </div>
 
                 {/* Main content card */}
-                <div className="flex items-center justify-center p-4 pt-2 pb-12">
+                <div className="flex items-center justify-center p- pt-2 pb-12">
                   <div className="w-full max-w-4xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">

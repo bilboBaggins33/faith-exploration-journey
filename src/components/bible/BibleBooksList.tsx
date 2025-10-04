@@ -32,7 +32,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   
   return (
     <div className="space-y-8">
-      <Card className="p-6 bg-transparent backdrop-blur-sm shadow-xl border-0 rounded-2xl">
+      <Card className="bg-transparent backdrop-blur-sm shadow-xl border-0 rounded-2xl">
         <h2 className="text-2xl font-serif font-bold mb-6 text-white">Old Testament</h2>
         <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {oldTestamentBooks.map(book => (
