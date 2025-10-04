@@ -80,70 +80,21 @@ const Bible: React.FC = () => {
         {/* Background for main book list */}
         {!selectedBook && (
           <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
-            <div className="absolute inset-0 opacity-20" style={{
-              backgroundImage: `url('/parchment-texture.png')`,
-              backgroundSize: 'cover',
-              backgroundPosition: 'center'
-            }} />
+            <img 
+              src="/assets/bible/default.jpg"
+              alt="Bible background"
+              className="w-full h-full object-cover blur-sm scale-110"
+              loading="eager"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-black/50" />
           </div>
         )}
         
-        <div className="max-w-7xl mx-auto">
-          <div>
+        <div className="flex items-center justify-center p-4 pt-2 pb-12">
+          <div className="w-full max-w-4xl">
             {!selectedBook && (
               <div>
-                {/* Introduction Card */}
-                <Card className="mb-8 p-8 bg-white/95 backdrop-blur-sm shadow-xl border-0 rounded-2xl">
-                  <div className="prose max-w-none">
-                    <h2 className="text-3xl font-serif font-bold mb-4 text-foreground">Welcome to Bible Study</h2>
-                    <p className="mb-4 text-muted-foreground leading-relaxed">
-                      Explore the Bible by selecting a book below. Each book is organized by chapters, 
-                      allowing you to study at your own pace and track your progress.
-                    </p>
-                    <ul className="list-disc pl-6 space-y-2 mb-4 text-muted-foreground">
-                      <li>Click on any book to view its chapters</li>
-                      <li>Complete chapter challenges to track your progress</li>
-                    </ul>
-                    <p className="text-primary text-sm font-semibold">
-                      Your reading progress is automatically saved as you complete chapters.
-                    </p>
-                  </div>
-                </Card>
-                
-                {/* Search Filter */}
-                {/* <div className="mb-6">
-                  <BookSearchFilter 
-                    searchTerm={searchTerm} 
-                    setSearchTerm={setSearchTerm} 
-                    setActiveTestament={setActiveTestament} 
-                  />
-                </div> */}
-                
-                {user && recentlyReadBooks.length > 0 && (
-                  <div className="mb-10">
-                    <Card className="p-6 bg-white/95 backdrop-blur-sm shadow-xl border-0 rounded-2xl">
-                      <h2 className="text-2xl font-serif font-bold mb-6 text-foreground">Recently Read</h2>
-                      <div className="grid grid-cols-2 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
-                        {recentlyReadBooks.map(id => {
-                          const book = bibleBooks.find(book => book.id === id);
-                          if (!book) return null;
-                          return (
-                            <BibleBookCard
-                              key={book.id}
-                              bookId={book.id}
-                              bookName={book.name}
-                              totalChapters={book.chapters}
-                              progressPercent={getBookProgressPercentage(book.id)}
-                              testament={book.testament as 'old' | 'new'}
-                              onClick={() => handleBookSelect(book.id)}
-                            />
-                          );
-                        })}
-                      </div>
-                    </Card>
-                  </div>
-                )}
-                
                 <BibleBooksList 
                   books={bibleBooks}
                   getBookProgress={getBookProgressPercentage}
