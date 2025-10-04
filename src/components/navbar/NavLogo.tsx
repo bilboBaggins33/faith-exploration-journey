@@ -9,7 +9,7 @@ interface NavLogoProps {
 const NavLogo = ({ isHomePage, isBiblePage }: NavLogoProps) => {
   const logoSrc =
     isBiblePage
-      ? '/BibleQuestLogoDark.png' // default full homepage logo
+      ? '/BibleQuestLogo.png' // default full homepage logo
       : '/BibleQuestLogo.png'; // smaller or alternative logo for all other cases
 
   return (

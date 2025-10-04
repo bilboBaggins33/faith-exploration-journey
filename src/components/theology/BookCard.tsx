@@ -26,7 +26,7 @@ const BookCard: React.FC<BookCardProps> = ({
   const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
   
   return (
-    <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300">
+    <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0">
       <BookCardHeader 
         title={book.title}
         author={book.author}
