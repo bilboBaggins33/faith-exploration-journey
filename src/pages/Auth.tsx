@@ -24,44 +24,52 @@ const AuthPage = () => {
       <ScrollToTop />
       <Navbar />
       
-      <main className="flex-1 pt-16">
-        <section className="py-10 bg-bible-beige min-h-[calc(100vh-4rem)]">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex justify-center items-center min-h-[calc(100vh-16rem)]">
-              <div className="w-full max-w-md">
-                <div className="glass-card rounded-xl shadow-xl overflow-hidden">
-                  <Tabs defaultValue="login" className="w-full">
-                    <div className="px-6 pt-6">
-                      <TabsList className="grid grid-cols-2 w-full">
-                        <TabsTrigger value="login">Sign In</TabsTrigger>
-                        <TabsTrigger value="register">Sign Up</TabsTrigger>
-                      </TabsList>
-                    </div>
-                    
-                    <div className="p-6">
-                      <TabsContent value="login">
-                        <LoginForm />
-                      </TabsContent>
-                      
-                      <TabsContent value="register">
-                        <RegisterForm />
-                      </TabsContent>
-                    </div>
-                  </Tabs>
+      <main className="flex-grow pb-10 relative">
+        {/* Blurred background */}
+        <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
+          <img 
+            src="/assets/bible/default.jpg"
+            alt="Auth background"
+            className="w-full h-full object-cover blur-sm scale-110"
+            loading="eager"
+            decoding="async"
+          />
+          <div className="absolute inset-0 bg-black/50" />
+        </div>
+
+        <div className="flex items-center justify-center p-4 pt-2 pb-12 min-h-screen">
+          <div className="w-full max-w-md">
+            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
+              <Tabs defaultValue="login" className="w-full">
+                <div className="px-6 pt-6">
+                  <TabsList className="grid grid-cols-2 w-full">
+                    <TabsTrigger value="login">Sign In</TabsTrigger>
+                    <TabsTrigger value="register">Sign Up</TabsTrigger>
+                  </TabsList>
                 </div>
                 
-                <div className="text-center mt-8">
-                  <p className="text-sm text-bible-dark/70">
-                    By signing in or creating an account, you agree to our{' '}
-                    <Link to="/terms" className="text-bible-blue hover-link">Terms of Service</Link>{' '}
-                    and{' '}
-                    <Link to="/privacy" className="text-bible-blue hover-link">Privacy Policy</Link>.
-                  </p>
+                <div className="p-6">
+                  <TabsContent value="login">
+                    <LoginForm />
+                  </TabsContent>
+                  
+                  <TabsContent value="register">
+                    <RegisterForm />
+                  </TabsContent>
                 </div>
-              </div>
+              </Tabs>
+            </div>
+            
+            <div className="text-center mt-8">
+              <p className="text-sm text-white/80">
+                By signing in or creating an account, you agree to our{' '}
+                <Link to="/terms" className="text-white hover:underline font-medium">Terms of Service</Link>{' '}
+                and{' '}
+                <Link to="/privacy" className="text-white hover:underline font-medium">Privacy Policy</Link>.
+              </p>
             </div>
           </div>
-        </section>
+        </div>
       </main>
       
       <Footer />
