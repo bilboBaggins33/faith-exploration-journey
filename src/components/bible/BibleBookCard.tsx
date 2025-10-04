@@ -1,6 +1,6 @@
 
 import React, { useState } from 'react';
-import { getBookImage } from '@/data/bible/book-images';
+import { getBookThumbnail } from '@/data/bible/book-images';
 import { Progress } from '@/components/ui/progress';
 import { Card } from '@/components/ui/card';
 
@@ -30,10 +30,10 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
     >
       <div className="relative pb-[46.67%] bg-[#e8dcc4]">
         <img
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
+          src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
           className="absolute inset-0 object-cover w-full h-full"
-          loading="eager"
+          loading="lazy"
           decoding="async"
           onError={() => setImageError(true)}
         />

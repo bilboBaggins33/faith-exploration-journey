@@ -72,11 +72,13 @@ export const bibleBookImages: Record<string, string> = {
   'revelation': '/assets/bible/revelation.jpg',
 };
 
-// Define thumbnail images (paths are derived from main images)
-export const bibleBookThumbnails: Record<string, string> = Object.entries(bibleBookImages).reduce(
-  (acc, [key, value]) => {
-    // Convert "/path/image.jpg" to "/path/image-thumb.jpg"
-    acc[key] = value.replace('.jpg', '-thumb.jpg');
+// Define thumbnail images (use existing thumbnail directory)
+export const bibleBookThumbnails: Record<string, string> = Object.keys(bibleBookImages).reduce(
+  (acc, key) => {
+    // Convert "/assets/bible/genesis.jpg" to "/assets/bible/thumbnail/genesis.jpg"
+    const mainImage = bibleBookImages[key];
+    const imageName = mainImage.split('/').pop(); // Get filename
+    acc[key] = `/assets/bible/thumbnail/${imageName}`;
     return acc;
   },
   {} as Record<string, string>

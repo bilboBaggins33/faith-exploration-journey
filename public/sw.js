@@ -44,16 +44,28 @@ self.addEventListener('activate', function(evt) {
 
 // Fetch event provides content when offline
 self.addEventListener('fetch', function(evt) {
-  console.log('[PWA] The service worker is serving the asset.');
+  // Skip non-GET requests
+  if (evt.request.method !== 'GET') return;
   
-  // Cache images aggressively
+  // Cache images aggressively with cache-first strategy
   if (evt.request.url.includes('/assets/bible/') || evt.request.url.includes('/assets/')) {
     evt.respondWith(
       caches.open(IMAGE_CACHE).then(function(cache) {
         return cache.match(evt.request).then(function(response) {
-          return response || fetch(evt.request).then(function(fetchResponse) {
-            cache.put(evt.request, fetchResponse.clone());
+          // Return cached version if available
+          if (response) {
+            return response;
+          }
+          // Otherwise fetch and cache
+          return fetch(evt.request).then(function(fetchResponse) {
+            // Only cache successful responses
+            if (fetchResponse && fetchResponse.status === 200) {
+              cache.put(evt.request, fetchResponse.clone());
+            }
             return fetchResponse;
+          }).catch(function() {
+            // Return a fallback if offline and not in cache
+            return cache.match('/assets/bible/default.jpg');
           });
         });
       })
