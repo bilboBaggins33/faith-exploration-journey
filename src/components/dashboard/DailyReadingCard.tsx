@@ -26,7 +26,7 @@ const DailyReadingCard = () => {
               <span>Genesis 1</span>
             </div>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/challenge/bible/GEN/1">
+              <Link to="/bible/GEN/1">
                 Read
               </Link>
             </Button>
@@ -39,7 +39,7 @@ const DailyReadingCard = () => {
               <span>Matthew 1</span>
             </div>
             <Button variant="ghost" size="sm" asChild>
-              <Link to="/challenge/bible/MAT/1">
+              <Link to="/bible/MAT/1">
                 Read
               </Link>
             </Button>

@@ -24,7 +24,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const bookChapters = Array.from({ length: book.chapters }, (_, i) => i + 1);
   
   const navigateToChapter = (chapterBookId: string, chapter: number) => {
-    navigate(`/challenge/bible/${chapterBookId}/${chapter}`);
+    navigate(`/bible/${chapterBookId}/${chapter}`);
   };
 
   return (

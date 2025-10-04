@@ -92,7 +92,7 @@ const DailyReadingPlan = () => {
   
   const navigateToChapter = (bookId: string, chapter: number) => {
     // Remove the authentication check for the first chapter
-    navigate(`/challenge/bible/${bookId}/${chapter}`);
+    navigate(`/bible/${bookId}/${chapter}`);
   };
   
   const getCompletionStatus = (bookId: string, chapter: number) => {

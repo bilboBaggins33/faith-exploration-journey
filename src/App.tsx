@@ -61,7 +61,7 @@ const router = createBrowserRouter([
         element: <Bible />,
       },
       {
-        path: 'challenge/bible/:bookId/:chapter',
+        path: 'bible/:bookId/:chapter',
         element: <Chapter />,
       },
       {

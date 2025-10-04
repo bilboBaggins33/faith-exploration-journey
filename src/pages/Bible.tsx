@@ -62,7 +62,7 @@ const Bible: React.FC = () => {
   };
   
   const handleGoToChallenge = (bookId: string, chapter: number) => {
-    navigate(`/challenge/bible/${bookId}/${chapter}`);
+    navigate(`/bible/${bookId}/${chapter}`);
   };
   
   // Helper function to transform the book progress object to just return the percentage
