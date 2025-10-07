@@ -36,7 +36,7 @@ const BookCard: React.FC<BookCardProps> = ({
           thumbnailImage={thumbnailImage}
         />
         
-        <CardContent className="flex-grow pt-4 px-3 sm:px-4 pb-3">
+        <CardContent className="flex-grow pt-4 px-3 sm:px-4 pb-3 bg-card">
           <BookCardProgress 
             completionPercentage={completionPercentage}
             averageScore={averageScore}

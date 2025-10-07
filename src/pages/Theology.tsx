@@ -56,7 +56,7 @@ const Theology = () => {
           <div className="absolute inset-0 bg-black/50" />
         </div>
 
-        <div className="flex items-center justify-center p-4 pt-2 pb-12">
+        <div className="flex items-center justify-center p-4 pt-2 md:pt-28 pb-12">
           <div className="w-full max-w-4xl">
             {selectedBook ? (
               <BookDetail 
