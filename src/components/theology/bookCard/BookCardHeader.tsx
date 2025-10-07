@@ -39,9 +39,10 @@ const BookCardHeader: React.FC<BookCardHeaderProps> = ({
             }
           }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent flex flex-col justify-end p-3 ">
-          <h3 className="text-sm sm:text-base md:text-lg font-bold text-white line-clamp-2">{title}</h3>
-          <p className="text-white/80 text-xs sm:text-sm truncate">by {author}</p>
+        <div className="absolute top-2 right-2">
+          <Badge variant="secondary" className="text-xs">
+            {category}
+          </Badge>
         </div>
       </AspectRatio>
     </div>

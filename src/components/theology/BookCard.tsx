@@ -26,32 +26,24 @@ const BookCard: React.FC<BookCardProps> = ({
   const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
   
   return (
-    <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0">
-      <BookCardHeader 
-        title={book.title}
-        author={book.author}
-        category={book.category}
-        coverImage={book.coverImage}
-        thumbnailImage={thumbnailImage}
-      />
-      
-      <CardContent className="flex-grow pt-4 px-3 sm:px-4">
-        <BookCardProgress 
-          completionPercentage={completionPercentage}
-          averageScore={averageScore}
+    <Link to={`/theology/${book.id}`} className="block">
+      <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0 cursor-pointer">
+        <BookCardHeader 
+          title={book.title}
+          author={book.author}
+          category={book.category}
+          coverImage={book.coverImage}
+          thumbnailImage={thumbnailImage}
         />
-      </CardContent>
-      
-      <CardFooter className="pt-0 pb-3 px-3 sm:px-4">
-        <Link to={`/theology/${book.id}`} className="w-full">
-          <Button size={isMobile ? "sm" : "default"} className="w-full flex items-center justify-center gap-1 sm:gap-2">
-            <BookText className="h-3 w-3 sm:h-4 sm:w-4" />
-            <span className="text-xs sm:text-sm">Explore</span>
-            <ArrowRight className="h-3 w-3 sm:h-4 sm:w-4" />
-          </Button>
-        </Link>
-      </CardFooter>
-    </Card>
+        
+        <CardContent className="flex-grow pt-4 px-3 sm:px-4 pb-3">
+          <BookCardProgress 
+            completionPercentage={completionPercentage}
+            averageScore={averageScore}
+          />
+        </CardContent>
+      </Card>
+    </Link>
   );
 };
 

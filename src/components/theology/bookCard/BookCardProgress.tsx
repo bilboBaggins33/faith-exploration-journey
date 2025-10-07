@@ -16,7 +16,7 @@ const BookCardProgress: React.FC<BookCardProgressProps> = ({
     <div className="space-y-3">
       <div>
         <div className="flex justify-between mb-1 text-xs sm:text-sm">
-          <span>Completion</span>
+          <span>Chapters</span>
           <span>{completionPercentage}%</span>
         </div>
         <Progress value={completionPercentage} className="h-1.5 sm:h-2" />

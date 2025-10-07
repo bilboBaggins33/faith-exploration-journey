@@ -109,29 +109,11 @@ const TheologyExplorer: React.FC = () => {
                 />
               </div>
             ) : (
-              <div>
-                {/* Search Bar */}
-                <div className="mb-6">
-                  <div className="relative max-w-md mx-auto">
-                    <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                      <Search className="h-5 w-5 text-gray-400" />
-                    </div>
-                    <Input
-                      type="text"
-                      placeholder="Search by title, author, or category..."
-                      className="pl-10 w-full bg-white/90"
-                      value={searchQuery}
-                      onChange={(e) => setSearchQuery(e.target.value)}
-                    />
-                  </div>
-                </div>
-                
-                <BookList 
-                  books={filteredBooks}
-                  getBookProgress={getBookProgress}
-                  getBookAverageScore={getBookAverageScore}
-                />
-              </div>
+              <BookList 
+                books={sortedBooks}
+                getBookProgress={getBookProgress}
+                getBookAverageScore={getBookAverageScore}
+              />
             )}
           </div>
         </div>
