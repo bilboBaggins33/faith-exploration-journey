@@ -1,7 +1,7 @@
 
 // This is the service worker with the Cache-first network
-const CACHE = "pwa-cache-v4";
-const IMAGE_CACHE = "pwa-images-v4";
+const CACHE = "pwa-cache-v5";
+const IMAGE_CACHE = "pwa-images-v5";
 
 // Add list of files to cache here.
 const precacheFiles = [
@@ -10,7 +10,11 @@ const precacheFiles = [
   '/manifest.json',
   '/icons/icon-192x192.png',
   '/icons/icon-512x512.png',
-  '/icons/apple-touch-icon.png'
+  '/icons/apple-touch-icon.png',
+  '/assets/bible/default.jpg',
+  '/assets/hero-bg.jpg',
+  '/BibleQuestLogo.png',
+  '/BibleQuestLogoDark.png'
 ];
 
 // Install stage sets up the cache-array to configure pre-cache content
@@ -32,7 +36,7 @@ self.addEventListener('activate', function(evt) {
   evt.waitUntil(
     caches.keys().then(keyList => {
       return Promise.all(keyList.map(key => {
-        if (key !== CACHE) {
+        if (key !== CACHE && key !== IMAGE_CACHE) {
           console.log('[PWA] Removing old cache', key);
           return caches.delete(key);
         }
