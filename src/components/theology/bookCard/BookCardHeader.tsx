@@ -22,8 +22,8 @@ const BookCardHeader: React.FC<BookCardHeaderProps> = ({
   const imageToUse = thumbnailImage || coverImage;
   
   return (
-    <div className="relative overflow-hidden">
-      <AspectRatio ratio={2/3} className="bg-muted">
+    <div className="relative overflow-hidden rounded-t-xl">
+      <AspectRatio ratio={2/3}>
         <img 
           src={imageToUse} 
           alt={title}
