@@ -73,6 +73,10 @@ const router = createBrowserRouter([
         element: <Theology />,
       },
       {
+        path: 'theology/:bookId',
+        element: <Theology />,
+      },
+      {
         path: 'contact',
         element: <Contact />,
       },
