@@ -27,7 +27,7 @@ const BookCard: React.FC<BookCardProps> = ({
   
   return (
     <Link to={`/theology/${book.id}`} className="block">
-      <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0 cursor-pointer bg-transparent">
+      <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0 cursor-pointer">
         <BookCardHeader 
           title={book.title}
           author={book.author}
