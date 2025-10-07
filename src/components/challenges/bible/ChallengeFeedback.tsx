@@ -122,7 +122,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
 
       {/* Main content card */}
       <div className="flex items-center justify-center p-4 pt-2 pb-12">
-        <div ref={headerRef} className="w-full max-w-2xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
+        <div ref={headerRef} className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
           <div className="relative overflow-hidden">
             {/* Background image */}
@@ -168,7 +168,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           </div>
 
           {/* Question content */}
-          <div className="px-6 pb-6">
+          <div className="px-6 pb-6 bg-white">
             <QuestionCard
               question={currentQuestionData.question}
               options={currentQuestionData.options}

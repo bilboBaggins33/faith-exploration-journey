@@ -121,7 +121,7 @@ const Bible: React.FC = () => {
 
                 {/* Main content card */}
                 <div className="flex items-center justify-center p- pt-2 pb-12">
-                  <div className="w-full max-w-4xl bg-white backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+                  <div className="w-full max-w-4xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
@@ -170,7 +170,7 @@ const Bible: React.FC = () => {
                     </div>
 
                     {/* Chapters grid */}
-                    <div className="p-6">
+                    <div className="p-6 bg-white ">
                       <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
                       <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
