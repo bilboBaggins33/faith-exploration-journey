@@ -28,7 +28,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col border-0 rounded-xl"
       onClick={onClick}
     >
-      <div className="relative pb-[46.67%] bg-[#e8dcc4]">
+      <div className="relative pb-[46.67%] rounded-t-xl overflow-hidden bg-transparent">
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
@@ -46,7 +46,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         </div>
       </div>
       
-      <div className="p-3 mt-auto">
+      <div className="p-3 mt-auto bg-card rounded-b-xl">
         <div className="flex justify-between items-center text-xs mb-1">
           <span className="text-gray-600">{totalChapters} chapters</span>
           <span className="font-medium">{progressPercent}%</span>

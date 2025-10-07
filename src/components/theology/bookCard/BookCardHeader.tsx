@@ -23,7 +23,7 @@ const BookCardHeader: React.FC<BookCardHeaderProps> = ({
   
   return (
     <div className="relative overflow-hidden">
-      <AspectRatio ratio={2/3} className="bg-muted">
+      <AspectRatio ratio={2/3} className="rounded-t-xl overflow-hidden">
         <img 
           src={imageToUse} 
           alt={title}
