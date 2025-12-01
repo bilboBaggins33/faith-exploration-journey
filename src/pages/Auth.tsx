@@ -1,7 +1,5 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { 
@@ -20,59 +18,114 @@ import ScrollToTop from '@/components/ScrollToTop';
 
 const AuthPage = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex">
       <ScrollToTop />
-      <Navbar />
       
-      <main className="flex-grow pb-10 relative">
-        {/* Blurred background */}
-        <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
+      {/* Left side - Branding with gradient background */}
+      <div className="hidden lg:flex lg:w-1/2 relative overflow-hidden bg-gradient-to-br from-bible-blue via-bible-deepBlue to-bible-dark">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-10">
           <img 
             src="/assets/bible/default.jpg"
             alt="Auth background"
-            className="w-full h-full object-cover blur-sm scale-110"
+            className="w-full h-full object-cover"
             loading="eager"
             decoding="async"
           />
-          <div className="absolute inset-0 bg-black/50" />
         </div>
-
-        <div className="flex items-center justify-center p-4 pt-2 pb-12 min-h-screen">
-          <div className="w-full max-w-md">
-            <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-xl overflow-hidden">
-              <Tabs defaultValue="login" className="w-full">
-                <div className="px-6 pt-6">
-                  <TabsList className="grid grid-cols-2 w-full">
-                    <TabsTrigger value="login">Sign In</TabsTrigger>
-                    <TabsTrigger value="register">Sign Up</TabsTrigger>
-                  </TabsList>
-                </div>
-                
-                <div className="p-6">
-                  <TabsContent value="login">
-                    <LoginForm />
-                  </TabsContent>
-                  
-                  <TabsContent value="register">
-                    <RegisterForm />
-                  </TabsContent>
-                </div>
-              </Tabs>
-            </div>
+        
+        {/* Content */}
+        <div className="relative z-10 flex flex-col justify-between p-12 text-white">
+          <div>
+            <Link to="/" className="inline-block">
+              <img
+                src="/BibleQuestLogoDark.png"
+                alt="Bible Quest Logo"
+                className="h-16 w-auto mb-12 brightness-0 invert"
+              />
+            </Link>
+          </div>
+          
+          <div className="space-y-6">
+            <h1 className="text-4xl font-serif font-bold leading-tight">
+              Deepen Your Understanding of Scripture
+            </h1>
+            <p className="text-lg text-white/90">
+              Join thousands of believers exploring God's Word through interactive challenges, 
+              reading plans, and theological insights.
+            </p>
             
-            <div className="text-center mt-8">
-              <p className="text-sm text-white/80">
-                By signing in or creating an account, you agree to our{' '}
-                <Link to="/terms" className="text-white hover:underline font-medium">Terms of Service</Link>{' '}
-                and{' '}
-                <Link to="/privacy" className="text-white hover:underline font-medium">Privacy Policy</Link>.
-              </p>
+            <div className="grid grid-cols-2 gap-4 pt-8">
+              <div className="space-y-2">
+                <div className="text-3xl font-bold">1,189</div>
+                <div className="text-sm text-white/80">Bible Chapters</div>
+              </div>
+              <div className="space-y-2">
+                <div className="text-3xl font-bold">15+</div>
+                <div className="text-sm text-white/80">Theology Books</div>
+              </div>
             </div>
           </div>
+          
+          <div className="text-sm text-white/60">
+            © 2024 Bible Quest. All rights reserved.
+          </div>
         </div>
-      </main>
+      </div>
       
-      <Footer />
+      {/* Right side - Auth form */}
+      <div className="flex-1 flex items-center justify-center p-8 bg-gradient-to-br from-bible-light via-white to-bible-cream">
+        <div className="w-full max-w-md">
+          {/* Mobile logo */}
+          <div className="lg:hidden mb-8 text-center">
+            <Link to="/" className="inline-block">
+              <img
+                src="/BibleQuestLogo.png"
+                alt="Bible Quest Logo"
+                className="h-12 w-auto mx-auto"
+              />
+            </Link>
+          </div>
+          
+          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+            <Tabs defaultValue="login" className="w-full">
+              <div className="px-6 pt-6 pb-2">
+                <TabsList className="grid grid-cols-2 w-full bg-bible-light">
+                  <TabsTrigger 
+                    value="login"
+                    className="data-[state=active]:bg-white data-[state=active]:text-bible-blue"
+                  >
+                    Sign In
+                  </TabsTrigger>
+                  <TabsTrigger 
+                    value="register"
+                    className="data-[state=active]:bg-white data-[state=active]:text-bible-blue"
+                  >
+                    Sign Up
+                  </TabsTrigger>
+                </TabsList>
+              </div>
+              
+              <div className="p-6 pt-4">
+                <TabsContent value="login" className="mt-0">
+                  <LoginForm />
+                </TabsContent>
+                
+                <TabsContent value="register" className="mt-0">
+                  <RegisterForm />
+                </TabsContent>
+              </div>
+            </Tabs>
+          </div>
+          
+          <div className="text-center mt-6 text-sm text-gray-600">
+            By continuing, you agree to our{' '}
+            <Link to="/terms" className="text-bible-blue hover:underline font-medium">Terms</Link>
+            {' '}and{' '}
+            <Link to="/privacy" className="text-bible-blue hover:underline font-medium">Privacy Policy</Link>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };
