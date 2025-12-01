@@ -14,7 +14,87 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      bible_progress: {
+        Row: {
+          books_progress: Json | null
+          challenges_completed: string[] | null
+          completed_chapters: Json | null
+          total_chapters_read: number | null
+          total_points: number | null
+          user_id: string
+          verses_memorized: string[] | null
+        }
+        Insert: {
+          books_progress?: Json | null
+          challenges_completed?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          total_points?: number | null
+          user_id: string
+          verses_memorized?: string[] | null
+        }
+        Update: {
+          books_progress?: Json | null
+          challenges_completed?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          total_points?: number | null
+          user_id?: string
+          verses_memorized?: string[] | null
+        }
+        Relationships: []
+      }
+      theology_progress: {
+        Row: {
+          books_completed: string[] | null
+          books_started: string[] | null
+          completed_chapters: Json | null
+          total_chapters_read: number | null
+          total_points: number | null
+          user_id: string
+        }
+        Insert: {
+          books_completed?: string[] | null
+          books_started?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          total_points?: number | null
+          user_id: string
+        }
+        Update: {
+          books_completed?: string[] | null
+          books_started?: string[] | null
+          completed_chapters?: Json | null
+          total_chapters_read?: number | null
+          total_points?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      user_profiles: {
+        Row: {
+          full_name: string | null
+          last_active: string | null
+          points: number | null
+          streak: number | null
+          user_id: string
+        }
+        Insert: {
+          full_name?: string | null
+          last_active?: string | null
+          points?: number | null
+          streak?: number | null
+          user_id: string
+        }
+        Update: {
+          full_name?: string | null
+          last_active?: string | null
+          points?: number | null
+          streak?: number | null
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
