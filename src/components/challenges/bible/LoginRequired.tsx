@@ -25,27 +25,29 @@ const LoginRequired = () => {
   return (
     <ChallengeSkeleton>
       <div className="flex-1 flex items-center justify-center p-4 pt-24">
-        <Card className="p-8 max-w-md text-center">
-          <AlertCircle className="mx-auto text-blue-500 mb-4" size={40} />
-          <h2 className="text-xl font-bold mb-2">Login Required</h2>
-          <p className="text-gray-600 mb-6">You need to be logged in to save your progress. Please log in to continue.</p>
+        <Card className="glass-card rounded-2xl shadow-xl p-8 max-w-md w-full text-center">
+          <AlertCircle className="mx-auto text-bible-blue mb-4" size={40} />
+          <h2 className="text-2xl font-semibold mb-2">Sign in to Save Your Progress</h2>
+          <p className="text-sm text-muted-foreground mb-6">
+            Create a free account or sign in so we can keep track of your Bible and theology challenge progress across devices.
+          </p>
           <div className="space-y-4">
             <Button onClick={() => navigate('/auth')} className="w-full">
-              Go to Login
+              Go to Sign In / Sign Up
             </Button>
             <div className="relative">
               <div className="absolute inset-0 flex items-center">
-                <span className="w-full border-t border-gray-300" />
+                <span className="w-full border-t border-border" />
               </div>
-              <div className="relative flex justify-center text-sm">
-                <span className="px-2 bg-white text-gray-500">Or</span>
+              <div className="relative flex justify-center text-xs font-medium text-muted-foreground uppercase tracking-wide">
+                <span className="px-3 bg-card">Or continue with</span>
               </div>
             </div>
             <Button 
               variant="outline" 
               onClick={handleGoogleSignIn}
               disabled={isSigningIn}
-              className="w-full flex items-center justify-center"
+              className="w-full flex items-center justify-center bg-card hover:bg-muted transition-colors"
             >
               {isSigningIn ? (
                 <span className="flex items-center">
@@ -63,7 +65,7 @@ const LoginRequired = () => {
                     <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
                     <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
                   </svg>
-                  Sign in with Google
+                  <span className="text-sm font-medium">Sign in with Google</span>
                 </>
               )}
             </Button>
