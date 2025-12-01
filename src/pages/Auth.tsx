@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -9,7 +9,7 @@ import {
   TabsTrigger 
 } from "@/components/ui/tabs";
 import { Eye, EyeOff, User, Key, Mail, ShieldCheck, CreditCard } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { supabase } from '@/lib/supabase';
@@ -17,6 +17,17 @@ import { Link } from 'react-router-dom';
 import ScrollToTop from '@/components/ScrollToTop';
 
 const AuthPage = () => {
+  const { user, isLoading } = useAuth();
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Redirect if already logged in
+  useEffect(() => {
+    if (!isLoading && user) {
+      const state = location.state as { from?: string } | null;
+      navigate(state?.from || '/dashboard');
+    }
+  }, [user, isLoading, navigate, location]);
   return (
     <div className="min-h-screen flex">
       <ScrollToTop />
@@ -74,23 +85,34 @@ const AuthPage = () => {
       </div>
       
       {/* Right side - Auth form */}
-      <div className="flex-1 flex items-center justify-center p-8 bg-gradient-to-br from-bible-light via-white to-bible-cream">
-        <div className="w-full max-w-md">
+      <div className="flex-1 flex items-center justify-center p-6 md:p-8 lg:p-12 bg-gradient-to-br from-bible-dark via-bible-deepBlue to-bible-dark relative">
+        {/* Background pattern */}
+        <div className="absolute inset-0 opacity-5">
+          <img 
+            src="/assets/bible/default.jpg"
+            alt="Auth background"
+            className="w-full h-full object-cover"
+            loading="eager"
+            decoding="async"
+          />
+        </div>
+        
+        <div className="relative z-10 w-full max-w-md">
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 text-center">
             <Link to="/" className="inline-block">
               <img
-                src="/BibleQuestLogo.png"
+                src="/BibleQuestLogoDark.png"
                 alt="Bible Quest Logo"
-                className="h-12 w-auto mx-auto"
+                className="h-12 w-auto mx-auto brightness-0 invert"
               />
             </Link>
           </div>
           
-          <div className="bg-white rounded-2xl shadow-2xl overflow-hidden border border-gray-100">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl shadow-2xl overflow-hidden border border-white/20">
             <Tabs defaultValue="login" className="w-full">
-              <div className="px-6 pt-6 pb-2">
-                <TabsList className="grid grid-cols-2 w-full bg-bible-light">
+              <div className="px-6 pt-8 pb-3">
+                <TabsList className="grid grid-cols-2 w-full bg-gray-100">
                   <TabsTrigger 
                     value="login"
                     className="data-[state=active]:bg-white data-[state=active]:text-bible-blue"
@@ -106,7 +128,7 @@ const AuthPage = () => {
                 </TabsList>
               </div>
               
-              <div className="p-6 pt-4">
+              <div className="p-6 pt-6">
                 <TabsContent value="login" className="mt-0">
                   <LoginForm />
                 </TabsContent>
@@ -118,11 +140,11 @@ const AuthPage = () => {
             </Tabs>
           </div>
           
-          <div className="text-center mt-6 text-sm text-gray-600">
+          <div className="text-center mt-8 text-sm text-white/80">
             By continuing, you agree to our{' '}
-            <Link to="/terms" className="text-bible-blue hover:underline font-medium">Terms</Link>
+            <Link to="/terms" className="text-bible-gold hover:text-bible-gold/80 hover:underline font-medium">Terms</Link>
             {' '}and{' '}
-            <Link to="/privacy" className="text-bible-blue hover:underline font-medium">Privacy Policy</Link>
+            <Link to="/privacy" className="text-bible-gold hover:text-bible-gold/80 hover:underline font-medium">Privacy Policy</Link>
           </div>
         </div>
       </div>
@@ -137,8 +159,15 @@ const LoginForm = () => {
   const [loggingIn, setLoggingIn] = useState(false);
   const [loggingInWithGoogle, setLoggingInWithGoogle] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
   const { signIn, signInWithGoogle } = useAuth();
   const { toast } = useToast();
+  
+  // Get the return URL from location state, or default to dashboard
+  const getReturnUrl = () => {
+    const state = location.state as { from?: string } | null;
+    return state?.from || '/dashboard';
+  };
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -155,7 +184,7 @@ const LoginForm = () => {
     try {
       setLoggingIn(true);
       await signIn(email, password);
-      navigate('/dashboard');
+      navigate(getReturnUrl());
     } catch (error) {
       console.error('Login error:', error);
     } finally {
@@ -204,14 +233,14 @@ const LoginForm = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="space-y-6">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-serif font-bold">Welcome Back</h1>
-          <p className="text-sm text-bible-dark/70">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-serif font-bold text-bible-dark">Welcome Back</h1>
+          <p className="text-sm text-bible-dark/70 mt-2">
             Sign in to continue your biblical journey
           </p>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
             <label 
               htmlFor="email" 
@@ -301,7 +330,7 @@ const LoginForm = () => {
           </Button>
         </form>
         
-        <div className="relative">
+        <div className="relative my-6">
           <div className="absolute inset-0 flex items-center">
             <span className="w-full border-t border-gray-300" />
           </div>
@@ -312,7 +341,7 @@ const LoginForm = () => {
           </div>
         </div>
         
-        <div className="grid grid-cols-2 gap-3">
+        <div className="grid grid-cols-2 gap-3 mt-6">
           <button
             type="button"
             onClick={handleGoogleSignIn}
@@ -427,14 +456,14 @@ const RegisterForm = () => {
       transition={{ duration: 0.3 }}
     >
       <div className="space-y-6">
-        <div className="text-center mb-8">
-          <h1 className="text-2xl font-serif font-bold">Create Your Account</h1>
-          <p className="text-sm text-bible-dark/70">
+        <div className="text-center mb-6">
+          <h1 className="text-2xl font-serif font-bold text-bible-dark">Create Your Account</h1>
+          <p className="text-sm text-bible-dark/70 mt-2">
             Join our community of Bible explorers
           </p>
         </div>
         
-        <div className="bg-blue-50 border border-blue-100 rounded-lg p-4 mb-4">
+        <div className="bg-blue-50 border border-blue-100 rounded-lg p-5 mb-5">
           <div className="flex items-start">
             <CreditCard className="text-bible-blue mt-1 mr-3 flex-shrink-0" size={18} />
             <div>
@@ -453,7 +482,7 @@ const RegisterForm = () => {
           </div>
         </div>
         
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="space-y-2">
             <label 
               htmlFor="name" 

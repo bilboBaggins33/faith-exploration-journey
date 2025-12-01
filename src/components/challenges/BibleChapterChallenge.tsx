@@ -1,15 +1,16 @@
 
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
-import LoginRequired from './bible/LoginRequired';
 import ChallengeFeedback from './bible/ChallengeFeedback';
 import { useBibleChallenge } from '@/hooks/bible/use-bible-challenge';
 
 const BibleChapterChallenge: React.FC = () => {
   const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
+  const navigate = useNavigate();
+  const location = useLocation();
   const { user } = useAuth();
   
   const {
@@ -23,8 +24,16 @@ const BibleChapterChallenge: React.FC = () => {
     handleGoBack
   } = useBibleChallenge(bookId, chapter);
   
+  // Redirect to auth if not logged in and not first chapter
+  useEffect(() => {
+    if (!user && !isFirstChapter && !state.loading) {
+      navigate('/auth', { state: { from: location.pathname } });
+    }
+  }, [user, isFirstChapter, state.loading, navigate, location.pathname]);
+  
+  // Show loading while redirecting or checking auth
   if (!user && !isFirstChapter) {
-    return <LoginRequired />;
+    return null; // Will redirect via useEffect
   }
   
   if (state.loading) {
