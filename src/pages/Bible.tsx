@@ -72,7 +72,7 @@ const Bible: React.FC = () => {
       <main className="flex-grow pb-10 relative">
         {/* Background for main book list */}
         {!selectedBook && (
-          <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
+          <div className="fixed inset-0 -z-10 bg-[#2b1306]">
             <img 
               src="/assets/bible/default.jpg"
               alt="Bible background"
@@ -101,7 +101,7 @@ const Bible: React.FC = () => {
             {selectedBook && !selectedChapter && (
               <div className="relative overflow-hidden">
                 {/* Blurred background */}
-                <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
+                <div className="fixed inset-0 -z-10 bg-[#2b1306]">
                   <img 
                     src={getBookImage(selectedBook.id)} 
                     alt={`${selectedBook.name} background`}
@@ -121,7 +121,7 @@ const Bible: React.FC = () => {
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
-                      <div className="absolute inset-0 bg-[#e8dcc4]">
+                      <div className="absolute inset-0 bg-[#2b1306]">
                         <img 
                           src={getBookImage(selectedBook.id)} 
                           alt={`${selectedBook.name} background`}

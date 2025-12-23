@@ -80,7 +80,7 @@ const TheologyExplorer: React.FC = () => {
       
       <main className="flex-grow pb-10 relative">
         {/* Blurred background */}
-        <div className="fixed inset-0 -z-10 bg-[#e8dcc4]">
+        <div className="fixed inset-0 -z-10 bg-[#2b1306]">
           <img 
             src="/assets/bible/default.jpg"
             alt="Theology background"
