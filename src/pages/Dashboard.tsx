@@ -1,8 +1,6 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
@@ -92,7 +90,7 @@ const Dashboard = () => {
   const streak = profile?.streak || 0;
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-grow py-8 px-4 bg-bible-beige">
@@ -116,8 +114,6 @@ const Dashboard = () => {
           />
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

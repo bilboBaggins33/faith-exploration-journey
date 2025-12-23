@@ -1,8 +1,6 @@
-
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import BibleChapterChallenge from '@/components/challenges/BibleChapterChallenge';
 import LoadingState from '@/components/challenges/bible/LoadingState';
 import ErrorState from '@/components/challenges/bible/ErrorState';
@@ -11,7 +9,6 @@ import { useAuth } from '@/context/auth';
 import { ChapterChallenge } from '@/data/bible/types';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import ChallengeSkeleton from '@/components/challenges/bible/ChallengeSkeleton';
-import ScrollToTop from '@/components/ScrollToTop';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
@@ -114,8 +111,7 @@ const Chapter = () => {
   };
   
   return (
-    <div className="flex flex-col">
-      <ScrollToTop />
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-grow">
@@ -123,8 +119,6 @@ const Chapter = () => {
           {renderContent()}
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

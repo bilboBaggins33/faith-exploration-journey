@@ -1,4 +1,3 @@
-
 import { useState } from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
@@ -8,7 +7,6 @@ import { Mail, MessageSquare, User } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
 
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -69,7 +67,7 @@ const Contact = () => {
   }
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col flex-1">
       <Navbar />
       <main className="flex-grow pt-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -187,7 +185,6 @@ const Contact = () => {
           </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

@@ -1,8 +1,6 @@
-
 import { useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import { BookOpen, BookText, Target, Award, Users, MessageSquare, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -13,7 +11,7 @@ const About = () => {
   }, []);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-1 pt-16">
@@ -195,8 +193,6 @@ const About = () => {
           </div>
         </section>
       </main>
-      
-      <Footer />
     </div>
   );
 };
