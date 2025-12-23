@@ -1,7 +1,5 @@
-
 import { useState } from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import MapContainer from '@/components/MapContainer';
 import LocationDetailPanel from '@/components/LocationDetailPanel';
 import { mapLocations } from '@/data/mapLocations';
@@ -22,7 +20,7 @@ const MapPage = () => {
   const activeLocation = mapLocations.find(loc => loc.id === activeLocationId);
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-1 pt-16">
@@ -59,8 +57,6 @@ const MapPage = () => {
           />
         )}
       </main>
-      
-      <Footer />
     </div>
   );
 };

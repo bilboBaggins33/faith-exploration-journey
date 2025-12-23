@@ -1,11 +1,9 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 
 const ChallengeLoading = () => {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       <main className="flex-1 flex items-center justify-center">
         <div className="text-center">
@@ -13,7 +11,6 @@ const ChallengeLoading = () => {
           <p>Loading challenge...</p>
         </div>
       </main>
-      <Footer />
     </div>
   );
 };

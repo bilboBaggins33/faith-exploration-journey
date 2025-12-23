@@ -1,7 +1,5 @@
-
 import React from 'react';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import DailyReadingPlan from '@/components/bible/DailyReadingPlan';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -12,7 +10,7 @@ const DailyReading = () => {
   const { user } = useAuth();
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-1 py-16">
@@ -70,8 +68,6 @@ const DailyReading = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };
