@@ -1,16 +1,10 @@
-
 import React, { useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import BookList from '@/components/theology/BookList';
 import BookDetail from '@/components/theology/BookDetail';
 import { theologyBooks } from '@/data/theology';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
-import { Card } from '@/components/ui/card';
-import { Input } from '@/components/ui/input';
-import { InputGroup } from '@/components/ui/input-group';
-import { Search } from 'lucide-react';
 
 const Theology = () => {
   const { bookId } = useParams<{ bookId?: string }>();
@@ -40,7 +34,7 @@ const Theology = () => {
     : theologyBooks;
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-grow pb-10 relative">
@@ -74,8 +68,6 @@ const Theology = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

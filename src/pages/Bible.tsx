@@ -1,8 +1,6 @@
-
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -10,7 +8,6 @@ import BibleBooksList from '@/components/bible/BibleBooksList';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/auth';
-import ScrollToTop from '@/components/ScrollToTop';
 import { getBookImage } from '@/data/bible/book-images';
 
 const Bible: React.FC = () => {
@@ -69,8 +66,7 @@ const Bible: React.FC = () => {
   };
   
   return (
-    <div className="min-h-screen flex flex-col">
-      <ScrollToTop />
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-grow pb-10 relative">
@@ -211,8 +207,6 @@ const Bible: React.FC = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

@@ -1,13 +1,11 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { BookOpen, Trophy, CalendarDays, Star, Award, Medal, Clock, BarChart2, Book } from 'lucide-react';
+import { BookOpen, Trophy, CalendarDays, Star, Award, Medal, Book } from 'lucide-react';
 
 const Achievements = () => {
   const navigate = useNavigate();
@@ -23,12 +21,11 @@ const Achievements = () => {
   
   if (isLoading) {
     return (
-      <div className="min-h-screen flex flex-col">
+      <div className="flex flex-col flex-1">
         <Navbar />
         <div className="flex-grow flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-bible-blue"></div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -40,7 +37,7 @@ const Achievements = () => {
   const completedAchievements = 1; // For now, just hardcode this
   
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-grow py-8 px-4 bg-bible-beige">
@@ -320,8 +317,6 @@ const Achievements = () => {
           </Tabs>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };

@@ -1,297 +1,132 @@
-import { useEffect } from 'react';
-import Navbar from '@/components/Navbar';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import Footer from '@/components/Footer';
-import { motion, useAnimation } from 'framer-motion';
+import { useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
-import { Link } from 'react-router-dom';
-import { ArrowRight, BookOpen, BookText } from 'lucide-react';
+import { Card, CardContent } from '@/components/ui/card';
+import Navbar from '@/components/Navbar';
+import Hero from '@/components/Hero';
+import { 
+  BookOpen, 
+  Trophy, 
+  Flame, 
+  BookMarked, 
+  Users, 
+  Target,
+  ChevronRight,
+  Sparkles,
+  Star,
+  Award,
+  Zap,
+  Heart,
+  Crown,
+  Compass,
+  CheckCircle2
+} from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const Index = () => {
-  // Initialize scroll reveal
-  useEffect(() => {
-    const scrollElements = document.querySelectorAll('.scroll-reveal');
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('revealed');
-        }
-      });
-    }, { threshold: 0.1 });
-    
-    scrollElements.forEach((el) => {
-      observer.observe(el);
-    });
-    
-    return () => {
-      scrollElements.forEach((el) => {
-        observer.unobserve(el);
-      });
-    };
-  }, []);
-  
   return (
-    <div className="min-h-screen">
+    <div className="flex flex-col">
       <Navbar />
       <Hero />
       <ChallengeTypes />
       <CallToAction />
-      <Footer />
     </div>
   );
 };
 
 const ChallengeTypes = () => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
+  const { ref, inView } = useInView({
     triggerOnce: true,
     threshold: 0.1,
   });
-  
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
-  
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-  
-  return (
-    <section className="py-16 md:py-20 bg-white">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
-            Explore Our Challenges
-          </h2>
-          <p className="max-w-2xl mx-auto text-lg text-bible-dark/70">
-            Deepen your understanding of Scripture and theology through interactive challenges
-          </p>
-        </div>
-        
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
-        >
-          <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="p-8">
-              <div className="flex items-center mb-4">
-                <BookOpen className="h-8 w-8 text-bible-blue mr-3" />
-                <h3 className="text-2xl font-serif font-semibold text-bible-dark">
-                  Bible Challenges
-                </h3>
-              </div>
-              <p className="text-bible-dark/70 mb-6">
-                Test your knowledge of biblical stories, characters, and teachings through chapter-by-chapter challenges
-              </p>
-              <Link to="/bible">
-                <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
-                  Explore Bible Challenges
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-          
-          <motion.div variants={itemVariants} className="glass-card rounded-xl overflow-hidden hover:shadow-xl transition-shadow">
-            <div className="p-8">
-              <div className="flex items-center mb-4">
-                <BookText className="h-8 w-8 text-bible-blue mr-3" />
-                <h3 className="text-2xl font-serif font-semibold text-bible-dark">
-                  Theology Challenges
-                </h3>
-              </div>
-              <p className="text-bible-dark/70 mb-6">
-                Engage with classic and contemporary theological works to deepen your faith understanding
-              </p>
-              <Link to="/theology">
-                <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
-                  Explore Theology Challenges
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </Link>
-            </div>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
 
-const HowItWorks = () => {
-  const controls = useAnimation();
-  const [ref, inView] = useInView({
-    triggerOnce: true,
-    threshold: 0.1,
-  });
-  
-  useEffect(() => {
-    if (inView) {
-      controls.start('visible');
-    }
-  }, [controls, inView]);
-  
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-  
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
-  };
-  
-  return (
-    <section className="pb-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-bible-blue font-medium mb-3">HOW IT WORKS</p>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-6">
-            Your Path to Spiritual Growth
-          </h2>
-          <p className="max-w-3xl mx-auto text-lg text-bible-dark/80">
-            Our platform helps you consistently engage with Scripture and theology through a structured, rewarding approach.
-          </p>
-        </div>
-        
-        <motion.div
-          ref={ref}
-          variants={containerVariants}
-          initial="hidden"
-          animate={controls}
-          className="grid md:grid-cols-3 gap-12"
-        >
-          <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-              <span className="text-2xl font-bold text-bible-deepBlue">1</span>
-            </div>
-            <h3 className="text-xl font-serif font-semibold text-bible-dark mb-3">
-              Create Your Account
-            </h3>
-            <p className="text-bible-dark/70 mb-4">
-              Sign up for an account to track your reading progress, access challenges and earn rewards.
-            </p>
-            <Link to="/auth" className="text-bible-blue hover-link">
-              Get Started
-            </Link>
-          </motion.div>
-          
-          <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-              <span className="text-2xl font-bold text-bible-deepBlue">2</span>
-            </div>
-            <h3 className="text-xl font-serif font-semibold text-bible-dark mb-3">
-              Choose Your Reading
-            </h3>
-            <p className="text-bible-dark/70 mb-4">
-              Browse our collection of Scripture and theology books, selecting what you want to read and grow in.
-            </p>
-            <Link to="/theology" className="text-bible-blue hover-link">
-              Explore Books
-            </Link>
-          </motion.div>
-          
-          <motion.div variants={itemVariants} className="flex flex-col items-center text-center">
-            <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-              <span className="text-2xl font-bold text-bible-deepBlue">3</span>
-            </div>
-            <h3 className="text-xl font-serif font-semibold text-bible-dark mb-3">
-              Track Your Progress
-            </h3>
-            <p className="text-bible-dark/70 mb-4">
-              Mark chapters as read, take quizzes to test your understanding, and watch your knowledge and faith grow.
-            </p>
-            <Link to="/profile" className="text-bible-blue hover-link">
-              View Progress
-            </Link>
-          </motion.div>
-        </motion.div>
-      </div>
-    </section>
-  );
-};
-
-const Testimonials = () => {
-  const testimonials = [
+  const challenges = [
     {
-      quote: "This platform has transformed my Bible reading habit. I'm more consistent and feel like I'm actually growing in my understanding of Scripture.",
-      author: "Sarah J.",
-      role: "Daily Reader",
-      image: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+      icon: BookOpen,
+      title: "Bible Challenges",
+      description: "Test your knowledge of Scripture with chapter-by-chapter quizzes covering all 66 books.",
+      color: "from-bible-blue to-bible-blue/80",
+      link: "/bible",
+      features: ["1,189 Chapters", "Comprehension Questions", "Progress Tracking"]
     },
     {
-      quote: "As a theology student, this has been an invaluable resource. The tracking system keeps me accountable, and the quizzes help reinforce what I'm learning.",
-      author: "Michael T.",
-      role: "Seminary Student",
-      image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+      icon: BookMarked,
+      title: "Theology Challenges",
+      description: "Explore classic Christian works and deepen your understanding of foundational doctrines.",
+      color: "from-bible-gold to-amber-500",
+      link: "/theology",
+      features: ["Classic Books", "Chapter Summaries", "Knowledge Quizzes"]
     },
     {
-      quote: "I've been a Christian for years, but this platform has helped me dive deeper into theological concepts I've always wanted to understand better.",
-      author: "Rebecca L.",
-      role: "Bible Study Group Leader",
-      image: "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-4.0.3&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+      icon: Trophy,
+      title: "Achievements",
+      description: "Earn badges and track your spiritual growth as you complete challenges and milestones.",
+      color: "from-emerald-500 to-emerald-600",
+      link: "/achievements",
+      features: ["Milestone Badges", "Streak Rewards", "Progress Stats"]
     }
   ];
-  
+
   return (
-    <section className="py-20 bg-bible-beige">
+    <section ref={ref} className="py-24 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <p className="text-bible-blue font-medium mb-3">TESTIMONIALS</p>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-6">
-            What Our Community Is Saying
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-bible-blue/10 text-bible-blue rounded-full text-sm font-medium mb-4">
+            <Sparkles className="h-4 w-4" />
+            Explore Our Features
+          </span>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
+            Your Journey Awaits
           </h2>
-        </div>
-        
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            Whether you're a new believer or a seasoned scholar, we have challenges designed to deepen your faith.
+          </p>
+        </motion.div>
+
         <div className="grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <div 
-              key={index}
-              className="scroll-reveal glass-card rounded-lg p-6 flex flex-col"
+          {challenges.map((challenge, index) => (
+            <motion.div
+              key={challenge.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={inView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <div className="mb-4">
-                <svg width="45" height="36" className="text-bible-gold fill-current opacity-20">
-                  <path d="M13.415.001C6.07 5.185.887 13.681.887 23.041c0 7.632 4.608 12.096 9.936 12.096 5.04 0 8.784-4.032 8.784-8.784 0-4.752-3.312-8.208-7.632-8.208-.864 0-2.016.144-2.304.288.72-4.896 5.328-10.656 9.936-13.536L13.415.001zm24.768 0c-7.2 5.184-12.384 13.68-12.384 23.04 0 7.632 4.608 12.096 9.936 12.096 4.896 0 8.784-4.032 8.784-8.784 0-4.752-3.456-8.208-7.776-8.208-.864 0-1.872.144-2.16.288.72-4.896 5.184-10.656 9.792-13.536L38.183.001z"></path>
-                </svg>
-              </div>
-              
-              <p className="flex-1 italic text-bible-dark/80 mb-6">
-                "{testimonial.quote}"
-              </p>
-              
-              <div className="flex items-center">
-                <img 
-                  src={testimonial.image} 
-                  alt={testimonial.author} 
-                  className="w-12 h-12 rounded-full mr-4 object-cover"
-                />
-                <div>
-                  <h4 className="font-semibold text-bible-dark">{testimonial.author}</h4>
-                  <p className="text-sm text-bible-dark/60">{testimonial.role}</p>
-                </div>
-              </div>
-            </div>
+              <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card">
+                <CardContent className="p-0">
+                  <div className={`bg-gradient-to-br ${challenge.color} p-6 text-white`}>
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
+                        <challenge.icon className="h-8 w-8" />
+                      </div>
+                      <ChevronRight className="h-6 w-6 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all" />
+                    </div>
+                    <h3 className="text-2xl font-bold mb-2">{challenge.title}</h3>
+                  </div>
+                  <div className="p-6">
+                    <p className="text-muted-foreground mb-6">{challenge.description}</p>
+                    <ul className="space-y-3 mb-6">
+                      {challenge.features.map((feature, i) => (
+                        <li key={i} className="flex items-center gap-2 text-sm text-foreground">
+                          <CheckCircle2 className="h-4 w-4 text-bible-blue flex-shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                    <Link to={challenge.link}>
+                      <Button className="w-full group-hover:bg-bible-blue group-hover:text-white transition-colors">
+                        Get Started
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </motion.div>
           ))}
         </div>
       </div>
@@ -299,134 +134,84 @@ const Testimonials = () => {
   );
 };
 
-const DownloadSection = () => {
-  return (
-    <section className="py-16 bg-bible-beige">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-12">
-          <p className="text-bible-blue font-medium mb-3">GET THE APP</p>
-          <h2 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-6">
-            Take Your Faith Journey Anywhere
-          </h2>
-          <p className="max-w-3xl mx-auto text-lg text-bible-dark/80">
-            Install Bible Quest on your device to access your challenges, track your progress, and continue growing in your faith wherever you go.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 gap-8 items-center">
-          <div className="glass-card p-8 rounded-lg">
-            <h3 className="text-xl font-serif font-semibold text-bible-dark mb-4">
-              Install on Your Device
-            </h3>
-            <div className="space-y-4">
-              <div className="flex items-start">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-bible-sky mr-4 flex-shrink-0">
-                  <span className="font-bold text-bible-deepBlue">1</span>
-                </div>
-                <div>
-                  <p className="font-medium">For iOS:</p>
-                  <p className="text-bible-dark/70">Tap the share button and select "Add to Home Screen"</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-bible-sky mr-4 flex-shrink-0">
-                  <span className="font-bold text-bible-deepBlue">2</span>
-                </div>
-                <div>
-                  <p className="font-medium">For Android:</p>
-                  <p className="text-bible-dark/70">Tap the menu button and select "Install App" or "Add to Home Screen"</p>
-                </div>
-              </div>
-              
-              <div className="flex items-start">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-bible-sky mr-4 flex-shrink-0">
-                  <span className="font-bold text-bible-deepBlue">3</span>
-                </div>
-                <div>
-                  <p className="font-medium">For Desktop:</p>
-                  <p className="text-bible-dark/70">Click the install icon in your browser's address bar</p>
-                </div>
-              </div>
-            </div>
-            
-            <div className="mt-6">
-              <Link to="/install-app">
-                <Button className="w-full bg-bible-blue hover:bg-bible-deepBlue">
-                  <Download className="mr-2 h-4 w-4" />
-                  View Detailed Instructions
-                </Button>
-              </Link>
-            </div>
-          </div>
-          
-          <div className="flex justify-center">
-            <div className="relative max-w-xs">
-              <div className="absolute -top-4 -right-4 bg-bible-gold text-white p-3 rounded-full shadow-lg">
-                <Smartphone className="h-6 w-6" />
-              </div>
-              <img 
-                src="https://images.unsplash.com/photo-1585829365295-ab7cd400c167?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
-                alt="Bible App on Mobile Device"
-                className="rounded-lg shadow-xl"
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-  );
-};
-
 const CallToAction = () => {
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    threshold: 0.1,
+  });
+
+  const stats = [
+    { icon: BookOpen, value: "66", label: "Books of the Bible" },
+    { icon: Star, value: "1,189", label: "Chapters to Master" },
+    { icon: Award, value: "100+", label: "Achievements to Earn" },
+    { icon: Users, value: "Growing", label: "Community" }
+  ];
+
   return (
-    <section className="py-16 md:py-20 bg-gradient-to-br from-bible-blue via-bible-deepBlue to-bible-dark">
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 className="text-3xl md:text-4xl font-serif font-bold text-white mb-4">
-          Ready to Start Your Journey?
-        </h2>
-        <p className="text-white/90 mb-8 text-lg max-w-2xl mx-auto">
-          Create your free account and begin tracking your Bible and theology reading progress today.
-        </p>
-        <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-          <Link to="/auth">
-            <Button size="lg" className="bg-white text-bible-deepBlue hover:bg-bible-sky transition-colors duration-300 px-8">
-              Sign Up Free
-              <ArrowRight className="ml-2 h-4 w-4" />
-            </Button>
-          </Link>
-          <Link to="/bible">
-            <Button size="lg" variant="outline" className="border-white text-white hover:bg-white/10 transition-colors duration-300 px-8">
-              Browse Challenges
-            </Button>
-          </Link>
-        </div>
+    <section ref={ref} className="py-24 relative overflow-hidden">
+      {/* Background Pattern */}
+      <div className="absolute inset-0 bg-gradient-to-br from-bible-blue via-bible-blue/90 to-bible-dark" />
+      <div className="absolute inset-0 opacity-10" style={{
+        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      }} />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        {/* Stats Grid */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6 }}
+          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+        >
+          {stats.map((stat, index) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, scale: 0.9 }}
+              animate={inView ? { opacity: 1, scale: 1 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center text-white border border-white/20"
+            >
+              <stat.icon className="h-8 w-8 mx-auto mb-3 text-bible-gold" />
+              <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
+              <div className="text-white/70 text-sm">{stat.label}</div>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* CTA Content */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="text-center text-white"
+        >
+          <div className="inline-flex items-center gap-2 px-4 py-2 bg-bible-gold/20 text-bible-gold rounded-full text-sm font-medium mb-6">
+            <Flame className="h-4 w-4" />
+            Start Your Journey Today
+          </div>
+          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
+            Ready to Grow in Your Faith?
+          </h2>
+          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10">
+            Join thousands of believers who are deepening their understanding of Scripture and theology through engaging challenges.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link to="/bible">
+              <Button size="lg" className="bg-white text-bible-blue hover:bg-white/90 shadow-lg px-8 py-6 text-lg">
+                <BookOpen className="mr-2 h-5 w-5" />
+                Explore Bible
+              </Button>
+            </Link>
+            <Link to="/auth">
+              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg bg-transparent">
+                <Crown className="mr-2 h-5 w-5" />
+                Create Free Account
+              </Button>
+            </Link>
+          </div>
+        </motion.div>
       </div>
     </section>
-  );
-};
-
-const ChallengeCard = ({ title, description, icon, link, bgColor, progress, isNew }) => {
-  return (
-    <motion.div
-      className={`glass-card p-8 rounded-lg ${bgColor}`}
-    >
-      <div className="flex items-center justify-center w-16 h-16 rounded-full bg-bible-sky mb-6">
-        {icon}
-      </div>
-      <h3 className="text-2xl font-serif font-semibold text-bible-dark mb-3">
-        {title}
-      </h3>
-      <p className="text-bible-dark/70 mb-6">
-        {description}
-      </p>
-      <Link to={link}>
-        <Button className="bg-bible-blue hover:bg-bible-deepBlue w-full">
-          Explore {title}
-          <ArrowRight className="ml-2 h-4 w-4" />
-        </Button>
-      </Link>
-    </motion.div>
   );
 };
 
