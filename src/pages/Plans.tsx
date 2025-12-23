@@ -1,9 +1,7 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
-import { BookText, Calendar, BookOpen, CheckCircle } from 'lucide-react';
+import { BookText, Calendar, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -26,7 +24,7 @@ const Plans = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col flex-1">
       <Navbar />
       
       <main className="flex-1 py-16">
@@ -48,8 +46,7 @@ const Plans = () => {
                 <div className="flex-1">
                   <h2 className="text-2xl font-serif font-bold mb-2">M'Cheyne Reading Plan</h2>
                   <p className="text-gray-600 mb-4 text-sm">
-                    Read through the New Testament and Psalms twice, and the Old Testament once in a year. 
-                    This classic plan, designed by Robert Murray M'Cheyne, provides a balanced diet of Scripture reading.
+                    Read through the New Testament and Psalms twice, and the Old Testament once in a year.
                   </p>
                 </div>
               </div>
@@ -99,8 +96,7 @@ const Plans = () => {
                 <div className="flex-1">
                   <h2 className="text-2xl font-serif font-bold mb-2">Bible in a Year</h2>
                   <p className="text-gray-600 mb-4 text-sm">
-                    Read through the entire Bible sequentially from Genesis to Revelation. 
-                    This straightforward plan takes you through all 66 books in order, reading 3-4 chapters per day.
+                    Read through the entire Bible sequentially from Genesis to Revelation.
                   </p>
                 </div>
               </div>
@@ -145,8 +141,6 @@ const Plans = () => {
           </div>
         </div>
       </main>
-      
-      <Footer />
     </div>
   );
 };
