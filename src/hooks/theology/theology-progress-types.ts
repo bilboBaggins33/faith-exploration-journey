@@ -24,6 +24,7 @@ export interface UseTheologyProgressReturn {
     score: number;
     completedAt?: string;
   };
+  getChapterScore: (bookId: string, chapter: number) => number;
   refreshProgress: () => Promise<void>;
   updateProgress: (data: Partial<TheologyProgressData>) => Promise<void>;
   isCompleted: (bookId: string, chapter: number) => boolean;

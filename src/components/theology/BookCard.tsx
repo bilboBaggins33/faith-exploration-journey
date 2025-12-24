@@ -26,7 +26,7 @@ const BookCard: React.FC<BookCardProps> = ({
   const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
 
   return (
-    <Link to={`/theology/${book.id}/1`} className="block">
+    <Link to={`/theology/${book.id}`} className="block">
       <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0 cursor-pointer">
         <BookCardHeader
           title={book.title}

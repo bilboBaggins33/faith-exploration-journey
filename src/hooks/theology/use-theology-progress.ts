@@ -14,6 +14,7 @@ import {
 
 export const useTheologyProgress = (): UseTheologyProgressReturn => {
   const { user } = useAuth();
+  console.log('useTheologyProgress hook called, user:', user?.id);
   const [progress, setProgress] = useState<TheologyProgressData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -86,6 +87,12 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
     return getChapterCompletionStatus(bookId, chapter, progress.completed_chapters);
   };
 
+  const getChapterScore = (bookId: string, chapter: number) => {
+    if (!progress?.completed_chapters) return 0;
+    const status = getChapterCompletionStatus(bookId, chapter, progress.completed_chapters);
+    return status.score || 0;
+  };
+
   // Helper function to update progress
   const updateProgress = async (data: Partial<TheologyProgressData>) => {
     if (!user) return;
@@ -111,7 +118,7 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
   // Helper function to complete a challenge
   const completeChallenge = async (bookId: string, chapter: number, score: number) => {
     if (!user || !progress) return;
-    
+
     // Create a new completed chapter entry
     const newEntry = {
       book_id: bookId,
@@ -119,20 +126,20 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
       completed_at: new Date().toISOString(),
       score
     };
-    
+
     // Check if this chapter is already completed
     const completedChapters = [...(progress.completed_chapters || [])];
     const existingIndex = completedChapters.findIndex(
       (ch: any) => ch.book_id === bookId && ch.chapter === chapter
     );
-    
+
     // Calculate points to add
     let pointsToAdd = score;
-    
+
     // If exists, update the entry and only add the difference in points if the new score is higher
     if (existingIndex >= 0) {
       const existingScore = completedChapters[existingIndex].score || 0;
-      
+
       // Only add the additional points if the new score is higher
       if (score > existingScore) {
         pointsToAdd = score - existingScore;
@@ -145,28 +152,28 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
     } else {
       completedChapters.push(newEntry);
     }
-    
+
     // Calculate new total points
     const newTotalPoints = (progress.total_points || 0) + pointsToAdd;
-    
+
     // Update books_started if needed
     let booksStarted = [...(progress.books_started || [])];
     if (!booksStarted.includes(bookId)) {
       booksStarted.push(bookId);
     }
-    
+
     // Update books_completed if all chapters are completed
     const book = theologyBooks.find(b => b.id === bookId);
     if (book) {
       const completedChaptersForBook = completedChapters.filter(
         (ch: any) => ch.book_id === bookId
       ).length;
-      
+
       let booksCompleted = [...(progress.books_completed || [])];
       if (completedChaptersForBook >= book.chapters && !booksCompleted.includes(bookId)) {
         booksCompleted.push(bookId);
       }
-      
+
       // Update the progress in Supabase
       const updatedData = {
         completed_chapters: completedChapters,
@@ -175,7 +182,7 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
         total_chapters_read: completedChapters.length,
         total_points: newTotalPoints
       };
-      
+
       await updateProgress(updatedData);
     }
   };
@@ -187,6 +194,7 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
     getBookChaptersRead: getBookChaptersReadWrapper,
     getBookAverageScore,
     getChapterStatus,
+    getChapterScore,
     refreshProgress,
     updateProgress,
     isCompleted,

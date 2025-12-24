@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import BibleChapterChallenge from '@/components/challenges/BibleChapterChallenge';
+import ChapterChallenge from '@/components/challenges/ChapterChallenge';
 import LoadingState from '@/components/challenges/bible/LoadingState';
 import ErrorState from '@/components/challenges/bible/ErrorState';
 import { bibleBooks } from '@/data/bible';
 import { useAuth } from '@/context/auth';
-import { ChapterChallenge } from '@/data/bible/types';
+import { ChapterChallenge as ChapterChallengeType } from '@/data/bible/types';
 import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
 import ChallengeSkeleton from '@/components/challenges/bible/ChallengeSkeleton';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
   const [loading, setLoading] = useState(true);
-  const [challenge, setChallenge] = useState<ChapterChallenge | null>(null);
+  const [challenge, setChallenge] = useState<ChapterChallengeType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
   const location = useLocation();
@@ -104,7 +104,7 @@ const Chapter = () => {
     return (
       // TODO: decide who can see chapters
       <SubscriptionRequired allowViewOnly={isFirstChapter || (!isFirstChapter)}>
-        <BibleChapterChallenge />
+        <ChapterChallenge type="bible" />
       </SubscriptionRequired>
     );
   };
