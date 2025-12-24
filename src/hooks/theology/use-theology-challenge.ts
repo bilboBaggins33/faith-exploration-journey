@@ -5,61 +5,39 @@ import { useTheologyChallengeActions } from './use-theology-challenge-actions';
 
 export const useTheologyChallenge = () => {
   const data = useTheologyChallengeData();
-  const { 
-    currentQuestion,
-    selectedAnswers,
-    isSubmitted,
-    score,
-    maxScore,
-    showResults,
-    hasReadPassage,
-    isReadConfirmationOpen,
-    setHasReadPassage,
-    setIsReadConfirmationOpen,
-    challenge,
-    bookInfo,
-    chapterInfo
-  } = useTheologyChallengeState();
-  
-  const {
-    handleSelectAnswer,
-    handleSubmitAnswer,
-    handleNextQuestion,
-    handleFinish,
-    handleRetake,
-    navigateToBook
-  } = useTheologyChallengeActions();
+  const state = useTheologyChallengeState();
+  const actions = useTheologyChallengeActions(state);
 
   return {
     // Data
-    challenge,
-    bookInfo,
-    chapterInfo,
+    challenge: state.challenge,
+    bookInfo: state.bookInfo,
+    chapterInfo: state.chapterInfo,
     chapterTitle: data.chapterTitle,
     passageText: data.passageText,
-    
+
     // State
-    currentQuestion,
-    selectedAnswers,
-    isSubmitted,
-    score,
-    maxScore,
-    showResults,
-    hasReadPassage,
-    isReadConfirmationOpen,
-    
+    currentQuestion: state.currentQuestion,
+    selectedAnswers: state.selectedAnswers,
+    isSubmitted: state.isSubmitted,
+    score: state.score,
+    maxScore: state.maxScore,
+    showResults: state.showResults,
+    hasReadPassage: state.hasReadPassage,
+    isReadConfirmationOpen: state.isReadConfirmationOpen,
+
     // Loading states
     isLoading: data.isLoading,
     error: data.error,
-    
+
     // Actions
-    handleSelectAnswer,
-    handleSubmitAnswer,
-    handleNextQuestion,
-    handleFinish,
-    handleRetake,
-    setHasReadPassage,
-    setIsReadConfirmationOpen,
-    navigateToBook
+    handleSelectAnswer: actions.handleSelectAnswer,
+    handleSubmitAnswer: actions.handleSubmitAnswer,
+    handleNextQuestion: actions.handleNextQuestion,
+    handleFinish: actions.handleFinish,
+    handleRetake: actions.handleRetake,
+    setHasReadPassage: state.setHasReadPassage,
+    setIsReadConfirmationOpen: state.setIsReadConfirmationOpen,
+    navigateToBook: actions.navigateToBook
   };
 };

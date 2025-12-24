@@ -4,6 +4,7 @@ import {
   RouterProvider,
   Outlet,
 } from 'react-router-dom';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import Index from '@/pages/Index';
 import Auth from '@/pages/Auth';
 import Profile from '@/pages/Profile';
@@ -13,6 +14,7 @@ import DailyReading from '@/pages/DailyReading';
 import Dashboard from '@/pages/Dashboard';
 import Achievements from '@/pages/Achievements';
 import Theology from '@/pages/Theology';
+import TheologyChapterChallenge from '@/components/challenges/TheologyChapterChallenge';
 import Contact from '@/pages/Contact';
 import About from '@/pages/About';
 import NotFound from '@/pages/NotFound';
@@ -77,6 +79,10 @@ const router = createBrowserRouter([
         element: <Theology />,
       },
       {
+        path: 'theology/:bookId/:chapter',
+        element: <TheologyChapterChallenge />,
+      },
+      {
         path: 'contact',
         element: <Contact />,
       },
@@ -116,7 +122,7 @@ function App() {
 
     const handleOnline = () => setIsOnline(true);
     const handleOffline = () => setIsOnline(false);
-    
+
     window.addEventListener('online', handleOnline);
     window.addEventListener('offline', handleOffline);
 
@@ -126,15 +132,27 @@ function App() {
     };
   }, []);
 
+  // Create a client for React Query
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: {
+        staleTime: 1000 * 60 * 5, // 5 minutes
+        refetchOnWindowFocus: false,
+      },
+    },
+  });
+
   return (
     <>
       <CookieProvider>
         <AuthProvider>
           <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
-            <div className="app">
-              <RouterProvider router={router} />
-            </div>
-            <Toaster />
+            <QueryClientProvider client={queryClient}>
+              <div className="app">
+                <RouterProvider router={router} />
+              </div>
+              <Toaster />
+            </QueryClientProvider>
           </ThemeProvider>
         </AuthProvider>
       </CookieProvider>

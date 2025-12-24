@@ -2,7 +2,7 @@
 import { useTheologyChallengeState } from './use-theology-challenge-state';
 import { isSupabaseConfigured } from '@/lib/supabase';
 
-export const useTheologyChallengeActions = () => {
+export const useTheologyChallengeActions = (state: any) => {
   const {
     currentQuestion,
     selectedAnswers,
@@ -18,7 +18,7 @@ export const useTheologyChallengeActions = () => {
     chapter,
     toast,
     navigate
-  } = useTheologyChallengeState();
+  } = state;
 
   // Handle answer selection
   const handleSelectAnswer = (answer: string) => {
@@ -30,7 +30,7 @@ export const useTheologyChallengeActions = () => {
   // Handle answer submission
   const handleSubmitAnswer = () => {
     if (!challenge) return;
-    
+
     if (selectedAnswers[currentQuestion] === '') {
       toast({
         title: "Select an answer",
@@ -51,7 +51,7 @@ export const useTheologyChallengeActions = () => {
   // Handle moving to the next question
   const handleNextQuestion = () => {
     if (!challenge) return;
-    
+
     if (currentQuestion < (challenge.questions.length || 0) - 1) {
       setCurrentQuestion(prev => prev + 1);
       setIsSubmitted(false);
@@ -81,17 +81,17 @@ export const useTheologyChallengeActions = () => {
   // Handle retaking the challenge
   const handleRetake = () => {
     if (!challenge) return;
-    
+
     setSelectedAnswers(new Array(challenge.questions.length || 0).fill(''));
     setCurrentQuestion(0);
     setScore(0);
     setIsSubmitted(false);
     setShowResults(false);
   };
-  
+
   // Navigation helpers
   const navigateToBook = () => navigate(`/theology/${bookId}`);
-  
+
   return {
     handleSelectAnswer,
     handleSubmitAnswer,

@@ -15,29 +15,29 @@ interface BookCardProps {
   averageScore: number;
 }
 
-const BookCard: React.FC<BookCardProps> = ({ 
-  book, 
-  completionPercentage, 
-  averageScore 
+const BookCard: React.FC<BookCardProps> = ({
+  book,
+  completionPercentage,
+  averageScore
 }) => {
   const isMobile = useIsMobile();
-  
+
   // Generate thumbnail URL (using smaller version of the image)
   const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
-  
+
   return (
-    <Link to={`/theology/${book.id}`} className="block">
+    <Link to={`/theology/${book.id}/1`} className="block">
       <Card className="flex flex-col overflow-hidden hover:shadow-lg transition-all duration-300 border-0 cursor-pointer">
-        <BookCardHeader 
+        <BookCardHeader
           title={book.title}
           author={book.author}
           category={book.category}
           coverImage={book.coverImage}
           thumbnailImage={thumbnailImage}
         />
-        
+
         <CardContent className="flex-grow pt-4 px-3 sm:px-4 pb-3 bg-card">
-          <BookCardProgress 
+          <BookCardProgress
             completionPercentage={completionPercentage}
             averageScore={averageScore}
           />

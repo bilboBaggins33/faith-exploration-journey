@@ -14,7 +14,7 @@ export const useTheologyChallengeState = () => {
     chapterInfo,
     previouslyCompletedScore
   } = useTheologyChallengeData();
-  
+
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [selectedAnswers, setSelectedAnswers] = useState<string[]>([]);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,7 +24,7 @@ export const useTheologyChallengeState = () => {
   const [hasReadPassage, setHasReadPassage] = useState(false);
   const [isRetaking, setIsRetaking] = useState(false);
   const [isReadConfirmationOpen, setIsReadConfirmationOpen] = useState(false);
-  
+
   const { toast } = useToast();
   const navigate = useNavigate();
   const { completeChallenge } = useTheologyProgress();
@@ -33,27 +33,36 @@ export const useTheologyChallengeState = () => {
   useEffect(() => {
     if (challenge) {
       setMaxScore(challenge.points);
-      setSelectedAnswers(new Array(challenge.questions.length).fill(''));
-      
+
+      // Only initialize selectedAnswers if they haven't been set yet
+      // or if the length doesn't match the current challenge questions
+      setSelectedAnswers(prev => {
+        if (prev.length === challenge.questions.length && !isRetaking) {
+          return prev;
+        }
+        return new Array(challenge.questions.length).fill('');
+      });
+
       if (previouslyCompletedScore !== null && !isRetaking) {
         setScore(previouslyCompletedScore);
         setShowResults(true);
-      } else {
+      } else if (isRetaking) {
         setScore(0);
         setShowResults(false);
         setCurrentQuestion(0);
         setIsSubmitted(false);
+        setIsRetaking(false); // Reset isRetaking flag after starting
       }
     }
-    
+
     if (!hasReadPassage && !isRetaking && previouslyCompletedScore === null) {
       setIsReadConfirmationOpen(true);
     }
-  }, [challenge, previouslyCompletedScore, isRetaking, hasReadPassage]);
+  }, [challenge?.id, previouslyCompletedScore, isRetaking]); // Removed hasReadPassage to avoid resets when it changes
 
   return {
     currentQuestion,
-    selectedAnswers, 
+    selectedAnswers,
     isSubmitted,
     score,
     maxScore,
