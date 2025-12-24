@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import { BookText, Calendar, BookOpen } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
@@ -14,20 +13,19 @@ const Plans = () => {
   const navigate = useNavigate();
   const todaysMcheyneReadings = getTodaysReading();
   const todaysBibleInYearReadings = getTodaysBibleInYearReading();
-  
+
   const handleReadingClick = (bookId: string, chapter: number) => {
     navigate(`/bible/${bookId}/${chapter}`);
   };
-  
+
   const getBookName = (bookId: string) => {
     return bibleBooks.find(b => b.id === bookId)?.name || bookId;
   };
 
   return (
-    <div className="flex flex-col flex-1">
-      <Navbar />
-      
-      <main className="flex-1 py-16">
+    <div className="flex flex-col min-h-screen">
+
+      <main className="flex-grow py-16">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
             <h1 className="text-4xl font-serif font-bold text-bible-dark mb-4">
@@ -50,7 +48,7 @@ const Plans = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <h3 className="text-lg font-semibold mb-3 text-bible-dark">
                   Today's Readings ({format(new Date(), 'MMMM d')})
@@ -80,7 +78,7 @@ const Plans = () => {
                   <p className="text-sm text-gray-500">No readings available for today</p>
                 )}
               </div>
-              
+
               <Button asChild className="w-full">
                 <Link to="/daily-reading" className="flex items-center justify-center gap-2">
                   <BookText className="h-4 w-4" />
@@ -100,7 +98,7 @@ const Plans = () => {
                   </p>
                 </div>
               </div>
-              
+
               <div className="mb-6">
                 <h3 className="text-lg font-semibold mb-3 text-bible-dark">
                   Today's Readings ({format(new Date(), 'MMMM d')})
@@ -130,7 +128,7 @@ const Plans = () => {
                   <p className="text-sm text-gray-500">No readings available for today</p>
                 )}
               </div>
-              
+
               <Button variant="outline" className="w-full" disabled>
                 <span className="flex items-center justify-center gap-2">
                   <BookText className="h-4 w-4" />

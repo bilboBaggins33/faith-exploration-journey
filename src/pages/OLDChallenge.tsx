@@ -1,5 +1,4 @@
 // import { useState, useEffect } from 'react';
-// import Navbar from '@/components/Navbar';
 // import Footer from '@/components/Footer';
 // import ChallengeCard from '@/components/ChallengeCard';
 // import { motion } from 'framer-motion';
@@ -152,7 +151,6 @@
 //   return (
 //     <div className="min-h-screen flex flex-col">
 //       <ScrollToTop />
-//       <Navbar />
       
 //       <main className="flex-1 pt-16">
 //         <section className="bg-bible-beige py-12">
@@ -188,7 +186,7 @@
 //                   Filters
 //                   <ChevronDown 
 //                     size={16} 
-//                     className={`transform transition-transform ${showFilters ? 'rotate-180' : ''}`} 
+//                     className={`transform transition - transform ${ showFilters ? 'rotate-180' : '' } `} 
 //                   />
 //                 </Button>
 //               </div>

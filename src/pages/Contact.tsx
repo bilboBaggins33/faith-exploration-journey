@@ -6,7 +6,6 @@ import { toast } from "sonner";
 import { Mail, MessageSquare, User } from 'lucide-react';
 import { supabase } from "@/integrations/supabase/client";
 
-import Navbar from '@/components/Navbar';
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -46,16 +45,16 @@ const Contact = () => {
 
   async function onSubmit(values: z.infer<typeof formSchema>) {
     setIsSubmitting(true);
-    
+
     try {
       const { data, error } = await supabase.functions.invoke('send-contact-email', {
         body: values
       });
-      
+
       if (error) {
         throw new Error(error.message);
       }
-      
+
       toast.success("Message sent successfully! We'll get back to you soon.");
       form.reset();
     } catch (error) {
@@ -67,9 +66,8 @@ const Contact = () => {
   }
 
   return (
-    <div className="flex flex-col flex-1">
-      <Navbar />
-      <main className="flex-grow pt-16">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
           <div className="text-center mb-12">
             <h1 className="text-3xl font-bold text-bible-dark dark:text-white sm:text-4xl">
@@ -90,8 +88,8 @@ const Contact = () => {
                 <p className="text-bible-dark/70 dark:text-white/70">
                   For general inquiries, please email:
                 </p>
-                <a 
-                  href="mailto:info@bibleadventurequest.com" 
+                <a
+                  href="mailto:info@bibleadventurequest.com"
                   className="text-bible-blue hover:underline"
                 >
                   info@bibleadventurequest.com
@@ -111,7 +109,7 @@ const Contact = () => {
 
             <div className="md:col-span-3 bg-white dark:bg-bible-dark/50 p-6 rounded-lg shadow-sm">
               <h2 className="text-xl font-semibold mb-6">Send Us a Message</h2>
-              
+
               <Form {...form}>
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                   <FormField
@@ -130,7 +128,7 @@ const Contact = () => {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="email"
@@ -150,7 +148,7 @@ const Contact = () => {
                       </FormItem>
                     )}
                   />
-                  
+
                   <FormField
                     control={form.control}
                     name="message"
@@ -160,10 +158,10 @@ const Contact = () => {
                         <FormControl>
                           <div className="relative">
                             <MessageSquare className="absolute left-3 top-3 h-4 w-4 text-bible-dark/40 dark:text-white/40" />
-                            <Textarea 
-                              placeholder="Type your message here..." 
-                              className="min-h-[120px] pl-10 pt-7" 
-                              {...field} 
+                            <Textarea
+                              placeholder="Type your message here..."
+                              className="min-h-[120px] pl-10 pt-7"
+                              {...field}
                             />
                           </div>
                         </FormControl>
@@ -171,9 +169,9 @@ const Contact = () => {
                       </FormItem>
                     )}
                   />
-                  
-                  <Button 
-                    type="submit" 
+
+                  <Button
+                    type="submit"
                     className="w-full bg-bible-blue hover:bg-bible-deepBlue text-white"
                     disabled={isSubmitting}
                   >

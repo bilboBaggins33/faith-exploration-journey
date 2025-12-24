@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation, Link } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import ProfileEditForm from '@/components/ProfileEditForm';
 import SubscriptionStatus from '@/components/profile/SubscriptionStatus';
 import ResetProgressSection from '@/components/profile/ResetProgressSection';
@@ -17,15 +16,15 @@ const Profile = () => {
   const { toast } = useToast();
   const [fullName, setFullName] = useState<string>('');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
-  
+
   const queryParams = new URLSearchParams(location.search);
   const subscriptionStatus = queryParams.get('subscription');
-  
+
   useEffect(() => {
     if (!isLoading && !user) {
       navigate('/auth');
     }
-    
+
     if (subscriptionStatus) {
       if (subscriptionStatus === 'success') {
         toast({
@@ -38,31 +37,30 @@ const Profile = () => {
           description: "You can subscribe again anytime from your profile page.",
         });
       }
-      
+
       navigate('/profile', { replace: true });
     }
   }, [isLoading, user, navigate, subscriptionStatus, toast]);
-  
+
   useEffect(() => {
     if (user) {
       setFullName(user.user_metadata?.full_name || '');
       setAvatarUrl(user.user_metadata?.avatar_url || null);
-      
+
       if (!fullName && user) {
         // This is a placeholder where you would fetch additional user profile data if needed
       }
     }
   }, [user, fullName]);
-  
+
   const handleProfileUpdated = () => {
     refreshUserProfile();
   };
-  
+
   if (isLoading) {
     return (
       <div className="flex flex-col flex-1">
-        <Navbar />
-        <main className="flex-1 pt-16">
+        <main className="flex-grow">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
             <div className="flex justify-center items-center min-h-[50vh]">
               <div className="flex flex-col items-center">
@@ -75,12 +73,10 @@ const Profile = () => {
       </div>
     );
   }
-  
+
   return (
     <div className="flex flex-col flex-1">
-      <Navbar />
-      
-      <main className="flex-1 pt-16">
+      <main className="flex-grow">
         <section className="py-10 bg-bible-beige">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="mb-8 flex items-center justify-between">
@@ -90,9 +86,9 @@ const Profile = () => {
                   Manage your account settings
                 </p>
               </div>
-              <Button 
-                variant="outline" 
-                asChild 
+              <Button
+                variant="outline"
+                asChild
                 className="flex items-center gap-2"
               >
                 <Link to="/dashboard">
@@ -101,7 +97,7 @@ const Profile = () => {
                 </Link>
               </Button>
             </div>
-            
+
             <div className="grid md:grid-cols-3 gap-8">
               <div className="md:col-span-2 space-y-8">
                 <Card className="p-6 shadow-lg rounded-xl">
@@ -114,12 +110,12 @@ const Profile = () => {
                     onProfileUpdated={handleProfileUpdated}
                   />
                 </Card>
-                
+
                 <Card className="p-6 shadow-lg rounded-xl">
                   <ResetProgressSection />
                 </Card>
               </div>
-              
+
               <div>
                 <SubscriptionStatus />
               </div>

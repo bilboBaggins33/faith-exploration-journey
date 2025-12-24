@@ -1,20 +1,13 @@
-import { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Navbar from '@/components/Navbar';
 import { Button } from '@/components/ui/button';
 import { BookOpen, BookText, Target, Award, Users, MessageSquare, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const About = () => {
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   return (
-    <div className="flex flex-col flex-1">
-      <Navbar />
-      
-      <main className="flex-1 pt-16">
+    <div className="flex flex-col min-h-screen">
+
+      <main className="flex-grow">
         {/* Hero Section */}
         <section className="py-16 md:py-24 px-4 relative overflow-hidden">
           <div className="absolute inset-0 bg-gradient-to-br from-bible-blue/10 to-bible-gold/5 z-0"></div>
@@ -34,7 +27,7 @@ const About = () => {
             </motion.div>
           </div>
         </section>
-        
+
         {/* Founder's Story */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-5xl mx-auto">
@@ -43,15 +36,15 @@ const About = () => {
                 <div className="relative">
                   <div className="absolute -top-4 -left-4 w-full h-full bg-bible-gold/20 rounded-2xl"></div>
                   <div className="relative glass-card rounded-2xl overflow-hidden">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Family reading the Bible together" 
+                    <img
+                      src="/placeholder.svg"
+                      alt="Family reading the Bible together"
                       className="w-full h-auto rounded-2xl"
                     />
                   </div>
                 </div>
               </div>
-              
+
               <div className="md:w-3/5">
                 <h2 className="text-3xl font-serif font-bold text-bible-dark mb-6">
                   A Father's Mission
@@ -65,7 +58,7 @@ const About = () => {
                 <p className="text-gray-700 mb-6">
                   This journey led to the creation of Bible Quest — a platform that combines Bible reading with interactive challenges, progress tracking, and thoughtful questions designed to spark meaningful conversations about faith.
                 </p>
-                
+
                 <div className="flex items-center">
                   <Heart className="text-red-500 mr-2" />
                   <span className="italic text-gray-600">
@@ -76,7 +69,7 @@ const About = () => {
             </div>
           </div>
         </section>
-        
+
         {/* Our Approach */}
         <section className="py-16 px-4 bg-bible-beige/30">
           <div className="max-w-5xl mx-auto">
@@ -86,21 +79,21 @@ const About = () => {
             <p className="text-center text-gray-700 mb-12 max-w-3xl mx-auto">
               How we make Bible reading and theological exploration engaging for children and families
             </p>
-            
+
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <FeatureCard 
+              <FeatureCard
                 icon={<MessageSquare className="h-8 w-8 text-bible-blue" />}
                 title="Asking Questions"
                 description="We believe that questions are the gateway to deeper understanding. Our challenges are designed to prompt thoughtful inquiry and discussion about Scripture."
               />
-              
-              <FeatureCard 
+
+              <FeatureCard
                 icon={<Target className="h-8 w-8 text-bible-blue" />}
                 title="Engaging Challenges"
                 description="Interactive quizzes and challenges help children and adults alike stay engaged with the text and remember key lessons from Scripture."
               />
-              
-              <FeatureCard 
+
+              <FeatureCard
                 icon={<Award className="h-8 w-8 text-bible-blue" />}
                 title="Progress Tracking"
                 description="Visualizing progress encourages consistent reading habits. Our tracking system celebrates milestones and builds a sense of accomplishment."
@@ -108,7 +101,7 @@ const About = () => {
             </div>
           </div>
         </section>
-        
+
         {/* For the Whole Family */}
         <section className="py-16 px-4 bg-white">
           <div className="max-w-5xl mx-auto">
@@ -116,36 +109,36 @@ const About = () => {
               <div className="md:w-2/5">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="glass-card rounded-xl overflow-hidden">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Family reading together" 
+                    <img
+                      src="/placeholder.svg"
+                      alt="Family reading together"
                       className="w-full h-auto"
                     />
                   </div>
                   <div className="glass-card rounded-xl overflow-hidden mt-6">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Child completing a Bible challenge" 
+                    <img
+                      src="/placeholder.svg"
+                      alt="Child completing a Bible challenge"
                       className="w-full h-auto"
                     />
                   </div>
                   <div className="glass-card rounded-xl overflow-hidden">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Family discussing Bible" 
+                    <img
+                      src="/placeholder.svg"
+                      alt="Family discussing Bible"
                       className="w-full h-auto"
                     />
                   </div>
                   <div className="glass-card rounded-xl overflow-hidden mt-6">
-                    <img 
-                      src="/placeholder.svg" 
-                      alt="Reading together" 
+                    <img
+                      src="/placeholder.svg"
+                      alt="Reading together"
                       className="w-full h-auto"
                     />
                   </div>
                 </div>
               </div>
-              
+
               <div className="md:w-3/5">
                 <h2 className="text-3xl font-serif font-bold text-bible-dark mb-6">
                   For the Whole Family
@@ -159,7 +152,7 @@ const About = () => {
                 <p className="text-gray-700 mb-6">
                   We've found that making learning feel like an adventure—with challenges to complete and progress to track—transforms how children approach Scripture study, making it something they look forward to rather than a chore.
                 </p>
-                
+
                 <Link to="/bible">
                   <Button className="bg-bible-blue hover:bg-bible-blue/90 text-white">
                     <BookOpen className="mr-2 h-4 w-4" />
@@ -176,7 +169,7 @@ const About = () => {
             </div>
           </div>
         </section>
-        
+
         {/* Join Us */}
         <section className="py-16 px-4 bg-bible-dark text-white">
           <div className="max-w-3xl mx-auto text-center">
@@ -205,7 +198,7 @@ interface FeatureCardProps {
 
 const FeatureCard = ({ icon, title, description }: FeatureCardProps) => {
   return (
-    <motion.div 
+    <motion.div
       whileHover={{ y: -5 }}
       className="bg-white rounded-xl p-6 shadow-sm border border-gray-100"
     >

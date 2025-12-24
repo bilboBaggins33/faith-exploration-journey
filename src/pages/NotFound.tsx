@@ -2,7 +2,6 @@ import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { WifiOff, Home, RefreshCw } from 'lucide-react';
-import Navbar from '@/components/Navbar';
 
 const NotFound = () => {
   const navigate = useNavigate();
@@ -23,7 +22,6 @@ const NotFound = () => {
 
   return (
     <div className="flex flex-col flex-1">
-      <Navbar />
       <main className="flex-1 flex items-center justify-center p-4">
         <div className="max-w-lg w-full text-center">
           {!isOnline ? (

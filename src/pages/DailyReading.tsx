@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import DailyReadingPlan from '@/components/bible/DailyReadingPlan';
 import { useAuth } from '@/context/AuthContext';
 import { Button } from '@/components/ui/button';
@@ -11,8 +10,7 @@ const DailyReading = () => {
 
   return (
     <div className="flex flex-col flex-1">
-      <Navbar />
-      
+
       <main className="flex-1 py-16">
         <div className="max-w-4xl mx-auto px-4 sm:px-6">
           <div className="mb-8 text-center">
@@ -20,11 +18,11 @@ const DailyReading = () => {
               Daily Bible Reading
             </h1>
             <p className="text-gray-600 max-w-2xl mx-auto">
-              Follow the M'Cheyne Bible Reading Plan to read through the entire Bible in one year, 
+              Follow the M'Cheyne Bible Reading Plan to read through the entire Bible in one year,
               with daily readings from different sections of Scripture.
             </p>
           </div>
-          
+
           {!user ? (
             <div className="glass-card p-8 text-center rounded-xl mb-6">
               <BookOpen className="mx-auto h-12 w-12 text-bible-blue/50 mb-4" />
@@ -44,15 +42,15 @@ const DailyReading = () => {
                   <h2 className="text-xl font-serif font-bold">Today's Readings</h2>
                 </div>
               </div>
-              
+
               <DailyReadingPlan />
             </div>
           )}
-          
+
           <div className="glass-card p-6 rounded-xl mb-6">
             <h2 className="text-xl font-serif font-bold mb-4">About the M'Cheyne Reading Plan</h2>
             <p className="mb-4">
-              The M'Cheyne Bible Reading Plan was designed by 19th century Scottish minister Robert Murray M'Cheyne. 
+              The M'Cheyne Bible Reading Plan was designed by 19th century Scottish minister Robert Murray M'Cheyne.
               It guides readers through the New Testament and Psalms twice, and the rest of the Bible once, in a year.
             </p>
             <p className="mb-4">

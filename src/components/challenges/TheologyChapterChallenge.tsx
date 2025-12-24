@@ -5,8 +5,6 @@ import ErrorState from './bible/ErrorState';
 import ChallengeFeedback from './bible/ChallengeFeedback';
 import { useTheologyChallengeAdapter } from '@/hooks/theology/use-theology-challenge-adapter';
 
-import Navbar from '@/components/Navbar';
-
 const TheologyChapterChallenge: React.FC = () => {
   const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
 
@@ -23,7 +21,6 @@ const TheologyChapterChallenge: React.FC = () => {
   if (state.loading) {
     return (
       <div className="flex flex-col min-h-screen">
-        <Navbar />
         <main className="flex-grow flex items-center justify-center">
           <LoadingState />
         </main>
@@ -34,7 +31,6 @@ const TheologyChapterChallenge: React.FC = () => {
   if (state.error || !state.challenge) {
     return (
       <div className="flex flex-col min-h-screen">
-        <Navbar />
         <main className="flex-grow flex items-center justify-center p-4">
           <ErrorState
             description={state.error || "Challenge not found."}
@@ -47,7 +43,6 @@ const TheologyChapterChallenge: React.FC = () => {
 
   return (
     <div className="flex flex-col min-h-screen overflow-x-hidden">
-      <Navbar />
 
       <main className="flex-grow">
         <div className="max-w-4xl mx-auto">

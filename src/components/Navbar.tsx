@@ -11,54 +11,50 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const location = useLocation();
   const { user, signOut } = useAuth();
+
   const isHomePage = location.pathname === '/';
   const isBiblePage = location.pathname.valueOf() === '/bible';
-  
+
   useEffect(() => {
     setIsOpen(false);
   }, [location]);
-  
+
   const toggleMenu = () => setIsOpen(!isOpen);
-  
+
   const handleSignOut = async () => {
     await signOut();
   };
-  
-  const navbarBgClass = 'dark:bg-bible-dark/90';
-  
+
   return (
-    <nav 
-      className={`z-50 transition-all duration-300 ${isHomePage ? 'absolute top-0 left-0 right-0 w-full' : 'relative'} ${navbarBgClass}`}
-    >
+    <nav className="z-50 bg-bible-dark/90 dark:bg-bible-dark/90 relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
-          <NavLogo isHomePage={isHomePage} isBiblePage={isBiblePage}/>
-          
-          <DesktopNav 
+          <NavLogo isHomePage={isHomePage} isBiblePage={isBiblePage} />
+
+          <DesktopNav
             isHomePage={isHomePage}
-            user={user} 
+            user={user}
             handleSignOut={handleSignOut}
           />
-          
+
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
-                isBiblePage ? 'text-bible-dark hover:text-bible-sky' : 'text-white dark:text-white hover:text-bible-blue'
-              }`}
+              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${isBiblePage ? 'text-bible-dark hover:text-bible-sky' : 'text-white dark:text-white hover:text-bible-blue'
+                }`}
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
       </div>
-      
-        <MobileNav 
-          isOpen={isOpen} 
-          onOpenChange={setIsOpen}
-          user={user} 
-          handleSignOut={handleSignOut}
-        />
+
+      <MobileNav
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+        user={user}
+        handleSignOut={handleSignOut}
+      />
     </nav>
   );
 };

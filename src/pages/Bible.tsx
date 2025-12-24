@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -20,13 +19,13 @@ const Bible: React.FC = () => {
   const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleProgress();
   const isMobile = useIsMobile();
   const { user } = useAuth();
-  
+
   const selectedBook = bookId ? bibleBooks.find(book => book.id === bookId) : null;
-  
+
   useEffect(() => {
     // Reset selected chapter when book changes
     setSelectedChapter(null);
-    
+
     // Only store recently read books if user is authenticated
     if (bookId && user) {
       const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
@@ -46,34 +45,33 @@ const Bible: React.FC = () => {
       setRecentlyReadBooks([]);
     }
   }, [bookId, user]);
-  
+
   const handleBookSelect = (id: string) => {
     navigate(`/bible/${id}`);
   };
-  
+
   const handleBackToBooks = () => {
     navigate('/bible');
   };
-  
+
   const handleGoToChallenge = (bookId: string, chapter: number) => {
     navigate(`/bible/${bookId}/${chapter}`);
   };
-  
+
   // Helper function to transform the book progress object to just return the percentage
   const getBookProgressPercentage = (bookId: string): number => {
     const progress = getBookProgress(bookId);
     return progress.percentage;
   };
-  
+
   return (
     <div className="flex flex-col flex-1">
-      <Navbar />
-      
+
       <main className="flex-grow pb-10 relative">
         {/* Background for main book list */}
         {!selectedBook && (
           <div className="fixed inset-0 -z-10 bg-[#2b1306]">
-            <img 
+            <img
               src="/assets/bible/default.jpg"
               alt="Bible background"
               className="w-full h-full object-cover blur-sm scale-110"
@@ -83,12 +81,12 @@ const Bible: React.FC = () => {
             <div className="absolute inset-0 bg-black/50" />
           </div>
         )}
-        
+
         <div className="flex items-center justify-center p-4 pt-2 md:pt-16 pb-12">
           <div className="w-full max-w-4xl">
             {!selectedBook && (
               <div>
-                <BibleBooksList 
+                <BibleBooksList
                   books={bibleBooks}
                   getBookProgress={getBookProgressPercentage}
                   searchTerm={searchTerm}
@@ -97,13 +95,13 @@ const Bible: React.FC = () => {
                 />
               </div>
             )}
-            
+
             {selectedBook && !selectedChapter && (
               <div className="relative overflow-hidden">
                 {/* Blurred background */}
                 <div className="fixed inset-0 -z-10 bg-[#2b1306]">
-                  <img 
-                    src={getBookImage(selectedBook.id)} 
+                  <img
+                    src={getBookImage(selectedBook.id)}
                     alt={`${selectedBook.name} background`}
                     className="w-full h-full object-cover blur-sm scale-110"
                     loading="eager"
@@ -122,8 +120,8 @@ const Bible: React.FC = () => {
                     <div className="relative overflow-hidden">
                       {/* Background image */}
                       <div className="absolute inset-0 bg-[#2b1306]">
-                        <img 
-                          src={getBookImage(selectedBook.id)} 
+                        <img
+                          src={getBookImage(selectedBook.id)}
                           alt={`${selectedBook.name} background`}
                           className="w-full h-full object-cover"
                           loading="eager"
@@ -134,11 +132,11 @@ const Bible: React.FC = () => {
                         />
                         <div className="absolute inset-0 bg-black/20" />
                       </div>
-                      
+
                       {/* Content over background */}
                       <div className="relative z-10 p-5 pt-2 pb-4">
                         <div className="mb-4">
-                          <button 
+                          <button
                             onClick={handleBackToBooks}
                             className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
                           >
@@ -146,7 +144,7 @@ const Bible: React.FC = () => {
                           </button>
                           <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-9">{selectedBook.name}</h1>
                         </div>
-                        
+
                         {/* Progress info */}
                         <div className="flex justify-between items-center text-sm text-white/80 mb-2">
                           <span>{selectedBook.chapters} chapters</span>
@@ -154,10 +152,10 @@ const Bible: React.FC = () => {
                             Progress: <span className="text-white">{getBookProgressPercentage(selectedBook.id)}%</span>
                           </span>
                         </div>
-                        
+
                         {/* Progress bar */}
                         <div className="w-full bg-white/20 rounded-full h-2">
-                          <div 
+                          <div
                             className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
                             style={{ width: `${getBookProgressPercentage(selectedBook.id)}%` }}
                           />
@@ -191,7 +189,7 @@ const Bible: React.FC = () => {
                 </div>
               </div>
             )}
-            
+
             {selectedBook && selectedChapter && (
               <BibleChapterCard
                 bookId={selectedBook.id}

@@ -3,14 +3,13 @@ import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
-import { 
-  BookOpen, 
-  Trophy, 
-  Flame, 
-  BookMarked, 
-  Users, 
+import {
+  BookOpen,
+  Trophy,
+  Flame,
+  BookMarked,
+  Users,
   Target,
   ChevronRight,
   Sparkles,
@@ -26,11 +25,12 @@ import { motion } from 'framer-motion';
 
 const Index = () => {
   return (
-    <div className="flex flex-col">
-      <Navbar />
+    <div className="flex flex-col min-h-screen">
       <Hero />
-      <ChallengeTypes />
-      <CallToAction />
+      <main className="flex-grow">
+        <ChallengeTypes />
+        <CallToAction />
+      </main>
     </div>
   );
 };
@@ -71,7 +71,7 @@ const ChallengeTypes = () => {
   return (
     <section ref={ref} className="py-24 bg-gradient-to-b from-background to-muted/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -157,7 +157,7 @@ const CallToAction = () => {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Stats Grid */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
@@ -179,7 +179,7 @@ const CallToAction = () => {
         </motion.div>
 
         {/* CTA Content */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.3 }}

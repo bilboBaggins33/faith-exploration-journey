@@ -1,5 +1,4 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Smartphone, Apple, Chrome } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -7,9 +6,8 @@ import { Button } from '@/components/ui/button';
 
 const InstallApp = () => {
   return (
-    <div className="flex flex-col flex-1">
-      <Navbar />
-      <div className="flex-1 py-16 px-4">
+    <div className="flex flex-col min-h-screen">
+      <main className="flex-grow flex items-center justify-center p-4">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">
@@ -77,7 +75,7 @@ const InstallApp = () => {
             </Link>
           </div>
         </div>
-      </div>
+      </main>
     </div>
   );
 };

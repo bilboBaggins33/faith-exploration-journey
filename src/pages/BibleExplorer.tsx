@@ -1,7 +1,5 @@
-
 import { useState, useMemo } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import BookHeader from '@/components/bible/explorer/BookHeader';
 import ChaptersGrid from '@/components/bible/explorer/ChaptersGrid';
@@ -18,19 +16,19 @@ const BibleExplorer = () => {
   const { bookId } = useParams();
   const selectedBook = selectedBookId ? bibleBooks.find(book => book.id === selectedBookId) : null;
   const isMobile = useIsMobile();
-  const { 
-    loading: progressLoading, 
-    getBookProgress, 
-    getBookAverageScore 
+  const {
+    loading: progressLoading,
+    getBookProgress,
+    getBookAverageScore
   } = useBibleProgress();
-  
+
   // Filter books based on search query
   const filteredBooks = useMemo(() => {
     if (!searchQuery.trim()) return bibleBooks;
-    
+
     const query = searchQuery.toLowerCase();
-    return bibleBooks.filter(book => 
-      book.name.toLowerCase().includes(query) || 
+    return bibleBooks.filter(book =>
+      book.name.toLowerCase().includes(query) ||
       book.testament.toLowerCase().includes(query)
     );
   }, [searchQuery]);
@@ -46,11 +44,10 @@ const BibleExplorer = () => {
     setSelectedBookId(bookId);
     navigate(`/bible/${bookId}`);
   };
-  
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
+
       <main className="flex-1 pt-24 pb-10 px-4 md:px-6 bg-bible-beige">
         <div className="max-w-7xl mx-auto">
           {!selectedBook && (
@@ -62,7 +59,7 @@ const BibleExplorer = () => {
                 Explore the Holy Bible, discover God's Word, and deepen your understanding of Scripture
                 through interactive reading and study tools.
               </p>
-              
+
               <div className="relative max-w-md mx-auto mb-8">
                 <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                   <Search className="h-5 w-5 text-gray-400" />
@@ -77,7 +74,7 @@ const BibleExplorer = () => {
               </div>
             </div>
           )}
-          
+
           <header className="text-center mb-8">
             {selectedBook && (
               <BookHeader
@@ -86,7 +83,7 @@ const BibleExplorer = () => {
               />
             )}
           </header>
-          
+
           <div className="w-full">
             {selectedBook ? (
               <ChaptersGrid bookId={selectedBookId} />
@@ -95,7 +92,7 @@ const BibleExplorer = () => {
                 {filteredBooks.map((book) => {
                   const progress = getBookProgress(book.id);
                   const averageScore = getBookAverageScore(book.id);
-                  
+
                   return (
                     <button
                       key={book.id}
@@ -118,7 +115,7 @@ const BibleExplorer = () => {
                           </p>
                         </div>
                       </div>
-                      
+
                       <div className="p-3 flex-grow flex flex-col">
                         {/* Progress section */}
                         <div className="mt-auto pt-2">
@@ -127,7 +124,7 @@ const BibleExplorer = () => {
                             <span className="text-gray-900 font-medium">{progress.percentage}%</span>
                           </div>
                           <div className="w-full h-1.5 bg-gray-100 rounded-full overflow-hidden">
-                            <div 
+                            <div
                               className="h-full bg-bible-gold transition-all duration-300"
                               style={{ width: `${progress.percentage}%` }}
                             />
@@ -152,7 +149,7 @@ const BibleExplorer = () => {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );

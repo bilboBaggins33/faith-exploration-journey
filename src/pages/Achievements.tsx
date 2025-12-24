@@ -1,6 +1,5 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/context/auth';
@@ -11,42 +10,40 @@ const Achievements = () => {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
   const { progress } = useBibleProgress();
-  
+
   // Redirect to login if not authenticated
   React.useEffect(() => {
     if (!isLoading && !user) {
       navigate('/auth', { replace: true });
     }
   }, [user, isLoading, navigate]);
-  
+
   if (isLoading) {
     return (
       <div className="flex flex-col flex-1">
-        <Navbar />
         <div className="flex-grow flex items-center justify-center">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-bible-blue"></div>
         </div>
       </div>
     );
   }
-  
+
   if (!user) {
     return null; // Will redirect in the effect
   }
 
   const completedAchievements = 1; // For now, just hardcode this
-  
+
   return (
-    <div className="flex flex-col flex-1">
-      <Navbar />
-      
+    <div className="flex flex-col min-h-screen">
+
       <main className="flex-grow py-8 px-4 bg-bible-beige">
         <div className="max-w-7xl mx-auto">
           <div className="mb-8">
             <h1 className="text-3xl font-serif font-bold">Achievements</h1>
             <p className="text-gray-600">Track your progress and accomplishments</p>
           </div>
-          
+
           <div className="mb-8">
             <Card>
               <CardHeader>
@@ -63,8 +60,8 @@ const Achievements = () => {
                         {completedAchievements} out of 12 achievements unlocked
                       </p>
                       <div className="w-full max-w-md bg-gray-200 rounded-full h-2.5 mt-2">
-                        <div 
-                          className="bg-bible-blue h-2.5 rounded-full" 
+                        <div
+                          className="bg-bible-blue h-2.5 rounded-full"
                           style={{ width: `${(completedAchievements / 12) * 100}%` }}
                         ></div>
                       </div>
@@ -74,7 +71,7 @@ const Achievements = () => {
               </CardContent>
             </Card>
           </div>
-          
+
           <Tabs defaultValue="all" className="space-y-4">
             <TabsList>
               <TabsTrigger value="all">All Achievements</TabsTrigger>
@@ -82,7 +79,7 @@ const Achievements = () => {
               <TabsTrigger value="theology">Theology</TabsTrigger>
               <TabsTrigger value="challenges">Challenges</TabsTrigger>
             </TabsList>
-            
+
             <TabsContent value="all" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Bible Reading Achievement */}
@@ -101,7 +98,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Book Finisher Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -117,7 +114,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* 7-Day Streak Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -133,7 +130,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* 30-Day Streak Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -149,7 +146,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Old Testament Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -165,7 +162,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* New Testament Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -181,7 +178,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Gospels Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -197,7 +194,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Wisdom Books Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -213,7 +210,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Theology Book Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -231,7 +228,7 @@ const Achievements = () => {
                 </Card>
               </div>
             </TabsContent>
-            
+
             <TabsContent value="bible" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Bible Reading Achievements */}
@@ -250,7 +247,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Book Finisher Achievement */}
                 <Card className="bg-white/60">
                   <CardHeader className="pb-2">
@@ -266,11 +263,11 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Additional Bible reading achievements */}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="theology" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Theology book achievements */}
@@ -288,11 +285,11 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Additional theology achievements */}
               </div>
             </TabsContent>
-            
+
             <TabsContent value="challenges" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                 {/* Challenge achievements */}
@@ -310,7 +307,7 @@ const Achievements = () => {
                     </div>
                   </CardContent>
                 </Card>
-                
+
                 {/* Additional challenge achievements */}
               </div>
             </TabsContent>

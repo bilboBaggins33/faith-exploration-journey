@@ -1,7 +1,5 @@
-
 import React, { useMemo, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import { theologyBooks } from '@/data/theology/books';
 import { theologyChapters } from '@/data/theology/chapters';
@@ -15,20 +13,20 @@ import { Search } from 'lucide-react';
 
 const TheologyExplorer: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
-  const { 
-    loading, 
+  const {
+    loading,
     progress,
-    getBookProgress, 
-    getBookAverageScore, 
-    getChapterStatus 
+    getBookProgress,
+    getBookAverageScore,
+    getChapterStatus
   } = useTheologyProgress();
-  
+
   const [searchQuery, setSearchQuery] = useState('');
-  
+
   // Get selected book data if bookId is provided
   const selectedBook = bookId ? theologyBooks.find(book => book.id === bookId) : null;
   const bookChapters = selectedBook ? theologyChapters[selectedBook.id] || [] : [];
-  
+
   // Sort books by most recently read first
   const sortedBooks = useMemo(() => {
     if (!progress || !progress.completed_chapters) {
@@ -40,7 +38,7 @@ const TheologyExplorer: React.FC = () => {
     progress.completed_chapters.forEach(chapter => {
       const bookId = chapter.book_id;
       const completedAt = new Date(chapter.completed_at);
-      
+
       if (!bookTimestamps.has(bookId) || completedAt > bookTimestamps.get(bookId)!) {
         bookTimestamps.set(bookId, completedAt);
       }
@@ -50,7 +48,7 @@ const TheologyExplorer: React.FC = () => {
     return [...theologyBooks].sort((a, b) => {
       const timeA = bookTimestamps.get(a.id);
       const timeB = bookTimestamps.get(b.id);
-      
+
       if (timeA && timeB) {
         return timeB.getTime() - timeA.getTime();
       } else if (timeA) {
@@ -61,27 +59,26 @@ const TheologyExplorer: React.FC = () => {
       return 0; // Neither has been read
     });
   }, [progress]);
-  
+
   // Filter books based on search query
   const filteredBooks = useMemo(() => {
     if (!searchQuery.trim()) return sortedBooks;
-    
+
     const query = searchQuery.toLowerCase();
-    return sortedBooks.filter(book => 
-      book.title.toLowerCase().includes(query) || 
+    return sortedBooks.filter(book =>
+      book.title.toLowerCase().includes(query) ||
       book.author.toLowerCase().includes(query) ||
       book.category.toLowerCase().includes(query)
     );
   }, [sortedBooks, searchQuery]);
-  
+
   return (
     <div className="min-h-screen flex flex-col">
-      <Navbar />
-      
+
       <main className="flex-grow pb-10 relative">
         {/* Blurred background */}
         <div className="fixed inset-0 -z-10 bg-[#2b1306]">
-          <img 
+          <img
             src="/assets/bible/default.jpg"
             alt="Theology background"
             className="w-full h-full object-cover blur-sm scale-110"
@@ -97,19 +94,19 @@ const TheologyExplorer: React.FC = () => {
               <div className="text-center py-12 text-white">Loading theology content...</div>
             ) : selectedBook ? (
               <div>
-                <BookDetail 
+                <BookDetail
                   book={selectedBook}
                   bookProgress={getBookProgress(selectedBook.id)}
                   bookAverageScore={getBookAverageScore(selectedBook.id)}
                 />
-                
-                <ChapterList 
+
+                <ChapterList
                   chapters={bookChapters}
                   getChapterStatus={getChapterStatus}
                 />
               </div>
             ) : (
-              <BookList 
+              <BookList
                 books={sortedBooks}
                 getBookProgress={getBookProgress}
                 getBookAverageScore={getBookAverageScore}
@@ -118,7 +115,7 @@ const TheologyExplorer: React.FC = () => {
           </div>
         </div>
       </main>
-      
+
       <Footer />
     </div>
   );
