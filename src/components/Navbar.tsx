@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="z-50 bg-bible-dark/90 dark:bg-bible-dark/90 relative">
+    <nav className="z-50 bg-transparent relative">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <NavLogo isHomePage={isHomePage} isBiblePage={isBiblePage} />
