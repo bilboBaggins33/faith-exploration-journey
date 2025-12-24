@@ -13,14 +13,12 @@ const NavLogo = ({ isHomePage, isBiblePage }: NavLogoProps) => {
       : '/BibleQuestLogo.png'; // smaller or alternative logo for all other cases
 
   return (
-    <div className={`flex items-center ${(isHomePage) ? 'pt-5' : ''}`}>
+    <div className="flex items-center">
       <Link to="/" className="flex items-center">
         <img
           src={logoSrc}
           alt="Bible Quest Logo"
-          className={`transition-all duration-300 ${
-            isHomePage ? 'h-14 w-auto' : 'h-10 md:h-14 w-auto'
-          }`}
+          className="h-12 w-auto transition-all duration-300"
         />
       </Link>
     </div>
