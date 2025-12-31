@@ -17,7 +17,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Solomon'
         ],
         correctAnswer: 'Adonijah',
-        explanation: '1 Kings 1:5 says, “…Adonijah… exalted himself…”'
+        explanation: '1 Kings 1:5 (ESV): "Now Adonijah the son of Haggith exalted himself, saying, “I will be king.” And he prepared for himself chariots and horsemen, and fifty men to run before him." Ambition led him to claim the throne prematurely.'
       },
       {
         id: '1kings1-q2',
@@ -29,7 +29,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Benaiah'
         ],
         correctAnswer: 'Bathsheba and Nathan',
-        explanation: '1 Kings 1:11-14 states, “…Nathan… Bathsheba…”'
+        explanation: '1 Kings 1:11-14 (ESV): Nathan told Bathsheba, “Go in at once to King David, and say to him, ‘Did you not, my lord the king, swear to your servant, saying, “Solomon your son shall reign after me, and he shall sit on my throne”? Why then is Adonijah king?’ Then while you are still speaking with the king, I also will come in after you and confirm your words.” They cooperated to secure Solomon’s kingship.'
       },
       {
         id: '1kings1-q3',
@@ -41,7 +41,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Absalom'
         ],
         correctAnswer: 'Solomon',
-        explanation: '1 Kings 1:17, 30 says, “…Solomon…”'
+        explanation: '1 Kings 1:30 (ESV): David confirmed, “as I swore to you by the Lord, the God of Israel, saying, ‘Solomon your son shall reign after me, and he shall sit on my throne in my place,’ even so will I do this day.” David upheld his promise to Bathsheba.'
       },
       {
         id: '1kings1-q4',
@@ -53,7 +53,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Shiloh'
         ],
         correctAnswer: 'Gihon',
-        explanation: '1 Kings 1:33, 39 states, “…Gihon…”'
+        explanation: '1 Kings 1:33, 39 (ESV): The king said, “bring him down to Gihon.” Then “Zadok the priest took the horn of oil from the tent and anointed Solomon. Then they blew the trumpet, and all the people said, ‘Long live King Solomon!’” Gihon was the site of the coronation.'
       },
       {
         id: '1kings1-q5',
@@ -65,7 +65,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Joined Solomon'
         ],
         correctAnswer: 'Fled and sought mercy',
-        explanation: '1 Kings 1:50-51 says, “…fled… horns of the altar…”'
+        explanation: '1 Kings 1:50-51 (ESV): “And Adonijah feared Solomon. So he arose and went and took hold of the horns of the altar.” He sought sanctuary once he realized Solomon was king.'
       }
     ],
     key_verse: '1 Kings 1:39',
@@ -90,7 +90,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Marry many wives'
         ],
         correctAnswer: 'Keep God’s laws',
-        explanation: '1 Kings 2:3 says, “…keep… statutes…”'
+        explanation: '1 Kings 2:3 (ESV): “and keep the charge of the Lord your God, walking in his ways and keeping his statutes... as it is written in the Law of Moses, that you may prosper in all that you do.” David’s final charge was spiritual faithfulness.'
       },
       {
         id: '1kings2-q2',
@@ -102,7 +102,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Bathsheba and Abiathar'
         ],
         correctAnswer: 'Joab and Shimei',
-        explanation: '1 Kings 2:5-6, 8-9 states, “…Joab… Shimei…”'
+        explanation: '1 Kings 2:5-6, 8-9 (ESV): David told Solomon regarding Joab: “do not let his gray head go down to Sheol in peace.” Regarding Shimei: “you shall bring his gray head down with blood to Sheol.” Solomon was to deal with these legacy issues with wisdom.'
       },
       {
         id: '1kings2-q3',
@@ -114,7 +114,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Shimei'
         ],
         correctAnswer: 'Benaiah',
-        explanation: '1 Kings 2:25 says, “…Benaiah…”'
+        explanation: '1 Kings 2:25 (ESV): “So King Solomon sent Benaiah the son of Jehoiada, and he struck him down, and he died.” This was in response to Adonijah’s request for Abishag.'
       },
       {
         id: '1kings2-q4',
@@ -126,7 +126,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Imprisoned'
         ],
         correctAnswer: 'Banished to Anathoth',
-        explanation: '1 Kings 2:26-27 states, “…Anathoth…”'
+        explanation: '1 Kings 2:26-27 (ESV): The king told Abiathar: “Go to Anathoth... for you deserve death. But I will not at this time put you to death... So Solomon expelled Abiathar from being priest to the Lord.” This fulfilled the prophecy concerning Eli.'
       },
       {
         id: '1kings2-q5',
@@ -138,7 +138,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Poisoned'
         ],
         correctAnswer: 'Benaiah killed him for leaving Jerusalem',
-        explanation: '1 Kings 2:46 says, “…Benaiah… struck…”'
+        explanation: '1 Kings 2:46 (ESV): “Then the king commanded Benaiah the son of Jehoiada, and he went out and struck him down, and he died. So the kingdom was established in the hand of Solomon.” This followed Shimei leaving Jerusalem.'
       }
     ],
     key_verse: '1 Kings 2:3',
@@ -163,7 +163,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Shiloh'
         ],
         correctAnswer: 'Gibeon',
-        explanation: '1 Kings 3:4 says, “…Gibeon…”'
+        explanation: '1 Kings 3:4 (ESV): “And the king went to Gibeon to sacrifice there, for that was the great high place. Solomon used to offer a thousand burnt offerings on that altar.” It was here that God appeared to him in a dream.'
       },
       {
         id: '1kings3-q2',
@@ -175,7 +175,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Victory'
         ],
         correctAnswer: 'Wisdom to discern good and evil',
-        explanation: '1 Kings 3:9 states, “…understanding… discern…”'
+        explanation: '1 Kings 3:9 (ESV): Solomon asked, “Give your servant therefore an understanding mind to govern your people, that I may discern between good and evil.” This request pleased the Lord.'
       },
       {
         id: '1kings3-q3',
@@ -187,7 +187,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'A son'
         ],
         correctAnswer: 'Riches and honor',
-        explanation: '1 Kings 3:13 says, “…riches and honor…”'
+        explanation: '1 Kings 3:13 (ESV): God told him, “I give you also what you have not asked, both riches and honor, so that no other king shall compare with you, all your days.”'
       },
       {
         id: '1kings3-q4',
@@ -199,7 +199,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Gave the child to both'
         ],
         correctAnswer: 'Ordered the baby cut in two',
-        explanation: '1 Kings 3:25 says, “…divide… two…”'
+        explanation: '1 Kings 3:25 (ESV): “And the king said, ‘Divide the living child in two, and give half to the one and half to the other.’” This was the king’s method to reveal the true mother.'
       },
       {
         id: '1kings3-q5',
@@ -211,7 +211,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Solomon'
         ],
         correctAnswer: 'The true mother who begged to save it',
-        explanation: '1 Kings 3:26-27 states, “…mother… give her…”'
+        explanation: '1 Kings 3:26-27 (ESV): The true mother said, “Oh, my lord, give her the living child, and by no means put him to death.” The king then answered, “Give the living child to the first woman... she is his mother.”'
       }
     ],
     key_verse: '1 Kings 3:12',
@@ -236,7 +236,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '30'
         ],
         correctAnswer: '12',
-        explanation: '1 Kings 4:7 says, “…twelve…”'
+        explanation: '1 Kings 4:7 (ESV): “Solomon had twelve officers over all Israel, who provided food for the king and his household. Each man had to make provision for one month in the year.”'
       },
       {
         id: '1kings4-q2',
@@ -248,7 +248,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Benaiah'
         ],
         correctAnswer: 'Zadok',
-        explanation: '1 Kings 4:2 states, “…Zadok…”'
+        explanation: '1 Kings 4:2 (ESV): “and these were his high officials: Azariah the son of Zadok was the priest;” Zadok’s family held the high priestly role.'
       },
       {
         id: '1kings4-q3',
@@ -260,7 +260,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Hebron to Gibeon'
         ],
         correctAnswer: 'Egypt to the Euphrates',
-        explanation: '1 Kings 4:21 says, “…Egypt… Euphrates…”'
+        explanation: '1 Kings 4:21 (ESV): “Solomon ruled over all the kingdoms from the Euphrates to the land of the Philistines and to the border of Egypt. They brought tribute and served Solomon all the days of his life.”'
       },
       {
         id: '1kings4-q4',
@@ -272,7 +272,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '10,000'
         ],
         correctAnswer: '3,000',
-        explanation: '1 Kings 4:32 states, “…three thousand proverbs…”'
+        explanation: '1 Kings 4:32 (ESV): “He also spoke 3,000 proverbs, and his songs were 1,005.” Solomon’s wisdom was expressed in a vast body of literature.'
       },
       {
         id: '1kings4-q5',
@@ -284,7 +284,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'The Philistines’'
         ],
         correctAnswer: 'Egypt and the East',
-        explanation: '1 Kings 4:30 says, “…Egypt… east…”'
+        explanation: '1 Kings 4:30 (ESV): “so that Solomon’s wisdom surpassed the wisdom of all the people of the east and all the wisdom of Egypt.” He was internationally renowned.'
       }
     ],
     key_verse: '1 Kings 4:29',
@@ -309,7 +309,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'The Ammonites'
         ],
         correctAnswer: 'Hiram king of Tyre',
-        explanation: '1 Kings 5:1 says, “…Hiram…”'
+        explanation: '1 Kings 5:1 (ESV): “Now Hiram king of Tyre sent his servants to Solomon when he heard that they had anointed him king in place of his father, for Hiram always loved David.”'
       },
       {
         id: '1kings5-q2',
@@ -321,7 +321,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Silver'
         ],
         correctAnswer: 'Cedar trees',
-        explanation: '1 Kings 5:6 states, “…cedar…”'
+        explanation: '1 Kings 5:6 (ESV): Solomon told Hiram, “Now therefore command that cedars of Lebanon be cut for me... for you know that there is no one among us who knows how to cut timber like the Sidonians.”'
       },
       {
         id: '1kings5-q3',
@@ -333,7 +333,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Gold'
         ],
         correctAnswer: 'Food for his household',
-        explanation: '1 Kings 5:9, 11 says, “…food… household…”'
+        explanation: '1 Kings 5:11 (ESV): “Solomon gave Hiram 20,000 cors of wheat as food for his household, and 20,000 cors of beaten oil. Solomon gave this to Hiram year by year.”'
       },
       {
         id: '1kings5-q4',
@@ -345,7 +345,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '100,000'
         ],
         correctAnswer: '30,000',
-        explanation: '1 Kings 5:13 states, “…thirty thousand…”'
+        explanation: '1 Kings 5:13 (ESV): “King Solomon drafted forced labor out of all Israel, and the draft numbered 30,000 men.” These men worked on the temple materials.'
       },
       {
         id: '1kings5-q5',
@@ -357,7 +357,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Zadok'
         ],
         correctAnswer: 'Adoniram',
-        explanation: '1 Kings 5:14 says, “…Adoniram…”'
+        explanation: '1 Kings 5:14 (ESV): “And he sent them to Lebanon... Adoniram was in charge of the draft.” Adoniram was the official over the forced labor.'
       }
     ],
     key_verse: '1 Kings 5:5',
@@ -382,7 +382,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Tenth'
         ],
         correctAnswer: 'Fourth',
-        explanation: '1 Kings 6:1 says, “…fourth year…”'
+        explanation: '1 Kings 6:1 (ESV): "In the four hundred and eightieth year after the people of Israel came out of the land of Egypt, in the fourth year of Solomon’s reign over Israel... he began to build the house of the Lord."'
       },
       {
         id: '1kings6-q2',
@@ -394,7 +394,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '12 years'
         ],
         correctAnswer: '7 years',
-        explanation: '1 Kings 6:38 states, “…seven years…”'
+        explanation: '1 Kings 6:38 (ESV): “And in the eleventh year... the house was finished in all its parts, and according to all its specifications. He was seven years in building it.”'
       },
       {
         id: '1kings6-q3',
@@ -406,7 +406,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Bronze'
         ],
         correctAnswer: 'Cedar wood',
-        explanation: '1 Kings 6:15 says, “…cedar…”'
+        explanation: '1 Kings 6:15 (ESV): “He lined the walls of the house on the inside with boards of cedar. From the floor of the house to the walls of the ceiling, he covered them on the inside with wood.”'
       },
       {
         id: '1kings6-q4',
@@ -418,7 +418,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Eagles'
         ],
         correctAnswer: 'Cherubim, palm trees, and flowers',
-        explanation: '1 Kings 6:29, 32 states, “…cherubim… palm trees… flowers…”'
+        explanation: '1 Kings 6:29, 32 (ESV): “Around all the walls of the house he carved engraved figures of cherubim and palm trees and open flowers...” and “He covered the two doors of olivewood with carvings of cherubim, palm trees, and open flowers.”'
       },
       {
         id: '1kings6-q5',
@@ -430,7 +430,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Long life'
         ],
         correctAnswer: 'His word would dwell with Israel if they obeyed',
-        explanation: '1 Kings 6:12-13 says, “…statutes… dwell among…”'
+        explanation: '1 Kings 6:12-13 (ESV): “Concerning this house that you are building, if you will walk in my statutes and obey my rules and keep all my commandments... then I will establish my word with you... And I will dwell among the children of Israel.”'
       }
     ],
     key_verse: '1 Kings 6:7',
@@ -455,7 +455,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '10 years'
         ],
         correctAnswer: '13 years',
-        explanation: '1 Kings 7:1 says, “…thirteen years…”'
+        explanation: '1 Kings 7:1 (ESV): “Solomon was building his own house thirteen years, and he finished his entire house.” His palace complex took longer than the temple.'
       },
       {
         id: '1kings7-q2',
@@ -467,7 +467,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'House of Peace'
         ],
         correctAnswer: 'Hall of Justice',
-        explanation: '1 Kings 7:7 states, “…Hall of Justice…”'
+        explanation: '1 Kings 7:7 (ESV): “And he made the Hall of the Throne where he was to pronounce judgment, even the Hall of Judgment. It was finished with cedar from floor to rafters.”'
       },
       {
         id: '1kings7-q3',
@@ -479,7 +479,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Oholiab'
         ],
         correctAnswer: 'Hiram',
-        explanation: '1 Kings 7:13-14 says, “…Hiram…”'
+        explanation: '1 Kings 7:13-14 (ESV): Solomon brought Hiram from Tyre, who was “full of wisdom, understanding, and skill for making any work in bronze. He came to King Solomon and did all his work.”'
       },
       {
         id: '1kings7-q4',
@@ -491,7 +491,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Lion and Lamb'
         ],
         correctAnswer: 'Jachin and Boaz',
-        explanation: '1 Kings 7:21 states, “…Jachin… Boaz…”'
+        explanation: '1 Kings 7:21 (ESV): “He set up the pillar on the south and called its name Jachin, and he set up the pillar on the north and called its name Boaz.” These bronze pillars stood at the vestibule of the temple.'
       },
       {
         id: '1kings7-q5',
@@ -503,7 +503,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Stone'
         ],
         correctAnswer: 'Bronze',
-        explanation: '1 Kings 7:23 says, “…cast metal…” (bronze, per context).'
+        explanation: '1 Kings 7:23 (ESV): “Then he made the sea of cast metal. It was round, ten cubits from brim to brim, and five cubits high...” This was a massive bronze basin for the priests.'
       }
     ],
     key_verse: '1 Kings 7:51',
@@ -528,7 +528,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Porch'
         ],
         correctAnswer: 'Most Holy Place',
-        explanation: '1 Kings 8:6 says, “…Most Holy Place…”'
+        explanation: '1 Kings 8:6 (ESV): “Then the priests brought the ark of the covenant of the Lord to its place in the inner sanctuary of the house, in the Most Holy Place, underneath the wings of the cherubim.”'
       },
       {
         id: '1kings8-q2',
@@ -540,7 +540,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Light'
         ],
         correctAnswer: 'A cloud of God’s glory',
-        explanation: '1 Kings 8:10-11 states, “…cloud… glory…”'
+        explanation: '1 Kings 8:10-11 (ESV): “And when the priests came out of the Holy Place, a cloud filled the house of the Lord, so that the priests could not stand to minister because of the cloud, for the glory of the Lord filled the house of the Lord.”'
       },
       {
         id: '1kings8-q3',
@@ -552,7 +552,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Treasury'
         ],
         correctAnswer: 'God’s name to dwell there',
-        explanation: '1 Kings 8:16-20 says, “…name… there…”'
+        explanation: '1 Kings 8:16, 20 (ESV): God said, “I chose no city... in which to build a house, that my name might be there.” Solomon replied, “I have arisen in the place of David my father... and I have built the house for the name of the Lord.”'
       },
       {
         id: '1kings8-q4',
@@ -564,7 +564,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '50,000'
         ],
         correctAnswer: '22,000 oxen and 120,000 sheep',
-        explanation: '1 Kings 8:63 states, “…twenty-two thousand… hundred twenty thousand…”'
+        explanation: '1 Kings 8:63 (ESV): “Solomon offered as peace offerings to the Lord 22,000 oxen and 120,000 sheep. So the king and all the people of Israel dedicated the house of the Lord.”'
       },
       {
         id: '1kings8-q5',
@@ -576,7 +576,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Long life'
         ],
         correctAnswer: 'Eyes and heart always with the temple',
-        explanation: '1 Kings 8:66, cf. 9:3 says, “…eyes… heart… always…”'
+        explanation: '1 Kings 9:3 (ESV): “I have consecrated this house that you have built, by putting my name there forever. My eyes and my heart will be there for all time.”'
       }
     ],
     key_verse: '1 Kings 8:11',
@@ -601,7 +601,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Long life only'
         ],
         correctAnswer: 'Throne established forever',
-        explanation: '1 Kings 9:4-5 says, “…throne… forever…”'
+        explanation: '1 Kings 9:4-5 (ESV): “if you will walk before me, as David your father walked, with integrity of heart... then I will establish your royal throne over Israel forever.”'
       },
       {
         id: '1kings9-q2',
@@ -613,7 +613,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Exile only'
         ],
         correctAnswer: 'Temple destroyed and Israel a byword',
-        explanation: '1 Kings 9:7 states, “…cast… proverb… byword…”'
+        explanation: '1 Kings 9:7 (ESV): “then I will cut off Israel from the land... and the house that I have consecrated for my name I will cast out of my sight, and Israel will become a proverb and a byword among all peoples.”'
       },
       {
         id: '1kings9-q3',
@@ -625,7 +625,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '5'
         ],
         correctAnswer: '20',
-        explanation: '1 Kings 9:11 says, “…twenty cities…”'
+        explanation: '1 Kings 9:11 (ESV): “and Hiram king of Tyre had supplied Solomon with cedar and cypress timber and gold... King Solomon gave to Hiram twenty cities in the land of Galilee.”'
       },
       {
         id: '1kings9-q4',
@@ -637,7 +637,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Galilee'
         ],
         correctAnswer: 'Cabul',
-        explanation: '1 Kings 9:13 states, “…Cabul…”'
+        explanation: '1 Kings 9:13 (ESV): “Therefore he said, ‘What kind of cities are these that you have given me, my brother?’ So they are called the land of Cabul [meaning worthless] to this day.”'
       },
       {
         id: '1kings9-q5',
@@ -649,7 +649,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'A tower'
         ],
         correctAnswer: 'Walls, Millo, and cities',
-        explanation: '1 Kings 9:15-17 says, “…wall… Millo… Hazor…”'
+        explanation: '1 Kings 9:15, 17 (ESV): “And this is the account of the forced labor that King Solomon drafted to build the house of the Lord and his own house and the Millo and the wall of Jerusalem and Hazor and Megiddo and Gezer...”'
       }
     ],
     key_verse: '1 Kings 9:3',
@@ -674,7 +674,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'King of Edom'
         ],
         correctAnswer: 'Queen of Sheba',
-        explanation: '1 Kings 10:1 says, “…Queen of Sheba…”'
+        explanation: '1 Kings 10:1 (ESV): “Now when the queen of Sheba heard of the fame of Solomon concerning the name of the Lord, she came to test him with hard questions.”'
       },
       {
         id: '1kings10-q2',
@@ -686,7 +686,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Weapons'
         ],
         correctAnswer: 'Gold, spices, and precious stones',
-        explanation: '1 Kings 10:2, 10 states, “…gold… spices… stones…”'
+        explanation: '1 Kings 10:2, 10 (ESV): She came “with a very great retinue, with camels bearing spices and very much gold and precious stones.” “Then she gave the king 120 talents of gold, and a very great quantity of spices and precious stones.”'
       },
       {
         id: '1kings10-q3',
@@ -698,7 +698,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Stone'
         ],
         correctAnswer: 'Ivory overlaid with gold',
-        explanation: '1 Kings 10:18 says, “…ivory… overlaid… gold…”'
+        explanation: '1 Kings 10:18 (ESV): “The king also made a great ivory throne and overlaid it with the finest gold.” It was a supreme expression of his wealth.'
       },
       {
         id: '1kings10-q4',
@@ -710,7 +710,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '100 talents'
         ],
         correctAnswer: '666 talents',
-        explanation: '1 Kings 10:14 states, “…six hundred sixty-six talents…”'
+        explanation: '1 Kings 10:14 (ESV): “Now the weight of gold that came to Solomon in one year was 666 talents of gold.” This huge amount represents the peak of his income.'
       },
       {
         id: '1kings10-q5',
@@ -722,7 +722,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'It came from men'
         ],
         correctAnswer: 'The half was not told her',
-        explanation: '1 Kings 10:7 says, “…half was not told me…”'
+        explanation: '1 Kings 10:7 (ESV): “but I did not believe the reports until I came and my own eyes had seen it. And behold, the half was not told me. Your wisdom and prosperity surpass the report that I heard.”'
       }
     ],
     key_verse: '1 Kings 10:23',
@@ -747,7 +747,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Pride'
         ],
         correctAnswer: 'His foreign wives',
-        explanation: '1 Kings 11:1-4 says, “…loved many foreign women… turned away…”'
+        explanation: '1 Kings 11:1, 4 (ESV): “Now King Solomon loved many foreign women...” “For when Solomon was old his wives turned away his heart after other gods, and his heart was not wholly true to the Lord his God...”'
       },
       {
         id: '1kings11-q2',
@@ -759,7 +759,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Isis and Osiris'
         ],
         correctAnswer: 'Ashtoreth, Chemosh, and Molech',
-        explanation: '1 Kings 11:5-7 states, “…Ashtoreth… Chemosh… Molech…”'
+        explanation: '1 Kings 11:5-7 (ESV): “For Solomon went after Ashtoreth... and after Milcom... Then Solomon built a high place for Chemosh... and for Molech... on the mountain east of Jerusalem.”'
       },
       {
         id: '1kings11-q3',
@@ -771,7 +771,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Joab'
         ],
         correctAnswer: 'Hadad the Edomite',
-        explanation: '1 Kings 11:14 says, “…Hadad…” (Jeroboam later, v. 26).'
+        explanation: '1 Kings 11:14 (ESV): “And the Lord raised up an adversary against Solomon, Hadad the Edomite. He was of the royal house in Edom.” God brought judgment through external enemies.'
       },
       {
         id: '1kings11-q4',
@@ -783,7 +783,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Gad'
         ],
         correctAnswer: 'Ahijah the Shilonite',
-        explanation: '1 Kings 11:29 states, “…Ahijah the Shilonite…”'
+        explanation: '1 Kings 11:29 (ESV): “when Jeroboam went out of Jerusalem, the prophet Ahijah the Shilonite found him on the road.” The prophet then used a symbolic action to declare the coming division.'
       },
       {
         id: '1kings11-q5',
@@ -795,7 +795,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Twelve'
         ],
         correctAnswer: 'Two',
-        explanation: '1 Kings 11:32, 36 says, “…one tribe…” (Judah and Benjamin, effectively two).'
+        explanation: '1 Kings 11:32, 36 (ESV): “(but he shall have one tribe, for the sake of my servant David... city where I have chosen to put my name).” Solomon’s son was left with one tribe (and Benjamin, together forming the southern kingdom).'
       }
     ],
     key_verse: '1 Kings 11:9',
@@ -820,7 +820,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Hadad'
         ],
         correctAnswer: 'Rehoboam',
-        explanation: '1 Kings 12:1 says, “…Rehoboam…”'
+        explanation: '1 Kings 12:1 (ESV): “Rehoboam went to Shechem, for all Israel had come to Shechem to make him king.” All the tribes gathered to confirm the new king.'
       },
       {
         id: '1kings12-q2',
@@ -832,7 +832,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Lower taxes'
         ],
         correctAnswer: 'Lighten their yoke',
-        explanation: '1 Kings 12:4 states, “…yoke… lighter…”'
+        explanation: '1 Kings 12:4 (ESV): “Your father made our yoke heavy. Now therefore lighten the hard service of your father and his heavy yoke on us, and we will serve you.” The people sought relief from Solomon’s labor demands.'
       },
       {
         id: '1kings12-q3',
@@ -844,7 +844,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'The priests’'
         ],
         correctAnswer: 'The young men’s',
-        explanation: '1 Kings 12:13-14 says, “…young men…”'
+        explanation: '1 Kings 12:13-14 (ESV): “And the king answered the people harshly... he spoke to them according to the counsel of the young men, saying, ‘My father made your yoke heavy, but I will add to your yoke.’” Rehoboam rejected the wisdom of the elders.'
       },
       {
         id: '1kings12-q4',
@@ -856,7 +856,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'An army'
         ],
         correctAnswer: 'Two golden calves',
-        explanation: '1 Kings 12:28 states, “…two calves of gold…”'
+        explanation: '1 Kings 12:28 (ESV): “So the king took counsel and made two calves of gold. And he said to the people, ‘You have gone up to Jerusalem long enough. Behold your gods, O Israel...’” Jeroboam set up a rival worship system.'
       },
       {
         id: '1kings12-q5',
@@ -868,7 +868,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Samaria and Shechem'
         ],
         correctAnswer: 'Bethel and Dan',
-        explanation: '1 Kings 12:29 says, “…Bethel… Dan…”'
+        explanation: '1 Kings 12:29 (ESV): “And he set one in Bethel, and the other he put in Dan.” These locations were at the southern and northern borders of the new kingdom.'
       }
     ],
     key_verse: '1 Kings 12:15',
@@ -893,7 +893,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'It would be rebuilt'
         ],
         correctAnswer: 'It would split apart',
-        explanation: '1 Kings 13:3, 5 says, “…altar shall be torn apart…”'
+        explanation: '1 Kings 13:3, 5 (ESV): “And he gave a sign... ‘Behold, the altar shall be torn down, and the ashes that are on it shall be poured out.’... And the altar also was torn down.” The sign confirmed the man of God’s message.'
       },
       {
         id: '1kings13-q2',
@@ -905,7 +905,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Jeroboam’s death'
         ],
         correctAnswer: 'Altar split and ashes poured out',
-        explanation: '1 Kings 13:5 states, “…altar… torn… ashes…”'
+        explanation: '1 Kings 13:5 (ESV): “The altar also was torn down, and the ashes poured out from the altar, according to the sign that the man of God had given by the word of the Lord.”'
       },
       {
         id: '1kings13-q3',
@@ -917,7 +917,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'A soldier'
         ],
         correctAnswer: 'An old prophet',
-        explanation: '1 Kings 13:18 says, “…old prophet…”'
+        explanation: '1 Kings 13:18 (ESV): “And he said to him, ‘I also am a prophet as you are, and an angel spoke to me... saying, “Bring him back with you into your house...”’ But he lied to him.” Deception led the man of God astray.'
       },
       {
         id: '1kings13-q4',
@@ -929,7 +929,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Imprisoned'
         ],
         correctAnswer: 'Killed by a lion',
-        explanation: '1 Kings 13:24 states, “…lion… killed him…”'
+        explanation: '1 Kings 13:24 (ESV): “And as he went away a lion met him on the road and killed him. And his body was thrown in the road, and the donkey stood beside it; the lion also stood beside the body.”'
       },
       {
         id: '1kings13-q5',
@@ -941,7 +941,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Fled'
         ],
         correctAnswer: 'Continued in his evil ways',
-        explanation: '1 Kings 13:33-34 says, “…did not turn…”'
+        explanation: '1 Kings 13:33-34 (ESV): “After this thing Jeroboam did not turn from his evil way, but made priests for the high places again from among all the people... And this thing became sin to the house of Jeroboam.”'
       }
     ],
     key_verse: '1 Kings 13:2',
@@ -966,7 +966,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'His general'
         ],
         correctAnswer: 'His wife in disguise',
-        explanation: '1 Kings 14:2 says, “…wife… disguise…”'
+        explanation: '1 Kings 14:2 (ESV): “And Jeroboam said to his wife, ‘Arise, and disguise yourself, that it not be known that you are the wife of Jeroboam, and go to Shiloh.’” He hoped to get a favorable prophecy regarding his sick son.'
       },
       {
         id: '1kings14-q2',
@@ -978,7 +978,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Exile only'
         ],
         correctAnswer: 'Destruction for idolatry',
-        explanation: '1 Kings 14:10-11 states, “…cut off… because…”'
+        explanation: '1 Kings 14:10-11 (ESV): “I will bring harm upon the house of Jeroboam... Anyone belonging to Jeroboam who dies in the city the dogs shall eat, and anyone who dies in the open country the birds... shall eat.”'
       },
       {
         id: '1kings14-q3',
@@ -990,7 +990,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Nadab'
         ],
         correctAnswer: 'Abijam',
-        explanation: '1 Kings 14:31 says, “…Abijam…”'
+        explanation: '1 Kings 14:31 (ESV): “And Rehoboam slept with his fathers and was buried with his fathers in the city of David... And Abijam his son reigned in his place.”'
       },
       {
         id: '1kings14-q4',
@@ -1002,7 +1002,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Assyria'
         ],
         correctAnswer: 'Egypt under Shishak',
-        explanation: '1 Kings 14:25 states, “…Shishak…”'
+        explanation: '1 Kings 14:25 (ESV): “In the fifth year of King Rehoboam, Shishak king of Egypt came up against Jerusalem.” This resulted in the loss of many of the temple treasures.'
       },
       {
         id: '1kings14-q5',
@@ -1014,7 +1014,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Elah'
         ],
         correctAnswer: 'Nadab',
-        explanation: '1 Kings 14:20 says, “…Nadab…”'
+        explanation: '1 Kings 14:20 (ESV): “And the time that Jeroboam reigned was twenty-two years. And he slept with his fathers, and Nadab his son reigned in his place.”'
       }
     ],
     key_verse: '1 Kings 14:15',
@@ -1039,7 +1039,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '41 years'
         ],
         correctAnswer: '3 years',
-        explanation: '1 Kings 15:2 says, “…three years…”'
+        explanation: '1 Kings 15:2 (ESV): “He reigned for three years in Jerusalem. His mother’s name was Maacah the daughter of Abishalom.” Abijam’s reign in Judah was brief.'
       },
       {
         id: '1kings15-q2',
@@ -1051,7 +1051,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Nadab'
         ],
         correctAnswer: 'Asa',
-        explanation: '1 Kings 15:9-11 states, “…Asa… right…”'
+        explanation: '1 Kings 15:9-11 (ESV): “In the twentieth year of Jeroboam king of Israel, Asa began to reign over Judah... And Asa did what was right in the eyes of the Lord, as David his father had done.”'
       },
       {
         id: '1kings15-q3',
@@ -1063,7 +1063,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Priests'
         ],
         correctAnswer: 'Idols and high places',
-        explanation: '1 Kings 15:12-14 says, “…idols… high places…”'
+        explanation: '1 Kings 15:12-14 (ESV): “He put away the male cult prostitutes out of the land and removed all the idols that his fathers had made. He also removed Maacah his mother from being queen mother...”'
       },
       {
         id: '1kings15-q4',
@@ -1075,7 +1075,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Omri'
         ],
         correctAnswer: 'Baasha',
-        explanation: '1 Kings 15:27-28 says, “…Baasha…”'
+        explanation: '1 Kings 15:27-28 (ESV): “Baasha the son of Ahijah... conspired against [Nadab]. And Baasha struck him down at Gibbethon... So Baasha killed him in the third year of Asa king of Judah.”'
       },
       {
         id: '1kings15-q5',
@@ -1087,7 +1087,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '50 years'
         ],
         correctAnswer: '41 years',
-        explanation: '1 Kings 15:10 states, “…forty-one years…”'
+        explanation: '1 Kings 15:10 (ESV): “and he reigned forty-one years in Jerusalem. His mother’s name was Maacah the daughter of Abishalom.” Asa’s long reign was marked by reform.'
       }
     ],
     key_verse: '1 Kings 15:11',
@@ -1112,7 +1112,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Nathan'
         ],
         correctAnswer: 'Jehu son of Hanani',
-        explanation: '1 Kings 16:1, 7 says, “…Jehu the son of Hanani…”'
+        explanation: '1 Kings 16:1, 7 (ESV): “And the word of the Lord came to Jehu the son of Hanani against Baasha... because of all the evil that he did in the sight of the Lord... in being like the house of Jeroboam.”'
       },
       {
         id: '1kings16-q2',
@@ -1124,7 +1124,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Tibni'
         ],
         correctAnswer: 'Zimri',
-        explanation: '1 Kings 16:10 states, “…Zimri…”'
+        explanation: '1 Kings 16:10 (ESV): “Zimri came in and struck him down and killed him, in the twenty-seventh year of Asa king of Judah, and reigned in his place.”'
       },
       {
         id: '1kings16-q3',
@@ -1136,7 +1136,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '3 years'
         ],
         correctAnswer: '7 days',
-        explanation: '1 Kings 16:15 says, “…seven days…”'
+        explanation: '1 Kings 16:15 (ESV): “In the twenty-seventh year of Asa king of Judah, Zimri reigned seven days in Tirzah.” His reign was the shortest in Israel’s history.'
       },
       {
         id: '1kings16-q4',
@@ -1148,7 +1148,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Baasha'
         ],
         correctAnswer: 'Omri',
-        explanation: '1 Kings 16:21-22 states, “…Omri prevailed…”'
+        explanation: '1 Kings 16:21-22 (ESV): “Then the people of Israel were divided into two parts. Half of the people followed Tibni... and half followed Omri. But the people who followed Omri overcame the people who followed Tibni... So Tibni died, and Omri became king.”'
       },
       {
         id: '1kings16-q5',
@@ -1160,7 +1160,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Asa'
         ],
         correctAnswer: 'Ahab',
-        explanation: '1 Kings 16:30 says, “…Ahab… evil… more than…”'
+        explanation: '1 Kings 16:30 (ESV): “And Ahab the son of Omri did evil in the sight of the Lord, more than all who were before him.” Ahab’s reign was a time of unprecedented apostasy.'
       }
     ],
     key_verse: '1 Kings 16:25',
@@ -1185,7 +1185,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Nathan'
         ],
         correctAnswer: 'Elijah',
-        explanation: '1 Kings 17:1 says, “…Elijah…”'
+        explanation: '1 Kings 17:1 (ESV): “Now Elijah the Tishbite... said to Ahab, ‘As the Lord, the God of Israel, lives... there shall be neither dew nor rain these years, except by my word.’”'
       },
       {
         id: '1kings17-q2',
@@ -1197,7 +1197,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Locusts'
         ],
         correctAnswer: 'Ravens',
-        explanation: '1 Kings 17:4-6 states, “…ravens…”'
+        explanation: '1 Kings 17:4-6 (ESV): “I have commanded the ravens to feed you there... And the ravens brought him bread and meat in the morning, and bread and meat in the evening, and he drank from the brook.”'
       },
       {
         id: '1kings17-q3',
@@ -1209,7 +1209,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Bethel'
         ],
         correctAnswer: 'Zarephath',
-        explanation: '1 Kings 17:9 says, “…Zarephath…”'
+        explanation: '1 Kings 17:9 (ESV): “Arise, go to Zarephath, which belongs to Sidon, and dwell there. Behold, I have commanded a widow there to feed you.”'
       },
       {
         id: '1kings17-q4',
@@ -1221,7 +1221,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Gave her gold'
         ],
         correctAnswer: 'Multiplied her oil and flour',
-        explanation: '1 Kings 17:14-16 states, “…jar… jug… not…”'
+        explanation: '1 Kings 17:14-16 (ESV): “For thus says the Lord... ‘The jar of flour shall not be spent, and the jug of oil shall not be empty...’ ... The jar of flour was not spent, neither did the jug of oil become empty.”'
       },
       {
         id: '1kings17-q5',
@@ -1233,7 +1233,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Fled'
         ],
         correctAnswer: 'Raised him from the dead',
-        explanation: '1 Kings 17:21-22 says, “…child… lived…”'
+        explanation: '1 Kings 17:21-22 (ESV): “Then he stretched himself upon the child three times and cried to the Lord... And the Lord listened to the voice of Elijah. And the life of the child came into him again, and he revived.”'
       }
     ],
     key_verse: '1 Kings 17:1',
@@ -1258,7 +1258,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Mount Zion'
         ],
         correctAnswer: 'Mount Carmel',
-        explanation: '1 Kings 18:19-20 says, “…Mount Carmel…”'
+        explanation: '1 Kings 18:19-20 (ESV): “Now therefore send and gather all Israel to me at Mount Carmel, and the 450 prophets of Baal and the 400 prophets of Asherah...” “So Ahab sent to all the people of Israel and gathered the prophets together at Mount Carmel.”'
       },
       {
         id: '1kings18-q2',
@@ -1270,7 +1270,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '50'
         ],
         correctAnswer: '450',
-        explanation: '1 Kings 18:19 states, “…four hundred and fifty…”'
+        explanation: '1 Kings 18:19 (ESV): “Now therefore send and gather all Israel to me at Mount Carmel, and the 450 prophets of Baal and the 400 prophets of Asherah, who eat at Jezebel’s table.”'
       },
       {
         id: '1kings18-q3',
@@ -1282,7 +1282,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Blood'
         ],
         correctAnswer: 'Water',
-        explanation: '1 Kings 18:33-35 says, “…water…”'
+        explanation: '1 Kings 18:33-35 (ESV): “Fill four jars with water and pour it on the burnt offering and on the wood.” “And the water ran around the altar and filled the trench also with water.” Elijah made it impossible to start the fire by human means.'
       },
       {
         id: '1kings18-q4',
@@ -1294,7 +1294,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'The people fled'
         ],
         correctAnswer: 'Fire consumed the offering',
-        explanation: '1 Kings 18:38 states, “…fire… consumed…”'
+        explanation: '1 Kings 18:38 (ESV): “Then the fire of the Lord fell and consumed the burnt offering and the wood and the stones and the dust, and licked up the water that was in the trench.” God’s direct intervention proved His power.'
       },
       {
         id: '1kings18-q5',
@@ -1306,7 +1306,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Fled to Judah'
         ],
         correctAnswer: 'Ran ahead of Ahab to Jezreel',
-        explanation: '1 Kings 18:46 says, “…ran before Ahab…”'
+        explanation: '1 Kings 18:46 (ESV): “And the hand of the Lord was on Elijah, and he gathered up his garment and ran before Ahab to the entrance of Jezreel.” Elijah miraculously outran Ahab’s chariot.'
       }
     ],
     key_verse: '1 Kings 18:39',
@@ -1331,7 +1331,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'God’s command'
         ],
         correctAnswer: 'Jezebel’s threat',
-        explanation: '1 Kings 19:2-3 says, “…Jezebel… fled…”'
+        explanation: '1 Kings 19:2-3 (ESV): “Then Jezebel sent a messenger to Elijah, saying, ‘So may the gods do to me and more also, if I do not make your life as the life of one of them by this time tomorrow.’ Then he was afraid, and he arose and ran for his life...”'
       },
       {
         id: '1kings19-q2',
@@ -1343,7 +1343,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Jerusalem'
         ],
         correctAnswer: 'Horeb, the mount of God',
-        explanation: '1 Kings 19:8 states, “…Horeb…”'
+        explanation: '1 Kings 19:8 (ESV): “And he arose and ate and drank, and went in the strength of that food forty days and forty nights to Horeb, the mount of God.”'
       },
       {
         id: '1kings19-q3',
@@ -1355,7 +1355,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'A cloud'
         ],
         correctAnswer: 'Wind, earthquake, and fire',
-        explanation: '1 Kings 19:11-12 says, “…wind… earthquake… fire…” (before the voice).'
+        explanation: '1 Kings 19:11-12 (ESV): “And behold, the Lord passed by, and a great and strong wind tore the mountains... but the Lord was not in the wind. And after the wind an earthquake... And after the earthquake a fire...” These preceded the low whisper.'
       },
       {
         id: '1kings19-q4',
@@ -1367,7 +1367,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Ahab'
         ],
         correctAnswer: 'Elisha',
-        explanation: '1 Kings 19:16 states, “…Elisha…”'
+        explanation: '1 Kings 19:16 (ESV): “And Jehu the son of Nimshi you shall anoint to be king over Israel, and Elisha the son of Shaphat... you shall anoint to be prophet in your place.”'
       },
       {
         id: '1kings19-q5',
@@ -1379,7 +1379,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Fled'
         ],
         correctAnswer: 'Sacrificed his oxen',
-        explanation: '1 Kings 19:21 says, “…sacrificed… oxen…”'
+        explanation: '1 Kings 19:21 (ESV): “And he returned from following him and took the yoke of oxen and sacrificed them... and gave it to the people, and they ate. Then he arose and went after Elijah and assisted him.”'
       }
     ],
     key_verse: '1 Kings 19:12',
@@ -1404,7 +1404,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Omri'
         ],
         correctAnswer: 'Ben-hadad',
-        explanation: '1 Kings 20:1 says, “…Ben-hadad…”'
+        explanation: '1 Kings 20:1 (ESV): “Ben-hadad the king of Syria gathered all his army together. Thirty-two kings were with him, and horses and chariots. And he went up and closed in on Samaria and fought against it.”'
       },
       {
         id: '1kings20-q2',
@@ -1416,7 +1416,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Jehu'
         ],
         correctAnswer: 'A prophet',
-        explanation: '1 Kings 20:13 states, “…a prophet…”'
+        explanation: '1 Kings 20:13 (ESV): “And behold, a prophet came near to Ahab king of Israel and said, ‘Thus says the Lord, “Have you seen all this great multitude? Behold, I will give it into your hand this day, and you shall know that I am the Lord.”’”'
       },
       {
         id: '1kings20-q3',
@@ -1428,7 +1428,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           '1,000'
         ],
         correctAnswer: '232',
-        explanation: '1 Kings 20:15 says, “…two hundred thirty-two…”'
+        explanation: '1 Kings 20:15 (ESV): “Then he mustered the servants of the governors of the districts, and they were 232. And after them he mustered all the people of Israel, seven thousand.”'
       },
       {
         id: '1kings20-q4',
@@ -1440,7 +1440,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Exiled him'
         ],
         correctAnswer: 'Made a covenant and let him go',
-        explanation: '1 Kings 20:34 says, “…covenant… let him go…”'
+        explanation: '1 Kings 20:34 (ESV): Ahab told Ben-hadad: “I will let you go on these terms.” “So he made a covenant with him and let him go.” Ahab failed to execute the king God had devoted to destruction.'
       },
       {
         id: '1kings20-q5',
@@ -1452,7 +1452,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'It would bring peace'
         ],
         correctAnswer: 'Ahab’s life for Ben-hadad’s',
-        explanation: '1 Kings 20:42 states, “…your life… his life…”'
+        explanation: '1 Kings 20:42 (ESV): “And he said to him, ‘Thus says the Lord, “Because you have let go out of your hand the man whom I had devoted to destruction, therefore your life shall be for his life, and your people for his people.”’”'
       }
     ],
     key_verse: '1 Kings 20:28',
@@ -1477,7 +1477,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'His house'
         ],
         correctAnswer: 'His vineyard',
-        explanation: '1 Kings 21:2 says, “…vineyard…”'
+        explanation: '1 Kings 21:2 (ESV): “And after this Ahab said to Naboth, ‘Give me your vineyard, that I may have it for a vegetable garden, because it is near my house...’”'
       },
       {
         id: '1kings21-q2',
@@ -1489,7 +1489,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'God told him not to'
         ],
         correctAnswer: 'It was his inheritance',
-        explanation: '1 Kings 21:3 states, “…inheritance…”'
+        explanation: '1 Kings 21:3 (ESV): “But Naboth said to Ahab, ‘The Lord forbid that I should give you the inheritance of my fathers.’” Naboth prioritized God’s law regarding tribal land.'
       },
       {
         id: '1kings21-q3',
@@ -1501,7 +1501,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'The elders'
         ],
         correctAnswer: 'Jezebel',
-        explanation: '1 Kings 21:8-10 says, “…Jezebel…”'
+        explanation: '1 Kings 21:8-10 (ESV): “So she wrote letters in Ahab’s name and sealed them with his seal... ‘Proclaim a fast, and set Naboth at the head of the people. And set two worthless men opposite him... saying, “You have cursed God and the king.” Then take him out and stone him to death.’”'
       },
       {
         id: '1kings21-q4',
@@ -1513,7 +1513,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Hanged'
         ],
         correctAnswer: 'Stoned after false accusations',
-        explanation: '1 Kings 21:13 states, “…stoned…”'
+        explanation: '1 Kings 21:13 (ESV): “And the worthless men brought a charge against Naboth in the presence of the people, saying, ‘Naboth cursed God and the king.’ So they took him outside the city and stoned him to death with stones.”'
       },
       {
         id: '1kings21-q5',
@@ -1525,7 +1525,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Victory'
         ],
         correctAnswer: 'Dogs would lick his blood',
-        explanation: '1 Kings 21:19 says, “…dogs shall lick…”'
+        explanation: '1 Kings 21:19 (ESV): “And you shall say to him, ‘Thus says the Lord: “In the place where dogs licked up the blood of Naboth shall dogs lick your own blood.”’” Elijah delivered this severe judgment.'
       }
     ],
     key_verse: '1 Kings 21:29',
@@ -1550,7 +1550,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Omri'
         ],
         correctAnswer: 'Jehoshaphat',
-        explanation: '1 Kings 22:2-4 says, “…Jehoshaphat…”'
+        explanation: '1 Kings 22:2-4 (ESV): “Jehoshaphat the king of Judah came down to the king of Israel... And he said to Jehoshaphat, ‘Will you go with me to battle at Ramoth-gilead?’ And Jehoshaphat said... ‘I am as you are, my people as your people...’”'
       },
       {
         id: '1kings22-q2',
@@ -1562,7 +1562,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Jehu'
         ],
         correctAnswer: 'Micaiah son of Imlah',
-        explanation: '1 Kings 22:17-18 states, “…Micaiah…”'
+        explanation: '1 Kings 22:17-18 (ESV): Micaiah said, “I saw all Israel scattered on the mountains, as sheep that have no shepherd.” Ahab responded, “Did I not tell you that he would not prophesy good concerning me, but evil?”'
       },
       {
         id: '1kings22-q3',
@@ -1574,7 +1574,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Flee the battle'
         ],
         correctAnswer: 'Victory over Ramoth-gilead',
-        explanation: '1 Kings 22:6, 12 says, “…Lord will give…”'
+        explanation: '1 Kings 22:6, 12 (ESV): The king gathered about 400 prophets, and they said, “Go up, for the Lord will give it into the hand of the king.” “Go up to Ramoth-gilead and triumph; the Lord will give it into the hand of the king.”'
       },
       {
         id: '1kings22-q4',
@@ -1586,7 +1586,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Fell from a chariot'
         ],
         correctAnswer: 'Shot by an arrow',
-        explanation: '1 Kings 22:34-35 states, “…arrow… struck…”'
+        explanation: '1 Kings 22:34-35 (ESV): “But a certain man drew his bow at random and struck the king of Israel between the scale armor and the breastplate... and at evening he died.” Ahab’s disguise did not protect him from God’s judgment.'
       },
       {
         id: '1kings22-q5',
@@ -1598,7 +1598,7 @@ export const kings1Challenges: ChapterChallenge[] = [
           'Asa'
         ],
         correctAnswer: 'Ahaziah',
-        explanation: '1 Kings 22:40, 51 says, “…Ahaziah…”'
+        explanation: '1 Kings 22:40 (ESV): “So Ahab slept with his fathers, and Ahaziah his son reigned in his place.”'
       }
     ],
     key_verse: '1 Kings 22:23',
