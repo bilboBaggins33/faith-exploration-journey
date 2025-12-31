@@ -382,7 +382,7 @@ export const chronicles2Challenges: ChapterChallenge[] = [
           'Shiloh'
         ],
         correctAnswer: 'Jerusalem',
-        explanation: '2 Chronicles 6:6 (ESV): "but I have chosen Jerusalem that my name may be there, and I have chosen David to be over my people Israel.’ Solomon declared that God chose Jerusalem as His dwelling place."
+        explanation: '2 Chronicles 6:6 (ESV): "but I have chosen Jerusalem that my name may be there, and I have chosen David to be over my people Israel.’ Solomon declared that God chose Jerusalem as His dwelling place.'
       },
       {
         id: '2chron6-q2',
