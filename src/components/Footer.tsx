@@ -29,9 +29,14 @@ const Footer = () => {
         </div>
         
         <div className="border-t border-white/10 pt-6 flex flex-col md:flex-row justify-between items-center gap-4">
-          <p className="text-white/60 text-sm">
-            &copy; {currentYear} Bible Quest. All rights reserved.
-          </p>
+          <div className="flex flex-col md:flex-row items-center gap-2 md:gap-4">
+            <p className="text-white/60 text-sm">
+              &copy; {currentYear} Bible Quest. All rights reserved.
+            </p>
+            <span className="text-white/40 text-xs">
+              v1.7.0
+            </span>
+          </div>
           <div className="flex flex-wrap justify-center gap-4 text-sm">
             <Link to="/terms" className="text-white/60 hover:text-white transition-colors duration-300">
               Terms
