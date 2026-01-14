@@ -23,7 +23,8 @@ const BookCard: React.FC<BookCardProps> = ({
   const isMobile = useIsMobile();
 
   // Generate thumbnail URL (using smaller version of the image)
-  const thumbnailImage = book.coverImage.replace('.jpg', '-thumb.jpg');
+  const extension = book.coverImage.endsWith('.png') ? '.png' : '.jpg';
+  const thumbnailImage = book.coverImage.replace(extension, `-thumb${extension}`);
 
   return (
     <Link to={`/theology/${book.id}`} className="block">

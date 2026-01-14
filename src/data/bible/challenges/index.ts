@@ -19,10 +19,10 @@ import { nehemiahChallenges } from './nehemiah';
 import { estherChallenges } from './esther';
 import { jobChallenges } from './job';
 import { psalmChallenges } from './psalms';
-import { proverbsChallenges } from './proverbs';  
+import { proverbsChallenges } from './proverbs';
 import { ecclesiastesChallenges } from './ecclesiastes';
 // import { songofsolomonChallenges } from './songofsolomon';
-// import { isaiahChallenges } from './isaiah';
+import { isaiahChallenges } from './isaiah';
 // import { jeremiahChallenges } from './jeremiah';
 // import { lamentationsChallenges } from './lamentations';
 // import { ezekielChallenges } from './ezekiel';
@@ -92,7 +92,7 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...proverbsChallenges,
   ...ecclesiastesChallenges,
   // ...songofsolomonChallenges,
-  // ...isaiahChallenges,
+  ...isaiahChallenges,
   // ...jeremiahChallenges,
   // ...lamentationsChallenges,
   // ...ezekielChallenges,
@@ -102,7 +102,7 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...amosChallenges,
   ...obadiahChallenges,
   ...jonahChallenges,
-  ...micahChallenges, 
+  ...micahChallenges,
   ...nahumChallenges,
   ...habakkukChallenges,
   ...zephaniahChallenges,
@@ -142,7 +142,7 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
  * Get a specific Bible challenge by book ID and chapter number
  */
 export const getBibleChallengeByBookAndChapter = (
-  bookId: string, 
+  bookId: string,
   chapter: number
 ): ChapterChallenge | undefined => {
   return sampleChapterChallenges.find(

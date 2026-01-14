@@ -2,8 +2,8 @@
 // Maps Bible book IDs to their respective image paths
 export const bibleBookImages: Record<string, string> = {
   // Old Testament
-  'genesis': '/assets/bible/1280/genesis.webp',
-  'exodus': '/assets/bible/exodus.jpg',
+  'genesis': '/assets/bible/genesis.png',
+  'exodus': '/assets/bible/exodus.png',
   'leviticus': '/assets/bible/leviticus.jpg',
   'numbers': '/assets/bible/numbers.jpg',
   'deuteronomy': '/assets/bible/deuteronomy.jpg',
@@ -59,16 +59,16 @@ export const bibleBookImages: Record<string, string> = {
   '2thessalonians': '/assets/bible/2thessalonians.jpg',
   '1timothy': '/assets/bible/1timothy.jpg',
   '2timothy': '/assets/bible/2timothy.jpg',
-  'titus': '/assets/bible/titus.jpg',
+  'titus': '/assets/bible/titus.png',
   'philemon': '/assets/bible/philemon.jpg',
   'hebrews': '/assets/bible/hebrews.jpg',
   'james': '/assets/bible/james.jpg',
   '1peter': '/assets/bible/1peter.jpg',
   '2peter': '/assets/bible/2peter.jpg',
-  '1john': '/assets/bible/1john.jpg',
-  '2john': '/assets/bible/2john.jpg',
+  '1john': '/assets/bible/1john.png',
+  '2john': '/assets/bible/2john.png',
   '3john': '/assets/bible/3john.jpg',
-  'jude': '/assets/bible/jude.jpg',
+  'jude': '/assets/bible/jude.png',
   'revelation': '/assets/bible/revelation.jpg',
 };
 

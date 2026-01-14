@@ -421,7 +421,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'Why did the Gibeonites deceive Israel?',
         options: ['For wealth', 'To save themselves from destruction', 'To spy', 'For land'],
         correctAnswer: 'To save themselves from destruction',
-        explanation: 'Joshua 9:9, 24 (ESV): "They said to him... ‘We have heard... how the LORD your God commanded his servant Moses to give you all the land... Therefore we feared greatly for our lives...’"
+        explanation: 'Joshua 9:9, 24 (ESV): "They said to him... ‘We have heard... how the LORD your God commanded his servant Moses to give you all the land... Therefore we feared greatly for our lives...’"'
       },
       {
         id: 'josh9-q2',
@@ -449,7 +449,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'How did the Gibeonites’ nearby cities react?',
         options: ['Surrendered', 'Attacked Gibeon', 'Fled', 'Joined Israel'],
         correctAnswer: 'Attacked Gibeon',
-        explanation: 'Joshua 10:1–4 (ESV): "Adoni-zedek king of Jerusalem... sent to Hoham king of Hebron... saying, ‘Come up to me and help me, and let us strike Gibeon...’"
+        explanation: 'Joshua 10:1–4 (ESV): "Adoni-zedek king of Jerusalem... sent to Hoham king of Hebron... saying, ‘Come up to me and help me, and let us strike Gibeon...’"'
       }
     ],
     key_verse: 'Joshua 9:14',
@@ -836,7 +836,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'What did Joseph’s descendants complain about to Joshua?',
         options: ['Too little land', 'Too many enemies', 'Poor soil', 'No water'],
         correctAnswer: 'Too little land',
-        explanation: 'Joshua 17:14 (ESV): "And the people of Joseph spoke to Joshua, saying, ‘Why have you given me but one lot and one portion as an inheritance...?’"
+        explanation: 'Joshua 17:14 (ESV): "And the people of Joseph spoke to Joshua, saying, ‘Why have you given me but one lot and one portion as an inheritance...?’"'
       },
       {
         id: 'josh17-q5',
@@ -1076,7 +1076,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'Why did the western tribes prepare to fight over the altar?',
         options: ['They wanted it', 'They thought it was for rebellion or sacrifice', 'It blocked the river', 'It was too big'],
         correctAnswer: 'They thought it was for rebellion or sacrifice',
-        explanation: 'Joshua 22:12, 16 (ESV): "...to go to war against them... ‘What is this treachery that you have committed against the God of Israel... by building yourselves an altar...?’"
+        explanation: 'Joshua 22:12, 16 (ESV): "...to go to war against them... ‘What is this treachery that you have committed against the God of Israel... by building yourselves an altar...?’"'
       },
       {
         id: 'josh22-q5',
@@ -1103,7 +1103,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'What did Joshua say about his age?',
         options: ['He was young', 'He was old and advanced in days', 'He was strong', 'He was timeless'],
         correctAnswer: 'He was old and advanced in days',
-        explanation: 'Joshua 23:1–2 (ESV): "A long time afterward, when the LORD had given rest to Israel from all their surrounding enemies... Joshua summoned all Israel... and said, ‘I am old and well advanced in years...’"
+        explanation: 'Joshua 23:1–2 (ESV): "A long time afterward, when the LORD had given rest to Israel from all their surrounding enemies... Joshua summoned all Israel... and said, ‘I am old and well advanced in years...’"'
       },
       {
         id: 'josh23-q2',
@@ -1179,7 +1179,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         question: 'What did Joshua set up as a witness to the covenant?',
         options: ['A tree', 'A large stone', 'A tablet', 'An altar'],
         correctAnswer: 'A large stone',
-        explanation: 'Joshua 24:26–27 (ESV): "And Joshua wrote these words in the Book of the Law of God... And Joshua said to all the people, ‘Behold, this stone shall be a witness against us...’"
+        explanation: 'Joshua 24:26–27 (ESV): "And Joshua wrote these words in the Book of the Law of God... And Joshua said to all the people, ‘Behold, this stone shall be a witness against us...’"'
       }
     ],
     key_verse: 'Joshua 24:15',

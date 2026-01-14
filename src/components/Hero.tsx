@@ -7,24 +7,24 @@ import { Link } from 'react-router-dom';
 import { useIsMobile } from '@/hooks/use-mobile';
 
 const heroBackgroundUrls = [
-  'assets/bible/exodus.jpg'
+  'assets/bible/exodus.png'
 ];
 
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
-  
+
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => 
+      setCurrentImageIndex((prevIndex) =>
         prevIndex === heroBackgroundUrls.length - 1 ? 0 : prevIndex + 1
       );
     }, 6000);
-    
+
     return () => clearInterval(interval);
   }, []);
-  
+
   return (
     <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
       {/* Background Image with Parallax Effect */}
@@ -37,18 +37,18 @@ const Hero = () => {
             opacity: currentImageIndex === index ? 1 : 0,
           }}
         >
-          <img 
-            src={url} 
-            className="hidden" 
-            alt="Preload" 
-            onError={() => setImageLoadError(prev => ({...prev, [url]: true}))}
+          <img
+            src={url}
+            className="hidden"
+            alt="Preload"
+            onError={() => setImageLoadError(prev => ({ ...prev, [url]: true }))}
           />
         </div>
       ))}
-      
+
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/50 via-bible-dark/40 to-bible-dark/20" />
-      
+
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <motion.div
@@ -62,7 +62,7 @@ const Hero = () => {
             Questions and Answers
           </h1>
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -81,7 +81,7 @@ const Hero = () => {
             </Button>
           </Link>
         </motion.div>
-        
+
         {/* Feature Icons */}
         {/* <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -103,7 +103,7 @@ const Hero = () => {
           />
         </motion.div> */}
       </div>
-      
+
     </div>
   );
 };
