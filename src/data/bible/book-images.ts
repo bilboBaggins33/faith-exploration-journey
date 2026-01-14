@@ -4,7 +4,7 @@ export const bibleBookImages: Record<string, string> = {
   // Old Testament
   'genesis': '/assets/bible/genesis.png',
   'exodus': '/assets/bible/exodus.png',
-  'leviticus': '/assets/bible/leviticus.jpg',
+  'leviticus': '/assets/bible/leviticus.png',
   'numbers': '/assets/bible/numbers.jpg',
   'deuteronomy': '/assets/bible/deuteronomy.jpg',
   'joshua': '/assets/bible/joshua.jpg',
@@ -60,16 +60,16 @@ export const bibleBookImages: Record<string, string> = {
   '1timothy': '/assets/bible/1timothy.jpg',
   '2timothy': '/assets/bible/2timothy.jpg',
   'titus': '/assets/bible/titus.png',
-  'philemon': '/assets/bible/philemon.jpg',
-  'hebrews': '/assets/bible/hebrews.jpg',
+  'philemon': '/assets/bible/philemon.png',
+  'hebrews': '/assets/bible/hebrews.png',
   'james': '/assets/bible/james.jpg',
-  '1peter': '/assets/bible/1peter.jpg',
-  '2peter': '/assets/bible/2peter.jpg',
+  '1peter': '/assets/bible/1peter.png',
+  '2peter': '/assets/bible/2peter.png',
   '1john': '/assets/bible/1john.png',
   '2john': '/assets/bible/2john.png',
-  '3john': '/assets/bible/3john.jpg',
+  '3john': '/assets/bible/3john.png',
   'jude': '/assets/bible/jude.png',
-  'revelation': '/assets/bible/revelation.jpg',
+  'revelation': '/assets/bible/revelation.png',
 };
 
 // Define thumbnail images (use existing thumbnail directory)

@@ -41,19 +41,19 @@ const ResultsCard = ({
   // Ensure score and totalQuestions are valid numbers
   const safeScore = Math.max(0, score || 0);
   const safeTotalQuestions = Math.max(1, totalQuestions || 1); // Prevent division by zero
-  
+
   // Ensure that score doesn't exceed totalQuestions
   const normalizedScore = Math.min(safeScore, safeTotalQuestions);
   const percentage = Math.round((normalizedScore / safeTotalQuestions) * 100);
-  
+
   const book = bibleBooks.find(b => b.id === bookId);
-  
+
   return (
     <div className="relative overflow-hidden">
       {/* Blurred background */}
       <div className="fixed inset-0 -z-10">
-        <img 
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+        <img
+          src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
           alt={`${book?.name || 'Bible book'} background`}
           className="w-full h-full object-cover blur-sm scale-110"
           onError={() => setImageError(true)}
@@ -62,7 +62,7 @@ const ResultsCard = ({
       </div>
 
       {/* Main content card */}
-      <div className="flex items-center justify-center p-4 pt-2 pb-12">
+      <div className="min-h-screen flex items-center justify-center p-4 pt-2 pb-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -72,22 +72,22 @@ const ResultsCard = ({
           <div className="relative overflow-hidden">
             {/* Background image */}
             <div className="absolute inset-0">
-              <img 
-                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)} 
+              <img
+                src={imageError ? '/assets/bible/default.jpg' : getBookImage(bookId)}
                 alt={`${book?.name || 'Bible book'} background`}
                 className="w-full h-full object-cover"
                 onError={() => setImageError(true)}
               />
               <div className="absolute inset-0 bg-black/20" />
             </div>
-            
+
             {/* Content over background */}
             <div className="relative z-10 p-5 pt-3 pb-4">
               <div className="mb-4">
                 <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{book?.name}</h1>
                 <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
               </div>
-              
+
               {/* Final Score */}
               <div className="flex justify-between items-center text-sm text-white/80 mb-2">
                 <span>Challenge Complete!</span>
@@ -95,10 +95,10 @@ const ResultsCard = ({
                   Final Score: <span className="text-white">{normalizedScore}/{safeTotalQuestions}</span>
                 </span>
               </div>
-              
+
               {/* Progress bar */}
               <div className="w-full bg-white/20 rounded-full h-2">
-                <div 
+                <div
                   className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
                   style={{ width: `${percentage}%` }}
                 />
@@ -110,18 +110,18 @@ const ResultsCard = ({
           <div className="px-6 pb-6 pt-4">
             <div className="text-center">
               <Award className={cn(
-                "mx-auto mb-4", 
+                "mx-auto mb-4",
                 normalizedScore === safeTotalQuestions ? "text-purple-500" : "text-bible-gold"
               )} size={60} />
-              
+
               <h2 className="text-2xl font-bold mb-2">
                 {normalizedScore === safeTotalQuestions ? "Perfect Score!" : "Challenge Completed!"}
               </h2>
-              
+
               <p className="text-gray-600 mb-6">
                 You've earned {normalizedScore} out of {safeTotalQuestions} possible points.
               </p>
-              
+
               <div className="bg-gray-50 p-4 rounded-lg mb-6">
                 <h3 className="font-medium mb-2 flex items-center justify-center">
                   <Bookmark className="mr-2 text-bible-blue" size={16} />
@@ -130,9 +130,9 @@ const ResultsCard = ({
                 <p className="italic text-gray-700 mb-2">"{keyVerseText}"</p>
                 <p className="text-sm text-gray-500">{keyVerse}</p>
               </div>
-              
+
               {showSignUpPrompt && (
-                <motion.div 
+                <motion.div
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ delay: 0.3 }}
@@ -152,22 +152,22 @@ const ResultsCard = ({
                   </Link>
                 </motion.div>
               )}
-              
+
               <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
-                <Button 
+                <Button
                   onClick={onRestartQuiz}
                 >
                   Retake Challenge
                 </Button>
-                
-                <Button 
-                onClick={onNavigateToBook}
-                variant="outline"
+
+                <Button
+                  onClick={onNavigateToBook}
+                  variant="outline"
                 >
                   Return to {bookName || 'Book'}
                 </Button>
               </div>
-              
+
             </div>
           </div>
         </motion.div>

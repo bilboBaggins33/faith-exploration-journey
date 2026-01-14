@@ -129,7 +129,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       </button> */}
 
       {/* Main content card */}
-      <div className="flex items-center justify-center p-4 pt-2 pb-12">
+      <div className="min-h-screen flex items-center justify-center p-4 pt-2 pb-12">
         <div ref={headerRef} className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
           {/* Header section with book info */}
           <div className="relative overflow-hidden">
