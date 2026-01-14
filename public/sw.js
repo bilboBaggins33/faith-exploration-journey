@@ -1,7 +1,7 @@
 
 // This is the service worker with the Cache-first network
-const CACHE = "pwa-cache-v5";
-const IMAGE_CACHE = "pwa-images-v5";
+const CACHE = "pwa-cache-v6";
+const IMAGE_CACHE = "pwa-images-v6";
 
 // Add list of files to cache here.
 const precacheFiles = [
