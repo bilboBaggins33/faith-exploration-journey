@@ -108,67 +108,132 @@ const ResultsCard = ({
 
           {/* Results content */}
           <div className="px-6 pb-6 pt-4">
-            <div className="text-center">
-              <Award className={cn(
-                "mx-auto mb-4",
-                normalizedScore === safeTotalQuestions ? "text-purple-500" : "text-bible-gold"
-              )} size={60} />
+            <div className="relative mb-6 flex justify-center items-center h-32">
+              {(() => {
+                // Determine icon and animation based on score ratio
+                const ratio = normalizedScore / safeTotalQuestions;
 
-              <h2 className="text-2xl font-bold mb-2">
-                {normalizedScore === safeTotalQuestions ? "Perfect Score!" : "Challenge Completed!"}
-              </h2>
+                // Animation settings
+                let rotationDuration = 0; // 0 means no rotation
+                let iconColor = "text-gray-400";
+                let GlowColor = "bg-gray-200/20";
 
-              <p className="text-gray-600 mb-6">
-                You've earned {normalizedScore} out of {safeTotalQuestions} possible points.
-              </p>
+                if (ratio === 1) { // 5/5
+                  rotationDuration = 3;
+                  iconColor = "text-yellow-500";
+                  GlowColor = "bg-yellow-400/30";
+                } else if (ratio >= 0.8) { // 4/5
+                  rotationDuration = 6;
+                  iconColor = "text-gray-300"; // Silver
+                  GlowColor = "bg-gray-300/30";
+                } else if (ratio >= 0.6) { // 3/5
+                  rotationDuration = 10;
+                  iconColor = "text-amber-700"; // Bronze
+                  GlowColor = "bg-amber-700/20";
+                } else {
+                  // 1-2/5
+                  rotationDuration = 0; // No spin
+                  iconColor = "text-stone-400";
+                  GlowColor = "bg-stone-200/10";
+                }
 
-              <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                <h3 className="font-medium mb-2 flex items-center justify-center">
-                  <Bookmark className="mr-2 text-bible-blue" size={16} />
-                  Key Verse
-                </h3>
-                <p className="italic text-gray-700 mb-2">"{keyVerseText}"</p>
-                <p className="text-sm text-gray-500">{keyVerse}</p>
-              </div>
+                return (
+                  <>
+                    <motion.div
+                      animate={rotationDuration > 0 ? { rotateY: 360 } : {}}
+                      transition={rotationDuration > 0 ? { repeat: Infinity, duration: rotationDuration, ease: "linear" } : {}}
+                      className={cn("drop-shadow-xl", iconColor)}
+                      style={{ perspective: 1000 }}
+                    >
+                      {/* Use Crown for all tiers? Or Award for low? User said "similar styles". Crown implies victory. 
+                            Let's use Crown for >= 3/5, Award for lower?
+                            User said "Normal crown for 4 out of 5. etc."
+                            So let's use Crown for all.
+                        */}
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="80"
+                        height="80"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        stroke="currentColor"
+                        strokeWidth="1"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        className="lucide lucide-crown"
+                      >
+                        <path d="M11.562 3.266a.5.5 0 0 1 .876 0L15.39 9.9l6-1.333a.5.5 0 0 1 .596.543l-1.5 11a.5.5 0 0 1-.5.44H4.014a.5.5 0 0 1-.5-.44l-1.5-11a.5.5 0 0 1 .596-.543l6 1.333Z" />
+                      </svg>
+                    </motion.div>
 
-              {showSignUpPrompt && (
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.3 }}
-                  className="bg-bible-blue/10 border border-bible-blue/20 p-5 rounded-lg mb-6"
-                >
-                  <h3 className="text-lg font-medium text-bible-blue mb-2">
-                    Unlock Your Bible Journey
-                  </h3>
-                  <p className="text-gray-600 mb-4">
-                    Sign up to track your progress, unlock all chapters, and continue your Bible adventure. Your scores and achievements will be saved!
-                  </p>
-                  <Link to="/auth">
-                    <Button className="bg-bible-blue text-white hover:bg-bible-deepBlue">
-                      <LogIn className="mr-2 h-4 w-4" />
-                      Sign Up Now
-                    </Button>
-                  </Link>
-                </motion.div>
-              )}
-
-              <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
-                <Button
-                  onClick={onRestartQuiz}
-                >
-                  Retake Challenge
-                </Button>
-
-                <Button
-                  onClick={onNavigateToBook}
-                  variant="outline"
-                >
-                  Return to {bookName || 'Book'}
-                </Button>
-              </div>
-
+                    {/* Glow effect for high scores */}
+                    {ratio >= 0.6 && (
+                      <motion.div
+                        className={cn("absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 -z-10 w-32 h-32 rounded-full blur-xl", GlowColor)}
+                        animate={{ scale: [1, 1.2, 1], opacity: [0.5, 0.8, 0.5] }}
+                        transition={{ repeat: Infinity, duration: 2 }}
+                      />
+                    )}
+                  </>
+                );
+              })()}
             </div>
+
+
+            <h2 className="text-2xl font-bold mb-2">
+              {normalizedScore === safeTotalQuestions ? "Perfect Score!" : "Challenge Completed!"}
+            </h2>
+
+            <p className="text-gray-600 mb-6">
+              You've earned {normalizedScore} out of {safeTotalQuestions} possible points.
+            </p>
+
+            <div className="bg-gray-50 p-4 rounded-lg mb-6">
+              <h3 className="font-medium mb-2 flex items-center justify-center">
+                <Bookmark className="mr-2 text-bible-blue" size={16} />
+                Key Verse
+              </h3>
+              <p className="italic text-gray-700 mb-2">"{keyVerseText}"</p>
+              <p className="text-sm text-gray-500">{keyVerse}</p>
+            </div>
+
+            {showSignUpPrompt && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0.95 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="bg-bible-blue/10 border border-bible-blue/20 p-5 rounded-lg mb-6"
+              >
+                <h3 className="text-lg font-medium text-bible-blue mb-2">
+                  Unlock Your Bible Journey
+                </h3>
+                <p className="text-gray-600 mb-4">
+                  Sign up to track your progress, unlock all chapters, and continue your Bible adventure. Your scores and achievements will be saved!
+                </p>
+                <Link to="/auth">
+                  <Button className="bg-bible-blue text-white hover:bg-bible-deepBlue">
+                    <LogIn className="mr-2 h-4 w-4" />
+                    Sign Up Now
+                  </Button>
+                </Link>
+              </motion.div>
+            )}
+
+            <div className="flex flex-col sm:flex-row justify-center gap-3 mb-4">
+              <Button
+                onClick={onRestartQuiz}
+              >
+                Retake Challenge
+              </Button>
+
+              <Button
+                onClick={onNavigateToBook}
+                variant="outline"
+              >
+                Return to {bookName || 'Book'}
+              </Button>
+            </div>
+
           </div>
         </motion.div>
       </div>

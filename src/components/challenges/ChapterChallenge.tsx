@@ -27,6 +27,7 @@ const ChapterChallengeComponent: React.FC<ChapterChallengeProps> = ({ type }) =>
         handleCheckAnswer,
         handleNextQuestion,
         handlePreviousQuestion,
+        handleJumpToQuestion,
         handleRetry,
         handleGoBack
     } = type === 'bible' ? bibleChallenge : theologyChallenge;
@@ -78,6 +79,7 @@ const ChapterChallengeComponent: React.FC<ChapterChallengeProps> = ({ type }) =>
                         onCheckAnswer={handleCheckAnswer}
                         onNextQuestion={handleNextQuestion}
                         onPreviousQuestion={handlePreviousQuestion}
+                        onJumpToQuestion={handleJumpToQuestion}
                         onRetry={handleRetry}
                         onGoBack={handleGoBack}
                     />

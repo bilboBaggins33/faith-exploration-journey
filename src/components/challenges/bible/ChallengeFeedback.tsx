@@ -13,10 +13,11 @@ interface ChallengeFeedbackProps {
   state: BibleChallengeState;
   bookId: string;
   chapter: string;
-  onSelectAnswer: (answer: string) => void;
-  onCheckAnswer: () => void;
+  onSelectAnswer: (answer: string, index?: number) => void;
+  onCheckAnswer: (index?: number) => void;
   onNextQuestion: () => void;
   onPreviousQuestion: () => void;
+  onJumpToQuestion: (index: number) => void;
   onRetry: () => void;
   onGoBack: () => void;
 }
@@ -29,44 +30,93 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   onCheckAnswer,
   onNextQuestion,
   onPreviousQuestion,
+  onJumpToQuestion,
   onRetry,
   onGoBack
 }) => {
   const [imageError, setImageError] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const {
     challenge,
     currentQuestion,
     userAnswers,
-    showExplanation,
+    showExplanation, // Note: this global state might conflict if we want per-card explanation state. 
+    // But the hook updates global state based on current question.
+    // In a scroll view, "current question" is the one in view.
     isCorrect,
     score,
-    completed
+    completed,
+    answeredQuestions
   } = state;
   const navigate = useNavigate();
 
-  const headerRef = useRef<HTMLDivElement>(null);
+  // Scroll to current question when it changes externally (e.g. initial load or skip)
   useEffect(() => {
-    if (!headerRef.current) return;
-    const el = headerRef.current;
-
-    // Blur the active element to avoid the browser keeping the clicked button in view
-    if (document.activeElement instanceof HTMLElement) {
-      document.activeElement.blur();
+    if (containerRef.current && challenge) {
+      const el = containerRef.current.children[currentQuestion] as HTMLElement;
+      if (el) {
+        // Only scroll if not already visible? 
+        // Actually, we want to sync scroll position with state.
+        // But if the user scrolled, that triggered the state change, so scrolling back is redundant and might cause jitter.
+        // We need a flag or check.
+        // For now, let's trust the observer to handle state updates from scroll, 
+        // and only programmatic updates (like "Next") should trigger scroll.
+      }
     }
+  }, [currentQuestion, challenge]);
 
-    // Scroll after layout settles to avoid scroll anchoring on Next
-    // requestAnimationFrame(() => {
-    //   requestAnimationFrame(() => {
-    //     const y = el.getBoundingClientRect().top + window.scrollY - 8; // slight offset
-    //     window.scrollTo({ top: y, behavior: 'smooth' });
+  // Observer to track visible card
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container || !challenge) return;
 
-    //     // Move focus to the header (without additional scrolling) for accessibility
-    //     setTimeout(() => {
-    //       el.focus?.({ preventScroll: true } as any);
-    //     }, 200);
-    //   });
-    // });
-  }, [currentQuestion]);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
+            // Only update if different to prevent loops
+            // Debouncing might be good but let's try direct first.
+            // We need to access the LATEST currentQuestion, so we should rely on the state passed in props or a ref.
+            // But here we just fire the event.
+            onJumpToQuestion(index);
+          }
+        });
+      },
+      {
+        root: container,
+        threshold: 0.6 // Must be 60% visible to count as "current"
+      }
+    );
+
+    Array.from(container.children).forEach((child) => observer.observe(child));
+
+    return () => observer.disconnect();
+  }, [challenge, onJumpToQuestion]); // Dependencies should be stable
+
+  const handleScrollToNext = (index: number) => {
+    if (containerRef.current) {
+      const nextIndex = index + 1;
+      if (nextIndex < (challenge?.questions.length || 0)) {
+        const nextEl = containerRef.current.children[nextIndex] as HTMLElement;
+        nextEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      } else {
+        // Last question - maybe complete?
+        onNextQuestion(); // This triggers completion logic in hook
+      }
+    }
+  };
+
+  const handleScrollToPrev = (index: number) => {
+    if (containerRef.current) {
+      const prevIndex = index - 1;
+      if (prevIndex >= 0) {
+        const prevEl = containerRef.current.children[prevIndex] as HTMLElement;
+        prevEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+      }
+    }
+  };
+
 
   if (!challenge) {
     return null;
@@ -93,8 +143,6 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     );
   }
 
-  const currentQuestionData = challenge.questions[currentQuestion];
-
   const handleBackToBookPage = () => {
     if (theologyBook) {
       navigate(`/theology/${bookId}`);
@@ -104,8 +152,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   };
 
   return (
-    <div className="relative overflow-hidden">
-      {/* Blurred background */}
+    <div className="relative h-screen w-full overflow-hidden">
+      {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img
           src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
@@ -113,88 +161,123 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           className="w-full h-full object-cover blur-sm scale-110"
           onError={() => setImageError(true)}
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/60" />
       </div>
 
-      {/* Back button */}
-      {/* <button
-        onClick={onGoBack}
-        className="absolute top-4 left-4 z-20 bg-white/90 hover:bg-white rounded-full p-3 shadow-lg transition-all"
-        aria-label="Back to book"
-        type="button"
+      {/* Scroll Container */}
+      <div
+        ref={containerRef}
+        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide py-16 md:py-0 md:items-center"
       >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-          <path d="M15 19l-7-7 7-7" />
-        </svg>
-      </button> */}
+        {challenge.questions.map((q, index) => {
+          const isAnswered = !!userAnswers[index];
+          const answerState = answeredQuestions[index];
+          const localIsCorrect = answerState ? answerState.isCorrect : null;
+          // Only show explanation if we have explicitly checked the answer (answerState exists)
+          const localShowExplanation = !!answerState;
 
-      {/* Main content card */}
-      <div className="min-h-screen flex items-center justify-center p-4 pt-2 pb-12">
-        <div ref={headerRef} className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden" tabIndex={-1}>
-          {/* Header section with book info */}
-          <div className="relative overflow-hidden">
-            {/* Background image */}
-            <div className="absolute inset-0">
-              <img
-                src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
-                alt={`${bookName || 'Book'} background`}
-                className="w-full h-full object-cover"
-                onError={() => setImageError(true)}
-              />
-              <div className="absolute inset-0 bg-black/20" />
+          return (
+            <div
+              key={q.id}
+              data-index={index}
+              className="w-full flex-shrink-0 snap-center md:snap-center p-4 md:p-8 flex items-center justify-center min-h-[80vh] md:min-h-screen"
+            >
+              <div className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden bg-white/10" tabIndex={-1}>
+                {/* Header section with book info */}
+                <div className="relative overflow-hidden">
+                  {/* Background image */}
+                  <div className="absolute inset-0">
+                    <img
+                      src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
+                      alt={`${bookName || 'Book'} background`}
+                      className="w-full h-full object-cover"
+                      onError={() => setImageError(true)}
+                    />
+                    <div className="absolute inset-0 bg-black/20" />
+                  </div>
+
+                  {/* Content over background */}
+                  <div className="relative z-10 p-5 pt-2 pb-4">
+                    <div className="mb-4">
+                      <button
+                        onClick={handleBackToBookPage}
+                        className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
+                      >
+                        <span className="mr-1">←</span> Back
+                      </button>
+                      <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{bookName}</h1>
+                      <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
+                    </div>
+
+                    {/* Progress and Score */}
+                    <div className="flex justify-between items-center text-sm text-white/80 mb-2">
+                      <span>Question {index + 1} of {challenge.questions.length}</span>
+                      <span className="font-semibold">
+                        Score: <span className="text-white">{score}/{challenge.questions.length}</span>
+                      </span>
+                    </div>
+
+                    {/* Progress bar */}
+                    <div className="w-full bg-white/20 rounded-full h-2">
+                      <div
+                        className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
+                        style={{ width: `${((index + 1) / challenge.questions.length) * 100}%` }}
+                      />
+                    </div>
+                  </div>
+                </div>
+
+                {/* Question content */}
+                <div className="px-6 pb-6 bg-white">
+                  <QuestionCard
+                    question={q.question}
+                    options={q.options}
+                    correctAnswer={q.correctAnswer}
+                    selectedAnswer={userAnswers[index] || null}
+                    showExplanation={localShowExplanation}
+                    isCorrect={localIsCorrect}
+                    explanation={q.explanation}
+                    onSelectAnswer={(ans) => {
+                      onSelectAnswer(ans, index);
+                    }}
+                    onCheckAnswer={() => {
+                      onCheckAnswer(index);
+                    }}
+                    onNextQuestion={() => handleScrollToNext(index)}
+                    onPreviousQuestion={() => handleScrollToPrev(index)}
+                    isLastQuestion={index === challenge.questions.length - 1}
+                    isNotFirstQuestion={index > 0}
+                    onNavigateBack={null}
+                  />
+                </div>
+              </div>
             </div>
+          );
+        })}
 
-            {/* Content over background */}
-            <div className="relative z-10 p-5 pt-2 pb-4">
-              <div className="mb-4">
-                <button
-                  onClick={handleBackToBookPage}
-                  className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
-                >
-                  <span className="mr-1">←</span> Back
-                </button>
-                <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{bookName}</h1>
-                <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
-              </div>
+      </div>
 
-              {/* Progress and Score */}
-              <div className="flex justify-between items-center text-sm text-white/80 mb-2">
-                <span>Question {currentQuestion + 1} of {challenge.questions.length}</span>
-                <span className="font-semibold">
-                  Score: <span className="text-white">{score}/{challenge.questions.length}</span>
-                </span>
-              </div>
+      {/* Desktop Navigation Arrows */}
+      <div className="hidden md:block">
+        {currentQuestion > 0 && (
+          <button
+            onClick={() => handleScrollToPrev(currentQuestion)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+            aria-label="Previous question"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+          </button>
+        )}
 
-              {/* Progress bar */}
-              <div className="w-full bg-white/20 rounded-full h-2">
-                <div
-                  className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
-                  style={{ width: `${((currentQuestion + 1) / challenge.questions.length) * 100}%` }}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Question content */}
-          <div className="px-6 pb-6 bg-white">
-            <QuestionCard
-              question={currentQuestionData.question}
-              options={currentQuestionData.options}
-              correctAnswer={currentQuestionData.correctAnswer}
-              selectedAnswer={userAnswers[currentQuestion] || null}
-              showExplanation={showExplanation}
-              isCorrect={isCorrect}
-              explanation={currentQuestionData.explanation}
-              onSelectAnswer={onSelectAnswer}
-              onCheckAnswer={onCheckAnswer}
-              onNextQuestion={onNextQuestion}
-              onPreviousQuestion={onPreviousQuestion}
-              isLastQuestion={currentQuestion === challenge.questions.length - 1}
-              isNotFirstQuestion={currentQuestion > 0}
-              onNavigateBack={null}
-            />
-          </div>
-        </div>
+        {currentQuestion < (challenge?.questions.length || 0) - 1 && (
+          <button
+            onClick={() => handleScrollToNext(currentQuestion)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+            aria-label="Next question"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+          </button>
+        )}
       </div>
     </div>
   );

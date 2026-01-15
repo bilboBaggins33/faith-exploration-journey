@@ -124,7 +124,7 @@ const QuestionCard = ({
                   <CheckCircle
                     className="text-green-500 ml-2 flex-shrink-0"
                     size={18}
-                  />  
+                  />
                 </>
               )}
               {showExplanation &&
@@ -136,89 +136,92 @@ const QuestionCard = ({
           ))}
         </RadioGroup>
 
-        <div className="flex justify-between">
-          {!showExplanation ? (
+        <div className="flex flex-col-reverse sm:flex-row sm:justify-between sm:items-center gap-4">
+          {isNotFirstQuestion && (
             <Button
-              disabled={!selectedAnswer}
-              onClick={onCheckAnswer}
-              className={cn(!onNavigateBack && "ml-auto w-full sm:w-auto")}
+              variant="ghost"
+              onClick={onPreviousQuestion}
+              className="flex items-center justify-center sm:justify-start"
             >
-              Check Answer
-            </Button>
-          ) : (
-            <Button
-              onClick={onNextQuestion}
-              className={cn(!onNavigateBack && "ml-auto w-full sm:w-auto")}
-            >
-              {!isLastQuestion ? (
-                <>
-                  Next Question
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-arrow-right ml-2"
-                    style={{ width: 16, height: 16 }}
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </>
-              ) : (
-                <>
-                  Complete Challenge
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    className="lucide lucide-check-circle ml-2"
-                    style={{ width: 16, height: 16 }}
-                  >
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <path d="m9 11 3 3L22 4" />
-                  </svg>
-                </>
-              )}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                className="lucide lucide-arrow-left mr-2"
+                style={{ width: 16, height: 16 }}
+              >
+                <path d="m12 19-7-7 7-7" />
+                <path d="M19 12H5" />
+              </svg>
+              Back
             </Button>
           )}
+
+          <div className={cn("flex w-full sm:w-auto", !isNotFirstQuestion && "ml-auto")}>
+            {!showExplanation ? (
+              <Button
+                disabled={!selectedAnswer}
+                onClick={onCheckAnswer}
+                className="w-full sm:w-auto"
+              >
+                Check Answer
+              </Button>
+            ) : (
+              <Button
+                onClick={onNextQuestion}
+                className="w-full sm:w-auto"
+              >
+                {!isLastQuestion ? (
+                  <>
+                    Next Question
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-arrow-right ml-2"
+                      style={{ width: 16, height: 16 }}
+                    >
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </>
+                ) : (
+                  <>
+                    Complete Challenge
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="24"
+                      height="24"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      className="lucide lucide-check-circle ml-2"
+                      style={{ width: 16, height: 16 }}
+                    >
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                  </>
+                )}
+              </Button>
+            )}
+          </div>
         </div>
-        {isNotFirstQuestion && (
-          <Button
-            variant="link"
-            onClick={onPreviousQuestion}
-            className="flex items-center"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              className="lucide lucide-arrow-left mr-2"
-              style={{ width: 16, height: 16 }}
-            >
-              <path d="m12 19-7-7 7-7" />
-              <path d="M19 12H5" />
-            </svg>
-            Back
-          </Button>
-        )}
       </motion.div>
     </div>
   );

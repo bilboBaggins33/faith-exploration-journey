@@ -132,12 +132,15 @@ export function useTheologyChallengeAdapter() {
         }
     }, [showResults, user, challenge, score, maxScore]);
 
-    const handleSelectAnswerAdapter = (answer: string) => {
+    const handleSelectAnswerAdapter = (answer: string, index?: number) => {
         if (state.showExplanation) return;
+        // Theology logic might not support random access answer selection yet, 
+        // effectively ignoring index or needing update.
+        // For now, ignoring index as we focus on Bible challenge fixes.
         handleSelectAnswer(answer);
     };
 
-    const handleCheckAnswerAdapter = () => {
+    const handleCheckAnswerAdapter = (index?: number) => {
         if (!challenge) return;
         handleSubmitAnswer();
     };
@@ -168,6 +171,11 @@ export function useTheologyChallengeAdapter() {
         navigate(`/theology/${bookId}`);
     };
 
+    const handleJumpToQuestionAdapter = (index: number) => {
+        // Not implemented for theology yet
+        // handleJumpToQuestion(index);
+    };
+
     return {
         state,
         isFirstChapter: parseInt(chapter, 10) === 1,
@@ -175,6 +183,7 @@ export function useTheologyChallengeAdapter() {
         handleCheckAnswer: handleCheckAnswerAdapter,
         handleNextQuestion: handleNextQuestionAdapter,
         handlePreviousQuestion: handlePreviousQuestionAdapter,
+        handleJumpToQuestion: handleJumpToQuestionAdapter,
         handleRetry: handleRetryAdapter,
         handleGoBack: handleGoBackAdapter
     };
