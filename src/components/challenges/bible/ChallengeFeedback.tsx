@@ -94,12 +94,25 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     return () => observer.disconnect();
   }, [challenge, onJumpToQuestion]); // Dependencies should be stable
 
+  // Scroll to first card on mount to ensure it's centered
+  useEffect(() => {
+    if (containerRef.current && challenge && challenge.questions.length > 0) {
+      const firstEl = containerRef.current.children[0] as HTMLElement;
+      if (firstEl) {
+        // Use requestAnimationFrame to ensure DOM is ready
+        requestAnimationFrame(() => {
+          firstEl.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'center' });
+        });
+      }
+    }
+  }, [challenge]);
+
   const handleScrollToNext = (index: number) => {
     if (containerRef.current) {
       const nextIndex = index + 1;
       if (nextIndex < (challenge?.questions.length || 0)) {
         const nextEl = containerRef.current.children[nextIndex] as HTMLElement;
-        nextEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        nextEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       } else {
         // Last question - maybe complete?
         onNextQuestion(); // This triggers completion logic in hook
@@ -112,7 +125,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       const prevIndex = index - 1;
       if (prevIndex >= 0) {
         const prevEl = containerRef.current.children[prevIndex] as HTMLElement;
-        prevEl?.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        prevEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }
     }
   };
