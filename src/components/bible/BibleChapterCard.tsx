@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { BookOpen, CheckCircle, Unlock, Lock } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/auth';
 
 interface BibleChapterCardProps {
@@ -33,17 +33,9 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
 
-  const getBorderColorClass = () => {
-    if (!effectivelyUnlocked) return "border-gray-200 hover:border-gray-300 bg-gray-50";
-    if (!isCompleted) return "border-gray-200 hover:border-bible-blue hover:bg-blue-50";
-    if (scorePercentage === 100) return "bg-green-50 border-green-200";
-    if (scorePercentage >= 50) return "bg-orange-50 border-orange-200";
-    return "bg-red-50 border-red-200";
-  };
-
-  // Color gradient for bars: amber to green based on score
+  // Bar colors based on score
   const getBarColor = (index: number) => {
-    if (index >= score) return "bg-gray-200";
+    if (index >= score) return "bg-white/30";
     switch (score) {
       case 1:
         return "bg-red-400";
@@ -56,19 +48,35 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
       case 5:
         return "bg-green-500";
       default:
-        return "bg-gray-200";
+        return "bg-white/30";
     }
+  };
+
+  // Glassmorphism styling based on state
+  const getGlassStyles = () => {
+    if (!effectivelyUnlocked) {
+      return "bg-gray-200/50 backdrop-blur-sm border-gray-300/50";
+    }
+    if (isCompleted) {
+      if (scorePercentage === 100) {
+        return "bg-green-100/60 backdrop-blur-md border-green-300/60";
+      }
+      if (scorePercentage >= 50) {
+        return "bg-amber-100/60 backdrop-blur-md border-amber-300/60";
+      }
+      return "bg-red-100/60 backdrop-blur-md border-red-300/60";
+    }
+    return "bg-white/60 backdrop-blur-md border-white/70 hover:bg-white/80";
   };
 
   return (
     <motion.div
-      whileHover={{ y: -4, scale: 1.025, boxShadow: "0 8px 24px rgba(0, 0, 0, 0.10)" }}
+      whileHover={{ y: -4, scale: 1.04 }}
       transition={{ duration: 0.18 }}
       className={cn(
-        "p-3 rounded-xl border cursor-pointer transition-all shadow-sm w-full h-full",
-        "bg-opacity-90 overflow-hidden relative text-center",
-        getBorderColorClass(),
-        effectivelyUnlocked ? "bg-gradient-to-br from-white via-white-50 to-gray-50" : "bg-gray-50"
+        "p-3 rounded-2xl border cursor-pointer transition-all shadow-lg w-full h-full",
+        "overflow-hidden relative text-center",
+        getGlassStyles()
       )}
       onClick={onClick}
     >
@@ -92,7 +100,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
               <div
                 key={index}
                 className={cn(
-                  "h-2 flex-1 rounded-full",
+                  "h-2 flex-1 rounded-full transition-colors",
                   getBarColor(index)
                 )}
               />
@@ -100,10 +108,14 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           </div>
         </div>
         {(!user && isFirstChapter) && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-3 border border-bible-blue/20">Sample Chapter</span>
+          <span className="inline-block px-2 py-0.5 rounded-full bg-blue-500/20 backdrop-blur-sm text-blue-700 text-[10px] font-semibold mt-3 border border-blue-300/40">
+            Sample
+          </span>
         )}
         {!effectivelyUnlocked && !isFirstChapter && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-orange-300 text-gray-600 text-[10px] font-semibold mt-3 border border-gray-300">Sign in</span>
+          <span className="inline-block px-2 py-0.5 rounded-full bg-amber-400/20 backdrop-blur-sm text-amber-700 text-[10px] font-semibold mt-3 border border-amber-300/40">
+            Sign in
+          </span>
         )}
       </div>
     </motion.div>

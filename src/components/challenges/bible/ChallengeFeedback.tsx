@@ -40,9 +40,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     challenge,
     currentQuestion,
     userAnswers,
-    showExplanation, // Note: this global state might conflict if we want per-card explanation state. 
-    // But the hook updates global state based on current question.
-    // In a scroll view, "current question" is the one in view.
+    showExplanation,
     isCorrect,
     score,
     completed,
@@ -50,17 +48,12 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   } = state;
   const navigate = useNavigate();
 
-  // Scroll to current question when it changes externally (e.g. initial load or skip)
+  // Scroll to current question when it changes externally
   useEffect(() => {
     if (containerRef.current && challenge) {
       const el = containerRef.current.children[currentQuestion] as HTMLElement;
       if (el) {
-        // Only scroll if not already visible? 
-        // Actually, we want to sync scroll position with state.
-        // But if the user scrolled, that triggered the state change, so scrolling back is redundant and might cause jitter.
-        // We need a flag or check.
-        // For now, let's trust the observer to handle state updates from scroll, 
-        // and only programmatic updates (like "Next") should trigger scroll.
+        // Sync scroll position with state
       }
     }
   }, [currentQuestion, challenge]);
@@ -75,31 +68,26 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-            // Only update if different to prevent loops
-            // Debouncing might be good but let's try direct first.
-            // We need to access the LATEST currentQuestion, so we should rely on the state passed in props or a ref.
-            // But here we just fire the event.
             onJumpToQuestion(index);
           }
         });
       },
       {
         root: container,
-        threshold: 0.6 // Must be 60% visible to count as "current"
+        threshold: 0.6
       }
     );
 
     Array.from(container.children).forEach((child) => observer.observe(child));
 
     return () => observer.disconnect();
-  }, [challenge, onJumpToQuestion]); // Dependencies should be stable
+  }, [challenge, onJumpToQuestion]);
 
-  // Scroll to first card on mount to ensure it's centered
+  // Scroll to first card on mount
   useEffect(() => {
     if (containerRef.current && challenge && challenge.questions.length > 0) {
       const firstEl = containerRef.current.children[0] as HTMLElement;
       if (firstEl) {
-        // Use requestAnimationFrame to ensure DOM is ready
         requestAnimationFrame(() => {
           firstEl.scrollIntoView({ behavior: 'instant', block: 'center', inline: 'center' });
         });
@@ -114,8 +102,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         const nextEl = containerRef.current.children[nextIndex] as HTMLElement;
         nextEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       } else {
-        // Last question - maybe complete?
-        onNextQuestion(); // This triggers completion logic in hook
+        onNextQuestion();
       }
     }
   };
@@ -129,7 +116,6 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       }
     }
   };
-
 
   if (!challenge) {
     return null;
@@ -174,123 +160,135 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           className="w-full h-full object-cover blur-sm scale-110"
           onError={() => setImageError(true)}
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Scroll Container */}
       <div
         ref={containerRef}
-        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide py-16 md:py-0 md:items-center"
+        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide items-center"
       >
         {challenge.questions.map((q, index) => {
-          const isAnswered = !!userAnswers[index];
           const answerState = answeredQuestions[index];
           const localIsCorrect = answerState ? answerState.isCorrect : null;
-          // Only show explanation if we have explicitly checked the answer (answerState exists)
           const localShowExplanation = !!answerState;
 
           return (
             <div
               key={q.id}
               data-index={index}
-              className="w-full flex-shrink-0 snap-center md:snap-center p-4 md:p-8 flex items-center justify-center min-h-[80vh] md:min-h-screen"
+              className="w-full flex-shrink-0 snap-center p-4 md:p-8 flex items-center justify-center min-h-screen"
             >
-              <div className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden bg-white/10" tabIndex={-1}>
-                {/* Header section with book info */}
-                <div className="relative overflow-hidden">
-                  {/* Background image */}
-                  <div className="absolute inset-0">
-                    <img
-                      src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
-                      alt={`${bookName || 'Book'} background`}
-                      className="w-full h-full object-cover"
-                      onError={() => setImageError(true)}
-                    />
-                    <div className="absolute inset-0 bg-black/20" />
-                  </div>
-
-                  {/* Content over background */}
-                  <div className="relative z-10 p-5 pt-2 pb-4">
-                    <div className="mb-4">
-                      <button
-                        onClick={handleBackToBookPage}
-                        className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
-                      >
-                        <span className="mr-1">←</span> Back
-                      </button>
-                      <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg">{bookName}</h1>
-                      <p className="text-md leading-tight text-white/90 drop-shadow">Chapter {parseInt(chapter, 10)}</p>
-                    </div>
-
-                    {/* Progress and Score */}
-                    <div className="flex justify-between items-center text-sm text-white/80 mb-2">
-                      <span>Question {index + 1} of {challenge.questions.length}</span>
-                      <span className="font-semibold">
-                        Score: <span className="text-white">{score}/{challenge.questions.length}</span>
-                      </span>
-                    </div>
-
-                    {/* Progress bar */}
-                    <div className="w-full bg-white/20 rounded-full h-2">
-                      <div
-                        className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
-                        style={{ width: `${((index + 1) / challenge.questions.length) * 100}%` }}
-                      />
-                    </div>
-                  </div>
+              <div className="w-full max-w-sm relative" tabIndex={-1}>
+                {/* Header row with Back button and Book/Chapter info */}
+                <div className="flex justify-between items-center mb-2">
+                  <button
+                    onClick={handleBackToBookPage}
+                    className="text-white/90 hover:text-white transition-colors inline-flex items-center text-sm"
+                  >
+                    <span className="mr-1">←</span> Back
+                  </button>
+                  <span className="text-white/90 text-sm font-medium">
+                    {bookName} {chapter}
+                  </span>
                 </div>
 
-                {/* Question content */}
-                <div className="px-6 pb-6 bg-white">
-                  <QuestionCard
-                    question={q.question}
-                    options={q.options}
-                    correctAnswer={q.correctAnswer}
-                    selectedAnswer={userAnswers[index] || null}
-                    showExplanation={localShowExplanation}
-                    isCorrect={localIsCorrect}
-                    explanation={q.explanation}
-                    onSelectAnswer={(ans) => {
-                      onSelectAnswer(ans, index);
-                    }}
-                    onCheckAnswer={() => {
-                      onCheckAnswer(index);
-                    }}
-                    onNextQuestion={() => handleScrollToNext(index)}
-                    onPreviousQuestion={() => handleScrollToPrev(index)}
-                    isLastQuestion={index === challenge.questions.length - 1}
-                    isNotFirstQuestion={index > 0}
-                    onNavigateBack={null}
+                {/* Logo overlapping the top edge */}
+                <div className="absolute left-1/2 -translate-x-1/2 top-6 z-20">
+                  <img
+                    src="/BibleQuestLogo.png"
+                    alt="Bible Quest Logo"
+                    className="h-8 w-auto drop-shadow-lg"
                   />
+                </div>
+
+                {/* Glassmorphism Card */}
+                <div className="backdrop-blur-xl bg-white/20 rounded-[32px] shadow-2xl border border-white/30 overflow-hidden">
+                  {/* Question Progress Indicator */}
+                  <div className="pt-10 pb-4 px-6">
+                    <div className="flex items-center justify-center gap-3">
+                      {challenge.questions.map((_, qIndex) => (
+                        <div key={qIndex} className="flex items-center gap-2">
+                          <span
+                            className={`text-lg font-medium transition-all ${qIndex === index
+                              ? 'text-white'
+                              : qIndex < index
+                                ? 'text-white/60'
+                                : 'text-white/40'
+                              }`}
+                          >
+                            {qIndex + 1}
+                          </span>
+                          {qIndex === index && qIndex < challenge.questions.length - 1 && (
+                            <div className="w-12 h-1.5 bg-white/30 rounded-full overflow-hidden">
+                              <div
+                                className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-300"
+                                style={{ width: localShowExplanation ? '100%' : '50%' }}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Question Content */}
+                  <div className="px-6 pb-6">
+                    <QuestionCard
+                      question={q.question}
+                      options={q.options}
+                      correctAnswer={q.correctAnswer}
+                      selectedAnswer={userAnswers[index] || null}
+                      showExplanation={localShowExplanation}
+                      isCorrect={localIsCorrect}
+                      explanation={q.explanation}
+                      onSelectAnswer={(ans) => {
+                        onSelectAnswer(ans, index);
+                      }}
+                      onCheckAnswer={() => {
+                        onCheckAnswer(index);
+                      }}
+                      onNextQuestion={() => handleScrollToNext(index)}
+                      onPreviousQuestion={() => handleScrollToPrev(index)}
+                      isLastQuestion={index === challenge.questions.length - 1}
+                      isNotFirstQuestion={index > 0}
+                      onNavigateBack={null}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           );
         })}
-
       </div>
 
-      {/* Desktop Navigation Arrows */}
-      <div className="hidden md:block">
-        {currentQuestion > 0 && (
-          <button
-            onClick={() => handleScrollToPrev(currentQuestion)}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
-            aria-label="Previous question"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
-          </button>
-        )}
+      {/* Desktop Navigation Arrows - positioned closer to card */}
+      <div className="hidden md:flex absolute inset-0 items-center justify-center pointer-events-none">
+        <div className="w-full max-w-xl flex justify-between px-4">
+          {currentQuestion > 0 ? (
+            <button
+              onClick={() => handleScrollToPrev(currentQuestion)}
+              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+              aria-label="Previous question"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
+            </button>
+          ) : (
+            <div />
+          )}
 
-        {currentQuestion < (challenge?.questions.length || 0) - 1 && (
-          <button
-            onClick={() => handleScrollToNext(currentQuestion)}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-30 p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
-            aria-label="Next question"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
-          </button>
-        )}
+          {currentQuestion < (challenge?.questions.length || 0) - 1 ? (
+            <button
+              onClick={() => handleScrollToNext(currentQuestion)}
+              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+              aria-label="Next question"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>
+            </button>
+          ) : (
+            <div />
+          )}
+        </div>
       </div>
     </div>
   );
