@@ -195,16 +195,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
               data-index={index}
               className="w-full flex-shrink-0 snap-center md:snap-center p-4 md:p-8 flex items-center justify-center min-h-[80vh] md:min-h-screen"
             >
-              <div className="w-full max-w-2xl rounded-3xl shadow-2xl overflow-hidden backdrop-blur-md bg-white/20 border border-white/30" tabIndex={-1}>
-                {/* Logo centered on top */}
-                <div className="flex justify-center py-4 bg-gradient-to-b from-black/20 to-transparent">
-                  <img 
-                    src="/BibleQuestLogoDark.png" 
-                    alt="BibleQuest Logo" 
-                    className="h-10 w-auto drop-shadow-lg"
-                  />
-                </div>
-                
+              <div className="w-full max-w-2xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden bg-white/10" tabIndex={-1}>
                 {/* Header section with book info */}
                 <div className="relative overflow-hidden">
                   {/* Background image */}
@@ -215,7 +206,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                       className="w-full h-full object-cover"
                       onError={() => setImageError(true)}
                     />
-                    <div className="absolute inset-0 bg-black/30 backdrop-blur-[2px]" />
+                    <div className="absolute inset-0 bg-black/20" />
                   </div>
 
                   {/* Content over background */}
@@ -250,7 +241,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                 </div>
 
                 {/* Question content */}
-                <div className="px-6 pb-6 bg-white/95 backdrop-blur-sm">
+                <div className="px-6 pb-6 bg-white">
                   <QuestionCard
                     question={q.question}
                     options={q.options}
