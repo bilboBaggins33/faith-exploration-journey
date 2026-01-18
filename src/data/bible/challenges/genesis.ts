@@ -2592,69 +2592,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 20,
     title: 'Abraham and Abimelech',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis20-q1',
-        question: 'Where did Abraham sojourn?',
-        options: [
-          'Rich Egypt',
-          'Gerar',
-          'Strong Sodom',
-          'Silent Canaan'
-        ],
+        question: 'Where did Abraham travel to in this chapter?',
+        options: ['Egypt', 'Gerar', 'Hebron', 'Bethel'],
         correctAnswer: 'Gerar',
-        explanation: 'Genesis 20:1 (ESV): "From there Abraham journeyed toward the territory of the Negeb and lived between Kadesh and Shur; and he sojourned in Gerar." Journey moves.'
+        explanation: 'Genesis 20:1: Abraham sojourned in Gerar.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis20-q2',
         question: 'What did Abraham say about Sarah?',
-        options: [
-          'She’s rich',
-          'She’s my sister',
-          'She’s strong',
-          'She’s silent'
-        ],
-        correctAnswer: 'She’s my sister',
-        explanation: 'Genesis 20:2 (ESV): "And Abraham said of Sarah his wife, ‘She is my sister.’ And Abimelech king of Gerar sent and took Sarah." Fear repeats.'
+        options: ['She is my wife', 'She is my sister', 'She is my servant', 'She is my mother'],
+        correctAnswer: 'She is my sister',
+        explanation: 'Genesis 20:2: Abraham said Sarah was his sister.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis20-q3',
-        question: 'How did God warn Abimelech?',
-        options: [
-          'With rich visions',
-          'In a dream',
-          'With strong signs',
-          'With silent omens'
-        ],
-        correctAnswer: 'In a dream',
-        explanation: 'Genesis 20:3 (ESV): "But God came to Abimelech in a dream by night and said to him, ‘Behold, you are a dead man because of the woman whom you have taken, for she is a man’s wife.’" Warning speaks.'
+        question: 'Who took Sarah?',
+        options: ['Pharaoh', 'Abimelech', 'Lot', 'Laban'],
+        correctAnswer: 'Abimelech',
+        explanation: 'Genesis 20:2: Abimelech king of Gerar took Sarah.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis20-q4',
-        question: 'What did Abimelech give Abraham?',
-        options: [
-          'Rich gold',
-          'Sheep, oxen, and servants',
-          'Strong horses',
-          'Silent lands'
-        ],
-        correctAnswer: 'Sheep, oxen, and servants',
-        explanation: 'Genesis 20:14 (ESV): "Then Abimelech took sheep and oxen, and male servants and female servants, and gave them to Abraham, and returned Sarah his wife to him." Restitution offers.'
+        question: 'How did God warn Abimelech?',
+        options: ['Through a prophet', 'In a dream', 'Through an angel', 'By fire'],
+        correctAnswer: 'In a dream',
+        explanation: 'Genesis 20:3: God came to Abimelech in a dream by night.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis20-q5',
-        question: 'What role did Abraham have for Abimelech?',
-        options: [
-          'Rich advisor',
-          'Prophet who prayed',
-          'Strong ally',
-          'Silent guide'
-        ],
-        correctAnswer: 'Prophet who prayed',
-        explanation: 'Genesis 20:7 (ESV): "‘Now then, return the man’s wife, for he is a prophet, so that he will pray for you, and you shall live. But if you do not return her, know that you shall surely die, you and all who are yours.’" Intercession heals.'
+        question: 'Was Sarah returned to Abraham?',
+        options: ['No', 'Yes', 'She refused', 'She stayed with Abimelech'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 20:14: Abimelech returned Sarah to Abraham.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis20-q6',
+        question: 'What did God call Abraham when speaking to Abimelech?',
+        options: ['A king', 'A prophet', 'A priest', 'A judge'],
+        correctAnswer: 'A prophet',
+        explanation: 'Genesis 20:7: "he is a prophet, so that he will pray for you."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis20-q7',
+        question: 'What did Abimelech give Abraham as compensation?',
+        options: ['Gold only', 'Sheep, oxen, and servants', 'Land only', 'Nothing'],
+        correctAnswer: 'Sheep, oxen, and servants',
+        explanation: 'Genesis 20:14: Abimelech gave sheep, oxen, and servants to Abraham.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis20-q8',
+        question: 'Why was Abraham called to pray for Abimelech?',
+        options: ['For wisdom', 'So Abimelech would live', 'For children', 'For wealth'],
+        correctAnswer: 'So Abimelech would live',
+        explanation: 'Genesis 20:7: "he will pray for you, and you shall live."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis20-q9',
+        question: 'Did Abimelech actually touch Sarah?',
+        options: ['Yes', 'No, God kept him from it', 'The text doesn\'t say', 'Yes, and was punished'],
+        correctAnswer: 'No, God kept him from it',
+        explanation: 'Genesis 20:6: "I kept you from sinning against me... I did not let you touch her."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis20-q10',
+        question: 'How had God afflicted Abimelech\'s household?',
+        options: ['With disease', 'Closed all wombs', 'With blindness', 'With poverty'],
+        correctAnswer: 'Closed all wombs',
+        explanation: 'Genesis 20:18: The LORD had closed all the wombs of Abimelech\'s house.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis20-q11',
+        question: 'Was Sarah actually Abraham\'s sister?',
+        options: ['No, it was a complete lie', 'Yes, his half-sister', 'She was his cousin', 'She was his niece'],
+        correctAnswer: 'Yes, his half-sister',
+        explanation: 'Genesis 20:12: "She is indeed my sister, the daughter of my father though not my mother."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis20-q12',
+        question: 'What did Abraham fear about Gerar?',
+        options: ['It was poor', 'There was no fear of God there', 'It was at war', 'It was a desert'],
+        correctAnswer: 'There was no fear of God there',
+        explanation: 'Genesis 20:11: "I thought, There is no fear of God at all in this place."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis20-q13',
+        question: 'How much silver did Abimelech give to Sarah as a "covering of the eyes"?',
+        options: ['100 pieces', '500 pieces', '1000 pieces', '5000 pieces'],
+        correctAnswer: '1000 pieces',
+        explanation: 'Genesis 20:16: Abimelech gave 1000 pieces of silver.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis20-q14',
+        question: 'What did Abimelech offer Abraham regarding land?',
+        options: ['He banished him', 'He gave him all his land', 'He said Abraham could dwell wherever he pleased', 'He asked him to leave'],
+        correctAnswer: 'He said Abraham could dwell wherever he pleased',
+        explanation: 'Genesis 20:15: "my land is before you; dwell where it pleases you."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis20-q15',
+        question: 'What happened after Abraham prayed for Abimelech?',
+        options: ['Nothing changed', 'God healed Abimelech\'s house and they bore children', 'Abimelech died', 'Abraham left'],
+        correctAnswer: 'God healed Abimelech\'s house and they bore children',
+        explanation: 'Genesis 20:17: God healed Abimelech, his wife, and female servants.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 20:7',
-    key_verse_text: "‘Now then, return the man’s wife, for he is a prophet, so that he will pray for you, and you shall live. But if you do not return her, know that you shall surely die, you and all who are yours.’",
+    key_verse_text: "'Now then, return the man's wife, for he is a prophet, so that he will pray for you, and you shall live.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
