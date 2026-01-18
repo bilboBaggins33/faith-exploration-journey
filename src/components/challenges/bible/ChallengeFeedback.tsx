@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import ResultsCard from './ResultsCard';
 import { bibleBooks } from '@/data/bible';
 import { theologyBooks } from '@/data/theology';
@@ -47,6 +47,8 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     answeredQuestions
   } = state;
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const fromDaily = searchParams.get('from') === 'daily';
 
   // Scroll to current question when it changes externally
   useEffect(() => {
@@ -143,7 +145,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   }
 
   const handleBackToBookPage = () => {
-    if (theologyBook) {
+    if (fromDaily) {
+      navigate('/daily-reading');
+    } else if (theologyBook) {
       navigate(`/theology/${bookId}`);
     } else {
       navigate(`/bible/${(book?.name || '').toLowerCase().replace(/\s+/g, '')}`);
@@ -204,31 +208,32 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
 
                 {/* Glassmorphism Card */}
                 <div className="backdrop-blur-xl bg-white/20 rounded-[32px] shadow-2xl border border-white/30 overflow-hidden">
-                  {/* Question Progress Indicator */}
+                  {/* Question Numbers - colored by result */}
                   <div className="pt-10 pb-4 px-6">
-                    <div className="flex items-center justify-center gap-3">
-                      {challenge.questions.map((_, qIndex) => (
-                        <div key={qIndex} className="flex items-center gap-2">
+                    <div className="flex items-center justify-center gap-4">
+                      {challenge.questions.map((_, qIndex) => {
+                        const questionResult = answeredQuestions[qIndex];
+                        const isAnswered = !!questionResult;
+                        const isCorrect = questionResult?.isCorrect;
+                        const isCurrent = qIndex === index;
+
+                        // Color logic: green if correct, red if wrong, white if current, gray if not answered
+                        let colorClass = 'text-white/40'; // default - not answered yet
+                        if (isAnswered) {
+                          colorClass = isCorrect ? 'text-green-400' : 'text-red-400';
+                        } else if (isCurrent) {
+                          colorClass = 'text-white';
+                        }
+
+                        return (
                           <span
-                            className={`text-lg font-medium transition-all ${qIndex === index
-                              ? 'text-white'
-                              : qIndex < index
-                                ? 'text-white/60'
-                                : 'text-white/40'
-                              }`}
+                            key={qIndex}
+                            className={`text-lg font-semibold transition-all ${colorClass}`}
                           >
                             {qIndex + 1}
                           </span>
-                          {qIndex === index && qIndex < challenge.questions.length - 1 && (
-                            <div className="w-12 h-1.5 bg-white/30 rounded-full overflow-hidden">
-                              <div
-                                className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-300"
-                                style={{ width: localShowExplanation ? '100%' : '50%' }}
-                              />
-                            </div>
-                          )}
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
 

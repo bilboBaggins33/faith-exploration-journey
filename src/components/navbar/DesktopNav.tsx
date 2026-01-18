@@ -22,7 +22,7 @@ const DesktopNav = ({ isHomePage, user, handleSignOut }: DesktopNavProps) => {
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const [isOpen, setIsOpen] = useState(false);
-  
+
   const getSignInButtonClasses = () => {
     if (isHomePage) {
       return 'bg-bible-blue text-white hover:bg-bible-deepBlue';
@@ -39,7 +39,7 @@ const DesktopNav = ({ isHomePage, user, handleSignOut }: DesktopNavProps) => {
         <NavLink to="/bible" active={isActive('/bible')} isHomePage={isHomePage}>
           Bible
         </NavLink>
-        <NavLink to="/plans" active={isActive('/plans')} isHomePage={isHomePage}>
+        <NavLink to="/daily-reading" active={isActive('/daily-reading')} isHomePage={isHomePage}>
           <div className="flex items-center">
             {/* <BookOpen className="h-4 w-4 mr-1" /> */}
             Plans
@@ -51,33 +51,32 @@ const DesktopNav = ({ isHomePage, user, handleSignOut }: DesktopNavProps) => {
             Books
           </div>
         </NavLink>
-        
+
         <NavLink to="/about" active={isActive('/about')} isHomePage={isHomePage}>
           <div className="flex items-center">
             {/* <Info className="h-4 w-4 mr-1" /> */}
             About
           </div>
         </NavLink>
-        
+
         {user ? (
           <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
             >
-              <button className={`flex items-center justify-center p-1 hover-link font-medium transition-colors duration-300 ${
-                isActive('/profile') || isActive('/dashboard')
-                  ? 'text-bible-blue after:scale-x-100' 
+              <button className={`flex items-center justify-center p-1 hover-link font-medium transition-colors duration-300 ${isActive('/profile') || isActive('/dashboard')
+                  ? 'text-bible-blue after:scale-x-100'
                   : isHomePage
                     ? 'text-white'
                     : 'text-bible-dark dark:text-white'
-              }`}>
+                }`}>
                 <User className="h-4 w-4 mr-1" />
                 <span>Admin</span>
               </button>
             </DropdownMenuTrigger>
-            <DropdownMenuContent 
-              align="end" 
+            <DropdownMenuContent
+              align="end"
               className="w-56 bg-white dark:bg-bible-dark border border-gray-200 dark:border-gray-800"
               onMouseEnter={() => setIsOpen(true)}
               onMouseLeave={() => setIsOpen(false)}
@@ -103,8 +102,8 @@ const DesktopNav = ({ isHomePage, user, handleSignOut }: DesktopNavProps) => {
           </DropdownMenu>
         ) : (
           <Link to="/auth">
-            <Button 
-              size="sm" 
+            <Button
+              size="sm"
               className={`ml-4 transition-colors duration-300 flex items-center ${getSignInButtonClasses()}`}
             >
               <LogIn className="h-4 w-4 mr-2" />

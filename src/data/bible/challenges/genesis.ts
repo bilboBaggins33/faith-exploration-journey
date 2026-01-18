@@ -824,45 +824,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 7,
     title: 'The Flood Begins',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis7-q1',
-        question: 'How many pairs of clean animals did Noah take on the ark?',
-        options: ['Two pairs', 'Seven pairs', 'Twelve pairs', 'One pair'],
-        correctAnswer: 'Seven pairs',
-        explanation: 'Genesis 7:2 (ESV): "Take with you seven pairs of all clean animals."',
-        difficulty: 'medium'
+        question: 'How long did the rain fall during the flood?',
+        options: ['7 days', '40 days and nights', '100 days', '1 year'],
+        correctAnswer: '40 days and nights',
+        explanation: 'Genesis 7:12: Rain fell upon the earth forty days and forty nights.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis7-q2',
-        question: 'How old was Noah when the flood waters came upon the earth?',
-        options: ['500 years old', '600 years old', '700 years old', '950 years old'],
-        correctAnswer: '600 years old',
-        explanation: 'Genesis 7:6 (ESV): "Noah was six hundred years old when the flood of waters came."',
-        difficulty: 'hard'
+        question: 'Who shut the door of the ark?',
+        options: ['Noah', 'The Lord', 'Noah\'s sons', 'An angel'],
+        correctAnswer: 'The Lord',
+        explanation: 'Genesis 7:16: "And the LORD shut him in."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis7-q3',
-        question: 'How long did rain fall upon the earth during the flood?',
-        options: ['Seven days and nights', 'Forty days and nights', 'One hundred days', 'One year'],
-        correctAnswer: 'Forty days and nights',
-        explanation: 'Genesis 7:12 (ESV): "rain fell upon the earth forty days and forty nights."',
+        question: 'What happened to all creatures outside the ark?',
+        options: ['They survived on high ground', 'They all died', 'Some swam', 'Angels saved them'],
+        correctAnswer: 'They all died',
+        explanation: 'Genesis 7:21-23: All flesh with the breath of life died; only Noah and those with him survived.',
         difficulty: 'easy'
       },
       {
         id: 'genesis7-q4',
-        question: 'How deep did the waters rise above the mountains?',
-        options: ['Five cubits', 'Fifteen cubits', 'Thirty cubits', 'One hundred cubits'],
-        correctAnswer: 'Fifteen cubits',
-        explanation: 'Genesis 7:20 (ESV): "The waters prevailed above the mountains, covering them fifteen cubits deep."',
-        difficulty: 'hard'
+        question: 'Did the waters cover the mountains?',
+        options: ['No, just the valleys', 'Only small hills', 'Yes, all the high mountains', 'Just halfway up'],
+        correctAnswer: 'Yes, all the high mountains',
+        explanation: 'Genesis 7:19: "all the high mountains under the whole heaven were covered."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis7-q5',
-        question: 'Who closed the door of the ark after Noah and his family entered?',
-        options: ['Noah', 'The Lord', 'Noah\'s sons', 'An angel'],
-        correctAnswer: 'The Lord',
-        explanation: 'Genesis 7:16 (ESV): "And the LORD shut him in."',
+        question: 'How many of each unclean animal went on the ark?',
+        options: ['One pair', 'Seven pairs', 'Three pairs', 'Ten of each'],
+        correctAnswer: 'One pair',
+        explanation: 'Genesis 7:2: Unclean animals came in pairs, clean animals in sevens.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis7-q6',
+        question: 'How many pairs of clean animals did Noah take?',
+        options: ['Two pairs', 'Seven pairs', 'One pair', 'Twelve pairs'],
+        correctAnswer: 'Seven pairs',
+        explanation: 'Genesis 7:2: "Take with you seven pairs of all clean animals."',
         difficulty: 'medium'
+      },
+      {
+        id: 'genesis7-q7',
+        question: 'How many days passed between Noah entering the ark and the rain starting?',
+        options: ['3 days', '7 days', '10 days', '40 days'],
+        correctAnswer: '7 days',
+        explanation: 'Genesis 7:4,10: God gave 7 days notice before sending rain.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis7-q8',
+        question: 'How deep did the waters rise above the mountains?',
+        options: ['5 cubits', '15 cubits', '30 cubits', '100 cubits'],
+        correctAnswer: '15 cubits',
+        explanation: 'Genesis 7:20: Waters covered the mountains by fifteen cubits.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis7-q9',
+        question: 'How long did the waters prevail upon the earth?',
+        options: ['40 days', '100 days', '150 days', '1 year'],
+        correctAnswer: '150 days',
+        explanation: 'Genesis 7:24: "the waters prevailed on the earth 150 days."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis7-q10',
+        question: 'What two sources did the flood waters come from?',
+        options: ['Rain only', 'Rivers and rain', 'Fountains of the deep and windows of heaven', 'Melting ice and rain'],
+        correctAnswer: 'Fountains of the deep and windows of heaven',
+        explanation: 'Genesis 7:11: Fountains of the great deep burst forth and windows of heaven opened.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis7-q11',
+        question: 'How old was Noah when the flood came?',
+        options: ['500 years old', '600 years old', '700 years old', '950 years old'],
+        correctAnswer: '600 years old',
+        explanation: 'Genesis 7:6: Noah was 600 years old when the flood waters came.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis7-q12',
+        question: 'In what month and day did the flood begin?',
+        options: ['First month, first day', 'Second month, seventeenth day', 'Third month, first day', 'Seventh month, seventeenth day'],
+        correctAnswer: 'Second month, seventeenth day',
+        explanation: 'Genesis 7:11: "In the 600th year... second month, seventeenth day."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis7-q13',
+        question: 'According to Genesis 7:15, how many of each kind came to Noah?',
+        options: ['One', 'Two of every sort', 'Seven', 'As many as would fit'],
+        correctAnswer: 'Two of every sort',
+        explanation: 'Genesis 7:15: "They went into the ark with Noah, two and two of all flesh."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis7-q14',
+        question: 'What phrase describes how the animals came to the ark?',
+        options: ['Noah gathered them', 'They came to him', 'Angels brought them', 'They were scared by the storm'],
+        correctAnswer: 'They came to him',
+        explanation: 'Genesis 7:9,15: The animals came to Noah and entered the ark themselves.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis7-q15',
+        question: 'What happened to the ark when the waters rose?',
+        options: ['It sank', 'It rose high above the earth', 'It stayed on the ground', 'It broke apart'],
+        correctAnswer: 'It rose high above the earth',
+        explanation: 'Genesis 7:17: "the ark rose high above the earth."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 7:16',
@@ -877,45 +960,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 8,
     title: 'The Flood Recedes',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis8-q1',
-        question: 'How did God cause the flood waters to recede?',
-        options: ['The sun dried them up', 'A wind blew over the earth', 'The ground absorbed them', 'Angels removed them'],
-        correctAnswer: 'A wind blew over the earth',
-        explanation: 'Genesis 8:1 (ESV): "God made a wind blow over the earth, and the waters subsided."',
-        difficulty: 'medium'
+        question: 'Which bird did Noah send out first?',
+        options: ['A dove', 'A raven', 'A sparrow', 'An eagle'],
+        correctAnswer: 'A raven',
+        explanation: 'Genesis 8:7: Noah first sent out a raven.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis8-q2',
-        question: 'Which bird did Noah send out first from the ark?',
-        options: ['A dove', 'A raven', 'A sparrow', 'An eagle'],
-        correctAnswer: 'A raven',
-        explanation: 'Genesis 8:7 (ESV): "he sent forth a raven."',
+        question: 'What did the dove bring back to Noah?',
+        options: ['A fig leaf', 'An olive leaf', 'A piece of grain', 'A twig'],
+        correctAnswer: 'An olive leaf',
+        explanation: 'Genesis 8:11: The dove returned with a freshly plucked olive leaf.',
         difficulty: 'easy'
       },
       {
         id: 'genesis8-q3',
-        question: 'What did the dove bring back to Noah as a sign the waters had receded?',
-        options: ['A fig leaf', 'An olive leaf', 'A piece of grain', 'Nothing'],
-        correctAnswer: 'An olive leaf',
-        explanation: 'Genesis 8:11 (ESV): "in her mouth was a freshly plucked olive leaf."',
+        question: 'What was the first thing Noah built after leaving the ark?',
+        options: ['A house', 'An altar', 'A vineyard', 'A city'],
+        correctAnswer: 'An altar',
+        explanation: 'Genesis 8:20: Noah built an altar to the LORD.',
         difficulty: 'easy'
       },
       {
         id: 'genesis8-q4',
-        question: 'What was the first thing Noah built after leaving the ark?',
-        options: ['A house', 'An altar to the Lord', 'A vineyard', 'A city'],
-        correctAnswer: 'An altar to the Lord',
-        explanation: 'Genesis 8:20 (ESV): "Noah built an altar to the LORD."',
+        question: 'On which mountain did the ark come to rest?',
+        options: ['Mount Sinai', 'Mount Ararat', 'Mount Moriah', 'Mount Nebo'],
+        correctAnswer: 'Mount Ararat',
+        explanation: 'Genesis 8:4: The ark came to rest on the mountains of Ararat.',
         difficulty: 'easy'
       },
       {
         id: 'genesis8-q5',
-        question: 'On which mountain did the ark come to rest?',
-        options: ['Mount Sinai', 'Mount Ararat', 'Mount Moriah', 'Mount Nebo'],
-        correctAnswer: 'Mount Ararat',
-        explanation: 'Genesis 8:4 (ESV): "the ark came to rest on the mountains of Ararat."',
+        question: 'What did Noah offer on the altar?',
+        options: ['Grain offerings', 'Burnt offerings of clean animals', 'Wine', 'Incense'],
+        correctAnswer: 'Burnt offerings of clean animals',
+        explanation: 'Genesis 8:20: Noah offered burnt offerings from every clean animal and bird.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis8-q6',
+        question: 'How did God cause the flood waters to recede?',
+        options: ['The sun dried them', 'A wind blew over the earth', 'The ground absorbed them', 'Rivers drained them'],
+        correctAnswer: 'A wind blew over the earth',
+        explanation: 'Genesis 8:1: God made a wind blow over the earth and the waters subsided.',
         difficulty: 'medium'
+      },
+      {
+        id: 'genesis8-q7',
+        question: 'What happened when Noah sent out the dove the third time?',
+        options: ['It returned with a leaf', 'It returned empty', 'It did not return', 'It died'],
+        correctAnswer: 'It did not return',
+        explanation: 'Genesis 8:12: The dove did not return to him anymore.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis8-q8',
+        question: 'What did God promise never to do again after the flood?',
+        options: ['Create animals', 'Curse the ground because of man', 'Send rain', 'Speak to humans'],
+        correctAnswer: 'Curse the ground because of man',
+        explanation: 'Genesis 8:21: "I will never again curse the ground because of man."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis8-q9',
+        question: 'What did God say would never cease while the earth remains?',
+        options: ['Human sin', 'Seedtime, harvest, cold, heat, summer, winter, day, night', 'Rain', 'The wind'],
+        correctAnswer: 'Seedtime, harvest, cold, heat, summer, winter, day, night',
+        explanation: 'Genesis 8:22: "seedtime and harvest, cold and heat, summer and winter, day and night, shall not cease."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis8-q10',
+        question: 'How long did Noah wait between sending out the dove the second time?',
+        options: ['3 days', '7 days', '14 days', '40 days'],
+        correctAnswer: '7 days',
+        explanation: 'Genesis 8:10: Noah waited another seven days before sending the dove again.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis8-q11',
+        question: 'In what month did the ark rest on Ararat?',
+        options: ['First month', 'Fifth month', 'Seventh month', 'Tenth month'],
+        correctAnswer: 'Seventh month',
+        explanation: 'Genesis 8:4: The ark rested on Ararat in the seventh month.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis8-q12',
+        question: 'When did the tops of the mountains become visible?',
+        options: ['Seventh month', 'Tenth month', 'First month', 'Twelfth month'],
+        correctAnswer: 'Tenth month',
+        explanation: 'Genesis 8:5: On the first day of the tenth month, the tops of the mountains were seen.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis8-q13',
+        question: 'How long after the flood started did Noah remove the covering of the ark?',
+        options: ['150 days', '301 days (first day of first month in 601st year)', '40 days', '1 year exactly'],
+        correctAnswer: '301 days (first day of first month in 601st year)',
+        explanation: 'Genesis 8:13: In the 601st year, first month, first day, Noah removed the covering.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis8-q14',
+        question: 'What did God smell from Noah\'s sacrifice?',
+        options: ['A warning', 'A pleasing aroma', 'Smoke only', 'Nothing special'],
+        correctAnswer: 'A pleasing aroma',
+        explanation: 'Genesis 8:21: "the LORD smelled the pleasing aroma."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis8-q15',
+        question: 'What reason did God give for not cursing the ground again?',
+        options: ['Noah was righteous', 'The intention of man\'s heart is evil from youth', 'The animals deserved life', 'The flood was too destructive'],
+        correctAnswer: 'The intention of man\'s heart is evil from youth',
+        explanation: 'Genesis 8:21: God showed mercy despite man\'s evil nature from youth.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 8:22',
@@ -930,44 +1096,127 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 9,
     title: 'God\'s Covenant with Noah',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis9-q1',
-        question: 'What command did God give Noah after the flood?',
-        options: ['Build another ark', 'Be fruitful and multiply', 'Never eat meat', 'Return to Eden'],
-        correctAnswer: 'Be fruitful and multiply',
-        explanation: 'Genesis 9:1 (ESV): "And God blessed Noah and his sons and said to them, Be fruitful and multiply and fill the earth."',
+        question: 'What was the sign of God\'s covenant with Noah?',
+        options: ['A star', 'The rainbow', 'A dove', 'An altar'],
+        correctAnswer: 'The rainbow',
+        explanation: 'Genesis 9:13: "I have set my bow in the cloud, and it shall be a sign of the covenant."',
         difficulty: 'easy'
       },
       {
         id: 'genesis9-q2',
-        question: 'What dietary restriction did God give after the flood?',
-        options: ['No fruit', 'No meat with blood in it', 'No bread', 'Vegetables only'],
-        correctAnswer: 'No meat with blood in it',
-        explanation: 'Genesis 9:4 (ESV): "you shall not eat flesh with its life, that is, its blood."',
-        difficulty: 'medium'
+        question: 'What command did God give Noah after the flood?',
+        options: ['Build a temple', 'Be fruitful and multiply', 'Stay on the ark', 'Go to Canaan'],
+        correctAnswer: 'Be fruitful and multiply',
+        explanation: 'Genesis 9:1: "Be fruitful and multiply and fill the earth."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis9-q3',
-        question: 'What was the sign of God\'s covenant with Noah?',
-        options: ['A star in the sky', 'The rainbow', 'A dove', 'An olive tree'],
-        correctAnswer: 'The rainbow',
-        explanation: 'Genesis 9:13 (ESV): "I have set my bow in the cloud, and it shall be a sign of the covenant."',
+        question: 'What did God promise never to do again?',
+        options: ['Create humans', 'Destroy earth with a flood', 'Make covenants', 'Send rain'],
+        correctAnswer: 'Destroy earth with a flood',
+        explanation: 'Genesis 9:11: "Never again shall all flesh be cut off by the waters of the flood."',
         difficulty: 'easy'
       },
       {
         id: 'genesis9-q4',
-        question: 'What did Noah plant after the flood?',
-        options: ['An olive garden', 'A vineyard', 'A wheat field', 'A fig orchard'],
-        correctAnswer: 'A vineyard',
-        explanation: 'Genesis 9:20 (ESV): "Noah began to be a man of the soil, and he planted a vineyard."',
-        difficulty: 'medium'
+        question: 'How long did Noah live after the flood?',
+        options: ['150 years', '250 years', '350 years', '450 years'],
+        correctAnswer: '350 years',
+        explanation: 'Genesis 9:28: Noah lived 350 years after the flood.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis9-q5',
-        question: 'Which of Noah\'s sons saw his nakedness and told his brothers?',
+        question: 'How old was Noah when he died?',
+        options: ['750 years', '850 years', '950 years', '1000 years'],
+        correctAnswer: '950 years',
+        explanation: 'Genesis 9:29: "All the days of Noah were 950 years, and he died."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis9-q6',
+        question: 'What dietary restriction did God give after the flood?',
+        options: ['No plants', 'No meat with blood', 'No fish', 'Vegetables only'],
+        correctAnswer: 'No meat with blood',
+        explanation: 'Genesis 9:4: "you shall not eat flesh with its life, that is, its blood."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis9-q7',
+        question: 'What did Noah plant after the flood?',
+        options: ['Fig trees', 'A vineyard', 'Wheat', 'Olive trees'],
+        correctAnswer: 'A vineyard',
+        explanation: 'Genesis 9:20: "Noah... planted a vineyard."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis9-q8',
+        question: 'What happened to Noah after he drank wine?',
+        options: ['He danced', 'He became drunk and lay uncovered', 'He fell asleep outside', 'He prophesied'],
+        correctAnswer: 'He became drunk and lay uncovered',
+        explanation: 'Genesis 9:21: "He drank of the wine and became drunk and lay uncovered in his tent."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis9-q9',
+        question: 'What did Shem and Japheth do when they learned of Noah\'s nakedness?',
+        options: ['Laughed at him', 'Ignored him', 'Covered him walking backward', 'Woke him up'],
+        correctAnswer: 'Covered him walking backward',
+        explanation: 'Genesis 9:23: They walked backward and covered him without seeing his nakedness.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis9-q10',
+        question: 'What is the penalty for murder according to Genesis 9?',
+        options: ['Exile', 'A fine', 'Death - life for life', 'Imprisonment'],
+        correctAnswer: 'Death - life for life',
+        explanation: 'Genesis 9:6: "Whoever sheds the blood of man, by man shall his blood be shed."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis9-q11',
+        question: 'Which of Noah\'s sons saw his nakedness?',
         options: ['Shem', 'Ham', 'Japheth', 'All three'],
         correctAnswer: 'Ham',
-        explanation: 'Genesis 9:22 (ESV): "Ham, the father of Canaan, saw the nakedness of his father and told his two brothers."',
+        explanation: 'Genesis 9:22: "Ham, the father of Canaan, saw the nakedness of his father."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis9-q12',
+        question: 'Who was cursed because of Ham\'s actions?',
+        options: ['Ham', 'Canaan', 'Noah', 'Shem'],
+        correctAnswer: 'Canaan',
+        explanation: 'Genesis 9:25: "Cursed be Canaan; a servant of servants shall he be."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis9-q13',
+        question: 'What blessing did Noah give to Shem?',
+        options: ['Wealth', 'Blessed be the LORD, the God of Shem', 'Many children', 'Long life'],
+        correctAnswer: 'Blessed be the LORD, the God of Shem',
+        explanation: 'Genesis 9:26: "Blessed be the LORD, the God of Shem."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis9-q14',
+        question: 'What blessing did Noah give to Japheth?',
+        options: ['Wealth', 'God shall enlarge Japheth', 'Priesthood', 'Kingship'],
+        correctAnswer: 'God shall enlarge Japheth',
+        explanation: 'Genesis 9:27: "May God enlarge Japheth, and let him dwell in the tents of Shem."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis9-q15',
+        question: 'Why was man given authority to eat meat after the flood?',
+        options: ['Plants became scarce', 'God gave every moving thing as food', 'Noah requested it', 'Animals were too numerous'],
+        correctAnswer: 'God gave every moving thing as food',
+        explanation: 'Genesis 9:3: "Every moving thing that lives shall be food for you."',
         difficulty: 'hard'
       }
     ],
@@ -983,44 +1232,127 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 10,
     title: 'Table of Nations',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis10-q1',
-        question: 'Genesis 10 records the descendants of which family?',
-        options: ['Adam\'s family', 'Noah\'s three sons', 'Abraham\'s family', 'Jacob\'s twelve sons'],
+        question: 'Whose descendants are listed in Genesis 10?',
+        options: ['Adam\'s family', 'Noah\'s three sons', 'Abraham\'s family', 'Jacob\'s sons'],
         correctAnswer: 'Noah\'s three sons',
-        explanation: 'Genesis 10:1 (ESV): "These are the generations of the sons of Noah, Shem, Ham, and Japheth."',
+        explanation: 'Genesis 10:1: The generations of the sons of Noah: Shem, Ham, and Japheth.',
         difficulty: 'easy'
       },
       {
         id: 'genesis10-q2',
-        question: 'Who is described as "a mighty hunter before the LORD"?',
-        options: ['Shem', 'Ham', 'Nimrod', 'Canaan'],
-        correctAnswer: 'Nimrod',
-        explanation: 'Genesis 10:9 (ESV): "He was a mighty hunter before the LORD."',
-        difficulty: 'medium'
+        question: 'What is Genesis 10 commonly called?',
+        options: ['The Creation Story', 'The Table of Nations', 'The Book of Law', 'The Covenant'],
+        correctAnswer: 'The Table of Nations',
+        explanation: 'Genesis 10 lists the descendants of Noah and how nations spread across the earth.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis10-q3',
-        question: 'What was the beginning of Nimrod\'s kingdom?',
-        options: ['Jerusalem', 'Babel, Erech, Accad, and Calneh', 'Ur of the Chaldeans', 'Egypt'],
-        correctAnswer: 'Babel, Erech, Accad, and Calneh',
-        explanation: 'Genesis 10:10 (ESV): "The beginning of his kingdom was Babel, Erech, Accad, and Calneh."',
-        difficulty: 'hard'
+        question: 'From which son of Noah did Nimrod descend?',
+        options: ['Shem', 'Ham', 'Japheth', 'None of them'],
+        correctAnswer: 'Ham',
+        explanation: 'Genesis 10:6-8: Ham fathered Cush, and Cush fathered Nimrod.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis10-q4',
-        question: 'Which son of Ham became the father of the Canaanites?',
-        options: ['Cush', 'Egypt', 'Put', 'Canaan'],
-        correctAnswer: 'Canaan',
-        explanation: 'Genesis 10:6,15 (ESV): "The sons of Ham: Cush, Egypt, Put, and Canaan... Canaan fathered Sidon his firstborn."',
-        difficulty: 'medium'
+        question: 'What happened to the nations after the flood?',
+        options: ['They stayed together', 'They spread abroad on the earth', 'They died out', 'They returned to the ark'],
+        correctAnswer: 'They spread abroad on the earth',
+        explanation: 'Genesis 10:32: From Noah\'s sons the nations spread abroad on the earth.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis10-q5',
-        question: 'From which of Noah\'s sons did Eber (ancestor of the Hebrews) descend?',
-        options: ['Ham', 'Japheth', 'Shem', 'None of these'],
+        question: 'How many sons of Noah are named as ancestors of nations?',
+        options: ['One', 'Two', 'Three', 'Twelve'],
+        correctAnswer: 'Three',
+        explanation: 'Shem, Ham, and Japheth - all three sons of Noah became ancestors of nations.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis10-q6',
+        question: 'Who is described as "a mighty hunter before the LORD"?',
+        options: ['Shem', 'Canaan', 'Nimrod', 'Eber'],
+        correctAnswer: 'Nimrod',
+        explanation: 'Genesis 10:9: "He was a mighty hunter before the LORD."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis10-q7',
+        question: 'Which son of Ham became father of the Canaanites?',
+        options: ['Cush', 'Egypt', 'Put', 'Canaan'],
+        correctAnswer: 'Canaan',
+        explanation: 'Genesis 10:15-18: Canaan fathered Sidon and the Canaanite clans.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis10-q8',
+        question: 'What cities were part of Nimrod\'s kingdom?',
+        options: ['Jerusalem and Hebron', 'Babel, Erech, Accad', 'Sodom and Gomorrah', 'Ur and Haran'],
+        correctAnswer: 'Babel, Erech, Accad',
+        explanation: 'Genesis 10:10: The beginning of his kingdom was Babel, Erech, Accad, and Calneh.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis10-q9',
+        question: 'From which of Noah\'s sons did the Hebrews descend?',
+        options: ['Ham', 'Japheth', 'Shem', 'All three'],
         correctAnswer: 'Shem',
-        explanation: 'Genesis 10:21-24 (ESV): "To Shem also, the father of all the children of Eber... Arpachshad fathered Shelah, and Shelah fathered Eber."',
+        explanation: 'Genesis 10:21: Shem was the father of all the children of Eber (Hebrews).',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis10-q10',
+        question: 'Where did Nimrod go from the land of Shinar?',
+        options: ['Egypt', 'Assyria', 'Canaan', 'Persia'],
+        correctAnswer: 'Assyria',
+        explanation: 'Genesis 10:11: From that land he went into Assyria and built Nineveh.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis10-q11',
+        question: 'What does the name "Peleg" mean and why was he so named?',
+        options: ['Strength - he was strong', 'Division - the earth was divided', 'Wisdom - he was wise', 'Victory - he conquered'],
+        correctAnswer: 'Division - the earth was divided',
+        explanation: 'Genesis 10:25: "in his days the earth was divided."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis10-q12',
+        question: 'Which famous city did Nimrod build in Assyria?',
+        options: ['Babylon', 'Nineveh', 'Damascus', 'Jerusalem'],
+        correctAnswer: 'Nineveh',
+        explanation: 'Genesis 10:11: He went into Assyria and built Nineveh.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis10-q13',
+        question: 'Who were the sons of Japheth?',
+        options: ['Cush, Egypt, Put', 'Gomer, Magog, Madai, Javan, Tubal, Meshech, Tiras', 'Elam, Asshur, Arpachshad', 'Sidon, Heth, the Jebusites'],
+        correctAnswer: 'Gomer, Magog, Madai, Javan, Tubal, Meshech, Tiras',
+        explanation: 'Genesis 10:2 lists the seven sons of Japheth.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis10-q14',
+        question: 'Which peoples descended from Canaan?',
+        options: ['Egyptians and Libyans', 'Jebusites, Amorites, Hivites', 'Persians and Medes', 'Greeks and Romans'],
+        correctAnswer: 'Jebusites, Amorites, Hivites',
+        explanation: 'Genesis 10:15-18: Canaan fathered several peoples including Jebusites, Amorites, Hivites.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis10-q15',
+        question: 'Who was Eber\'s father?',
+        options: ['Shem', 'Shelah', 'Arpachshad', 'Peleg'],
+        correctAnswer: 'Shelah',
+        explanation: 'Genesis 10:24: Arpachshad fathered Shelah, and Shelah fathered Eber.',
         difficulty: 'hard'
       }
     ],
@@ -1034,71 +1366,134 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-11',
     bookId: 'genesis',
     chapter: 11,
-    title: 'The Tower of Babel and Shem’s Line',
+    title: 'The Tower of Babel and Shem\'s Line',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis11-q1',
-        question: 'What did the people plan to build?',
-        options: [
-          'A rich palace',
-          'A tower to heaven',
-          'A strong fortress',
-          'A silent temple'
-        ],
-        correctAnswer: 'A tower to heaven',
-        explanation: 'Genesis 11:4 (ESV): "Then they said, ‘Come, let us build ourselves a city and a tower with its top in the heavens, and let us make a name for ourselves, lest we be dispersed over the face of the whole earth.’" Ambition rises.'
+        question: 'What did the people at Babel try to build?',
+        options: ['A palace', 'A tower reaching to heaven', 'A temple', 'A fortress'],
+        correctAnswer: 'A tower reaching to heaven',
+        explanation: 'Genesis 11:4: They planned to build a city and a tower with its top in the heavens.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis11-q2',
-        question: 'What did God do to their language?',
-        options: [
-          'Made it rich',
-          'Confused it',
-          'Made it strong',
-          'Kept it silent'
-        ],
-        correctAnswer: 'Confused it',
-        explanation: 'Genesis 11:7 (ESV): "‘Come, let us go down and there confuse their language, so that they may not understand one another’s speech.’" Division scatters.'
+        question: 'What did God do to stop the building project?',
+        options: ['Destroyed the tower', 'Confused their language', 'Sent a flood', 'Killed the workers'],
+        correctAnswer: 'Confused their language',
+        explanation: 'Genesis 11:7: God confused their language so they could not understand each other.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis11-q3',
-        question: 'Why was the place called Babel?',
-        options: [
-          'Rich in glory',
-          'Language was confused',
-          'Strong in unity',
-          'Silent in ruin'
-        ],
-        correctAnswer: 'Language was confused',
-        explanation: 'Genesis 11:9 (ESV): "Therefore its name was called Babel, because there the Lord confused the language of all the earth. And from there the Lord dispersed them over the face of all the earth." Name marks.'
+        question: 'What does "Babel" mean?',
+        options: ['Great city', 'Confusion', 'Tower', 'Unity'],
+        correctAnswer: 'Confusion',
+        explanation: 'Genesis 11:9: The name Babel sounds like the Hebrew word for "confused."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis11-q4',
-        question: 'Who was the father of Terah?',
-        options: [
-          'Rich Nahor',
-          'Serug',
-          'Strong Peleg',
-          'Silent Eber'
-        ],
-        correctAnswer: 'Serug',
-        explanation: 'Genesis 11:22 (ESV): "When Serug had lived thirty years, he fathered Nahor." Lineage traces.'
+        question: 'Who was Abram\'s father?',
+        options: ['Nahor', 'Terah', 'Haran', 'Shem'],
+        correctAnswer: 'Terah',
+        explanation: 'Genesis 11:26: "Terah fathered Abram, Nahor, and Haran."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis11-q5',
-        question: 'Where did Terah settle with his family?',
-        options: [
-          'Rich Canaan',
-          'Haran',
-          'Strong Ur',
-          'Silent Shinar'
-        ],
+        question: 'Where did Terah and his family originally come from?',
+        options: ['Canaan', 'Egypt', 'Ur of the Chaldeans', 'Babylon'],
+        correctAnswer: 'Ur of the Chaldeans',
+        explanation: 'Genesis 11:31: Terah took his family from Ur of the Chaldeans.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis11-q6',
+        question: 'What materials did the people use to build at Babel?',
+        options: ['Stone and mortar', 'Brick and tar/bitumen', 'Wood and nails', 'Gold and silver'],
+        correctAnswer: 'Brick and tar/bitumen',
+        explanation: 'Genesis 11:3: They used brick for stone and bitumen for mortar.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis11-q7',
+        question: 'Why did the people want to build the tower?',
+        options: ['To worship God', 'To make a name for themselves', 'To escape another flood', 'To see God'],
+        correctAnswer: 'To make a name for themselves',
+        explanation: 'Genesis 11:4: "let us make a name for ourselves, lest we be dispersed."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis11-q8',
+        question: 'Where did Terah settle instead of reaching Canaan?',
+        options: ['Egypt', 'Haran', 'Babylon', 'Damascus'],
         correctAnswer: 'Haran',
-        explanation: 'Genesis 11:31 (ESV): "Terah took Abram his son and Lot the son of Haran, his grandson, and Sarai his daughter-in-law, his son Abram’s wife, and they went forth together from Ur of the Chaldeans to go into the land of Canaan, but when they came to Haran, they settled there." Journey pauses.'
+        explanation: 'Genesis 11:31: They intended to go to Canaan but settled in Haran.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis11-q9',
+        question: 'Who was Sarai\'s husband?',
+        options: ['Nahor', 'Haran', 'Abram', 'Lot'],
+        correctAnswer: 'Abram',
+        explanation: 'Genesis 11:29: "Abram and Nahor took wives. The name of Abram\'s wife was Sarai."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis11-q10',
+        question: 'What does Genesis 11:30 say about Sarai?',
+        options: ['She was beautiful', 'She was barren', 'She was old', 'She was wealthy'],
+        correctAnswer: 'She was barren',
+        explanation: 'Genesis 11:30: "Now Sarai was barren; she had no child."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis11-q11',
+        question: 'How old was Terah when he died?',
+        options: ['175 years', '205 years', '600 years', '969 years'],
+        correctAnswer: '205 years',
+        explanation: 'Genesis 11:32: "The days of Terah were 205 years, and Terah died in Haran."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis11-q12',
+        question: 'Who was Lot\'s father?',
+        options: ['Abram', 'Nahor', 'Haran', 'Terah'],
+        correctAnswer: 'Haran',
+        explanation: 'Genesis 11:27: "Haran fathered Lot."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis11-q13',
+        question: 'At what age did Shem father Arpachshad?',
+        options: ['50 years', '100 years old', '200 years', '500 years'],
+        correctAnswer: '100 years old',
+        explanation: 'Genesis 11:10: Shem was 100 years old when he fathered Arpachshad.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis11-q14',
+        question: 'How long did Eber live?',
+        options: ['239 years', '464 years', '600 years', '969 years'],
+        correctAnswer: '464 years',
+        explanation: 'Genesis 11:16-17: Eber lived 464 years in total.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis11-q15',
+        question: 'What was the land of Shinar known for in Genesis 11?',
+        options: ['The birthplace of Abraham', 'The location of the tower of Babel', 'The promised land', 'The garden of Eden'],
+        correctAnswer: 'The location of the tower of Babel',
+        explanation: 'Genesis 11:2: The people settled in Shinar and built the tower there.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 11:9',
-    key_verse_text: "Therefore its name was called Babel, because there the Lord confused the language of all the earth. And from there the Lord dispersed them over the face of all the earth.",
+    key_verse_text: "Therefore its name was called Babel, because there the Lord confused the language of all the earth.",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -1109,69 +1504,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 12,
     title: 'The Call of Abram',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis12-q1',
         question: 'What did God tell Abram to leave?',
-        options: [
-          'Rich wealth',
-          'Country, kin, and father’s house',
-          'Strong army',
-          'Silent home'
-        ],
-        correctAnswer: 'Country, kin, and father’s house',
-        explanation: 'Genesis 12:1 (ESV): "Now the Lord said to Abram, ‘Go from your country and your kindred and your father’s house to the land that I will show you.’" Call commands.'
+        options: ['His wealth', 'His country and father\'s house', 'His servants', 'His animals'],
+        correctAnswer: 'His country and father\'s house',
+        explanation: 'Genesis 12:1: "Go from your country and your kindred and your father\'s house."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis12-q2',
         question: 'What did God promise to make Abram?',
-        options: [
-          'A rich king',
-          'A great nation',
-          'A strong warrior',
-          'A silent prophet'
-        ],
+        options: ['A king', 'A great nation', 'A priest', 'A prophet'],
         correctAnswer: 'A great nation',
-        explanation: 'Genesis 12:2 (ESV): "‘And I will make of you a great nation, and I will bless you and make your name great, so that you will be a blessing.’" Promise blesses.'
+        explanation: 'Genesis 12:2: "I will make of you a great nation."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis12-q3',
-        question: 'Where did Abram build an altar?',
-        options: [
-          'Rich Haran',
-          'Between Bethel and Ai',
-          'Strong Ur',
-          'Silent Shinar'
-        ],
-        correctAnswer: 'Between Bethel and Ai',
-        explanation: 'Genesis 12:8 (ESV): "From there he moved to the hill country on the east of Bethel and pitched his tent, with Bethel on the west and Ai on the east. And there he built an altar to the Lord and called upon the name of the Lord." Worship establishes.'
+        question: 'Where did Abram go during a famine?',
+        options: ['Canaan', 'Egypt', 'Mesopotamia', 'Babylon'],
+        correctAnswer: 'Egypt',
+        explanation: 'Genesis 12:10: Abram went down to Egypt because of the famine.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis12-q4',
-        question: 'Where did Abram go during the famine?',
-        options: [
-          'Rich Canaan',
-          'Egypt',
-          'Strong Moab',
-          'Silent Edom'
-        ],
-        correctAnswer: 'Egypt',
-        explanation: 'Genesis 12:10 (ESV): "Now there was a famine in the land. So Abram went down to Egypt to sojourn there, for the famine was severe in the land." Need drives.'
+        question: 'Who went with Abram when he left Haran?',
+        options: ['Noah', 'Lot', 'Isaac', 'Jacob'],
+        correctAnswer: 'Lot',
+        explanation: 'Genesis 12:4-5: Abram took Sarai and Lot with him.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis12-q5',
+        question: 'How old was Abram when he left Haran?',
+        options: ['50 years old', '75 years old', '100 years old', '175 years old'],
+        correctAnswer: '75 years old',
+        explanation: 'Genesis 12:4: "Abram was seventy-five years old when he departed from Haran."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis12-q6',
         question: 'What did Abram say about Sarai in Egypt?',
-        options: [
-          'She’s rich',
-          'She’s my sister',
-          'She’s strong',
-          'She’s silent'
-        ],
-        correctAnswer: 'She’s my sister',
-        explanation: 'Genesis 12:13 (ESV): "‘Say you are my sister, that it may go well with me because of you, and that my life may be spared for your sake.’" Fear deceives.'
+        options: ['She is my wife', 'She is my sister', 'She is my servant', 'She is a widow'],
+        correctAnswer: 'She is my sister',
+        explanation: 'Genesis 12:13: Abram asked Sarai to say she was his sister.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis12-q7',
+        question: 'What happened to Pharaoh when he took Sarai?',
+        options: ['He became rich', 'God afflicted him with plagues', 'He became sick', 'Nothing happened'],
+        correctAnswer: 'God afflicted him with plagues',
+        explanation: 'Genesis 12:17: The LORD afflicted Pharaoh and his house with great plagues.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis12-q8',
+        question: 'Where did Abram first build an altar in Canaan?',
+        options: ['Jerusalem', 'At the oak of Moreh at Shechem', 'Beersheba', 'Hebron'],
+        correctAnswer: 'At the oak of Moreh at Shechem',
+        explanation: 'Genesis 12:6-7: At Shechem, at the oak of Moreh, Abram built an altar.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis12-q9',
+        question: 'What did God promise to give Abram\'s offspring?',
+        options: ['Wealth', 'This land (Canaan)', 'Many servants', 'Victory in battle'],
+        correctAnswer: 'This land (Canaan)',
+        explanation: 'Genesis 12:7: "To your offspring I will give this land."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis12-q10',
+        question: 'What was in the land when Abram arrived?',
+        options: ['Egyptians', 'Canaanites', 'Philistines', 'Amalekites'],
+        correctAnswer: 'Canaanites',
+        explanation: 'Genesis 12:6: "At that time the Canaanites were in the land."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis12-q11',
+        question: 'What blessing would come through Abram to all families?',
+        options: ['Wealth', 'They would be blessed', 'Land', 'Victory'],
+        correctAnswer: 'They would be blessed',
+        explanation: 'Genesis 12:3: "in you all the families of the earth shall be blessed."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis12-q12',
+        question: 'Where did Abram pitch his tent between two cities?',
+        options: ['Between Sodom and Gomorrah', 'Between Bethel and Ai', 'Between Jerusalem and Jericho', 'Between Haran and Damascus'],
+        correctAnswer: 'Between Bethel and Ai',
+        explanation: 'Genesis 12:8: He pitched his tent with Bethel on the west and Ai on the east.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis12-q13',
+        question: 'What did Pharaoh give Abram because of Sarai?',
+        options: ['Gold only', 'Sheep, oxen, donkeys, servants, and camels', 'Land in Egypt', 'A title of nobility'],
+        correctAnswer: 'Sheep, oxen, donkeys, servants, and camels',
+        explanation: 'Genesis 12:16: Pharaoh gave Abram livestock and servants for Sarai\'s sake.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis12-q14',
+        question: 'What happened after Pharaoh discovered the truth about Sarai?',
+        options: ['He killed Abram', 'He sent Abram away with all he had', 'He imprisoned Abram', 'He took back the gifts'],
+        correctAnswer: 'He sent Abram away with all he had',
+        explanation: 'Genesis 12:19-20: Pharaoh sent Abram away with his wife and all that he had.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis12-q15',
+        question: 'What would happen to those who cursed Abram according to God\'s promise?',
+        options: ['Nothing', 'God would curse them', 'They would prosper', 'They would take his land'],
+        correctAnswer: 'God would curse them',
+        explanation: 'Genesis 12:3: "him who dishonors you I will curse."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 12:2',
-    key_verse_text: "‘And I will make of you a great nation, and I will bless you and make your name great, so that you will be a blessing.’",
+    key_verse_text: "'And I will make of you a great nation, and I will bless you and make your name great, so that you will be a blessing.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -1182,69 +1640,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 13,
     title: 'Abram and Lot Separate',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis13-q1',
-        question: 'Why did Abram and Lot separate?',
-        options: [
-          'Rich disputes',
-          'Strife over grazing land',
-          'Strong rivalry',
-          'Silent anger'
-        ],
-        correctAnswer: 'Strife over grazing land',
-        explanation: 'Genesis 13:7 (ESV): "and there was strife between the herdsmen of Abram’s livestock and the herdsmen of Lot’s livestock. At that time the Canaanites and the Perizzites were dwelling in the land." Conflict divides.'
+        question: 'Why did Abram and Lot need to separate?',
+        options: ['They were enemies', 'The land could not support both', 'Lot was rebellious', 'God commanded it'],
+        correctAnswer: 'The land could not support both',
+        explanation: 'Genesis 13:6: The land could not support both of them dwelling together.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis13-q2',
-        question: 'What did Abram offer Lot?',
-        options: [
-          'Rich gold',
-          'Choice of the land',
-          'Strong herds',
-          'Silent fields'
-        ],
-        correctAnswer: 'Choice of the land',
-        explanation: 'Genesis 13:9 (ESV): "‘Is not the whole land before you? Separate yourself from me. If you take the left hand, then I will go to the right, or if you take the right hand, then I will go to the left.’" Peace offers.'
+        question: 'What did Abram generously offer Lot?',
+        options: ['Gold', 'First choice of the land', 'His flocks', 'A city'],
+        correctAnswer: 'First choice of the land',
+        explanation: 'Genesis 13:9: Abram let Lot choose which direction to go.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis13-q3',
-        question: 'Where did Lot choose to live?',
-        options: [
-          'Rich Bethel',
-          'The Jordan Valley near Sodom',
-          'Strong Hebron',
-          'Silent Canaan'
-        ],
-        correctAnswer: 'The Jordan Valley near Sodom',
-        explanation: 'Genesis 13:11-12 (ESV): "So Lot chose for himself all the Jordan Valley, and Lot journeyed east. Thus they separated from each other. Abram settled in the land of Canaan, while Lot settled among the cities of the valley and moved his tent as far as Sodom." Choice settles.'
+        question: 'Which direction did Lot choose?',
+        options: ['West toward the sea', 'East toward the Jordan Valley', 'North toward Damascus', 'South toward Egypt'],
+        correctAnswer: 'East toward the Jordan Valley',
+        explanation: 'Genesis 13:11: Lot chose the Jordan Valley and journeyed east.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis13-q4',
-        question: 'What did God reaffirm to Abram?',
-        options: [
-          'Rich wealth',
-          'Land and offspring',
-          'Strong power',
-          'Silent promise'
-        ],
-        correctAnswer: 'Land and offspring',
-        explanation: 'Genesis 13:15-16 (ESV): "‘for all the land that you see I will give to you and to your offspring forever. I will make your offspring as the dust of the earth, so that if one can count the dust of the earth, your offspring also can be counted.’" Covenant confirms.'
+        question: 'What city did Lot settle near?',
+        options: ['Jerusalem', 'Sodom', 'Hebron', 'Bethel'],
+        correctAnswer: 'Sodom',
+        explanation: 'Genesis 13:12: Lot moved his tent as far as Sodom.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis13-q5',
-        question: 'Where did Abram settle after Lot left?',
-        options: [
-          'Rich Egypt',
-          'Hebron, by oaks of Mamre',
-          'Strong Sodom',
-          'Silent Jordan'
-        ],
-        correctAnswer: 'Hebron, by oaks of Mamre',
-        explanation: 'Genesis 13:18 (ESV): "So Abram moved his tent and came and settled by the oaks of Mamre, which are at Hebron, and there he built an altar to the Lord." Home rests.'
+        question: 'Where did Abram settle after they separated?',
+        options: ['Egypt', 'Hebron', 'Sodom', 'Ur'],
+        correctAnswer: 'Hebron',
+        explanation: 'Genesis 13:18: Abram settled by the oaks of Mamre at Hebron.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis13-q6',
+        question: 'What was the conflict between Abram and Lot?',
+        options: ['Personal quarrel', 'Strife between their herdsmen', 'Property dispute', 'Religious differences'],
+        correctAnswer: 'Strife between their herdsmen',
+        explanation: 'Genesis 13:7: There was strife between their herdsmen.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis13-q7',
+        question: 'Why was the Jordan Valley attractive to Lot?',
+        options: ['It had gold', 'It was well-watered like the garden of the LORD', 'It was near family', 'It had no inhabitants'],
+        correctAnswer: 'It was well-watered like the garden of the LORD',
+        explanation: 'Genesis 13:10: The Jordan Valley was well-watered everywhere, like the garden of the LORD.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis13-q8',
+        question: 'What was the moral condition of Sodom?',
+        options: ['Righteous', 'Wicked and great sinners', 'Neutral', 'Holy'],
+        correctAnswer: 'Wicked and great sinners',
+        explanation: 'Genesis 13:13: The men of Sodom were wicked, great sinners against the LORD.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis13-q9',
+        question: 'To what did God compare Abram\'s future offspring?',
+        options: ['The stars', 'The dust of the earth', 'The sand', 'The leaves of a tree'],
+        correctAnswer: 'The dust of the earth',
+        explanation: 'Genesis 13:16: God said He would make Abram\'s offspring as the dust of the earth.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis13-q10',
+        question: 'What did God tell Abram to do after Lot left?',
+        options: ['Build a city', 'Walk through the land', 'Go to Egypt', 'Make war'],
+        correctAnswer: 'Walk through the land',
+        explanation: 'Genesis 13:17: "Arise, walk through the length and breadth of the land."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis13-q11',
+        question: 'What peoples were dwelling in the land during Abram\'s time?',
+        options: ['Egyptians and Assyrians', 'Canaanites and Perizzites', 'Philistines and Amorites', 'Hittites and Jebusites'],
+        correctAnswer: 'Canaanites and Perizzites',
+        explanation: 'Genesis 13:7: The Canaanites and Perizzites were dwelling in the land.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis13-q12',
+        question: 'What did Abram build at the oaks of Mamre?',
+        options: ['A house', 'An altar to the LORD', 'A well', 'A city'],
+        correctAnswer: 'An altar to the LORD',
+        explanation: 'Genesis 13:18: Abram built an altar to the LORD at Hebron.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis13-q13',
+        question: 'From where did Abram return when this chapter begins?',
+        options: ['Canaan', 'Egypt', 'Ur', 'Haran'],
+        correctAnswer: 'Egypt',
+        explanation: 'Genesis 13:1: Abram went up from Egypt into the Negeb.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis13-q14',
+        question: 'How wealthy was Abram described as being?',
+        options: ['Poor', 'Modest', 'Very rich in livestock, silver, and gold', 'Average'],
+        correctAnswer: 'Very rich in livestock, silver, and gold',
+        explanation: 'Genesis 13:2: "Now Abram was very rich in livestock, in silver, and in gold."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis13-q15',
+        question: 'What directions did God tell Abram to look?',
+        options: ['Only east', 'North, south, east, and west', 'Only toward Sodom', 'Toward Egypt'],
+        correctAnswer: 'North, south, east, and west',
+        explanation: 'Genesis 13:14: "Lift up your eyes and look... northward and southward and eastward and westward."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 13:15',
-    key_verse_text: "‘for all the land that you see I will give to you and to your offspring forever.’",
+    key_verse_text: "'for all the land that you see I will give to you and to your offspring forever.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -1255,69 +1776,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 14,
     title: 'Abram Rescues Lot',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis14-q1',
-        question: 'Who captured Lot?',
-        options: [
-          'Rich Pharaoh',
-          'Chedorlaomer and kings',
-          'Strong Canaanites',
-          'Silent raiders'
-        ],
-        correctAnswer: 'Chedorlaomer and kings',
-        explanation: 'Genesis 14:12 (ESV): "They also took Lot, the son of Abram’s brother, who was dwelling in Sodom, and his possessions, and went their way." (Context v. 1-11 names Chedorlaomer.) War captures.'
+        question: 'Who was captured by invading kings?',
+        options: ['Abram', 'Lot', 'Sarai', 'Melchizedek'],
+        correctAnswer: 'Lot',
+        explanation: 'Genesis 14:12: They took Lot, who was dwelling in Sodom.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis14-q2',
-        question: 'How many men did Abram lead?',
-        options: [
-          'Rich 500',
-          'Three hundred eighteen',
-          'Strong 200',
-          'Silent 400'
-        ],
-        correctAnswer: 'Three hundred eighteen',
-        explanation: 'Genesis 14:14 (ESV): "When Abram heard that his kinsman had been taken captive, he led forth his trained men, born in his house, 318 of them, and went in pursuit as far as Dan." Force pursues.'
+        question: 'What did Abram do when he heard Lot was captured?',
+        options: ['Prayed', 'Rescued him', 'Mourned', 'Left for Egypt'],
+        correctAnswer: 'Rescued him',
+        explanation: 'Genesis 14:14-16: Abram led his men to rescue Lot and brought him back.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis14-q3',
-        question: 'What did Abram recover?',
-        options: [
-          'Rich treasures',
-          'Lot, people, and goods',
-          'Strong cities',
-          'Silent lands'
-        ],
-        correctAnswer: 'Lot, people, and goods',
-        explanation: 'Genesis 14:16 (ESV): "Then he brought back all the possessions, and also brought back his kinsman Lot with his possessions, and the women and the other people." Victory restores.'
+        question: 'Who blessed Abram after the battle?',
+        options: ['Pharaoh', 'Melchizedek', 'The king of Sodom', 'Lot'],
+        correctAnswer: 'Melchizedek',
+        explanation: 'Genesis 14:18-19: Melchizedek, king of Salem, blessed Abram.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis14-q4',
-        question: 'Who blessed Abram after the battle?',
-        options: [
-          'Rich Pharaoh',
-          'Melchizedek, priest of God',
-          'Strong Sodom’s king',
-          'Silent Lot'
-        ],
-        correctAnswer: 'Melchizedek, priest of God',
-        explanation: 'Genesis 14:18-19 (ESV): "And Melchizedek king of Salem brought out bread and wine. (He was priest of God Most High.) And he blessed him and said, ‘Blessed be Abram by God Most High, Possessor of heaven and earth;’" Priest honors.'
+        question: 'What did Abram give Melchizedek?',
+        options: ['Gold', 'A tenth of everything', 'Livestock', 'Land'],
+        correctAnswer: 'A tenth of everything',
+        explanation: 'Genesis 14:20: Abram gave him a tenth of everything.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis14-q5',
-        question: 'What did Abram give Melchizedek?',
-        options: [
-          'Rich gold',
-          'A tenth of everything',
-          'Strong horses',
-          'Silent thanks'
-        ],
-        correctAnswer: 'A tenth of everything',
-        explanation: 'Genesis 14:20 (ESV): "‘and blessed be God Most High, who has delivered your enemies into your hand!’ And Abram gave him a tenth of everything." Tithe offers.'
+        question: 'What did Melchizedek bring out to Abram?',
+        options: ['Gold and silver', 'Bread and wine', 'Weapons', 'Clothing'],
+        correctAnswer: 'Bread and wine',
+        explanation: 'Genesis 14:18: Melchizedek brought out bread and wine.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis14-q6',
+        question: 'How many trained men did Abram lead?',
+        options: ['100', '318', '500', '1000'],
+        correctAnswer: '318',
+        explanation: 'Genesis 14:14: Abram led 318 trained men born in his house.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis14-q7',
+        question: 'Who was the leader of the invading kings?',
+        options: ['Melchizedek', 'Chedorlaomer', 'The king of Sodom', 'Pharaoh'],
+        correctAnswer: 'Chedorlaomer',
+        explanation: 'Genesis 14:4-5: Chedorlaomer was the dominant king leading the alliance.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis14-q8',
+        question: 'What did the king of Sodom offer Abram after the rescue?',
+        options: ['His kingdom', 'The goods, but asked for the people back', 'Marriage alliance', 'A treaty'],
+        correctAnswer: 'The goods, but asked for the people back',
+        explanation: 'Genesis 14:21: The king asked Abram to give him the people and keep the goods.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis14-q9',
+        question: 'What was Melchizedek\'s title?',
+        options: ['King of Egypt', 'King of Salem, priest of God Most High', 'King of Sodom', 'Prophet of the LORD'],
+        correctAnswer: 'King of Salem, priest of God Most High',
+        explanation: 'Genesis 14:18: Melchizedek was king of Salem and priest of God Most High.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis14-q10',
+        question: 'How far did Abram pursue the enemy kings?',
+        options: ['To Egypt', 'As far as Dan', 'To Babylon', 'To the Jordan'],
+        correctAnswer: 'As far as Dan',
+        explanation: 'Genesis 14:14: Abram pursued them as far as Dan.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis14-q11',
+        question: 'How many kings were in the alliance that attacked Sodom?',
+        options: ['Two', 'Four', 'Seven', 'Twelve'],
+        correctAnswer: 'Four',
+        explanation: 'Genesis 14:1-2: Four kings against five - Chedorlaomer led four allied kings.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis14-q12',
+        question: 'Why did Abram refuse the king of Sodom\'s offer?',
+        options: ['He was too proud', 'So no one could say they made Abram rich', 'He already had enough', 'God told him to refuse'],
+        correctAnswer: 'So no one could say they made Abram rich',
+        explanation: 'Genesis 14:23: "lest you should say, I have made Abram rich."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis14-q13',
+        question: 'What did Abram swear when refusing the spoils?',
+        options: ['By his life', 'By the LORD, God Most High', 'By his offspring', 'By the land'],
+        correctAnswer: 'By the LORD, God Most High',
+        explanation: 'Genesis 14:22: "I have lifted my hand to the LORD, God Most High."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis14-q14',
+        question: 'Where were the tar pits that some kings fell into?',
+        options: ['Valley of Shinar', 'Valley of Siddim', 'Valley of Sorek', 'Valley of Elah'],
+        correctAnswer: 'Valley of Siddim',
+        explanation: 'Genesis 14:10: The Valley of Siddim was full of bitumen (tar) pits.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis14-q15',
+        question: 'Which allies of Abram went with him on the rescue mission?',
+        options: ['Lot and his servants', 'Aner, Eshcol, and Mamre', 'The kings of Sodom', 'Melchizedek\'s army'],
+        correctAnswer: 'Aner, Eshcol, and Mamre',
+        explanation: 'Genesis 14:13,24: Aner, Eshcol, and Mamre were Abram\'s Amorite allies.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 14:19',
-    key_verse_text: "And he blessed him and said, ‘Blessed be Abram by God Most High, Possessor of heaven and earth;’",
+    key_verse_text: "And he blessed him and said, 'Blessed be Abram by God Most High, Possessor of heaven and earth;'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -1328,65 +1912,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 15,
     title: 'God’s Covenant with Abram',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis15-q1',
-        question: 'What did God promise Abram as a shield?',
-        options: [
-          'Rich wealth',
-          'Himself and great reward',
-          'Strong army',
-          'Silent protection'
-        ],
-        correctAnswer: 'Himself and great reward',
-        explanation: 'Genesis 15:1 (ESV): "After these things the word of the Lord came to Abram in a vision: ‘Fear not, Abram, I am your shield; your reward shall be very great.’" Assurance comforts.'
+        question: 'What did God promise to be for Abram?',
+        options: ['His king', 'His shield', 'His father', 'His teacher'],
+        correctAnswer: 'His shield',
+        explanation: 'Genesis 15:1: "Fear not, Abram, I am your shield."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis15-q2',
-        question: 'Who did Abram say was his heir?',
-        options: [
-          'Rich Lot',
-          'Eliezer of Damascus',
-          'Strong Ishmael',
-          'Silent Sarai'
-        ],
-        correctAnswer: 'Eliezer of Damascus',
-        explanation: 'Genesis 15:2 (ESV): "But Abram said, ‘O Lord God, what will you give me, for I continue childless, and the heir of my house is Eliezer of Damascus?’" Concern questions.'
+        question: 'To what did God compare Abram\'s offspring?',
+        options: ['The dust', 'The stars', 'The sand', 'The trees'],
+        correctAnswer: 'The stars',
+        explanation: 'Genesis 15:5: God told Abram to count the stars - so shall his offspring be.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis15-q3',
-        question: 'What did God compare Abram’s offspring to?',
-        options: [
-          'Rich gold',
-          'Stars of heaven',
-          'Strong oaks',
-          'Silent sands'
-        ],
-        correctAnswer: 'Stars of heaven',
-        explanation: 'Genesis 15:5 (ESV): "And he brought him outside and said, ‘Look toward heaven, and number the stars, if you are able to number them.’ Then he said to him, ‘So shall your offspring be.’" Promise expands.'
+        question: 'Why was Abram counted as righteous?',
+        options: ['His good works', 'His sacrifices', 'He believed the LORD', 'His wealth'],
+        correctAnswer: 'He believed the LORD',
+        explanation: 'Genesis 15:6: "he believed the LORD, and he counted it to him as righteousness."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis15-q4',
-        question: 'Why was Abram counted righteous?',
-        options: [
-          'Rich deeds',
-          'He believed the Lord',
-          'Strong works',
-          'Silent faith'
-        ],
-        correctAnswer: 'He believed the Lord',
-        explanation: 'Genesis 15:6 (ESV): "And he believed the Lord, and he counted it to him as righteousness." Faith justifies.'
+        question: 'What was Abram concerned about?',
+        options: ['His wealth', 'Having no children', 'His enemies', 'His wife'],
+        correctAnswer: 'Having no children',
+        explanation: 'Genesis 15:2-3: Abram was concerned because he had no children.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis15-q5',
-        question: 'How did God seal the covenant?',
-        options: [
-          'With rich gifts',
-          'Passing fire between pieces',
-          'With strong oaths',
-          'With silent signs'
-        ],
-        correctAnswer: 'Passing fire between pieces',
-        explanation: 'Genesis 15:17 (ESV): "When the sun had gone down and it was dark, behold, a smoking fire pot and a flaming torch passed between these pieces." Covenant binds.'
+        question: 'What did God promise to give Abram\'s descendants?',
+        options: ['Gold', 'This land', 'Servants', 'Long life'],
+        correctAnswer: 'This land',
+        explanation: 'Genesis 15:18: God made a covenant to give Abram\'s offspring the land.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis15-q6',
+        question: 'Who did Abram say was his current heir?',
+        options: ['Lot', 'Eliezer of Damascus', 'Ishmael', 'Pharaoh'],
+        correctAnswer: 'Eliezer of Damascus',
+        explanation: 'Genesis 15:2: Abram thought Eliezer would be his heir since he had no children.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis15-q7',
+        question: 'What came over Abram as the sun was going down?',
+        options: ['Joy', 'A deep sleep and dread', 'Hunger', 'Anger'],
+        correctAnswer: 'A deep sleep and dread',
+        explanation: 'Genesis 15:12: "a deep sleep fell on Abram... dreadful and great darkness."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis15-q8',
+        question: 'How long would Abram\'s descendants be oppressed in another land?',
+        options: ['200 years', '400 years', '500 years', '1000 years'],
+        correctAnswer: '400 years',
+        explanation: 'Genesis 15:13: "your offspring will be... afflicted for four hundred years."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis15-q9',
+        question: 'What animals did Abram bring for the covenant ceremony?',
+        options: ['One lamb', 'A heifer, goat, ram, turtledove, and pigeon', 'Seven bulls', 'Two oxen'],
+        correctAnswer: 'A heifer, goat, ram, turtledove, and pigeon',
+        explanation: 'Genesis 15:9: God instructed Abram to bring five animals for the covenant.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis15-q10',
+        question: 'What passed between the cut pieces of the animals?',
+        options: ['Water', 'A smoking fire pot and flaming torch', 'An angel', 'Wind'],
+        correctAnswer: 'A smoking fire pot and flaming torch',
+        explanation: 'Genesis 15:17: A smoking fire pot and flaming torch passed between the pieces.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis15-q11',
+        question: 'Whose sin was "not yet complete" according to Genesis 15:16?',
+        options: ['The Egyptians', 'The Amorites', 'The Canaanites', 'Abram\'s descendants'],
+        correctAnswer: 'The Amorites',
+        explanation: 'Genesis 15:16: "the iniquity of the Amorites is not yet complete."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis15-q12',
+        question: 'What nation would God judge for oppressing Abram\'s descendants?',
+        options: ['Canaan', 'Egypt', 'Babylon', 'Assyria'],
+        correctAnswer: 'Egypt',
+        explanation: 'Genesis 15:14: "I will bring judgment on the nation that they serve."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis15-q13',
+        question: 'What did Abram drive away from the carcasses?',
+        options: ['Wolves', 'Birds of prey', 'Lions', 'Snakes'],
+        correctAnswer: 'Birds of prey',
+        explanation: 'Genesis 15:11: "And when birds of prey came down... Abram drove them away."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis15-q14',
+        question: 'From what river to what river did God promise the land?',
+        options: ['Jordan to Nile', 'River of Egypt to Euphrates', 'Tigris to Jordan', 'Red Sea to Dead Sea'],
+        correctAnswer: 'River of Egypt to Euphrates',
+        explanation: 'Genesis 15:18: "from the river of Egypt to... the Euphrates."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis15-q15',
+        question: 'In what generation would Abram\'s descendants return to Canaan?',
+        options: ['Second', 'Third', 'Fourth', 'Fifth'],
+        correctAnswer: 'Fourth',
+        explanation: 'Genesis 15:16: "they shall come back here in the fourth generation."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 15:6',

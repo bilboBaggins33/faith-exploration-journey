@@ -6,11 +6,7 @@ import { bibleBooks } from '@/data/bible/books';
 import { getTodaysReading, getReadingForDate } from '@/data/bible/reading-plans/mcheyne';
 import { BibleReading } from '@/data/bible/types';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Badge } from '@/components/ui/badge';
-import { CalendarIcon, BookText, CheckCircle, BookOpen, Lock } from 'lucide-react';
-import { Progress } from '@/components/ui/progress';
+import { CalendarIcon, BookOpen, CheckCircle, Lock } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
@@ -18,6 +14,7 @@ import {
 } from "@/components/ui/popover";
 import { format } from 'date-fns';
 import { useAuth } from '@/context/auth';
+import GlassCard from '@/components/ui/GlassCard';
 
 interface ReadingItemProps {
   reading: BibleReading;
@@ -33,23 +30,25 @@ const ReadingItem = ({ reading, index, isCompleted, isFirstChapter, onClick }: R
   const requiresAuth = !isFirstChapter && !user;
 
   return (
-    <div 
-      className={`flex items-center justify-between p-4 rounded-lg mb-2 ${
-        requiresAuth ? 'bg-gray-100' : 
-        isCompleted ? 'bg-green-50 border border-green-200' : 
-        'bg-gray-50 hover:bg-gray-100 cursor-pointer'
-      }`}
+    <div
+      className={`flex items-center justify-between p-4 rounded-2xl mb-2 backdrop-blur-md border transition-all ${requiresAuth
+          ? 'bg-white/10 border-white/20'
+          : isCompleted
+            ? 'bg-green-500/20 border-green-400/30'
+            : 'bg-white/10 border-white/20 hover:bg-white/20 cursor-pointer'
+        }`}
+      onClick={!requiresAuth ? onClick : undefined}
     >
       <div className="flex items-center flex-1">
-        <div className="w-8 h-8 rounded-full bg-bible-blue/10 flex items-center justify-center mr-3 text-sm font-medium">
+        <div className="w-8 h-8 rounded-full bg-amber-500/30 flex items-center justify-center mr-3 text-sm font-medium text-white">
           {index + 1}
         </div>
         <div>
-          <h4 className="font-medium text-lg">{book?.name || reading.bookId}</h4>
-          <p className="text-sm text-gray-600">
+          <h4 className="font-medium text-lg text-white">{book?.name || reading.bookId}</h4>
+          <p className="text-sm text-white/70">
             Chapter {reading.chapter}
             {isCompleted && (
-              <span className="inline-flex items-center text-green-600 ml-2">
+              <span className="inline-flex items-center text-green-400 ml-2">
                 <CheckCircle className="h-4 w-4 mr-1" />
                 Completed
               </span>
@@ -57,24 +56,28 @@ const ReadingItem = ({ reading, index, isCompleted, isFirstChapter, onClick }: R
           </p>
         </div>
       </div>
-      <Button 
-        variant={requiresAuth ? "outline" : "ghost"} 
-        size="sm" 
-        className="ml-4"
-        onClick={onClick}
+      <button
+        className={`ml-4 px-4 py-2 rounded-full font-medium backdrop-blur-md border transition-all flex items-center gap-2 ${requiresAuth
+            ? 'bg-white/10 text-white/70 border-white/20'
+            : 'bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border-amber-300/50 hover:scale-105'
+          }`}
+        onClick={(e) => {
+          e.stopPropagation();
+          onClick();
+        }}
       >
         {requiresAuth ? (
           <>
-            <Lock className="h-4 w-4 mr-2" />
-            Sign in to Read
+            <Lock className="h-4 w-4" />
+            Sign in
           </>
         ) : (
           <>
-            <BookOpen className="h-4 w-4 mr-2" />
+            <BookOpen className="h-4 w-4" />
             {isCompleted ? 'Review' : 'Read'}
           </>
         )}
-      </Button>
+      </button>
     </div>
   );
 };
@@ -85,47 +88,55 @@ const DailyReadingPlan = () => {
   const [open, setOpen] = useState(false);
   const { user } = useAuth();
   const { getChapterStatus } = useBibleProgress();
-  
+
   const readings = selectedDate ? getReadingForDate(selectedDate) : getTodaysReading();
   const todaysReadings = getTodaysReading();
   const isToday = selectedDate && format(selectedDate, 'MM-dd') === format(new Date(), 'MM-dd');
-  
+
   const navigateToChapter = (bookId: string, chapter: number) => {
-    // Remove the authentication check for the first chapter
-    navigate(`/bible/${bookId}/${chapter}`);
+    // Pass from=daily so the back button returns to daily reading
+    navigate(`/bible/${bookId}/${chapter}?from=daily`);
   };
-  
+
   const getCompletionStatus = (bookId: string, chapter: number) => {
     if (!user) return false;
     const { isCompleted } = getChapterStatus(bookId, chapter);
     return isCompleted;
   };
-  
+
   const getTodayCompletionPercentage = () => {
     if (!user || !todaysReadings.length) return 0;
-    
-    const completedCount = todaysReadings.filter(reading => 
+
+    const completedCount = todaysReadings.filter(reading =>
       getCompletionStatus(reading.bookId, reading.chapter)
     ).length;
-    
+
     return Math.round((completedCount / todaysReadings.length) * 100);
   };
 
   return (
-    <Card>
-      <CardHeader>
+    <GlassCard>
+      {/* Header */}
+      <div className="p-6 border-b border-white/20">
         <div className="flex items-center justify-between">
           <div>
-            <CardTitle className="text-2xl font-serif">M'Cheyne Reading Plan</CardTitle>
-            <CardDescription>Readings for {format(selectedDate, 'MMMM d, yyyy')}</CardDescription>
+            <h2
+              className="text-2xl font-bold text-white"
+              style={{ fontFamily: "'Playfair Display', serif" }}
+            >
+              M'Cheyne Reading Plan
+            </h2>
+            <p className="text-white/60 text-sm">
+              Readings for {format(selectedDate, 'MMMM d, yyyy')}
+            </p>
           </div>
-          
+
           <Popover open={open} onOpenChange={setOpen}>
             <PopoverTrigger asChild>
-              <Button variant="outline" className="gap-2">
+              <button className="px-4 py-2 rounded-full bg-white/10 text-white/90 font-medium backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all flex items-center gap-2">
                 <CalendarIcon className="h-4 w-4" />
                 Change Date
-              </Button>
+              </button>
             </PopoverTrigger>
             <PopoverContent className="w-auto p-0" align="end">
               <Calendar
@@ -140,22 +151,28 @@ const DailyReadingPlan = () => {
             </PopoverContent>
           </Popover>
         </div>
-        
+
         {isToday && user && (
           <div className="mt-4">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium">Today's Progress</span>
-              <span className="text-sm font-medium">{getTodayCompletionPercentage()}%</span>
+              <span className="text-sm font-medium text-white/80">Today's Progress</span>
+              <span className="text-sm font-medium text-white">{getTodayCompletionPercentage()}%</span>
             </div>
-            <Progress value={getTodayCompletionPercentage()} className="h-2" />
-            <p className="text-sm text-gray-500 mt-2">
+            <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500"
+                style={{ width: `${getTodayCompletionPercentage()}%` }}
+              />
+            </div>
+            <p className="text-sm text-white/60 mt-2">
               {todaysReadings.filter(r => getCompletionStatus(r.bookId, r.chapter)).length} of {todaysReadings.length} readings completed
             </p>
           </div>
         )}
-      </CardHeader>
-      
-      <CardContent>
+      </div>
+
+      {/* Reading Items */}
+      <div className="p-6">
         {readings.length > 0 ? (
           <div className="space-y-2">
             {readings.map((reading, index) => (
@@ -171,28 +188,32 @@ const DailyReadingPlan = () => {
           </div>
         ) : (
           <div className="text-center py-6">
-            <BookText className="mx-auto h-12 w-12 text-gray-300 mb-3" />
-            <p className="text-gray-500">No readings available for this date</p>
+            <BookOpen className="mx-auto h-12 w-12 text-white/30 mb-3" />
+            <p className="text-white/50">No readings available for this date</p>
           </div>
         )}
-      </CardContent>
-      
-      <CardFooter className="flex justify-between">
-        <Button 
-          variant="outline" 
+      </div>
+
+      {/* Footer */}
+      <div className="p-6 border-t border-white/20 flex justify-between items-center">
+        <button
           onClick={() => setSelectedDate(new Date())}
           disabled={isToday}
+          className={`px-4 py-2 rounded-full font-medium backdrop-blur-md border transition-all ${isToday
+              ? 'bg-white/5 text-white/30 border-white/10 cursor-not-allowed'
+              : 'bg-white/10 text-white/90 border-white/30 hover:bg-white/20'
+            }`}
         >
           Today's Reading
-        </Button>
-        
+        </button>
+
         {isToday && (
-          <Badge variant="outline" className="ml-auto">
+          <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-sm border border-amber-400/30">
             {format(new Date(), 'MMMM d')}
-          </Badge>
+          </span>
         )}
-      </CardFooter>
-    </Card>
+      </div>
+    </GlassCard>
   );
 };
 
