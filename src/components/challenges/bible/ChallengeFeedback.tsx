@@ -157,7 +157,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         <img
           src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
           alt={`${bookName || 'Book'} background`}
-          className="w-full h-full object-cover blur-sm scale-110"
+          className="w-full h-full object-cover scale-110"
           onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-black/40" />

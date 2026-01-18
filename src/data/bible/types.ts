@@ -43,6 +43,7 @@ export interface ChapterChallenge {
     options: string[];
     correctAnswer: string;
     explanation: string;
+    difficulty?: 'easy' | 'medium' | 'hard';
   }[];
   key_verse: string;
   key_verse_text: string;
