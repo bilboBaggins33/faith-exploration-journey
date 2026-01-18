@@ -2048,69 +2048,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 16,
     title: 'Hagar and Ishmael',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis16-q1',
-        question: 'Who gave Hagar to Abram as a wife?',
-        options: [
-          'Rich Pharaoh',
-          'Sarai',
-          'Strong Lot',
-          'Silent Eliezer'
-        ],
-        correctAnswer: 'Sarai',
-        explanation: 'Genesis 16:3 (ESV): "So, after Abram had lived ten years in the land of Canaan, Sarai, Abram’s wife, took Hagar the Egyptian, her servant, and gave her to Abram her husband as a wife." Plan offers.'
+        question: 'Who was Hagar?',
+        options: ['Abram\'s wife', 'Sarai\'s Egyptian servant', 'Lot\'s daughter', 'A prophet'],
+        correctAnswer: 'Sarai\'s Egyptian servant',
+        explanation: 'Genesis 16:1: Sarai had an Egyptian servant named Hagar.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis16-q2',
-        question: 'Why did Hagar flee from Sarai?',
-        options: [
-          'Seeking riches',
-          'Sarai treated her harshly',
-          'Seeking strength',
-          'Silent fear'
-        ],
-        correctAnswer: 'Sarai treated her harshly',
-        explanation: 'Genesis 16:6 (ESV): "But Abram said to Sarai, ‘Behold, your servant is in your power; do to her as you please.’ Then Sarai dealt harshly with her, and she fled from her." Conflict drives.'
+        question: 'Who gave Hagar to Abram as a wife?',
+        options: ['Pharaoh', 'Sarai', 'Lot', 'God'],
+        correctAnswer: 'Sarai',
+        explanation: 'Genesis 16:3: Sarai gave Hagar to Abram as a wife.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis16-q3',
-        question: 'Who found Hagar by a spring?',
-        options: [
-          'Rich merchant',
-          'The angel of the Lord',
-          'Strong Abram',
-          'Silent Sarai'
-        ],
-        correctAnswer: 'The angel of the Lord',
-        explanation: 'Genesis 16:7 (ESV): "The angel of the Lord found her by a spring of water in the wilderness, the spring on the way to Shur." Mercy seeks.'
+        question: 'What was the name of Hagar\'s son?',
+        options: ['Isaac', 'Ishmael', 'Jacob', 'Esau'],
+        correctAnswer: 'Ishmael',
+        explanation: 'Genesis 16:11: The angel told Hagar to name her son Ishmael.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis16-q4',
-        question: 'What did the angel tell Hagar about her son?',
-        options: [
-          'He’ll be rich',
-          'He’ll be a wild donkey of a man',
-          'He’ll be strong',
-          'He’ll be silent'
-        ],
-        correctAnswer: 'He’ll be a wild donkey of a man',
-        explanation: 'Genesis 16:12 (ESV): "‘He shall be a wild donkey of a man, his hand against everyone and everyone’s hand against him, and he shall dwell over against all his kinsmen.’" Destiny foretells.'
+        question: 'Who found Hagar in the wilderness?',
+        options: ['Abram', 'The angel of the LORD', 'Sarai', 'A traveler'],
+        correctAnswer: 'The angel of the LORD',
+        explanation: 'Genesis 16:7: The angel of the LORD found her by a spring.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis16-q5',
-        question: 'What name did Hagar give God?',
-        options: [
-          'Rich Provider',
-          'God who sees me',
-          'Strong Deliverer',
-          'Silent Watcher'
-        ],
-        correctAnswer: 'God who sees me',
-        explanation: 'Genesis 16:13 (ESV): "So she called the name of the Lord who spoke to her, ‘You are a God of seeing,’ for she said, ‘Truly here I have seen him who looks after me.’" Faith names.'
+        question: 'Why did Hagar run away?',
+        options: ['She was lost', 'Sarai treated her harshly', 'She wanted adventure', 'Abram sent her away'],
+        correctAnswer: 'Sarai treated her harshly',
+        explanation: 'Genesis 16:6: Sarai dealt harshly with her, and she fled.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis16-q6',
+        question: 'Why did Sarai give Hagar to Abram?',
+        options: ['As a gift', 'So she could have children through her', 'To please Pharaoh', 'God commanded it'],
+        correctAnswer: 'So she could have children through her',
+        explanation: 'Genesis 16:2: Sarai hoped to build a family through her servant.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis16-q7',
+        question: 'How did Hagar act toward Sarai after becoming pregnant?',
+        options: ['Respectful', 'She looked on Sarai with contempt', 'Fearful', 'Grateful'],
+        correctAnswer: 'She looked on Sarai with contempt',
+        explanation: 'Genesis 16:4: When Hagar conceived, she looked on Sarai with contempt.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis16-q8',
+        question: 'What did the angel tell Hagar to do?',
+        options: ['Go to Egypt', 'Return and submit to Sarai', 'Stay in the wilderness', 'Go to Canaan'],
+        correctAnswer: 'Return and submit to Sarai',
+        explanation: 'Genesis 16:9: The angel told her to return and submit to her mistress.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis16-q9',
+        question: 'What name did Hagar give to God?',
+        options: ['El Shaddai', 'El Roi (God who sees me)', 'El Elyon', 'Yahweh'],
+        correctAnswer: 'El Roi (God who sees me)',
+        explanation: 'Genesis 16:13: She called him "You are a God of seeing."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis16-q10',
+        question: 'How old was Abram when Ishmael was born?',
+        options: ['75 years', '86 years', '99 years', '100 years'],
+        correctAnswer: '86 years',
+        explanation: 'Genesis 16:16: Abram was 86 years old when Hagar bore Ishmael.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis16-q11',
+        question: 'What does the name Ishmael mean?',
+        options: ['God provides', 'God hears', 'God sees', 'God blesses'],
+        correctAnswer: 'God hears',
+        explanation: 'Genesis 16:11: "You shall call his name Ishmael, because the LORD has listened to your affliction."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis16-q12',
+        question: 'What was prophesied about Ishmael\'s character?',
+        options: ['He would be peaceful', 'He would be a wild donkey of a man', 'He would be wealthy', 'He would be a great priest'],
+        correctAnswer: 'He would be a wild donkey of a man',
+        explanation: 'Genesis 16:12: "He shall be a wild donkey of a man, his hand against everyone."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis16-q13',
+        question: 'Where was the spring where the angel found Hagar?',
+        options: ['Near Beersheba', 'On the way to Shur', 'By the Jordan', 'Near Hebron'],
+        correctAnswer: 'On the way to Shur',
+        explanation: 'Genesis 16:7: The spring was on the way to Shur.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis16-q14',
+        question: 'What was the well named after this encounter?',
+        options: ['Beer-lahai-roi', 'Beersheba', 'Beer-sheba', 'En-gedi'],
+        correctAnswer: 'Beer-lahai-roi',
+        explanation: 'Genesis 16:14: The well was called Beer-lahai-roi.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis16-q15',
+        question: 'How long had Abram been in Canaan when Sarai gave Hagar to him?',
+        options: ['5 years', '10 years', '15 years', '20 years'],
+        correctAnswer: '10 years',
+        explanation: 'Genesis 16:3: After Abram had lived 10 years in Canaan.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 16:13',
-    key_verse_text: "So she called the name of the Lord who spoke to her, ‘You are a God of seeing,’ for she said, ‘Truly here I have seen him who looks after me.’",
+    key_verse_text: "So she called the name of the Lord who spoke to her, 'You are a God of seeing.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -2121,69 +2184,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 17,
     title: 'The Covenant of Circumcision',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis17-q1',
-        question: 'How old was Abram when God appeared?',
-        options: [
-          'Rich seventy',
-          'Ninety-nine',
-          'Strong eighty',
-          'Silent sixty'
-        ],
-        correctAnswer: 'Ninety-nine',
-        explanation: 'Genesis 17:1 (ESV): "When Abram was ninety-nine years old the Lord appeared to Abram and said to him, ‘I am God Almighty; walk before me, and be blameless,’" Time marks.'
+        question: 'What new name did God give Abram?',
+        options: ['Isaac', 'Abraham', 'Israel', 'Jacob'],
+        correctAnswer: 'Abraham',
+        explanation: 'Genesis 17:5: God changed Abram\'s name to Abraham.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis17-q2',
-        question: 'What new name did God give Abram?',
-        options: [
-          'Rich Abner',
-          'Abraham',
-          'Strong Abiram',
-          'Silent Abra'
-        ],
-        correctAnswer: 'Abraham',
-        explanation: 'Genesis 17:5 (ESV): "‘No longer shall your name be called Abram, but your name shall be Abraham, for I have made you the father of a multitude of nations.’" Name changes.'
+        question: 'What new name did God give Sarai?',
+        options: ['Rachel', 'Sarah', 'Rebekah', 'Leah'],
+        correctAnswer: 'Sarah',
+        explanation: 'Genesis 17:15: God changed Sarai\'s name to Sarah.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis17-q3',
-        question: 'What was the sign of the covenant?',
-        options: [
-          'Rich offerings',
-          'Circumcision',
-          'Strong altars',
-          'Silent vows'
-        ],
+        question: 'What was the sign of God\'s covenant with Abraham?',
+        options: ['Sacrifice', 'Circumcision', 'A rainbow', 'An altar'],
         correctAnswer: 'Circumcision',
-        explanation: 'Genesis 17:11 (ESV): "‘You shall be circumcised in the flesh of your foreskins, and it shall be a sign of the covenant between me and you.’" Sign seals.'
+        explanation: 'Genesis 17:11: Circumcision was the sign of the covenant.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis17-q4',
-        question: 'What new name was Sarai given?',
-        options: [
-          'Rich Sarina',
-          'Sarah',
-          'Strong Saria',
-          'Silent Sara'
-        ],
-        correctAnswer: 'Sarah',
-        explanation: 'Genesis 17:15 (ESV): "And God said to Abraham, ‘As for Sarai your wife, you shall not call her name Sarai, but Sarah shall be her name.’" Identity shifts.'
+        question: 'What name did God tell Abraham to give his son?',
+        options: ['Ishmael', 'Isaac', 'Jacob', 'Esau'],
+        correctAnswer: 'Isaac',
+        explanation: 'Genesis 17:19: "You shall call his name Isaac."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis17-q5',
-        question: 'What did Abraham do when God promised a son?',
-        options: [
-          'Sought riches',
-          'Laughed and questioned',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Laughed and questioned',
-        explanation: 'Genesis 17:17 (ESV): "Then Abraham fell on his face and laughed and said to himself, ‘Shall a child be born to a man who is a hundred years old? Shall Sarah, who is ninety years old, bear a child?’" Doubt marvels.'
+        question: 'Did Abraham obey God regarding circumcision?',
+        options: ['No', 'Yes, that very day', 'He delayed', 'He refused'],
+        correctAnswer: 'Yes, that very day',
+        explanation: 'Genesis 17:23: Abraham circumcised the males of his household that very day.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis17-q6',
+        question: 'How old was Abram when God appeared and gave this covenant?',
+        options: ['75 years old', '86 years old', '99 years old', '100 years old'],
+        correctAnswer: '99 years old',
+        explanation: 'Genesis 17:1: Abram was 99 years old when the LORD appeared.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis17-q7',
+        question: 'What does Abraham mean?',
+        options: ['High father', 'Father of a multitude', 'Blessed one', 'God\'s servant'],
+        correctAnswer: 'Father of a multitude',
+        explanation: 'Genesis 17:5: "for I have made you the father of a multitude of nations."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis17-q8',
+        question: 'What did Abraham do when God said Sarah would have a son?',
+        options: ['Praised God', 'Fell on his face and laughed', 'Wept', 'Doubted silently'],
+        correctAnswer: 'Fell on his face and laughed',
+        explanation: 'Genesis 17:17: Abraham fell on his face and laughed.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis17-q9',
+        question: 'At what age should males be circumcised according to this covenant?',
+        options: ['At birth', '8 days old', '1 year old', 'At adulthood'],
+        correctAnswer: '8 days old',
+        explanation: 'Genesis 17:12: Every male shall be circumcised at 8 days old.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis17-q10',
+        question: 'What did God say would happen to one who was not circumcised?',
+        options: ['He would be blessed', 'Cut off from his people', 'Made a slave', 'Nothing'],
+        correctAnswer: 'Cut off from his people',
+        explanation: 'Genesis 17:14: "that person shall be cut off from his people."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis17-q11',
+        question: 'What name did God reveal Himself by to Abraham?',
+        options: ['Yahweh', 'El Shaddai (God Almighty)', 'El Elyon', 'Adonai'],
+        correctAnswer: 'El Shaddai (God Almighty)',
+        explanation: 'Genesis 17:1: "I am God Almighty (El Shaddai)."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis17-q12',
+        question: 'How many nations would come from Abraham according to this chapter?',
+        options: ['One great nation', 'A multitude of nations', 'Twelve tribes', 'Seven kingdoms'],
+        correctAnswer: 'A multitude of nations',
+        explanation: 'Genesis 17:4-5: "You shall be the father of a multitude of nations."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis17-q13',
+        question: 'How old was Ishmael when he was circumcised?',
+        options: ['8 days old', '10 years old', '13 years old', '15 years old'],
+        correctAnswer: '13 years old',
+        explanation: 'Genesis 17:25: Ishmael was 13 years old when circumcised.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis17-q14',
+        question: 'What did Abraham ask God regarding Ishmael?',
+        options: ['Make him wealthy', 'Oh that Ishmael might live before you!', 'Send him away', 'Give him land'],
+        correctAnswer: 'Oh that Ishmael might live before you!',
+        explanation: 'Genesis 17:18: Abraham pleaded for Ishmael to live before God.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis17-q15',
+        question: 'How many princes would come from Ishmael according to this covenant?',
+        options: ['Seven', 'Ten', 'Twelve', 'Twenty'],
+        correctAnswer: 'Twelve',
+        explanation: 'Genesis 17:20: "twelve princes shall he father."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 17:5',
-    key_verse_text: "‘No longer shall your name be called Abram, but your name shall be Abraham, for I have made you the father of a multitude of nations.’",
+    key_verse_text: "'No longer shall your name be called Abram, but your name shall be Abraham, for I have made you the father of a multitude of nations.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
