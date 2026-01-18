@@ -2320,69 +2320,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 18,
     title: 'The Lord Visits Abraham',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis18-q1',
-        question: 'Who appeared to Abraham by the oaks?',
-        options: [
-          'Rich kings',
-          'The Lord and two angels',
-          'Strong warriors',
-          'Silent messengers'
-        ],
-        correctAnswer: 'The Lord and two angels',
-        explanation: 'Genesis 18:1-2 (ESV): "And the Lord appeared to him by the oaks of Mamre, as he sat at the door of his tent in the heat of the day. He lifted up his eyes and looked, and behold, three men were standing in front of him." Visitors arrive.'
+        question: 'How many men appeared to Abraham at Mamre?',
+        options: ['One', 'Two', 'Three', 'Four'],
+        correctAnswer: 'Three',
+        explanation: 'Genesis 18:2: Three men stood before Abraham.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis18-q2',
-        question: 'What did Sarah do when told she’d bear a son?',
-        options: [
-          'Sought riches',
-          'Laughed to herself',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Laughed to herself',
-        explanation: 'Genesis 18:12 (ESV): "So Sarah laughed to herself, saying, ‘After I am worn out, and my lord is old, shall I have pleasure?’" Doubt chuckles.'
+        question: 'What did Sarah do when she heard she would have a son?',
+        options: ['Cried', 'Laughed', 'Prayed', 'Ran away'],
+        correctAnswer: 'Laughed',
+        explanation: 'Genesis 18:12: Sarah laughed to herself.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis18-q3',
-        question: 'What did the Lord say about Sodom’s sin?',
-        options: [
-          'It’s rich',
-          'It’s very grave',
-          'It’s strong',
-          'It’s silent'
-        ],
-        correctAnswer: 'It’s very grave',
-        explanation: 'Genesis 18:20 (ESV): "Then the Lord said, ‘Because the outcry against Sodom and Gomorrah is great and their sin is very grave,’" Judgment looms.'
+        question: 'What famous question did the LORD ask about His power?',
+        options: ['Is anything too expensive?', 'Is anything too hard for the LORD?', 'Is anything too far?', 'Is anything too late?'],
+        correctAnswer: 'Is anything too hard for the LORD?',
+        explanation: 'Genesis 18:14: "Is anything too hard for the LORD?"',
+        difficulty: 'easy'
       },
       {
         id: 'genesis18-q4',
-        question: 'How many righteous did Abraham first ask about?',
-        options: [
-          'Rich ten',
-          'Fifty',
-          'Strong twenty',
-          'Silent five'
-        ],
-        correctAnswer: 'Fifty',
-        explanation: 'Genesis 18:24 (ESV): "‘Suppose there are fifty righteous within the city. Will you then sweep away the place and not spare it for the fifty righteous who are in it?’" Mercy pleads.'
+        question: 'Which cities was the LORD going to examine for sin?',
+        options: ['Babylon and Nineveh', 'Sodom and Gomorrah', 'Jerusalem and Jericho', 'Egypt and Canaan'],
+        correctAnswer: 'Sodom and Gomorrah',
+        explanation: 'Genesis 18:20: The LORD spoke about Sodom and Gomorrah\'s sin.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis18-q5',
-        question: 'What was the lowest number Abraham negotiated?',
-        options: [
-          'Rich forty',
-          'Ten',
-          'Strong thirty',
-          'Silent fifteen'
-        ],
+        question: 'Did Abraham intercede for the cities?',
+        options: ['No', 'Yes, he bargained with God', 'He ignored it', 'He celebrated'],
+        correctAnswer: 'Yes, he bargained with God',
+        explanation: 'Genesis 18:23-32: Abraham negotiated with God about sparing the righteous.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis18-q6',
+        question: 'Where was Abraham sitting when the visitors appeared?',
+        options: ['In his tent', 'At the door of his tent', 'By a well', 'Under a tree'],
+        correctAnswer: 'At the door of his tent',
+        explanation: 'Genesis 18:1: Abraham sat at the tent door in the heat of the day.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis18-q7',
+        question: 'What food did Abraham prepare for the visitors?',
+        options: ['Fish and bread', 'Lamb only', 'Calf, bread, curds and milk', 'Vegetables'],
+        correctAnswer: 'Calf, bread, curds and milk',
+        explanation: 'Genesis 18:6-8: Abraham prepared a generous meal including a tender calf.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis18-q8',
+        question: 'What was the starting number Abraham asked about for sparing Sodom?',
+        options: ['Ten', 'Thirty', 'Fifty', 'One hundred'],
+        correctAnswer: 'Fifty',
+        explanation: 'Genesis 18:24: Abraham started by asking about fifty righteous people.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis18-q9',
+        question: 'What was the final number Abraham negotiated down to?',
+        options: ['Five', 'Ten', 'Twenty', 'Thirty'],
         correctAnswer: 'Ten',
-        explanation: 'Genesis 18:32 (ESV): "Then he said, ‘Oh let not the Lord be angry, and I will speak again but this once. Suppose ten are found there.’ He answered, ‘For the sake of ten I will not destroy it.’" Intercession limits.'
+        explanation: 'Genesis 18:32: Abraham stopped at ten righteous people.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis18-q10',
+        question: 'Did Sarah deny laughing?',
+        options: ['No, she admitted it', 'Yes, because she was afraid', 'She stayed silent', 'She laughed again'],
+        correctAnswer: 'Yes, because she was afraid',
+        explanation: 'Genesis 18:15: Sarah denied it because she was afraid.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis18-q11',
+        question: 'Why did the LORD say He would not hide His plans from Abraham?',
+        options: ['Abraham was rich', 'Abraham would become a great nation and all nations blessed through him', 'Abraham was old', 'Abraham was a prophet'],
+        correctAnswer: 'Abraham would become a great nation and all nations blessed through him',
+        explanation: 'Genesis 18:17-18: God shared His plans because of His covenant with Abraham.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis18-q12',
+        question: 'What phrase describes the sin of Sodom in this chapter?',
+        options: ['Minor offense', 'Very grave', 'Small matter', 'Forgivable'],
+        correctAnswer: 'Very grave',
+        explanation: 'Genesis 18:20: "their sin is very grave."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis18-q13',
+        question: 'Where were the oaks where Abraham was camping?',
+        options: ['Bethel', 'Mamre', 'Beersheba', 'Hebron'],
+        correctAnswer: 'Mamre',
+        explanation: 'Genesis 18:1: The LORD appeared at the oaks of Mamre.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis18-q14',
+        question: 'What did Abraham call himself when speaking to the LORD?',
+        options: ['A servant', 'Dust and ashes', 'A sinner', 'A friend'],
+        correctAnswer: 'Dust and ashes',
+        explanation: 'Genesis 18:27: "I who am but dust and ashes."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis18-q15',
+        question: 'When would the LORD return for Sarah to have her son?',
+        options: ['In a month', 'About this time next year', 'In three years', 'Immediately'],
+        correctAnswer: 'About this time next year',
+        explanation: 'Genesis 18:14: "At the appointed time I will return to you, about this time next year."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 18:14',
-    key_verse_text: "‘Is anything too hard for the Lord? At the appointed time I will return to you, about this time next year, and Sarah shall have a son.’",
+    key_verse_text: "'Is anything too hard for the Lord? At the appointed time I will return to you, about this time next year, and Sarah shall have a son.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -2393,65 +2456,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 19,
     title: 'Destruction of Sodom and Gomorrah',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis19-q1',
         question: 'Who visited Lot in Sodom?',
-        options: [
-          'Rich merchants',
-          'Two angels',
-          'Strong kings',
-          'Silent prophets'
-        ],
+        options: ['Abraham', 'Two angels', 'Three men', 'Pharaoh'],
         correctAnswer: 'Two angels',
-        explanation: 'Genesis 19:1 (ESV): "The two angels came to Sodom in the evening, and Lot was sitting in the gate of Sodom. When Lot saw them, he rose to meet them and bowed himself with his face to the earth" Guests arrive.'
+        explanation: 'Genesis 19:1: The two angels came to Sodom in the evening.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis19-q2',
-        question: 'What did the men of Sodom demand?',
-        options: [
-          'Rich tribute',
-          'To know Lot’s guests',
-          'Strong protection',
-          'Silent departure'
-        ],
-        correctAnswer: 'To know Lot’s guests',
-        explanation: 'Genesis 19:5 (ESV): "And they called to Lot, ‘Where are the men who came to you tonight? Bring them out to us, that we may know them.’" Sin demands.'
+        question: 'How was Sodom destroyed?',
+        options: ['By a flood', 'By sulfur and fire', 'By an earthquake', 'By an army'],
+        correctAnswer: 'By sulfur and fire',
+        explanation: 'Genesis 19:24: The LORD rained sulfur and fire from heaven.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis19-q3',
-        question: 'How was Sodom destroyed?',
-        options: [
-          'Rich flood',
-          'Sulfur and fire',
-          'Strong earthquake',
-          'Silent plague'
-        ],
-        correctAnswer: 'Sulfur and fire',
-        explanation: 'Genesis 19:24 (ESV): "Then the Lord rained on Sodom and Gomorrah sulfur and fire from the Lord out of heaven." Judgment falls.'
+        question: 'What happened to Lot\'s wife?',
+        options: ['She escaped safely', 'She became a pillar of salt', 'She went back to Sodom', 'She died in the fire'],
+        correctAnswer: 'She became a pillar of salt',
+        explanation: 'Genesis 19:26: Lot\'s wife looked back and became a pillar of salt.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis19-q4',
-        question: 'What happened to Lot’s wife?',
-        options: [
-          'Gained riches',
-          'Became a pillar of salt',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Became a pillar of salt',
-        explanation: 'Genesis 19:26 (ESV): "But Lot’s wife, behind him, looked back, and she became a pillar of salt." Disobedience hardens.'
+        question: 'Where did the angels tell Lot to flee?',
+        options: ['To Egypt', 'To the hills', 'To Hebron', 'To the Jordan'],
+        correctAnswer: 'To the hills',
+        explanation: 'Genesis 19:17: "Escape to the hills, lest you be swept away."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis19-q5',
-        question: 'Where did Lot’s daughters conceive sons?',
-        options: [
-          'Rich city',
-          'A cave',
-          'Strong fortress',
-          'Silent valley'
-        ],
-        correctAnswer: 'A cave',
-        explanation: 'Genesis 19:30 (ESV): "Now Lot went up out of Zoar and lived in a cave with his two daughters." Refuge hides.'
+        question: 'What small city did Lot ask to flee to instead of the hills?',
+        options: ['Beersheba', 'Zoar', 'Bethel', 'Hebron'],
+        correctAnswer: 'Zoar',
+        explanation: 'Genesis 19:20-22: Lot asked to flee to the small city of Zoar.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis19-q6',
+        question: 'What did the men of Sodom demand from Lot?',
+        options: ['Money', 'Food', 'To bring out his guests', 'His daughters'],
+        correctAnswer: 'To bring out his guests',
+        explanation: 'Genesis 19:5: They demanded Lot bring out the visitors.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis19-q7',
+        question: 'What did the angels do to the men of Sodom?',
+        options: ['Killed them', 'Struck them with blindness', 'Sent them away', 'Ignored them'],
+        correctAnswer: 'Struck them with blindness',
+        explanation: 'Genesis 19:11: The angels struck the men with blindness.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis19-q8',
+        question: 'How did Lot\'s sons-in-law react to his warning?',
+        options: ['They fled immediately', 'They thought he was joking', 'They prayed', 'They fought back'],
+        correctAnswer: 'They thought he was joking',
+        explanation: 'Genesis 19:14: Lot seemed to be jesting to his sons-in-law.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis19-q9',
+        question: 'Why did Lot hesitate to leave?',
+        options: ['He was sick', 'He wanted to save his wealth', 'He lingered', 'He was afraid'],
+        correctAnswer: 'He lingered',
+        explanation: 'Genesis 19:16: "But he lingered." The angels had to seize his hand.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis19-q10',
+        question: 'Where did Lot end up living after leaving Zoar?',
+        options: ['In a city', 'In a cave', 'In Hebron', 'In Egypt'],
+        correctAnswer: 'In a cave',
+        explanation: 'Genesis 19:30: Lot lived in a cave with his two daughters.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis19-q11',
+        question: 'Who were the ancestors of the Moabites and Ammonites?',
+        options: ['Abraham\'s sons', 'Lot\'s sons by his daughters', 'Esau\'s sons', 'Ishmael\'s sons'],
+        correctAnswer: 'Lot\'s sons by his daughters',
+        explanation: 'Genesis 19:37-38: Moab and Ben-ammi, sons of Lot, fathered these nations.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis19-q12',
+        question: 'What time of day did the angels urge Lot to leave?',
+        options: ['Midnight', 'When dawn arose', 'At noon', 'In the evening'],
+        correctAnswer: 'When dawn arose',
+        explanation: 'Genesis 19:15: "As morning dawned, the angels urged Lot."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis19-q13',
+        question: 'Why did God spare Zoar?',
+        options: ['It was righteous', 'For Lot\'s sake when he asked', 'It was too small to matter', 'Abraham prayed for it'],
+        correctAnswer: 'For Lot\'s sake when he asked',
+        explanation: 'Genesis 19:21: God agreed to spare Zoar at Lot\'s request.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis19-q14',
+        question: 'What is specifically mentioned about the judgment covering Sodom and Gomorrah?',
+        options: ['Just the cities', 'The cities, inhabitants, and valley vegetation', 'Only the wicked', 'Only Lot\'s house'],
+        correctAnswer: 'The cities, inhabitants, and valley vegetation',
+        explanation: 'Genesis 19:25: God overthrew the cities, inhabitants, and what grew on the ground.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis19-q15',
+        question: 'Why did God remember Abraham when destroying Sodom?',
+        options: ['Abraham lived nearby', 'God sent Lot out of the destruction because of Abraham', 'Abraham was watching', 'Abraham owned land there'],
+        correctAnswer: 'God sent Lot out of the destruction because of Abraham',
+        explanation: 'Genesis 19:29: God remembered Abraham and sent Lot out of the overthrow.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 19:24',
