@@ -32,19 +32,21 @@ export interface BibleReadingProgress {
   };
 }
 
+export interface ChapterQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correctAnswer: string;
+  explanation: string;
+  difficulty?: 'easy' | 'medium' | 'hard';
+}
+
 export interface ChapterChallenge {
   id: string;
   bookId: string;
   chapter: number;
   title: string;
-  questions: {
-    id: string;
-    question: string;
-    options: string[];
-    correctAnswer: string;
-    explanation: string;
-    difficulty?: 'easy' | 'medium' | 'hard';
-  }[];
+  questions: ChapterQuestion[];
   key_verse: string;
   key_verse_text: string;
   memory_challenge: boolean;

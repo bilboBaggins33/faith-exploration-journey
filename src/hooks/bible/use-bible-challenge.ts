@@ -1,13 +1,15 @@
 
 import { useState, useEffect, useRef } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
-import { ChapterChallenge } from '@/data/bible/types';
+import { ChapterChallenge, ChapterQuestion } from '@/data/bible/types';
 import { BibleProgressData } from '@/hooks/bible/bible-progress-types';
+
+export type DifficultyLevel = 'easy' | 'medium' | 'hard';
 
 export interface BibleChallengeState {
   challenge: ChapterChallenge | null;
@@ -20,14 +22,21 @@ export interface BibleChallengeState {
   error: string | null;
   completed: boolean;
   answeredQuestions: Record<number, { isCorrect: boolean; hasBeenScored: boolean }>;
+  difficulty: DifficultyLevel;
+  filteredQuestions: ChapterQuestion[];
 }
 
 export function useBibleChallenge(bookId: string, chapter: string) {
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { updateProgress } = useBibleProgress();
+  const { updateProgress, getChapterStatus } = useBibleProgress();
   const progressSavedRef = useRef(false);
+
+  // Get difficulty from URL or default to 'easy'
+  const urlDifficulty = searchParams.get('difficulty') as DifficultyLevel | null;
+  const initialDifficulty: DifficultyLevel = urlDifficulty || 'easy';
 
   const [state, setState] = useState<BibleChallengeState>({
     challenge: null,
@@ -39,10 +48,36 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     loading: true,
     error: null,
     completed: false,
-    answeredQuestions: {}
+    answeredQuestions: {},
+    difficulty: initialDifficulty,
+    filteredQuestions: []
   });
 
   const isFirstChapter = parseInt(chapter, 10) === 1;
+
+  // Filter questions by difficulty
+  const filterQuestionsByDifficulty = (questions: ChapterQuestion[], difficulty: DifficultyLevel): ChapterQuestion[] => {
+    const filtered = questions.filter(q => q.difficulty === difficulty);
+    // If no questions at this difficulty, return all questions with easy as fallback
+    if (filtered.length === 0) {
+      return questions.filter(q => q.difficulty === 'easy');
+    }
+    // Take only 5 questions for the challenge
+    return filtered.slice(0, 5);
+  };
+
+  // Check if medium difficulty is unlocked (easy completed)
+  const isMediumUnlocked = (): boolean => {
+    if (!user) return false;
+    const { isCompleted, score } = getChapterStatus(bookId, parseInt(chapter, 10));
+    return isCompleted && score >= 3; // Need at least 3/5 to unlock medium
+  };
+
+  // Check if hard difficulty is unlocked (medium completed)
+  const isHardUnlocked = (): boolean => {
+    // For now, hard is not implemented - would need to track medium completion separately
+    return false;
+  };
 
   useEffect(() => {
     if (!bookId || !chapter) {
@@ -70,14 +105,28 @@ export function useBibleChallenge(bookId: string, chapter: string) {
           return;
         }
 
-        setState(prev => ({ ...prev, challenge: loadedChallenge, loading: false }));
+        // Filter questions by current difficulty
+        const filteredQuestions = filterQuestionsByDifficulty(loadedChallenge.questions, state.difficulty);
+
+        // Create a modified challenge with filtered questions
+        const filteredChallenge = {
+          ...loadedChallenge,
+          questions: filteredQuestions
+        };
+
+        setState(prev => ({
+          ...prev,
+          challenge: filteredChallenge,
+          filteredQuestions,
+          loading: false
+        }));
       } catch (err: any) {
         setState(prev => ({ ...prev, error: err.message || "Failed to load challenge.", loading: false }));
       }
     };
 
     loadChallenge();
-  }, [bookId, chapter]);
+  }, [bookId, chapter, state.difficulty]);
 
   useEffect(() => {
     if (state.challenge && state.completed && user && !progressSavedRef.current) {
@@ -92,7 +141,8 @@ export function useBibleChallenge(bookId: string, chapter: string) {
               book_id: bookId,
               chapter: chapterNumber,
               completed_at: new Date().toISOString(),
-              score: state.score
+              score: state.score,
+              difficulty: state.difficulty
             };
 
             const progressData: Partial<BibleProgressData> = {
@@ -225,15 +275,37 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     navigate(`/bible/${bookId}`);
   };
 
+  const handleChangeDifficulty = (newDifficulty: DifficultyLevel) => {
+    // Only allow changing to medium if unlocked
+    if (newDifficulty === 'medium' && !isMediumUnlocked()) return;
+    if (newDifficulty === 'hard' && !isHardUnlocked()) return;
+
+    progressSavedRef.current = false;
+    setState(prev => ({
+      ...prev,
+      difficulty: newDifficulty,
+      currentQuestion: 0,
+      userAnswers: {},
+      score: 0,
+      completed: false,
+      showExplanation: false,
+      isCorrect: null,
+      answeredQuestions: {}
+    }));
+  };
+
   return {
     state,
     isFirstChapter,
+    isMediumUnlocked: isMediumUnlocked(),
+    isHardUnlocked: isHardUnlocked(),
     handleSelectAnswer,
     handleCheckAnswer,
     handleNextQuestion,
     handlePreviousQuestion,
     handleJumpToQuestion,
     handleRetry,
-    handleGoBack
+    handleGoBack,
+    handleChangeDifficulty
   };
 }

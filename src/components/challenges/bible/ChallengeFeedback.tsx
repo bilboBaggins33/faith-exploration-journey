@@ -44,8 +44,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     isCorrect,
     score,
     completed,
-    answeredQuestions
-  } = state;
+    answeredQuestions,
+    difficulty
+  } = state as typeof state & { difficulty?: string };
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const fromDaily = searchParams.get('from') === 'daily';
@@ -192,9 +193,19 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                   >
                     <span className="mr-1">←</span> Back
                   </button>
-                  <span className="text-white/90 text-sm font-medium">
-                    {bookName} {chapter}
-                  </span>
+                  <div className="flex items-center gap-2">
+                    <span className="text-white/90 text-sm font-medium">
+                      {bookName} {chapter}
+                    </span>
+                    {difficulty && (
+                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${difficulty === 'easy' ? 'bg-green-500/30 text-green-300 border border-green-400/40' :
+                          difficulty === 'medium' ? 'bg-amber-500/30 text-amber-300 border border-amber-400/40' :
+                            'bg-red-500/30 text-red-300 border border-red-400/40'
+                        }`}>
+                        {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Logo overlapping the top edge */}
