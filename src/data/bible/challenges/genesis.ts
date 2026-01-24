@@ -2726,67 +2726,130 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-21',
     bookId: 'genesis',
     chapter: 21,
-    title: 'Birth of Isaac and Hagar’s Departure',
+    title: 'Birth of Isaac and Hagar\'s Departure',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis21-q1',
-        question: 'What was the name of Abraham’s son by Sarah?',
-        options: [
-          'Rich Ishmael',
-          'Isaac',
-          'Strong Lot',
-          'Silent Jacob'
-        ],
+        question: 'What was Abraham and Sarah\'s son named?',
+        options: ['Ishmael', 'Isaac', 'Jacob', 'Esau'],
         correctAnswer: 'Isaac',
-        explanation: 'Genesis 21:3 (ESV): "Abraham called the name of his son who was born to him, whom Sarah bore him, Isaac." Promise fulfills.'
+        explanation: 'Genesis 21:3: Abraham named his son Isaac.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis21-q2',
-        question: 'What did Sarah ask Abraham to do with Hagar and Ishmael?',
-        options: [
-          'Give them riches',
-          'Cast them out',
-          'Make them strong',
-          'Keep them silent'
-        ],
-        correctAnswer: 'Cast them out',
-        explanation: 'Genesis 21:10 (ESV): "So she said to Abraham, ‘Cast out this slave woman with her son, for the son of this slave woman shall not be heir with my son Isaac.’" Jealousy demands.'
+        question: 'Why did Sarah laugh?',
+        options: ['She was sad', 'God brought her laughter through Isaac', 'She was angry', 'She was afraid'],
+        correctAnswer: 'God brought her laughter through Isaac',
+        explanation: 'Genesis 21:6: "God has made laughter for me."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis21-q3',
         question: 'What did God provide for Hagar in the wilderness?',
-        options: [
-          'Rich treasures',
-          'A well of water',
-          'Strong shelter',
-          'Silent refuge'
-        ],
+        options: ['Food', 'A well of water', 'A tent', 'An angel guide'],
         correctAnswer: 'A well of water',
-        explanation: 'Genesis 21:19 (ESV): "Then God opened her eyes, and she saw a well of water. And she went and filled the skin with water and gave the boy a drink." Mercy sustains.'
+        explanation: 'Genesis 21:19: God opened her eyes and she saw a well of water.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis21-q4',
-        question: 'Who made a treaty with Abraham?',
-        options: [
-          'Rich Pharaoh',
-          'Abimelech',
-          'Strong Lot',
-          'Silent Ishmael'
-        ],
+        question: 'Who made a covenant with Abraham at Beersheba?',
+        options: ['Pharaoh', 'Abimelech', 'Lot', 'Melchizedek'],
         correctAnswer: 'Abimelech',
-        explanation: 'Genesis 21:27 (ESV): "So Abraham took sheep and oxen and gave them to Abimelech, and the two men made a covenant." Peace binds.'
+        explanation: 'Genesis 21:27: Abraham and Abimelech made a covenant.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis21-q5',
+        question: 'What does "Isaac" mean?',
+        options: ['Strength', 'He laughs', 'Promise', 'Blessing'],
+        correctAnswer: 'He laughs',
+        explanation: 'The name Isaac comes from the Hebrew word for laughter.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis21-q6',
+        question: 'How old was Abraham when Isaac was born?',
+        options: ['75 years', '86 years', '99 years', '100 years'],
+        correctAnswer: '100 years',
+        explanation: 'Genesis 21:5: Abraham was 100 years old when Isaac was born.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis21-q7',
+        question: 'What did Sarah demand Abraham do with Hagar and Ishmael?',
+        options: ['Give them wealth', 'Cast them out', 'Give them land', 'Make Ishmael heir'],
+        correctAnswer: 'Cast them out',
+        explanation: 'Genesis 21:10: Sarah said to cast out the slave woman and her son.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis21-q8',
+        question: 'How did Abraham feel about sending Ishmael away?',
+        options: ['Happy', 'Very displeased', 'Indifferent', 'Relieved'],
+        correctAnswer: 'Very displeased',
+        explanation: 'Genesis 21:11: The thing was very displeasing to Abraham.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis21-q9',
         question: 'What did Abraham plant at Beersheba?',
-        options: [
-          'Rich vines',
-          'A tamarisk tree',
-          'Strong oaks',
-          'Silent figs'
-        ],
+        options: ['An olive tree', 'A tamarisk tree', 'A vineyard', 'A fig tree'],
         correctAnswer: 'A tamarisk tree',
-        explanation: 'Genesis 21:33 (ESV): "Abraham planted a tamarisk tree in Beersheba and called there on the name of the Lord, the Everlasting God." Worship marks.'
+        explanation: 'Genesis 21:33: Abraham planted a tamarisk tree in Beersheba.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis21-q10',
+        question: 'What does Beersheba mean?',
+        options: ['Well of seven or well of oath', 'Place of blessing', 'Land of promise', 'God\'s dwelling'],
+        correctAnswer: 'Well of seven or well of oath',
+        explanation: 'Genesis 21:31: It was named for the oath between Abraham and Abimelech.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis21-q11',
+        question: 'What did God promise about Ishmael?',
+        options: ['He would perish', 'He would become a nation', 'He would return', 'He would be forgotten'],
+        correctAnswer: 'He would become a nation',
+        explanation: 'Genesis 21:13: "I will make a nation of him also, because he is your offspring."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis21-q12',
+        question: 'How many lambs did Abraham set apart for the covenant?',
+        options: ['Three', 'Seven', 'Ten', 'Twelve'],
+        correctAnswer: 'Seven',
+        explanation: 'Genesis 21:28-30: Abraham set seven ewe lambs apart.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis21-q13',
+        question: 'Who was Phicol?',
+        options: ['A prophet', 'The commander of Abimelech\'s army', 'A priest', 'Abraham\'s servant'],
+        correctAnswer: 'The commander of Abimelech\'s army',
+        explanation: 'Genesis 21:22: Phicol was the commander of Abimelech\'s army.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis21-q14',
+        question: 'By what name did Abraham call upon the LORD at Beersheba?',
+        options: ['El Shaddai', 'El Olam (Everlasting God)', 'El Roi', 'Yahweh'],
+        correctAnswer: 'El Olam (Everlasting God)',
+        explanation: 'Genesis 21:33: Abraham called on the name of the LORD, the Everlasting God.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis21-q15',
+        question: 'Where did Ishmael dwell after leaving Abraham?',
+        options: ['Canaan', 'The wilderness of Paran', 'Egypt', 'Mesopotamia'],
+        correctAnswer: 'The wilderness of Paran',
+        explanation: 'Genesis 21:21: Ishmael lived in the wilderness of Paran.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 21:1',
@@ -2801,69 +2864,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 22,
     title: 'The Sacrifice of Isaac',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis22-q1',
-        question: 'What did God ask Abraham to sacrifice?',
-        options: [
-          'Rich herds',
-          'His son Isaac',
-          'Strong lambs',
-          'Silent offerings'
-        ],
+        question: 'What did God ask Abraham to offer as a sacrifice?',
+        options: ['A lamb', 'His son Isaac', 'A bull', 'Grain'],
         correctAnswer: 'His son Isaac',
-        explanation: 'Genesis 22:2 (ESV): "He said, ‘Take your son, your only son Isaac, whom you love, and go to the land of Moriah, and offer him there as a burnt offering on one of the mountains of which I shall tell you.’" Test commands.'
+        explanation: 'Genesis 22:2: God told Abraham to offer Isaac as a burnt offering.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis22-q2',
-        question: 'What did Abraham take to the mountain?',
-        options: [
-          'Rich gold',
-          'Wood, fire, and Isaac',
-          'Strong guards',
-          'Silent tools'
-        ],
-        correctAnswer: 'Wood, fire, and Isaac',
-        explanation: 'Genesis 22:6 (ESV): "And Abraham took the wood of the burnt offering and laid it on Isaac his son. And he took in his hand the fire and the knife. So they went both of them together." Obedience prepares.'
+        question: 'What did God provide instead of Isaac?',
+        options: ['A lamb', 'A ram', 'A dove', 'A goat'],
+        correctAnswer: 'A ram',
+        explanation: 'Genesis 22:13: Abraham saw a ram caught in a thicket.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis22-q3',
-        question: 'What did Isaac ask about the offering?',
-        options: [
-          'Where’s the riches?',
-          'Where’s the lamb?',
-          'Where’s the strength?',
-          'Where’s the silence?'
-        ],
-        correctAnswer: 'Where’s the lamb?',
-        explanation: 'Genesis 22:7 (ESV): "And Isaac said to his father Abraham, ‘My father!’ And he said, ‘Here I am, my son.’ He said, ‘Behold, the fire and the wood, but where is the lamb for a burnt offering?’" Question trusts.'
+        question: 'Did Abraham pass God\'s test?',
+        options: ['No', 'Yes', 'Partially', 'He failed'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 22:12: "Now I know that you fear God."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis22-q4',
-        question: 'What did God provide instead of Isaac?',
-        options: [
-          'Rich treasure',
-          'A ram caught in a thicket',
-          'Strong bull',
-          'Silent dove'
-        ],
-        correctAnswer: 'A ram caught in a thicket',
-        explanation: 'Genesis 22:13 (ESV): "And Abraham lifted up his eyes and looked, and behold, behind him was a ram, caught in a thicket by his horns. And Abraham went and took the ram and offered it up as a burnt offering instead of his son." Provision spares.'
+        question: 'Who stopped Abraham from sacrificing Isaac?',
+        options: ['Sarah', 'The angel of the LORD', 'Isaac', 'A prophet'],
+        correctAnswer: 'The angel of the LORD',
+        explanation: 'Genesis 22:11: The angel of the LORD called to him from heaven.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis22-q5',
-        question: 'What did God reaffirm to Abraham?',
-        options: [
-          'Rich wealth',
-          'Blessing and many offspring',
-          'Strong power',
-          'Silent favor'
-        ],
-        correctAnswer: 'Blessing and many offspring',
-        explanation: 'Genesis 22:17 (ESV): "‘I will surely bless you, and I will surely multiply your offspring as the stars of heaven and as the sand that is on the seashore. And your offspring shall possess the gate of his enemies,’" Covenant renews.'
+        question: 'What did Abraham name the place where God provided?',
+        options: ['Bethel', 'The LORD Will Provide', 'Beersheba', 'Moriah'],
+        correctAnswer: 'The LORD Will Provide',
+        explanation: 'Genesis 22:14: Abraham called it "The LORD will provide."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis22-q6',
+        question: 'What question did Isaac ask his father on the way?',
+        options: ['Are we there yet?', 'Where is the lamb for the offering?', 'Why are we going?', 'Who will help us?'],
+        correctAnswer: 'Where is the lamb for the offering?',
+        explanation: 'Genesis 22:7: Isaac asked "where is the lamb for a burnt offering?"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis22-q7',
+        question: 'How did Abraham reply to Isaac\'s question about the lamb?',
+        options: ['We have no lamb', 'God will provide for himself the lamb', 'You are the lamb', 'We will find one'],
+        correctAnswer: 'God will provide for himself the lamb',
+        explanation: 'Genesis 22:8: "God will provide for himself the lamb."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis22-q8',
+        question: 'Where did God tell Abraham to go for the sacrifice?',
+        options: ['Mount Sinai', 'The land of Moriah', 'Beersheba', 'Bethel'],
+        correctAnswer: 'The land of Moriah',
+        explanation: 'Genesis 22:2: God directed Abraham to the land of Moriah.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis22-q9',
+        question: 'How many days did the journey to Moriah take?',
+        options: ['One day', 'Three days', 'Seven days', 'Ten days'],
+        correctAnswer: 'Three days',
+        explanation: 'Genesis 22:4: On the third day Abraham saw the place.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis22-q10',
+        question: 'What did Abraham tell his servants?',
+        options: ['Wait here', 'We will worship and return', 'Prepare a feast', 'Build an altar'],
+        correctAnswer: 'We will worship and return',
+        explanation: 'Genesis 22:5: "I and the boy will go... worship and come again to you."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis22-q11',
+        question: 'How was Isaac described in relation to Abraham?',
+        options: ['His firstborn', 'His only son whom he loved', 'His heir', 'His chosen one'],
+        correctAnswer: 'His only son whom he loved',
+        explanation: 'Genesis 22:2: "your son, your only son Isaac, whom you love."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis22-q12',
+        question: 'Where was the ram caught?',
+        options: ['In a pit', 'In a thicket by its horns', 'By a stream', 'On the altar'],
+        correctAnswer: 'In a thicket by its horns',
+        explanation: 'Genesis 22:13: "a ram, caught in a thicket by his horns."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis22-q13',
+        question: 'By what did God swear when blessing Abraham?',
+        options: ['By heaven', 'By Himself', 'By the covenant', 'By the altar'],
+        correctAnswer: 'By Himself',
+        explanation: 'Genesis 22:16: "By myself I have sworn, declares the LORD."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis22-q14',
+        question: 'To what two things did God compare Abraham\'s offspring?',
+        options: ['Trees and rivers', 'Stars and sand', 'Mountains and valleys', 'Clouds and rain'],
+        correctAnswer: 'Stars and sand',
+        explanation: 'Genesis 22:17: "as the stars of heaven and as the sand on the seashore."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis22-q15',
+        question: 'Why did God bless Abraham according to this chapter?',
+        options: ['His wealth', 'Because he obeyed God\'s voice', 'His wisdom', 'His age'],
+        correctAnswer: 'Because he obeyed God\'s voice',
+        explanation: 'Genesis 22:18: "because you have obeyed my voice."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 22:14',
-    key_verse_text: "So Abraham called the name of that place, ‘The Lord will provide’; as it is said to this day, ‘On the mount of the Lord it shall be provided.’",
+    key_verse_text: "So Abraham called the name of that place, 'The Lord will provide.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -2872,67 +2998,130 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-23',
     bookId: 'genesis',
     chapter: 23,
-    title: 'Sarah’s Death and Burial',
+    title: 'Sarah\'s Death and Burial',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis23-q1',
         question: 'How old was Sarah when she died?',
-        options: [
-          'Rich hundred years',
-          'One hundred twenty-seven years',
-          'Strong ninety years',
-          'Silent eighty years'
-        ],
-        correctAnswer: 'One hundred twenty-seven years',
-        explanation: 'Genesis 23:1 (ESV): "Sarah lived 127 years; these were the years of the life of Sarah." Age records.'
+        options: ['100 years', '127 years', '90 years', '110 years'],
+        correctAnswer: '127 years',
+        explanation: 'Genesis 23:1: Sarah lived 127 years.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis23-q2',
         question: 'Where did Sarah die?',
-        options: [
-          'Rich Egypt',
-          'Kiriath-arba (Hebron)',
-          'Strong Sodom',
-          'Silent Gerar'
-        ],
-        correctAnswer: 'Kiriath-arba (Hebron)',
-        explanation: 'Genesis 23:2 (ESV): "And Sarah died at Kiriath-arba (that is, Hebron) in the land of Canaan, and Abraham went in to mourn for Sarah and to weep for her." Place grieves.'
+        options: ['Beersheba', 'Hebron', 'Egypt', 'Bethel'],
+        correctAnswer: 'Hebron',
+        explanation: 'Genesis 23:2: Sarah died at Kiriath-arba (Hebron).',
+        difficulty: 'easy'
       },
       {
         id: 'genesis23-q3',
-        question: 'From whom did Abraham buy the burial site?',
-        options: [
-          'Rich Abimelech',
-          'Ephron the Hittite',
-          'Strong Lot',
-          'Silent Heth'
-        ],
-        correctAnswer: 'Ephron the Hittite',
-        explanation: 'Genesis 23:10 (ESV): "Now Ephron was sitting among the Hittites, and Ephron the Hittite answered Abraham in the hearing of the Hittites, of all who went in at the gate of his city," Deal negotiates.'
+        question: 'What did Abraham purchase from Ephron?',
+        options: ['A house', 'A field with a cave', 'Livestock', 'Gold'],
+        correctAnswer: 'A field with a cave',
+        explanation: 'Genesis 23:17-18: Abraham purchased the field and cave.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis23-q4',
-        question: 'What was the name of the burial site?',
-        options: [
-          'Rich Bethel',
-          'Cave of Machpelah',
-          'Strong Mamre',
-          'Silent Zoar'
-        ],
+        question: 'Where was Sarah buried?',
+        options: ['In a tomb', 'Cave of Machpelah', 'In the desert', 'At Beersheba'],
         correctAnswer: 'Cave of Machpelah',
-        explanation: 'Genesis 23:19 (ESV): "After this, Abraham buried Sarah his wife in the cave of the field of Machpelah east of Mamre (that is, Hebron) in the land of Canaan." Tomb rests.'
+        explanation: 'Genesis 23:19: Sarah was buried in the cave of Machpelah.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis23-q5',
-        question: 'How much did Abraham pay for the cave?',
-        options: [
-          'Rich gold',
-          'Four hundred shekels of silver',
-          'Strong bronze',
-          'Silent wealth'
-        ],
-        correctAnswer: 'Four hundred shekels of silver',
-        explanation: 'Genesis 23:16 (ESV): "Abraham listened to Ephron, and Abraham weighed out for Ephron the silver that he had named in the hearing of the Hittites, four hundred shekels of silver, according to the weights current among the merchants." Price settles.'
+        question: 'Did Abraham own the burial land?',
+        options: ['No, he borrowed it', 'Yes, he purchased it', 'It was given free', 'He found it abandoned'],
+        correctAnswer: 'Yes, he purchased it',
+        explanation: 'Genesis 23:20: The field and cave were made over to Abraham as property.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis23-q6',
+        question: 'Who did Abraham negotiate with for the burial site?',
+        options: ['Abimelech', 'Ephron the Hittite', 'The sons of Heth', 'Phicol'],
+        correctAnswer: 'Ephron the Hittite',
+        explanation: 'Genesis 23:10-16: Abraham negotiated with Ephron the Hittite.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis23-q7',
+        question: 'How much silver did Abraham pay for the field?',
+        options: ['100 shekels', '200 shekels', '400 shekels', '500 shekels'],
+        correctAnswer: '400 shekels',
+        explanation: 'Genesis 23:15-16: Abraham paid 400 shekels of silver.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis23-q8',
+        question: 'What did Abraham call himself when speaking to the Hittites?',
+        options: ['A prophet', 'A sojourner and foreigner', 'A wealthy man', 'A friend'],
+        correctAnswer: 'A sojourner and foreigner',
+        explanation: 'Genesis 23:4: "I am a sojourner and foreigner among you."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis23-q9',
+        question: 'Did Ephron initially offer to give the field for free?',
+        options: ['No', 'Yes', 'He demanded payment', 'He refused to sell'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 23:11: Ephron offered to give Abraham the field.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis23-q10',
+        question: 'What nationality were the people Abraham negotiated with?',
+        options: ['Egyptians', 'Hittites', 'Canaanites', 'Philistines'],
+        correctAnswer: 'Hittites',
+        explanation: 'Genesis 23:10: Ephron was among the Hittites.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis23-q11',
+        question: 'What was the other name for Hebron?',
+        options: ['Mamre', 'Kiriath-arba', 'Beersheba', 'Zoar'],
+        correctAnswer: 'Kiriath-arba',
+        explanation: 'Genesis 23:2: Kiriath-arba (that is, Hebron).',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis23-q12',
+        question: 'Where was the negotiation conducted?',
+        options: ['In Ephron\'s house', 'At the city gate', 'In the field', 'At the cave'],
+        correctAnswer: 'At the city gate',
+        explanation: 'Genesis 23:10: The transaction occurred at the gate in the hearing of all who entered.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis23-q13',
+        question: 'What trees were in the field?',
+        options: ['Olive trees', 'All the trees in the field', 'Oak trees', 'Fig trees'],
+        correctAnswer: 'All the trees in the field',
+        explanation: 'Genesis 23:17: All the trees in the field were included in the sale.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis23-q14',
+        question: 'What standard were the weights measured by?',
+        options: ['Egyptian standard', 'Current among the merchants', 'Temple standard', 'Royal standard'],
+        correctAnswer: 'Current among the merchants',
+        explanation: 'Genesis 23:16: "according to the weights current among the merchants."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis23-q15',
+        question: 'What was confirmed as Abraham\'s possession?',
+        options: ['Only the cave', 'The field, cave, and all trees', 'Just the burial site', 'The land around Hebron'],
+        correctAnswer: 'The field, cave, and all trees',
+        explanation: 'Genesis 23:17-18: The field, cave, and all trees were made over to Abraham.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 23:19',
@@ -2947,69 +3136,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 24,
     title: 'A Wife for Isaac',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis24-q1',
-        question: 'Who did Abraham send to find a wife for Isaac?',
-        options: [
-          'Rich steward',
-          'His chief servant',
-          'Strong Lot',
-          'Silent Eliezer'
-        ],
-        correctAnswer: 'His chief servant',
-        explanation: 'Genesis 24:2 (ESV): "And Abraham said to his servant, the oldest of his household, who had charge of all that he had, ‘Put your hand under my thigh,’" Mission entrusts.'
+        question: 'Who did Abraham\'s servant find for Isaac?',
+        options: ['Rachel', 'Rebekah', 'Leah', 'Sarah'],
+        correctAnswer: 'Rebekah',
+        explanation: 'Genesis 24:15: Rebekah came out to the well.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis24-q2',
-        question: 'Where was the servant sent to find a wife?',
-        options: [
-          'Rich Egypt',
-          'Mesopotamia, Nahor’s city',
-          'Strong Canaan',
-          'Silent Gerar'
-        ],
-        correctAnswer: 'Mesopotamia, Nahor’s city',
-        explanation: 'Genesis 24:10 (ESV): "Then the servant took ten of his master’s camels and departed, taking all sorts of choice gifts from his master; and he arose and went to Mesopotamia to the city of Nahor." Journey seeks.'
+        question: 'Where did the servant go to find a wife?',
+        options: ['Egypt', 'To Abraham\'s homeland', 'Canaan', 'Sodom'],
+        correctAnswer: 'To Abraham\'s homeland',
+        explanation: 'Genesis 24:4: Abraham sent his servant to his country and kindred.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis24-q3',
-        question: 'What sign did the servant ask God for?',
-        options: [
-          'Rich gifts',
-          'A woman offering water',
-          'Strong winds',
-          'Silent stars'
-        ],
-        correctAnswer: 'A woman offering water',
-        explanation: 'Genesis 24:14 (ESV): "‘Let the young woman to whom I shall say, “Please let down your jar that I may drink,” and who shall say, “Drink, and I will water your camels”—let her be the one whom you have appointed for your servant Isaac. By this I shall know that you have shown steadfast love to my master.’" Sign confirms.'
+        question: 'What sign did the servant ask for?',
+        options: ['A rainbow', 'A woman who would water his camels', 'A dove', 'Fire from heaven'],
+        correctAnswer: 'A woman who would water his camels',
+        explanation: 'Genesis 24:14: The servant prayed for God to show him the right woman through this sign.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis24-q4',
-        question: 'Who met the servant’s criteria?',
-        options: [
-          'Rich Sarah',
-          'Rebekah',
-          'Strong Rachel',
-          'Silent Dinah'
-        ],
-        correctAnswer: 'Rebekah',
-        explanation: 'Genesis 24:15-16 (ESV): "Before he had finished speaking, behold, Rebekah, who was born to Bethuel the son of Milcah, the wife of Nahor, Abraham’s brother, came out with her water jar on her shoulder." Providence answers.'
+        question: 'Did Rebekah agree to go with the servant?',
+        options: ['No', 'Yes', 'She hesitated', 'She refused'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 24:58: Rebekah said "I will go."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis24-q5',
-        question: 'What did Rebekah agree to do?',
-        options: [
-          'Seek riches',
-          'Go with the servant to marry Isaac',
-          'Stay strong',
-          'Remain silent'
-        ],
-        correctAnswer: 'Go with the servant to marry Isaac',
-        explanation: 'Genesis 24:58 (ESV): "And they called Rebekah and said to her, ‘Will you go with this man?’ She said, ‘I will go.’" Consent commits.'
+        question: 'Who was Rebekah\'s brother?',
+        options: ['Lot', 'Laban', 'Nahor', 'Esau'],
+        correctAnswer: 'Laban',
+        explanation: 'Genesis 24:29: Rebekah had a brother named Laban.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis24-q6',
+        question: 'How many camels did the servant take?',
+        options: ['Five', 'Ten', 'Twenty', 'Thirty'],
+        correctAnswer: 'Ten',
+        explanation: 'Genesis 24:10: The servant took ten camels.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis24-q7',
+        question: 'What did the servant give Rebekah after she watered the camels?',
+        options: ['Gold coins', 'A gold ring and bracelets', 'Clothing', 'Food'],
+        correctAnswer: 'A gold ring and bracelets',
+        explanation: 'Genesis 24:22: He gave her a gold ring and two gold bracelets.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis24-q8',
+        question: 'Where did Isaac first see Rebekah?',
+        options: ['At home', 'In the field', 'At a well', 'In the city'],
+        correctAnswer: 'In the field',
+        explanation: 'Genesis 24:63: Isaac went out to meditate in the field in the evening.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis24-q9',
+        question: 'Who was Rebekah\'s father?',
+        options: ['Nahor', 'Bethuel', 'Laban', 'Terah'],
+        correctAnswer: 'Bethuel',
+        explanation: 'Genesis 24:15: Rebekah was born to Bethuel.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis24-q10',
+        question: 'What did Rebekah do when she saw Isaac?',
+        options: ['Ran away', 'Got down from the camel and covered herself', 'Waved', 'Called to him'],
+        correctAnswer: 'Got down from the camel and covered herself',
+        explanation: 'Genesis 24:64-65: Rebekah dismounted and covered herself with her veil.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis24-q11',
+        question: 'What oath did Abraham make his servant swear?',
+        options: ['To return quickly', 'Not to take a wife for Isaac from the Canaanites', 'To bring gifts', 'To honor Isaac'],
+        correctAnswer: 'Not to take a wife for Isaac from the Canaanites',
+        explanation: 'Genesis 24:3: Abraham made him swear not to take a Canaanite wife for Isaac.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis24-q12',
+        question: 'Where did the servant make his camels kneel?',
+        options: ['In the city', 'At the city gate', 'By the well outside the city', 'In Bethuel\'s house'],
+        correctAnswer: 'By the well outside the city',
+        explanation: 'Genesis 24:11: He made the camels kneel down outside the city by the well.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis24-q13',
+        question: 'What did Rebekah\'s family initially want before she left?',
+        options: ['Her to stay forever', 'Ten days or so', 'A month', 'A year'],
+        correctAnswer: 'Ten days or so',
+        explanation: 'Genesis 24:55: Her family said "Let the young woman remain with us... at least ten days."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis24-q14',
+        question: 'What comforted Isaac after his mother\'s death?',
+        options: ['Prayer', 'His father', 'Taking Rebekah as his wife', 'Work'],
+        correctAnswer: 'Taking Rebekah as his wife',
+        explanation: 'Genesis 24:67: Isaac was comforted after his mother\'s death when he married Rebekah.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis24-q15',
+        question: 'How were Bethuel and Laban described in relation to Abraham?',
+        options: ['Enemies', 'Family of Abraham\'s brother', 'Friends', 'Servants'],
+        correctAnswer: 'Family of Abraham\'s brother',
+        explanation: 'Genesis 24:15: Bethuel was the son of Milcah, wife of Nahor, Abraham\'s brother.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 24:27',
-    key_verse_text: "and he said, ‘Blessed be the Lord, the God of my master Abraham, who has not forsaken his steadfast love and his faithfulness toward my master. As for me, the Lord has led me in the way to the house of my master’s kinsmen.’",
+    key_verse_text: "\"Blessed be the LORD, the God of my master Abraham, who has not forsaken his steadfast love and his faithfulness toward my master.\"",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3018,71 +3270,134 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-25',
     bookId: 'genesis',
     chapter: 25,
-    title: 'Abraham’s Death and Isaac’s Family',
+    title: 'Abraham\'s Death and Isaac\'s Family',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis25-q1',
-        question: 'Who was Abraham’s second wife?',
-        options: [
-          'Rich Hagar',
-          'Keturah',
-          'Strong Sarah',
-          'Silent Rebekah'
-        ],
-        correctAnswer: 'Keturah',
-        explanation: 'Genesis 25:1 (ESV): "Abraham took another wife, whose name was Keturah." Family extends.'
+        question: 'Who were Rebekah\'s twin sons?',
+        options: ['Cain and Abel', 'Esau and Jacob', 'Isaac and Ishmael', 'Joseph and Benjamin'],
+        correctAnswer: 'Esau and Jacob',
+        explanation: 'Genesis 25:24-26: Rebekah gave birth to twins, Esau and Jacob.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis25-q2',
-        question: 'Who inherited all Abraham owned?',
-        options: [
-          'Rich Ishmael',
-          'Isaac',
-          'Strong Midian',
-          'Silent Lot'
-        ],
-        correctAnswer: 'Isaac',
-        explanation: 'Genesis 25:5 (ESV): "Abraham gave all he had to Isaac." Heir receives.'
+        question: 'What did Esau sell to Jacob?',
+        options: ['His land', 'His birthright', 'His livestock', 'His tent'],
+        correctAnswer: 'His birthright',
+        explanation: 'Genesis 25:33: Esau sold his birthright to Jacob.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis25-q3',
         question: 'How old was Abraham when he died?',
-        options: [
-          'Rich hundred years',
-          'One hundred seventy-five years',
-          'Strong ninety years',
-          'Silent eighty years'
-        ],
-        correctAnswer: 'One hundred seventy-five years',
-        explanation: 'Genesis 25:7 (ESV): "These are the days of the years of Abraham’s life, 175 years." Life ends.'
+        options: ['100 years', '127 years', '175 years', '200 years'],
+        correctAnswer: '175 years',
+        explanation: 'Genesis 25:7: Abraham lived 175 years.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis25-q4',
-        question: 'Who were Rebekah’s twin sons?',
-        options: [
-          'Rich Ishmael and Isaac',
-          'Esau and Jacob',
-          'Strong Midian and Zimran',
-          'Silent Joseph and Benjamin'
-        ],
-        correctAnswer: 'Esau and Jacob',
-        explanation: 'Genesis 25:24-26 (ESV): "When her days to give birth were completed, behold, there were twins in her womb. The first came out red, all his body like a hairy cloak, so they called his name Esau. Afterward his brother came out with his hand holding Esau’s heel, so his name was called Jacob." Birth contends.'
+        question: 'Who inherited everything Abraham had?',
+        options: ['Ishmael', 'Isaac', 'Keturah\'s sons', 'All sons equally'],
+        correctAnswer: 'Isaac',
+        explanation: 'Genesis 25:5: Abraham gave all he had to Isaac.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis25-q5',
-        question: 'What did Esau sell to Jacob?',
-        options: [
-          'Rich lands',
-          'His birthright',
-          'Strong herds',
-          'Silent rights'
-        ],
-        correctAnswer: 'His birthright',
-        explanation: 'Genesis 25:33 (ESV): "Jacob said, ‘Swear to me now.’ So he swore to him and sold his birthright to Jacob." Trade shifts.'
+        question: 'Where was Abraham buried?',
+        options: ['Beersheba', 'Cave of Machpelah', 'Hebron city', 'Egypt'],
+        correctAnswer: 'Cave of Machpelah',
+        explanation: 'Genesis 25:9: Isaac and Ishmael buried Abraham in the cave of Machpelah.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis25-q6',
+        question: 'Who was Abraham\'s wife after Sarah died?',
+        options: ['Hagar', 'Keturah', 'Rebekah', 'Leah'],
+        correctAnswer: 'Keturah',
+        explanation: 'Genesis 25:1: Abraham took another wife named Keturah.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis25-q7',
+        question: 'What did Esau trade his birthright for?',
+        options: ['Gold', 'Bread and lentil stew', 'Livestock', 'Land'],
+        correctAnswer: 'Bread and lentil stew',
+        explanation: 'Genesis 25:34: Jacob gave Esau bread and lentil stew for his birthright.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis25-q8',
+        question: 'Which twin was born first?',
+        options: ['Jacob', 'Esau', 'They were born simultaneously', 'Not stated'],
+        correctAnswer: 'Esau',
+        explanation: 'Genesis 25:25: The first came out red and hairy, and they named him Esau.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis25-q9',
+        question: 'How old was Isaac when the twins were born?',
+        options: ['40 years', '60 years', '100 years', '75 years'],
+        correctAnswer: '60 years',
+        explanation: 'Genesis 25:26: Isaac was 60 years old when Rebekah bore them.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis25-q10',
+        question: 'Why did Rebekah struggle during pregnancy?',
+        options: ['She was ill', 'The children struggled within her', 'She was afraid', 'She was old'],
+        correctAnswer: 'The children struggled within her',
+        explanation: 'Genesis 25:22: The children struggled together within her.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis25-q11',
+        question: 'What did God tell Rebekah about her twins?',
+        options: ['They would be friends', 'Two nations, the older will serve the younger', 'They would share equally', 'They would both be blessed'],
+        correctAnswer: 'Two nations, the older will serve the younger',
+        explanation: 'Genesis 25:23: "the older shall serve the younger."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis25-q12',
+        question: 'What did Jacob mean in Hebrew?',
+        options: ['Blessed one', 'He grasps the heel / Supplanter', 'Red one', 'Hunter'],
+        correctAnswer: 'He grasps the heel / Supplanter',
+        explanation: 'Genesis 25:26: Jacob\'s name relates to grasping Esau\'s heel at birth.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis25-q13',
+        question: 'What did Esau become?',
+        options: ['A farmer', 'A skillful hunter', 'A merchant', 'A priest'],
+        correctAnswer: 'A skillful hunter',
+        explanation: 'Genesis 25:27: Esau was a skillful hunter, a man of the field.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis25-q14',
+        question: 'Who buried Abraham?',
+        options: ['Isaac only', 'Isaac and Ishmael together', 'Ishmael only', 'His servants'],
+        correctAnswer: 'Isaac and Ishmael together',
+        explanation: 'Genesis 25:9: Isaac and Ishmael his sons buried him.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis25-q15',
+        question: 'How many sons did Ishmael have?',
+        options: ['Seven', 'Ten', 'Twelve', 'Fifteen'],
+        correctAnswer: 'Twelve',
+        explanation: 'Genesis 25:16: These are the twelve princes according to their tribes.',
+        difficulty: 'hard'
       }
     ],
-    key_verse: 'Genesis 25:33',
-    key_verse_text: "Jacob said, ‘Swear to me now.’ So he swore to him and sold his birthright to Jacob.",
+    key_verse: 'Genesis 25:23',
+    key_verse_text: "\"Two nations are in your womb, and two peoples from within you shall be divided; the one shall be stronger than the other, the older shall serve the younger.\"",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3093,69 +3408,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 26,
     title: 'Isaac and Abimelech',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis26-q1',
-        question: 'Where did Isaac go during a famine?',
-        options: [
-          'Rich Egypt',
-          'Gerar, to Abimelech',
-          'Strong Haran',
-          'Silent Canaan'
-        ],
-        correctAnswer: 'Gerar, to Abimelech',
-        explanation: 'Genesis 26:1 (ESV): "Now there was a famine in the land, besides the former famine that was in the days of Abraham. And Isaac went to Gerar to Abimelech king of the Philistines." Need journeys.'
+        question: 'Where did Isaac go during the famine?',
+        options: ['Egypt', 'Gerar', 'Hebron', 'Beersheba'],
+        correctAnswer: 'Gerar',
+        explanation: 'Genesis 26:1: Isaac went to Gerar to Abimelech king of the Philistines.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis26-q2',
         question: 'What did Isaac say about Rebekah?',
-        options: [
-          'She’s rich',
-          'She’s my sister',
-          'She’s strong',
-          'She’s silent'
-        ],
-        correctAnswer: 'She’s my sister',
-        explanation: 'Genesis 26:7 (ESV): "When the men of the place asked about his wife, he said, ‘She is my sister,’ for he feared to say, ‘My wife,’ thinking, ‘lest the men of the place should kill me because of Rebekah,’ because she was attractive in appearance." Fear deceives.'
+        options: ['She is my wife', 'She is my sister', 'She is my servant', 'She is my daughter'],
+        correctAnswer: 'She is my sister',
+        explanation: 'Genesis 26:7: Isaac said Rebekah was his sister.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis26-q3',
-        question: 'What did God reaffirm to Isaac?',
-        options: [
-          'Rich wealth',
-          'Land and offspring',
-          'Strong power',
-          'Silent favor'
-        ],
-        correctAnswer: 'Land and offspring',
-        explanation: 'Genesis 26:3-4 (ESV): "‘Sojourn in this land, and I will be with you and will bless you, for to you and to your offspring I will give all these lands, and I will establish the oath that I swore to Abraham your father. I will multiply your offspring as the stars of heaven and will give to your offspring all these lands.’" Covenant continues.'
+        question: 'Did God appear to Isaac?',
+        options: ['No', 'Yes', 'Only in dreams', 'Through prophets'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 26:2: The LORD appeared to Isaac.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis26-q4',
-        question: 'Why did Abimelech send Isaac away?',
-        options: [
-          'Isaac’s riches',
-          'Isaac’s great might',
-          'Isaac’s strong army',
-          'Isaac’s silent ways'
-        ],
-        correctAnswer: 'Isaac’s great might',
-        explanation: 'Genesis 26:16 (ESV): "And Abimelech said to Isaac, ‘Go away from us, for you are much mightier than we.’" Prosperity threatens.'
+        question: 'What did Isaac do that made him wealthy?',
+        options: ['Trading', 'Sowed and reaped', 'Inherited only', 'Found treasure'],
+        correctAnswer: 'Sowed and reaped',
+        explanation: 'Genesis 26:12: Isaac sowed in the land and reaped a hundredfold.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis26-q5',
+        question: 'Did Isaac make peace with Abimelech?',
+        options: ['No', 'Yes', 'They went to war', 'They avoided each other'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 26:28-31: They made a covenant of peace.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis26-q6',
+        question: 'Why did the Philistines stop up Isaac\'s wells?',
+        options: ['To steal water', 'Out of envy', 'To punish Isaac', 'By accident'],
+        correctAnswer: 'Out of envy',
+        explanation: 'Genesis 26:14-15: The Philistines envied Isaac and stopped up the wells.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis26-q7',
+        question: 'What did Isaac name the well where there was no quarreling?',
+        options: ['Esek', 'Sitnah', 'Rehoboth', 'Beersheba'],
+        correctAnswer: 'Rehoboth',
+        explanation: 'Genesis 26:22: Isaac named it Rehoboth, saying "the LORD has made room for us."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis26-q8',
+        question: 'How did Abimelech discover Rebekah was Isaac\'s wife?',
+        options: ['Isaac confessed', 'He saw Isaac laughing with her', 'Rebekah told him', 'An angel revealed it'],
+        correctAnswer: 'He saw Isaac laughing with her',
+        explanation: 'Genesis 26:8: Abimelech saw Isaac laughing with Rebekah.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis26-q9',
+        question: 'Why did Abimelech ask Isaac to leave?',
+        options: ['He was angry', 'Isaac had become too powerful', 'Famine ended', 'God commanded it'],
+        correctAnswer: 'Isaac had become too powerful',
+        explanation: 'Genesis 26:16: "you are much mightier than we."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis26-q10',
+        question: 'What wells did Isaac reopen?',
+        options: ['New wells only', 'The wells Abraham had dug', 'Philistine wells', 'Egyptian wells'],
+        correctAnswer: 'The wells Abraham had dug',
+        explanation: 'Genesis 26:18: Isaac reopened the wells that had been dug in Abraham\'s days.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis26-q11',
+        question: 'What was the first well Isaac\'s servants dug called?',
+        options: ['Rehoboth', 'Esek', 'Sitnah', 'Shibah'],
+        correctAnswer: 'Esek',
+        explanation: 'Genesis 26:20: They called it Esek (meaning "contention").',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis26-q12',
+        question: 'How much did Isaac\'s crops yield?',
+        options: ['Tenfold', 'Fiftyfold', 'A hundredfold', 'Twofold'],
+        correctAnswer: 'A hundredfold',
+        explanation: 'Genesis 26:12: Isaac reaped in that year a hundredfold.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis26-q13',
+        question: 'Who came with Abimelech to make a covenant with Isaac?',
+        options: ['His servants', 'Ahuzzath and Phicol', 'His sons', 'Philistine elders'],
+        correctAnswer: 'Ahuzzath and Phicol',
+        explanation: 'Genesis 26:26: Abimelech came with Ahuzzath his adviser and Phicol his army commander.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis26-q14',
         question: 'What did Isaac call the well at Beersheba?',
-        options: [
-          'Rich Well',
-          'Shibah',
-          'Strong Spring',
-          'Silent Water'
-        ],
+        options: ['Rehoboth', 'Esek', 'Shibah', 'Beer-lahai-roi'],
         correctAnswer: 'Shibah',
-        explanation: 'Genesis 26:33 (ESV): "He called it Shibah; therefore the name of the city is Beersheba to this day." Name endures.'
+        explanation: 'Genesis 26:33: He called it Shibah, giving the city its name Beersheba.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis26-q15',
+        question: 'How old was Esau when he married Hittite women?',
+        options: ['30 years', '40 years', '50 years', '25 years'],
+        correctAnswer: '40 years',
+        explanation: 'Genesis 26:34: When Esau was 40 years old, he took Hittite wives.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 26:4',
-    key_verse_text: "‘I will multiply your offspring as the stars of heaven and will give to your offspring all these lands. And in your offspring all the nations of the earth shall be blessed,’",
+    key_verse_text: "'I will multiply your offspring as the stars of heaven and will give to your offspring all these lands.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3164,71 +3542,134 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-27',
     bookId: 'genesis',
     chapter: 27,
-    title: 'Jacob Steals Esau’s Blessing',
+    title: 'Jacob Steals Esau\'s Blessing',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis27-q1',
-        question: 'Who encouraged Jacob to deceive Isaac?',
-        options: [
-          'Rich servant',
-          'Rebekah',
-          'Strong Esau',
-          'Silent Laban'
-        ],
+        question: 'Who helped Jacob deceive Isaac?',
+        options: ['Esau', 'Rebekah', 'Laban', 'Abraham'],
         correctAnswer: 'Rebekah',
-        explanation: 'Genesis 27:6-7 (ESV): "Rebekah said to her son Jacob, ‘I heard your father speak to Esau your brother, saying, “Bring me game and prepare for me delicious food, that I may eat it and bless you before the Lord before I die.”’" Plan schemes.'
+        explanation: 'Genesis 27:6-10: Rebekah told Jacob the plan to deceive Isaac.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis27-q2',
-        question: 'How did Jacob disguise himself as Esau?',
-        options: [
-          'With rich robes',
-          'Goat skins on hands and neck',
-          'With strong armor',
-          'With silent steps'
-        ],
-        correctAnswer: 'Goat skins on hands and neck',
-        explanation: 'Genesis 27:16 (ESV): "And the skins of the young goats she put on his hands and on the smooth part of his neck." Deception cloaks.'
+        question: 'What did Jacob use to feel hairy like Esau?',
+        options: ['Sheep wool', 'Goat skins', 'A hairy robe', 'Animal fur'],
+        correctAnswer: 'Goat skins',
+        explanation: 'Genesis 27:16: Rebekah put goatskins on Jacob\'s hands and neck.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis27-q3',
-        question: 'What did Isaac bless Jacob with?',
-        options: [
-          'Rich gold',
-          'Dew, fatness, and lordship',
-          'Strong armies',
-          'Silent lands'
-        ],
-        correctAnswer: 'Dew, fatness, and lordship',
-        explanation: 'Genesis 27:28-29 (ESV): "‘May God give you of the dew of heaven and of the fatness of the earth and plenty of grain and wine. Let peoples serve you, and nations bow down to you. Be lord over your brothers, and may your mother’s sons bow down to you.’" Blessing bestows.'
+        question: 'Who did Jacob impersonate?',
+        options: ['Abraham', 'Esau', 'Isaac', 'Laban'],
+        correctAnswer: 'Esau',
+        explanation: 'Genesis 27:19: Jacob pretended to be Esau to receive the blessing.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis27-q4',
-        question: 'What did Esau receive from Isaac?',
-        options: [
-          'Rich inheritance',
-          'A lesser blessing',
-          'Strong power',
-          'Silent favor'
-        ],
-        correctAnswer: 'A lesser blessing',
-        explanation: 'Genesis 27:39-40 (ESV): "Then Isaac his father answered and said to him: ‘Behold, away from the fatness of the earth shall your dwelling be, and away from the dew of heaven on high. By your sword you shall live, and you shall serve your brother; but when you grow restless you shall break his yoke from your neck.’" Fate assigns.'
+        question: 'What did Esau plan to do to Jacob?',
+        options: ['Forgive him', 'Kill him', 'Ignore him', 'Bless him'],
+        correctAnswer: 'Kill him',
+        explanation: 'Genesis 27:41: Esau said he would kill Jacob after Isaac died.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis27-q5',
-        question: 'Why did Jacob flee from Esau?',
-        options: [
-          'To seek riches',
-          'Esau planned to kill him',
-          'To gain strength',
-          'To stay silent'
-        ],
-        correctAnswer: 'Esau planned to kill him',
-        explanation: 'Genesis 27:41 (ESV): "Now Esau hated Jacob because of the blessing with which his father had blessed him, and Esau said in his heart, ‘The days of mourning for my father are approaching; then I will kill my brother Jacob.’" Anger threatens.'
+        question: 'Was Isaac deceived by Jacob?',
+        options: ['No', 'Yes', 'He knew all along', 'He was unsure'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 27:23: Isaac blessed Jacob, thinking he was Esau.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis27-q6',
+        question: 'What sense did Isaac use to try to identify Jacob?',
+        options: ['Sight', 'Touch', 'Taste', 'Smell'],
+        correctAnswer: 'Touch',
+        explanation: 'Genesis 27:21-22: Isaac felt Jacob because his eyes were dim.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis27-q7',
+        question: 'What did Isaac ask Jacob to bring him?',
+        options: ['Water', 'Game to eat', 'Wine', 'Bread'],
+        correctAnswer: 'Game to eat',
+        explanation: 'Genesis 27:3-4: Isaac asked Esau (but Jacob came) to bring game.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis27-q8',
+        question: 'How did Jacob respond when Isaac asked if he was Esau?',
+        options: ['He confessed', 'He said "I am Esau"', 'He stayed silent', 'He ran away'],
+        correctAnswer: 'He said "I am Esau"',
+        explanation: 'Genesis 27:19: "I am Esau your firstborn."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis27-q9',
+        question: 'What did Esau do when he realized the blessing was stolen?',
+        options: ['Laughed', 'Cried out with a great and bitter cry', 'Left quietly', 'Cursed Jacob'],
+        correctAnswer: 'Cried out with a great and bitter cry',
+        explanation: 'Genesis 27:34: Esau cried out with an exceedingly great and bitter cry.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis27-q10',
+        question: 'Why did Rebekah send Jacob away?',
+        options: ['To find a wife', 'To escape Esau\'s anger', 'To gain wealth', 'To study'],
+        correctAnswer: 'To escape Esau\'s anger',
+        explanation: 'Genesis 27:42-45: Rebekah told Jacob to flee from Esau\'s anger.',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis27-q11',
+        question: 'What blessing did Isaac give Jacob regarding the earth?',
+        options: ['Poverty', 'The dew of heaven and fatness of the earth', 'Barren land', 'Deserts'],
+        correctAnswer: 'The dew of heaven and fatness of the earth',
+        explanation: 'Genesis 27:28: "God give you of the dew of heaven and of the fatness of the earth."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis27-q12',
+        question: 'What would happen to those who cursed Jacob?',
+        options: ['Nothing', 'They would be cursed', 'They would be blessed', 'They would be ignored'],
+        correctAnswer: 'They would be cursed',
+        explanation: 'Genesis 27:29: "Cursed be everyone who curses you."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis27-q13',
+        question: 'What did Isaac prophesy about Esau\'s dwelling?',
+        options: ['Fruitful land', 'Away from the fatness of the earth', 'By the sea', 'In the mountains'],
+        correctAnswer: 'Away from the fatness of the earth',
+        explanation: 'Genesis 27:39: "away from the fatness of the earth shall your dwelling be."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis27-q14',
+        question: 'How would Esau eventually gain freedom according to Isaac?',
+        options: ['Through war', 'When he grows restless and breaks the yoke', 'Never', 'Through peace'],
+        correctAnswer: 'When he grows restless and breaks the yoke',
+        explanation: 'Genesis 27:40: "when you grow restless you shall break his yoke from your neck."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis27-q15',
+        question: 'Where did Rebekah tell Jacob to flee?',
+        options: ['Egypt', 'To her brother Laban in Haran', 'Canaan', 'Beersheba'],
+        correctAnswer: 'To her brother Laban in Haran',
+        explanation: 'Genesis 27:43: "flee to Laban my brother in Haran."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 27:29',
-    key_verse_text: "‘Let peoples serve you, and nations bow down to you. Be lord over your brothers, and may your mother’s sons bow down to you. Cursed be everyone who curses you, and blessed be everyone who blesses you!’",
+    key_verse_text: "'Let peoples serve you, and nations bow down to you. Be lord over your brothers.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3237,71 +3678,134 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-28',
     bookId: 'genesis',
     chapter: 28,
-    title: 'Jacob’s Dream and Vow',
+    title: 'Jacob\'s Dream and Vow',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis28-q1',
-        question: 'Where was Jacob sent to find a wife?',
-        options: [
-          'Rich Egypt',
-          'Paddan-aram',
-          'Strong Canaan',
-          'Silent Gerar'
-        ],
-        correctAnswer: 'Paddan-aram',
-        explanation: 'Genesis 28:2 (ESV): "‘Arise, go to Paddan-aram to the house of Bethuel your mother’s father, and take a wife from there from the daughters of Laban your mother’s brother.’" Journey directs.'
+        question: 'What did Jacob see in his dream?',
+        options: ['A mountain', 'A ladder reaching to heaven', 'A burning bush', 'A rainbow'],
+        correctAnswer: 'A ladder reaching to heaven',
+        explanation: 'Genesis 28:12: Jacob saw a ladder with angels ascending and descending.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis28-q2',
-        question: 'What did Jacob see in his dream?',
-        options: [
-          'Rich treasures',
-          'A ladder to heaven',
-          'Strong armies',
-          'Silent angels'
-        ],
-        correctAnswer: 'A ladder to heaven',
-        explanation: 'Genesis 28:12 (ESV): "And he dreamed, and behold, there was a ladder set up on the earth, and the top of it reached to heaven. And behold, the angels of God were ascending and descending on it!" Vision reveals.'
+        question: 'What did Jacob name the place where he had the dream?',
+        options: ['Beersheba', 'Bethel', 'Bethlehem', 'Beer-lahai-roi'],
+        correctAnswer: 'Bethel',
+        explanation: 'Genesis 28:19: He called the place Bethel (house of God).',
+        difficulty: 'easy'
       },
       {
         id: 'genesis28-q3',
-        question: 'What did God promise Jacob?',
-        options: [
-          'Rich wealth',
-          'Land, offspring, and blessing',
-          'Strong power',
-          'Silent protection'
-        ],
-        correctAnswer: 'Land, offspring, and blessing',
-        explanation: 'Genesis 28:13-14 (ESV): "And behold, the Lord stood above it and said, ‘I am the Lord, the God of Abraham your father and the God of Isaac. The land on which you lie I will give to you and to your offspring. Your offspring shall be like the dust of the earth, and you shall spread abroad to the west and to the east and to the north and to the south, and in you and your offspring shall all the families of the earth be blessed.’" Covenant extends.'
+        question: 'Where was Jacob traveling to?',
+        options: ['Egypt', 'To find a wife', 'Canaan', 'Beersheba'],
+        correctAnswer: 'To find a wife',
+        explanation: 'Genesis 28:2: Jacob was sent to Paddan-aram to find a wife.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis28-q4',
-        question: 'What did Jacob name the place of his dream?',
-        options: [
-          'Rich Bethel',
-          'Bethel',
-          'Strong Luz',
-          'Silent Peniel'
-        ],
-        correctAnswer: 'Bethel',
-        explanation: 'Genesis 28:19 (ESV): "He called the name of that place Bethel, but the name of the city was Luz at the first." Name sanctifies.'
+        question: 'Did God speak to Jacob in the dream?',
+        options: ['No', 'Yes', 'Only angels spoke', 'A prophet spoke'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 28:13: The LORD stood above the ladder and spoke to Jacob.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis28-q5',
-        question: 'What vow did Jacob make to God?',
-        options: [
-          'To give riches',
-          'To give a tenth if God protects',
-          'To build a strong altar',
-          'To remain silent'
-        ],
-        correctAnswer: 'To give a tenth if God protects',
-        explanation: 'Genesis 28:20-22 (ESV): "Then Jacob made a vow, saying, ‘If God will be with me and will keep me in this way that I go, and will give me bread to eat and clothing to wear, so that I come again to my father’s house in peace, then the Lord shall be my God, and this stone, which I have set up for a pillar, shall be God’s house. And of all that you give me I will give a full tenth to you.’" Faith pledges.'
+        question: 'What did Jacob set up as a pillar?',
+        options: ['Wood', 'A stone', 'An altar', 'A tent pole'],
+        correctAnswer: 'A stone',
+        explanation: 'Genesis 28:18: Jacob set up the stone he had used as a pillow.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis28-q6',
+        question: 'What did Jacob pour on the stone pillar?',
+        options: ['Water', 'Oil', 'Wine', 'Blood'],
+        correctAnswer: 'Oil',
+        explanation: 'Genesis 28:18: Jacob poured oil on top of the stone.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis28-q7',
+        question: 'Who appeared to Jacob in the dream at the top of the ladder?',
+        options: ['Angels only', 'The LORD', 'Abraham', 'Isaac'],
+        correctAnswer: 'The LORD',
+        explanation: 'Genesis 28:13: The LORD stood above it.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis28-q8',
+        question: 'What was the original name of Bethel?',
+        options: ['Luz', 'Beersheba', 'Peniel', 'Mahanaim'],
+        correctAnswer: 'Luz',
+        explanation: 'Genesis 28:19: The city was formerly called Luz.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis28-q9',
+        question: 'What did Jacob use as a pillow?',
+        options: ['His cloak', 'A stone', 'Sand', 'A bundle of reeds'],
+        correctAnswer: 'A stone',
+        explanation: 'Genesis 28:11: He took one of the stones and put it under his head.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis28-q10',
+        question: 'What fraction did Jacob vow to give to God?',
+        options: ['A fifth', 'A tenth', 'A fourth', 'A third'],
+        correctAnswer: 'A tenth',
+        explanation: 'Genesis 28:22: "of all that you give me I will give a full tenth to you."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis28-q11',
+        question: 'What did God promise about Jacob\'s offspring?',
+        options: ['12 sons', 'They would be like the dust of the earth', 'A great nation', 'Numberless as stars'],
+        correctAnswer: 'They would be like the dust of the earth',
+        explanation: 'Genesis 28:14: "Your offspring shall be like the dust of the earth."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis28-q12',
+        question: 'What specific promise did God make about being with Jacob?',
+        options: ['Be strong', 'I am with you and will keep you wherever you go', 'Fight for you', 'Make you rich'],
+        correctAnswer: 'I am with you and will keep you wherever you go',
+        explanation: 'Genesis 28:15: "I am with you and will keep you wherever you go."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis28-q13',
+        question: 'What was Jacob\'s response when he awoke?',
+        options: ['He was happy', 'He was afraid', 'He was confused', 'He was angry'],
+        correctAnswer: 'He was afraid',
+        explanation: 'Genesis 28:17: "How awesome is this place! This is none other than the house of God."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis28-q14',
+        question: 'In which direction(s) would Jacob\'s offspring spread?',
+        options: ['North only', 'West, east, north, and south', 'East and west', 'All over Canaan'],
+        correctAnswer: 'West, east, north, and south',
+        explanation: 'Genesis 28:14: "spread abroad to the west and to the east and to the north and to the south."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis28-q15',
+        question: 'What condition did Jacob place on his vow?',
+        options: ['None', 'If God will be with him and bring him back safely', 'If he becomes rich', 'If he has many children'],
+        correctAnswer: 'If God will be with him and bring him back safely',
+        explanation: 'Genesis 28:20-21: Jacob\'s vow was conditional on God being with him and bringing him back in peace.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 28:15',
-    key_verse_text: "‘Behold, I am with you and will keep you wherever you go, and will bring you back to this land. For I will not leave you until I have done what I have promised you.’",
+    key_verse_text: "'Behold, I am with you and will keep you wherever you go, and will bring you back to this land.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3312,65 +3816,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 29,
     title: 'Jacob Marries Leah and Rachel',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis29-q1',
         question: 'Who did Jacob meet at the well?',
-        options: [
-          'Rich Bethuel',
-          'Rachel',
-          'Strong Laban',
-          'Silent Leah'
-        ],
+        options: ['Leah', 'Rachel', 'Rebekah', 'Bilhah'],
         correctAnswer: 'Rachel',
-        explanation: 'Genesis 29:10 (ESV): "Now as soon as Jacob saw Rachel the daughter of Laban his mother’s brother, and the sheep of Laban his mother’s brother, Jacob came near and rolled the stone from the well’s mouth and watered the flock of Laban his mother’s brother." Love begins.'
+        explanation: 'Genesis 29:10: Jacob saw Rachel, Laban\'s daughter, at the well.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis29-q2',
-        question: 'How long did Jacob work for Rachel?',
-        options: [
-          'Rich five years',
-          'Seven years',
-          'Strong ten years',
-          'Silent three years'
-        ],
-        correctAnswer: 'Seven years',
-        explanation: 'Genesis 29:20 (ESV): "So Jacob served seven years for Rachel, and they seemed to him but a few days because of the love he had for her." Labor endures.'
+        question: 'How many years did Jacob agree to work for Rachel?',
+        options: ['Five', 'Seven', 'Ten', 'Fourteen'],
+        correctAnswer: 'Seven',
+        explanation: 'Genesis 29:18: Jacob agreed to serve seven years for Rachel.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis29-q3',
-        question: 'Who was given to Jacob first?',
-        options: [
-          'Rich Rachel',
-          'Leah',
-          'Strong Bilhah',
-          'Silent Zilpah'
-        ],
+        question: 'Who did Laban give Jacob on his wedding night instead of Rachel?',
+        options: ['Rachel', 'Leah', 'Bilhah', 'Zilpah'],
         correctAnswer: 'Leah',
-        explanation: 'Genesis 29:25 (ESV): "And in the morning, behold, it was Leah! And Jacob said to Laban, ‘What is this you have done to me? Did I not serve with you for Rachel? Why then have you deceived me?’" Trick reveals.'
+        explanation: 'Genesis 29:23: Laban gave Leah to Jacob instead of Rachel.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis29-q4',
-        question: 'What did Laban give with each daughter?',
-        options: [
-          'Rich gold',
-          'A servant',
-          'Strong flocks',
-          'Silent gifts'
-        ],
-        correctAnswer: 'A servant',
-        explanation: 'Genesis 29:24, 29 (ESV): "Laban gave his female servant Zilpah to his daughter Leah to be her servant. ... Laban gave his female servant Bilhah to his daughter Rachel to be her servant." Dowry includes.'
+        question: 'Who was Jacob\'s first son?',
+        options: ['Joseph', 'Reuben', 'Judah', 'Levi'],
+        correctAnswer: 'Reuben',
+        explanation: 'Genesis 29:32: Leah bore Reuben, Jacob\'s firstborn.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis29-q5',
-        question: 'Who was Jacob’s first son by Leah?',
-        options: [
-          'Rich Joseph',
-          'Reuben',
-          'Strong Judah',
-          'Silent Levi'
-        ],
-        correctAnswer: 'Reuben',
-        explanation: 'Genesis 29:32 (ESV): "And Leah conceived and bore a son, and she called his name Reuben, for she said, ‘Because the Lord has looked upon my affliction; for now my husband will love me.’" Family grows.'
+        question: 'Was Jacob deceived by Laban?',
+        options: ['No', 'Yes', 'He knew beforehand', 'Partially'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 29:25: Jacob discovered the deception in the morning.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis29-q6',
+        question: 'What did the seven years seem like to Jacob?',
+        options: ['An eternity', 'Like a few days because of his love', 'Very difficult', 'Unbearable'],
+        correctAnswer: 'Like a few days because of his love',
+        explanation: 'Genesis 29:20: "they seemed to him but a few days because of the love he had for her."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis29-q7',
+        question: 'How long did Jacob have to wait after marrying Leah to marry Rachel?',
+        options: ['One month', 'One week', 'One year', 'Immediately'],
+        correctAnswer: 'One week',
+        explanation: 'Genesis 29:27-28: Jacob completed Leah\'s week and then married Rachel.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis29-q8',
+        question: 'Which wife did Jacob love more?',
+        options: ['Leah', 'Rachel', 'Both equally', 'Neither'],
+        correctAnswer: 'Rachel',
+        explanation: 'Genesis 29:30: "he loved Rachel more than Leah."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis29-q9',
+        question: 'How many sons did Leah bear Jacob in this chapter?',
+        options: ['Two', 'Three', 'Four', 'Five'],
+        correctAnswer: 'Four',
+        explanation: 'Genesis 29:32-35: Leah bore Reuben, Simeon, Levi, and Judah.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis29-q10',
+        question: 'Why did God open Leah\'s womb?',
+        options: ['She prayed', 'Because she was unloved', 'Jacob asked', 'Laban requested'],
+        correctAnswer: 'Because she was unloved',
+        explanation: 'Genesis 29:31: "the LORD saw that Leah was hated, he opened her womb."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis29-q11',
+        question: 'What reason did Laban give for giving Leah first?',
+        options: ['Custom', 'It is not so done in our country to give the younger before the firstborn', 'Leah asked', 'Jacob misunderstood'],
+        correctAnswer: 'It is not so done in our country to give the younger before the firstborn',
+        explanation: 'Genesis 29:26: Custom dictated the older daughter should marry first.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis29-q12',
+        question: 'What was Leah\'s maidservant\'s name?',
+        options: ['Bilhah', 'Zilpah', 'Hagar', 'Deborah'],
+        correctAnswer: 'Zilpah',
+        explanation: 'Genesis 29:24: Laban gave Zilpah as Leah\'s maidservant.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis29-q13',
+        question: 'What was Rachel\'s maidservant\'s name?',
+        options: ['Zilpah', 'Bilhah', 'Hagar', 'Keturah'],
+        correctAnswer: 'Bilhah',
+        explanation: 'Genesis 29:29: Laban gave Bilhah as Rachel\'s maidservant.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis29-q14',
+        question: 'What did Leah say when she bore Judah?',
+        options: ['"God has taken away my reproach"', '"This time I will praise the LORD"', '"Now my husband will love me"', '"God has heard me"'],
+        correctAnswer: '"This time I will praise the LORD"',
+        explanation: 'Genesis 29:35: "This time I will praise the LORD."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis29-q15',
+        question: 'What does Reuben mean?',
+        options: ['"Praise"', '"See, a son" / "The LORD has looked on my affliction"', '"Attached"', '"Hearing"'],
+        correctAnswer: '"See, a son" / "The LORD has looked on my affliction"',
+        explanation: 'Genesis 29:32: The name relates to God seeing Leah\'s affliction.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 29:20',
@@ -3383,67 +3950,130 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-30',
     bookId: 'genesis',
     chapter: 30,
-    title: 'Jacob’s Children and Prosperity',
+    title: 'Jacob\'s Children and Prosperity',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis30-q1',
-        question: 'What did Rachel give Jacob to bear children?',
-        options: [
-          'Rich jewels',
-          'Her servant Bilhah',
-          'Strong herbs',
-          'Silent prayers'
-        ],
-        correctAnswer: 'Her servant Bilhah',
-        explanation: 'Genesis 30:3 (ESV): "Then she said, ‘Here is my servant Bilhah; go in to her, so that she may give birth on my behalf, that even I may have children through her.’" Plan competes.'
+        question: 'Who did Rachel give to Jacob as a wife to bear children?',
+        options: ['Zilpah', 'Bilhah', 'Leah', 'A concubine'],
+        correctAnswer: 'Bilhah',
+        explanation: 'Genesis 30:3-4: Rachel gave her servant Bilhah to Jacob.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis30-q2',
-        question: 'Who was Jacob’s son by Bilhah?',
-        options: [
-          'Rich Simeon',
-          'Dan',
-          'Strong Gad',
-          'Silent Asher'
-        ],
-        correctAnswer: 'Dan',
-        explanation: 'Genesis 30:6 (ESV): "Then Rachel said, ‘God has judged me, and has also heard my voice and given me a son.’ Therefore she called his name Dan." Name judges.'
+        question: 'Who did Leah give to Jacob as a wife?',
+        options: ['Bilhah', 'Zilpah', 'Her friend', 'Hagar'],
+        correctAnswer: 'Zilpah',
+        explanation: 'Genesis 30:9: Leah gave her servant Zilpah to Jacob.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis30-q3',
-        question: 'What did Leah trade for mandrakes?',
-        options: [
-          'Rich gold',
-          'A night with Jacob',
-          'Strong flocks',
-          'Silent vows'
-        ],
+        question: 'What did Rachel trade for mandrakes?',
+        options: ['Gold', 'A night with Jacob', 'Sheep', 'Clothing'],
         correctAnswer: 'A night with Jacob',
-        explanation: 'Genesis 30:15-16 (ESV): "But she said to her, ‘Is it a small matter that you have taken away my husband? Would you take away my son’s mandrakes also?’ Rachel said, ‘Then he may lie with you tonight in exchange for your son’s mandrakes.’" Bargain trades.'
+        explanation: 'Genesis 30:15-16: Rachel traded a night with Jacob for Reuben\'s mandrakes.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis30-q4',
-        question: 'How did Jacob increase his flocks?',
-        options: [
-          'Rich purchases',
-          'Speckled rods by water',
-          'Strong breeding',
-          'Silent deals'
-        ],
-        correctAnswer: 'Speckled rods by water',
-        explanation: 'Genesis 30:38-39 (ESV): "He set the rods that he had peeled in front of the flocks in the troughs, that is, the watering places, where the flocks came to drink. And since they bred when they came to drink, the flocks bred in front of the rods and so the flocks brought forth striped, speckled, and spotted." Strategy prospers.'
+        question: 'Who was Rachel\'s first son?',
+        options: ['Dan', 'Joseph', 'Naphtali', 'Benjamin'],
+        correctAnswer: 'Joseph',
+        explanation: 'Genesis 30:24: Rachel bore Joseph.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis30-q5',
-        question: 'What did Jacob’s wealth include?',
-        options: [
-          'Rich gold and silver',
-          'Flocks, servants, and camels',
-          'Strong fortresses',
-          'Silent lands'
-        ],
-        correctAnswer: 'Flocks, servants, and camels',
-        explanation: 'Genesis 30:43 (ESV): "Thus the man increased greatly and had large flocks, female servants and male servants, and camels and donkeys." Wealth grows.'
+        question: 'Did Jacob become wealthy while with Laban?',
+        options: ['No', 'Yes', 'He stayed poor', 'He lost everything'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 30:43: Jacob increased greatly in wealth.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis30-q6',
+        question: 'How many sons did Jacob have through his wives and servants?',
+        options: ['Ten', 'Eleven', 'Twelve', 'Thirteen'],
+        correctAnswer: 'Eleven',
+        explanation: 'Genesis 30: Eleven sons were born before Benjamin (chapter 35).',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis30-q7',
+        question: 'What wages did Jacob ask from Laban?',
+        options: ['Gold', 'Speckled and spotted animals', 'Half the flock', 'Land'],
+        correctAnswer: 'Speckled and spotted animals',
+        explanation: 'Genesis 30:32: Jacob asked for every speckled and spotted sheep.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis30-q8',
+        question: 'What did Jacob use to influence the breeding of the flocks?',
+        options: ['Special food', 'Peeled rods at watering troughs', 'Separation', 'Prayer only'],
+        correctAnswer: 'Peeled rods at watering troughs',
+        explanation: 'Genesis 30:37-38: Jacob peeled rods and placed them at the watering places.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis30-q9',
+        question: 'Who was Dan\'s mother?',
+        options: ['Rachel', 'Leah', 'Bilhah', 'Zilpah'],
+        correctAnswer: 'Bilhah',
+        explanation: 'Genesis 30:5-6: Bilhah bore Dan to Jacob.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis30-q10',
+        question: 'What does Joseph mean?',
+        options: ['"God judges"', '"May he add"', '"Attached"', '"Happy"'],
+        correctAnswer: '"May he add"',
+        explanation: 'Genesis 30:24: Rachel said "May the LORD add to me another son."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis30-q11',
+        question: 'How many sons did Bilhah bear for Jacob?',
+        options: ['One', 'Two', 'Three', 'Four'],
+        correctAnswer: 'Two',
+        explanation: 'Genesis 30:5-8: Bilhah bore Dan and Naphtali.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis30-q12',
+        question: 'How many sons did Zilpah bear for Jacob?',
+        options: ['One', 'Two', 'Three', 'Four'],
+        correctAnswer: 'Two',
+        explanation: 'Genesis 30:10-13: Zilpah bore Gad and Asher.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis30-q13',
+        question: 'What was Leah\'s sixth son named?',
+        options: ['Issachar', 'Zebulun', 'Judah', 'Levi'],
+        correctAnswer: 'Zebulun',
+        explanation: 'Genesis 30:20: Leah\'s sixth son was Zebulun.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis30-q14',
+        question: 'When did Jacob ask to leave Laban?',
+        options: ['Immediately', 'After Joseph was born', 'After 14 years', 'After 20 years'],
+        correctAnswer: 'After Joseph was born',
+        explanation: 'Genesis 30:25: "As soon as Rachel had borne Joseph, Jacob said to Laban..."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis30-q15',
+        question: 'Which animals did Jacob selectively breed?',
+        options: ['Cattle only', 'The stronger animals', 'The weaker animals', 'All equally'],
+        correctAnswer: 'The stronger animals',
+        explanation: 'Genesis 30:41-42: Jacob used the rods with stronger animals only.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 30:43',
@@ -3458,69 +4088,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 31,
     title: 'Jacob Flees from Laban',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis31-q1',
-        question: 'Why did Jacob decide to leave Laban?',
-        options: [
-          'Seeking riches',
-          'Laban’s changed attitude',
-          'Stronger flocks',
-          'Silent fear'
-        ],
-        correctAnswer: 'Laban’s changed attitude',
-        explanation: 'Genesis 31:2 (ESV): "And Jacob saw that Laban did not regard him with favor as before." Tension rises.'
+        question: 'What did Rachel steal from her father?',
+        options: ['Gold', 'Household gods', 'Sheep', 'Jewelry'],
+        correctAnswer: 'Household gods',
+        explanation: 'Genesis 31:19: Rachel stole the household gods.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis31-q2',
-        question: 'What did Rachel steal from Laban?',
-        options: [
-          'Rich gold',
-          'Household gods',
-          'Strong camels',
-          'Silent jewels'
-        ],
-        correctAnswer: 'Household gods',
-        explanation: 'Genesis 31:19 (ESV): "Laban had gone to shear his sheep, and Rachel stole her father’s household gods." Theft hides.'
+        question: 'Did Jacob tell Laban he was leaving?',
+        options: ['Yes', 'No, he fled secretly', 'He sent a message', 'Laban knew'],
+        correctAnswer: 'No, he fled secretly',
+        explanation: 'Genesis 31:20: Jacob fled without telling Laban.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis31-q3',
-        question: 'What did God tell Laban in a dream?',
-        options: [
-          'Seek riches',
-          'Do not harm Jacob',
-          'Grow strong',
-          'Stay silent'
-        ],
-        correctAnswer: 'Do not harm Jacob',
-        explanation: 'Genesis 31:24 (ESV): "But God came to Laban the Aramean in a dream by night and said to him, ‘Be careful not to say anything to Jacob, either good or bad.’" Warning protects.'
+        question: 'Who warned Laban not to harm Jacob?',
+        options: ['An angel', 'God', 'Abraham', 'Isaac'],
+        correctAnswer: 'God',
+        explanation: 'Genesis 31:24: God warned Laban in a dream.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis31-q4',
-        question: 'Where did Rachel hide the household gods?',
-        options: [
-          'In rich bags',
-          'In a camel’s saddle',
-          'In strong boxes',
-          'In silent tents'
-        ],
-        correctAnswer: 'In a camel’s saddle',
-        explanation: 'Genesis 31:34 (ESV): "Now Rachel had taken the household gods and put them in the camel’s saddle and sat on them. Laban felt all about the tent, but did not find them." Deception conceals.'
+        question: 'Did Laban find the stolen household gods?',
+        options: ['Yes', 'No', 'He found some', 'He didn\'t search'],
+        correctAnswer: 'No',
+        explanation: 'Genesis 31:34-35: Rachel hid them and Laban didn\'t find them.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis31-q5',
-        question: 'What covenant did Jacob and Laban make?',
-        options: [
-          'Rich trade',
-          'Mizpah, a boundary heap',
-          'Strong alliance',
-          'Silent oath'
-        ],
-        correctAnswer: 'Mizpah, a boundary heap',
-        explanation: 'Genesis 31:48-49 (ESV): "Laban said, ‘This heap is a witness between you and me today.’ Therefore he named it Galeed, and Mizpah, for he said, ‘The Lord watch between you and me, when we are out of one another’s sight.’" Pact divides.'
+        question: 'Did Jacob and Laban make peace?',
+        options: ['No', 'Yes, with a covenant', 'They fought', 'They parted enemies'],
+        correctAnswer: 'Yes, with a covenant',
+        explanation: 'Genesis 31:44: They made a covenant together.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis31-q6',
+        question: 'How long had Jacob worked for Laban?',
+        options: ['14 years', '20 years', '7 years', '10 years'],
+        correctAnswer: '20 years',
+        explanation: 'Genesis 31:41: Jacob served 20 years in Laban\'s house.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis31-q7',
+        question: 'Where did Rachel hide the household gods?',
+        options: ['In a bag', 'In the camel\'s saddle', 'Underground', 'In a tent corner'],
+        correctAnswer: 'In the camel\'s saddle',
+        explanation: 'Genesis 31:34: Rachel put them in the camel\'s saddle and sat on them.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis31-q8',
+        question: 'What did Jacob set up as a witness of the covenant?',
+        options: ['An altar', 'A pillar and heap of stones', 'A tree', 'A tent'],
+        correctAnswer: 'A pillar and heap of stones',
+        explanation: 'Genesis 31:45-46: Jacob set up a pillar and they made a heap.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis31-q9',
+        question: 'What name did Laban give the heap?',
+        options: ['Bethel', 'Jegar-sahadutha', 'Mizpah', 'Mahanaim'],
+        correctAnswer: 'Jegar-sahadutha',
+        explanation: 'Genesis 31:47: Laban called it Jegar-sahadutha (in Aramaic).',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis31-q10',
+        question: 'What name did Jacob give the heap?',
+        options: ['Jegar-sahadutha', 'Galeed', 'Bethel', 'Peniel'],
+        correctAnswer: 'Galeed',
+        explanation: 'Genesis 31:47: Jacob called it Galeed (in Hebrew).',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis31-q11',
+        question: 'How many times did Laban change Jacob\'s wages?',
+        options: ['Three', 'Five', 'Ten times', 'Twenty times'],
+        correctAnswer: 'Ten times',
+        explanation: 'Genesis 31:7: "your father has cheated me and changed my wages ten times."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis31-q12',
+        question: 'What was also called Mizpah?',
+        options: ['The pillar', 'The heap of witness', 'The well', 'The altar'],
+        correctAnswer: 'The heap of witness',
+        explanation: 'Genesis 31:49: The heap was also called Mizpah.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis31-q13',
+        question: 'What did the Mizpah blessing mean?',
+        options: ['Goodbye', 'The LORD watch between you and me', 'Peace', 'Blessing'],
+        correctAnswer: 'The LORD watch between you and me',
+        explanation: 'Genesis 31:49: "The LORD watch between you and me, when we are out of one another\'s sight."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis31-q14',
+        question: 'What penalty did Jacob unknowingly pronounce on Rachel?',
+        options: ['Exile', 'Death for whoever stole the gods', 'Poverty', 'Servitude'],
+        correctAnswer: 'Death for whoever stole the gods',
+        explanation: 'Genesis 31:32: "Anyone with whom you find your gods shall not live."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis31-q15',
+        question: 'How many days did it take Laban to catch up to Jacob?',
+        options: ['Three', 'Seven', 'Ten', 'Fourteen'],
+        correctAnswer: 'Seven',
+        explanation: 'Genesis 31:23: Laban pursued Jacob for seven days.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 31:49',
-    key_verse_text: "and Mizpah, for he said, ‘The Lord watch between you and me, when we are out of one another’s sight.’",
+    key_verse_text: "'The Lord watch between you and me, when we are out of one another\'s sight.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -3531,69 +4224,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 32,
     title: 'Jacob Prepares to Meet Esau',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis32-q1',
-        question: 'Who met Jacob as he traveled?',
-        options: [
-          'Rich merchants',
-          'Angels of God',
-          'Strong warriors',
-          'Silent guides'
-        ],
-        correctAnswer: 'Angels of God',
-        explanation: 'Genesis 32:1 (ESV): "Jacob went on his way, and the angels of God met him." Encounter assures.'
+        question: 'Who did Jacob wrestle with all night?',
+        options: ['An angel', 'A man', 'Esau', 'Laban'],
+        correctAnswer: 'A man',
+        explanation: 'Genesis 32:24: A man wrestled with Jacob until daybreak.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis32-q2',
-        question: 'What did Jacob send to Esau?',
-        options: [
-          'Rich gold',
-          'Gifts of livestock',
-          'Strong guards',
-          'Silent messages'
-        ],
-        correctAnswer: 'Gifts of livestock',
-        explanation: 'Genesis 32:13 (ESV): "So he stayed there that night, and from what he had with him he took a present for his brother Esau," Peace offers.'
+        question: 'What new name did Jacob receive?',
+        options: ['Abraham', 'Israel', 'Isaac', 'Judah'],
+        correctAnswer: 'Israel',
+        explanation: 'Genesis 32:28: "Your name shall no longer be Jacob, but Israel."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis32-q3',
-        question: 'What did Jacob do alone at night?',
-        options: [
-          'Sought riches',
-          'Wrestled with a man',
-          'Built strength',
-          'Kept silent'
-        ],
-        correctAnswer: 'Wrestled with a man',
-        explanation: 'Genesis 32:24 (ESV): "And Jacob was left alone. And a man wrestled with him until the breaking of the day." Struggle transforms.'
+        question: 'What did Jacob send to Esau?',
+        options: ['A message', 'Gifts of livestock', 'Money', 'Weapons'],
+        correctAnswer: 'Gifts of livestock',
+        explanation: 'Genesis 32:13-15: Jacob sent herds as a gift to Esau.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis32-q4',
-        question: 'What new name was Jacob given?',
-        options: [
-          'Rich Abram',
-          'Israel',
-          'Strong Isaac',
-          'Silent Judah'
-        ],
-        correctAnswer: 'Israel',
-        explanation: 'Genesis 32:28 (ESV): "Then he said, ‘Your name shall no longer be called Jacob, but Israel, for you have striven with God and with men, and have prevailed.’" Name changes.'
+        question: 'What did Jacob name the place where he wrestled?',
+        options: ['Bethel', 'Peniel', 'Mahanaim', 'Beersheba'],
+        correctAnswer: 'Peniel',
+        explanation: 'Genesis 32:30: Jacob called it Peniel (face of God).',
+        difficulty: 'easy'
       },
       {
         id: 'genesis32-q5',
-        question: 'What did Jacob name the place of wrestling?',
-        options: [
-          'Rich Bethel',
-          'Peniel',
-          'Strong Mahanaim',
-          'Silent Mizpah'
-        ],
-        correctAnswer: 'Peniel',
-        explanation: 'Genesis 32:30 (ESV): "So Jacob called the name of the place Peniel, saying, ‘For I have seen God face to face, and yet my life has been delivered.’" Vision names.'
+        question: 'Was Jacob afraid to meet Esau?',
+        options: ['No', 'Yes', 'He was confident', 'He was excited'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 32:7: Jacob was greatly afraid and distressed.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis32-q6',
+        question: 'What was injured during Jacob\'s wrestling match?',
+        options: ['His arm', 'His hip socket', 'His leg', 'His shoulder'],
+        correctAnswer: 'His hip socket',
+        explanation: 'Genesis 32:25: The man touched Jacob\'s hip socket.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis32-q7',
+        question: 'Who met Jacob when he set out?',
+        options: ['Laban', 'Angels of God', 'Esau\'s men', 'Servants'],
+        correctAnswer: 'Angels of God',
+        explanation: 'Genesis 32:1: The angels of God met Jacob.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis32-q8',
+        question: 'What did Jacob call the place where angels met him?',
+        options: ['Peniel', 'Mahanaim', 'Bethel', 'Mizpah'],
+        correctAnswer: 'Mahanaim',
+        explanation: 'Genesis 32:2: Jacob called it Mahanaim (two camps).',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis32-q9',
+        question: 'How did Jacob divide his camp?',
+        options: ['Into three groups', 'Into two camps', 'He didn\'t divide it', 'Into four groups'],
+        correctAnswer: 'Into two camps',
+        explanation: 'Genesis 32:7: Jacob divided the people into two camps.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis32-q10',
+        question: 'What did Jacob ask the man for before letting him go?',
+        options: ['His name', 'A blessing', 'Forgiveness', 'Strength'],
+        correctAnswer: 'A blessing',
+        explanation: 'Genesis 32:26: "I will not let you go unless you bless me."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis32-q11',
+        question: 'Why was Jacob given the name Israel?',
+        options: ['He was blessed', 'He struggled with God and men and prevailed', 'He was faithful', 'He was strong'],
+        correctAnswer: 'He struggled with God and men and prevailed',
+        explanation: 'Genesis 32:28: "for you have striven with God and with men, and have prevailed."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis32-q12',
+        question: 'Did the man tell Jacob his name?',
+        options: ['Yes', 'No', 'He revealed it partly', 'Later he did'],
+        correctAnswer: 'No',
+        explanation: 'Genesis 32:29: "Why is it that you ask my name?" And he blessed him there.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis32-q13',
+        question: 'When did the wrestling end?',
+        options: ['At midnight', 'At daybreak', 'At sunset', 'In the afternoon'],
+        correctAnswer: 'At daybreak',
+        explanation: 'Genesis 32:24: They wrestled "until the breaking of the day."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis32-q14',
+        question: 'How many men did Jacob hear were coming with Esau?',
+        options: ['100', '200', '400', '1000'],
+        correctAnswer: '400',
+        explanation: 'Genesis 32:6: "Esau is coming to meet you, and four hundred men with him."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis32-q15',
+        question: 'What does Peniel mean?',
+        options: ['"House of God"', '"Face of God"', '"Struggle"', '"Two camps"'],
+        correctAnswer: '"Face of God"',
+        explanation: 'Genesis 32:30: "For I have seen God face to face."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 32:28',
-    key_verse_text: "Then he said, ‘Your name shall no longer be called Jacob, but Israel, for you have striven with God and with men, and have prevailed.’",
+    key_verse_text: "\"Your name shall no longer be called Jacob, but Israel, for you have striven with God and with men, and have prevailed.\"",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
