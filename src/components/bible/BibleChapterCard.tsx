@@ -35,7 +35,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
 
   // Bar colors based on score
   const getBarColor = (index: number) => {
-    if (index >= score) return "bg-white/30";
+    if (index >= score) return "bg-gray-300/60";
     switch (score) {
       case 1:
         return "bg-red-400";

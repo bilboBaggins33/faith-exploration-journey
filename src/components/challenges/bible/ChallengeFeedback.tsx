@@ -221,11 +221,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             const isCorrectDot = questionResult?.isCorrect;
             const isCurrent = qIndex === currentQuestion;
 
-            let dotClass = 'bg-white/30';
+            let dotClass = 'bg-white/50 border border-white/40';
             if (isAnswered) {
-              dotClass = isCorrectDot ? 'bg-green-400' : 'bg-red-400';
+              dotClass = isCorrectDot ? 'bg-green-400 border border-green-300/50' : 'bg-red-400 border border-red-300/50';
             } else if (isCurrent) {
-              dotClass = 'bg-white';
+              dotClass = 'bg-white border border-white/60';
             }
 
             return (
@@ -263,7 +263,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             >
               <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
                 {/* Logo overlapping the top edge */}
-                <div className="absolute left-1/2 -translate-x-1/2 top-0 z-20">
+                <div className="absolute left-1/2 -translate-x-1/2 -top-4 z-20">
                   <img
                     src="/BibleQuestLogo.png"
                     alt="Bible Quest Logo"
@@ -282,17 +282,17 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                         const isCorrectNum = questionResult?.isCorrect;
                         const isCurrent = qIndex === index;
 
-                        let colorClass = 'text-white/40';
+                        let colorClass = 'text-white/50 bg-white/10 border border-white/20';
                         if (isAnswered) {
-                          colorClass = isCorrectNum ? 'text-green-400' : 'text-red-400';
+                          colorClass = isCorrectNum ? 'text-green-400 bg-green-400/15 border border-green-400/30' : 'text-red-400 bg-red-400/15 border border-red-400/30';
                         } else if (isCurrent) {
-                          colorClass = 'text-white';
+                          colorClass = 'text-white bg-white/20 border border-white/40';
                         }
 
                         return (
                           <span
                             key={qIndex}
-                            className={`text-base md:text-lg font-semibold transition-all duration-200 ${colorClass}`}
+                            className={`w-7 h-7 md:w-8 md:h-8 rounded-full inline-flex items-center justify-center text-xs md:text-sm font-semibold transition-all duration-200 ${colorClass}`}
                           >
                             {qIndex + 1}
                           </span>

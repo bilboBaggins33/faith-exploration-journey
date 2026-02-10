@@ -13,6 +13,7 @@ const heroBackgroundUrls = [
 const Hero = () => {
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({});
+  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
   const isMobile = useIsMobile();
 
   useEffect(() => {
@@ -26,25 +27,30 @@ const Hero = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <div className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460)' }}>
       {/* Background Image with Parallax Effect */}
-      {heroBackgroundUrls.map((url, index) => (
-        <div
-          key={url}
-          className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
-          style={{
-            backgroundImage: `url(${imageLoadError[url] ? '/assets/bible/default.jpg' : url})`,
-            opacity: currentImageIndex === index ? 1 : 0,
-          }}
-        >
-          <img
-            src={url}
-            className="hidden"
-            alt="Preload"
-            onError={() => setImageLoadError(prev => ({ ...prev, [url]: true }))}
-          />
-        </div>
-      ))}
+      {heroBackgroundUrls.map((url, index) => {
+        const imgSrc = imageLoadError[url] ? '/assets/bible/default.jpg' : url;
+        const isLoaded = imageLoaded[imgSrc];
+        return (
+          <div
+            key={url}
+            className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
+            style={{
+              backgroundImage: `url(${imgSrc})`,
+              opacity: currentImageIndex === index && isLoaded ? 1 : 0,
+            }}
+          >
+            <img
+              src={imgSrc}
+              className="hidden"
+              alt="Preload"
+              onLoad={() => setImageLoaded(prev => ({ ...prev, [imgSrc]: true }))}
+              onError={() => setImageLoadError(prev => ({ ...prev, [url]: true }))}
+            />
+          </div>
+        );
+      })}
 
       {/* Overlay Gradient */}
       <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/50 via-bible-dark/40 to-bible-dark/20" />
