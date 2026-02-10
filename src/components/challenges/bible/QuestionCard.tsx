@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { CheckCircle, X } from "lucide-react";
+import { CheckCircle, X, Info } from "lucide-react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { cn } from "@/lib/utils";
 
@@ -40,10 +40,10 @@ const QuestionCard = ({
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="pt-2">
+    <div className="pt-1 md:pt-2">
       {/* Explanation Dialog - moved outside buttons for proper event handling */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-sm">
+        <DialogContent className="max-w-sm mx-4">
           <DialogHeader>
             <DialogTitle>Answer Explanation</DialogTitle>
           </DialogHeader>
@@ -58,13 +58,13 @@ const QuestionCard = ({
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.3 }}
       >
-        {/* Question Text - Playfair Display serif font, centered */}
-        <h2 className="text-xl text-center text-white mb-6 leading-relaxed drop-shadow-md" style={{ fontFamily: "'Playfair Display', serif" }}>
+        {/* Question Text */}
+        <h2 className="text-lg md:text-xl text-center text-white mb-4 md:mb-6 leading-relaxed text-balance drop-shadow-md" style={{ fontFamily: "'Playfair Display', serif" }}>
           {question}
         </h2>
 
         {/* Answer Options - Pill shaped buttons */}
-        <div className="space-y-3 mb-6">
+        <div className="space-y-2.5 md:space-y-3 mb-4 md:mb-6">
           {options.map((option, index) => {
             const isSelected = selectedAnswer === option;
             const isCorrectAnswer = option === correctAnswer;
@@ -72,12 +72,14 @@ const QuestionCard = ({
             const showAsCorrect = showExplanation && isCorrectAnswer;
 
             return (
-              <button
+              <motion.button
                 key={index}
                 onClick={() => !showExplanation && onSelectAnswer(option)}
                 disabled={showExplanation}
+                whileTap={!showExplanation ? { scale: 0.97 } : undefined}
+                transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className={cn(
-                  "w-full py-4 px-6 rounded-full text-center font-medium transition-all duration-300 relative backdrop-blur-md border",
+                  "w-full min-h-[48px] md:min-h-[52px] py-3 md:py-4 px-5 md:px-6 rounded-full text-center text-sm md:text-base font-medium transition-all duration-300 relative backdrop-blur-md border",
                   // Default unselected state - frosted glass
                   !isSelected && !showExplanation && "bg-white/10 text-white border-white/40 hover:bg-white/40 shadow-lg",
                   // Selected state - golden gradient with glass
@@ -96,13 +98,14 @@ const QuestionCard = ({
                   {showAsCorrect && (
                     <>
                       <span
-                        className="text-white/90 hover:text-white text-xs underline cursor-pointer ml-1"
+                        className="inline-flex items-center gap-1 text-white/90 hover:text-white text-xs bg-white/20 rounded-full px-2 py-0.5 cursor-pointer ml-1 hover:bg-white/30 transition-colors"
                         onClick={(e) => {
                           e.stopPropagation();
                           e.preventDefault();
                           setIsModalOpen(true);
                         }}
                       >
+                        <Info className="w-3 h-3" />
                         Why?
                       </span>
                       <CheckCircle className="w-5 h-5 flex-shrink-0" />
@@ -110,7 +113,7 @@ const QuestionCard = ({
                   )}
                   {isWrongSelection && <X className="w-5 h-5 flex-shrink-0" />}
                 </span>
-              </button>
+              </motion.button>
             );
           })}
         </div>
@@ -118,22 +121,24 @@ const QuestionCard = ({
         {/* Action Buttons */}
         <div className="flex justify-center gap-3">
           {!showExplanation ? (
-            <button
+            <motion.button
               disabled={!selectedAnswer}
               onClick={onCheckAnswer}
+              whileTap={selectedAnswer ? { scale: 0.96 } : undefined}
               className={cn(
-                "px-8 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-md border",
+                "w-full md:w-auto md:px-8 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-md border",
                 selectedAnswer
                   ? "bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105"
                   : "bg-white/20 text-white/50 border-white/20 cursor-not-allowed"
               )}
             >
               Check Answer
-            </button>
+            </motion.button>
           ) : (
-            <button
+            <motion.button
               onClick={onNextQuestion}
-              className="px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center gap-2 backdrop-blur-md"
+              whileTap={{ scale: 0.96 }}
+              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-md"
             >
               {!isLastQuestion ? (
                 <>
@@ -172,9 +177,24 @@ const QuestionCard = ({
                   </svg>
                 </>
               )}
-            </button>
+            </motion.button>
           )}
         </div>
+
+        {/* Swipe hint on mobile - shown after answering */}
+        {showExplanation && !isLastQuestion && (
+          <motion.div
+            initial={{ opacity: 0, y: 5 }}
+            animate={{ opacity: 1, y: [0, -4, 0] }}
+            transition={{ delay: 0.5, y: { repeat: 2, duration: 0.8 } }}
+            className="flex justify-center mt-3 md:hidden"
+          >
+            <span className="text-white/50 text-xs flex items-center gap-1">
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+              Swipe up for next
+            </span>
+          </motion.div>
+        )}
       </motion.div>
     </div>
   );

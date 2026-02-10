@@ -14,6 +14,33 @@
   .scrollbar-hide::-webkit-scrollbar {
     display: none;
   }
+
+  /* Mobile-optimised snap scroll container */
+  .snap-scroll-mobile {
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-y: contain;
+    scroll-behavior: smooth;
+    will-change: scroll-position;
+  }
+
+  /* Use dynamic viewport height (accounts for mobile browser chrome) */
+  .h-dvh {
+    height: 100dvh;
+  }
+
+  .min-h-dvh {
+    min-height: 100dvh;
+  }
+
+  /* Better text wrapping for question / heading text */
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Prevent accidental horizontal scroll on vertical containers */
+  .touch-pan-y {
+    touch-action: pan-y;
+  }
 }
 
 @layer base {

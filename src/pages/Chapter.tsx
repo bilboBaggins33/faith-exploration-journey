@@ -112,7 +112,7 @@ const Chapter = () => {
   return (
     <div className="flex flex-col flex-1">
       <main className="flex-grow">
-        <div className="max-w-4xl mx-auto sm:px-6 lg:px-8">
+        <div className="max-w-4xl mx-auto">
           {renderContent()}
         </div>
       </main>

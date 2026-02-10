@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import QuestionCard from './QuestionCard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -36,6 +36,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
 }) => {
   const [imageError, setImageError] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  const jumpTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const {
     challenge,
     currentQuestion,
@@ -50,6 +51,24 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const fromDaily = searchParams.get('from') === 'daily';
+
+  // Debounced jump to question – prevents rapid state updates from IntersectionObserver
+  const debouncedJump = useCallback(
+    (index: number) => {
+      if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
+      jumpTimerRef.current = setTimeout(() => {
+        onJumpToQuestion(index);
+      }, 80);
+    },
+    [onJumpToQuestion]
+  );
+
+  // Cleanup debounce timer
+  useEffect(() => {
+    return () => {
+      if (jumpTimerRef.current) clearTimeout(jumpTimerRef.current);
+    };
+  }, []);
 
   // Scroll to current question when it changes externally
   useEffect(() => {
@@ -71,20 +90,20 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-            onJumpToQuestion(index);
+            debouncedJump(index);
           }
         });
       },
       {
         root: container,
-        threshold: 0.6
+        threshold: 0.55
       }
     );
 
     Array.from(container.children).forEach((child) => observer.observe(child));
 
     return () => observer.disconnect();
-  }, [challenge, onJumpToQuestion]);
+  }, [challenge, debouncedJump]);
 
   // Scroll to first card on mount
   useEffect(() => {
@@ -156,7 +175,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   };
 
   return (
-    <div className="relative h-screen w-full overflow-hidden">
+    <div className="relative h-dvh w-full overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img
@@ -168,10 +187,68 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         <div className="absolute inset-0 bg-black/40" />
       </div>
 
+      {/* Sticky top header — shown once, not per card */}
+      <div className="absolute top-0 left-0 right-0 z-30 pointer-events-none">
+        <div className="flex justify-between items-center px-4 pt-3 pb-2 pointer-events-auto">
+          <button
+            onClick={handleBackToBookPage}
+            className="text-white/90 hover:text-white transition-colors inline-flex items-center text-sm backdrop-blur-sm bg-black/20 rounded-full px-3 py-1.5"
+          >
+            <span className="mr-1">←</span> Back
+          </button>
+          <div className="flex items-center gap-2">
+            <span className="text-white/90 text-sm font-medium backdrop-blur-sm bg-black/20 rounded-full px-3 py-1.5">
+              {bookName} {chapter}
+            </span>
+            {difficulty && (
+              <span className={`text-xs px-2 py-1 rounded-full font-medium backdrop-blur-sm ${difficulty === 'easy' ? 'bg-green-500/30 text-green-300 border border-green-400/40' :
+                difficulty === 'medium' ? 'bg-amber-500/30 text-amber-300 border border-amber-400/40' :
+                  'bg-red-500/30 text-red-300 border border-red-400/40'
+                }`}>
+                {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
+              </span>
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Fixed bottom progress dots */}
+      <div className="absolute bottom-0 left-0 right-0 z-30 pointer-events-none">
+        <div className="flex items-center justify-center gap-2.5 pb-4 pt-6 bg-gradient-to-t from-black/30 to-transparent">
+          {challenge.questions.map((_, qIndex) => {
+            const questionResult = answeredQuestions[qIndex];
+            const isAnswered = !!questionResult;
+            const isCorrectDot = questionResult?.isCorrect;
+            const isCurrent = qIndex === currentQuestion;
+
+            let dotClass = 'bg-white/30';
+            if (isAnswered) {
+              dotClass = isCorrectDot ? 'bg-green-400' : 'bg-red-400';
+            } else if (isCurrent) {
+              dotClass = 'bg-white';
+            }
+
+            return (
+              <button
+                key={qIndex}
+                onClick={() => {
+                  if (containerRef.current) {
+                    const el = containerRef.current.children[qIndex] as HTMLElement;
+                    el?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+                  }
+                }}
+                className={`pointer-events-auto transition-all duration-300 rounded-full ${dotClass} ${isCurrent ? 'w-3 h-3 scale-110' : 'w-2.5 h-2.5'}`}
+                aria-label={`Go to question ${qIndex + 1}`}
+              />
+            );
+          })}
+        </div>
+      </div>
+
       {/* Scroll Container */}
       <div
         ref={containerRef}
-        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide items-center"
+        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide snap-scroll-mobile touch-pan-y items-center"
       >
         {challenge.questions.map((q, index) => {
           const answerState = answeredQuestions[index];
@@ -182,56 +259,32 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             <div
               key={q.id}
               data-index={index}
-              className="w-full flex-shrink-0 snap-center p-4 md:p-8 flex items-center justify-center min-h-screen"
+              className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:min-h-screen"
             >
-              <div className="w-full max-w-sm relative" tabIndex={-1}>
-                {/* Header row with Back button and Book/Chapter info */}
-                <div className="flex justify-between items-center mb-2">
-                  <button
-                    onClick={handleBackToBookPage}
-                    className="text-white/90 hover:text-white transition-colors inline-flex items-center text-sm"
-                  >
-                    <span className="mr-1">←</span> Back
-                  </button>
-                  <div className="flex items-center gap-2">
-                    <span className="text-white/90 text-sm font-medium">
-                      {bookName} {chapter}
-                    </span>
-                    {difficulty && (
-                      <span className={`text-xs px-2 py-0.5 rounded-full font-medium ${difficulty === 'easy' ? 'bg-green-500/30 text-green-300 border border-green-400/40' :
-                          difficulty === 'medium' ? 'bg-amber-500/30 text-amber-300 border border-amber-400/40' :
-                            'bg-red-500/30 text-red-300 border border-red-400/40'
-                        }`}>
-                        {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
-                      </span>
-                    )}
-                  </div>
-                </div>
-
+              <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
                 {/* Logo overlapping the top edge */}
-                <div className="absolute left-1/2 -translate-x-1/2 top-6 z-20">
+                <div className="absolute left-1/2 -translate-x-1/2 top-0 z-20">
                   <img
                     src="/BibleQuestLogo.png"
                     alt="Bible Quest Logo"
-                    className="h-8 w-auto drop-shadow-lg"
+                    className="h-7 md:h-8 w-auto drop-shadow-lg"
                   />
                 </div>
 
                 {/* Glassmorphism Card */}
-                <div className="backdrop-blur-xl bg-white/20 rounded-[32px] shadow-2xl border border-white/30 overflow-hidden">
+                <div className="backdrop-blur-xl bg-white/20 rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/30 overflow-hidden">
                   {/* Question Numbers - colored by result */}
-                  <div className="pt-10 pb-4 px-6">
-                    <div className="flex items-center justify-center gap-4">
+                  <div className="pt-9 md:pt-10 pb-3 md:pb-4 px-4 md:px-6">
+                    <div className="flex items-center justify-center gap-3 md:gap-4">
                       {challenge.questions.map((_, qIndex) => {
                         const questionResult = answeredQuestions[qIndex];
                         const isAnswered = !!questionResult;
-                        const isCorrect = questionResult?.isCorrect;
+                        const isCorrectNum = questionResult?.isCorrect;
                         const isCurrent = qIndex === index;
 
-                        // Color logic: green if correct, red if wrong, white if current, gray if not answered
-                        let colorClass = 'text-white/40'; // default - not answered yet
+                        let colorClass = 'text-white/40';
                         if (isAnswered) {
-                          colorClass = isCorrect ? 'text-green-400' : 'text-red-400';
+                          colorClass = isCorrectNum ? 'text-green-400' : 'text-red-400';
                         } else if (isCurrent) {
                           colorClass = 'text-white';
                         }
@@ -239,7 +292,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                         return (
                           <span
                             key={qIndex}
-                            className={`text-lg font-semibold transition-all ${colorClass}`}
+                            className={`text-base md:text-lg font-semibold transition-all duration-200 ${colorClass}`}
                           >
                             {qIndex + 1}
                           </span>
@@ -249,7 +302,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
                   </div>
 
                   {/* Question Content */}
-                  <div className="px-6 pb-6">
+                  <div className="px-4 md:px-6 pb-5 md:pb-6">
                     <QuestionCard
                       question={q.question}
                       options={q.options}
