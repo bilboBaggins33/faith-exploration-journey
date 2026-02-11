@@ -4360,65 +4360,128 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 33,
     title: 'Jacob and Esau Reconcile',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis33-q1',
         question: 'How did Esau greet Jacob?',
-        options: [
-          'With rich gifts',
-          'Embraced and kissed him',
-          'With strong guards',
-          'With silent anger'
-        ],
+        options: ['With anger', 'Embraced and kissed him', 'With a sword', 'He ignored him'],
         correctAnswer: 'Embraced and kissed him',
-        explanation: 'Genesis 33:4 (ESV): "But Esau ran to meet him and embraced him and fell on his neck and kissed him, and they wept." Reconciliation heals.'
+        explanation: 'Genesis 33:4 (ESV): "But Esau ran to meet him and embraced him and fell on his neck and kissed him, and they wept."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis33-q2',
         question: 'What did Jacob offer Esau?',
-        options: [
-          'Rich gold',
-          'A gift of livestock',
-          'Strong protection',
-          'Silent tribute'
-        ],
+        options: ['Gold', 'A gift of livestock', 'Land', 'Clothing'],
         correctAnswer: 'A gift of livestock',
-        explanation: 'Genesis 33:8 (ESV): "Esau said, ‘What do you mean by all this company that I met?’ Jacob answered, ‘To find favor in the sight of my lord.’" Gift humbles.'
+        explanation: 'Genesis 33:10-11: Jacob urged Esau to accept his gift of livestock.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis33-q3',
-        question: 'What did Esau offer to do for Jacob?',
-        options: [
-          'Give riches',
-          'Travel together',
-          'Build strength',
-          'Stay silent'
-        ],
-        correctAnswer: 'Travel together',
-        explanation: 'Genesis 33:12 (ESV): "Then Esau said, ‘Let us journey on our way, and I will go ahead of you.’" Unity offers.'
+        question: 'Where did Jacob settle after meeting Esau?',
+        options: ['Haran', 'Succoth', 'Bethel', 'Gerar'],
+        correctAnswer: 'Succoth',
+        explanation: 'Genesis 33:17: Jacob journeyed to Succoth and built a house there.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis33-q4',
-        question: 'Where did Jacob settle after meeting Esau?',
-        options: [
-          'Rich Haran',
-          'Succoth',
-          'Strong Paddan-aram',
-          'Silent Gerar'
-        ],
-        correctAnswer: 'Succoth',
-        explanation: 'Genesis 33:17 (ESV): "But Jacob journeyed to Succoth, and built himself a house and made booths for his livestock. Therefore the place is called Succoth." Home builds.'
+        question: 'Did Jacob and Esau reconcile peacefully?',
+        options: ['No, they fought', 'Yes', 'They avoided each other', 'Esau attacked'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 33:4: Esau ran to meet Jacob, embraced him, and they wept together.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis33-q5',
         question: 'What did Jacob buy near Shechem?',
-        options: [
-          'Rich jewels',
-          'A piece of land',
-          'Strong flocks',
-          'Silent tents'
-        ],
+        options: ['A house', 'A piece of land', 'Livestock', 'A well'],
         correctAnswer: 'A piece of land',
-        explanation: 'Genesis 33:19 (ESV): "And from the sons of Hamor, Shechem’s father, he bought for a hundred pieces of money the piece of land on which he had pitched his tent." Purchase settles.'
+        explanation: 'Genesis 33:19: Jacob bought a piece of land from the sons of Hamor.',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis33-q6',
+        question: 'How many men were with Esau when he came to meet Jacob?',
+        options: ['100', '200', '400', '1000'],
+        correctAnswer: '400',
+        explanation: 'Genesis 33:1: Esau was coming with four hundred men.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis33-q7',
+        question: 'How did Jacob arrange his family when meeting Esau?',
+        options: ['All together', 'Servants first, Rachel and Joseph last', 'Men in front, women behind', 'He hid them'],
+        correctAnswer: 'Servants first, Rachel and Joseph last',
+        explanation: 'Genesis 33:2: Jacob put the servants first, Leah and her children next, and Rachel and Joseph last.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis33-q8',
+        question: 'What did Jacob do as he approached Esau?',
+        options: ['Ran toward him', 'Bowed seven times', 'Called out to him', 'Hid behind his servants'],
+        correctAnswer: 'Bowed seven times',
+        explanation: 'Genesis 33:3: Jacob went on before them, bowing himself to the ground seven times.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis33-q9',
+        question: 'What did Esau offer to do for Jacob?',
+        options: ['Give him land', 'Travel together', 'Build him a house', 'Give him servants'],
+        correctAnswer: 'Travel together',
+        explanation: 'Genesis 33:12: Esau said, "Let us journey on our way, and I will go ahead of you."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis33-q10',
+        question: "What did Jacob say about seeing Esau's face?",
+        options: ['It frightened him', 'It was like seeing the face of God', 'It made him weep', 'It reminded him of their father'],
+        correctAnswer: 'It was like seeing the face of God',
+        explanation: 'Genesis 33:10: "for I have seen your face, which is like seeing the face of God."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis33-q11',
+        question: 'Why did Jacob decline to travel with Esau?',
+        options: ['He was afraid', 'The children were frail and the flocks needed care', 'He wanted to go to Bethel', "He didn't trust Esau"],
+        correctAnswer: 'The children were frail and the flocks needed care',
+        explanation: 'Genesis 33:13: Jacob said the children are frail and the nursing flocks needed gentle driving.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis33-q12',
+        question: 'What does "Succoth" mean?',
+        options: ['Rest', 'Booths', 'Peace', 'Dwelling'],
+        correctAnswer: 'Booths',
+        explanation: 'Genesis 33:17: Jacob built booths for his livestock, so the place was called Succoth (booths).',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis33-q13',
+        question: 'How much did Jacob pay for the land near Shechem?',
+        options: ['50 pieces of money', 'A hundred pieces of money', '400 shekels of silver', 'Ten pieces of gold'],
+        correctAnswer: 'A hundred pieces of money',
+        explanation: 'Genesis 33:19: He bought it for a hundred pieces of money.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis33-q14',
+        question: 'What did Jacob name the altar he built near Shechem?',
+        options: ['Bethel', 'El-Elohe-Israel', 'Mizpah', 'Peniel'],
+        correctAnswer: 'El-Elohe-Israel',
+        explanation: 'Genesis 33:20: Jacob erected an altar and called it El-Elohe-Israel (God, the God of Israel).',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis33-q15',
+        question: 'Where did Esau return to after meeting Jacob?',
+        options: ['Canaan', 'Seir', 'Haran', 'Beersheba'],
+        correctAnswer: 'Seir',
+        explanation: 'Genesis 33:16: Esau returned that day on his way to Seir.',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 33:4',
@@ -4433,69 +4496,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 34,
     title: 'Dinah and the Shechemites',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis34-q1',
-        question: 'Who violated Jacob’s daughter Dinah?',
-        options: [
-          'Rich Abimelech',
-          'Shechem, son of Hamor',
-          'Strong Esau',
-          'Silent Laban'
-        ],
+        question: "Who violated Jacob's daughter Dinah?",
+        options: ['Abimelech', 'Shechem, son of Hamor', 'Esau', 'Laban'],
         correctAnswer: 'Shechem, son of Hamor',
-        explanation: 'Genesis 34:2 (ESV): "And when Shechem the son of Hamor the Hivite, the prince of the land, saw her, he seized her and lay with her and humiliated her." Crime offends.'
+        explanation: 'Genesis 34:2 (ESV): "And when Shechem the son of Hamor the Hivite, the prince of the land, saw her, he seized her and lay with her and humiliated her."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis34-q2',
         question: 'What did Shechem ask of Jacob?',
-        options: [
-          'Rich dowry',
-          'To marry Dinah',
-          'Strong alliance',
-          'Silent peace'
-        ],
+        options: ['A dowry', 'To marry Dinah', 'An alliance', 'Peace'],
         correctAnswer: 'To marry Dinah',
-        explanation: 'Genesis 34:8 (ESV): "But Hamor spoke with them, saying, ‘The soul of my son Shechem longs for your daughter. Please give her to him to be his wife.’" Request seeks.'
+        explanation: 'Genesis 34:8: Hamor spoke with them, saying his son Shechem longed for Dinah and asked for her as his wife.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis34-q3',
-        question: 'What did Jacob’s sons require of the Shechemites?',
-        options: [
-          'Rich tribute',
-          'Circumcision',
-          'Strong oaths',
-          'Silent vows'
-        ],
-        correctAnswer: 'Circumcision',
-        explanation: 'Genesis 34:15 (ESV): "‘Only on this condition will we agree with you—that you will become as we are by every male among you being circumcised.’" Deception demands.'
+        question: 'Who killed the men of Shechem?',
+        options: ['Isaac', 'Simeon and Levi', 'Judah', 'Reuben'],
+        correctAnswer: 'Simeon and Levi',
+        explanation: "Genesis 34:25: Simeon and Levi, Dinah's brothers, took their swords and attacked the city.",
+        difficulty: 'easy'
       },
       {
         id: 'genesis34-q4',
-        question: 'Who killed the men of Shechem?',
-        options: [
-          'Rich Isaac',
-          'Simeon and Levi',
-          'Strong Judah',
-          'Silent Reuben'
-        ],
-        correctAnswer: 'Simeon and Levi',
-        explanation: 'Genesis 34:25 (ESV): "On the third day, when they were sore, two of the sons of Jacob, Simeon and Levi, Dinah’s brothers, took their swords and came against the city while it felt secure and killed all the males." Vengeance strikes.'
+        question: 'What did Jacob fear after the attack on Shechem?',
+        options: ['Loss of wealth', 'Retaliation by Canaanites', 'Famine', 'Exile'],
+        correctAnswer: 'Retaliation by Canaanites',
+        explanation: 'Genesis 34:30: Jacob feared the Canaanites and Perizzites would gather against him and attack.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis34-q5',
-        question: 'What did Jacob fear after the attack?',
-        options: [
-          'Loss of riches',
-          'Attack by Canaanites',
-          'Loss of strength',
-          'Silent ruin'
-        ],
-        correctAnswer: 'Attack by Canaanites',
-        explanation: 'Genesis 34:30 (ESV): "Then Jacob said to Simeon and Levi, ‘You have brought trouble on me by making me stink to the inhabitants of the land, the Canaanites and the Perizzites. My numbers are few, and if they gather themselves against me and attack me, I shall be destroyed, both I and my household.’" Fear threatens.'
+        question: 'Did Shechem love Dinah?',
+        options: ['No', 'Yes', 'It is not mentioned', 'He hated her'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 34:3: "His soul was drawn to Dinah...he loved the young woman and spoke tenderly to her."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis34-q6',
+        question: "What condition did Jacob's sons set for allowing intermarriage?",
+        options: ['Payment of gold', 'Circumcision of all males', 'Building an altar', 'Leaving the land'],
+        correctAnswer: 'Circumcision of all males',
+        explanation: 'Genesis 34:15: They would agree only if every male among the Shechemites was circumcised.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis34-q7',
+        question: 'When did Simeon and Levi attack the city?',
+        options: ['At night', 'On the third day when the men were sore', 'During a feast', 'At dawn'],
+        correctAnswer: 'On the third day when the men were sore',
+        explanation: 'Genesis 34:25: On the third day after circumcision, when the men were still in pain, they attacked.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis34-q8',
+        question: "What did Jacob's sons do after killing the men?",
+        options: ['Fled immediately', 'Plundered the city', 'Buried the dead', 'Made peace'],
+        correctAnswer: 'Plundered the city',
+        explanation: 'Genesis 34:27-29: The sons of Jacob plundered the city, taking flocks, herds, donkeys, wealth, women, and children.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis34-q9',
+        question: 'Who was Hamor?',
+        options: ['A servant of Jacob', 'The father of Shechem', 'A Pharaoh', 'A priest'],
+        correctAnswer: 'The father of Shechem',
+        explanation: 'Genesis 34:2: Shechem was the son of Hamor the Hivite, the prince of the land.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis34-q10',
+        question: "Were Jacob's sons honest in their demand for circumcision?",
+        options: ['Yes, it was sincere', 'No, they answered deceitfully', 'They were unsure', 'Jacob told them to'],
+        correctAnswer: 'No, they answered deceitfully',
+        explanation: 'Genesis 34:13: "The sons of Jacob answered Shechem and his father Hamor deceitfully."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis34-q11',
+        question: "What did Hamor propose to Jacob's family besides the marriage?",
+        options: ['To leave the land', 'Intermarriage and shared land', 'To pay double dowry', 'To serve Jacob'],
+        correctAnswer: 'Intermarriage and shared land',
+        explanation: 'Genesis 34:9-10: Hamor proposed mutual intermarriage, dwelling together, trading, and acquiring property.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis34-q12',
+        question: 'How did Simeon and Levi justify their actions?',
+        options: ['God commanded it', 'Should Dinah be treated like a prostitute?', 'They blamed Jacob', 'They denied involvement'],
+        correctAnswer: 'Should Dinah be treated like a prostitute?',
+        explanation: 'Genesis 34:31: "But they said, \'Should he treat our sister like a prostitute?\'"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis34-q13',
+        question: 'Where did the Shechemites agree to be circumcised?',
+        options: ['In the temple', 'At the gate of the city', "In Jacob's camp", 'By the river'],
+        correctAnswer: 'At the gate of the city',
+        explanation: 'Genesis 34:20: Hamor and Shechem went to the gate of their city and spoke to the men.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis34-q14',
+        question: 'What argument did Hamor use to convince the Shechemites?',
+        options: ['Fear of God', "Jacob's livestock would become theirs", "Jacob would share his God", 'Military alliance'],
+        correctAnswer: "Jacob's livestock would become theirs",
+        explanation: 'Genesis 34:23: "Will not their livestock, their property, and all their beasts be ours?"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis34-q15',
+        question: 'What was Dinah doing when Shechem first saw her?',
+        options: ['Drawing water', 'Going out to see the women of the land', 'Tending sheep', 'Praying'],
+        correctAnswer: 'Going out to see the women of the land',
+        explanation: 'Genesis 34:1: "Now Dinah the daughter of Leah went out to see the women of the land."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 34:30',
-    key_verse_text: "Then Jacob said to Simeon and Levi, ‘You have brought trouble on me by making me stink to the inhabitants of the land, the Canaanites and the Perizzites. My numbers are few, and if they gather themselves against me and attack me, I shall be destroyed, both I and my household.’",
+    key_verse_text: "Then Jacob said to Simeon and Levi, 'You have brought trouble on me by making me stink to the inhabitants of the land.'",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -4506,69 +4632,132 @@ export const genesisChallenges: ChapterChallenge[] = [
     chapter: 35,
     title: 'Jacob Returns to Bethel',
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis35-q1',
-        question: 'Where did God tell Jacob to settle?',
-        options: [
-          'Rich Haran',
-          'Bethel',
-          'Strong Shechem',
-          'Silent Succoth'
-        ],
+        question: 'Where did God tell Jacob to go?',
+        options: ['Egypt', 'Bethel', 'Haran', 'Shechem'],
         correctAnswer: 'Bethel',
-        explanation: 'Genesis 35:1 (ESV): "God said to Jacob, ‘Arise, go up to Bethel and dwell there. Make an altar there to the God who appeared to you when you fled from your brother Esau.’" Command directs.'
+        explanation: 'Genesis 35:1 (ESV): "God said to Jacob, \'Arise, go up to Bethel and dwell there.\'"',
+        difficulty: 'easy'
       },
       {
         id: 'genesis35-q2',
-        question: 'What did Jacob tell his household to do?',
-        options: [
-          'Seek riches',
-          'Put away foreign gods',
-          'Grow strong',
-          'Stay silent'
-        ],
-        correctAnswer: 'Put away foreign gods',
-        explanation: 'Genesis 35:2 (ESV): "So Jacob said to his household and to all who were with him, ‘Put away the foreign gods that are among you and purify yourselves and change your garments.’" Purity calls.'
+        question: 'Who died and was buried near Bethlehem?',
+        options: ['Leah', 'Rachel', 'Rebekah', 'Sarah'],
+        correctAnswer: 'Rachel',
+        explanation: 'Genesis 35:19: "So Rachel died, and she was buried on the way to Ephrath (that is, Bethlehem)."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis35-q3',
-        question: 'What name did God confirm for Jacob?',
-        options: [
-          'Rich Abraham',
-          'Israel',
-          'Strong Isaac',
-          'Silent Judah'
-        ],
-        correctAnswer: 'Israel',
-        explanation: 'Genesis 35:10 (ESV): "And God said to him, ‘Your name is Jacob; no longer shall your name be called Jacob, but Israel shall be your name.’ So he called his name Israel." Identity affirms.'
+        question: 'What was the name of the son born as Rachel was dying?',
+        options: ['Judah', 'Benjamin', 'Joseph', 'Dan'],
+        correctAnswer: 'Benjamin',
+        explanation: 'Genesis 35:18: Rachel named him Ben-oni, but Jacob called him Benjamin.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis35-q4',
-        question: 'Who died giving birth to Benjamin?',
-        options: [
-          'Rich Leah',
-          'Rachel',
-          'Strong Bilhah',
-          'Silent Zilpah'
-        ],
-        correctAnswer: 'Rachel',
-        explanation: 'Genesis 35:18 (ESV): "And as her soul was departing (for she was dying), she called his name Ben-oni; but his father called him Benjamin." Loss grieves.'
+        question: 'How many sons did Jacob have?',
+        options: ['Ten', 'Twelve', 'Eight', 'Fourteen'],
+        correctAnswer: 'Twelve',
+        explanation: 'Genesis 35:22-26: Jacob had twelve sons total.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis35-q5',
-        question: 'Where was Isaac buried?',
-        options: [
-          'Rich Egypt',
-          'Mamre, with Abraham',
-          'Strong Bethel',
-          'Silent Shechem'
-        ],
-        correctAnswer: 'Mamre, with Abraham',
-        explanation: 'Genesis 35:27 (ESV): "And Jacob came to his father Isaac at Mamre, or Kiriath-arba (that is, Hebron), where Abraham and Isaac had sojourned." Tomb rests.'
+        question: 'Who died at the age of 180 years?',
+        options: ['Abraham', 'Isaac', 'Jacob', 'Joseph'],
+        correctAnswer: 'Isaac',
+        explanation: 'Genesis 35:28: "Now the days of Isaac were 180 years."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis35-q6',
+        question: 'What did Jacob tell his household to do before going to Bethel?',
+        options: ['Fast for seven days', 'Put away foreign gods and purify themselves', 'Offer burnt offerings', 'Shave their heads'],
+        correctAnswer: 'Put away foreign gods and purify themselves',
+        explanation: 'Genesis 35:2: "Put away the foreign gods that are among you and purify yourselves and change your garments."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis35-q7',
+        question: 'What did God rename Jacob?',
+        options: ['Abraham', 'Israel', 'Judah', 'Benjamin'],
+        correctAnswer: 'Israel',
+        explanation: 'Genesis 35:10: "Your name is Jacob; no longer shall your name be called Jacob, but Israel shall be your name."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis35-q8',
+        question: 'What name did Rachel give her newborn before she died?',
+        options: ['Benjamin', 'Ben-oni', 'Benaiah', 'Bethuel'],
+        correctAnswer: 'Ben-oni',
+        explanation: 'Genesis 35:18: Rachel called him Ben-oni (son of my sorrow), but Jacob called him Benjamin.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis35-q9',
+        question: "What sin did Reuben commit?",
+        options: ['He stole from Jacob', 'He lay with Bilhah, his father\'s concubine', 'He worshiped idols', 'He murdered a man'],
+        correctAnswer: "He lay with Bilhah, his father's concubine",
+        explanation: 'Genesis 35:22: "Reuben went and lay with Bilhah his father\'s concubine. And Israel heard of it."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis35-q10',
+        question: 'Who buried Isaac?',
+        options: ['Jacob alone', 'Esau and Jacob', 'Joseph', 'The Hittites'],
+        correctAnswer: 'Esau and Jacob',
+        explanation: 'Genesis 35:29: "Esau and Jacob his sons buried him."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis35-q11',
+        question: 'Where did Jacob hide the foreign gods?',
+        options: ['In a river', 'Under the terebinth tree near Shechem', 'In a cave', 'He burned them'],
+        correctAnswer: 'Under the terebinth tree near Shechem',
+        explanation: 'Genesis 35:4: "Jacob hid them under the terebinth tree that was near Shechem."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis35-q12',
+        question: "Who was Deborah in this chapter?",
+        options: ['A prophetess', "Rebekah's nurse", "Rachel's servant", "Leah's daughter"],
+        correctAnswer: "Rebekah's nurse",
+        explanation: 'Genesis 35:8: "And Deborah, Rebekah\'s nurse, died, and she was buried under an oak below Bethel."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis35-q13',
+        question: 'What did Jacob set up at the place where God spoke to him?',
+        options: ['An altar of stone', 'A pillar of stone and poured a drink offering on it', 'A tent', 'A well'],
+        correctAnswer: 'A pillar of stone and poured a drink offering on it',
+        explanation: 'Genesis 35:14: "Jacob set up a pillar...a pillar of stone. He poured out a drink offering on it and poured oil on it."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis35-q14',
+        question: 'What promise did God reaffirm to Jacob at Bethel?',
+        options: ['Victory in battle', 'A nation and kings would come from him', 'Long life', 'Great wealth'],
+        correctAnswer: 'A nation and kings would come from him',
+        explanation: 'Genesis 35:11: "A nation and a company of nations shall come from you, and kings shall spring from you."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis35-q15',
+        question: 'Where was Jacob when Rachel began giving birth?',
+        options: ['At Bethel', 'Some distance from Ephrath', 'In Shechem', 'At Hebron'],
+        correctAnswer: 'Some distance from Ephrath',
+        explanation: 'Genesis 35:16: "Then they journeyed from Bethel. When they were still some distance from Ephrath, Rachel went into labor."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 35:10',
-    key_verse_text: "And God said to him, ‘Your name is Jacob; no longer shall your name be called Jacob, but Israel shall be your name.’ So he called his name Israel.",
+    key_verse_text: "Your name is Jacob; no longer shall your name be called Jacob, but Israel shall be your name.",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
@@ -4577,1095 +4766,2114 @@ export const genesisChallenges: ChapterChallenge[] = [
     id: 'genesis-36',
     bookId: 'genesis',
     chapter: 36,
-    title: 'Esau’s Descendants',
+    title: "Esau's Descendants",
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis36-q1',
-        question: 'Where did Esau settle?',
-        options: [
-          'Rich Canaan',
-          'Seir',
-          'Strong Egypt',
-          'Silent Haran'
-        ],
-        correctAnswer: 'Seir',
-        explanation: 'Genesis 36:8 (ESV): "So Esau settled in the hill country of Seir. (Esau is Edom.)" Land claims.'
+        question: 'What is another name for Esau?',
+        options: ['Israel', 'Edom', 'Moab', 'Ammon'],
+        correctAnswer: 'Edom',
+        explanation: 'Genesis 36:1 (ESV): "These are the generations of Esau (that is, Edom)."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis36-q2',
-        question: 'What was another name for Esau?',
-        options: [
-          'Rich Jacob',
-          'Edom',
-          'Strong Israel',
-          'Silent Isaac'
-        ],
-        correctAnswer: 'Edom',
-        explanation: 'Genesis 36:1 (ESV): "These are the generations of Esau (that is, Edom)." Name identifies.'
+        question: 'Where did Esau settle?',
+        options: ['Canaan', 'The hill country of Seir', 'Egypt', 'Haran'],
+        correctAnswer: 'The hill country of Seir',
+        explanation: 'Genesis 36:8: "So Esau settled in the hill country of Seir. Esau is Edom."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis36-q3',
-        question: 'Who was one of Esau’s wives?',
-        options: [
-          'Rich Rebekah',
-          'Adah, daughter of Elon',
-          'Strong Rachel',
-          'Silent Leah'
-        ],
-        correctAnswer: 'Adah, daughter of Elon',
-        explanation: 'Genesis 36:2 (ESV): "Esau took his wives from the Canaanites: Adah the daughter of Elon the Hittite, Oholibamah the daughter of Anah the daughter of Zibeon the Hivite," Family lists.'
+        question: 'Why did Esau move away from Jacob?',
+        options: ['They fought', 'Their possessions were too great to dwell together', 'God commanded it', 'Famine'],
+        correctAnswer: 'Their possessions were too great to dwell together',
+        explanation: 'Genesis 36:7: "For their possessions were too great for them to dwell together."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis36-q4',
-        question: 'Who was a chief among Esau’s sons?',
-        options: [
-          'Rich Amalek',
-          'Korah',
-          'Strong Teman',
-          'Silent Eliphaz'
-        ],
-        correctAnswer: 'Korah',
-        explanation: 'Genesis 36:16 (ESV): "Korah, Gatam, and Amalek; these are the chiefs of Eliphaz in the land of Edom; these are the sons of Adah." Lineage leads.'
+        question: 'From how many wives did Esau have sons?',
+        options: ['One', 'Two', 'Three', 'Four'],
+        correctAnswer: 'Three',
+        explanation: 'Genesis 36:2-5: Esau had sons from Adah, Oholibamah, and Basemath.',
+        difficulty: 'easy'
       },
       {
         id: 'genesis36-q5',
-        question: 'Who ruled Edom before any king ruled Israel?',
-        options: [
-          'Rich Job',
-          'Bela, son of Beor',
-          'Strong Saul',
-          'Silent Hadad'
-        ],
-        correctAnswer: 'Bela, son of Beor',
-        explanation: 'Genesis 36:31-32 (ESV): "These are the kings who reigned in the land of Edom, before any king reigned over the Israelites. Bela the son of Beor reigned in Edom, the name of his city being Dinhabah." Rule begins.'
+        question: 'What people descended from Esau?',
+        options: ['Israelites', 'Edomites', 'Moabites', 'Ammonites'],
+        correctAnswer: 'Edomites',
+        explanation: 'Genesis 36:9: "These are the generations of Esau the father of the Edomites in the hill country of Seir."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
+      {
+        id: 'genesis36-q6',
+        question: "Who was Esau's grandson through Eliphaz?",
+        options: ['Teman', 'Korah', 'Both Teman and others', 'None listed'],
+        correctAnswer: 'Both Teman and others',
+        explanation: 'Genesis 36:11: "The sons of Eliphaz were Teman, Omar, Zepho, Gatam, and Kenaz."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis36-q7',
+        question: 'Who was Amalek in relation to Esau?',
+        options: ['Son', 'Grandson', 'Brother', 'Servant'],
+        correctAnswer: 'Grandson',
+        explanation: 'Genesis 36:12: "Timna was a concubine of Eliphaz...and she bore Amalek to Eliphaz."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis36-q8',
+        question: 'What type of leaders ruled Edom?',
+        options: ['Judges', 'Chiefs (or clan leaders)', 'Prophets', 'Priests'],
+        correctAnswer: 'Chiefs (or clan leaders)',
+        explanation: 'Genesis 36:15-19: The sons of Esau became chiefs of their clans.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis36-q9',
+        question: "Who were Esau's wives from?",
+        options: ['Israelites', 'Canaanite and Ishmaelite women', 'Egyptians', 'Philistines'],
+        correctAnswer: 'Canaanite and Ishmaelite women',
+        explanation: 'Genesis 36:2-3: Esau married Canaanite women and Basemath, daughter of Ishmael.',
+        difficulty: 'medium'
+      },
+      {
+        id: 'genesis36-q10',
+        question: 'Did Edom have kings before Israel?',
+        options: ['No', 'Yes', 'At the same time', 'It is not mentioned'],
+        correctAnswer: 'Yes',
+        explanation: 'Genesis 36:31: "These are the kings who reigned in the land of Edom, before any king reigned over the Israelites."',
+        difficulty: 'medium'
+      },
+      // HARD QUESTIONS (5)
+      {
+        id: 'genesis36-q11',
+        question: 'Who were the Horites?',
+        options: ['Egyptian slaves', 'The original inhabitants of Seir', 'Canaanite priests', 'Philistine warriors'],
+        correctAnswer: 'The original inhabitants of Seir',
+        explanation: 'Genesis 36:20: "These are the sons of Seir the Horite, the inhabitants of the land."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis36-q12',
+        question: 'Who was Anah and what did he discover?',
+        options: ['A king who found gold', 'A chief who found hot springs in the wilderness', 'A shepherd who found a well', 'A priest who found an altar'],
+        correctAnswer: 'A chief who found hot springs in the wilderness',
+        explanation: 'Genesis 36:24: "He is the Anah who found the hot springs in the wilderness."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis36-q13',
+        question: 'How many kings of Edom are listed in this chapter?',
+        options: ['Five', 'Eight', 'Twelve', 'Three'],
+        correctAnswer: 'Eight',
+        explanation: 'Genesis 36:31-39: Eight kings are listed who reigned in Edom.',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis36-q14',
+        question: "What was the name of Esau's first son?",
+        options: ['Reuel', 'Eliphaz', 'Korah', 'Jeush'],
+        correctAnswer: 'Eliphaz',
+        explanation: 'Genesis 36:10: "Eliphaz the son of Adah the wife of Esau."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis36-q15',
+        question: "Who was Timna?",
+        options: ['A wife of Esau', 'A concubine of Eliphaz', 'A daughter of Jacob', 'A queen of Edom'],
+        correctAnswer: 'A concubine of Eliphaz',
+        explanation: 'Genesis 36:12: "Timna was a concubine of Eliphaz, Esau\'s son; she bore Amalek to Eliphaz."',
+        difficulty: 'hard'
       }
     ],
     key_verse: 'Genesis 36:8',
-    key_verse_text: "So Esau settled in the hill country of Seir. (Esau is Edom.)",
+    key_verse_text: "So Esau settled in the hill country of Seir. Esau is Edom.",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
   },
+
   {
     id: 'genesis-37',
     bookId: 'genesis',
     chapter: 37,
-    title: 'Joseph’s Dreams and Slavery',
+    title: "Joseph's Dreams and Betrayal",
     questions: [
+      // EASY QUESTIONS (5)
       {
         id: 'genesis37-q1',
-        question: 'How old was Joseph when he had his dreams?',
-        options: [
-          'Rich twelve',
-          'Seventeen',
-          'Strong twenty',
-          'Silent fifteen'
-        ],
-        correctAnswer: 'Seventeen',
-        explanation: 'Genesis 37:2 (ESV): "These are the generations of Jacob. Joseph, being seventeen years old, was pasturing the flock with his brothers." Age marks.'
+        question: 'What special garment did Jacob give Joseph?',
+        options: ['A golden crown', 'A robe of many colors', 'A suit of armor', 'A priestly garment'],
+        correctAnswer: 'A robe of many colors',
+        explanation: 'Genesis 37:3 (ESV): "Now Israel loved Joseph more than any other of his sons...And he made him a robe of many colors."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis37-q2',
-        question: 'What did Joseph dream his brothers did?',
-        options: [
-          'Gave him riches',
-          'Bowed down to him',
-          'Grew strong',
-          'Kept silent'
-        ],
-        correctAnswer: 'Bowed down to him',
-        explanation: 'Genesis 37:7 (ESV): "‘Behold, we were binding sheaves in the field, and behold, my sheaf arose and stood upright. And behold, your sheaves gathered around it and bowed down to my sheaf.’" Vision foretells.'
+        question: "Why did Joseph's brothers hate him?",
+        options: ['He was lazy', 'Their father loved him more', 'He stole from them', 'He was the oldest'],
+        correctAnswer: 'Their father loved him more',
+        explanation: 'Genesis 37:4: "But when his brothers saw that their father loved him more than all his brothers, they hated him."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis37-q3',
-        question: 'What did Jacob give Joseph?',
-        options: [
-          'Rich gold',
-          'A robe of many colors',
-          'Strong flocks',
-          'Silent blessings'
-        ],
-        correctAnswer: 'A robe of many colors',
-        explanation: 'Genesis 37:3 (ESV): "Now Israel loved Joseph more than any other of his sons, because he was the son of his old age. And he made him a robe of many colors." Favor adorns.'
+        question: 'What did Joseph dream about sheaves?',
+        options: ['They were burned', "His brothers' sheaves bowed to his", 'They flew away', 'They turned to dust'],
+        correctAnswer: "His brothers' sheaves bowed to his",
+        explanation: 'Genesis 37:7: "Your sheaves gathered around it and bowed down to my sheaf."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis37-q4',
-        question: 'Who suggested selling Joseph?',
-        options: [
-          'Rich Reuben',
-          'Judah',
-          'Strong Simeon',
-          'Silent Levi'
-        ],
-        correctAnswer: 'Judah',
-        explanation: 'Genesis 37:26-27 (ESV): "Then Judah said to his brothers, ‘What profit is it if we kill our brother and conceal his blood? Come, let us sell him to the Ishmaelites, and let not our hand be upon him, for he is our brother, our own flesh.’ And his brothers listened to him." Plan spares.'
+        question: "What did Joseph's brothers do to him?",
+        options: ['Honored him', 'Sold him to traders', 'Sent him to school', 'Made him king'],
+        correctAnswer: 'Sold him to traders',
+        explanation: 'Genesis 37:28: "They...sold him to the Ishmaelites for twenty shekels of silver."',
+        difficulty: 'easy'
       },
       {
         id: 'genesis37-q5',
-        question: 'To whom was Joseph sold in Egypt?',
-        options: [
-          'Rich Pharaoh',
-          'Potiphar, an officer',
-          'Strong Ishmaelites',
-          'Silent Midianites'
-        ],
-        correctAnswer: 'Potiphar, an officer',
-        explanation: 'Genesis 37:36 (ESV): "Meanwhile the Midianites had sold him in Egypt to Potiphar, an officer of Pharaoh, the captain of the guard." Fate delivers.'
-      }
-    ],
-    key_verse: 'Genesis 37:7',
-    key_verse_text: "‘Behold, we were binding sheaves in the field, and behold, my sheaf arose and stood upright. And behold, your sheaves gathered around it and bowed down to my sheaf.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-38',
-    bookId: 'genesis',
-    chapter: 38,
-    title: 'Judah and Tamar',
-    questions: [
+        question: 'Where was Joseph taken to?',
+        options: ['Babylon', 'Egypt', 'Haran', 'Moab'],
+        correctAnswer: 'Egypt',
+        explanation: 'Genesis 37:28: "They took Joseph to Egypt."',
+        difficulty: 'easy'
+      },
+      // MEDIUM QUESTIONS (5)
       {
-        id: 'genesis38-q1',
-        question: 'Who was Judah’s first wife?',
-        options: [
-          'Rich Tamar',
-          'Daughter of Shua',
-          'Strong Dinah',
-          'Silent Rachel'
-        ],
-        correctAnswer: 'Daughter of Shua',
-        explanation: 'Genesis 38:2 (ESV): "There Judah saw the daughter of a certain Canaanite whose name was Shua. He took her and went in to her," Marriage begins.'
+        id: 'genesis37-q6',
+        question: 'In his second dream, what bowed down to Joseph?',
+        options: ['Stars only', 'The sun, moon, and eleven stars', 'Trees', 'Animals'],
+        correctAnswer: 'The sun, moon, and eleven stars',
+        explanation: 'Genesis 37:9: "The sun, the moon, and eleven stars were bowing down to me."',
+        difficulty: 'medium'
       },
       {
-        id: 'genesis38-q2',
-        question: 'What happened to Judah’s son Er?',
-        options: [
-          'Gained riches',
-          'God put him to death',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'God put him to death',
-        explanation: 'Genesis 38:7 (ESV): "But Er, Judah’s firstborn, was wicked in the sight of the Lord, and the Lord put him to death." Judgment falls.'
+        id: 'genesis37-q7',
+        question: 'Which brother suggested not killing Joseph?',
+        options: ['Judah', 'Reuben', 'Simeon', 'Levi'],
+        correctAnswer: 'Reuben',
+        explanation: 'Genesis 37:21-22: "Reuben heard it and rescued him out of their hands, saying, \'Let us not take his life.\'"',
+        difficulty: 'medium'
       },
       {
-        id: 'genesis38-q3',
-        question: 'What did Tamar do to Judah?',
-        options: [
-          'Gave him riches',
-          'Posed as a prostitute',
-          'Built strength',
-          'Kept silent'
-        ],
-        correctAnswer: 'Posed as a prostitute',
-        explanation: 'Genesis 38:15-16 (ESV): "When Judah saw her, he thought she was a prostitute, for she had covered her face. He turned to her at the roadside and said, ‘Come, let me come in to you,’ for he did not know that she was his daughter-in-law." Deception acts.'
+        id: 'genesis37-q8',
+        question: 'What did the brothers do to deceive Jacob?',
+        options: ['Said Joseph ran away', "Dipped Joseph's robe in goat blood", 'Said he drowned', 'Said a fire killed him'],
+        correctAnswer: "Dipped Joseph's robe in goat blood",
+        explanation: 'Genesis 37:31: "They took Joseph\'s robe and slaughtered a goat and dipped the robe in the blood."',
+        difficulty: 'medium'
       },
       {
-        id: 'genesis38-q4',
-        question: 'What did Tamar keep as a pledge?',
-        options: [
-          'Rich gold',
-          'Judah’s signet, cord, and staff',
-          'Strong flocks',
-          'Silent tokens'
-        ],
-        correctAnswer: 'Judah’s signet, cord, and staff',
-        explanation: 'Genesis 38:18 (ESV): "He said, ‘What pledge shall I give you?’ She replied, ‘Your signet and your cord and your staff that is in your hand.’ So he gave them to her and went in to her, and she conceived by him." Proof secures.'
+        id: 'genesis37-q9',
+        question: 'How much was Joseph sold for?',
+        options: ['Ten shekels', 'Twenty shekels of silver', 'Thirty pieces of gold', 'Fifty shekels'],
+        correctAnswer: 'Twenty shekels of silver',
+        explanation: 'Genesis 37:28: "They...sold him to the Ishmaelites for twenty shekels of silver."',
+        difficulty: 'medium'
       },
       {
-        id: 'genesis38-q5',
-        question: 'Who were Tamar’s twin sons?',
-        options: [
-          'Rich Er and Onan',
-          'Perez and Zerah',
-          'Strong Shelah and Judah',
-          'Silent Pharez and Zimri'
-        ],
-        correctAnswer: 'Perez and Zerah',
-        explanation: 'Genesis 38:29-30 (ESV): "But as he drew back his hand, behold, his brother came out. And she said, ‘What a breach you have made for yourself!’ Therefore his name was called Perez. Afterward his brother came out with the scarlet thread on his hand, and his name was called Zerah." Birth names.'
-      }
-    ],
-    key_verse: 'Genesis 38:26',
-    key_verse_text: "Then Judah identified them and said, ‘She is more righteous than I, since I did not give her to my son Shelah.’ And he did not know her again.",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-39',
-    bookId: 'genesis',
-    chapter: 39,
-    title: 'Joseph in Potiphar’s House',
-    questions: [
-      {
-        id: 'genesis39-q1',
+        id: 'genesis37-q10',
         question: 'Who bought Joseph in Egypt?',
-        options: [
-          'Rich Pharaoh',
-          'Potiphar, captain of the guard',
-          'Strong Midianites',
-          'Silent Ishmaelites'
-        ],
-        correctAnswer: 'Potiphar, captain of the guard',
-        explanation: 'Genesis 39:1 (ESV): "Now Joseph had been brought down to Egypt, and Potiphar, an Egyptian who was one of Pharaoh’s officers, the captain of the guard, bought him from the Ishmaelites who had brought him down there." Service begins.'
+        options: ['Pharaoh', 'Potiphar', 'The jailer', 'A priest'],
+        correctAnswer: 'Potiphar',
+        explanation: 'Genesis 37:36: "The Midianites had sold him in Egypt to Potiphar, an officer of Pharaoh."',
+        difficulty: 'medium'
       },
+      // HARD QUESTIONS (5)
       {
-        id: 'genesis39-q2',
-        question: 'Why did Joseph prosper in Potiphar’s house?',
-        options: [
-          'Rich bribes',
-          'The Lord was with him',
-          'Strong skills',
-          'Silent favor'
-        ],
-        correctAnswer: 'The Lord was with him',
-        explanation: 'Genesis 39:2-3 (ESV): "The Lord was with Joseph, and he became a successful man, and he was in the house of his Egyptian master. His master saw that the Lord was with him and that the Lord caused all that he did to succeed in his hands." Blessing prospers.'
-      },
-      {
-        id: 'genesis39-q3',
-        question: 'What did Potiphar’s wife try to do?',
-        options: [
-          'Give him riches',
-          'Seduce Joseph',
-          'Make him strong',
-          'Keep him silent'
-        ],
-        correctAnswer: 'Seduce Joseph',
-        explanation: 'Genesis 39:7 (ESV): "And after a time his master’s wife cast her eyes on Joseph and said, ‘Lie with me.’" Temptation lures.'
-      },
-      {
-        id: 'genesis39-q4',
-        question: 'Why was Joseph imprisoned?',
-        options: [
-          'Stole riches',
-          'False accusation of assault',
-          'Lost strength',
-          'Spoke silently'
-        ],
-        correctAnswer: 'False accusation of assault',
-        explanation: 'Genesis 39:17-18 (ESV): "and she told him the same story, saying, ‘The Hebrew servant, whom you have brought among us, came in to me to laugh at me. But as soon as I lifted up my voice and cried, he left his garment beside me and fled out of the house.’" Lie accuses.'
-      },
-      {
-        id: 'genesis39-q5',
-        question: 'How did Joseph fare in prison?',
-        options: [
-          'Gained riches',
-          'The Lord showed him favor',
-          'Grew strong',
-          'Remained silent'
-        ],
-        correctAnswer: 'The Lord showed him favor',
-        explanation: 'Genesis 39:21 (ESV): "But the Lord was with Joseph and showed him steadfast love and gave him favor in the sight of the keeper of the prison." Grace sustains.'
-      }
-    ],
-    key_verse: 'Genesis 39:21',
-    key_verse_text: "But the Lord was with Joseph and showed him steadfast love and gave him favor in the sight of the keeper of the prison.",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-40',
-    bookId: 'genesis',
-    chapter: 40,
-    title: 'Joseph Interprets Dreams',
-    questions: [
-      {
-        id: 'genesis40-q1',
-        question: 'Who were imprisoned with Joseph?',
-        options: [
-          'Rich merchants',
-          'Pharaoh’s cupbearer and baker',
-          'Strong guards',
-          'Silent scribes'
-        ],
-        correctAnswer: 'Pharaoh’s cupbearer and baker',
-        explanation: 'Genesis 40:1-2 (ESV): "Some time after this, the cupbearer of the king of Egypt and his baker committed an offense against their lord the king of Egypt. And Pharaoh was angry with his two officers, the chief cupbearer and the chief baker," Companions join.'
-      },
-      {
-        id: 'genesis40-q2',
-        question: 'What did the cupbearer dream about?',
-        options: [
-          'Rich gold',
-          'A vine with three branches',
-          'Strong horses',
-          'Silent rivers'
-        ],
-        correctAnswer: 'A vine with three branches',
-        explanation: 'Genesis 40:9-10 (ESV): "So the chief cupbearer told his dream to Joseph and said to him, ‘In my dream there was a vine before me, and on the vine there were three branches. As soon as it budded, its blossoms shot forth, and the clusters ripened into grapes.’" Vision shares.'
-      },
-      {
-        id: 'genesis40-q3',
-        question: 'What did Joseph say the cupbearer’s dream meant?',
-        options: [
-          'Rich reward',
-          'Restored in three days',
-          'Strong rule',
-          'Silent freedom'
-        ],
-        correctAnswer: 'Restored in three days',
-        explanation: 'Genesis 40:12-13 (ESV): "Then Joseph said to him, ‘This is its interpretation: the three branches are three days. In three days Pharaoh will lift up your head and restore you to your office, and you shall place Pharaoh’s cup in his hand as formerly, when you were his cupbearer.’" Hope interprets.'
-      },
-      {
-        id: 'genesis40-q4',
-        question: 'What did the baker dream about?',
-        options: [
-          'Rich feasts',
-          'Three baskets of bread',
-          'Strong ovens',
-          'Silent loaves'
-        ],
-        correctAnswer: 'Three baskets of bread',
-        explanation: 'Genesis 40:16-17 (ESV): "When the chief baker saw that the interpretation was favorable, he said to Joseph, ‘I also had a dream: there were three cake baskets on my head, and in the top basket there were all sorts of baked food for Pharaoh, but the birds were eating it out of the basket on my head.’" Doom foretells.'
-      },
-      {
-        id: 'genesis40-q5',
-        question: 'What happened to the baker?',
-        options: [
-          'Gained riches',
-          'Hanged, as Joseph predicted',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Hanged, as Joseph predicted',
-        explanation: 'Genesis 40:22 (ESV): "But he hanged the chief baker, as Joseph had interpreted to them." Fate fulfills.'
-      }
-    ],
-    key_verse: 'Genesis 40:13',
-    key_verse_text: "In three days Pharaoh will lift up your head and restore you to your office, and you shall place Pharaoh’s cup in his hand as formerly, when you were his cupbearer.",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-41',
-    bookId: 'genesis',
-    chapter: 41,
-    title: 'Joseph Rises to Power',
-    questions: [
-      {
-        id: 'genesis41-q1',
-        question: 'How long was Joseph in prison before Pharaoh’s dreams?',
-        options: [
-          'Rich one year',
-          'Two years',
-          'Strong three years',
-          'Silent five years'
-        ],
-        correctAnswer: 'Two years',
-        explanation: 'Genesis 41:1 (ESV): "After two whole years, Pharaoh dreamed that he was standing by the Nile," Time passes.'
-      },
-      {
-        id: 'genesis41-q2',
-        question: 'What did Pharaoh dream about first?',
-        options: [
-          'Rich gold',
-          'Seven fat and seven thin cows',
-          'Strong soldiers',
-          'Silent rivers'
-        ],
-        correctAnswer: 'Seven fat and seven thin cows',
-        explanation: 'Genesis 41:2-4 (ESV): "and behold, there came up out of the Nile seven cows, attractive and plump, and they fed in the reed grass. And behold, seven other cows, gaunt and thin, came up out of the Nile after them, and stood by the other cows on the bank of the Nile. And the gaunt and thin cows ate up the seven attractive and plump cows." Vision warns.'
-      },
-      {
-        id: 'genesis41-q3',
-        question: 'What did Joseph interpret the dreams to mean?',
-        options: [
-          'Rich harvest',
-          'Seven years of plenty, seven of famine',
-          'Strong battles',
-          'Silent peace'
-        ],
-        correctAnswer: 'Seven years of plenty, seven of famine',
-        explanation: 'Genesis 41:29-30 (ESV): "There will come seven years of great plenty throughout all the land of Egypt, but after them there will arise seven years of famine, and all the plenty will be forgotten in the land of Egypt. The famine will consume the land," Wisdom foretells.'
-      },
-      {
-        id: 'genesis41-q4',
-        question: 'What role did Pharaoh give Joseph?',
-        options: [
-          'Rich treasurer',
-          'Ruler over Egypt',
-          'Strong general',
-          'Silent advisor'
-        ],
-        correctAnswer: 'Ruler over Egypt',
-        explanation: 'Genesis 41:40-41 (ESV): "‘You shall be over my house, and all my people shall order themselves as you command. Only as regards the throne will I be greater than you.’ And Pharaoh said to Joseph, ‘See, I have set you over all the land of Egypt.’" Authority rises.'
-      },
-      {
-        id: 'genesis41-q5',
-        question: 'What was Joseph’s Egyptian name?',
-        options: [
-          'Rich Potiphar',
-          'Zaphenath-paneah',
-          'Strong Amun',
-          'Silent Ptah'
-        ],
-        correctAnswer: 'Zaphenath-paneah',
-        explanation: 'Genesis 41:45 (ESV): "And Pharaoh called Joseph’s name Zaphenath-paneah. And he gave him in marriage Asenath, the daughter of Potiphera priest of On. So Joseph went out over the land of Egypt." Identity shifts.'
-      }
-    ],
-    key_verse: 'Genesis 41:16',
-    key_verse_text: "Joseph answered Pharaoh, ‘It is not in me; God will give Pharaoh a favorable answer.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-42',
-    bookId: 'genesis',
-    chapter: 42,
-    title: 'Joseph’s Brothers Go to Egypt',
-    questions: [
-      {
-        id: 'genesis42-q1',
-        question: 'Why did Jacob send his sons to Egypt?',
-        options: [
-          'To seek riches',
-          'To buy grain',
-          'To gain strength',
-          'To stay silent'
-        ],
-        correctAnswer: 'To buy grain',
-        explanation: 'Genesis 42:1-2 (ESV): "When Jacob learned that there was grain for sale in Egypt, he said to his sons, ‘Why do you look at one another?’ And he said, ‘Behold, I have heard that there is grain for sale in Egypt. Go down and buy grain for us there, that we may live and not die.’" Famine drives.'
-      },
-      {
-        id: 'genesis42-q2',
-        question: 'Which brother stayed behind?',
-        options: [
-          'Rich Judah',
-          'Benjamin',
-          'Strong Reuben',
-          'Silent Levi'
-        ],
-        correctAnswer: 'Benjamin',
-        explanation: 'Genesis 42:4 (ESV): "But Jacob did not send Benjamin, Joseph’s brother, with his brothers, for he feared that harm might happen to him." Fear protects.'
-      },
-      {
-        id: 'genesis42-q3',
-        question: 'What did Joseph accuse his brothers of being?',
-        options: [
-          'Rich merchants',
-          'Spies',
-          'Strong warriors',
-          'Silent thieves'
-        ],
-        correctAnswer: 'Spies',
-        explanation: 'Genesis 42:9 (ESV): "And Joseph remembered the dreams that he had dreamed of them. And he said to them, ‘You are spies; you have come to see the nakedness of the land.’" Test probes.'
-      },
-      {
-        id: 'genesis42-q4',
-        question: 'Who was kept in prison by Joseph?',
-        options: [
-          'Rich Judah',
-          'Simeon',
-          'Strong Reuben',
-          'Silent Levi'
-        ],
-        correctAnswer: 'Simeon',
-        explanation: 'Genesis 42:24 (ESV): "Then he turned away from them and wept. And he returned to them and spoke to them. And he took Simeon from them and bound him before their eyes." Bond holds.'
-      },
-      {
-        id: 'genesis42-q5',
-        question: 'What did the brothers find in their sacks?',
-        options: [
-          'Rich gold',
-          'Their money returned',
-          'Strong tools',
-          'Silent gifts'
-        ],
-        correctAnswer: 'Their money returned',
-        explanation: 'Genesis 42:27-28 (ESV): "And as one of them opened his sack to give his donkey fodder at the lodging place, he saw his money in the mouth of his sack. He said to his brothers, ‘My money has been put back; here it is in the mouth of my sack!’" Discovery alarms.'
-      }
-    ],
-    key_verse: 'Genesis 42:18',
-    key_verse_text: "On the third day Joseph said to them, ‘Do this and you will live, for I fear God:",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-43',
-    bookId: 'genesis',
-    chapter: 43,
-    title: 'The Brothers Return with Benjamin',
-    questions: [
-      {
-        id: 'genesis43-q1',
-        question: 'Why did Jacob finally send Benjamin?',
-        options: [
-          'Seeking riches',
-          'Famine forced more grain',
-          'Strengthening ties',
-          'Silent agreement'
-        ],
-        correctAnswer: 'Famine forced more grain',
-        explanation: 'Genesis 43:2 (ESV): "And when they had eaten the grain that they had brought from Egypt, their father said to them, ‘Go again, buy us a little food.’" Need compels.'
-      },
-      {
-        id: 'genesis43-q2',
-        question: 'What did Judah promise Jacob?',
-        options: [
-          'Rich rewards',
-          'To ensure Benjamin’s safety',
-          'Strong protection',
-          'Silent return'
-        ],
-        correctAnswer: 'To ensure Benjamin’s safety',
-        explanation: 'Genesis 43:9 (ESV): "‘I will be a pledge of his safety. From my hand you shall require him. If I do not bring him back to you and set him before you, then let me bear the blame forever.’" Oath binds.'
-      },
-      {
-        id: 'genesis43-q3',
-        question: 'What did the brothers bring to Joseph?',
-        options: [
-          'Rich gold',
-          'Gifts of balm and honey',
-          'Strong camels',
-          'Silent offerings'
-        ],
-        correctAnswer: 'Gifts of balm and honey',
-        explanation: 'Genesis 43:11 (ESV): "Then their father Israel said to them, ‘If it must be so, then do this: take some of the choice fruits of the land in your bags, and carry a present down to the man, a little balm and a little honey, gum, myrrh, pistachio nuts, and almonds.’" Tribute offers.'
-      },
-      {
-        id: 'genesis43-q4',
-        question: 'Where did Joseph host his brothers?',
-        options: [
-          'Rich palace',
-          'His own house',
-          'Strong fortress',
-          'Silent temple'
-        ],
-        correctAnswer: 'His own house',
-        explanation: 'Genesis 43:16 (ESV): "When Joseph saw Benjamin with them, he said to the steward of his house, ‘Bring the men into the house, and slaughter an animal and make ready, for the men are to dine with me at noon.’" Hospitality invites.'
-      },
-      {
-        id: 'genesis43-q5',
-        question: 'What amazed the brothers at the meal?',
-        options: [
-          'Rich wealth',
-          'Seating by birth order',
-          'Strong guards',
-          'Silent service'
-        ],
-        correctAnswer: 'Seating by birth order',
-        explanation: 'Genesis 43:33 (ESV): "And they sat before him, the firstborn according to his birthright and the youngest according to his youth. And the men looked at one another in amazement." Order reveals.'
-      }
-    ],
-    key_verse: 'Genesis 43:14',
-    key_verse_text: "‘May God Almighty grant you mercy before the man, and may he send back your other brother and Benjamin. And as for me, if I am bereaved of my children, I am bereaved.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  },
-  {
-    id: 'genesis-44',
-    bookId: 'genesis',
-    chapter: 44,
-    title: 'Joseph Tests His Brothers',
-    questions: [
-      {
-        id: 'genesis44-q1',
-        question: 'What did Joseph hide in Benjamin’s sack?',
-        options: [
-          'Rich gold',
-          'A silver cup',
-          'Strong jewels',
-          'Silent coins'
-        ],
-        correctAnswer: 'A silver cup',
-        explanation: 'Genesis 44:2 (ESV): "‘and put my cup, the silver cup, in the mouth of the sack of the youngest, with his money for the grain.’ And he did as Joseph told him." Trap sets.'
-      },
-      {
-        id: 'genesis44-q2',
-        question: 'What did Joseph’s steward accuse the brothers of?',
-        options: [
-          'Stealing riches',
-          'Stealing the cup',
-          'Breaking strength',
-          'Silent theft'
-        ],
-        correctAnswer: 'Stealing the cup',
-        explanation: 'Genesis 44:6-7 (ESV): "When he overtook them, he spoke to them these words. They said to him, ‘Why does my lord speak such words as these? Far be it from your servants to do such a thing!’" Accusation challenges.'
-      },
-      {
-        id: 'genesis44-q3',
-        question: 'Who offered himself as a slave for Benjamin?',
-        options: [
-          'Rich Reuben',
-          'Judah',
-          'Strong Levi',
-          'Silent Simeon'
-        ],
+        id: 'genesis37-q11',
+        question: 'Which brother proposed selling Joseph instead of killing him?',
+        options: ['Reuben', 'Judah', 'Simeon', 'Dan'],
         correctAnswer: 'Judah',
-        explanation: 'Genesis 44:33 (ESV): "‘Now therefore, please let your servant remain instead of the boy as a servant to my lord, and let the boy go back with his brothers.’" Sacrifice pleads.'
+        explanation: 'Genesis 37:26-27: "Then Judah said...Come, let us sell him to the Ishmaelites."',
+        difficulty: 'hard'
       },
       {
-        id: 'genesis44-q4',
-        question: 'What did the brothers fear losing?',
-        options: [
-          'Rich lands',
-          'Benjamin to slavery',
-          'Strong flocks',
-          'Silent hope'
-        ],
-        correctAnswer: 'Benjamin to slavery',
-        explanation: 'Genesis 44:17 (ESV): "But he said, ‘Far be it from me that I should do so! Only the man in whose hand the cup was found shall be my servant. But as for you, go up in peace to your father.’" Threat looms.'
+        id: 'genesis37-q12',
+        question: 'Where were the brothers pasturing when Joseph was sent to them?',
+        options: ['Hebron', 'Shechem, then Dothan', 'Bethel', 'Beersheba'],
+        correctAnswer: 'Shechem, then Dothan',
+        explanation: 'Genesis 37:12-17: Jacob sent Joseph to Shechem, but the brothers had moved to Dothan.',
+        difficulty: 'hard'
       },
       {
-        id: 'genesis44-q5',
-        question: 'What did Judah recount to Joseph?',
-        options: [
-          'Rich promises',
-          'Their father’s grief',
-          'Strong battles',
-          'Silent vows'
-        ],
-        correctAnswer: 'Their father’s grief',
-        explanation: 'Genesis 44:30-31 (ESV): "‘Now therefore, as soon as I come to your servant my father, and the boy is not with us, then, as his life is bound up in the boy’s life, as soon as he sees that the boy is not with us, he will die, and your servants will bring down the gray hairs of your servant our father with sorrow to Sheol.’" Love speaks.'
+        id: 'genesis37-q13',
+        question: 'Where did the brothers first throw Joseph?',
+        options: ['A river', 'A pit (cistern)', 'A cave', 'A field'],
+        correctAnswer: 'A pit (cistern)',
+        explanation: 'Genesis 37:24: "They took him and threw him into a pit. The pit was empty; there was no water in it."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis37-q14',
+        question: 'What was Potiphar\'s role?',
+        options: ['Pharaoh\'s cupbearer', 'Captain of the guard', 'Chief baker', 'Tax collector'],
+        correctAnswer: 'Captain of the guard',
+        explanation: 'Genesis 37:36: "Potiphar, an officer of Pharaoh, the captain of the guard."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'genesis37-q15',
+        question: 'How old was Joseph when he had his dreams?',
+        options: ['Twelve', 'Seventeen', 'Twenty', 'Thirty'],
+        correctAnswer: 'Seventeen',
+        explanation: 'Genesis 37:2: "Joseph, being seventeen years old, was pasturing the flock with his brothers."',
+        difficulty: 'hard'
       }
     ],
-    key_verse: 'Genesis 44:33',
-    key_verse_text: "‘Now therefore, please let your servant remain instead of the boy as a servant to my lord, and let the boy go back with his brothers.’",
+    key_verse: 'Genesis 37:28',
+    key_verse_text: "They drew Joseph up and lifted him out of the pit, and sold him to the Ishmaelites for twenty shekels of silver.",
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
   },
-  {
-    id: 'genesis-45',
+{
+  id: 'genesis-38',
     bookId: 'genesis',
-    chapter: 45,
-    title: 'Joseph Reveals Himself',
-    questions: [
-      {
-        id: 'genesis45-q1',
-        question: 'What did Joseph do when he revealed himself?',
-        options: [
-          'Gave riches',
-          'Wept aloud',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Wept aloud',
-        explanation: 'Genesis 45:2 (ESV): "And he wept aloud, so that the Egyptians heard it, and the household of Pharaoh heard it." Emotion overflows.'
-      },
-      {
-        id: 'genesis45-q2',
-        question: 'Who did Joseph say sent him to Egypt?',
-        options: [
-          'Rich Pharaoh',
-          'God',
-          'Strong brothers',
-          'Silent fate'
-        ],
-        correctAnswer: 'God',
-        explanation: 'Genesis 45:7-8 (ESV): "‘And God sent me before you to preserve for you a remnant on earth, and to keep alive for you many survivors. So it was not you who sent me here, but God. He has made me a father to Pharaoh, and lord of all his house and ruler over all the land of Egypt.’" Providence rules.'
-      },
-      {
-        id: 'genesis45-q3',
-        question: 'Where did Joseph invite his family to live?',
-        options: [
-          'Rich Canaan',
-          'Goshen',
-          'Strong Memphis',
-          'Silent On'
-        ],
-        correctAnswer: 'Goshen',
-        explanation: 'Genesis 45:10 (ESV): "‘You shall dwell in the land of Goshen, and you shall be near me, you and your children and your children’s children, and your flocks, your herds, and all that you have.’" Refuge offers.'
-      },
-      {
-        id: 'genesis45-q4',
-        question: 'What did Pharaoh give Joseph’s brothers?',
-        options: [
-          'Rich gold',
-          'Carts and provisions',
-          'Strong horses',
-          'Silent lands'
-        ],
-        correctAnswer: 'Carts and provisions',
-        explanation: 'Genesis 45:21 (ESV): "The sons of Israel did so: and Joseph gave them wagons, according to the command of Pharaoh, and gave them provisions for the journey." Generosity aids.'
-      },
-      {
-        id: 'genesis45-q5',
-        question: 'What did Joseph warn his brothers not to do?',
-        options: [
-          'Seek riches',
-          'Quarrel on the way',
-          'Grow strong',
-          'Stay silent'
-        ],
-        correctAnswer: 'Quarrel on the way',
-        explanation: 'Genesis 45:24 (ESV): "Then he sent his brothers away, and as they departed, he said to them, ‘Do not quarrel on the way.’" Unity urges.'
-      }
-    ],
-    key_verse: 'Genesis 45:8',
-    key_verse_text: "‘So it was not you who sent me here, but God. He has made me a father to Pharaoh, and lord of all his house and ruler over all the land of Egypt.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
+      chapter: 38,
+        title: 'Judah and Tamar',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis38-q1',
+              question: "Who was Judah's first son?",
+              options: ['Shelah', 'Er', 'Onan', 'Perez'],
+              correctAnswer: 'Er',
+              explanation: 'Genesis 38:3 (ESV): "She conceived and bore a son, and he called his name Er."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis38-q2',
+              question: 'Why did God put Er to death?',
+              options: ['He stole', 'He was wicked', 'He lied', 'He worshiped idols'],
+              correctAnswer: 'He was wicked',
+              explanation: 'Genesis 38:7: "But Er, Judah\'s firstborn, was wicked in the sight of the LORD, and the LORD put him to death."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis38-q3',
+              question: 'Who disguised herself to deceive Judah?',
+              options: ['Leah', 'Tamar', 'Rachel', 'Dinah'],
+              correctAnswer: 'Tamar',
+              explanation: 'Genesis 38:14: "She took off her widow\'s garments and covered herself with a veil."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis38-q4',
+              question: 'What twins did Tamar bear?',
+              options: ['Jacob and Esau', 'Perez and Zerah', 'Simeon and Levi', 'Er and Onan'],
+              correctAnswer: 'Perez and Zerah',
+              explanation: 'Genesis 38:27-30: Tamar gave birth to twins: Perez and Zerah.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis38-q5',
+              question: "Who was Judah's wife?",
+              options: ['Tamar', 'The daughter of Shua', 'Rachel', 'Leah'],
+              correctAnswer: 'The daughter of Shua',
+              explanation: 'Genesis 38:2: "There Judah saw the daughter of a certain Canaanite whose name was Shua. He took her and went in to her."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis38-q6',
+              question: 'Why did God put Onan to death?',
+              options: ['He murdered', 'He refused to raise offspring for his brother', 'He stole', 'He blasphemed'],
+              correctAnswer: 'He refused to raise offspring for his brother',
+              explanation: 'Genesis 38:9-10: Onan refused to fulfill his duty to raise offspring for his brother, and God put him to death.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis38-q7',
+              question: 'What pledge did Judah give Tamar?',
+              options: ['Money', 'His signet, cord, and staff', 'A ring', 'Livestock'],
+              correctAnswer: 'His signet, cord, and staff',
+              explanation: 'Genesis 38:18: "He said, \'What pledge shall I give you?\' She replied, \'Your signet and your cord and your staff.\'"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis38-q8',
+              question: "What was Judah's initial reaction when he learned Tamar was pregnant?",
+              options: ['Joy', 'He ordered her to be burned', 'He forgave her', 'He ignored it'],
+              correctAnswer: 'He ordered her to be burned',
+              explanation: 'Genesis 38:24: "Judah said, \'Bring her out, and let her be burned.\'"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis38-q9',
+              question: 'How did Tamar prove Judah was the father?',
+              options: ['She had witnesses', 'She showed his signet, cord, and staff', 'She swore an oath', 'A servant testified'],
+              correctAnswer: 'She showed his signet, cord, and staff',
+              explanation: 'Genesis 38:25: "She sent to her father-in-law, saying, \'By the man to whom these belong, I am pregnant.\'"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis38-q10',
+              question: 'What did Judah say about Tamar after learning the truth?',
+              options: ['She should still die', 'She is more righteous than I', 'She should be exiled', 'He said nothing'],
+              correctAnswer: 'She is more righteous than I',
+              explanation: 'Genesis 38:26: "Then Judah identified them and said, \'She is more righteous than I.\'"',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis38-q11',
+              question: 'Why did Tamar disguise herself?',
+              options: ['For fun', 'Because Judah withheld Shelah from her', 'She was fleeing', 'To steal'],
+              correctAnswer: 'Because Judah withheld Shelah from her',
+              explanation: 'Genesis 38:14: "For she saw that Shelah was grown up, and she had not been given to him in marriage."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis38-q12',
+              question: "What happened at Zerah's birth?",
+              options: ['He came out first', 'A scarlet thread was tied on his hand though Perez came out first', 'He was silent', 'He cried loudly'],
+              correctAnswer: 'A scarlet thread was tied on his hand though Perez came out first',
+              explanation: 'Genesis 38:28-30: The midwife tied a scarlet thread on Zerah\'s hand, but Perez broke through first.',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis38-q13',
+              question: "Who did Judah send to pay Tamar and retrieve his pledge?",
+              options: ['His servant', 'His friend Hirah the Adullamite', 'His son Shelah', 'A shepherd'],
+              correctAnswer: 'His friend Hirah the Adullamite',
+              explanation: 'Genesis 38:20: "Judah sent the young goat by his friend the Adullamite to take back the pledge."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis38-q14',
+              question: 'Where was Tamar sitting when Judah saw her?',
+              options: ['At a well', 'At the entrance to Enaim', 'In a marketplace', 'By the city gate'],
+              correctAnswer: 'At the entrance to Enaim',
+              explanation: 'Genesis 38:14: "She sat at the entrance to Enaim, which is on the road to Timnah."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis38-q15',
+              question: 'Why is Perez significant in biblical history?',
+              options: ['He became a priest', 'He was in the lineage of David and Jesus', 'He conquered Egypt', 'He built the temple'],
+              correctAnswer: 'He was in the lineage of David and Jesus',
+              explanation: 'Perez is listed in the genealogy of David (Ruth 4:18-22) and Jesus (Matthew 1:3).',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 38:26',
+              key_verse_text: "Then Judah identified them and said, 'She is more righteous than I.'",
+                memory_challenge: true,
+                  difficulty: 'hard',
+                    points: 20
   },
-  {
-    id: 'genesis-46',
+{
+  id: 'genesis-39',
     bookId: 'genesis',
-    chapter: 46,
-    title: 'Jacob’s Family Moves to Egypt',
-    questions: [
-      {
-        id: 'genesis46-q1',
-        question: 'Where did God speak to Jacob in a vision?',
-        options: [
-          'Rich Canaan',
-          'Beersheba',
-          'Strong Haran',
-          'Silent Bethel'
-        ],
-        correctAnswer: 'Beersheba',
-        explanation: 'Genesis 46:2 (ESV): "And God spoke to Israel in visions of the night and said, ‘Jacob, Jacob.’ And he said, ‘Here I am.’" Vision assures.'
-      },
-      {
-        id: 'genesis46-q2',
-        question: 'What did God promise Jacob in Egypt?',
-        options: [
-          'Rich wealth',
-          'A great nation',
-          'Strong armies',
-          'Silent return'
-        ],
-        correctAnswer: 'A great nation',
-        explanation: 'Genesis 46:3 (ESV): "Then he said, ‘I am God, the God of your father. Do not be afraid to go down to Egypt, for there I will make you into a great nation.’" Covenant reaffirms.'
-      },
-      {
-        id: 'genesis46-q3',
-        question: 'How many of Jacob’s descendants went to Egypt?',
-        options: [
-          'Rich fifty',
-          'Seventy',
-          'Strong eighty',
-          'Silent sixty'
-        ],
-        correctAnswer: 'Seventy',
-        explanation: 'Genesis 46:27 (ESV): "And the sons of Joseph, who were born to him in Egypt, were two. All the persons of the house of Jacob who came into Egypt were seventy." Count totals.'
-      },
-      {
-        id: 'genesis46-q4',
-        question: 'Where did Jacob settle in Egypt?',
-        options: [
-          'Rich Memphis',
-          'Goshen',
-          'Strong On',
-          'Silent Rameses'
-        ],
-        correctAnswer: 'Goshen',
-        explanation: 'Genesis 46:34 (ESV): "you shall say, ‘Your servants have been keepers of livestock from our youth even until now, both we and our fathers,’ in order that you may dwell in the land of Goshen, for every shepherd is an abomination to the Egyptians." Land settles.'
-      },
-      {
-        id: 'genesis46-q5',
-        question: 'Who presented Jacob to Pharaoh?',
-        options: [
-          'Rich Judah',
-          'Joseph',
-          'Strong Reuben',
-          'Silent Benjamin'
-        ],
-        correctAnswer: 'Joseph',
-        explanation: 'Genesis 46:31 (ESV): "Joseph said to his brothers and to his father’s household, ‘I will go up and tell Pharaoh and will say to him, “My brothers and my father’s household, who were in the land of Canaan, have come to me.”’" Honor introduces.'
-      }
-    ],
-    key_verse: 'Genesis 46:3',
-    key_verse_text: "Then he said, ‘I am God, the God of your father. Do not be afraid to go down to Egypt, for there I will make you into a great nation.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
+      chapter: 39,
+        title: "Joseph and Potiphar's Wife",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis39-q1',
+              question: 'Who bought Joseph in Egypt?',
+              options: ['Pharaoh', 'Potiphar', 'The jailer', 'A merchant'],
+              correctAnswer: 'Potiphar',
+              explanation: 'Genesis 39:1 (ESV): "Joseph had been brought down to Egypt, and Potiphar, an officer of Pharaoh...bought him."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis39-q2',
+              question: 'Did the LORD bless Joseph in Potiphar\'s house?',
+              options: ['No', 'Yes', 'Partially', 'Only at the end'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 39:2: "The LORD was with Joseph, and he became a successful man."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis39-q3',
+              question: "What did Potiphar's wife want Joseph to do?",
+              options: ['Steal for her', 'Lie with her', 'Leave Egypt', 'Serve only her'],
+              correctAnswer: 'Lie with her',
+              explanation: 'Genesis 39:7: "His master\'s wife cast her eyes on Joseph and said, \'Lie with me.\'"',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis39-q4',
+              question: 'What happened to Joseph after the false accusation?',
+              options: ['He was killed', 'He was put in prison', 'He was freed', 'He was sold again'],
+              correctAnswer: 'He was put in prison',
+              explanation: 'Genesis 39:20: "Joseph\'s master took him and put him into the prison."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis39-q5',
+              question: 'Was the LORD with Joseph in prison?',
+              options: ['No', 'Yes', 'It is not stated', 'Only sometimes'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 39:21: "But the LORD was with Joseph and showed him steadfast love."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis39-q6',
+              question: 'What role did Joseph have in Potiphar\'s house?',
+              options: ['Cook', 'Overseer of all he had', 'Guard', 'Shepherd'],
+              correctAnswer: 'Overseer of all he had',
+              explanation: 'Genesis 39:4-5: "He made him overseer of his house and put him in charge of all that he had."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis39-q7',
+              question: 'What did Joseph leave behind when he fled from Potiphar\'s wife?',
+              options: ['His sandals', 'His garment', 'His ring', 'His staff'],
+              correctAnswer: 'His garment',
+              explanation: 'Genesis 39:12: "She caught him by his garment, saying, \'Lie with me.\' But he left his garment in her hand and fled."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis39-q8',
+              question: 'What reason did Joseph give for refusing Potiphar\'s wife?',
+              options: ['Fear of Potiphar', 'It would be a sin against God', 'He was married', 'He did not find her attractive'],
+              correctAnswer: 'It would be a sin against God',
+              explanation: 'Genesis 39:9: "How then can I do this great wickedness and sin against God?"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis39-q9',
+              question: 'What did the keeper of the prison do with Joseph?',
+              options: ['Punished him harshly', 'Put all prisoners under Joseph\'s care', 'Released him', 'Ignored him'],
+              correctAnswer: "Put all prisoners under Joseph's care",
+              explanation: 'Genesis 39:22: "The keeper of the prison put Joseph in charge of all the prisoners."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis39-q10',
+              question: "What did Potiphar's wife accuse Joseph of?",
+              options: ['Stealing', 'Trying to force himself on her', 'Plotting against Potiphar', 'Running away'],
+              correctAnswer: 'Trying to force himself on her',
+              explanation: 'Genesis 39:14: "She called to the men of her household and said...He came in to me to lie with me."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis39-q11',
+              question: 'What detail shows Potiphar trusted Joseph completely?',
+              options: ['He gave him his ring', 'He did not concern himself with anything except the food he ate', 'He gave him a wife', 'He made him his equal'],
+              correctAnswer: 'He did not concern himself with anything except the food he ate',
+              explanation: 'Genesis 39:6: "He left all that he had in Joseph\'s charge, and because of him he had no concern about anything but the food he ate."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis39-q12',
+              question: 'How often did Potiphar\'s wife tempt Joseph?',
+              options: ['Once', 'Day after day', 'Three times', 'Only twice'],
+              correctAnswer: 'Day after day',
+              explanation: 'Genesis 39:10: "And as she spoke to Joseph day after day, he would not listen to her."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis39-q13',
+              question: 'What type of prison was Joseph placed in?',
+              options: ['A common jail', 'The place where the king\'s prisoners were confined', 'A dungeon', 'House arrest'],
+              correctAnswer: "The place where the king's prisoners were confined",
+              explanation: 'Genesis 39:20: "He put him into the prison, the place where the king\'s prisoners were confined."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis39-q14',
+              question: "What was Potiphar's official title?",
+              options: ['Chief steward', 'Captain of the guard', 'Royal treasurer', 'High priest'],
+              correctAnswer: 'Captain of the guard',
+              explanation: 'Genesis 39:1: "Potiphar, an officer of Pharaoh, the captain of the guard, an Egyptian."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis39-q15',
+              question: 'What phrase is repeated to emphasize God\'s presence with Joseph?',
+              options: ['God blessed him', 'The LORD was with Joseph', 'Joseph found grace', 'God remembered Joseph'],
+              correctAnswer: 'The LORD was with Joseph',
+              explanation: 'Genesis 39:2, 21, 23: "The LORD was with Joseph" is repeated throughout the chapter.',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 39:2',
+              key_verse_text: "The LORD was with Joseph, and he became a successful man.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
   },
-  {
-    id: 'genesis-47',
+{
+  id: 'genesis-40',
     bookId: 'genesis',
-    chapter: 47,
-    title: 'Jacob’s Family in Egypt',
-    questions: [
-      {
-        id: 'genesis47-q1',
-        question: 'What did Jacob tell Pharaoh about his life?',
-        options: [
-          'Rich with wealth',
-          'Few and evil years',
-          'Strong with sons',
-          'Silent with peace'
-        ],
-        correctAnswer: 'Few and evil years',
-        explanation: 'Genesis 47:9 (ESV): "And Jacob said to Pharaoh, ‘The days of the years of my sojourning are 130 years. Few and evil have been the days of the years of my life, and they have not attained to the days of the years of the life of my fathers in the days of their sojourning.’" Reflection humbles.'
-      },
-      {
-        id: 'genesis47-q2',
-        question: 'What did Joseph give his family in Egypt?',
-        options: [
-          'Rich gold',
-          'Land in Rameses',
-          'Strong camels',
-          'Silent tents'
-        ],
-        correctAnswer: 'Land in Rameses',
-        explanation: 'Genesis 47:11 (ESV): "Then Joseph settled his father and his brothers and gave them a possession in the land of Egypt, in the best of the land, in the land of Rameses, as Pharaoh had commanded." Provision secures.'
-      },
-      {
-        id: 'genesis47-q3',
-        question: 'How did Joseph manage Egypt’s famine?',
-        options: [
-          'Sold rich treasures',
-          'Sold grain for money, then land',
-          'Built strong storehouses',
-          'Kept silent stores'
-        ],
-        correctAnswer: 'Sold grain for money, then land',
-        explanation: 'Genesis 47:14, 20 (ESV): "And Joseph gathered up all the money that was found in the land of Egypt and in the land of Canaan, for the grain that they bought. ... So Joseph bought all the land of Egypt for Pharaoh, for all the Egyptians sold their fields, because the famine was severe on them." Strategy sustains.'
-      },
-      {
-        id: 'genesis47-q4',
-        question: 'What did the Egyptians give for food?',
-        options: [
-          'Rich jewels',
-          'Their land and themselves',
-          'Strong livestock',
-          'Silent offerings'
-        ],
-        correctAnswer: 'Their land and themselves',
-        explanation: 'Genesis 47:19 (ESV): "‘Why should we die before your eyes, both we and our land? Buy us and our land for food, and we with our land will be servants to Pharaoh. And give us seed that we may live and not die, and that the land may not be desolate.’" Desperation yields.'
-      },
-      {
-        id: 'genesis47-q5',
-        question: 'What did Jacob ask Joseph to swear?',
-        options: [
-          'Rich inheritance',
-          'Bury him in Canaan',
-          'Strong leadership',
-          'Silent loyalty'
-        ],
-        correctAnswer: 'Bury him in Canaan',
-        explanation: 'Genesis 47:29-30 (ESV): "And when the time drew near that Israel must die, he called his son Joseph and said to him, ‘If now I have found favor in your sight, put your hand under my thigh and promise to deal kindly and truly with me. Do not bury me in Egypt, but let me lie with my fathers. Carry me out of Egypt and bury me in their burying place.’ He answered, ‘I will do as you have said.’" Oath binds.'
-      }
-    ],
-    key_verse: 'Genesis 47:27',
-    key_verse_text: "Thus Israel settled in the land of Egypt, in the land of Goshen. And they gained possessions in it, and were fruitful and multiplied greatly.",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
+      chapter: 40,
+        title: "Joseph Interprets Dreams in Prison",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis40-q1',
+              question: "Whose dreams did Joseph interpret in prison?",
+              options: ["Pharaoh's", "The cupbearer's and the baker's", "Potiphar's", "His own"],
+              correctAnswer: "The cupbearer's and the baker's",
+              explanation: 'Genesis 40:5: "The cupbearer and the baker of the king of Egypt...each his own dream."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis40-q2',
+              question: "What happened to the cupbearer?",
+              options: ['He died', 'He was restored to his position', 'He was exiled', 'He stayed in prison'],
+              correctAnswer: 'He was restored to his position',
+              explanation: 'Genesis 40:21: "He restored the chief cupbearer to his position."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis40-q3',
+              question: 'What happened to the baker?',
+              options: ['He was freed', 'He was hanged', 'He was promoted', 'He escaped'],
+              correctAnswer: 'He was hanged',
+              explanation: 'Genesis 40:22: "But he hanged the chief baker, as Joseph had interpreted to them."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis40-q4',
+              question: 'Who did Joseph say could interpret dreams?',
+              options: ['Himself', 'God', 'The wise men', 'Pharaoh'],
+              correctAnswer: 'God',
+              explanation: 'Genesis 40:8: "Joseph said to them, \'Do not interpretations belong to God?\'"',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis40-q5',
+              question: 'Did the cupbearer remember Joseph after being freed?',
+              options: ['Yes, immediately', 'No, he forgot him', 'He sent Joseph a gift', 'He told Pharaoh right away'],
+              correctAnswer: 'No, he forgot him',
+              explanation: 'Genesis 40:23: "Yet the chief cupbearer did not remember Joseph, but forgot him."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis40-q6',
+              question: "What was in the cupbearer's dream?",
+              options: ['A tree', 'A vine with three branches bearing grapes', 'A river', 'A field of wheat'],
+              correctAnswer: 'A vine with three branches bearing grapes',
+              explanation: 'Genesis 40:9-10: "In my dream there was a vine before me, and on the vine there were three branches."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis40-q7',
+              question: "What was in the baker's dream?",
+              options: ['Three cakes', 'Three baskets of bread on his head', 'Three loaves', 'Three ovens'],
+              correctAnswer: 'Three baskets of bread on his head',
+              explanation: 'Genesis 40:16: "I also had a dream: there were three cake baskets on my head."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis40-q8',
+              question: 'What did the three branches/baskets represent?',
+              options: ['Three years', 'Three days', 'Three months', 'Three weeks'],
+              correctAnswer: 'Three days',
+              explanation: 'Genesis 40:12-13, 18: "The three branches are three days...the three baskets are three days."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis40-q9',
+              question: 'What did Joseph ask the cupbearer to do?',
+              options: ['Pay him', 'Remember him and mention him to Pharaoh', 'Free him', 'Bring him food'],
+              correctAnswer: 'Remember him and mention him to Pharaoh',
+              explanation: 'Genesis 40:14: "Only remember me, when it is well with you, and please do me the kindness to mention me to Pharaoh."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis40-q10',
+              question: 'Why were the cupbearer and baker in prison?',
+              options: ['They stole', 'They offended Pharaoh', 'They lied', 'They plotted against him'],
+              correctAnswer: 'They offended Pharaoh',
+              explanation: 'Genesis 40:1: "The cupbearer of the king of Egypt and his baker offended their lord the king of Egypt."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis40-q11',
+              question: "What detail in the baker's dream foreshadowed his fate?",
+              options: ['The baskets fell', 'Birds ate from the top basket', 'Bread turned moldy', 'Fire consumed the baskets'],
+              correctAnswer: 'Birds ate from the top basket',
+              explanation: 'Genesis 40:17: "The birds were eating it out of the basket on my head."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis40-q12',
+              question: 'What did Joseph say about how he ended up in prison?',
+              options: ['He deserved it', 'He was stolen from the land of the Hebrews and done nothing wrong', 'He blamed his brothers', 'He said God sent him'],
+              correctAnswer: 'He was stolen from the land of the Hebrews and done nothing wrong',
+              explanation: 'Genesis 40:15: "For I was indeed stolen out of the land of the Hebrews, and here also I have done nothing that they should put me into the pit."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis40-q13',
+              question: 'How did Joseph notice the officials were troubled?',
+              options: ['They told him', 'He saw their sad faces', 'A guard told him', 'They were crying'],
+              correctAnswer: 'He saw their sad faces',
+              explanation: 'Genesis 40:6-7: "He saw that they were troubled. So he asked...Why are your faces downcast today?"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis40-q14',
+              question: "What did the cupbearer do in Pharaoh's cup in his dream?",
+              options: ['Poured wine', 'Pressed grapes into the cup and placed it in Pharaoh\'s hand', 'Put water in it', 'Dropped it'],
+              correctAnswer: "Pressed grapes into the cup and placed it in Pharaoh's hand",
+              explanation: 'Genesis 40:11: "I took the grapes and pressed them into Pharaoh\'s cup and placed the cup in Pharaoh\'s hand."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis40-q15',
+              question: 'On what occasion was the baker hanged and cupbearer restored?',
+              options: ['A religious festival', "Pharaoh's birthday", 'A harvest celebration', 'A military victory'],
+              correctAnswer: "Pharaoh's birthday",
+              explanation: 'Genesis 40:20: "On the third day, which was Pharaoh\'s birthday, he made a feast."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 40:8',
+              key_verse_text: "Do not interpretations belong to God? Please tell them to me.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
   },
-  {
-    id: 'genesis-48',
+{
+  id: 'genesis-41',
     bookId: 'genesis',
-    chapter: 48,
-    title: 'Jacob Blesses Joseph’s Sons',
-    questions: [
-      {
-        id: 'genesis48-q1',
-        question: 'Who did Joseph bring to Jacob to bless?',
-        options: [
-          'Rich Judah',
-          'Manasseh and Ephraim',
-          'Strong Reuben',
-          'Silent Benjamin'
-        ],
-        correctAnswer: 'Manasseh and Ephraim',
-        explanation: 'Genesis 48:1 (ESV): "After this, Joseph was told, ‘Behold, your father is ill.’ So he took with him his two sons, Manasseh and Ephraim." Family gathers.'
-      },
-      {
-        id: 'genesis48-q2',
-        question: 'What did Jacob claim about Joseph’s sons?',
-        options: [
-          'Rich heirs',
-          'They are mine like Reuben',
-          'Strong warriors',
-          'Silent sons'
-        ],
-        correctAnswer: 'They are mine like Reuben',
-        explanation: 'Genesis 48:5 (ESV): "‘And now your two sons, who were born to you in the land of Egypt before I came to you in Egypt, are mine; Ephraim and Manasseh shall be mine, as Reuben and Simeon are.’" Adoption elevates.'
-      },
-      {
-        id: 'genesis48-q3',
-        question: 'Who received the greater blessing?',
-        options: [
-          'Rich Manasseh',
-          'Ephraim, the younger',
-          'Strong Judah',
-          'Silent Simeon'
-        ],
-        correctAnswer: 'Ephraim, the younger',
-        explanation: 'Genesis 48:14 (ESV): "And Israel stretched out his right hand and laid it on the head of Ephraim, who was the younger, and his left hand on the head of Manasseh, crossing his hands, for Manasseh was the firstborn." Blessing reverses.'
-      },
-      {
-        id: 'genesis48-q4',
-        question: 'What did Jacob promise Joseph’s sons?',
-        options: [
-          'Rich gold',
-          'Land and increase',
-          'Strong armies',
-          'Silent peace'
-        ],
-        correctAnswer: 'Land and increase',
-        explanation: 'Genesis 48:16 (ESV): "‘the angel who has redeemed me from all evil, bless the boys; and in them let my name be carried on, and the name of my fathers Abraham and Isaac; and let them grow into a multitude in the midst of the earth.’" Legacy extends.'
-      },
-      {
-        id: 'genesis48-q5',
-        question: 'What did Jacob give Joseph specifically?',
-        options: [
-          'Rich treasures',
-          'One mountain slope',
-          'Strong flocks',
-          'Silent fields'
-        ],
-        correctAnswer: 'One mountain slope',
-        explanation: 'Genesis 48:22 (ESV): "‘Moreover, I have given to you rather than to your brothers one mountain slope that I took from the hand of the Amorites with my sword and with my bow.’" Gift distinguishes.'
-      }
-    ],
-    key_verse: 'Genesis 48:16',
-    key_verse_text: "‘the angel who has redeemed me from all evil, bless the boys; and in them let my name be carried on, and the name of my fathers Abraham and Isaac; and let them grow into a multitude in the midst of the earth.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
+      chapter: 41,
+        title: "Pharaoh's Dreams and Joseph's Rise",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis41-q1',
+              question: "What did Pharaoh dream about?",
+              options: ['Stars and moon', 'Seven fat cows and seven thin cows', 'A great flood', 'A burning bush'],
+              correctAnswer: 'Seven fat cows and seven thin cows',
+              explanation: 'Genesis 41:2-4 (ESV): Pharaoh dreamed of seven attractive, plump cows eaten by seven thin, ugly cows.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis41-q2',
+              question: 'Who interpreted Pharaoh\'s dreams?',
+              options: ['The magicians', 'Joseph', 'Moses', 'Daniel'],
+              correctAnswer: 'Joseph',
+              explanation: 'Genesis 41:25: Joseph said to Pharaoh, "The dreams of Pharaoh are one; God has revealed to Pharaoh what he is about to do."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis41-q3',
+              question: 'What position did Pharaoh give Joseph?',
+              options: ['Slave master', 'Ruler over all Egypt', 'Chief baker', 'Prison warden'],
+              correctAnswer: 'Ruler over all Egypt',
+              explanation: 'Genesis 41:41: "Pharaoh said to Joseph, \'See, I have set you over all the land of Egypt.\'"',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis41-q4',
+              question: 'How many years of plenty did the dreams predict?',
+              options: ['Three', 'Five', 'Seven', 'Ten'],
+              correctAnswer: 'Seven',
+              explanation: 'Genesis 41:29: "There will come seven years of great plenty throughout all the land of Egypt."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis41-q5',
+              question: 'How many years of famine followed the plenty?',
+              options: ['Three', 'Five', 'Seven', 'Ten'],
+              correctAnswer: 'Seven',
+              explanation: 'Genesis 41:30: "After them there will arise seven years of famine."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis41-q6',
+              question: "What was Pharaoh's second dream about?",
+              options: ['Seven fat sheep', 'Seven full ears of grain and seven thin ears', 'Seven stars', 'Seven rivers'],
+              correctAnswer: 'Seven full ears of grain and seven thin ears',
+              explanation: 'Genesis 41:5-7: Seven plump, good ears of grain were swallowed by seven thin ears.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis41-q7',
+              question: 'Who remembered Joseph and recommended him to Pharaoh?',
+              options: ['Potiphar', 'The chief cupbearer', 'The chief baker', 'A guard'],
+              correctAnswer: 'The chief cupbearer',
+              explanation: 'Genesis 41:9-13: The chief cupbearer finally remembered Joseph and told Pharaoh.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis41-q8',
+              question: 'What Egyptian name did Pharaoh give Joseph?',
+              options: ['Imhotep', 'Zaphenath-paneah', 'Amenhotep', 'Rameses'],
+              correctAnswer: 'Zaphenath-paneah',
+              explanation: 'Genesis 41:45: "Pharaoh called Joseph\'s name Zaphenath-paneah."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis41-q9',
+              question: 'How old was Joseph when he stood before Pharaoh?',
+              options: ['Twenty', 'Twenty-five', 'Thirty', 'Forty'],
+              correctAnswer: 'Thirty',
+              explanation: 'Genesis 41:46: "Joseph was thirty years old when he entered the service of Pharaoh."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis41-q10',
+              question: "What were Joseph's two sons named?",
+              options: ['Perez and Zerah', 'Manasseh and Ephraim', 'Simeon and Levi', 'Er and Onan'],
+              correctAnswer: 'Manasseh and Ephraim',
+              explanation: 'Genesis 41:51-52: Joseph named his sons Manasseh and Ephraim.',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis41-q11',
+              question: "Who was Joseph's wife?",
+              options: ['Tamar', 'Asenath, daughter of Potiphera', 'Zipporah', 'Hagar'],
+              correctAnswer: 'Asenath, daughter of Potiphera',
+              explanation: 'Genesis 41:45: "Pharaoh gave him in marriage Asenath, the daughter of Potiphera priest of On."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis41-q12',
+              question: 'What did Joseph do with the grain during the years of plenty?',
+              options: ['Sold it', 'Stored it in the cities', 'Exported it', 'Gave it away'],
+              correctAnswer: 'Stored it in the cities',
+              explanation: 'Genesis 41:48: "He gathered up all the food of these seven years...and put the food in the cities."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis41-q13',
+              question: 'What does "Manasseh" mean?',
+              options: ['God is great', 'God has made me forget all my hardship', 'Blessed by God', 'Gift of God'],
+              correctAnswer: 'God has made me forget all my hardship',
+              explanation: 'Genesis 41:51: "Joseph called the name of the firstborn Manasseh. \'For God has made me forget all my hardship.\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis41-q14',
+              question: 'What does "Ephraim" mean?',
+              options: ['Fruitful', 'God has made me fruitful in the land of my affliction', 'Strong one', 'Heir of promise'],
+              correctAnswer: 'God has made me fruitful in the land of my affliction',
+              explanation: 'Genesis 41:52: "The name of the second he called Ephraim, \'For God has made me fruitful in the land of my affliction.\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis41-q15',
+              question: 'What did Joseph advise Pharaoh to do during the years of plenty?',
+              options: ['Build pyramids', 'Appoint a wise man and store a fifth of the produce', 'Expand the army', 'Build canals'],
+              correctAnswer: 'Appoint a wise man and store a fifth of the produce',
+              explanation: 'Genesis 41:33-34: Joseph advised appointing an overseer and collecting one-fifth of the produce during the plentiful years.',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 41:41',
+              key_verse_text: "Pharaoh said to Joseph, 'See, I have set you over all the land of Egypt.'",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
   },
-  {
-    id: 'genesis-49',
+{
+  id: 'genesis-42',
     bookId: 'genesis',
-    chapter: 49,
-    title: 'Jacob Blesses His Sons',
-    questions: [
-      {
-        id: 'genesis49-q1',
-        question: 'What did Jacob call his sons to do?',
-        options: [
-          'Seek riches',
-          'Hear their future',
-          'Grow strong',
-          'Stay silent'
-        ],
-        correctAnswer: 'Hear their future',
-        explanation: 'Genesis 49:1 (ESV): "Then Jacob called his sons and said, ‘Gather yourselves together, that I may tell you what shall happen to you in days to come.’" Prophecy summons.'
-      },
-      {
-        id: 'genesis49-q2',
-        question: 'Why did Reuben lose his preeminence?',
-        options: [
-          'Lost riches',
-          'Defiled his father’s bed',
-          'Lacked strength',
-          'Kept silent'
-        ],
-        correctAnswer: 'Defiled his father’s bed',
-        explanation: 'Genesis 49:4 (ESV): "‘Unstable as water, you shall not have preeminence, because you went up to your father’s bed; then you defiled it—he went up to my couch!’" Sin demotes.'
-      },
-      {
-        id: 'genesis49-q3',
-        question: 'What was Judah promised?',
-        options: [
-          'Rich wealth',
-          'A ruler’s scepter',
-          'Strong armies',
-          'Silent lands'
-        ],
-        correctAnswer: 'A ruler’s scepter',
-        explanation: 'Genesis 49:10 (ESV): "‘The scepter shall not depart from Judah, nor the ruler’s staff from between his feet, until tribute comes to him; and to him shall be the obedience of the peoples.’" Dominion foretold.'
-      },
-      {
-        id: 'genesis49-q4',
-        question: 'What was Joseph compared to?',
-        options: [
-          'Rich vine',
-          'A fruitful bough',
-          'Strong lion',
-          'Silent deer'
-        ],
-        correctAnswer: 'A fruitful bough',
-        explanation: 'Genesis 49:22 (ESV): "‘Joseph is a fruitful bough, a fruitful bough by a spring; his branches run over the wall.’" Blessing prospers.'
-      },
-      {
-        id: 'genesis49-q5',
-        question: 'Where did Jacob ask to be buried?',
-        options: [
-          'Rich Egypt',
-          'Cave of Machpelah',
-          'Strong Goshen',
-          'Silent Bethel'
-        ],
-        correctAnswer: 'Cave of Machpelah',
-        explanation: 'Genesis 49:29-30 (ESV): "Then he commanded them and said to them, ‘I am to be gathered to my people; bury me with my fathers in the cave that is in the field of Ephron the Hittite, in the cave that is in the field of Machpelah to the east of Mamre, in the land of Canaan, which Abraham bought with the field from Ephron the Hittite to possess as a burying place.’" Rest requests.'
-      }
-    ],
-    key_verse: 'Genesis 49:10',
-    key_verse_text: "‘The scepter shall not depart from Judah, nor the ruler’s staff from between his feet, until tribute comes to him; and to him shall be the obedience of the peoples.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
+      chapter: 42,
+        title: "Joseph's Brothers Go to Egypt",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis42-q1',
+              question: 'Why did Jacob send his sons to Egypt?',
+              options: ['To find Joseph', 'To buy grain', 'To trade livestock', 'To visit Pharaoh'],
+              correctAnswer: 'To buy grain',
+              explanation: 'Genesis 42:2: "I have heard that there is grain for sale in Egypt. Go down and buy grain for us there."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis42-q2',
+              question: 'Which brother did Jacob not send to Egypt?',
+              options: ['Judah', 'Benjamin', 'Reuben', 'Simeon'],
+              correctAnswer: 'Benjamin',
+              explanation: 'Genesis 42:4: "But Jacob did not send Benjamin, Joseph\'s brother, with his brothers."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis42-q3',
+              question: 'What did the brothers do when they came before Joseph?',
+              options: ['They recognized him', 'They bowed down before him', 'They fled', 'They fought him'],
+              correctAnswer: 'They bowed down before him',
+              explanation: 'Genesis 42:6: "Joseph\'s brothers came and bowed themselves before him with their faces to the ground."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis42-q4',
+              question: 'Did the brothers recognize Joseph?',
+              options: ['Yes', 'No', 'Only Reuben did', 'Only Judah did'],
+              correctAnswer: 'No',
+              explanation: 'Genesis 42:8: "Joseph recognized his brothers, but they did not recognize him."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis42-q5',
+              question: 'What did Joseph accuse his brothers of being?',
+              options: ['Thieves', 'Spies', 'Murderers', 'Liars'],
+              correctAnswer: 'Spies',
+              explanation: 'Genesis 42:9: "He said to them, \'You are spies; you have come to see the nakedness of the land.\'"',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis42-q6',
+              question: 'Which brother did Joseph keep as a hostage?',
+              options: ['Reuben', 'Simeon', 'Judah', 'Levi'],
+              correctAnswer: 'Simeon',
+              explanation: 'Genesis 42:24: "He took Simeon from them and bound him before their eyes."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis42-q7',
+              question: 'What did the brothers find in their sacks?',
+              options: ['Extra grain', 'Their money returned', 'A letter', 'Gifts from Joseph'],
+              correctAnswer: 'Their money returned',
+              explanation: 'Genesis 42:27-28: Each man found his money in the mouth of his sack.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis42-q8',
+              question: 'What did Joseph demand they bring next time?',
+              options: ['Gifts', 'Their youngest brother', 'Their father', 'More money'],
+              correctAnswer: 'Their youngest brother',
+              explanation: 'Genesis 42:20: "Bring your youngest brother to me. So your words will be verified."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis42-q9',
+              question: 'What did the brothers say to each other about their guilt?',
+              options: ['They denied any guilt', 'They were being punished for what they did to Joseph', 'They blamed Jacob', 'They blamed Reuben'],
+              correctAnswer: 'They were being punished for what they did to Joseph',
+              explanation: 'Genesis 42:21: "Then they said to one another, \'In truth we are guilty concerning our brother.\'"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis42-q10',
+              question: "What was Jacob's reaction to their request to take Benjamin?",
+              options: ['He agreed immediately', 'He refused', 'He asked for time', 'He sent a servant instead'],
+              correctAnswer: 'He refused',
+              explanation: 'Genesis 42:38: "My son shall not go down with you...if harm should happen to him."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis42-q11',
+              question: 'What did Reuben offer Jacob to guarantee Benjamin\'s safety?',
+              options: ['His inheritance', 'The lives of his own two sons', 'His livestock', 'His servitude'],
+              correctAnswer: 'The lives of his own two sons',
+              explanation: 'Genesis 42:37: "Kill my two sons if I do not bring him back to you."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis42-q12',
+              question: 'How many days did Joseph keep his brothers in custody?',
+              options: ['One', 'Three', 'Seven', 'Ten'],
+              correctAnswer: 'Three',
+              explanation: 'Genesis 42:17: "He put them all together in custody for three days."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis42-q13',
+              question: 'What did Joseph do after hearing his brothers speak of their guilt?',
+              options: ['He punished them', 'He turned away and wept', 'He revealed himself', 'He sent them away'],
+              correctAnswer: 'He turned away and wept',
+              explanation: 'Genesis 42:24: "Then he turned away from them and wept."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis42-q14',
+              question: 'How many brothers went to Egypt the first time?',
+              options: ['Eleven', 'Ten', 'Nine', 'Twelve'],
+              correctAnswer: 'Ten',
+              explanation: 'Genesis 42:3: "So ten of Joseph\'s brothers went down to buy grain in Egypt."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis42-q15',
+              question: 'What did Reuben remind his brothers about?',
+              options: ['Their father\'s blessing', 'That he had warned them not to harm Joseph', 'Their covenant', 'Their journey'],
+              correctAnswer: 'That he had warned them not to harm Joseph',
+              explanation: 'Genesis 42:22: "Reuben answered them, \'Did I not tell you not to sin against the boy? But you did not listen.\'"',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 42:6',
+              key_verse_text: "Joseph's brothers came and bowed themselves before him with their faces to the ground.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
   },
-  {
-    id: 'genesis-50',
+{
+  id: 'genesis-43',
     bookId: 'genesis',
-    chapter: 50,
-    title: 'Jacob’s Burial and Joseph’s Death',
-    questions: [
-      {
-        id: 'genesis50-q1',
-        question: 'What did Joseph do when Jacob died?',
-        options: [
-          'Sought riches',
-          'Wept and kissed him',
-          'Grew strong',
-          'Fell silent'
-        ],
-        correctAnswer: 'Wept and kissed him',
-        explanation: 'Genesis 50:1 (ESV): "Then Joseph fell on his father’s face and wept over him and kissed him." Grief mourns.'
-      },
-      {
-        id: 'genesis50-q2',
-        question: 'Where was Jacob buried?',
-        options: [
-          'Rich Rameses',
-          'Cave of Machpelah',
-          'Strong Goshen',
-          'Silent On'
-        ],
-        correctAnswer: 'Cave of Machpelah',
-        explanation: 'Genesis 50:13 (ESV): "for his sons carried him to the land of Canaan and buried him in the cave of the field of Machpelah to the east of Mamre, which Abraham bought with the field from Ephron the Hittite as a possession for a burying place." Tomb honors.'
-      },
-      {
-        id: 'genesis50-q3',
-        question: 'What did Joseph’s brothers fear after Jacob’s death?',
-        options: [
-          'Loss of riches',
-          'Joseph’s revenge',
-          'Loss of strength',
-          'Silent exile'
-        ],
-        correctAnswer: 'Joseph’s revenge',
-        explanation: 'Genesis 50:15 (ESV): "When Joseph’s brothers saw that their father was dead, they said, ‘It may be that Joseph will hate us and pay us back for all the evil that we did to him.’" Fear doubts.'
-      },
-      {
-        id: 'genesis50-q4',
-        question: 'What did Joseph promise his brothers?',
-        options: [
-          'Rich gifts',
-          'To provide and protect',
-          'Strong leadership',
-          'Silent peace'
-        ],
-        correctAnswer: 'To provide and protect',
-        explanation: 'Genesis 50:21 (ESV): "‘So do not fear; I will provide for you and your little ones.’ Thus he comforted them and spoke kindly to them." Assurance comforts.'
-      },
-      {
-        id: 'genesis50-q5',
-        question: 'How old was Joseph when he died?',
-        options: [
-          'Rich ninety years',
-          'One hundred ten years',
-          'Strong one hundred years',
-          'Silent eighty years'
-        ],
-        correctAnswer: 'One hundred ten years',
-        explanation: 'Genesis 50:26 (ESV): "So Joseph died, being 110 years old. They embalmed him, and he was put in a coffin in Egypt." Life ends.'
-      }
-    ],
-    key_verse: 'Genesis 50:20',
-    key_verse_text: "‘As for you, you meant evil against me, but God meant it for good, to bring it about that many people should be kept alive, as they are today.’",
-    memory_challenge: true,
-    difficulty: 'medium',
-    points: 15
-  }
+      chapter: 43,
+        title: 'The Brothers Return with Benjamin',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis43-q1',
+              question: 'Why did the brothers have to return to Egypt?',
+              options: ['To rescue Simeon', 'The famine was severe and they needed more grain', 'Joseph summoned them', 'To trade'],
+              correctAnswer: 'The famine was severe and they needed more grain',
+              explanation: 'Genesis 43:1-2: "Now the famine was severe in the land." Jacob told them to go buy more food.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis43-q2',
+              question: 'Who pledged to guarantee Benjamin\'s safety?',
+              options: ['Reuben', 'Judah', 'Simeon', 'Levi'],
+              correctAnswer: 'Judah',
+              explanation: 'Genesis 43:9: "I will be a pledge of his safety. From my hand you shall require him."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis43-q3',
+              question: 'Did Jacob eventually let Benjamin go?',
+              options: ['No', 'Yes', 'He sent a servant instead', 'He went himself'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 43:13-14: Jacob finally agreed and sent Benjamin with his brothers.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis43-q4',
+              question: 'What did Joseph do when he saw Benjamin?',
+              options: ['He was angry', 'He hurried out to weep privately', 'He ignored him', 'He punished him'],
+              correctAnswer: 'He hurried out to weep privately',
+              explanation: 'Genesis 43:30: "Joseph hurried out, for his compassion grew warm for his brother, and he sought a place to weep."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis43-q5',
+              question: 'Were the brothers invited to eat at Joseph\'s house?',
+              options: ['No', 'Yes', 'Only Benjamin', 'Only Judah'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 43:16: Joseph told his steward, "Bring the men to my house, and slaughter an animal and make ready."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis43-q6',
+              question: 'What gifts did Jacob send to the man in Egypt?',
+              options: ['Gold and silver', 'Balm, honey, gum, myrrh, pistachio nuts, and almonds', 'Livestock', 'Clothing'],
+              correctAnswer: 'Balm, honey, gum, myrrh, pistachio nuts, and almonds',
+              explanation: 'Genesis 43:11: "Take some of the choice fruits of the land...balm and honey, gum, myrrh, pistachio nuts, and almonds."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis43-q7',
+              question: 'What did the brothers fear when brought to Joseph\'s house?',
+              options: ['Execution', 'Being enslaved because of the money returned in their sacks', 'Being robbed', 'Being imprisoned'],
+              correctAnswer: 'Being enslaved because of the money returned in their sacks',
+              explanation: 'Genesis 43:18: "They were afraid because they were brought to Joseph\'s house...because of the money."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis43-q8',
+              question: 'What did the steward say about the money in their sacks?',
+              options: ['He accused them', 'He said their God must have put treasure in their sacks', 'He took it back', 'He ignored it'],
+              correctAnswer: 'He said their God must have put treasure in their sacks',
+              explanation: 'Genesis 43:23: "Your God and the God of your father has put treasure in your sacks."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis43-q9',
+              question: 'How were the brothers seated at the meal?',
+              options: ['Randomly', 'In order of their birth, from firstborn to youngest', 'By tribe', 'By height'],
+              correctAnswer: 'In order of their birth, from firstborn to youngest',
+              explanation: 'Genesis 43:33: "The men looked at one another in amazement" because they were seated in birth order.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis43-q10',
+              question: 'How much more food did Benjamin receive compared to his brothers?',
+              options: ['Twice as much', 'Five times as much', 'Three times as much', 'The same'],
+              correctAnswer: 'Five times as much',
+              explanation: 'Genesis 43:34: "Portions were taken to them from Joseph\'s table, but Benjamin\'s portion was five times as much."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis43-q11',
+              question: 'What did Jacob instruct about the money?',
+              options: ['Hide it', 'Take double the money and return the first amount', 'Send gold instead', 'Borrow from neighbors'],
+              correctAnswer: 'Take double the money and return the first amount',
+              explanation: 'Genesis 43:12: "Take double the money with you. Carry back with you the money that was returned."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis43-q12',
+              question: 'What did Joseph ask about when he saw his brothers?',
+              options: ['Their journey', 'Whether their father was still alive', 'Their livestock', 'The famine'],
+              correctAnswer: 'Whether their father was still alive',
+              explanation: 'Genesis 43:27: "He asked them about their welfare and said, \'Is your father well, the old man of whom you spoke? Is he still alive?\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis43-q13',
+              question: 'Why did Joseph eat separately from the Egyptians and his brothers?',
+              options: ['He was fasting', 'Egyptians could not eat with Hebrews as it was an abomination', 'He was sick', 'He was too emotional'],
+              correctAnswer: 'Egyptians could not eat with Hebrews as it was an abomination',
+              explanation: 'Genesis 43:32: "The Egyptians could not eat with the Hebrews, for that is an abomination to the Egyptians."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis43-q14',
+              question: 'What did Joseph say when he blessed Benjamin?',
+              options: ['You are my brother', 'God be gracious to you, my son', 'You will rule someday', 'The LORD bless you'],
+              correctAnswer: 'God be gracious to you, my son',
+              explanation: 'Genesis 43:29: "He said, \'God be gracious to you, my son!\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis43-q15',
+              question: "What was the brothers' condition at the end of the meal?",
+              options: ['They were anxious', 'They drank and were merry with him', 'They wanted to leave', 'They were suspicious'],
+              correctAnswer: 'They drank and were merry with him',
+              explanation: 'Genesis 43:34: "So they drank and were merry with him."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 43:30',
+              key_verse_text: "Joseph hurried out, for his compassion grew warm for his brother, and he sought a place to weep.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+  },
+{
+  id: 'genesis-44',
+    bookId: 'genesis',
+      chapter: 44,
+        title: "Joseph's Silver Cup",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis44-q1',
+              question: "What did Joseph's steward hide in Benjamin's sack?",
+              options: ['Gold', "Joseph's silver cup", 'A scroll', 'Grain'],
+              correctAnswer: "Joseph's silver cup",
+              explanation: 'Genesis 44:2: "Put my cup, the silver cup, in the mouth of the sack of the youngest."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis44-q2',
+              question: "In whose sack was the cup found?",
+              options: ["Reuben's", "Judah's", "Benjamin's", "Simeon's"],
+              correctAnswer: "Benjamin's",
+              explanation: 'Genesis 44:12: "The cup was found in Benjamin\'s sack."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis44-q3',
+              question: 'What did the brothers do when the cup was found?',
+              options: ['They fled', 'They tore their clothes and returned to the city', 'They fought', 'They blamed Benjamin'],
+              correctAnswer: 'They tore their clothes and returned to the city',
+              explanation: 'Genesis 44:13: "Then they tore their clothes, and every man loaded his donkey, and they returned to the city."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis44-q4',
+              question: "What punishment did Joseph declare for the one who had the cup?",
+              options: ['Death', 'He would become Joseph\'s slave', 'Prison', 'Beating'],
+              correctAnswer: "He would become Joseph's slave",
+              explanation: 'Genesis 44:17: "Only the man in whose hand the cup was found shall be my servant."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis44-q5',
+              question: 'Who pleaded with Joseph on behalf of Benjamin?',
+              options: ['Reuben', 'Simeon', 'Judah', 'Levi'],
+              correctAnswer: 'Judah',
+              explanation: 'Genesis 44:18: "Then Judah went up to him and said, \'Oh, my lord, please let your servant speak a word.\'"',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis44-q6',
+              question: 'What did the brothers first say when accused of stealing?',
+              options: ['They confessed', 'Whoever has it shall die, and the rest will be slaves', 'They denied it', 'They ran'],
+              correctAnswer: 'Whoever has it shall die, and the rest will be slaves',
+              explanation: 'Genesis 44:9: "Whichever of your servants is found with it shall die, and we also will be my lord\'s servants."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis44-q7',
+              question: 'What did Judah say would happen if Benjamin did not return?',
+              options: ['War would break out', 'Jacob would die of grief', 'They would revolt', 'Nothing'],
+              correctAnswer: 'Jacob would die of grief',
+              explanation: 'Genesis 44:31: "When he sees that the boy is not with us, he will die."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis44-q8',
+              question: 'What did Judah offer in place of Benjamin?',
+              options: ['Gold', 'Himself as a slave', 'His sons', 'Livestock'],
+              correctAnswer: 'Himself as a slave',
+              explanation: 'Genesis 44:33: "Please let your servant remain instead of the boy as a servant to my lord."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis44-q9',
+              question: "What did Judah reveal about Jacob's feelings for Benjamin?",
+              options: ['Jacob was indifferent', "Jacob's life was bound up in the boy's life", 'Jacob preferred Reuben', 'Jacob wanted to send Benjamin away'],
+              correctAnswer: "Jacob's life was bound up in the boy's life",
+              explanation: 'Genesis 44:30: "His life is bound up in the boy\'s life."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis44-q10',
+              question: 'What did Joseph claim the silver cup was used for?',
+              options: ['Drinking', 'Divination', 'Offerings', 'Decoration'],
+              correctAnswer: 'Divination',
+              explanation: 'Genesis 44:5: "Is it not from this that my lord drinks, and by this that he practices divination?"',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis44-q11',
+              question: "How did Judah's plea demonstrate his transformation?",
+              options: ['He was angry', 'He was willing to sacrifice himself for Benjamin, unlike when he sold Joseph', 'He blamed others', 'He was silent'],
+              correctAnswer: 'He was willing to sacrifice himself for Benjamin, unlike when he sold Joseph',
+              explanation: 'In Genesis 37, Judah suggested selling Joseph. Now in 44:33, he offers himself as a slave to protect Benjamin.',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis44-q12',
+              question: 'What did Judah say Jacob told them about Rachel\'s sons?',
+              options: ['They were cursed', 'One is gone and if harm comes to the other he would die', 'They would rule', 'They should stay home'],
+              correctAnswer: 'One is gone and if harm comes to the other he would die',
+              explanation: 'Genesis 44:27-29: Jacob said Rachel bore him two sons; one is gone, and if this one is taken too, it would bring his gray hairs to Sheol.',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis44-q13',
+              question: 'What did the steward modify about the brothers\' proposed punishment?',
+              options: ['He increased it', 'He said only the one with the cup would be a slave and the rest could go free', 'He ignored it', 'He added fines'],
+              correctAnswer: 'He said only the one with the cup would be a slave and the rest could go free',
+              explanation: 'Genesis 44:10: "Only the one who is found with it shall be my servant. But the rest of you shall be innocent."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis44-q14',
+              question: 'What did Judah say God had done?',
+              options: ['Blessed them', 'Found out the guilt of your servants', 'Punished Egypt', 'Forgotten them'],
+              correctAnswer: 'Found out the guilt of your servants',
+              explanation: 'Genesis 44:16: "God has found out the guilt of your servants."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis44-q15',
+              question: 'In what order were the sacks searched?',
+              options: ['Randomly', 'From the eldest to the youngest', 'Youngest first', 'Only Benjamin\'s'],
+              correctAnswer: 'From the eldest to the youngest',
+              explanation: 'Genesis 44:12: "He searched, beginning with the eldest and ending with the youngest."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 44:33',
+              key_verse_text: "Now therefore, please let your servant remain instead of the boy as a servant to my lord, and let the boy go back with his brothers.",
+                memory_challenge: true,
+                  difficulty: 'hard',
+                    points: 20
+  },
+{
+  id: 'genesis-45',
+    bookId: 'genesis',
+      chapter: 45,
+        title: 'Joseph Reveals Himself',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis45-q1',
+              question: 'What did Joseph reveal to his brothers?',
+              options: ['His wealth', 'That he was their brother Joseph', 'His power', 'His Egyptian name'],
+              correctAnswer: 'That he was their brother Joseph',
+              explanation: 'Genesis 45:3 (ESV): "Joseph said to his brothers, \'I am Joseph! Is my father still alive?\'"',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis45-q2',
+              question: "How did the brothers react to Joseph's revelation?",
+              options: ['Joy', 'They were dismayed and terrified', 'Anger', 'Disbelief only'],
+              correctAnswer: 'They were dismayed and terrified',
+              explanation: 'Genesis 45:3: "His brothers could not answer him, for they were dismayed at his presence."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis45-q3',
+              question: 'Where did Joseph tell his family to come live?',
+              options: ['Canaan', 'The land of Goshen', 'On the Nile', 'In the palace'],
+              correctAnswer: 'The land of Goshen',
+              explanation: 'Genesis 45:10: "You shall dwell in the land of Goshen, and you shall be near me."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis45-q4',
+              question: 'Did Pharaoh approve of Joseph\'s family coming to Egypt?',
+              options: ['No', 'Yes', 'He was indifferent', 'He was angry'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 45:16-20: Pharaoh was pleased and offered them the best of the land of Egypt.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis45-q5',
+              question: 'How did Joseph and Benjamin greet each other?',
+              options: ['They shook hands', 'They wept on each other\'s necks', 'They bowed', 'They spoke formally'],
+              correctAnswer: "They wept on each other's necks",
+              explanation: 'Genesis 45:14: "Then he fell upon his brother Benjamin\'s neck and wept, and Benjamin wept upon his neck."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis45-q6',
+              question: 'What did Joseph say about why God sent him to Egypt?',
+              options: ['To punish them', 'To preserve life', 'To build pyramids', 'To rule the world'],
+              correctAnswer: 'To preserve life',
+              explanation: 'Genesis 45:5: "God sent me before you to preserve life."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis45-q7',
+              question: 'How many more years of famine did Joseph say remained?',
+              options: ['Two', 'Five', 'Three', 'Seven'],
+              correctAnswer: 'Five',
+              explanation: 'Genesis 45:6: "For the famine has been in the land these two years, and there are yet five years."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis45-q8',
+              question: 'What did Joseph send to Jacob?',
+              options: ['A letter', 'Carts, provisions, and changes of clothing', 'Soldiers', 'Gold only'],
+              correctAnswer: 'Carts, provisions, and changes of clothing',
+              explanation: 'Genesis 45:21-23: Joseph gave them carts, provisions, changes of clothes, and extra gifts for Benjamin.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis45-q9',
+              question: 'How much silver did Joseph give Benjamin?',
+              options: ['100 shekels', '300 shekels', '50 shekels', '200 shekels'],
+              correctAnswer: '300 shekels',
+              explanation: 'Genesis 45:22: "To Benjamin he gave 300 shekels of silver and five changes of garments."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis45-q10',
+              question: "What was Jacob's initial reaction to the news?",
+              options: ['He believed immediately', 'His heart became numb, for he did not believe them', 'He was angry', 'He wept'],
+              correctAnswer: 'His heart became numb, for he did not believe them',
+              explanation: 'Genesis 45:26: "His heart became numb, for he did not believe them."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis45-q11',
+              question: 'What convinced Jacob that Joseph was alive?',
+              options: ['A letter', 'When he saw the carts Joseph had sent', 'A messenger\'s oath', 'A dream from God'],
+              correctAnswer: 'When he saw the carts Joseph had sent',
+              explanation: 'Genesis 45:27: "But when he saw the carts that Joseph had sent to carry him, the spirit of their father Jacob revived."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis45-q12',
+              question: "What did Joseph say about who sent him to Egypt?",
+              options: ['His brothers sent him', 'It was not his brothers but God who sent him', 'Fate brought him', 'Potiphar arranged it'],
+              correctAnswer: 'It was not his brothers but God who sent him',
+              explanation: 'Genesis 45:8: "So it was not you who sent me here, but God."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis45-q13',
+              question: 'What role did Joseph say God gave him in Egypt?',
+              options: ['A prophet', 'A father to Pharaoh and lord of all his house', 'A priest', 'A general'],
+              correctAnswer: 'A father to Pharaoh and lord of all his house',
+              explanation: 'Genesis 45:8: "He has made me a father to Pharaoh, and lord of all his house and ruler over all the land of Egypt."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis45-q14',
+              question: "What parting instruction did Joseph give his brothers?",
+              options: ['Hurry back', 'Do not quarrel on the way', 'Keep it secret', 'Bring weapons'],
+              correctAnswer: 'Do not quarrel on the way',
+              explanation: 'Genesis 45:24: "Then he sent his brothers away, and as they departed, he said to them, \'Do not quarrel on the way.\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis45-q15',
+              question: 'What did Joseph say God made him in addition to lord of Pharaoh\'s house?',
+              options: ['A priest', 'Ruler over all the land of Egypt', 'A judge', 'A prophet'],
+              correctAnswer: 'Ruler over all the land of Egypt',
+              explanation: 'Genesis 45:8-9: Joseph described himself as ruler over all the land of Egypt.',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 45:5',
+              key_verse_text: "God sent me before you to preserve life.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+  },
+{
+  id: 'genesis-46',
+    bookId: 'genesis',
+      chapter: 46,
+        title: 'Jacob Goes to Egypt',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis46-q1',
+              question: 'Where did God speak to Jacob on his way to Egypt?',
+              options: ['Bethel', 'Beersheba', 'Hebron', 'Shechem'],
+              correctAnswer: 'Beersheba',
+              explanation: 'Genesis 46:1 (ESV): "So Israel took his journey...and came to Beersheba, and offered sacrifices to the God of his father Isaac."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis46-q2',
+              question: 'Did God tell Jacob not to be afraid to go to Egypt?',
+              options: ['No', 'Yes', 'God was silent', 'God told him not to go'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 46:3: "Do not be afraid to go down to Egypt, for there I will make you into a great nation."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis46-q3',
+              question: 'How many of Jacob\'s family went to Egypt?',
+              options: ['Fifty', 'Seventy', 'Twelve', 'One hundred'],
+              correctAnswer: 'Seventy',
+              explanation: 'Genesis 46:27: "All the persons of the house of Jacob who came into Egypt were seventy."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis46-q4',
+              question: 'Who did Jacob send ahead to Joseph?',
+              options: ['Reuben', 'Judah', 'Benjamin', 'Simeon'],
+              correctAnswer: 'Judah',
+              explanation: 'Genesis 46:28: "He had sent Judah ahead of him to Joseph to show the way before him in Goshen."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis46-q5',
+              question: 'What did Jacob say when he met Joseph?',
+              options: ['I am angry at you', 'Now let me die, since I have seen your face', 'Tell me everything', 'How wealthy are you?'],
+              correctAnswer: 'Now let me die, since I have seen your face',
+              explanation: 'Genesis 46:30: "Israel said to Joseph, \'Now let me die, since I have seen your face and know that you are still alive.\'"',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis46-q6',
+              question: 'What promise did God make to Jacob at Beersheba?',
+              options: ['Victory over enemies', 'He would make him a great nation and bring him back', 'A long life', 'Wealth'],
+              correctAnswer: 'He would make him a great nation and bring him back',
+              explanation: 'Genesis 46:3-4: "I will make you into a great nation...I will also surely bring you up again."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis46-q7',
+              question: 'What did Joseph instruct his brothers to tell Pharaoh?',
+              options: ['They were warriors', 'They were shepherds and keepers of livestock', 'They were merchants', 'They were priests'],
+              correctAnswer: 'They were shepherds and keepers of livestock',
+              explanation: 'Genesis 46:34: "You shall say, \'Your servants have been keepers of livestock from our youth.\'"',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis46-q8',
+              question: 'Why did Joseph want them to say they were shepherds?',
+              options: ['So Pharaoh would respect them', 'So they could dwell in Goshen since shepherds were an abomination to Egyptians', 'To impress Pharaoh', 'To get good jobs'],
+              correctAnswer: 'So they could dwell in Goshen since shepherds were an abomination to Egyptians',
+              explanation: 'Genesis 46:34: "Every shepherd is an abomination to the Egyptians" — this would keep them separate in Goshen.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis46-q9',
+              question: 'How did Joseph greet Jacob?',
+              options: ['He bowed', 'He presented himself, fell on his neck, and wept', 'He sent gifts', 'He waved'],
+              correctAnswer: 'He presented himself, fell on his neck, and wept',
+              explanation: 'Genesis 46:29: "Joseph prepared his chariot and went up to meet Israel his father in Goshen. He presented himself to him and fell on his neck and wept on his neck a good while."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis46-q10',
+              question: 'Who promised to close Jacob\'s eyes (be with him at death)?',
+              options: ['Joseph', 'God', 'Judah', 'Benjamin'],
+              correctAnswer: 'God',
+              explanation: 'Genesis 46:4: "I myself will go down with you to Egypt, and I will also bring you up again, and Joseph\'s hand shall close your eyes."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis46-q11',
+              question: 'How many descendants came through Leah?',
+              options: ['Twenty', 'Thirty-three', 'Forty', 'Sixteen'],
+              correctAnswer: 'Thirty-three',
+              explanation: 'Genesis 46:15: "All the persons of his sons and his daughters were thirty-three."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis46-q12',
+              question: 'Who were the sons of Benjamin listed in this chapter?',
+              options: ['None were listed', 'Ten sons including Bela, Becher, and others', 'Two sons', 'Five sons'],
+              correctAnswer: 'Ten sons including Bela, Becher, and others',
+              explanation: 'Genesis 46:21: Ten sons of Benjamin are listed including Bela, Becher, Ashbel, Gera, and others.',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis46-q13',
+              question: 'Who were Joseph\'s sons born in Egypt?',
+              options: ['Er and Onan', 'Manasseh and Ephraim', 'Perez and Zerah', 'Simeon and Levi'],
+              correctAnswer: 'Manasseh and Ephraim',
+              explanation: 'Genesis 46:20: "And to Joseph in the land of Egypt were born Manasseh and Ephraim."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis46-q14',
+              question: "How many descendants came through Rachel?",
+              options: ['Seven', 'Fourteen', 'Twenty', 'Ten'],
+              correctAnswer: 'Fourteen',
+              explanation: 'Genesis 46:22: "All the persons of Rachel were fourteen."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis46-q15',
+              question: 'In what visions did God speak to Jacob?',
+              options: ['A dream', 'Visions of the night', 'A burning bush', 'Through an angel'],
+              correctAnswer: 'Visions of the night',
+              explanation: 'Genesis 46:2: "And God spoke to Israel in visions of the night."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 46:3',
+              key_verse_text: "Do not be afraid to go down to Egypt, for there I will make you into a great nation.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+  },
+{
+  id: 'genesis-47',
+    bookId: 'genesis',
+      chapter: 47,
+        title: "Jacob's Family Settles in Egypt",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis47-q1',
+              question: 'Where did Pharaoh allow Jacob\'s family to settle?',
+              options: ['Memphis', 'The land of Goshen', 'Thebes', 'On the Nile'],
+              correctAnswer: 'The land of Goshen',
+              explanation: 'Genesis 47:6: Pharaoh told Joseph to settle his family in the best of the land, in the land of Goshen.',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis47-q2',
+              question: 'Did Jacob bless Pharaoh?',
+              options: ['No', 'Yes', 'Only Joseph did', 'He cursed him'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 47:7: "Then Joseph brought in Jacob his father and stood him before Pharaoh, and Jacob blessed Pharaoh."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis47-q3',
+              question: 'How old was Jacob when he stood before Pharaoh?',
+              options: ['100', '130', '150', '147'],
+              correctAnswer: '130',
+              explanation: 'Genesis 47:9: "Jacob said to Pharaoh, \'The days of the years of my sojourning are 130 years.\'"',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis47-q4',
+              question: 'Where did Jacob want to be buried?',
+              options: ['Egypt', 'With his fathers in Canaan', 'Beersheba', 'Bethel'],
+              correctAnswer: 'With his fathers in Canaan',
+              explanation: 'Genesis 47:30: "Let me lie with my fathers. Carry me out of Egypt and bury me in their burying place."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis47-q5',
+              question: 'How many years did Jacob live in Egypt?',
+              options: ['Ten', 'Seventeen', 'Twenty', 'Thirty'],
+              correctAnswer: 'Seventeen',
+              explanation: 'Genesis 47:28: "Jacob lived in the land of Egypt seventeen years."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis47-q6',
+              question: 'What did the Egyptians give Joseph in exchange for food during the famine?',
+              options: ['Nothing', 'Their money, livestock, land, and themselves', 'Gold only', 'Their children'],
+              correctAnswer: 'Their money, livestock, land, and themselves',
+              explanation: 'Genesis 47:18-21: The Egyptians progressively gave money, livestock, land, and themselves for food.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis47-q7',
+              question: "What percentage of crops did Joseph require from the Egyptians?",
+              options: ['A tenth', 'A fifth', 'A third', 'Half'],
+              correctAnswer: 'A fifth',
+              explanation: 'Genesis 47:26: "Joseph made it a statute...that Pharaoh should have the fifth."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis47-q8',
+              question: 'How old was Jacob when he died?',
+              options: ['130', '147', '150', '175'],
+              correctAnswer: '147',
+              explanation: 'Genesis 47:28: "The whole age of Jacob was 147 years."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis47-q9',
+              question: 'What did Jacob make Joseph swear?',
+              options: ['To never leave Egypt', 'To bury him in Canaan, not Egypt', 'To forgive his brothers', 'To serve Pharaoh'],
+              correctAnswer: 'To bury him in Canaan, not Egypt',
+              explanation: 'Genesis 47:29-30: Jacob made Joseph swear to carry him out of Egypt and bury him with his fathers.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis47-q10',
+              question: "How did Jacob describe his years?",
+              options: ['Blessed and long', 'Few and evil', 'Full of joy', 'Peaceful'],
+              correctAnswer: 'Few and evil',
+              explanation: 'Genesis 47:9: "Few and evil have been the days of the years of my life."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis47-q11',
+              question: "Whose land was exempt from Pharaoh's purchase?",
+              options: ["Jacob's family", "The priests'", "The soldiers'", "The merchants'"],
+              correctAnswer: "The priests'",
+              explanation: 'Genesis 47:22: "Only the land of the priests he did not buy, for the priests had a fixed allowance from Pharaoh."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis47-q12',
+              question: 'How many brothers did Joseph present before Pharaoh?',
+              options: ['All twelve', 'Five', 'Three', 'Ten'],
+              correctAnswer: 'Five',
+              explanation: 'Genesis 47:2: "From among his brothers he took five men and presented them to Pharaoh."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis47-q13',
+              question: 'What did Joseph give the people in exchange for their land?',
+              options: ['Money', 'Seed to sow the land', 'Freedom', 'Animals'],
+              correctAnswer: 'Seed to sow the land',
+              explanation: 'Genesis 47:23: "Then Joseph said to the people, \'Behold, I have this day bought you and your land for Pharaoh. Now here is seed for you, and you shall sow the land.\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis47-q14',
+              question: 'What did Jacob do after Joseph swore his oath?',
+              options: ['He stood up', 'Israel bowed himself upon the head of his bed', 'He ate', 'He fell asleep'],
+              correctAnswer: 'Israel bowed himself upon the head of his bed',
+              explanation: 'Genesis 47:31: "Then Israel bowed himself upon the head of his bed."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis47-q15',
+              question: 'What happened to the Israelites in Goshen?',
+              options: ['They suffered', 'They were fruitful and multiplied greatly', 'They left', 'They became servants'],
+              correctAnswer: 'They were fruitful and multiplied greatly',
+              explanation: 'Genesis 47:27: "Thus Israel settled in the land of Egypt, in the land of Goshen. And they gained possessions in it, and were fruitful and multiplied greatly."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 47:27',
+              key_verse_text: "Thus Israel settled in the land of Egypt, in the land of Goshen. And they gained possessions in it, and were fruitful and multiplied greatly.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+  },
+{
+  id: 'genesis-48',
+    bookId: 'genesis',
+      chapter: 48,
+        title: 'Jacob Blesses Ephraim and Manasseh',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis48-q1',
+              question: 'Who did Joseph bring to Jacob to be blessed?',
+              options: ['His brothers', 'His two sons, Manasseh and Ephraim', 'Pharaoh', 'His servants'],
+              correctAnswer: 'His two sons, Manasseh and Ephraim',
+              explanation: 'Genesis 48:1 (ESV): "So he took with him his two sons, Manasseh and Ephraim."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis48-q2',
+              question: 'What did Jacob do when he blessed Joseph\'s sons?',
+              options: ['He crossed his hands', 'He stood up', 'He wept', 'He refused'],
+              correctAnswer: 'He crossed his hands',
+              explanation: 'Genesis 48:14: "Israel stretched out his right hand and laid it on the head of Ephraim, who was the younger, and his left hand on the head of Manasseh, crossing his hands."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis48-q3',
+              question: 'Which son received the greater blessing?',
+              options: ['Manasseh (the older)', 'Ephraim (the younger)', 'Both equally', 'Neither'],
+              correctAnswer: 'Ephraim (the younger)',
+              explanation: 'Genesis 48:19: "Nevertheless, his younger brother shall be greater than he."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis48-q4',
+              question: 'Did Joseph try to correct his father\'s hand placement?',
+              options: ['Yes', 'No', 'He didn\'t notice', 'He was angry'],
+              correctAnswer: 'Yes',
+              explanation: 'Genesis 48:17-18: "When Joseph saw that his father laid his right hand on the head of Ephraim, it displeased him, and he took his father\'s hand to remove it."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis48-q5',
+              question: 'What did Jacob say about his vision?',
+              options: ['It was dim due to age', 'It was perfect', 'He was blind', 'He could see angels'],
+              correctAnswer: 'It was dim due to age',
+              explanation: 'Genesis 48:10: "Now the eyes of Israel were dim with age, so that he could not see."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis48-q6',
+              question: 'What status did Jacob give Ephraim and Manasseh?',
+              options: ['They would be like Reuben and Simeon (his own sons)', 'They would be servants', 'They would be priests', 'They would rule Egypt'],
+              correctAnswer: 'They would be like Reuben and Simeon (his own sons)',
+              explanation: 'Genesis 48:5: "Ephraim and Manasseh shall be mine; like Reuben and Simeon, they shall be mine."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis48-q7',
+              question: 'Who did Jacob say had been his shepherd all his life?',
+              options: ['Joseph', 'God', 'Abraham', 'Isaac'],
+              correctAnswer: 'God',
+              explanation: 'Genesis 48:15: "The God who has been my shepherd all my life long to this day."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis48-q8',
+              question: 'In whose name did Jacob bless the boys?',
+              options: ['Pharaoh', 'Abraham, Isaac, and himself', 'Joseph', 'The God of Egypt'],
+              correctAnswer: 'Abraham, Isaac, and himself',
+              explanation: 'Genesis 48:16: "Let my name be carried on in them, and the name of my fathers Abraham and Isaac."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis48-q9',
+              question: 'What prophecy did Jacob make about the younger brother?',
+              options: ['He would serve the older', 'His offspring would become a multitude of nations', 'He would be a king', 'He would be a priest'],
+              correctAnswer: 'His offspring would become a multitude of nations',
+              explanation: 'Genesis 48:19: "His offspring shall become a multitude of nations."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis48-q10',
+              question: 'What extra portion did Jacob give to Joseph?',
+              options: ['A double inheritance', 'A mountain slope (Shechem) taken from the Amorites', 'All his gold', 'His staff'],
+              correctAnswer: 'A mountain slope (Shechem) taken from the Amorites',
+              explanation: 'Genesis 48:22: "I have given to you rather than to your brothers one mountain slope that I took from the hand of the Amorites with my sword and with my bow."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis48-q11',
+              question: 'Where did Jacob bury Rachel?',
+              options: ['Cave of Machpelah', 'On the way to Ephrath (Bethlehem)', 'Shechem', 'Bethel'],
+              correctAnswer: 'On the way to Ephrath (Bethlehem)',
+              explanation: 'Genesis 48:7: "I buried her there on the way to Ephrath (that is, Bethlehem)."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis48-q12',
+              question: 'Why did Jacob guide his hands knowingly?',
+              options: ['To confuse Joseph', 'Because he knew God\'s will was to bless the younger over the older', 'Because he was blind', 'Because Ephraim was taller'],
+              correctAnswer: 'Because he knew God\'s will was to bless the younger over the older',
+              explanation: 'Genesis 48:14, 19: Jacob "crossed his hands" knowingly, and refused Joseph\'s correction, stating the younger would be greater.',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis48-q13',
+              question: 'What angel did Jacob mention in his blessing?',
+              options: ['The angel who redeemed him from all evil', 'The angel of death', 'Gabriel', 'Michael'],
+              correctAnswer: 'The angel who redeemed him from all evil',
+              explanation: 'Genesis 48:16: "The angel who has redeemed me from all evil, bless the boys."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis48-q14',
+              question: 'What specific phrase did Jacob use to describe God\'s presence with him?',
+              options: ['God Almighty appeared to me', 'The Lord is my shepherd', 'The God of my fathers', 'The Almighty One'],
+              correctAnswer: 'God Almighty appeared to me',
+              explanation: 'Genesis 48:3: "God Almighty appeared to me at Luz in the land of Canaan and blessed me."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis48-q15',
+              question: 'How did Jacob strengthen himself when Joseph came?',
+              options: ['He drank wine', 'He sat up in bed', 'He prayed', 'He called for food'],
+              correctAnswer: 'He sat up in bed',
+              explanation: 'Genesis 48:2: "Israel summoned his strength and sat up in bed."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 48:15',
+              key_verse_text: "He blessed Joseph and said, 'The God before whom my fathers Abraham and Isaac walked, the God who has been my shepherd all my life long to this day...'",
+                memory_challenge: true,
+                  difficulty: 'hard',
+                    points: 20
+  },
+{
+  id: 'genesis-49',
+    bookId: 'genesis',
+      chapter: 49,
+        title: "Jacob Blesses His Twelve Sons",
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis49-q1',
+              question: 'What did Jacob gather his sons to tell them?',
+              options: ['Where to bury him', 'What would happen to them in days to come', 'How to divide the land', 'Who would be the next leader'],
+              correctAnswer: 'What would happen to them in days to come',
+              explanation: 'Genesis 49:1 (ESV): "Gather yourselves together, that I may tell you what shall happen to you in days to come."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis49-q2',
+              question: 'Who did Jacob call "unstable as water"?',
+              options: ['Simeon', 'Levi', 'Reuben', 'Judah'],
+              correctAnswer: 'Reuben',
+              explanation: 'Genesis 49:4: "Unstable as water, you shall not have preeminence."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis49-q3',
+              question: 'Which son did Jacob call a "lion\'s cub"?',
+              options: ['Judah', 'Dan', 'Benjamin', 'Joseph'],
+              correctAnswer: 'Judah',
+              explanation: 'Genesis 49:9: "Judah is a lion\'s cub; from the prey, my son, you have gone up."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis49-q4',
+              question: 'What animal did Jacob compare Benjamin to?',
+              options: ['A ravenous wolf', 'A strong donkey', 'A lion', 'A viper'],
+              correctAnswer: 'A ravenous wolf',
+              explanation: 'Genesis 49:27: "Benjamin is a ravenous wolf, in the morning devouring the prey and at evening dividing the spoil."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis49-q5',
+              question: 'Where did Jacob ask to be buried?',
+              options: ['In the cave of Machpelah', 'In Egypt', 'Beersheba', 'Shechem'],
+              correctAnswer: 'In the cave of Machpelah',
+              explanation: 'Genesis 49:29-30: "Bury me with my fathers in the cave that is in the field of Ephron the Hittite...the cave of Machpelah."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis49-q6',
+              question: 'What did Jacob say about Simeon and Levi?',
+              options: ['They are righteous', 'Their swords are weapons of violence', 'They are blessed priests', 'They are strong warriors'],
+              correctAnswer: 'Their swords are weapons of violence',
+              explanation: 'Genesis 49:5: "Simeon and Levi are brothers; weapons of violence are their swords."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis49-q7',
+              question: 'What prophecy was given to Judah regarding the scepter?',
+              options: ['It shall not depart from him', 'It will break', 'It will be given to Joseph', 'He will lose it to Edom'],
+              correctAnswer: 'It shall not depart from him',
+              explanation: 'Genesis 49:10: "The scepter shall not depart from Judah, nor the ruler\'s staff from between his feet."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis49-q8',
+              question: 'What did Jacob say about Zebulun?',
+              options: ['He shall dwell at the shore of the sea', 'He is a strong donkey', 'He is a fruitful bough', 'He is unstable'],
+              correctAnswer: 'He shall dwell at the shore of the sea',
+              explanation: 'Genesis 49:13: "Zebulun shall dwell at the shore of the sea; he shall become a haven for ships."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis49-q9',
+              question: 'Who is described as a "fruitful bough"?',
+              options: ['Joseph', 'Judah', 'Asher', 'Naphtali'],
+              correctAnswer: 'Joseph',
+              explanation: 'Genesis 49:22: "Joseph is a fruitful bough, a fruitful bough by a spring."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis49-q10',
+              question: 'What did Jacob say about Dan?',
+              options: ['He shall judge his people', 'He is a doe let loose', 'He provides royal delicacies', 'He bows down'],
+              correctAnswer: 'He shall judge his people',
+              explanation: 'Genesis 49:16: "Dan shall judge his people as one of the tribes of Israel."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis49-q11',
+              question: "Who is described as a 'strong donkey crouching between the sheepfolds'?",
+              options: ['Issachar', 'Gad', 'Asher', 'Naphtali'],
+              correctAnswer: 'Issachar',
+              explanation: 'Genesis 49:14: "Issachar is a strong donkey, crouching between the sheepfolds."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis49-q12',
+              question: 'What does the name "Shiloh" refer to in Judah\'s blessing (often interpreted as)?',
+              options: ['A city', 'The Messiah (to whom it belongs)', 'Peace', 'A weapon'],
+              correctAnswer: 'The Messiah (to whom it belongs)',
+              explanation: 'Genesis 49:10: "Until tribute (Shiloh) comes to him; and to him shall be the obedience of the peoples."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis49-q13',
+              question: 'What title for God is used in Joseph\'s blessing?',
+              options: ['The Mighty One of Jacob', 'El Shaddai', 'Jehovah Jireh', 'The Lord of Hosts'],
+              correctAnswer: 'The Mighty One of Jacob',
+              explanation: 'Genesis 49:24: "By the hands of the Mighty One of Jacob (from there is the Shepherd, the Stone of Israel)."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis49-q14',
+              question: 'Which tribe is described as giving "royal delicacies"?',
+              options: ['Asher', 'Naphtali', 'Gad', 'Benjamin'],
+              correctAnswer: 'Asher',
+              explanation: 'Genesis 49:20: "Asher\'s food shall be rich, and he shall yield royal delicacies."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis49-q15',
+              question: 'What did Jacob do immediately after finishing his instructions?',
+              options: ['He ate', 'He blessed Pharaoh', 'He gathered up his feet into the bed and breathed his last', 'He slept'],
+              correctAnswer: 'He gathered up his feet into the bed and breathed his last',
+              explanation: 'Genesis 49:33: "He gathered up his feet into the bed and breathed his last and was gathered to his people."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 49:10',
+              key_verse_text: "The scepter shall not depart from Judah, nor the ruler's staff from between his feet, until tribute comes to him.",
+                memory_challenge: true,
+                  difficulty: 'hard',
+                    points: 20
+  },
+{
+  id: 'genesis-50',
+    bookId: 'genesis',
+      chapter: 50,
+        title: 'Joseph Reassures His Brothers',
+          questions: [
+            // EASY QUESTIONS (5)
+            {
+              id: 'genesis50-q1',
+              question: 'Where was Jacob buried?',
+              options: ['In Egypt', 'In the cave of Machpelah in Canaan', 'In Shechem', 'By the river Jordan'],
+              correctAnswer: 'In the cave of Machpelah in Canaan',
+              explanation: 'Genesis 50:13 (ESV): "His sons carried him to the land of Canaan and buried him in the cave of the field at Machpelah."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis50-q2',
+              question: 'What did Joseph say when his brothers feared revenge?',
+              options: ['You meant evil against me, but God meant it for good', 'I will punish you now', 'Leave Egypt immediately', 'You are my servants'],
+              correctAnswer: 'You meant evil against me, but God meant it for good',
+              explanation: 'Genesis 50:20: "As for you, you meant evil against me, but God meant it for good."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis50-q3',
+              question: 'How old was Joseph when he died?',
+              options: ['110', '120', '100', '147'],
+              correctAnswer: '110',
+              explanation: 'Genesis 50:26: "So Joseph died, being 110 years old."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis50-q4',
+              question: 'What promise did Joseph ask of his brothers before he died?',
+              options: ['To carry his bones up from Egypt', 'To build him a pyramid', 'To stay in Egypt forever', 'To make his son king'],
+              correctAnswer: 'To carry his bones up from Egypt',
+              explanation: 'Genesis 50:25: "God will surely visit you, and you shall carry up my bones from here."',
+              difficulty: 'easy'
+            },
+            {
+              id: 'genesis50-q5',
+              question: 'Did the Egyptians mourn for Jacob?',
+              options: ['No', 'Yes, for seventy days', 'Yes, for seven days', 'They ignored his death'],
+              correctAnswer: 'Yes, for seventy days',
+              explanation: 'Genesis 50:3: "The Egyptians wept for him seventy days."',
+              difficulty: 'easy'
+            },
+            // MEDIUM QUESTIONS (5)
+            {
+              id: 'genesis50-q6',
+              question: 'How long did the embalming of Jacob take?',
+              options: ['Forty days', 'Seven days', 'Thirty days', 'Ten days'],
+              correctAnswer: 'Forty days',
+              explanation: 'Genesis 50:3: "Forty days were required for it, for that is how many are required for embalming."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis50-q7',
+              question: 'Who went with Joseph to bury Jacob?',
+              options: ['Only his brothers', 'All the servants of Pharaoh, the elders of his household, and all the elders of Egypt', 'Just his sons', 'No one'],
+              correctAnswer: 'All the servants of Pharaoh, the elders of his household, and all the elders of Egypt',
+              explanation: 'Genesis 50:7: "So Joseph went up to bury his father. With him went up all the servants of Pharaoh..."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis50-q8',
+              question: 'What message did the brothers send to Joseph after Jacob died?',
+              options: ['We are leaving', 'Your father gave this command: Forgive your brothers', 'We are sorry', 'Give us money'],
+              correctAnswer: 'Your father gave this command: Forgive your brothers',
+              explanation: 'Genesis 50:16-17: They sent a message saying Jacob commanded Joseph to forgive them.',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis50-q9',
+              question: 'How did Joseph react to his brothers\' message?',
+              options: ['He was angry', 'He wept', 'He ignored it', 'He laughed'],
+              correctAnswer: 'He wept',
+              explanation: 'Genesis 50:17: "Joseph wept when they spoke to him."',
+              difficulty: 'medium'
+            },
+            {
+              id: 'genesis50-q10',
+              question: 'Where did they stop to mourn on the way to Canaan?',
+              options: ['The threshing floor of Atad', 'The river Jordan', 'Mount Sinai', 'Jericho'],
+              correctAnswer: 'The threshing floor of Atad',
+              explanation: 'Genesis 50:10: "When they came to the threshing floor of Atad...they lamented there with a very great and grievous lamentation."',
+              difficulty: 'medium'
+            },
+            // HARD QUESTIONS (5)
+            {
+              id: 'genesis50-q11',
+              question: 'What did the Canaanites call the place where they mourned?',
+              options: ['Abel-mizraim', 'Bethel', 'Eshcol', 'Mara'],
+              correctAnswer: 'Abel-mizraim',
+              explanation: 'Genesis 50:11: "Therefore its name was called Abel-mizraim (Mourning of Egypt)."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis50-q12',
+              question: 'What generation of Ephraim\'s children did Joseph see?',
+              options: ['The third generation', 'The fourth generation', 'Only the first', 'None'],
+              correctAnswer: 'The third generation',
+              explanation: 'Genesis 50:23: "And Joseph saw Ephraim\'s children of the third generation."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis50-q13',
+              question: 'What specific reassurance did Joseph give his brothers?',
+              options: ['Am I in the place of God?', 'I have forgotten it', 'You are forgiven', 'Do not fear'],
+              correctAnswer: 'Am I in the place of God?',
+              explanation: 'Genesis 50:19: "But Joseph said to them, \'Do not fear, for am I in the place of God?\'"',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis50-q14',
+              question: "Whose children were 'counted as Joseph's' (born on his knees)?",
+              options: ['The children of Machir son of Manasseh', 'The children of Ephraim', 'The children of Benjamin', 'The children of Judah'],
+              correctAnswer: 'The children of Machir son of Manasseh',
+              explanation: 'Genesis 50:23: "The children also of Machir the son of Manasseh were counted as Joseph\'s own."',
+              difficulty: 'hard'
+            },
+            {
+              id: 'genesis50-q15',
+              question: 'How ends the book of Genesis?',
+              options: ['With a feast', 'With Joseph in a coffin in Egypt', 'With the return to Canaan', 'With the birth of Moses'],
+              correctAnswer: 'With Joseph in a coffin in Egypt',
+              explanation: 'Genesis 50:26: "So Joseph died...and he was put in a coffin in Egypt."',
+              difficulty: 'hard'
+            }
+          ],
+            key_verse: 'Genesis 50:20',
+              key_verse_text: "As for you, you meant evil against me, but God meant it for good, to bring it about that many people should be kept alive, as they are today.",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+  },
+{
+  id: 'genesis-50',
+    bookId: 'genesis',
+      chapter: 50,
+        title: 'Jacob’s Burial and Joseph’s Death',
+          questions: [
+            {
+              id: 'genesis50-q1',
+              question: 'What did Joseph do when Jacob died?',
+              options: [
+                'Sought riches',
+                'Wept and kissed him',
+                'Grew strong',
+                'Fell silent'
+              ],
+              correctAnswer: 'Wept and kissed him',
+              explanation: 'Genesis 50:1 (ESV): "Then Joseph fell on his father’s face and wept over him and kissed him." Grief mourns.'
+            },
+            {
+              id: 'genesis50-q2',
+              question: 'Where was Jacob buried?',
+              options: [
+                'Rich Rameses',
+                'Cave of Machpelah',
+                'Strong Goshen',
+                'Silent On'
+              ],
+              correctAnswer: 'Cave of Machpelah',
+              explanation: 'Genesis 50:13 (ESV): "for his sons carried him to the land of Canaan and buried him in the cave of the field of Machpelah to the east of Mamre, which Abraham bought with the field from Ephron the Hittite as a possession for a burying place." Tomb honors.'
+            },
+            {
+              id: 'genesis50-q3',
+              question: 'What did Joseph’s brothers fear after Jacob’s death?',
+              options: [
+                'Loss of riches',
+                'Joseph’s revenge',
+                'Loss of strength',
+                'Silent exile'
+              ],
+              correctAnswer: 'Joseph’s revenge',
+              explanation: 'Genesis 50:15 (ESV): "When Joseph’s brothers saw that their father was dead, they said, ‘It may be that Joseph will hate us and pay us back for all the evil that we did to him.’" Fear doubts.'
+            },
+            {
+              id: 'genesis50-q4',
+              question: 'What did Joseph promise his brothers?',
+              options: [
+                'Rich gifts',
+                'To provide and protect',
+                'Strong leadership',
+                'Silent peace'
+              ],
+              correctAnswer: 'To provide and protect',
+              explanation: 'Genesis 50:21 (ESV): "‘So do not fear; I will provide for you and your little ones.’ Thus he comforted them and spoke kindly to them." Assurance comforts.'
+            },
+            {
+              id: 'genesis50-q5',
+              question: 'How old was Joseph when he died?',
+              options: [
+                'Rich ninety years',
+                'One hundred ten years',
+                'Strong one hundred years',
+                'Silent eighty years'
+              ],
+              correctAnswer: 'One hundred ten years',
+              explanation: 'Genesis 50:26 (ESV): "So Joseph died, being 110 years old. They embalmed him, and he was put in a coffin in Egypt." Life ends.'
+            }
+          ],
+            key_verse: 'Genesis 50:20',
+              key_verse_text: "‘As for you, you meant evil against me, but God meant it for good, to bring it about that many people should be kept alive, as they are today.’",
+                memory_challenge: true,
+                  difficulty: 'medium',
+                    points: 15
+}
 ];

@@ -4,12 +4,13 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { useAchievements } from '@/hooks/use-achievements';
 import { BookOpen, Trophy, CalendarDays, Star, Award, Medal, Book } from 'lucide-react';
 
 const Achievements = () => {
   const navigate = useNavigate();
   const { user, isLoading } = useAuth();
-  const { progress } = useBibleProgress();
+  const { achievements, unlockedCount, totalCount } = useAchievements();
 
   // Redirect to login if not authenticated
   React.useEffect(() => {
@@ -32,7 +33,42 @@ const Achievements = () => {
     return null; // Will redirect in the effect
   }
 
-  const completedAchievements = 1; // For now, just hardcode this
+  const renderAchievementCard = (achievement: any) => (
+    <Card
+      key={achievement.id}
+      className={achievement.isUnlocked ? "bg-white border-amber-200" : "bg-white/60 opacity-90"}
+    >
+      <CardHeader className="pb-2">
+        <CardTitle className={`text-lg flex items-center ${!achievement.isUnlocked && "opacity-70"}`}>
+          <achievement.icon className={`h-5 w-5 mr-2 ${achievement.isUnlocked ? "text-amber-500" : "text-gray-500"}`} />
+          {achievement.title}
+        </CardTitle>
+      </CardHeader>
+      <CardContent>
+        <p className={`text-sm text-gray-600 ${!achievement.isUnlocked && "opacity-70"}`}>{achievement.description}</p>
+
+        {achievement.isUnlocked ? (
+          <div className="mt-4 flex items-center text-amber-600">
+            <Award className="h-5 w-5 mr-2" />
+            <span className="font-medium">Unlocked +{achievement.points}pts</span>
+          </div>
+        ) : (
+          <div className="mt-4">
+            <div className="flex justify-between text-xs text-gray-500 mb-1">
+              <span>Progress</span>
+              <span>{achievement.current} / {achievement.max}</span>
+            </div>
+            <div className="w-full bg-gray-200 rounded-full h-2">
+              <div
+                className="bg-bible-blue h-2 rounded-full transition-all duration-500"
+                style={{ width: `${achievement.progress}%` }}
+              ></div>
+            </div>
+          </div>
+        )}
+      </CardContent>
+    </Card>
+  );
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -57,12 +93,12 @@ const Achievements = () => {
                     </div>
                     <div>
                       <p className="text-lg font-medium">
-                        {completedAchievements} out of 12 achievements unlocked
+                        {unlockedCount} out of {totalCount} achievements unlocked
                       </p>
                       <div className="w-full max-w-md bg-gray-200 rounded-full h-2.5 mt-2">
                         <div
-                          className="bg-bible-blue h-2.5 rounded-full"
-                          style={{ width: `${(completedAchievements / 12) * 100}%` }}
+                          className="bg-bible-blue h-2.5 rounded-full transition-all duration-500"
+                          style={{ width: `${(unlockedCount / totalCount) * 100}%` }}
                         ></div>
                       </div>
                     </div>
@@ -78,237 +114,36 @@ const Achievements = () => {
               <TabsTrigger value="bible">Bible Reading</TabsTrigger>
               <TabsTrigger value="theology">Theology</TabsTrigger>
               <TabsTrigger value="challenges">Challenges</TabsTrigger>
+              <TabsTrigger value="streaks">Streaks</TabsTrigger>
             </TabsList>
 
             <TabsContent value="all" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Bible Reading Achievement */}
-                <Card className="bg-white">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center">
-                      <Star className="h-5 w-5 mr-2 text-amber-500" />
-                      First Steps
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600">Completed your first Bible chapter</p>
-                    <div className="mt-4 flex items-center text-green-600">
-                      <Award className="h-5 w-5 mr-2" />
-                      <span className="font-medium">Unlocked!</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Book Finisher Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <BookOpen className="h-5 w-5 mr-2 text-gray-500" />
-                      Book Finisher
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete an entire book of the Bible</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0/1 books completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* 7-Day Streak Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <CalendarDays className="h-5 w-5 mr-2 text-gray-500" />
-                      7-Day Streak
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Read the Bible for 7 consecutive days</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">Current streak: 1 day</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* 30-Day Streak Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Medal className="h-5 w-5 mr-2 text-gray-500" />
-                      30-Day Devotion
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Read the Bible for 30 consecutive days</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">Current streak: 1 day</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Old Testament Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Book className="h-5 w-5 mr-2 text-gray-500" />
-                      Old Testament Scholar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete reading the Old Testament</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0% completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* New Testament Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Book className="h-5 w-5 mr-2 text-gray-500" />
-                      New Testament Scholar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete reading the New Testament</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0% completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Gospels Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <BookOpen className="h-5 w-5 mr-2 text-gray-500" />
-                      Gospel Reader
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete all four Gospels</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0/4 completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Wisdom Books Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <BookOpen className="h-5 w-5 mr-2 text-gray-500" />
-                      Wisdom Seeker
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete the wisdom literature (Job, Psalms, Proverbs, Ecclesiastes, Song of Songs)</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0/5 completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Theology Book Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Book className="h-5 w-5 mr-2 text-gray-500" />
-                      Theology Scholar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete your first theology book</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">Not started</span>
-                    </div>
-                  </CardContent>
-                </Card>
+                {achievements.map(renderAchievementCard)}
               </div>
             </TabsContent>
 
             <TabsContent value="bible" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Bible Reading Achievements */}
-                <Card className="bg-white">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center">
-                      <Star className="h-5 w-5 mr-2 text-amber-500" />
-                      First Steps
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600">Completed your first Bible chapter</p>
-                    <div className="mt-4 flex items-center text-green-600">
-                      <Award className="h-5 w-5 mr-2" />
-                      <span className="font-medium">Unlocked!</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Book Finisher Achievement */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <BookOpen className="h-5 w-5 mr-2 text-gray-500" />
-                      Book Finisher
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete an entire book of the Bible</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0/1 books completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Additional Bible reading achievements */}
+                {achievements.filter(a => a.category === 'bible').map(renderAchievementCard)}
               </div>
             </TabsContent>
 
             <TabsContent value="theology" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Theology book achievements */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Book className="h-5 w-5 mr-2 text-gray-500" />
-                      Theology Scholar
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete your first theology book</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">Not started</span>
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Additional theology achievements */}
+                {achievements.filter(a => a.category === 'theology').map(renderAchievementCard)}
               </div>
             </TabsContent>
 
             <TabsContent value="challenges" className="space-y-4">
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {/* Challenge achievements */}
-                <Card className="bg-white/60">
-                  <CardHeader className="pb-2">
-                    <CardTitle className="text-lg flex items-center opacity-60">
-                      <Trophy className="h-5 w-5 mr-2 text-gray-500" />
-                      Challenge Champion
-                    </CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-gray-600 opacity-60">Complete 10 Bible challenges with 100% score</p>
-                    <div className="mt-4">
-                      <span className="text-sm text-gray-500">0/10 completed</span>
-                    </div>
-                  </CardContent>
-                </Card>
+                {achievements.filter(a => a.category === 'challenges').map(renderAchievementCard)}
+              </div>
+            </TabsContent>
 
-                {/* Additional challenge achievements */}
+            <TabsContent value="streaks" className="space-y-4">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {achievements.filter(a => a.category === 'streaks').map(renderAchievementCard)}
               </div>
             </TabsContent>
           </Tabs>
