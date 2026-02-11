@@ -1,4 +1,4 @@
-import { ChapterChallenge } from '../types';
+﻿import { ChapterChallenge } from '../types';
 
 export const leviticusChallenges: ChapterChallenge[] = [
   {
@@ -134,7 +134,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-2',
     bookId: 'leviticus',
@@ -267,7 +266,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-3',
@@ -402,7 +400,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-4',
     bookId: 'leviticus',
@@ -535,7 +532,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-5',
@@ -670,7 +666,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-6',
     bookId: 'leviticus',
@@ -803,7 +798,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-7',
@@ -938,7 +932,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-8',
     bookId: 'leviticus',
@@ -1071,7 +1064,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-9',
@@ -1206,7 +1198,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-10',
     bookId: 'leviticus',
@@ -1339,7 +1330,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-11',
@@ -1474,7 +1464,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-12',
     bookId: 'leviticus',
@@ -1607,7 +1596,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-13',
@@ -1742,7 +1730,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-14',
     bookId: 'leviticus',
@@ -1875,7 +1862,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-15',
@@ -2010,7 +1996,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-16',
     bookId: 'leviticus',
@@ -2143,7 +2128,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-17',
@@ -2278,7 +2262,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-18',
     bookId: 'leviticus',
@@ -2411,7 +2394,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-19',
@@ -2546,7 +2528,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-20',
     bookId: 'leviticus',
@@ -2679,7 +2660,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-21',
@@ -2814,7 +2794,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-22',
     bookId: 'leviticus',
@@ -2947,7 +2926,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-23',
@@ -3082,7 +3060,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-24',
     bookId: 'leviticus',
@@ -3215,7 +3192,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-25',
@@ -3350,7 +3326,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'leviticus-26',
     bookId: 'leviticus',
@@ -3483,7 +3458,6 @@ export const leviticusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'leviticus-27',
@@ -3618,5 +3592,4 @@ export const leviticusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   }
-];
 ];
