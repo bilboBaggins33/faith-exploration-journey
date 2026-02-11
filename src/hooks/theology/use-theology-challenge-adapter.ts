@@ -6,22 +6,9 @@ import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { theologyBooks } from '@/data/theology';
 import { useTheologyChallenge } from './use-theology-challenge';
 import { ChapterChallenge } from '@/data/bible/types';
+import { BibleChallengeState } from '@/hooks/bible/use-bible-challenge';
 
-// State interface matching BibleChallengeState
-export interface TheologyChallengeState {
-    challenge: ChapterChallenge | null;
-    currentQuestion: number;
-    userAnswers: Record<number, string>;
-    showExplanation: boolean;
-    isCorrect: boolean | null;
-    score: number;
-    loading: boolean;
-    error: string | null;
-    completed: boolean;
-    answeredQuestions: Record<number, { isCorrect: boolean; hasBeenScored: boolean }>;
-    difficulty: 'easy' | 'medium' | 'hard';
-    filteredQuestions: { id: string; question: string; options: string[]; correctAnswer: string; explanation: string }[];
-}
+export type TheologyChallengeState = BibleChallengeState;
 
 export function useTheologyChallengeAdapter() {
     const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
