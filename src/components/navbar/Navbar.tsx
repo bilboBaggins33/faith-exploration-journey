@@ -50,7 +50,7 @@ const Navbar = () => {
                 </div>
             </div>
 
-            <MobileNav isOpen={isOpen} user={user} handleSignOut={handleSignOut} setIsOpen={setIsOpen} />
+            <MobileNav isOpen={isOpen} onOpenChange={setIsOpen} user={user} handleSignOut={handleSignOut} />
         </nav>
     );
 };
