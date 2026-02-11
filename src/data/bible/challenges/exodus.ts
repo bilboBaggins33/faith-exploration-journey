@@ -2663,7 +2663,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-14',
     bookId: 'exodus',
@@ -2799,7 +2798,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-15',
@@ -2937,7 +2935,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-16',
     bookId: 'exodus',
@@ -3073,7 +3070,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-17',
@@ -3211,7 +3207,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-18',
     bookId: 'exodus',
@@ -3347,7 +3342,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-19',
@@ -3485,7 +3479,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-20',
     bookId: 'exodus',
@@ -3621,7 +3614,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-21',
@@ -3759,7 +3751,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-22',
     bookId: 'exodus',
@@ -3895,7 +3886,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 15
-  },
   },
   {
     id: 'exodus-23',
@@ -4033,7 +4023,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-24',
     bookId: 'exodus',
@@ -4169,7 +4158,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 15
-  },
   },
   {
     id: 'exodus-25',
@@ -4307,7 +4295,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-26',
     bookId: 'exodus',
@@ -4443,7 +4430,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 15
-  },
   },
   {
     id: 'exodus-27',
@@ -4581,7 +4567,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-28',
     bookId: 'exodus',
@@ -4717,7 +4702,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 15
-  },
   },
   {
     id: 'exodus-29',
@@ -4855,7 +4839,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-30',
     bookId: 'exodus',
@@ -4991,7 +4974,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'hard',
     points: 15
-  },
   },
   {
     id: 'exodus-31',
@@ -5129,7 +5111,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-32',
     bookId: 'exodus',
@@ -5262,7 +5243,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-33',
@@ -5397,7 +5377,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-34',
     bookId: 'exodus',
@@ -5530,7 +5509,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-35',
@@ -5665,7 +5643,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'medium',
     points: 15
   },
-  },
   {
     id: 'exodus-36',
     bookId: 'exodus',
@@ -5798,7 +5775,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-37',
@@ -5933,7 +5909,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-38',
     bookId: 'exodus',
@@ -6067,7 +6042,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     difficulty: 'hard',
     points: 15
   },
-  },
   {
     id: 'exodus-39',
     bookId: 'exodus',
@@ -6200,7 +6174,6 @@ export const exodusChallenges: ChapterChallenge[] = [
     memory_challenge: true,
     difficulty: 'medium',
     points: 15
-  },
   },
   {
     id: 'exodus-40',
