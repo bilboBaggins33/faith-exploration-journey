@@ -1,4 +1,5 @@
 import React from 'react';
+import { motion } from 'framer-motion';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -10,6 +11,15 @@ import ContentSection from '@/components/dashboard/ContentSection';
 import DashboardLoading from '@/components/dashboard/DashboardLoading';
 import StreakCounter from '@/components/dashboard/StreakCounter';
 import { Flame } from 'lucide-react';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' },
+  }),
+};
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -29,35 +39,26 @@ const Dashboard = () => {
   }
 
   if (!user) {
-    return null; // Will redirect in the effect
+    return null;
   }
 
-  // Calculate overall Bible reading progress
   const calculateOverallProgress = () => {
     if (!progress || !progress.completed_chapters) return 0;
-
     const totalChapters = bibleBooks.reduce((sum, book) => sum + book.chapters, 0);
     const completedChapters = progress.completed_chapters.length;
-
     return Math.round((completedChapters / totalChapters) * 100);
   };
 
-  // Get recently read Bible books
   const getRecentlyReadBooks = () => {
     if (!progress || !progress.completed_chapters) return [];
-
-    // Sort by most recent completion date and get unique books
     const sortedCompletedChapters = [...progress.completed_chapters]
       .sort((a, b) => new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime());
-
     const uniqueBooks = Array.from(new Set(
       sortedCompletedChapters.map(chapter => chapter.book_id)
     )).slice(0, 3);
-
     return uniqueBooks.map(bookId => {
       const book = bibleBooks.find(b => b.id === bookId);
       const bookProgress = getBookProgress(bookId);
-
       return {
         id: bookId,
         name: book?.name || bookId,
@@ -66,9 +67,7 @@ const Dashboard = () => {
     });
   };
 
-  // Get recently read theology books
   const getRecentTheologyBooks = () => {
-    // Get first 3 theology books that have some progress
     return theologyBooks.filter(book => {
       const progressValue = getTheologyBookProgress(book.id);
       return progressValue > 0;
@@ -90,7 +89,6 @@ const Dashboard = () => {
   const challengesCompleted = progress?.challenges_completed?.length || 0;
   const streak = profile?.streak || 0;
 
-  // Get greeting based on time of day
   const getGreeting = () => {
     const hour = new Date().getHours();
     if (hour < 12) return 'Good Morning';
@@ -104,14 +102,19 @@ const Dashboard = () => {
     <div className="flex flex-col flex-1">
       {/* Dark Hero Banner */}
       <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-20 pb-24 px-4 md:px-6 overflow-hidden">
-        {/* Decorative elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
           <div className="absolute bottom-0 left-10 w-48 h-48 bg-bible-gold rounded-full blur-[80px]" />
         </div>
 
         <div className="max-w-7xl mx-auto relative z-10">
-          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+          <motion.div
+            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0}
+          >
             <div>
               <p className="text-bible-sky/80 text-sm font-medium tracking-wide uppercase mb-1">{getGreeting()}</p>
               <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
@@ -122,7 +125,6 @@ const Dashboard = () => {
               </p>
             </div>
 
-            {/* Streak in hero */}
             <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 self-start md:self-auto">
               <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/30">
                 <Flame className="h-5 w-5 text-white" />
@@ -132,25 +134,29 @@ const Dashboard = () => {
                 <div className="text-white/50 text-xs mt-0.5">Day Streak</div>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
 
       {/* Main Content */}
       <main className="flex-1 pb-10 px-4 md:px-6">
         <div className="max-w-7xl mx-auto -mt-12 relative z-20">
-          <DashboardStats
-            totalChaptersRead={totalChaptersRead}
-            overallProgress={overallProgress}
-            challengesCompleted={challengesCompleted}
-            streak={streak}
-          />
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={1}>
+            <DashboardStats
+              totalChaptersRead={totalChaptersRead}
+              overallProgress={overallProgress}
+              challengesCompleted={challengesCompleted}
+              streak={streak}
+            />
+          </motion.div>
 
-          <ContentSection
-            recentlyReadBooks={recentlyReadBooks}
-            recentTheologyBooks={recentTheologyBooks}
-            overallProgress={overallProgress}
-          />
+          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
+            <ContentSection
+              recentlyReadBooks={recentlyReadBooks}
+              recentTheologyBooks={recentTheologyBooks}
+              overallProgress={overallProgress}
+            />
+          </motion.div>
         </div>
       </main>
     </div>
