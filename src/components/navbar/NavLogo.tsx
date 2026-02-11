@@ -2,23 +2,18 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 interface NavLogoProps {
-  isHomePage: boolean;
-  isBiblePage: boolean;
+  isDarkBg?: boolean;
 }
 
-const NavLogo = ({ isHomePage, isBiblePage }: NavLogoProps) => {
-  const logoSrc =
-    isBiblePage
-      ? '/BibleQuestLogo.png' // default full homepage logo
-      : '/BibleQuestLogo.png'; // smaller or alternative logo for all other cases
-
+const NavLogo = ({ isDarkBg = true }: NavLogoProps) => {
   return (
     <div className="flex items-center">
       <Link to="/" className="flex items-center">
         <img
-          src={logoSrc}
+          src="/BibleQuestLogo.png"
           alt="Bible Quest Logo"
-          className="h-12 w-auto transition-all duration-300"
+          className={`h-12 w-auto transition-all duration-300 ${isDarkBg ? '' : 'brightness-0 dark:brightness-100'
+            }`}
         />
       </Link>
     </div>
