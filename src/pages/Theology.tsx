@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { motion } from 'framer-motion';
 import { useParams, useNavigate } from 'react-router-dom';
 import BookList from '@/components/theology/BookList';
 import BookDetail from '@/components/theology/BookDetail';
@@ -7,6 +8,15 @@ import { theologyBooks } from '@/data/theology';
 import { useTheologyProgress } from '@/hooks/theology/use-theology-progress';
 import { getTheologyBookImage } from '@/data/theology/book-images';
 import { useAuth } from '@/context/auth';
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 20 },
+  visible: (i: number) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' },
+  }),
+};
 
 const Theology = () => {
   const { bookId } = useParams<{ bookId?: string }>();
@@ -34,7 +44,6 @@ const Theology = () => {
     ? theologyBooks.find(book => book.id === selectedBookId)
     : null;
 
-  // Filter books based on search query
   const filteredBooks = searchQuery.trim()
     ? theologyBooks.filter(book =>
       book.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -64,7 +73,13 @@ const Theology = () => {
         <div className="flex items-center justify-center p-4 pt-2 md:pt-16 pb-12">
           <div className="w-full max-w-4xl">
             {selectedBook ? (
-              <div className="backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden bg-white/10 p-1">
+              <motion.div
+                className="backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden bg-white/10 p-1"
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                custom={0}
+              >
                 <div className="bg-white rounded-2xl overflow-hidden">
                   <div className="p-6 pb-0">
                     <button
@@ -81,7 +96,13 @@ const Theology = () => {
                     />
                   </div>
 
-                  <div className="p-6 pt-0 bg-gray-50/50">
+                  <motion.div
+                    className="p-6 pt-0 bg-gray-50/50"
+                    variants={fadeUp}
+                    initial="hidden"
+                    animate="visible"
+                    custom={1}
+                  >
                     <h2 className="text-xl font-serif font-semibold mb-4 text-gray-800 border-t pt-6">Chapters</h2>
                     <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-5 gap-3">
                       {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
@@ -94,22 +115,29 @@ const Theology = () => {
                             title={`Chapter ${chapter}`}
                             isCompleted={score > 0}
                             score={score}
-                            maxScore={5} // Assuming 5 for consistency
+                            maxScore={5}
                             isUnlocked={!!user}
                             onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
                           />
                         );
                       })}
                     </div>
-                  </div>
+                  </motion.div>
                 </div>
-              </div>
+              </motion.div>
             ) : (
-              <BookList
-                books={filteredBooks}
-                getBookProgress={getBookProgress}
-                getBookAverageScore={getBookAverageScore}
-              />
+              <motion.div
+                variants={fadeUp}
+                initial="hidden"
+                animate="visible"
+                custom={0}
+              >
+                <BookList
+                  books={filteredBooks}
+                  getBookProgress={getBookProgress}
+                  getBookAverageScore={getBookAverageScore}
+                />
+              </motion.div>
             )}
           </div>
         </div>
