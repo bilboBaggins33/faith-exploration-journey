@@ -19,6 +19,8 @@ export interface TheologyChallengeState {
     error: string | null;
     completed: boolean;
     answeredQuestions: Record<number, { isCorrect: boolean; hasBeenScored: boolean }>;
+    difficulty: 'easy' | 'medium' | 'hard';
+    filteredQuestions: { id: string; question: string; options: string[]; correctAnswer: string; explanation: string }[];
 }
 
 export function useTheologyChallengeAdapter() {
@@ -57,7 +59,9 @@ export function useTheologyChallengeAdapter() {
         loading: true,
         error: null,
         completed: false,
-        answeredQuestions: {}
+        answeredQuestions: {},
+        difficulty: 'medium',
+        filteredQuestions: []
     });
 
     // Sync theology challenge state to adapter state
