@@ -5,7 +5,7 @@ import { useToast } from '@/hooks/use-toast';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { theologyBooks } from '@/data/theology';
 import { useTheologyChallenge } from './use-theology-challenge';
-import { ChapterChallenge, ChapterQuestion } from '@/data/bible/types';
+import { ChapterChallenge } from '@/data/bible/types';
 
 // State interface matching BibleChallengeState
 export interface TheologyChallengeState {
@@ -19,8 +19,6 @@ export interface TheologyChallengeState {
     error: string | null;
     completed: boolean;
     answeredQuestions: Record<number, { isCorrect: boolean; hasBeenScored: boolean }>;
-    difficulty: 'medium' | 'easy' | 'hard';
-    filteredQuestions: ChapterQuestion[];
 }
 
 export function useTheologyChallengeAdapter() {
@@ -59,9 +57,7 @@ export function useTheologyChallengeAdapter() {
         loading: true,
         error: null,
         completed: false,
-        answeredQuestions: {},
-        difficulty: 'medium',
-        filteredQuestions: []
+        answeredQuestions: {}
     });
 
     // Sync theology challenge state to adapter state
