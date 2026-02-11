@@ -57,10 +57,19 @@ export function useBibleChallenge(bookId: string, chapter: string) {
 
   // Filter questions by difficulty
   const filterQuestionsByDifficulty = (questions: ChapterQuestion[], difficulty: DifficultyLevel): ChapterQuestion[] => {
+    // Check if any questions have the difficulty field at all
+    const hasDifficultyField = questions.some(q => q.difficulty);
+
+    // If questions don't have difficulty tags, return all questions (up to 5)
+    if (!hasDifficultyField) {
+      return questions.slice(0, 5);
+    }
+
     const filtered = questions.filter(q => q.difficulty === difficulty);
-    // If no questions at this difficulty, return all questions with easy as fallback
+    // If no questions at this difficulty, fall back to easy, then all
     if (filtered.length === 0) {
-      return questions.filter(q => q.difficulty === 'easy');
+      const easyFallback = questions.filter(q => q.difficulty === 'easy');
+      return easyFallback.length > 0 ? easyFallback.slice(0, 5) : questions.slice(0, 5);
     }
     // Take only 5 questions for the challenge
     return filtered.slice(0, 5);

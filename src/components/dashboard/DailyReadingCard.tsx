@@ -7,9 +7,9 @@ import { CalendarDays, Clock } from 'lucide-react';
 
 const DailyReadingCard = () => {
   const navigate = useNavigate();
-  
+
   return (
-    <Card className="mt-6">
+    <Card className="mt-6 border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="text-lg flex items-center">
           <CalendarDays className="w-5 h-5 mr-2 text-bible-blue" />
@@ -45,9 +45,9 @@ const DailyReadingCard = () => {
             </Button>
           </div>
         </div>
-        
-        <Button 
-          variant="outline" 
+
+        <Button
+          variant="outline"
           className="w-full mt-4"
           onClick={() => navigate('/daily-reading')}
         >

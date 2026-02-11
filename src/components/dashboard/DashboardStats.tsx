@@ -1,12 +1,10 @@
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { BookOpen, BarChart2, Trophy } from 'lucide-react';
+import { BookOpen, BarChart2, Trophy, ChevronRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useNavigate } from 'react-router-dom';
-import { ChevronRight } from 'lucide-react';
-import StreakCounter from './StreakCounter';
 
 interface DashboardStatsProps {
   totalChaptersRead: number;
@@ -17,53 +15,60 @@ interface DashboardStatsProps {
 
 const DashboardStats = ({ totalChaptersRead, overallProgress, challengesCompleted, streak }: DashboardStatsProps) => {
   const navigate = useNavigate();
-  
+
   return (
     <div className="mb-8">
-      <StreakCounter streak={streak} />
-      
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg flex items-center">
-              <BookOpen className="w-5 h-5 mr-2 text-bible-blue" />
-              Total Chapters Read
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{totalChaptersRead}</div>
-            <p className="text-sm text-gray-500 mt-1">Out of 1,189 total chapters</p>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+        {/* Chapters Read */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+          <CardContent className="pt-6 pb-5">
+            <div className="flex items-start gap-4">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-blue-500 to-bible-deepBlue shadow-md shadow-blue-500/20 flex-shrink-0">
+                <BookOpen className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-muted-foreground">Chapters Read</p>
+                <div className="text-3xl font-bold mt-1 tracking-tight">{totalChaptersRead}</div>
+                <p className="text-xs text-muted-foreground mt-1">Out of 1,189 total</p>
+              </div>
+            </div>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg flex items-center">
-              <BarChart2 className="w-5 h-5 mr-2 text-bible-blue" />
-              Overall Progress
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{overallProgress}%</div>
-            <Progress value={overallProgress} className="h-2 mt-2" />
+
+        {/* Overall Progress */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+          <CardContent className="pt-6 pb-5">
+            <div className="flex items-start gap-4">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md shadow-emerald-500/20 flex-shrink-0">
+                <BarChart2 className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-muted-foreground">Overall Progress</p>
+                <div className="text-3xl font-bold mt-1 tracking-tight">{overallProgress}%</div>
+                <Progress value={overallProgress} className="h-1.5 mt-2" />
+              </div>
+            </div>
           </CardContent>
         </Card>
-        
-        <Card>
-          <CardHeader className="pb-2">
-            <CardTitle className="text-lg flex items-center">
-              <Trophy className="w-5 h-5 mr-2 text-bible-blue" />
-              Achievements
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="text-3xl font-bold">{challengesCompleted}</div>
-            <div className="flex justify-between items-center">
-              <p className="text-sm text-gray-500 mt-1">Challenges completed</p>
-              <Button variant="ghost" size="sm" onClick={() => navigate('/achievements')} className="text-bible-blue">
-                View All
-                <ChevronRight className="ml-1 h-4 w-4" />
-              </Button>
+
+        {/* Achievements */}
+        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
+          <CardContent className="pt-6 pb-5">
+            <div className="flex items-start gap-4">
+              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-gradient-to-br from-amber-400 to-bible-gold shadow-md shadow-amber-500/20 flex-shrink-0">
+                <Trophy className="w-6 h-6 text-white" />
+              </div>
+              <div className="flex-1 min-w-0">
+                <p className="text-sm font-medium text-muted-foreground">Achievements</p>
+                <div className="text-3xl font-bold mt-1 tracking-tight">{challengesCompleted}</div>
+                <div className="flex justify-between items-center mt-1">
+                  <p className="text-xs text-muted-foreground">Challenges completed</p>
+                  <Button variant="ghost" size="sm" onClick={() => navigate('/achievements')} className="text-bible-blue h-auto p-0 text-xs hover:bg-transparent">
+                    View All
+                    <ChevronRight className="ml-0.5 h-3 w-3" />
+                  </Button>
+                </div>
+              </div>
             </div>
           </CardContent>
         </Card>

@@ -18,9 +18,9 @@ interface BibleReadingCardProps {
 
 const BibleReadingCard = ({ recentlyReadBooks }: BibleReadingCardProps) => {
   const navigate = useNavigate();
-  
+
   return (
-    <Card className="mb-6">
+    <Card className="mb-6 border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="text-lg flex items-center">
           <BookOpen className="w-5 h-5 mr-2 text-bible-blue" />
@@ -31,20 +31,20 @@ const BibleReadingCard = ({ recentlyReadBooks }: BibleReadingCardProps) => {
         {recentlyReadBooks.length > 0 ? (
           <div className="space-y-4">
             {recentlyReadBooks.map(book => (
-              <div key={book.id} className="flex items-center justify-between p-2 border-b last:border-0">
+              <div key={book.id} className="flex items-center justify-between p-3 rounded-lg hover:bg-gray-50/80 transition-colors duration-200 border-b last:border-0">
                 <div>
                   <h3 className="font-medium">{book.name}</h3>
                   <div className="flex items-center text-sm text-gray-500">
-                    <Progress 
-                      value={book.progress} 
+                    <Progress
+                      value={book.progress}
                       className="w-24 h-2 mr-2"
                       color={book.progress === 100 ? "bg-green-500" : undefined}
                     />
                     {book.progress}% complete
                   </div>
                 </div>
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   className="bg-bible-blue hover:bg-bible-deepBlue"
                   onClick={() => navigate(`/bible/${book.id}`)}
                 >
@@ -57,7 +57,7 @@ const BibleReadingCard = ({ recentlyReadBooks }: BibleReadingCardProps) => {
           <div className="text-center py-8">
             <BookOpen className="h-12 w-12 mx-auto text-gray-300 mb-2" />
             <p className="text-gray-500">You haven't started reading yet</p>
-            <Button 
+            <Button
               className="mt-4 bg-bible-blue hover:bg-bible-deepBlue"
               onClick={() => navigate('/bible')}
             >
@@ -65,7 +65,7 @@ const BibleReadingCard = ({ recentlyReadBooks }: BibleReadingCardProps) => {
             </Button>
           </div>
         )}
-        
+
         <div className="mt-4 text-right">
           <Button variant="outline" onClick={() => navigate('/bible')}>
             View All Bible Books

@@ -29,7 +29,7 @@ const AchievementsCard = () => {
   }
 
   return (
-    <Card>
+    <Card className="border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="text-lg flex items-center">
           <Trophy className="w-5 h-5 mr-2 text-bible-blue" />
@@ -41,21 +41,21 @@ const AchievementsCard = () => {
           {displayAchievements.map(achievement => (
             <div
               key={achievement.id}
-              className={`flex items-center space-x-3 p-2 border rounded-md ${achievement.isUnlocked
-                ? 'bg-amber-50 border-amber-100'
-                : 'bg-gray-50 border-gray-100 opacity-80'
+              className={`flex items-center space-x-3 p-3 border rounded-lg transition-all duration-200 hover:shadow-sm ${achievement.isUnlocked
+                ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200/60'
+                : 'bg-gray-50/80 border-gray-100 opacity-80'
                 }`}
             >
-              <div className={`p-2 rounded-full ${achievement.isUnlocked ? 'bg-amber-100' : 'bg-gray-200'
+              <div className={`p-2.5 rounded-xl ${achievement.isUnlocked ? 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-md shadow-amber-400/20' : 'bg-gray-200'
                 }`}>
-                <achievement.icon className={`h-5 w-5 ${achievement.isUnlocked ? 'text-amber-600' : 'text-gray-500'
+                <achievement.icon className={`h-5 w-5 ${achievement.isUnlocked ? 'text-white' : 'text-gray-500'
                   }`} />
               </div>
               <div className="flex-1">
                 <div className="flex justify-between items-center mb-1">
                   <h3 className="font-medium text-sm">{achievement.title}</h3>
                   {achievement.isUnlocked && (
-                    <span className="text-xs font-bold text-amber-600">Unlocked!</span>
+                    <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">Unlocked!</span>
                   )}
                 </div>
                 <p className="text-xs text-gray-500">{achievement.description}</p>
@@ -81,7 +81,7 @@ const AchievementsCard = () => {
 
         <Button
           variant="outline"
-          className="w-full mt-4"
+          className="w-full mt-4 border-bible-blue/20 text-bible-blue hover:bg-bible-blue/5"
           onClick={() => navigate('/achievements')}
         >
           View All Achievements

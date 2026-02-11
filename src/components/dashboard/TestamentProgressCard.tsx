@@ -9,7 +9,7 @@ interface TestamentProgressCardProps {
 
 const TestamentProgressCard = ({ overallProgress }: TestamentProgressCardProps) => {
   return (
-    <Card className="mt-6">
+    <Card className="mt-6 border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="text-lg">Old vs New Testament</CardTitle>
       </CardHeader>
@@ -24,7 +24,7 @@ const TestamentProgressCard = ({ overallProgress }: TestamentProgressCardProps) 
             </div>
             <Progress value={Math.round(overallProgress * 0.7)} className="h-2" />
           </div>
-          
+
           <div>
             <div className="flex justify-between mb-1">
               <span className="text-sm font-medium">New Testament</span>

@@ -8,6 +8,8 @@ import { theologyBooks } from '@/data/theology';
 import DashboardStats from '@/components/dashboard/DashboardStats';
 import ContentSection from '@/components/dashboard/ContentSection';
 import DashboardLoading from '@/components/dashboard/DashboardLoading';
+import StreakCounter from '@/components/dashboard/StreakCounter';
+import { Flame } from 'lucide-react';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -88,15 +90,55 @@ const Dashboard = () => {
   const challengesCompleted = progress?.challenges_completed?.length || 0;
   const streak = profile?.streak || 0;
 
+  // Get greeting based on time of day
+  const getGreeting = () => {
+    const hour = new Date().getHours();
+    if (hour < 12) return 'Good Morning';
+    if (hour < 17) return 'Good Afternoon';
+    return 'Good Evening';
+  };
+
+  const displayName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Explorer';
+
   return (
     <div className="flex flex-col flex-1">
-      <main className="flex-1 pb-10">
-        <div className="max-w-7xl mx-auto">
-          <div className="mb-8">
-            <h1 className="text-3xl font-serif font-bold">Dashboard</h1>
-            <p className="text-gray-600">Track your Bible reading journey and progress</p>
-          </div>
+      {/* Dark Hero Banner */}
+      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-20 pb-24 px-4 md:px-6 overflow-hidden">
+        {/* Decorative elements */}
+        <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
+          <div className="absolute bottom-0 left-10 w-48 h-48 bg-bible-gold rounded-full blur-[80px]" />
+        </div>
 
+        <div className="max-w-7xl mx-auto relative z-10">
+          <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-4">
+            <div>
+              <p className="text-bible-sky/80 text-sm font-medium tracking-wide uppercase mb-1">{getGreeting()}</p>
+              <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
+                {displayName}
+              </h1>
+              <p className="text-white/60 text-base">
+                Track your Bible reading journey and progress
+              </p>
+            </div>
+
+            {/* Streak in hero */}
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 self-start md:self-auto">
+              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/30">
+                <Flame className="h-5 w-5 text-white" />
+              </div>
+              <div>
+                <div className="text-2xl font-bold text-white leading-none">{streak}</div>
+                <div className="text-white/50 text-xs mt-0.5">Day Streak</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <main className="flex-1 pb-10 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto -mt-12 relative z-20">
           <DashboardStats
             totalChaptersRead={totalChaptersRead}
             overallProgress={overallProgress}

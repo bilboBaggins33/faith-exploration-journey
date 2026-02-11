@@ -19,9 +19,9 @@ interface TheologyBooksCardProps {
 
 const TheologyBooksCard = ({ recentTheologyBooks }: TheologyBooksCardProps) => {
   const navigate = useNavigate();
-  
+
   return (
-    <Card>
+    <Card className="border-0 shadow-lg">
       <CardHeader>
         <CardTitle className="text-lg flex items-center">
           <Book className="w-5 h-5 mr-2 text-bible-blue" />
@@ -37,16 +37,16 @@ const TheologyBooksCard = ({ recentTheologyBooks }: TheologyBooksCardProps) => {
                   <h3 className="font-medium">{book.name}</h3>
                   <p className="text-xs text-gray-500">{book.author}</p>
                   <div className="flex items-center text-sm text-gray-500 mt-1">
-                    <Progress 
-                      value={book.progress} 
+                    <Progress
+                      value={book.progress}
                       className="w-24 h-2 mr-2"
                       color={book.progress === 100 ? "bg-green-500" : undefined}
                     />
                     {book.progress}% complete
                   </div>
                 </div>
-                <Button 
-                  size="sm" 
+                <Button
+                  size="sm"
                   className="bg-bible-blue hover:bg-bible-deepBlue"
                   onClick={() => navigate('/theology')}
                 >
@@ -59,7 +59,7 @@ const TheologyBooksCard = ({ recentTheologyBooks }: TheologyBooksCardProps) => {
           <div className="text-center py-8">
             <Book className="h-12 w-12 mx-auto text-gray-300 mb-2" />
             <p className="text-gray-500">You haven't started reading any theology books yet</p>
-            <Button 
+            <Button
               className="mt-4 bg-bible-blue hover:bg-bible-deepBlue"
               onClick={() => navigate('/theology')}
             >
@@ -67,7 +67,7 @@ const TheologyBooksCard = ({ recentTheologyBooks }: TheologyBooksCardProps) => {
             </Button>
           </div>
         )}
-        
+
         <div className="mt-4 text-right">
           <Button variant="outline" onClick={() => navigate('/theology')}>
             View All Theology Books
