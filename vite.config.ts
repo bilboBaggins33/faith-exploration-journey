@@ -19,4 +19,22 @@ export default defineConfig(({ mode }) => ({
       "@": path.resolve(__dirname, "./src"),
     },
   },
+  build: {
+    chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('data/bible/challenges')) {
+            return 'bible-challenges';
+          }
+          if (id.includes('data/theology/challenges')) {
+            return 'theology-challenges';
+          }
+          if (id.includes('node_modules')) {
+            return 'vendor';
+          }
+        },
+      },
+    },
+  },
 }));
