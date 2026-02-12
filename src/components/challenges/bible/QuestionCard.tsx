@@ -123,16 +123,15 @@ const QuestionCard = ({
             <motion.button
               onClick={onNextQuestion}
               whileTap={{ scale: 0.96 }}
-              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative flex items-center justify-center"
             >
               {!isLastQuestion ? "Next" : "Complete"}
-              <span className="flex-1" />
               <span
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsModalOpen(true);
                 }}
-                className="w-7 h-7 rounded-full bg-white/30 hover:bg-white/50 flex items-center justify-center transition-colors border border-white/30"
+                className="absolute right-3 w-7 h-7 rounded-full bg-white/30 hover:bg-white/50 flex items-center justify-center transition-colors border border-white/30"
                 aria-label="Show explanation"
               >
                 <Info className="w-4 h-4" />
