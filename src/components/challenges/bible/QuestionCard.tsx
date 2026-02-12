@@ -104,7 +104,7 @@ const QuestionCard = ({
         </div>
 
         {/* Action Buttons */}
-        <div className="flex justify-center items-center gap-3">
+        <div className="flex justify-center gap-3">
           {!showExplanation ? (
             <motion.button
               disabled={!selectedAnswer}
@@ -120,38 +120,23 @@ const QuestionCard = ({
               Check Answer
             </motion.button>
           ) : (
-            <>
-              <button
-                onClick={() => setIsModalOpen(true)}
-                className="flex-shrink-0 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white/80 hover:text-white transition-colors flex items-center justify-center"
+            <motion.button
+              onClick={onNextQuestion}
+              whileTap={{ scale: 0.96 }}
+              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+            >
+              {!isLastQuestion ? "Next" : "Complete"}
+              <span
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsModalOpen(true);
+                }}
+                className="ml-1 w-6 h-6 rounded-full bg-white/20 hover:bg-white/35 flex items-center justify-center transition-colors"
                 aria-label="Show explanation"
               >
-                <Info className="w-4 h-4" />
-              </button>
-              <motion.button
-                onClick={onNextQuestion}
-                whileTap={{ scale: 0.96 }}
-                className="flex-1 md:flex-none md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
-              >
-                {!isLastQuestion ? (
-                  <>
-                    Next
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M5 12h14" />
-                      <path d="m12 5 7 7-7 7" />
-                    </svg>
-                  </>
-                ) : (
-                  <>
-                    Complete
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                      <path d="m9 11 3 3L22 4" />
-                    </svg>
-                  </>
-                )}
-              </motion.button>
-            </>
+                <Info className="w-3.5 h-3.5" />
+              </span>
+            </motion.button>
           )}
         </div>
 
