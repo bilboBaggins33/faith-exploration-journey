@@ -79,10 +79,10 @@ const QuestionCard = ({
                 whileTap={!showExplanation ? { scale: 0.97 } : undefined}
                 transition={{ type: "spring", stiffness: 400, damping: 25 }}
                 className={cn(
-                  "w-full min-h-[48px] md:min-h-[52px] py-3 md:py-4 px-5 md:px-6 rounded-full text-center text-sm md:text-base font-medium transition-all duration-300 relative backdrop-blur-md border",
-                  // Default unselected state - frosted glass
-                  !isSelected && !showExplanation && "bg-white/10 text-white border-white/40 hover:bg-white/40 shadow-lg",
-                  // Selected state - golden gradient with glass
+                  "w-full min-h-[48px] md:min-h-[52px] py-3 md:py-4 px-5 md:px-6 rounded-full text-center text-sm md:text-base font-medium transition-all duration-300 relative border",
+                  // Default unselected state - frosted glass look without expensive filter
+                  !isSelected && !showExplanation && "bg-white/10 text-white border-white/40 hover:bg-white/20 shadow-lg",
+                  // Selected state
                   isSelected && !showExplanation && "bg-gradient-to-r from-amber-400/30 to-amber-500/30 text-white border-amber-300/50 shadow-xl",
                   // Correct answer revealed
                   showAsCorrect && "bg-gradient-to-r from-green-400/90 to-green-500/90 text-white border-green-300/50 shadow-xl",
@@ -126,7 +126,7 @@ const QuestionCard = ({
               onClick={onCheckAnswer}
               whileTap={selectedAnswer ? { scale: 0.96 } : undefined}
               className={cn(
-                "w-full md:w-auto md:px-8 py-3 rounded-full font-medium transition-all duration-300 backdrop-blur-md border",
+                "w-full md:w-auto md:px-8 py-3 rounded-full font-medium transition-all duration-300 border",
                 selectedAnswer
                   ? "bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105"
                   : "bg-white/20 text-white/50 border-white/20 cursor-not-allowed"
@@ -182,21 +182,23 @@ const QuestionCard = ({
         </div>
 
         {/* Swipe hint on mobile - shown after answering */}
-        {showExplanation && !isLastQuestion && (
-          <motion.div
-            initial={{ opacity: 0, y: 5 }}
-            animate={{ opacity: 1, y: [0, -4, 0] }}
-            transition={{ delay: 0.5, y: { repeat: 2, duration: 0.8 } }}
-            className="flex justify-center mt-3 md:hidden"
-          >
-            <span className="text-white/50 text-xs flex items-center gap-1">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
-              Swipe up for next
-            </span>
-          </motion.div>
-        )}
-      </motion.div>
-    </div>
+        {
+          showExplanation && !isLastQuestion && (
+            <motion.div
+              initial={{ opacity: 0, y: 5 }}
+              animate={{ opacity: 1, y: [0, -4, 0] }}
+              transition={{ delay: 0.5, y: { repeat: 2, duration: 0.8 } }}
+              className="flex justify-center mt-3 md:hidden"
+            >
+              <span className="text-white/50 text-xs flex items-center gap-1">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m18 15-6-6-6 6" /></svg>
+                Swipe up for next
+              </span>
+            </motion.div>
+          )
+        }
+      </motion.div >
+    </div >
   );
 };
 

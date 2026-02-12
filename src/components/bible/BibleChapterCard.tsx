@@ -55,18 +55,18 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   // Glassmorphism styling based on state
   const getGlassStyles = () => {
     if (!effectivelyUnlocked) {
-      return "bg-gray-200/50 backdrop-blur-sm border-gray-300/50";
+      return "bg-gray-200/80 border-gray-300/50";
     }
     if (isCompleted) {
       if (scorePercentage === 100) {
-        return "bg-green-100/60 backdrop-blur-md border-green-300/60";
+        return "bg-green-100/70 backdrop-blur-sm border-green-300/60";
       }
       if (scorePercentage >= 50) {
-        return "bg-amber-100/60 backdrop-blur-md border-amber-300/60";
+        return "bg-amber-100/70 backdrop-blur-sm border-amber-300/60";
       }
-      return "bg-red-100/60 backdrop-blur-md border-red-300/60";
+      return "bg-red-100/70 backdrop-blur-sm border-red-300/60";
     }
-    return "bg-white/60 backdrop-blur-md border-white/70 hover:bg-white/80";
+    return "bg-white/70 backdrop-blur-sm border-white/70 hover:bg-white/80";
   };
 
   return (

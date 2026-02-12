@@ -138,14 +138,21 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...revelationChallenges,
 ];
 
+// Create a lookup map for faster access
+const challengesMap = new Map<string, ChapterChallenge>();
+
+// Populate the map
+sampleChapterChallenges.forEach(challenge => {
+  challengesMap.set(`${challenge.bookId}-${challenge.chapter}`, challenge);
+});
+
 /**
  * Get a specific Bible challenge by book ID and chapter number
+ * Optimized to use O(1) lookup
  */
 export const getBibleChallengeByBookAndChapter = (
   bookId: string,
   chapter: number
 ): ChapterChallenge | undefined => {
-  return sampleChapterChallenges.find(
-    challenge => challenge.bookId === bookId && challenge.chapter === chapter
-  );
+  return challengesMap.get(`${bookId}-${chapter}`);
 };
