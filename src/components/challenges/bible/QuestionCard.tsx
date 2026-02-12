@@ -95,28 +95,26 @@ const QuestionCard = ({
               >
                 <span className="relative z-10 flex items-center justify-center gap-2">
                   {option}
-                  {showAsCorrect && (
-                    <>
-                      <span
-                        className="inline-flex items-center gap-1 text-white/90 hover:text-white text-xs bg-white/20 rounded-full px-2 py-0.5 cursor-pointer ml-1 hover:bg-white/30 transition-colors"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          setIsModalOpen(true);
-                        }}
-                      >
-                        <Info className="w-3 h-3" />
-                        Why?
-                      </span>
-                      <CheckCircle className="w-5 h-5 flex-shrink-0" />
-                    </>
-                  )}
+                  {showAsCorrect && <CheckCircle className="w-5 h-5 flex-shrink-0" />}
                   {isWrongSelection && <X className="w-5 h-5 flex-shrink-0" />}
                 </span>
               </motion.button>
             );
           })}
         </div>
+
+        {/* Why? button - separate from answer options */}
+        {showExplanation && (
+          <div className="flex justify-center mb-4 md:mb-6">
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm bg-white/15 hover:bg-white/25 rounded-full px-4 py-1.5 transition-colors border border-white/20"
+            >
+              <Info className="w-3.5 h-3.5" />
+              Why?
+            </button>
+          </div>
+        )}
 
         {/* Action Buttons */}
         <div className="flex justify-center gap-3">

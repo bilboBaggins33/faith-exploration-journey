@@ -45,7 +45,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
                 score={score}
                 maxScore={10}
                 isUnlocked={isFirstChapter || (user ? true : false)} // First chapter is always unlocked
-                onClick={() => navigateToChapter(bookId, chapter)}
+                onCardClick={(bookId, chapter) => navigateToChapter(bookId, chapter)}
               />
             </div>
           );
