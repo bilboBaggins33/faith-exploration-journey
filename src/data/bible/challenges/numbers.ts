@@ -1,4 +1,4 @@
-﻿import { ChapterChallenge } from '../types';
+import { ChapterChallenge } from '../types';
 
 export const numbersChallenges: ChapterChallenge[] = [
   {
