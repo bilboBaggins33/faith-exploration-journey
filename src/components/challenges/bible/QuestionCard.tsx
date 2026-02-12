@@ -41,15 +41,15 @@ const QuestionCard = ({
 
   return (
     <div className="pt-1 md:pt-2">
-      {/* Explanation Dialog - moved outside buttons for proper event handling */}
+      {/* Explanation Dialog */}
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
-        <DialogContent className="max-w-sm mx-4">
+        <DialogContent className="w-[calc(100%-2rem)] max-w-sm rounded-2xl bg-[#f5efe6] border border-amber-200/60 shadow-2xl p-5">
           <DialogHeader>
-            <DialogTitle>Answer Explanation</DialogTitle>
+            <DialogTitle className="text-base font-semibold text-amber-900" style={{ fontFamily: "'Playfair Display', serif" }}>
+              Answer Explanation
+            </DialogTitle>
           </DialogHeader>
-          <div className="mt-2">
-            <p className="text-sm leading-relaxed">{explanation}</p>
-          </div>
+          <p className="text-sm leading-relaxed text-amber-950/80 mt-1">{explanation}</p>
         </DialogContent>
       </Dialog>
 
@@ -103,21 +103,8 @@ const QuestionCard = ({
           })}
         </div>
 
-        {/* Why? button - separate from answer options */}
-        {showExplanation && (
-          <div className="flex justify-center mb-4 md:mb-6">
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="inline-flex items-center gap-1.5 text-white/80 hover:text-white text-sm bg-white/15 hover:bg-white/25 rounded-full px-4 py-1.5 transition-colors border border-white/20"
-            >
-              <Info className="w-3.5 h-3.5" />
-              Why?
-            </button>
-          </div>
-        )}
-
         {/* Action Buttons */}
-        <div className="flex justify-center gap-3">
+        <div className="flex justify-center items-center gap-3">
           {!showExplanation ? (
             <motion.button
               disabled={!selectedAnswer}
@@ -133,49 +120,38 @@ const QuestionCard = ({
               Check Answer
             </motion.button>
           ) : (
-            <motion.button
-              onClick={onNextQuestion}
-              whileTap={{ scale: 0.96 }}
-              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2 backdrop-blur-md"
-            >
-              {!isLastQuestion ? (
-                <>
-                  Next
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M5 12h14" />
-                    <path d="m12 5 7 7-7 7" />
-                  </svg>
-                </>
-              ) : (
-                <>
-                  Complete
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="20"
-                    height="20"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                  >
-                    <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-                    <path d="m9 11 3 3L22 4" />
-                  </svg>
-                </>
-              )}
-            </motion.button>
+            <>
+              <button
+                onClick={() => setIsModalOpen(true)}
+                className="flex-shrink-0 w-10 h-10 rounded-full bg-white/15 hover:bg-white/25 border border-white/20 text-white/80 hover:text-white transition-colors flex items-center justify-center"
+                aria-label="Show explanation"
+              >
+                <Info className="w-4 h-4" />
+              </button>
+              <motion.button
+                onClick={onNextQuestion}
+                whileTap={{ scale: 0.96 }}
+                className="flex-1 md:flex-none md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
+              >
+                {!isLastQuestion ? (
+                  <>
+                    Next
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M5 12h14" />
+                      <path d="m12 5 7 7-7 7" />
+                    </svg>
+                  </>
+                ) : (
+                  <>
+                    Complete
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                      <path d="m9 11 3 3L22 4" />
+                    </svg>
+                  </>
+                )}
+              </motion.button>
+            </>
           )}
         </div>
 
