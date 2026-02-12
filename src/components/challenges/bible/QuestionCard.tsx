@@ -126,15 +126,16 @@ const QuestionCard = ({
               className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 flex items-center justify-center gap-2"
             >
               {!isLastQuestion ? "Next" : "Complete"}
+              <span className="flex-1" />
               <span
                 onClick={(e) => {
                   e.stopPropagation();
                   setIsModalOpen(true);
                 }}
-                className="ml-1 w-6 h-6 rounded-full bg-white/20 hover:bg-white/35 flex items-center justify-center transition-colors"
+                className="w-7 h-7 rounded-full bg-white/30 hover:bg-white/50 flex items-center justify-center transition-colors border border-white/30"
                 aria-label="Show explanation"
               >
-                <Info className="w-3.5 h-3.5" />
+                <Info className="w-4 h-4" />
               </span>
             </motion.button>
           )}
