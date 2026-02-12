@@ -1,7 +1,6 @@
-import { ChapterChallenge } from '../../../types';
+import { ChapterChallenge } from '../types';
 
 export const deuteronomyChallenges: ChapterChallenge[] = [
-] = [
     {
         id: 'deuteronomy-1',
         bookId: 'deuteronomy',
@@ -800,8 +799,6 @@ export const deuteronomyChallenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     },
-
-] = [
     {
         id: 'deuteronomy-7',
         bookId: 'deuteronomy',
@@ -1600,8 +1597,6 @@ export const deuteronomyChallenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     },
-
-] = [
     {
         id: 'deuteronomy-13',
         bookId: 'deuteronomy',
@@ -2400,8 +2395,6 @@ export const deuteronomyChallenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     },
-
-] = [
     {
         id: 'deuteronomy-19',
         bookId: 'deuteronomy',
@@ -3200,8 +3193,6 @@ export const deuteronomyChallenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     },
-
-] = [
     {
         id: 'deuteronomy-25',
         bookId: 'deuteronomy',
@@ -4000,8 +3991,6 @@ export const deuteronomyChallenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     },
-
-] = [
     {
         id: 'deuteronomy-31',
         bookId: 'deuteronomy',
