@@ -41,8 +41,7 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={toggleMenu}
-              className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 text-white dark:text-white hover:text-bible-blue
-                }`}
+            className="inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 text-white dark:text-white hover:text-bible-blue"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
