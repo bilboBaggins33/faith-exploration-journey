@@ -1,7 +1,7 @@
-import { ChapterChallenge } from '../../../types';
+import { ChapterChallenge } from '../types';
 
 export const joshuaChallenges: ChapterChallenge[] = [
-] = [
+
     {
         id: 'joshua-1',
         bookId: 'joshua',
@@ -801,7 +801,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         points: 15
     },
 
-] = [
+
     {
         id: 'joshua-7',
         bookId: 'joshua',
@@ -1601,7 +1601,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         points: 15
     },
 
-] = [
+
     {
         id: 'joshua-13',
         bookId: 'joshua',
@@ -2401,7 +2401,7 @@ export const joshuaChallenges: ChapterChallenge[] = [
         points: 15
     },
 
-] = [
+
     {
         id: 'joshua-19',
         bookId: 'joshua',
