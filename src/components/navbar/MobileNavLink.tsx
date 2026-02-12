@@ -11,17 +11,16 @@ interface MobileNavLinkProps {
 }
 
 const MobileNavLink = ({ to, active, icon, children, onClick }: MobileNavLinkProps) => (
-  <Link 
-    to={to} 
+  <Link
+    to={to}
     onClick={onClick}
-    className={`flex items-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-      active 
-        ? 'bg-bible-sky/50 text-bible-blue shadow-sm' 
-        : 'text-bible-dark dark:text-white hover:bg-bible-sky/20 dark:hover:bg-slate-800'
-    }`}
+    className={`flex items-center px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${active
+        ? 'bg-bible-blue/20 text-bible-sky shadow-sm border border-bible-blue/10'
+        : 'text-white/70 hover:text-white hover:bg-white/5'
+      }`}
   >
     {icon}
-    {children}
+    <span className="ml-0.5">{children}</span>
   </Link>
 );
 
