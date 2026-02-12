@@ -12,7 +12,7 @@ interface BibleChapterCardProps {
   score: number;
   maxScore: number;
   isUnlocked?: boolean;
-  onClick: () => void;
+  onCardClick: (bookId: string, chapter: number) => void;
 }
 
 const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
@@ -23,12 +23,16 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   score,
   maxScore,
   isUnlocked = true,
-  onClick,
+  onCardClick,
 }) => {
   const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const isFirstChapter = chapter === 1;
 
   const { user } = useAuth();
+
+  const handleClick = React.useCallback(() => {
+    onCardClick(bookId, chapter);
+  }, [bookId, chapter, onCardClick]);
 
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
@@ -78,7 +82,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
         "overflow-hidden relative text-center",
         getGlassStyles()
       )}
-      onClick={onClick}
+      onClick={handleClick}
     >
       <div className="flex flex-col items-center justify-center h-full">
         <div className="relative w-full">
@@ -122,4 +126,4 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   );
 };
 
-export default BibleChapterCard;
+export default React.memo(BibleChapterCard);

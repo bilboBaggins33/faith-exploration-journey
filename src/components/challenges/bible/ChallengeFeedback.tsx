@@ -22,6 +22,98 @@ interface ChallengeFeedbackProps {
   onGoBack: () => void;
 }
 
+const CardContainer = React.memo(({
+  q,
+  index,
+  userAnswers,
+  answeredQuestions,
+  challenge,
+  onSelectAnswer,
+  onCheckAnswer,
+  handleScrollToNext,
+  handleScrollToPrev
+}: any) => {
+  const answerState = answeredQuestions[index];
+  const localIsCorrect = answerState ? answerState.isCorrect : null;
+  const localShowExplanation = !!answerState;
+
+  // Stable handlers for QuestionCard
+  const handleSelect = useCallback((ans: string) => onSelectAnswer(ans, index), [onSelectAnswer, index]);
+  const handleCheck = useCallback(() => onCheckAnswer(index), [onCheckAnswer, index]);
+  const handleNext = useCallback(() => handleScrollToNext(index), [handleScrollToNext, index]);
+  const handlePrev = useCallback(() => handleScrollToPrev(index), [handleScrollToPrev, index]);
+
+  return (
+    <div
+      key={q.id}
+      data-index={index}
+      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:min-h-screen"
+    >
+      <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
+        {/* Logo overlapping the top edge */}
+        <div className="absolute left-1/2 -translate-x-1/2 -top-4 z-20">
+          <img
+            src="/BibleQuestLogo.png"
+            alt="Bible Quest Logo"
+            className="h-7 md:h-8 w-auto drop-shadow-lg"
+          />
+        </div>
+
+        {/* Card without expensive backdrop-blur, using semi-transparent dark bg for contrast with white text */}
+        <div className="bg-black/60 rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/20 overflow-hidden">
+          {/* Question Numbers inside card */}
+          <div className="pt-9 md:pt-10 pb-3 md:pb-4 px-4 md:px-6">
+            <div className="flex items-center justify-center gap-3 md:gap-4">
+              {challenge.questions.map((_: any, qIndex: number) => {
+                const questionResult = answeredQuestions[qIndex];
+                const isAnswered = !!questionResult;
+                const isCorrectNum = questionResult?.isCorrect;
+                const isCurrent = qIndex === index;
+
+                let colorClass = 'text-white/50 bg-white/10 border border-white/20';
+                if (isAnswered) {
+                  colorClass = isCorrectNum ? 'text-green-400 bg-green-400/15 border border-green-400/30' : 'text-red-400 bg-red-100 border border-red-400/30';
+                } else if (isCurrent) {
+                  colorClass = 'text-white bg-white/20 border border-white/40';
+                }
+
+                return (
+                  <span
+                    key={qIndex}
+                    className={`w-7 h-7 md:w-8 md:h-8 rounded-full inline-flex items-center justify-center text-xs md:text-sm font-semibold transition-all duration-200 ${colorClass}`}
+                  >
+                    {qIndex + 1}
+                  </span>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Question Content */}
+          <div className="px-4 md:px-6 pb-5 md:pb-6">
+            <QuestionCard
+              question={q.question}
+              options={q.options}
+              correctAnswer={q.correctAnswer}
+              selectedAnswer={userAnswers[index] || null}
+              showExplanation={localShowExplanation}
+              isCorrect={localIsCorrect}
+              explanation={q.explanation}
+              onSelectAnswer={handleSelect}
+              onCheckAnswer={handleCheck}
+              onNextQuestion={handleNext}
+              onPreviousQuestion={handlePrev}
+              isLastQuestion={index === challenge.questions.length - 1}
+              isNotFirstQuestion={index > 0}
+              onNavigateBack={null}
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+});
+
 const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   state,
   bookId,
@@ -250,85 +342,20 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         ref={containerRef}
         className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide snap-scroll-mobile touch-pan-y items-center"
       >
-        {challenge.questions.map((q, index) => {
-          const answerState = answeredQuestions[index];
-          const localIsCorrect = answerState ? answerState.isCorrect : null;
-          const localShowExplanation = !!answerState;
-
-          return (
-            <div
-              key={q.id}
-              data-index={index}
-              className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:min-h-screen"
-            >
-              <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
-                {/* Logo overlapping the top edge */}
-                <div className="absolute left-1/2 -translate-x-1/2 -top-4 z-20">
-                  <img
-                    src="/BibleQuestLogo.png"
-                    alt="Bible Quest Logo"
-                    className="h-7 md:h-8 w-auto drop-shadow-lg"
-                  />
-                </div>
-
-                {/* Glassmorphism Card */}
-                <div className="backdrop-blur-md bg-white/20 rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/30 overflow-hidden">
-                  {/* Question Numbers - colored by result */}
-                  <div className="pt-9 md:pt-10 pb-3 md:pb-4 px-4 md:px-6">
-                    <div className="flex items-center justify-center gap-3 md:gap-4">
-                      {challenge.questions.map((_, qIndex) => {
-                        const questionResult = answeredQuestions[qIndex];
-                        const isAnswered = !!questionResult;
-                        const isCorrectNum = questionResult?.isCorrect;
-                        const isCurrent = qIndex === index;
-
-                        let colorClass = 'text-white/50 bg-white/10 border border-white/20';
-                        if (isAnswered) {
-                          colorClass = isCorrectNum ? 'text-green-400 bg-green-400/15 border border-green-400/30' : 'text-red-400 bg-red-400/15 border border-red-400/30';
-                        } else if (isCurrent) {
-                          colorClass = 'text-white bg-white/20 border border-white/40';
-                        }
-
-                        return (
-                          <span
-                            key={qIndex}
-                            className={`w-7 h-7 md:w-8 md:h-8 rounded-full inline-flex items-center justify-center text-xs md:text-sm font-semibold transition-all duration-200 ${colorClass}`}
-                          >
-                            {qIndex + 1}
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-
-                  {/* Question Content */}
-                  <div className="px-4 md:px-6 pb-5 md:pb-6">
-                    <QuestionCard
-                      question={q.question}
-                      options={q.options}
-                      correctAnswer={q.correctAnswer}
-                      selectedAnswer={userAnswers[index] || null}
-                      showExplanation={localShowExplanation}
-                      isCorrect={localIsCorrect}
-                      explanation={q.explanation}
-                      onSelectAnswer={(ans) => {
-                        onSelectAnswer(ans, index);
-                      }}
-                      onCheckAnswer={() => {
-                        onCheckAnswer(index);
-                      }}
-                      onNextQuestion={() => handleScrollToNext(index)}
-                      onPreviousQuestion={() => handleScrollToPrev(index)}
-                      isLastQuestion={index === challenge.questions.length - 1}
-                      isNotFirstQuestion={index > 0}
-                      onNavigateBack={null}
-                    />
-                  </div>
-                </div>
-              </div>
-            </div>
-          );
-        })}
+        {challenge.questions.map((q, index) => (
+          <CardContainer
+            key={q.id || index}
+            q={q}
+            index={index}
+            userAnswers={userAnswers}
+            answeredQuestions={answeredQuestions}
+            challenge={challenge}
+            onSelectAnswer={onSelectAnswer}
+            onCheckAnswer={onCheckAnswer}
+            handleScrollToNext={handleScrollToNext}
+            handleScrollToPrev={handleScrollToPrev}
+          />
+        ))}
       </div>
 
       {/* Desktop Navigation Arrows - positioned closer to card */}

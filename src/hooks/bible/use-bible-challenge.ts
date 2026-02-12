@@ -1,5 +1,5 @@
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
@@ -181,7 +181,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     }
   }, [state.completed, state.challenge, user]);
 
-  const handleSelectAnswer = (answer: string, index?: number) => {
+  const handleSelectAnswer = useCallback((answer: string, index?: number) => {
     const targetQuestion = index !== undefined ? index : state.currentQuestion;
     if (state.answeredQuestions[targetQuestion]) return;
     if (index === undefined && state.showExplanation) return;
@@ -191,9 +191,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       currentQuestion: targetQuestion,
       userAnswers: { ...prev.userAnswers, [targetQuestion]: answer }
     }));
-  };
+  }, [state.currentQuestion, state.answeredQuestions, state.showExplanation]);
 
-  const handleCheckAnswer = (index?: number) => {
+  const handleCheckAnswer = useCallback((index?: number) => {
     if (!state.challenge) return;
 
     const targetQuestion = index !== undefined ? index : state.currentQuestion;
@@ -216,9 +216,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         [targetQuestion]: { isCorrect: correct, hasBeenScored: correct && !alreadyAnswered?.hasBeenScored }
       }
     }));
-  };
+  }, [state.challenge, state.currentQuestion, state.userAnswers, state.answeredQuestions]);
 
-  const handleNextQuestion = () => {
+  const handleNextQuestion = useCallback(() => {
     if (!state.challenge) return;
 
     if (state.currentQuestion < state.challenge.questions.length - 1) {
@@ -237,9 +237,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         completed: true
       }));
     }
-  };
+  }, [state.challenge, state.currentQuestion, state.answeredQuestions]);
 
-  const handlePreviousQuestion = () => {
+  const handlePreviousQuestion = useCallback(() => {
     if (state.currentQuestion > 0) {
       const prevQuestionIndex = state.currentQuestion - 1;
       const prevQuestionAnswered = state.answeredQuestions[prevQuestionIndex];
@@ -251,9 +251,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         isCorrect: prevQuestionAnswered ? prevQuestionAnswered.isCorrect : null
       }));
     }
-  };
+  }, [state.currentQuestion, state.answeredQuestions]);
 
-  const handleRetry = () => {
+  const handleRetry = useCallback(() => {
     progressSavedRef.current = false;
     setState(prev => ({
       ...prev,
@@ -265,9 +265,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       isCorrect: null,
       answeredQuestions: {}
     }));
-  };
+  }, []);
 
-  const handleJumpToQuestion = (index: number) => {
+  const handleJumpToQuestion = useCallback((index: number) => {
     if (!state.challenge || index < 0 || index >= state.challenge.questions.length) return;
 
     const questionAnswered = state.answeredQuestions[index];
@@ -278,13 +278,13 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       showExplanation: questionAnswered ? true : false,
       isCorrect: questionAnswered ? questionAnswered.isCorrect : null
     }));
-  };
+  }, [state.challenge, state.answeredQuestions]);
 
-  const handleGoBack = () => {
+  const handleGoBack = useCallback(() => {
     navigate(`/bible/${bookId}`);
-  };
+  }, [navigate, bookId]);
 
-  const handleChangeDifficulty = (newDifficulty: DifficultyLevel) => {
+  const handleChangeDifficulty = useCallback((newDifficulty: DifficultyLevel) => {
     // Only allow changing to medium if unlocked
     if (newDifficulty === 'medium' && !isMediumUnlocked()) return;
     if (newDifficulty === 'hard' && !isHardUnlocked()) return;
@@ -301,7 +301,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
       isCorrect: null,
       answeredQuestions: {}
     }));
-  };
+  }, [isMediumUnlocked, isHardUnlocked]);
 
   return {
     state,

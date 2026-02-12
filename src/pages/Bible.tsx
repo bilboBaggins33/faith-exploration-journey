@@ -54,9 +54,9 @@ const Bible: React.FC = () => {
     navigate('/bible');
   };
 
-  const handleGoToChallenge = (bookId: string, chapter: number) => {
+  const handleGoToChallenge = React.useCallback((bookId: string, chapter: number) => {
     navigate(`/bible/${bookId}/${chapter}`);
-  };
+  }, [navigate]);
 
   // Helper function to transform the book progress object to just return the percentage
   const getBookProgressPercentage = (bookId: string): number => {
@@ -74,7 +74,7 @@ const Bible: React.FC = () => {
             <img
               src="/assets/bible/default.jpg"
               alt="Bible background"
-              className="w-full h-full object-cover blur-sm scale-110"
+              className="w-full h-full object-cover scale-110 opacity-40"
               loading="eager"
               decoding="async"
             />
@@ -103,7 +103,7 @@ const Bible: React.FC = () => {
                   <img
                     src={getBookImage(selectedBook.id)}
                     alt={`${selectedBook.name} background`}
-                    className="w-full h-full object-cover blur-sm scale-110"
+                    className="w-full h-full object-cover scale-110 opacity-50"
                     loading="eager"
                     decoding="async"
                     onError={(e) => {
@@ -115,7 +115,7 @@ const Bible: React.FC = () => {
 
                 {/* Main content card */}
                 <div className="flex items-center justify-center p- pt-2 pb-12">
-                  <div className="w-full max-w-4xl backdrop-blur-sm rounded-3xl shadow-xl overflow-hidden">
+                  <div className="w-full max-w-4xl rounded-3xl shadow-xl overflow-hidden">
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
@@ -179,7 +179,7 @@ const Bible: React.FC = () => {
                               score={getChapterScore(selectedBook.id, chapter)}
                               maxScore={5}
                               isUnlocked={!!user}
-                              onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
+                              onCardClick={handleGoToChallenge}
                             />
                           );
                         })}
@@ -199,7 +199,7 @@ const Bible: React.FC = () => {
                 score={0}
                 maxScore={0}
                 isUnlocked={true}
-                onClick={() => handleGoToChallenge(selectedBook.id, selectedChapter)}
+                onCardClick={handleGoToChallenge}
               />
             )}
           </div>
