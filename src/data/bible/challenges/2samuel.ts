@@ -1,7 +1,6 @@
 import { ChapterChallenge } from '../types';
 
 export const samuel2Challenges: ChapterChallenge[] = [
-] = [
     {
         id: '2samuel-1',
         bookId: '2samuel',
@@ -801,8 +800,7 @@ export const samuel2Challenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
-] = [
+    ,
     {
         id: '2samuel-7',
         bookId: '2samuel',
@@ -1609,8 +1607,7 @@ export const samuel2Challenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
-] = [
+    ,
     {
         id: '2samuel-13',
         bookId: '2samuel',
@@ -2409,8 +2406,7 @@ export const samuel2Challenges: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
-] = [
+    ,
     {
         id: '2samuel-19',
         bookId: '2samuel',

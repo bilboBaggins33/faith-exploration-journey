@@ -101,7 +101,7 @@ const Dashboard = () => {
   return (
     <div className="flex flex-col flex-1">
       {/* Dark Hero Banner */}
-      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-20 pb-24 px-4 md:px-6 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-24 md:pt-20 pb-20 md:pb-24 px-4 md:px-6 overflow-hidden">
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
           <div className="absolute bottom-0 left-10 w-48 h-48 bg-bible-gold rounded-full blur-[80px]" />
@@ -116,21 +116,21 @@ const Dashboard = () => {
             custom={0}
           >
             <div>
-              <p className="text-bible-sky/80 text-sm font-medium tracking-wide uppercase mb-1">{getGreeting()}</p>
-              <h1 className="text-3xl md:text-4xl font-serif font-bold text-white mb-2">
+              <p className="text-bible-sky/80 text-xs md:text-sm font-medium tracking-wide uppercase mb-1">{getGreeting()}</p>
+              <h1 className="text-2xl md:text-4xl font-serif font-bold text-white mb-1 md:mb-2">
                 {displayName}
               </h1>
-              <p className="text-white/60 text-base">
+              <p className="text-white/60 text-sm md:text-base">
                 Track your Bible reading journey and progress
               </p>
             </div>
 
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-5 py-3 border border-white/10 self-start md:self-auto">
-              <div className="flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/30">
-                <Flame className="h-5 w-5 text-white" />
+            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 md:px-5 py-2.5 md:py-3 border border-white/10 self-start md:self-auto">
+              <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/30">
+                <Flame className="h-4 w-4 md:h-5 md:w-5 text-white" />
               </div>
               <div>
-                <div className="text-2xl font-bold text-white leading-none">{streak}</div>
+                <div className="text-xl md:text-2xl font-bold text-white leading-none">{streak}</div>
                 <div className="text-white/50 text-xs mt-0.5">Day Streak</div>
               </div>
             </div>
@@ -140,7 +140,7 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <main className="flex-1 pb-10 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto -mt-12 relative z-20">
+        <div className="max-w-7xl mx-auto -mt-10 md:-mt-12 relative z-20">
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={1}>
             <DashboardStats
               totalChaptersRead={totalChaptersRead}

@@ -8,12 +8,13 @@ import Navbar from './Navbar';
 const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
+  const isDarkHeroPage = ['/dashboard', '/achievements'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
       <Navbar />
-      <div className={`flex-1 flex flex-col ${!isHomePage ? 'pt-16' : ''}`}>
+      <div className={`flex-1 flex flex-col ${!isHomePage && !isDarkHeroPage ? 'pt-16' : ''}`}>
         <Outlet />
       </div>
       <Footer />

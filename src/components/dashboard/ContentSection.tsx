@@ -31,8 +31,8 @@ const ContentSection = ({
   overallProgress 
 }: ContentSectionProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-      <div className="lg:col-span-2">
+    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
+      <div className="lg:col-span-2 space-y-6">
         {/* Bible Reading Card */}
         <BibleReadingCard recentlyReadBooks={recentlyReadBooks} />
         
@@ -40,7 +40,7 @@ const ContentSection = ({
         <TheologyBooksCard recentTheologyBooks={recentTheologyBooks} />
       </div>
       
-      <div>
+      <div className="space-y-6">
         <AchievementsCard />
         <TestamentProgressCard overallProgress={overallProgress} />
         <DailyReadingCard />
