@@ -18,7 +18,7 @@ import { ezraChallenges } from './ezra';
 import { nehemiahChallenges } from './nehemiah';
 import { estherChallenges } from './esther';
 import { jobChallenges } from './job';
-import { psalmChallenges } from './psalms';
+import { psalmsChallenges } from './psalms';
 import { proverbsChallenges } from './proverbs';
 import { ecclesiastesChallenges } from './ecclesiastes';
 // import { songofsolomonChallenges } from './songofsolomon';
@@ -88,7 +88,7 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...nehemiahChallenges,
   ...estherChallenges,
   ...jobChallenges,
-  ...psalmChallenges,
+  ...psalmsChallenges,
   ...proverbsChallenges,
   ...ecclesiastesChallenges,
   // ...songofsolomonChallenges,
