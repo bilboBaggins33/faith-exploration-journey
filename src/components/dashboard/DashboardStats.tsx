@@ -17,8 +17,8 @@ const DashboardStats = ({ totalChaptersRead, overallProgress, challengesComplete
   const navigate = useNavigate();
 
   return (
-    <div className="mb-6 md:mb-8">
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 md:gap-5">
+    <div>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
         {/* Chapters Read */}
         <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
           <CardContent className="pt-4 pb-4 md:pt-6 md:pb-5">
