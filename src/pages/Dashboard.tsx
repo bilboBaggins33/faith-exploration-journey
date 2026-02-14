@@ -139,8 +139,8 @@ const Dashboard = () => {
       </div>
 
       {/* Main Content */}
-      <main className="flex-1 pb-10 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto -mt-10 md:-mt-12 relative z-20">
+      <main className="flex-1 pb-12 px-4 md:px-6">
+        <div className="max-w-7xl mx-auto -mt-6 md:-mt-8 relative z-20 space-y-6 md:space-y-8">
           <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={1}>
             <DashboardStats
               totalChaptersRead={totalChaptersRead}
