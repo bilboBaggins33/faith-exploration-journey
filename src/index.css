@@ -130,8 +130,12 @@
     @apply border-border;
   }
 
-  html, body {
-    @apply scroll-smooth antialiased font-sans;
+  html {
+    @apply scroll-smooth;
+  }
+
+  body {
+    @apply antialiased font-sans;
   }
 
   body {
