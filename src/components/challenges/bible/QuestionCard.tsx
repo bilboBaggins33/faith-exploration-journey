@@ -111,7 +111,7 @@ const QuestionCard = ({
               onClick={onCheckAnswer}
               whileTap={selectedAnswer ? { scale: 0.96 } : undefined}
               className={cn(
-                "w-full md:w-auto md:px-8 py-3 rounded-full font-medium transition-all duration-300 border",
+                "w-full md:px-8 py-3 rounded-full font-medium transition-all duration-300 border",
                 selectedAnswer
                   ? "bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105"
                   : "bg-white/20 text-white/50 border-white/20 cursor-not-allowed"
@@ -123,7 +123,7 @@ const QuestionCard = ({
             <motion.button
               onClick={onNextQuestion}
               whileTap={{ scale: 0.96 }}
-              className="w-full md:w-auto md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative flex items-center justify-center"
+              className="w-full md:px-8 py-3 rounded-full font-medium bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border border-amber-300/50 shadow-xl hover:shadow-2xl hover:scale-105 transition-all duration-300 relative flex items-center justify-center"
             >
               {!isLastQuestion ? "Next" : "Complete"}
               <span

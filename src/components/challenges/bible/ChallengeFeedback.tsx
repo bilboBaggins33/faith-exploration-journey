@@ -59,8 +59,8 @@ const CardContainer = React.memo(({
           />
         </div>
 
-        {/* Card without expensive backdrop-blur, using semi-transparent dark bg for contrast with white text */}
-        <div className="bg-black/60 rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/20 overflow-hidden">
+        {/* Semi-transparent dark bg for contrast with white text */}
+        <div className="bg-black/20 backdrop-blur-md rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/20 overflow-hidden">
           {/* Question Numbers inside card */}
           <div className="pt-9 md:pt-10 pb-3 md:pb-4 px-4 md:px-6">
             <div className="flex items-center justify-center gap-3 md:gap-4">
