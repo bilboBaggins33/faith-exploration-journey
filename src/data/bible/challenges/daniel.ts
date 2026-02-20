@@ -1,6 +1,6 @@
 import { ChapterChallenge } from '../types';
 
-export const daniel: ChapterChallenge[] = [
+export const danielChallenges: ChapterChallenge[] = [
 
     {
         id: 'daniel-1',

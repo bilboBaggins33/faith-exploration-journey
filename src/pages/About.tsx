@@ -2,274 +2,137 @@ import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
 import { BookOpen, BookText, Target, Award, Users, MessageSquare, Heart } from 'lucide-react';
 import { Link } from 'react-router-dom';
-
-const fadeUp = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
-    opacity: 1,
-    y: 0,
-    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' },
-  }),
-};
-
-const staggerContainer = {
-  hidden: {},
-  visible: {
-    transition: { staggerChildren: 0.12 },
-  },
-};
-
-const staggerItem = {
-  hidden: { opacity: 0, y: 20 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: 'easeOut' } },
-};
+import ScrollToTop from '@/components/ScrollToTop';
 
 const About = () => {
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="min-h-screen w-full relative bg-bible-dark text-white font-sans">
+      <ScrollToTop />
 
-      <main className="flex-grow">
-        {/* Dark Hero Section */}
-        <section className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] py-24 px-4 overflow-hidden">
-          <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
-            <div className="absolute bottom-0 left-10 w-48 h-48 bg-bible-gold rounded-full blur-[80px]" />
-          </div>
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0 fixed">
+        <img
+          src="/assets/bible/default.jpg"
+          alt="Background"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-black/60 backdrop-blur-[4px]" />
+      </div>
 
-          <div className="max-w-5xl mx-auto relative z-10 text-center">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            >
-              <h1 className="text-4xl md:text-5xl font-serif font-bold text-white mb-6">
-                Our Mission & Story
-              </h1>
-              <p className="text-lg md:text-xl text-white/80 max-w-3xl mx-auto leading-relaxed">
-                Encouraging families to grow together through Scripture and thoughtful reading.
+      <div className="relative z-10 container mx-auto px-4 py-20 max-w-4xl">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-10"
+        >
+          <h1 className="text-3xl md:text-4xl font-serif font-medium text-white mb-2 tracking-wide drop-shadow-lg">
+            Our Mission & Story
+          </h1>
+          <p className="text-base text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
+            Encouraging families to grow together through Scripture and thoughtful reading.
+          </p>
+        </motion.div>
+
+        <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden p-6 md:p-8 space-y-10">
+
+          {/* Founder's Story Section */}
+          <section className="flex flex-col md:flex-row gap-8 items-center">
+            <div className="bg-white/5 rounded-xl p-2 border border-white/10 shadow-xl md:w-5/12">
+              <div className="aspect-video bg-black/20 rounded-lg flex items-center justify-center overflow-hidden">
+                <Users className="w-12 h-12 text-white/20" />
+              </div>
+            </div>
+
+            <div className="md:w-7/12 space-y-4">
+              <h2 className="text-2xl font-serif text-white mb-2">A Father's Mission</h2>
+              <div className="space-y-3 text-white/70 text-sm font-light leading-relaxed">
+                <p>
+                  As a Christian parent, I created Bible Quest with a simple vision: to make Bible reading and theological exploration engaging, interactive, and meaningful for families.
+                </p>
+                <p>
+                  I wanted to create something that would inspire curiosity and deep thinking, going beyond simple reading to true engagement with the Word.
+                </p>
+                <p>
+                  Bible Quest combines reading with interactive challenges and thoughtful questions designed to spark meaningful conversations about faith.
+                </p>
+              </div>
+              <div className="bg-bible-gold/10 border-l-2 border-bible-gold p-3 rounded-r-lg mt-4">
+                <p className="italic text-bible-gold text-xs font-serif leading-relaxed">
+                  "Train up a child in the way he should go; even when he is old he will not depart from it." — Proverbs 22:6
+                </p>
+              </div>
+            </div>
+          </section>
+
+          <div className="w-full h-px bg-white/10 flex-shrink-0" />
+
+          {/* Our Approach Section */}
+          <section>
+            <div className="text-center mb-8">
+              <h2 className="text-2xl font-serif text-white mb-2">Our Approach</h2>
+              <p className="text-sm text-white/60 font-light max-w-xl mx-auto">
+                How we make Bible reading and theological exploration engaging for children and families.
               </p>
-            </motion.div>
-          </div>
-        </section>
+            </div>
 
-        {/* Founder's Story */}
-        <section className="py-20 px-4 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              className="flex flex-col md:flex-row gap-12 items-center"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0}
-            >
-              <div className="md:w-2/5">
-                <div className="relative">
-                  <div className="absolute -top-4 -left-4 w-full h-full bg-bible-gold/20 rounded-2xl"></div>
-                  <div className="relative bg-white rounded-2xl overflow-hidden shadow-xl">
-                    <img
-                      src="/placeholder.svg"
-                      alt="Family reading the Bible together"
-                      className="w-full h-auto rounded-2xl"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <FeatureCard
+                icon={<MessageSquare className="w-5 h-5 text-blue-400" />}
+                title="Asking Questions"
+                description="Questions are the gateway to deeper understanding. Our challenges are designed to prompt thoughtful inquiry."
+              />
+              <FeatureCard
+                icon={<Target className="w-5 h-5 text-emerald-400" />}
+                title="Engaging Challenges"
+                description="Interactive quizzes keep engagement high and help reinforce key lessons from Scripture."
+              />
+              <FeatureCard
+                icon={<Award className="w-5 h-5 text-amber-400" />}
+                title="Progress Tracking"
+                description="Visualizing progress encourages consistency and builds a sense of accomplishment."
+              />
+            </div>
+          </section>
 
-              <div className="md:w-3/5">
-                <h2 className="text-3xl font-serif font-bold text-bible-dark mb-6">
-                  A Father's Mission
-                </h2>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  As a Christian parent with four children, I created Bible Quest with a simple vision: to make Bible reading and theological exploration engaging, interactive, and meaningful for families.
-                </p>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  I noticed that while my children were naturally curious about faith, traditional Bible studies often failed to capture their imagination or encourage deeper thinking. I wanted to create something that would inspire them to not just read Scripture, but to engage with it thoughtfully.
-                </p>
-                <p className="text-gray-700 mb-8 leading-relaxed">
-                  This journey led to the creation of Bible Quest — a platform that combines Bible reading with interactive challenges, progress tracking, and thoughtful questions designed to spark meaningful conversations about faith.
-                </p>
+          <div className="w-full h-px bg-white/10 flex-shrink-0" />
 
-                <div className="flex items-center bg-amber-50 p-4 rounded-xl border border-amber-100">
-                  <Heart className="text-red-500 mr-3 flex-shrink-0" />
-                  <span className="italic text-gray-700 font-serif">
-                    "Train up a child in the way he should go; even when he is old he will not depart from it." — Proverbs 22:6
-                  </span>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Our Approach */}
-        <section className="py-20 px-4 bg-gray-50/50">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0}
-              className="text-center"
-            >
-              <h2 className="text-3xl font-serif font-bold text-bible-dark mb-4">
-                Our Approach
-              </h2>
-              <p className="text-gray-600 mb-12 max-w-2xl mx-auto">
-                How we make Bible reading and theological exploration engaging for children and families
-              </p>
-            </motion.div>
-
-            <motion.div
-              className="grid grid-cols-1 md:grid-cols-3 gap-8"
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-            >
-              <motion.div variants={staggerItem}>
-                <FeatureCard
-                  icon={<MessageSquare className="h-8 w-8 text-white" />}
-                  title="Asking Questions"
-                  description="We believe that questions are the gateway to deeper understanding. Our challenges are designed to prompt thoughtful inquiry and discussion about Scripture."
-                  color="bg-blue-500"
-                />
-              </motion.div>
-
-              <motion.div variants={staggerItem}>
-                <FeatureCard
-                  icon={<Target className="h-8 w-8 text-white" />}
-                  title="Engaging Challenges"
-                  description="Interactive quizzes and challenges help children and adults alike stay engaged with the text and remember key lessons from Scripture."
-                  color="bg-emerald-500"
-                />
-              </motion.div>
-
-              <motion.div variants={staggerItem}>
-                <FeatureCard
-                  icon={<Award className="h-8 w-8 text-white" />}
-                  title="Progress Tracking"
-                  description="Visualizing progress encourages consistent reading habits. Our tracking system celebrates milestones and builds a sense of accomplishment."
-                  color="bg-amber-500"
-                />
-              </motion.div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* For the Whole Family */}
-        <section className="py-20 px-4 bg-white">
-          <div className="max-w-5xl mx-auto">
-            <motion.div
-              className="flex flex-col md:flex-row-reverse gap-12 items-center"
-              variants={fadeUp}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              custom={0}
-            >
-              <div className="md:w-2/5">
-                <div className="grid grid-cols-2 gap-4">
-                  <div className="rounded-xl overflow-hidden shadow-lg transform translate-y-4">
-                    <img src="/placeholder.svg" alt="Family reading together" className="w-full h-auto" />
-                  </div>
-                  <div className="rounded-xl overflow-hidden shadow-lg mt-8">
-                    <img src="/placeholder.svg" alt="Child completing a Bible challenge" className="w-full h-auto" />
-                  </div>
-                  <div className="rounded-xl overflow-hidden shadow-lg">
-                    <img src="/placeholder.svg" alt="Family discussing Bible" className="w-full h-auto" />
-                  </div>
-                  <div className="rounded-xl overflow-hidden shadow-lg mt-8 transform -translate-y-4">
-                    <img src="/placeholder.svg" alt="Reading together" className="w-full h-auto" />
-                  </div>
-                </div>
-              </div>
-
-              <div className="md:w-3/5">
-                <h2 className="text-3xl font-serif font-bold text-bible-dark mb-6">
-                  For the Whole Family
-                </h2>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  Bible Quest is designed for families to use together. Parents and children can read Scripture together, tackle challenges as a team, and have meaningful conversations about faith.
-                </p>
-                <p className="text-gray-700 mb-4 leading-relaxed">
-                  As children engage with both the Bible and classic theological books through our platform, they develop not just biblical literacy but critical thinking skills that will serve them throughout their faith journey.
-                </p>
-                <p className="text-gray-700 mb-8 leading-relaxed">
-                  We've found that making learning feel like an adventure—with challenges to complete and progress to track—transforms how children approach Scripture study, making it something they look forward to rather than a chore.
-                </p>
-
-                <div className="flex flex-wrap gap-4">
-                  <Link to="/bible">
-                    <Button className="bg-bible-blue hover:bg-bible-blue/90 text-white rounded-full px-6 h-12">
-                      <BookOpen className="mr-2 h-4 w-4" />
-                      Explore Bible Challenges
-                    </Button>
-                  </Link>
-                  <Link to="/theology">
-                    <Button variant="outline" className="border-2 border-bible-dark text-bible-dark hover:bg-bible-dark hover:text-white rounded-full px-6 h-12 bg-transparent">
-                      <BookText className="mr-2 h-4 w-4" />
-                      Discover Theology Books
-                    </Button>
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </section>
-
-        {/* Join Us */}
-        <section className="py-20 px-4 bg-[#0f2027] text-white overflow-hidden relative">
-          <div className="absolute inset-0 bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] opacity-90"></div>
-          <div className="absolute inset-0 opacity-10" style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
-          }} />
-
-          <motion.div
-            className="max-w-3xl mx-auto text-center relative z-10"
-            variants={fadeUp}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.3 }}
-            custom={0}
-          >
-            <Users className="h-12 w-12 text-bible-gold mx-auto mb-6" />
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-6">Join Our Community</h2>
-            <p className="text-white/80 mb-10 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-              Bible Quest is more than just an app—it's a community of families committed to growing in faith together. Start your family's adventure today.
+          {/* CTA Section */}
+          <section className="text-center py-4">
+            <h2 className="text-2xl font-serif text-white mb-3">Join Our Community</h2>
+            <p className="text-sm text-white/70 mb-6 max-w-xl mx-auto font-light">
+              Bible Quest is more than just an app—it's a community of families committed to growing in faith together.
             </p>
-            <Link to="/auth">
-              <Button className="bg-bible-gold hover:bg-bible-gold/90 text-bible-dark text-lg px-8 py-6 rounded-full font-bold shadow-xl hover:shadow-2xl hover:scale-105 transition-all">
-                Create Your Family Account
-              </Button>
-            </Link>
-          </motion.div>
-        </section>
-      </main>
+            <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <Link to="/auth">
+                <Button className="bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium px-6 h-10 rounded-lg text-sm w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-[0.98]">
+                  Start Your Journey
+                </Button>
+              </Link>
+              <Link to="/bible">
+                <Button variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 px-6 h-10 rounded-lg text-sm w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-[0.98]">
+                  Explore Challenges
+                </Button>
+              </Link>
+            </div>
+          </section>
+
+        </div>
+      </div>
     </div>
   );
 };
 
-interface FeatureCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  color: string;
-}
-
-const FeatureCard = ({ icon, title, description, color }: FeatureCardProps) => {
-  return (
-    <motion.div
-      whileHover={{ y: -5 }}
-      className="bg-white rounded-xl p-8 shadow-lg border-0 hover:shadow-xl transition-all duration-300"
-    >
-      <div className={`mb-6 p-4 rounded-xl inline-block ${color} shadow-md`}>
-        {icon}
-      </div>
-      <h3 className="text-xl font-bold text-bible-dark mb-3">{title}</h3>
-      <p className="text-gray-600 leading-relaxed">{description}</p>
-    </motion.div>
-  );
-};
+const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
+  <div className="bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors duration-300">
+    <div className="mb-3 bg-black/40 p-2.5 rounded-xl inline-block">
+      {icon}
+    </div>
+    <h3 className="text-sm font-medium text-white mb-1.5">{title}</h3>
+    <p className="text-xs text-white/60 font-light leading-relaxed">
+      {description}
+    </p>
+  </div>
+);
 
 export default About;

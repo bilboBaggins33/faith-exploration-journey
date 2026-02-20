@@ -21,11 +21,11 @@ import { jobChallenges } from './job';
 import { psalmsChallenges } from './psalms';
 import { proverbsChallenges } from './proverbs';
 import { ecclesiastesChallenges } from './ecclesiastes';
-// import { songofsolomonChallenges } from './songofsolomon';
+import { songofsolomonChallenges } from './songofsolomon';
 import { isaiahChallenges } from './isaiah';
-// import { jeremiahChallenges } from './jeremiah';
-// import { lamentationsChallenges } from './lamentations';
-// import { ezekielChallenges } from './ezekiel';
+import { jeremiahChallenges } from './jeremiah';
+import { lamentationsChallenges } from './lamentations';
+import { ezekielChallenges } from './ezekiel';
 import { danielChallenges } from './daniel';
 import { hoseaChallenges } from './hosea';
 import { joelChallenges } from './joel';
@@ -91,11 +91,11 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...psalmsChallenges,
   ...proverbsChallenges,
   ...ecclesiastesChallenges,
-  // ...songofsolomonChallenges,
+  ...songofsolomonChallenges,
   ...isaiahChallenges,
-  // ...jeremiahChallenges,
-  // ...lamentationsChallenges,
-  // ...ezekielChallenges,
+  ...jeremiahChallenges,
+  ...lamentationsChallenges,
+  ...ezekielChallenges,
   ...danielChallenges,
   ...hoseaChallenges,
   ...joelChallenges,

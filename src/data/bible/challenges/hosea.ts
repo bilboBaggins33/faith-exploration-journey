@@ -1,6 +1,6 @@
 import { ChapterChallenge } from '../types';
 
-export const hosea: ChapterChallenge[] = [
+export const hoseaChallenges: ChapterChallenge[] = [
 
     {
         id: 'hosea-1',
