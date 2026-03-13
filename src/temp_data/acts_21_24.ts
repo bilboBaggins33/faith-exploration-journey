@@ -1,4 +1,4 @@
-import { ChapterChallenge } from '../types';
+import { ChapterChallenge } from '../data/bible/types';
 
 export const actsChallengesBatch5a: ChapterChallenge[] = [
     {
