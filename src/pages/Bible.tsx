@@ -115,7 +115,7 @@ const Bible: React.FC = () => {
 
                 {/* Main content card */}
                 <div className="flex items-center justify-center p- pt-2 pb-12">
-                  <div className="w-full max-w-4xl rounded-3xl shadow-xl overflow-hidden">
+                  <div className="w-full max-w-screen-xl rounded-2xl shadow-xl overflow-hidden">
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
