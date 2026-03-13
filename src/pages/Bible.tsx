@@ -83,7 +83,7 @@ const Bible: React.FC = () => {
         )}
 
         <div className="flex items-center justify-center p-4 pt-2 md:pt-16 pb-12">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-screen-xl">
             {!selectedBook && (
               <div>
                 <BibleBooksList
@@ -115,7 +115,7 @@ const Bible: React.FC = () => {
 
                 {/* Main content card */}
                 <div className="flex items-center justify-center p- pt-2 pb-12">
-                  <div className="w-full max-w-4xl rounded-3xl shadow-xl overflow-hidden">
+                  <div className="w-full max-w-screen-xl rounded-2xl shadow-xl overflow-hidden">
                     {/* Header section with book info */}
                     <div className="relative overflow-hidden">
                       {/* Background image */}
@@ -166,7 +166,7 @@ const Bible: React.FC = () => {
                     {/* Chapters grid */}
                     <div className="p-6 bg-white ">
                       <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
-                      <div className="grid grid-cols-2 sm:grid-cols-4 md:grid-cols-6 gap-2">
+                      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
                           const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
                           return (
