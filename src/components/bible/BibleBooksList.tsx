@@ -48,8 +48,8 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
         </div>
       </Card>
 
-      <Card className="pt-16 bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+      <Card className="bg-transparent border-0 rounded-2xl">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-6">
           {newTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}
