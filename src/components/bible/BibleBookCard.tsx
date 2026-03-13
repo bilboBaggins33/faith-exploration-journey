@@ -15,10 +15,21 @@ interface BibleBookCardProps {
 }
 
 const DIFFICULTY_COLORS = {
-  easy: 'hsl(142, 71%, 45%)',    // green
-  medium: 'hsl(38, 92%, 50%)',   // amber
-  hard: 'hsl(0, 72%, 51%)',      // red
+  easy: 'hsl(142, 71%, 45%)',
+  medium: 'hsl(38, 92%, 50%)',
+  hard: 'hsl(0, 72%, 51%)',
 };
+
+const DIFFICULTY_LABELS = { easy: 'Easy', medium: 'Med', hard: 'Hard' } as const;
+
+function scoreColor(pct: number, attempted: boolean): string {
+  if (!attempted) return 'text-muted-foreground/30';
+  if (pct >= 90) return 'text-green-600';
+  if (pct >= 70) return 'text-emerald-500';
+  if (pct >= 50) return 'text-amber-500';
+  if (pct >= 30) return 'text-orange-500';
+  return 'text-red-500';
+}
 
 const BibleBookCard: React.FC<BibleBookCardProps> = ({
   bookId,
@@ -58,66 +69,30 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       </div>
 
       {/* Bottom section with donuts */}
-      <div className="p-3 mt-auto bg-white border-t border-border/10">
-
+      <div className="px-2 py-2 mt-auto bg-white border-t border-border/10">
         {difficultyProgress ? (
-          <div className="flex items-center justify-around pt-1 pb-1">
-            <div className="flex flex-col items-center">
-              <MiniDonutChart
-                percentage={difficultyProgress.easy.percentage}
-                color={DIFFICULTY_COLORS.easy}
-                label="Easy"
-                size={34}
-              />
-              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
-                {difficultyProgress.easy.completed > 0 ? (
-                  <>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.easy.completed}</span> attempted</span>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.easy.correctPercentage}%</span> avg score</span>
-                  </>
-                ) : (
-                  <span className="opacity-50">—</span>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <MiniDonutChart
-                percentage={difficultyProgress.medium.percentage}
-                color={DIFFICULTY_COLORS.medium}
-                label="Med"
-                size={34}
-              />
-              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
-                {difficultyProgress.medium.completed > 0 ? (
-                  <>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.medium.completed}</span> attempted</span>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.medium.correctPercentage}%</span> avg score</span>
-                  </>
-                ) : (
-                  <span className="opacity-50">—</span>
-                )}
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <MiniDonutChart
-                percentage={difficultyProgress.hard.percentage}
-                color={DIFFICULTY_COLORS.hard}
-                label="Hard"
-                size={34}
-              />
-              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
-                {difficultyProgress.hard.completed > 0 ? (
-                  <>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.hard.completed}</span> attempted</span>
-                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.hard.correctPercentage}%</span> avg score</span>
-                  </>
-                ) : (
-                  <span className="opacity-50">—</span>
-                )}
-              </div>
-            </div>
+          <div className="flex items-start justify-around">
+            {(['easy', 'medium', 'hard'] as const).map(diff => {
+              const dp = difficultyProgress[diff];
+              const attempted = dp.completed > 0;
+              return (
+                <div key={diff} className="flex flex-col items-center gap-0.5">
+                  <MiniDonutChart
+                    percentage={dp.percentage}
+                    color={DIFFICULTY_COLORS[diff]}
+                    label={DIFFICULTY_LABELS[diff]}
+                    centerText={`${dp.completed}/${dp.total}`}
+                    size={40}
+                  />
+                  {/* Fixed-height score row — always rendered to keep alignment */}
+                  <div className="h-3.5 flex items-center justify-center">
+                    <span className={`text-[9px] font-semibold ${scoreColor(dp.correctPercentage, attempted)}`}>
+                      {attempted ? `${dp.correctPercentage}%` : '—'}
+                    </span>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         ) : (
           <div className="w-full bg-muted rounded-full h-2 overflow-hidden">

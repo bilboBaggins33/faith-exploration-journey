@@ -8,6 +8,7 @@ interface MiniDonutChartProps {
   color: string;
   bgColor?: string;
   label?: string;
+  centerText?: string;
   className?: string;
 }
 
@@ -18,6 +19,7 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
   color,
   bgColor = 'text-muted/30',
   label,
+  centerText,
   className,
 }) => {
   const radius = (size - strokeWidth) / 2;
@@ -25,9 +27,15 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
   const validPercentage = Math.min(Math.max(percentage, 0), 100);
   const offset = circumference - (validPercentage / 100) * circumference;
   
-  // Calculate dynamic opacity: at 100% it's 1, at 0% it's 0.3 (or 0 if truly empty)
-  // This satisfies the "midway color" request by making partial completions look somewhat muted
   const dynamicOpacity = validPercentage === 0 ? 0 : 0.4 + (validPercentage / 100) * 0.6;
+
+  // Adaptive font size for center text based on string length
+  const displayText = centerText ?? String(Math.round(validPercentage));
+  const centerFontSize =
+    displayText.length >= 7 ? size * 0.17 :
+    displayText.length >= 5 ? size * 0.20 :
+    displayText.length >= 4 ? size * 0.23 :
+    size * 0.28;
 
   return (
     <div className={cn('flex flex-col items-center gap-0.5', className)}>
@@ -59,10 +67,10 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
           />
         </svg>
         <span
-          className="absolute inset-0 flex items-center justify-center text-foreground font-bold"
-          style={{ fontSize: size * 0.28 }}
+          className="absolute inset-0 flex items-center justify-center text-foreground font-bold leading-none"
+          style={{ fontSize: centerFontSize }}
         >
-          {Math.round(validPercentage)}
+          {displayText}
         </span>
       </div>
       {label && (

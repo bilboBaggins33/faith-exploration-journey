@@ -91,7 +91,7 @@ const Bible: React.FC = () => {
           </div>
         )}
 
-        <div className="flex items-center justify-center p-4 pt-2 md:pt-16 pb-12">
+        <div className="flex items-center justify-center p-4 pt-6 md:pt-8 pb-12">
           <div className="w-full max-w-screen-xl">
             {!selectedBook && (
               <div>
@@ -124,7 +124,7 @@ const Bible: React.FC = () => {
                 </div>
 
                 {/* Main content card */}
-                <div className="flex items-center justify-center pt-2 pb-12">
+                <div className="flex items-center justify-center pt-6 pb-12">
                   <div className="w-full max-w-screen-xl rounded-2xl shadow-xl overflow-hidden">
                     {/* Header section */}
                     <div className="relative overflow-hidden">

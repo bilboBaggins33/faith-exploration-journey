@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const isDarkHeroPage = ['/dashboard', '/achievements'].includes(location.pathname);
+  const isDarkHeroPage = ['/dashboard', '/achievements', '/profile'].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">

@@ -15,7 +15,7 @@ const Navbar = () => {
     const isHomePage = location.pathname === '/';
 
     // Pages that have dark backgrounds behind the navbar area
-    const darkBgRoutes = ['/', '/bible', '/theology', '/daily-reading', '/auth', '/dashboard'];
+    const darkBgRoutes = ['/', '/bible', '/theology', '/daily-reading', '/auth', '/dashboard', '/achievements', '/profile'];
     const isDarkBg = darkBgRoutes.some(route => {
         if (route === '/') return location.pathname === '/';
         return location.pathname.startsWith(route);

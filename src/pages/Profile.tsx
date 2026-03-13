@@ -59,17 +59,9 @@ const Profile = () => {
 
   if (isLoading) {
     return (
-      <div className="flex flex-col flex-1">
-        <main className="flex-grow">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-            <div className="flex justify-center items-center min-h-[50vh]">
-              <div className="flex flex-col items-center">
-                <Loader2 className="h-10 w-10 text-bible-blue animate-spin mb-4" />
-                <p className="text-xl text-gray-600">Loading your profile...</p>
-              </div>
-            </div>
-          </div>
-        </main>
+      <div className="flex flex-col flex-1 items-center justify-center min-h-[60vh]">
+        <Loader2 className="h-10 w-10 text-bible-blue animate-spin mb-4" />
+        <p className="text-gray-500">Loading your profile...</p>
       </div>
     );
   }
@@ -77,7 +69,7 @@ const Profile = () => {
   return (
     <div className="flex flex-col flex-1 min-h-screen pb-12">
       {/* Dark Hero Banner */}
-      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-24 pb-16 px-4 md:px-6 overflow-hidden">
+      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-24 md:pt-20 pb-16 md:pb-20 px-4 md:px-6 overflow-hidden">
         {/* Decorative elements */}
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
@@ -121,7 +113,7 @@ const Profile = () => {
         </div>
       </div>
 
-      <main className="flex-grow px-4 sm:px-6 lg:px-8 -mt-8 relative z-20">
+      <main className="flex-grow px-4 md:px-6 -mt-6 md:-mt-8 relative z-20">
         <div className="max-w-7xl mx-auto">
           <div className="grid md:grid-cols-3 gap-8">
             <div className="md:col-span-2 space-y-8">
