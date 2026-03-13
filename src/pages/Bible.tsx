@@ -8,6 +8,20 @@ import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/auth';
 import { getBookImage } from '@/data/bible/book-images';
+import { useDifficultyProgress, getChaptersByDifficulty, Difficulty } from '@/hooks/bible/use-difficulty-progress';
+import MiniDonutChart from '@/components/ui/MiniDonutChart';
+
+const DIFFICULTY_COLORS = {
+  easy: 'hsl(142, 71%, 45%)',
+  medium: 'hsl(38, 92%, 50%)',
+  hard: 'hsl(0, 72%, 51%)',
+};
+
+const DIFFICULTY_LABELS: Record<Difficulty, string> = {
+  easy: 'Easy',
+  medium: 'Medium',
+  hard: 'Hard',
+};
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -16,17 +30,17 @@ const Bible: React.FC = () => {
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeTestament, setActiveTestament] = useState<string>('all');
-  const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleProgress();
+  const [activeDifficulty, setActiveDifficulty] = useState<Difficulty>('easy');
+  const { getBookProgress, getBookAverageScore, getChapterScore, progress } = useBibleProgress();
+  const { getBookDifficultyProgress } = useDifficultyProgress(progress);
   const isMobile = useIsMobile();
   const { user } = useAuth();
 
   const selectedBook = bookId ? bibleBooks.find(book => book.id === bookId) : null;
 
   useEffect(() => {
-    // Reset selected chapter when book changes
     setSelectedChapter(null);
 
-    // Only store recently read books if user is authenticated
     if (bookId && user) {
       const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
       if (!recent.includes(bookId)) {
@@ -37,11 +51,9 @@ const Bible: React.FC = () => {
         setRecentlyReadBooks(recent);
       }
     } else if (user) {
-      // Load recently read books from localStorage when on main Bible page and user is authenticated
       const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
       setRecentlyReadBooks(recent);
     } else {
-      // Clear recent books if not authenticated
       setRecentlyReadBooks([]);
     }
   }, [bookId, user]);
@@ -58,17 +70,20 @@ const Bible: React.FC = () => {
     navigate(`/bible/${bookId}/${chapter}`);
   }, [navigate]);
 
-  // Helper function to transform the book progress object to just return the percentage
   const getBookProgressPercentage = (bookId: string): number => {
     const progress = getBookProgress(bookId);
     return progress.percentage;
+  };
+
+  // Get chapters filtered by active difficulty
+  const getFilteredChapters = (bookId: string): number[] => {
+    return getChaptersByDifficulty(bookId, activeDifficulty);
   };
 
   return (
     <div className="flex flex-col flex-1">
 
       <main className="flex-grow pb-10 relative">
-        {/* Background for main book list */}
         {!selectedBook && (
           <div className="fixed inset-0 -z-10 bg-[#2b1306]">
             <img
@@ -89,6 +104,7 @@ const Bible: React.FC = () => {
                 <BibleBooksList
                   books={bibleBooks}
                   getBookProgress={getBookProgressPercentage}
+                  getBookDifficultyProgress={getBookDifficultyProgress}
                   searchTerm={searchTerm}
                   activeTestament={activeTestament}
                   isMobile={isMobile}
@@ -114,11 +130,10 @@ const Bible: React.FC = () => {
                 </div>
 
                 {/* Main content card */}
-                <div className="flex items-center justify-center p- pt-2 pb-12">
+                <div className="flex items-center justify-center pt-2 pb-12">
                   <div className="w-full max-w-screen-xl rounded-2xl shadow-xl overflow-hidden">
-                    {/* Header section with book info */}
+                    {/* Header section */}
                     <div className="relative overflow-hidden">
-                      {/* Background image */}
                       <div className="absolute inset-0 bg-[#2b1306]">
                         <img
                           src={getBookImage(selectedBook.id)}
@@ -133,7 +148,6 @@ const Bible: React.FC = () => {
                         <div className="absolute inset-0 bg-black/20" />
                       </div>
 
-                      {/* Content over background */}
                       <div className="relative z-10 p-5 pt-2 pb-4">
                         <div className="mb-4">
                           <button
@@ -142,48 +156,94 @@ const Bible: React.FC = () => {
                           >
                             <span className="mr-1">←</span> Back to All Books
                           </button>
-                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-9">{selectedBook.name}</h1>
+                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-4">{selectedBook.name}</h1>
                         </div>
 
-                        {/* Progress info */}
-                        <div className="flex justify-between items-center text-sm text-white/80 mb-2">
-                          <span>{selectedBook.chapters} chapters</span>
-                          <span className="font-semibold">
-                            Progress: <span className="text-white">{getBookProgressPercentage(selectedBook.id)}%</span>
-                          </span>
-                        </div>
-
-                        {/* Progress bar */}
-                        <div className="w-full bg-white/20 rounded-full h-2">
-                          <div
-                            className="bg-white h-2 rounded-full transition-all duration-300 ease-in-out"
-                            style={{ width: `${getBookProgressPercentage(selectedBook.id)}%` }}
-                          />
-                        </div>
+                        {/* Difficulty donuts in header */}
+                        {(() => {
+                          const dp = getBookDifficultyProgress(selectedBook.id);
+                          return (
+                            <div className="flex items-center gap-6">
+                              {(['easy', 'medium', 'hard'] as Difficulty[]).map(diff => (
+                                <MiniDonutChart
+                                  key={diff}
+                                  percentage={dp[diff].percentage}
+                                  color={DIFFICULTY_COLORS[diff]}
+                                  label={`${DIFFICULTY_LABELS[diff]} (${dp[diff].completed}/${dp[diff].total})`}
+                                  size={42}
+                                  bgColor="text-white/20"
+                                />
+                              ))}
+                            </div>
+                          );
+                        })()}
                       </div>
                     </div>
 
-                    {/* Chapters grid */}
-                    <div className="p-6 bg-white ">
-                      <h2 className="text-xl font-serif font-semibold mb-4">Chapters</h2>
-                      <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
-                        {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
-                          const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                    {/* Chapters section with difficulty tabs */}
+                    <div className="p-6 bg-white">
+                      {/* Difficulty tabs */}
+                      <div className="flex items-center gap-2 mb-5">
+                        {(['easy', 'medium', 'hard'] as Difficulty[]).map(diff => {
+                          const chapters = getChaptersByDifficulty(selectedBook.id, diff);
+                          const isActive = activeDifficulty === diff;
                           return (
-                            <BibleChapterCard
-                              key={chapter}
-                              bookId={selectedBook.id}
-                              chapter={chapter}
-                              title={challengeData?.title}
-                              isCompleted={false}
-                              score={getChapterScore(selectedBook.id, chapter)}
-                              maxScore={5}
-                              isUnlocked={!!user}
-                              onCardClick={handleGoToChallenge}
-                            />
+                            <button
+                              key={diff}
+                              onClick={() => setActiveDifficulty(diff)}
+                              className={`
+                                flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200
+                                ${isActive
+                                  ? 'text-white shadow-md scale-105'
+                                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                                }
+                              `}
+                              style={isActive ? { backgroundColor: DIFFICULTY_COLORS[diff] } : undefined}
+                            >
+                              {DIFFICULTY_LABELS[diff]}
+                              <span className={`
+                                text-xs px-1.5 py-0.5 rounded-full
+                                ${isActive ? 'bg-white/25' : 'bg-background'}
+                              `}>
+                                {chapters.length}
+                              </span>
+                            </button>
                           );
                         })}
                       </div>
+
+                      {/* Chapter cards grid */}
+                      {(() => {
+                        const chapters = getFilteredChapters(selectedBook.id);
+                        if (chapters.length === 0) {
+                          return (
+                            <div className="text-center py-12 text-muted-foreground">
+                              <p className="text-lg font-medium">No {activeDifficulty} chapters available for {selectedBook.name}</p>
+                              <p className="text-sm mt-1">Try a different difficulty level</p>
+                            </div>
+                          );
+                        }
+                        return (
+                          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
+                            {chapters.map(chapter => {
+                              const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                              return (
+                                <BibleChapterCard
+                                  key={chapter}
+                                  bookId={selectedBook.id}
+                                  chapter={chapter}
+                                  title={challengeData?.title}
+                                  isCompleted={false}
+                                  score={getChapterScore(selectedBook.id, chapter)}
+                                  maxScore={5}
+                                  isUnlocked={!!user}
+                                  onCardClick={handleGoToChallenge}
+                                />
+                              );
+                            })}
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
                 </div>
