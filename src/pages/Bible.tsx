@@ -83,7 +83,7 @@ const Bible: React.FC = () => {
         )}
 
         <div className="flex items-center justify-center p-4 pt-2 md:pt-16 pb-12">
-          <div className="w-full max-w-4xl">
+          <div className="w-full max-w-screen-xl">
             {!selectedBook && (
               <div>
                 <BibleBooksList
