@@ -1,6 +1,6 @@
 import { ChapterChallenge } from '../types';
 
-export const zechariah: ChapterChallenge[] = [
+export const zechariahChallenges: ChapterChallenge[] = [
 
     {
         id: 'zechariah-1',
@@ -401,7 +401,7 @@ export const zechariah: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
+    ,
 
     {
         id: 'zechariah-4',
@@ -669,7 +669,7 @@ export const zechariah: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
+    ,
 
     {
         id: 'zechariah-6',
@@ -1070,7 +1070,7 @@ export const zechariah: ChapterChallenge[] = [
         difficulty: 'medium',
         points: 15
     }
-,
+    ,
 
     {
         id: 'zechariah-9',
@@ -1471,7 +1471,7 @@ export const zechariah: ChapterChallenge[] = [
         difficulty: 'hard',
         points: 15
     }
-,
+    ,
 
     {
         id: 'zechariah-12',

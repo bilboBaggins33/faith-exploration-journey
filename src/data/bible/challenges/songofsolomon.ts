@@ -1,7 +1,7 @@
 import { ChapterChallenge } from '../types';
 
-export const songOfSongsChallenges: ChapterChallenge[] = [
-{
+export const songofsolomonChallenges: ChapterChallenge[] = [
+  {
     id: 'songofsolomon-1',
     bookId: 'songofsolomon',
     chapter: 1,
@@ -533,536 +533,536 @@ export const songOfSongsChallenges: ChapterChallenge[] = [
     difficulty: 'easy',
     points: 15
   },
-{
-        id: 'songofsolomon-5',
-        bookId: 'songofsolomon',
-        chapter: 5,
-        title: 'Love\'s Longing and Description',
-        questions: [
-            {
-                id: 'songofsolomon5-q1',
-                question: 'I came to my garden, my sister, my what?',
-                options: ['Bride', 'Love', 'Friend', 'One'],
-                correctAnswer: 'Bride',
-                explanation: 'Song of Solomon 5:1 (ESV): "I came to my garden, my sister, my bride,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon5-q2',
-                question: 'Eat, friends, drink, and be drunk with what?',
-                options: ['Love', 'Wine', 'Joy', 'Desire'],
-                correctAnswer: 'Love',
-                explanation: 'Song of Solomon 5:1 (ESV): "Eat, friends, drink, and be drunk with love!"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon5-q3',
-                question: 'I slept, but my heart was what?',
-                options: ['Awake', 'Asleep', 'Sad', 'Cold'],
-                correctAnswer: 'Awake',
-                explanation: 'Song of Solomon 5:2 (ESV): "I slept, but my heart was awake."',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon5-q4',
-                question: 'Who was knocking, saying, "Open to me"?',
-                options: ['My beloved', 'The King', 'The watchman', 'A friend'],
-                correctAnswer: 'My beloved',
-                explanation: 'Song of Solomon 5:2 (ESV): "A sound! My beloved is knocking. \'Open to me, my sister, my love,\'"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon5-q5',
-                question: 'What is your beloved more than another beloved, O most beautiful among whom?',
-                options: ['Women', 'Queens', 'Daughters', 'Virgins'],
-                correctAnswer: 'Women',
-                explanation: 'Song of Solomon 5:9 (ESV): "What is your beloved more than another beloved, O most beautiful among women?"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon5-q6',
-                question: 'My beloved put his hand to the latch, and my heart was thrilled within whom?',
-                options: ['Me', 'Him', 'Us', 'The House'],
-                correctAnswer: 'Me',
-                explanation: 'Song of Solomon 5:4 (ESV): "and my heart was thrilled within me."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon5-q7',
-                question: 'I arose to open to my beloved, and my hands dripped with what?',
-                options: ['Myrrh', 'Oil', 'Water', 'Honey'],
-                correctAnswer: 'Myrrh',
-                explanation: 'Song of Solomon 5:5 (ESV): "and my hands dripped with myrrh,"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon5-q8',
-                question: 'I opened to my beloved, but my beloved had turned and was what?',
-                options: ['Gone', 'Here', 'Waiting', 'Silent'],
-                correctAnswer: 'Gone',
-                explanation: 'Song of Solomon 5:6 (ESV): "I opened to my beloved, but my beloved had turned and gone."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon5-q9',
-                question: 'The watchmen found me as they went about in the city; they beat me, they bruised me, they took away my what?',
-                options: ['Veil', 'Robe', 'Cloak', 'Jewels'],
-                correctAnswer: 'Veil',
-                explanation: 'Song of Solomon 5:7 (ESV): "they took away my veil, those watchmen of the walls."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon5-q10',
-                question: 'My beloved is radiant and ruddy, distinguished among how many?',
-                options: ['Ten thousand', 'A thousand', 'A hundred', 'All men'],
-                correctAnswer: 'Ten thousand',
-                explanation: 'Song of Solomon 5:10 (ESV): "distinguished among ten thousand."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon5-q11',
-                question: 'His head is the finest gold; his locks are wavy, black as a what?',
-                options: ['Raven', 'Night', 'Coal', 'Crow'],
-                correctAnswer: 'Raven',
-                explanation: 'Song of Solomon 5:11 (ESV): "his locks are wavy, black as a raven."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon5-q12',
-                question: 'His arms are rods of gold, set with what?',
-                options: ['Jewels', 'Diamonds', 'Rubies', 'Emeralds'],
-                correctAnswer: 'Jewels',
-                explanation: 'Song of Solomon 5:14 (ESV): "His arms are rods of gold, set with jewels."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon5-q13',
-                question: 'His body is polished ivory, bedecked with what?',
-                options: ['Sapphires', 'Gold', 'Silver', 'Pearls'],
-                correctAnswer: 'Sapphires',
-                explanation: 'Song of Solomon 5:14 (ESV): "his body is polished ivory, bedecked with sapphires."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon5-q14',
-                question: 'His legs are alabaster columns, set on bases of what?',
-                options: ['Gold', 'Silver', 'Marble', 'Bronze'],
-                correctAnswer: 'Gold',
-                explanation: 'Song of Solomon 5:15 (ESV): "His legs are alabaster columns, set on bases of gold."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon5-q15',
-                question: 'His mouth is most sweet, and he is altogether what?',
-                options: ['Desirable', 'Lovely', 'Beautiful', 'Fair'],
-                correctAnswer: 'Desirable',
-                explanation: 'Song of Solomon 5:16 (ESV): "His mouth is most sweet, and he is altogether desirable."',
-                difficulty: 'hard'
-            }
-        ],
-        key_verse: 'Song of Solomon 5:16',
-        key_verse_text: 'His mouth is most sweet, and he is altogether desirable. This is my beloved and this is my friend, O daughters of Jerusalem.',
-        memory_challenge: true,
-        difficulty: 'medium',
-        points: 15
-    },
-    {
-        id: 'songofsolomon-6',
-        bookId: 'songofsolomon',
-        chapter: 6,
-        title: 'Mutual Praise',
-        questions: [
-            {
-                id: 'songofsolomon6-q1',
-                question: 'Where has your beloved gone, O most beautiful among whom?',
-                options: ['Women', 'Queens', 'Daughters', 'The city'],
-                correctAnswer: 'Women',
-                explanation: 'Song of Solomon 6:1 (ESV): "Where has your beloved gone, O most beautiful among women?"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon6-q2',
-                question: 'My beloved has gone down to his what?',
-                options: ['Garden', 'Vineyard', 'Field', 'House'],
-                correctAnswer: 'Garden',
-                explanation: 'Song of Solomon 6:2 (ESV): "My beloved has gone down to his garden,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon6-q3',
-                question: 'I am my beloved\'s and my beloved is whose?',
-                options: ['Mine', 'Yours', 'God\'s', 'The King\'s'],
-                correctAnswer: 'Mine',
-                explanation: 'Song of Solomon 6:3 (ESV): "I am my beloved\'s and my beloved is mine;"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon6-q4',
-                question: 'You are beautiful as Tirzah, my love, lovely as what?',
-                options: ['Jerusalem', 'Zion', 'Lebanon', 'Sharon'],
-                correctAnswer: 'Jerusalem',
-                explanation: 'Song of Solomon 6:4 (ESV): "You are beautiful as Tirzah, my love, lovely as Jerusalem,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon6-q5',
-                question: 'Turn away your eyes from me, for they what me?',
-                options: ['Overwhelm', 'Captivate', 'Frighten', 'Blind'],
-                correctAnswer: 'Overwhelm',
-                explanation: 'Song of Solomon 6:5 (ESV): "Turn away your eyes from me, for they overwhelm me--"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon6-q6',
-                question: 'There are sixty queens and eighty concubines, and virgins without what?',
-                options: ['Number', 'Name', 'Face', 'Voice'],
-                correctAnswer: 'Number',
-                explanation: 'Song of Solomon 6:8 (ESV): "and virgins without number."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon6-q7',
-                question: 'My dove, my perfect one, is the only one of her what?',
-                options: ['Mother', 'Father', 'Kind', 'Family'],
-                correctAnswer: 'Mother',
-                explanation: 'Song of Solomon 6:9 (ESV): "My dove, my perfect one, is the only one... pure to her who bore her."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon6-q8',
-                question: 'Who is this who looks down like the what?',
-                options: ['Dawn', 'Sun', 'Moon', 'Star'],
-                correctAnswer: 'Dawn',
-                explanation: 'Song of Solomon 6:10 (ESV): "Who is this who looks down like the dawn,"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon6-q9',
-                question: 'I went down to the nut orchard to look at the blossoms of the what?',
-                options: ['Valley', 'Hill', 'Tree', 'Field'],
-                correctAnswer: 'Valley',
-                explanation: 'Song of Solomon 6:11 (ESV): "I went down to the nut orchard to look at the blossoms of the valley,"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon6-q10',
-                question: 'Before I was aware, my desire set me among the chariots of my whom?',
-                options: ['Kinsman', 'King', 'Beloved', 'Enemy'],
-                correctAnswer: 'Kinsman',
-                explanation: 'Song of Solomon 6:12 (ESV): "my desire set me among the chariots of my kinsman,"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon6-q11',
-                question: 'Return, return, O Shulammite, return, return, that we may look upon whom?',
-                options: ['You', 'Him', 'The King', 'The City'],
-                correctAnswer: 'You',
-                explanation: 'Song of Solomon 6:13 (ESV): "Return, return, O Shulammite, return, return, that we may look upon you."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon6-q12',
-                question: 'Why should you look upon the Shulammite, as upon a dance before two what?',
-                options: ['Armies', 'Kings', 'Camps', 'Cities'],
-                correctAnswer: 'Armies',
-                explanation: 'Song of Solomon 6:13 (ESV): "Why should you look upon the Shulammite, as upon a dance before two armies?"',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon6-q13',
-                question: 'You are awesome as an army with what?',
-                options: ['Banners', 'Swords', 'Shields', 'Spears'],
-                correctAnswer: 'Banners',
-                explanation: 'Song of Solomon 6:4 (ESV): "awesome as an army with banners."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon6-q14',
-                question: 'Your teeth are like a flock of ewes that have come up from the what?',
-                options: ['Washing', 'Shearing', 'Pasture', 'Field'],
-                correctAnswer: 'Washing',
-                explanation: 'Song of Solomon 6:6 (ESV): "Your teeth are like a flock of ewes that have come up from the washing,"',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon6-q15',
-                question: 'To see whether the vines had budded, whether the pomegranates were in what?',
-                options: ['Bloom', 'Fruit', 'Season', 'Harvest'],
-                correctAnswer: 'Bloom',
-                explanation: 'Song of Solomon 6:11 (ESV): "whether the pomegranates were in bloom."',
-                difficulty: 'hard'
-            }
-        ],
-        key_verse: 'Song of Solomon 6:3',
-        key_verse_text: 'I am my beloved\'s and my beloved is mine; he grazes among the lilies.',
-        memory_challenge: true,
-        difficulty: 'easy',
-        points: 15
-    },
-    {
-        id: 'songofsolomon-7',
-        bookId: 'songofsolomon',
-        chapter: 7,
-        title: 'Expressions of Love',
-        questions: [
-            {
-                id: 'songofsolomon7-q1',
-                question: 'How beautiful are your feet in sandals, O noble what?',
-                options: ['Daughter', 'Queen', 'Lady', 'Woman'],
-                correctAnswer: 'Daughter',
-                explanation: 'Song of Solomon 7:1 (ESV): "How beautiful are your feet in sandals, O noble daughter!"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon7-q2',
-                question: 'Your neck is like an ivory what?',
-                options: ['Tower', 'Pillar', 'Column', 'Statue'],
-                correctAnswer: 'Tower',
-                explanation: 'Song of Solomon 7:4 (ESV): "Your neck is like an ivory tower."',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon7-q3',
-                question: 'Your head crowns you like what?',
-                options: ['Carmel', 'Hermon', 'Zion', 'Lebanon'],
-                correctAnswer: 'Carmel',
-                explanation: 'Song of Solomon 7:5 (ESV): "Your head crowns you like Carmel,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon7-q4',
-                question: 'I am my beloved\'s, and his desire is for whom?',
-                options: ['Me', 'Her', 'You', 'Us'],
-                correctAnswer: 'Me',
-                explanation: 'Song of Solomon 7:10 (ESV): "I am my beloved\'s, and his desire is for me."',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon7-q5',
-                question: 'Come, my beloved, let us go out into the what?',
-                options: ['Fields', 'City', 'Garden', 'Vineyards'],
-                correctAnswer: 'Fields',
-                explanation: 'Song of Solomon 7:11 (ESV): "Come, my beloved, let us go out into the fields"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon7-q6',
-                question: 'Your navel is a rounded bowl that never lacks mixed what?',
-                options: ['Wine', 'Oil', 'Water', 'Spice'],
-                correctAnswer: 'Wine',
-                explanation: 'Song of Solomon 7:2 (ESV): "Your navel is a rounded bowl that never lacks mixed wine."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon7-q7',
-                question: 'Your belly is a heap of wheat, encircled with what?',
-                options: ['Lilies', 'Roses', 'Vines', 'Flowers'],
-                correctAnswer: 'Lilies',
-                explanation: 'Song of Solomon 7:2 (ESV): "Your belly is a heap of wheat, encircled with lilies."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon7-q8',
-                question: 'How beautiful and pleasant you are, O loved one, with all your what?',
-                options: ['Delights', 'Charms', 'Graces', 'Beauty'],
-                correctAnswer: 'Delights',
-                explanation: 'Song of Solomon 7:6 (ESV): "How beautiful and pleasant you are, O loved one, with all your delights!"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon7-q9',
-                question: 'Your stature is like a palm tree, and your breasts are like its what?',
-                options: ['Clusters', 'Fruit', 'Branches', 'Leaves'],
-                correctAnswer: 'Clusters',
-                explanation: 'Song of Solomon 7:7 (ESV): "Your stature is like a palm tree, and your breasts are like its clusters."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon7-q10',
-                question: 'Let us see if the vines have budded... there I will give you my what?',
-                options: ['Love', 'Heart', 'Hand', 'Seal'],
-                correctAnswer: 'Love',
-                explanation: 'Song of Solomon 7:12 (ESV): "there I will give you my love."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon7-q11',
-                question: 'Your eyes are pools in Heshbon, by the gate of what?',
-                options: ['Bath-rabbim', 'Damascus', 'Jerusalem', 'Zion'],
-                correctAnswer: 'Bath-rabbim',
-                explanation: 'Song of Solomon 7:4 (ESV): "Your eyes are pools in Heshbon, by the gate of Bath-rabbim."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon7-q12',
-                question: 'Your nose is like a tower of Lebanon, which looks toward where?',
-                options: ['Damascus', 'Jerusalem', 'The Sea', 'The North'],
-                correctAnswer: 'Damascus',
-                explanation: 'Song of Solomon 7:4 (ESV): "Your nose is like a tower of Lebanon, which looks toward Damascus."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon7-q13',
-                question: 'The king is held captive in its what?',
-                options: ['Tresses', 'Beauty', 'Eyes', 'Love'],
-                correctAnswer: 'Tresses',
-                explanation: 'Song of Solomon 7:5 (ESV): "The king is held captive in its tresses."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon7-q14',
-                question: 'I say I will climb the palm tree; I will take hold of its what?',
-                options: ['Fruit stalks', 'Branches', 'Trunk', 'Top'],
-                correctAnswer: 'Fruit stalks',
-                explanation: 'Song of Solomon 7:8 (ESV): "I say I will climb the palm tree; I will take hold of its fruit stalks."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon7-q15',
-                question: 'The mandrakes give forth fragrance, and over our doors are all choice what?',
-                options: ['Fruits', 'Spices', 'Flowers', 'Gifts'],
-                correctAnswer: 'Fruits',
-                explanation: 'Song of Solomon 7:13 (ESV): "The mandrakes give forth fragrance, and over our doors are all choice fruits,"',
-                difficulty: 'hard'
-            }
-        ],
-        key_verse: 'Song of Solomon 7:10',
-        key_verse_text: 'I am my beloved\'s, and his desire is for me.',
-        memory_challenge: true,
-        difficulty: 'easy',
-        points: 15
-    },
-    {
-        id: 'songofsolomon-8',
-        bookId: 'songofsolomon',
-        chapter: 8,
-        title: 'Love Strong as Death',
-        questions: [
-            {
-                id: 'songofsolomon8-q1',
-                question: 'Oh that you were like a brother to me, who nursed at my mother\'s what?',
-                options: ['Breasts', 'Side', 'Arms', 'House'],
-                correctAnswer: 'Breasts',
-                explanation: 'Song of Solomon 8:1 (ESV): "who nursed at my mother\'s breasts!"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon8-q2',
-                question: 'Set me as a seal upon your what?',
-                options: ['Heart', 'Hand', 'Arm', 'Soul'],
-                correctAnswer: 'Heart',
-                explanation: 'Song of Solomon 8:6 (ESV): "Set me as a seal upon your heart,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon8-q3',
-                question: 'For love is strong as what?',
-                options: ['Death', 'Life', 'The Grave', 'Iron'],
-                correctAnswer: 'Death',
-                explanation: 'Song of Solomon 8:6 (ESV): "for love is strong as death,"',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon8-q4',
-                question: 'Jealousy is fierce as the what?',
-                options: ['Grave', 'Lion', 'Storm', 'Fire'],
-                correctAnswer: 'Grave',
-                explanation: 'Song of Solomon 8:6 (ESV): "jealousy is fierce as the grave."',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon8-q5',
-                question: 'Many waters cannot quench what?',
-                options: ['Love', 'Fire', 'Hope', 'Faith'],
-                correctAnswer: 'Love',
-                explanation: 'Song of Solomon 8:7 (ESV): "Many waters cannot quench love, neither can floods drown it."',
-                difficulty: 'easy'
-            },
-            {
-                id: 'songofsolomon8-q6',
-                question: 'I would lead you and bring you into the house of whom?',
-                options: ['My mother', 'My father', 'The King', 'The Lord'],
-                correctAnswer: 'My mother',
-                explanation: 'Song of Solomon 8:2 (ESV): "I would lead you and bring you into the house of my mother"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon8-q7',
-                question: 'I would give you spiced wine to drink, the juice of my what?',
-                options: ['Pomegranate', 'Vineyard', 'Apple', 'Figs'],
-                correctAnswer: 'Pomegranate',
-                explanation: 'Song of Solomon 8:2 (ESV): "the juice of my pomegranate."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon8-q8',
-                question: 'Who is that coming up from the wilderness, leaning on her what?',
-                options: ['Beloved', 'Staff', 'Mother', 'Husband'],
-                correctAnswer: 'Beloved',
-                explanation: 'Song of Solomon 8:5 (ESV): "Who is that coming up from the wilderness, leaning on her beloved?"',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon8-q9',
-                question: 'Under the apple tree I awakened whom?',
-                options: ['You', 'Him', 'Love', 'My mother'],
-                correctAnswer: 'You',
-                explanation: 'Song of Solomon 8:5 (ESV): "Under the apple tree I awakened you."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon8-q10',
-                question: 'We have a little sister, and she has no what?',
-                options: ['Breasts', 'Hair', 'Jewels', 'Name'],
-                correctAnswer: 'Breasts',
-                explanation: 'Song of Solomon 8:8 (ESV): "We have a little sister, and she has no breasts."',
-                difficulty: 'medium'
-            },
-            {
-                id: 'songofsolomon8-q11',
-                question: 'Its flashes are flashes of fire, the very flame of whom?',
-                options: ['The LORD', 'The King', 'Love', 'David'],
-                correctAnswer: 'The LORD',
-                explanation: 'Song of Solomon 8:6 (ESV): "the very flame of the LORD."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon8-q12',
-                question: 'If she is a wall, we will build on her a battlement of what?',
-                options: ['Silver', 'Gold', 'Bronze', 'Stone'],
-                correctAnswer: 'Silver',
-                explanation: 'Song of Solomon 8:9 (ESV): "If she is a wall, we will build on her a battlement of silver,"',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon8-q13',
-                question: 'If she is a door, we will enclose her with boards of what?',
-                options: ['Cedar', 'Pine', 'Oak', 'Cypress'],
-                correctAnswer: 'Cedar',
-                explanation: 'Song of Solomon 8:9 (ESV): "but if she is a door, we will enclose her with boards of cedar."',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon8-q14',
-                question: 'Solomon had a vineyard at where?',
-                options: ['Baal-hamon', 'Engedi', 'Carmel', 'Sharon'],
-                correctAnswer: 'Baal-hamon',
-                explanation: 'Song of Solomon 8:11 (ESV): "Solomon had a vineyard at Baal-hamon;"',
-                difficulty: 'hard'
-            },
-            {
-                id: 'songofsolomon8-q15',
-                question: 'Make haste, my beloved, and be like a gazelle or a young stag on the mountains of what?',
-                options: ['Spices', 'Myrrh', 'Lebanon', 'Israel'],
-                correctAnswer: 'Spices',
-                explanation: 'Song of Solomon 8:14 (ESV): "on the mountains of spices."',
-                difficulty: 'hard'
-            }
-        ],
-        key_verse: 'Song of Solomon 8:6',
-        key_verse_text: 'Set me as a seal upon your heart, as a seal upon your arm, for love is strong as death, jealousy is fierce as the grave. Its flashes are flashes of fire, the very flame of the LORD.',
-        memory_challenge: true,
-        difficulty: 'easy',
-        points: 15
-    }
+  {
+    id: 'songofsolomon-5',
+    bookId: 'songofsolomon',
+    chapter: 5,
+    title: 'Love\'s Longing and Description',
+    questions: [
+      {
+        id: 'songofsolomon5-q1',
+        question: 'I came to my garden, my sister, my what?',
+        options: ['Bride', 'Love', 'Friend', 'One'],
+        correctAnswer: 'Bride',
+        explanation: 'Song of Solomon 5:1 (ESV): "I came to my garden, my sister, my bride,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon5-q2',
+        question: 'Eat, friends, drink, and be drunk with what?',
+        options: ['Love', 'Wine', 'Joy', 'Desire'],
+        correctAnswer: 'Love',
+        explanation: 'Song of Solomon 5:1 (ESV): "Eat, friends, drink, and be drunk with love!"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon5-q3',
+        question: 'I slept, but my heart was what?',
+        options: ['Awake', 'Asleep', 'Sad', 'Cold'],
+        correctAnswer: 'Awake',
+        explanation: 'Song of Solomon 5:2 (ESV): "I slept, but my heart was awake."',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon5-q4',
+        question: 'Who was knocking, saying, "Open to me"?',
+        options: ['My beloved', 'The King', 'The watchman', 'A friend'],
+        correctAnswer: 'My beloved',
+        explanation: 'Song of Solomon 5:2 (ESV): "A sound! My beloved is knocking. \'Open to me, my sister, my love,\'"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon5-q5',
+        question: 'What is your beloved more than another beloved, O most beautiful among whom?',
+        options: ['Women', 'Queens', 'Daughters', 'Virgins'],
+        correctAnswer: 'Women',
+        explanation: 'Song of Solomon 5:9 (ESV): "What is your beloved more than another beloved, O most beautiful among women?"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon5-q6',
+        question: 'My beloved put his hand to the latch, and my heart was thrilled within whom?',
+        options: ['Me', 'Him', 'Us', 'The House'],
+        correctAnswer: 'Me',
+        explanation: 'Song of Solomon 5:4 (ESV): "and my heart was thrilled within me."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon5-q7',
+        question: 'I arose to open to my beloved, and my hands dripped with what?',
+        options: ['Myrrh', 'Oil', 'Water', 'Honey'],
+        correctAnswer: 'Myrrh',
+        explanation: 'Song of Solomon 5:5 (ESV): "and my hands dripped with myrrh,"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon5-q8',
+        question: 'I opened to my beloved, but my beloved had turned and was what?',
+        options: ['Gone', 'Here', 'Waiting', 'Silent'],
+        correctAnswer: 'Gone',
+        explanation: 'Song of Solomon 5:6 (ESV): "I opened to my beloved, but my beloved had turned and gone."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon5-q9',
+        question: 'The watchmen found me as they went about in the city; they beat me, they bruised me, they took away my what?',
+        options: ['Veil', 'Robe', 'Cloak', 'Jewels'],
+        correctAnswer: 'Veil',
+        explanation: 'Song of Solomon 5:7 (ESV): "they took away my veil, those watchmen of the walls."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon5-q10',
+        question: 'My beloved is radiant and ruddy, distinguished among how many?',
+        options: ['Ten thousand', 'A thousand', 'A hundred', 'All men'],
+        correctAnswer: 'Ten thousand',
+        explanation: 'Song of Solomon 5:10 (ESV): "distinguished among ten thousand."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon5-q11',
+        question: 'His head is the finest gold; his locks are wavy, black as a what?',
+        options: ['Raven', 'Night', 'Coal', 'Crow'],
+        correctAnswer: 'Raven',
+        explanation: 'Song of Solomon 5:11 (ESV): "his locks are wavy, black as a raven."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon5-q12',
+        question: 'His arms are rods of gold, set with what?',
+        options: ['Jewels', 'Diamonds', 'Rubies', 'Emeralds'],
+        correctAnswer: 'Jewels',
+        explanation: 'Song of Solomon 5:14 (ESV): "His arms are rods of gold, set with jewels."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon5-q13',
+        question: 'His body is polished ivory, bedecked with what?',
+        options: ['Sapphires', 'Gold', 'Silver', 'Pearls'],
+        correctAnswer: 'Sapphires',
+        explanation: 'Song of Solomon 5:14 (ESV): "his body is polished ivory, bedecked with sapphires."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon5-q14',
+        question: 'His legs are alabaster columns, set on bases of what?',
+        options: ['Gold', 'Silver', 'Marble', 'Bronze'],
+        correctAnswer: 'Gold',
+        explanation: 'Song of Solomon 5:15 (ESV): "His legs are alabaster columns, set on bases of gold."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon5-q15',
+        question: 'His mouth is most sweet, and he is altogether what?',
+        options: ['Desirable', 'Lovely', 'Beautiful', 'Fair'],
+        correctAnswer: 'Desirable',
+        explanation: 'Song of Solomon 5:16 (ESV): "His mouth is most sweet, and he is altogether desirable."',
+        difficulty: 'hard'
+      }
+    ],
+    key_verse: 'Song of Solomon 5:16',
+    key_verse_text: 'His mouth is most sweet, and he is altogether desirable. This is my beloved and this is my friend, O daughters of Jerusalem.',
+    memory_challenge: true,
+    difficulty: 'medium',
+    points: 15
+  },
+  {
+    id: 'songofsolomon-6',
+    bookId: 'songofsolomon',
+    chapter: 6,
+    title: 'Mutual Praise',
+    questions: [
+      {
+        id: 'songofsolomon6-q1',
+        question: 'Where has your beloved gone, O most beautiful among whom?',
+        options: ['Women', 'Queens', 'Daughters', 'The city'],
+        correctAnswer: 'Women',
+        explanation: 'Song of Solomon 6:1 (ESV): "Where has your beloved gone, O most beautiful among women?"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon6-q2',
+        question: 'My beloved has gone down to his what?',
+        options: ['Garden', 'Vineyard', 'Field', 'House'],
+        correctAnswer: 'Garden',
+        explanation: 'Song of Solomon 6:2 (ESV): "My beloved has gone down to his garden,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon6-q3',
+        question: 'I am my beloved\'s and my beloved is whose?',
+        options: ['Mine', 'Yours', 'God\'s', 'The King\'s'],
+        correctAnswer: 'Mine',
+        explanation: 'Song of Solomon 6:3 (ESV): "I am my beloved\'s and my beloved is mine;"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon6-q4',
+        question: 'You are beautiful as Tirzah, my love, lovely as what?',
+        options: ['Jerusalem', 'Zion', 'Lebanon', 'Sharon'],
+        correctAnswer: 'Jerusalem',
+        explanation: 'Song of Solomon 6:4 (ESV): "You are beautiful as Tirzah, my love, lovely as Jerusalem,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon6-q5',
+        question: 'Turn away your eyes from me, for they what me?',
+        options: ['Overwhelm', 'Captivate', 'Frighten', 'Blind'],
+        correctAnswer: 'Overwhelm',
+        explanation: 'Song of Solomon 6:5 (ESV): "Turn away your eyes from me, for they overwhelm me--"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon6-q6',
+        question: 'There are sixty queens and eighty concubines, and virgins without what?',
+        options: ['Number', 'Name', 'Face', 'Voice'],
+        correctAnswer: 'Number',
+        explanation: 'Song of Solomon 6:8 (ESV): "and virgins without number."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon6-q7',
+        question: 'My dove, my perfect one, is the only one of her what?',
+        options: ['Mother', 'Father', 'Kind', 'Family'],
+        correctAnswer: 'Mother',
+        explanation: 'Song of Solomon 6:9 (ESV): "My dove, my perfect one, is the only one... pure to her who bore her."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon6-q8',
+        question: 'Who is this who looks down like the what?',
+        options: ['Dawn', 'Sun', 'Moon', 'Star'],
+        correctAnswer: 'Dawn',
+        explanation: 'Song of Solomon 6:10 (ESV): "Who is this who looks down like the dawn,"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon6-q9',
+        question: 'I went down to the nut orchard to look at the blossoms of the what?',
+        options: ['Valley', 'Hill', 'Tree', 'Field'],
+        correctAnswer: 'Valley',
+        explanation: 'Song of Solomon 6:11 (ESV): "I went down to the nut orchard to look at the blossoms of the valley,"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon6-q10',
+        question: 'Before I was aware, my desire set me among the chariots of my whom?',
+        options: ['Kinsman', 'King', 'Beloved', 'Enemy'],
+        correctAnswer: 'Kinsman',
+        explanation: 'Song of Solomon 6:12 (ESV): "my desire set me among the chariots of my kinsman,"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon6-q11',
+        question: 'Return, return, O Shulammite, return, return, that we may look upon whom?',
+        options: ['You', 'Him', 'The King', 'The City'],
+        correctAnswer: 'You',
+        explanation: 'Song of Solomon 6:13 (ESV): "Return, return, O Shulammite, return, return, that we may look upon you."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon6-q12',
+        question: 'Why should you look upon the Shulammite, as upon a dance before two what?',
+        options: ['Armies', 'Kings', 'Camps', 'Cities'],
+        correctAnswer: 'Armies',
+        explanation: 'Song of Solomon 6:13 (ESV): "Why should you look upon the Shulammite, as upon a dance before two armies?"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon6-q13',
+        question: 'You are awesome as an army with what?',
+        options: ['Banners', 'Swords', 'Shields', 'Spears'],
+        correctAnswer: 'Banners',
+        explanation: 'Song of Solomon 6:4 (ESV): "awesome as an army with banners."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon6-q14',
+        question: 'Your teeth are like a flock of ewes that have come up from the what?',
+        options: ['Washing', 'Shearing', 'Pasture', 'Field'],
+        correctAnswer: 'Washing',
+        explanation: 'Song of Solomon 6:6 (ESV): "Your teeth are like a flock of ewes that have come up from the washing,"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon6-q15',
+        question: 'To see whether the vines had budded, whether the pomegranates were in what?',
+        options: ['Bloom', 'Fruit', 'Season', 'Harvest'],
+        correctAnswer: 'Bloom',
+        explanation: 'Song of Solomon 6:11 (ESV): "whether the pomegranates were in bloom."',
+        difficulty: 'hard'
+      }
+    ],
+    key_verse: 'Song of Solomon 6:3',
+    key_verse_text: 'I am my beloved\'s and my beloved is mine; he grazes among the lilies.',
+    memory_challenge: true,
+    difficulty: 'easy',
+    points: 15
+  },
+  {
+    id: 'songofsolomon-7',
+    bookId: 'songofsolomon',
+    chapter: 7,
+    title: 'Expressions of Love',
+    questions: [
+      {
+        id: 'songofsolomon7-q1',
+        question: 'How beautiful are your feet in sandals, O noble what?',
+        options: ['Daughter', 'Queen', 'Lady', 'Woman'],
+        correctAnswer: 'Daughter',
+        explanation: 'Song of Solomon 7:1 (ESV): "How beautiful are your feet in sandals, O noble daughter!"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon7-q2',
+        question: 'Your neck is like an ivory what?',
+        options: ['Tower', 'Pillar', 'Column', 'Statue'],
+        correctAnswer: 'Tower',
+        explanation: 'Song of Solomon 7:4 (ESV): "Your neck is like an ivory tower."',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon7-q3',
+        question: 'Your head crowns you like what?',
+        options: ['Carmel', 'Hermon', 'Zion', 'Lebanon'],
+        correctAnswer: 'Carmel',
+        explanation: 'Song of Solomon 7:5 (ESV): "Your head crowns you like Carmel,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon7-q4',
+        question: 'I am my beloved\'s, and his desire is for whom?',
+        options: ['Me', 'Her', 'You', 'Us'],
+        correctAnswer: 'Me',
+        explanation: 'Song of Solomon 7:10 (ESV): "I am my beloved\'s, and his desire is for me."',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon7-q5',
+        question: 'Come, my beloved, let us go out into the what?',
+        options: ['Fields', 'City', 'Garden', 'Vineyards'],
+        correctAnswer: 'Fields',
+        explanation: 'Song of Solomon 7:11 (ESV): "Come, my beloved, let us go out into the fields"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon7-q6',
+        question: 'Your navel is a rounded bowl that never lacks mixed what?',
+        options: ['Wine', 'Oil', 'Water', 'Spice'],
+        correctAnswer: 'Wine',
+        explanation: 'Song of Solomon 7:2 (ESV): "Your navel is a rounded bowl that never lacks mixed wine."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon7-q7',
+        question: 'Your belly is a heap of wheat, encircled with what?',
+        options: ['Lilies', 'Roses', 'Vines', 'Flowers'],
+        correctAnswer: 'Lilies',
+        explanation: 'Song of Solomon 7:2 (ESV): "Your belly is a heap of wheat, encircled with lilies."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon7-q8',
+        question: 'How beautiful and pleasant you are, O loved one, with all your what?',
+        options: ['Delights', 'Charms', 'Graces', 'Beauty'],
+        correctAnswer: 'Delights',
+        explanation: 'Song of Solomon 7:6 (ESV): "How beautiful and pleasant you are, O loved one, with all your delights!"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon7-q9',
+        question: 'Your stature is like a palm tree, and your breasts are like its what?',
+        options: ['Clusters', 'Fruit', 'Branches', 'Leaves'],
+        correctAnswer: 'Clusters',
+        explanation: 'Song of Solomon 7:7 (ESV): "Your stature is like a palm tree, and your breasts are like its clusters."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon7-q10',
+        question: 'Let us see if the vines have budded... there I will give you my what?',
+        options: ['Love', 'Heart', 'Hand', 'Seal'],
+        correctAnswer: 'Love',
+        explanation: 'Song of Solomon 7:12 (ESV): "there I will give you my love."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon7-q11',
+        question: 'Your eyes are pools in Heshbon, by the gate of what?',
+        options: ['Bath-rabbim', 'Damascus', 'Jerusalem', 'Zion'],
+        correctAnswer: 'Bath-rabbim',
+        explanation: 'Song of Solomon 7:4 (ESV): "Your eyes are pools in Heshbon, by the gate of Bath-rabbim."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon7-q12',
+        question: 'Your nose is like a tower of Lebanon, which looks toward where?',
+        options: ['Damascus', 'Jerusalem', 'The Sea', 'The North'],
+        correctAnswer: 'Damascus',
+        explanation: 'Song of Solomon 7:4 (ESV): "Your nose is like a tower of Lebanon, which looks toward Damascus."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon7-q13',
+        question: 'The king is held captive in its what?',
+        options: ['Tresses', 'Beauty', 'Eyes', 'Love'],
+        correctAnswer: 'Tresses',
+        explanation: 'Song of Solomon 7:5 (ESV): "The king is held captive in its tresses."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon7-q14',
+        question: 'I say I will climb the palm tree; I will take hold of its what?',
+        options: ['Fruit stalks', 'Branches', 'Trunk', 'Top'],
+        correctAnswer: 'Fruit stalks',
+        explanation: 'Song of Solomon 7:8 (ESV): "I say I will climb the palm tree; I will take hold of its fruit stalks."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon7-q15',
+        question: 'The mandrakes give forth fragrance, and over our doors are all choice what?',
+        options: ['Fruits', 'Spices', 'Flowers', 'Gifts'],
+        correctAnswer: 'Fruits',
+        explanation: 'Song of Solomon 7:13 (ESV): "The mandrakes give forth fragrance, and over our doors are all choice fruits,"',
+        difficulty: 'hard'
+      }
+    ],
+    key_verse: 'Song of Solomon 7:10',
+    key_verse_text: 'I am my beloved\'s, and his desire is for me.',
+    memory_challenge: true,
+    difficulty: 'easy',
+    points: 15
+  },
+  {
+    id: 'songofsolomon-8',
+    bookId: 'songofsolomon',
+    chapter: 8,
+    title: 'Love Strong as Death',
+    questions: [
+      {
+        id: 'songofsolomon8-q1',
+        question: 'Oh that you were like a brother to me, who nursed at my mother\'s what?',
+        options: ['Breasts', 'Side', 'Arms', 'House'],
+        correctAnswer: 'Breasts',
+        explanation: 'Song of Solomon 8:1 (ESV): "who nursed at my mother\'s breasts!"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon8-q2',
+        question: 'Set me as a seal upon your what?',
+        options: ['Heart', 'Hand', 'Arm', 'Soul'],
+        correctAnswer: 'Heart',
+        explanation: 'Song of Solomon 8:6 (ESV): "Set me as a seal upon your heart,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon8-q3',
+        question: 'For love is strong as what?',
+        options: ['Death', 'Life', 'The Grave', 'Iron'],
+        correctAnswer: 'Death',
+        explanation: 'Song of Solomon 8:6 (ESV): "for love is strong as death,"',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon8-q4',
+        question: 'Jealousy is fierce as the what?',
+        options: ['Grave', 'Lion', 'Storm', 'Fire'],
+        correctAnswer: 'Grave',
+        explanation: 'Song of Solomon 8:6 (ESV): "jealousy is fierce as the grave."',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon8-q5',
+        question: 'Many waters cannot quench what?',
+        options: ['Love', 'Fire', 'Hope', 'Faith'],
+        correctAnswer: 'Love',
+        explanation: 'Song of Solomon 8:7 (ESV): "Many waters cannot quench love, neither can floods drown it."',
+        difficulty: 'easy'
+      },
+      {
+        id: 'songofsolomon8-q6',
+        question: 'I would lead you and bring you into the house of whom?',
+        options: ['My mother', 'My father', 'The King', 'The Lord'],
+        correctAnswer: 'My mother',
+        explanation: 'Song of Solomon 8:2 (ESV): "I would lead you and bring you into the house of my mother"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon8-q7',
+        question: 'I would give you spiced wine to drink, the juice of my what?',
+        options: ['Pomegranate', 'Vineyard', 'Apple', 'Figs'],
+        correctAnswer: 'Pomegranate',
+        explanation: 'Song of Solomon 8:2 (ESV): "the juice of my pomegranate."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon8-q8',
+        question: 'Who is that coming up from the wilderness, leaning on her what?',
+        options: ['Beloved', 'Staff', 'Mother', 'Husband'],
+        correctAnswer: 'Beloved',
+        explanation: 'Song of Solomon 8:5 (ESV): "Who is that coming up from the wilderness, leaning on her beloved?"',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon8-q9',
+        question: 'Under the apple tree I awakened whom?',
+        options: ['You', 'Him', 'Love', 'My mother'],
+        correctAnswer: 'You',
+        explanation: 'Song of Solomon 8:5 (ESV): "Under the apple tree I awakened you."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon8-q10',
+        question: 'We have a little sister, and she has no what?',
+        options: ['Breasts', 'Hair', 'Jewels', 'Name'],
+        correctAnswer: 'Breasts',
+        explanation: 'Song of Solomon 8:8 (ESV): "We have a little sister, and she has no breasts."',
+        difficulty: 'medium'
+      },
+      {
+        id: 'songofsolomon8-q11',
+        question: 'Its flashes are flashes of fire, the very flame of whom?',
+        options: ['The LORD', 'The King', 'Love', 'David'],
+        correctAnswer: 'The LORD',
+        explanation: 'Song of Solomon 8:6 (ESV): "the very flame of the LORD."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon8-q12',
+        question: 'If she is a wall, we will build on her a battlement of what?',
+        options: ['Silver', 'Gold', 'Bronze', 'Stone'],
+        correctAnswer: 'Silver',
+        explanation: 'Song of Solomon 8:9 (ESV): "If she is a wall, we will build on her a battlement of silver,"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon8-q13',
+        question: 'If she is a door, we will enclose her with boards of what?',
+        options: ['Cedar', 'Pine', 'Oak', 'Cypress'],
+        correctAnswer: 'Cedar',
+        explanation: 'Song of Solomon 8:9 (ESV): "but if she is a door, we will enclose her with boards of cedar."',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon8-q14',
+        question: 'Solomon had a vineyard at where?',
+        options: ['Baal-hamon', 'Engedi', 'Carmel', 'Sharon'],
+        correctAnswer: 'Baal-hamon',
+        explanation: 'Song of Solomon 8:11 (ESV): "Solomon had a vineyard at Baal-hamon;"',
+        difficulty: 'hard'
+      },
+      {
+        id: 'songofsolomon8-q15',
+        question: 'Make haste, my beloved, and be like a gazelle or a young stag on the mountains of what?',
+        options: ['Spices', 'Myrrh', 'Lebanon', 'Israel'],
+        correctAnswer: 'Spices',
+        explanation: 'Song of Solomon 8:14 (ESV): "on the mountains of spices."',
+        difficulty: 'hard'
+      }
+    ],
+    key_verse: 'Song of Solomon 8:6',
+    key_verse_text: 'Set me as a seal upon your heart, as a seal upon your arm, for love is strong as death, jealousy is fierce as the grave. Its flashes are flashes of fire, the very flame of the LORD.',
+    memory_challenge: true,
+    difficulty: 'easy',
+    points: 15
+  }
 ];

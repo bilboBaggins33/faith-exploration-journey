@@ -65,11 +65,15 @@ import { john1Challenges } from './1john';
 import { john2Challenges } from './2john';
 import { john3Challenges } from './3john';
 import { judeChallenges } from './jude';
-import { revelationChallenges } from './revelation';
+import { revelation1Challenges } from './revelation1';
+import { revelation2Challenges } from './revelation2';
+import { revelation3Challenges } from './revelation3';
+import { revelation4Challenges } from './revelation4';
+import { revelation5Challenges } from './revelation5';
 import { ChapterChallenge } from '../types';
 
 // Collect challenges from all books
-export const sampleChapterChallenges: ChapterChallenge[] = [
+export const allChallenges: ChapterChallenge[] = [
   ...genesisChallenges,
   ...exodusChallenges,
   ...leviticusChallenges,
@@ -135,14 +139,92 @@ export const sampleChapterChallenges: ChapterChallenge[] = [
   ...john2Challenges,
   ...john3Challenges,
   ...judeChallenges,
-  ...revelationChallenges,
+  ...revelation1Challenges,
+  ...revelation2Challenges,
+  ...revelation3Challenges,
+  ...revelation4Challenges,
+  ...revelation5Challenges,
 ];
+
+// Export individual books for targeted usage
+export {
+  genesisChallenges,
+  exodusChallenges,
+  leviticusChallenges,
+  numbersChallenges,
+  deuteronomyChallenges,
+  joshuaChallenges,
+  judgesChallenges,
+  ruthChallenges,
+  samuel1Challenges,
+  samuel2Challenges,
+  kings1Challenges,
+  kings2Challenges,
+  chronicles1Challenges,
+  chronicles2Challenges,
+  ezraChallenges,
+  nehemiahChallenges,
+  estherChallenges,
+  jobChallenges,
+  psalmsChallenges,
+  proverbsChallenges,
+  ecclesiastesChallenges,
+  songofsolomonChallenges,
+  isaiahChallenges,
+  jeremiahChallenges,
+  lamentationsChallenges,
+  ezekielChallenges,
+  danielChallenges,
+  hoseaChallenges,
+  joelChallenges,
+  amosChallenges,
+  obadiahChallenges,
+  jonahChallenges,
+  micahChallenges,
+  nahumChallenges,
+  habakkukChallenges,
+  zephaniahChallenges,
+  haggaiChallenges,
+  zechariahChallenges,
+  malachiChallenges,
+  matthewChallenges,
+  markChallenges,
+  lukeChallenges,
+  johnChallenges,
+  actsChallenges,
+  romansChallenges,
+  corinthians1Challenges,
+  corinthians2Challenges,
+  galatiansChallenges,
+  ephesiansChallenges,
+  philippiansChallenges,
+  colossiansChallenges,
+  thessalonians1Challenges,
+  thessalonians2Challenges,
+  timothy1Challenges,
+  timothy2Challenges,
+  titusChallenges,
+  philemonChallenges,
+  hebrewsChallenges,
+  jamesChallenges,
+  peter1Challenges,
+  peter2Challenges,
+  john1Challenges,
+  john2Challenges,
+  john3Challenges,
+  judeChallenges,
+  revelation1Challenges,
+  revelation2Challenges,
+  revelation3Challenges,
+  revelation4Challenges,
+  revelation5Challenges,
+};
 
 // Create a lookup map for faster access
 const challengesMap = new Map<string, ChapterChallenge>();
 
 // Populate the map
-sampleChapterChallenges.forEach(challenge => {
+allChallenges.forEach(challenge => {
   challengesMap.set(`${challenge.bookId}-${challenge.chapter}`, challenge);
 });
 

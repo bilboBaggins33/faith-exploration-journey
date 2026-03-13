@@ -2,7 +2,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { BibleProgressData } from './bible-progress-types';
 import { bibleBooks } from '@/data/bible';
-import { sampleChapterChallenges } from '@/data/bible/challenges';
+import { allChallenges } from '@/data/bible/challenges';
 
 /**
  * Hook to fetch Bible challenge data for a specific book and chapter
@@ -22,7 +22,7 @@ export const useBibleChallenges = (bookId: string, chapter: number) => {
       }
       
       // Find challenge for this chapter
-      const challenge = sampleChapterChallenges.find(
+      const challenge = allChallenges.find(
         c => c.bookId === bookId && c.chapter === chapter
       );
       

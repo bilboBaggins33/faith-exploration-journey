@@ -37,9 +37,9 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
           decoding="async"
           onError={() => setImageError(true)}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/60 rounded-t-2xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-2xl" />
         <div className="absolute bottom-0 left-0 p-3">
-          <h2 className="font-semibold text-white text-xl sm:text-xl drop-shadow-md" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="font-semibold text-white text-xl sm:text-xl drop-shadow-sm/90" style={{ fontFamily: "'Playfair Display', serif" }}>
             {bookName}
           </h2>
         </div>

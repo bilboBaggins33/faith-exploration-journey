@@ -78,11 +78,11 @@ const AuthPage = () => {
 
             <div className="p-8 flex-1 flex flex-col justify-center">
               <AnimatePresence mode="wait">
-                <TabsContent value="login" className="mt-0 focus-visible:outline-none w-full">
+                <TabsContent key="login" value="login" className="mt-0 focus-visible:outline-none w-full">
                   <LoginForm />
                 </TabsContent>
 
-                <TabsContent value="register" className="mt-0 focus-visible:outline-none w-full">
+                <TabsContent key="register" value="register" className="mt-0 focus-visible:outline-none w-full">
                   <RegisterForm />
                 </TabsContent>
               </AnimatePresence>

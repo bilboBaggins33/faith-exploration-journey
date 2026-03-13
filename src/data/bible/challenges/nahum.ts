@@ -1,6 +1,6 @@
 import { ChapterChallenge } from '../types';
 
-export const nahum: ChapterChallenge[] = [
+export const nahumChallenges: ChapterChallenge[] = [
 
     {
         id: 'nahum-1',

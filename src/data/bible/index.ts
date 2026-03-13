@@ -5,4 +5,4 @@ export * from './chapters';
 export * from './challenges';
 
 // Export sample chapter challenges for backwards compatibility with existing components
-export { sampleChapterChallenges } from './challenges';
+export { allChallenges } from './challenges';
