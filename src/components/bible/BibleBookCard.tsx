@@ -24,7 +24,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
 
   return (
     <div
-      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-2xl backdrop-blur-md border border-white/30 shadow-lg bg-white/10"
+      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-xl border-0 shadow-lg bg-card"
       onClick={onClick}
     >
       {/* Image section with rounded top corners */}
