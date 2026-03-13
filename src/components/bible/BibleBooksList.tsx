@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { BookOpen } from 'lucide-react';
 import BibleBookCard from './BibleBookCard';
 import { Card } from '@/components/ui/card';
+import { DifficultyProgress } from '@/hooks/bible/use-difficulty-progress';
 
 interface BibleBooksListProps {
   books: {
@@ -13,6 +14,7 @@ interface BibleBooksListProps {
     chapters: number;
   }[];
   getBookProgress: (bookId: string) => number;
+  getBookDifficultyProgress?: (bookId: string) => DifficultyProgress;
   searchTerm: string;
   activeTestament: string;
   isMobile: boolean;
@@ -21,6 +23,7 @@ interface BibleBooksListProps {
 const BibleBooksList: React.FC<BibleBooksListProps> = ({
   books,
   getBookProgress,
+  getBookDifficultyProgress,
   searchTerm,
   activeTestament,
   isMobile
@@ -42,6 +45,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
               totalChapters={book.chapters}
               progressPercent={getBookProgress(book.id)}
               testament="old"
+              difficultyProgress={getBookDifficultyProgress?.(book.id)}
               onClick={() => navigate(`/bible/${book.id}`)}
             />
           ))}
@@ -58,6 +62,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
               totalChapters={book.chapters}
               progressPercent={getBookProgress(book.id)}
               testament="new"
+              difficultyProgress={getBookDifficultyProgress?.(book.id)}
               onClick={() => navigate(`/bible/${book.id}`)}
             />
           ))}
