@@ -32,7 +32,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
-          className="absolute inset-0 object-cover w-full h-full rounded-t-2xl"
+          className="absolute inset-0 object-cover w-full h-full rounded-t-xl"
           loading="lazy"
           decoding="async"
           onError={() => setImageError(true)}
