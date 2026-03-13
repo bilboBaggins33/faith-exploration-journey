@@ -8,7 +8,7 @@ import type { BibleProgressData } from './bible-progress-types';
 export const useBibleProgress = () => {
   const { profile, progress, loading, refreshData, setProgress } = useBibleFetch();
   const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleCalculations(progress);
-  const { isCompleted, getChapterStatus, completeChallenge } = useBibleStatus(progress, profile);
+  const { isCompleted, getChapterStatus, completeChallenge, getChapterDifficultyScores } = useBibleStatus(progress, profile);
 
   const updateProfile = async (data: any) => {
     if (!progress?.user_id) return;
@@ -50,10 +50,13 @@ export const useBibleProgress = () => {
             const existing = prev.completed_chapters || [];
             const newChapters = data.completed_chapters;
             
-            // Remove any existing entry for the same book/chapter combination
+            // Remove any existing entry for the same book/chapter/difficulty combination
             const filteredExisting = existing.filter(
               (existingChapter: any) => !newChapters.some(
-                (newChapter: any) => existingChapter.book_id === newChapter.book_id && existingChapter.chapter === newChapter.chapter
+                (newChapter: any) => 
+                  existingChapter.book_id === newChapter.book_id && 
+                  existingChapter.chapter === newChapter.chapter &&
+                  existingChapter.difficulty === newChapter.difficulty
               )
             );
             
@@ -98,6 +101,7 @@ export const useBibleProgress = () => {
     getChapterScore,
     isCompleted,
     completeChallenge,
-    getChapterStatus
+    getChapterStatus,
+    getChapterDifficultyScores
   };
 };

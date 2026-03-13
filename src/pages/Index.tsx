@@ -48,6 +48,7 @@ const ChallengeTypes = () => {
       description: "Test your knowledge of Scripture with chapter-by-chapter quizzes covering all 66 books.",
       color: "from-bible-blue to-bible-blue/80",
       link: "/bible",
+      image: "/assets/bible/genesis.png",
       features: ["1,189 Chapters", "Comprehension Questions", "Progress Tracking"]
     },
     {
@@ -56,6 +57,7 @@ const ChallengeTypes = () => {
       description: "Explore classic Christian works and deepen your understanding of foundational doctrines.",
       color: "from-bible-gold to-amber-500",
       link: "/theology",
+      image: "/assets/pilgrims-progress-cover.jpg",
       features: ["Classic Books", "Chapter Summaries", "Knowledge Quizzes"]
     },
     {
@@ -64,6 +66,7 @@ const ChallengeTypes = () => {
       description: "Earn badges and track your spiritual growth as you complete challenges and milestones.",
       color: "from-emerald-500 to-emerald-600",
       link: "/achievements",
+      image: "/assets/bible/matthew.jpg",
       features: ["Milestone Badges", "Streak Rewards", "Progress Stats"]
     }
   ];
@@ -82,7 +85,7 @@ const ChallengeTypes = () => {
             Explore Our Features
           </span>
           <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
-            Your Journey Awaits
+            Your Quest Awaits
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
             Whether you're a new believer or a seasoned scholar, we have challenges designed to deepen your faith.
@@ -99,17 +102,17 @@ const ChallengeTypes = () => {
             >
               <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card">
                 <CardContent className="p-0">
-                  <div className={`bg-gradient-to-br ${challenge.color} p-6 text-white`}>
+                  <div className={`bg-gradient-to-br p-6 text-white bg-cover bg-center`} style={{ backgroundImage: `url(${challenge.image})` }}>
                     <div className="flex items-center justify-between mb-4">
                       <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
                         <challenge.icon className="h-8 w-8" />
                       </div>
                       <ChevronRight className="h-6 w-6 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all" />
                     </div>
-                    <h3 className="text-2xl font-bold mb-2">{challenge.title}</h3>
+                    <h3 className="text-2xl font-bold mb-2 drop-shadow-[0_3px_3px_rgba(0,0,0,0.75)]" style={{ fontFamily: "'Playfair Display', serif" }}>{challenge.title}</h3>
                   </div>
                   <div className="p-6">
-                    <p className="text-muted-foreground mb-6">{challenge.description}</p>
+                    <p className="text-muted-foreground text-sm mb-6">{challenge.description}</p>
                     <ul className="space-y-3 mb-6">
                       {challenge.features.map((feature, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-foreground">
@@ -141,18 +144,17 @@ const CallToAction = () => {
   });
 
   const stats = [
-    { icon: BookOpen, value: "66", label: "Books of the Bible" },
-    { icon: Star, value: "1,189", label: "Chapters to Master" },
-    { icon: Award, value: "100+", label: "Achievements to Earn" },
-    { icon: Users, value: "Growing", label: "Community" }
+    { icon: BookOpen, value: "1,189", label: "Chapters to Master" },
+    { icon: Star, value: "4000+", label: "Challenges to Complete" },
+    { icon: Award, value: "100+", label: "Achievements to Earn" }
   ];
 
   return (
     <section ref={ref} className="py-24 relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br from-bible-blue via-bible-blue/90 to-bible-dark" />
-      <div className="absolute inset-0 opacity-10" style={{
-        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.4'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+      <div className="absolute inset-0 bg-gradient-to-br" />
+      <div className="absolute inset-0 opacity-100" style={{
+        backgroundImage: `url("/assets/bible/revelation.png")`
       }} />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -161,7 +163,7 @@ const CallToAction = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
+          className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -193,7 +195,7 @@ const CallToAction = () => {
             Ready to Grow in Your Faith?
           </h2>
           <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10">
-            Join thousands of believers who are deepening their understanding of Scripture and theology through engaging challenges.
+            Join other believers who are deepening their understanding of Scripture and theology through engaging challenges.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link to="/bible">

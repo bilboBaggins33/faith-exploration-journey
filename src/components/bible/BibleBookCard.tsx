@@ -33,7 +33,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
 
   return (
     <div
-      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-xl border-0 shadow-lg bg-card"
+      className="overflow-hidden transition-all duration-500 ease hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-lg border-0 shadow-lg bg-card"
       onClick={onClick}
     >
       {/* Image section */}
@@ -41,14 +41,14 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
-          className="absolute inset-0 object-cover w-full h-full rounded-t-xl"
+          className="absolute inset-0 object-cover w-full h-full rounded-t-lg"
           loading="lazy"
           decoding="async"
           onError={() => setImageError(true)}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-lg" />
         <div className="absolute bottom-0 left-0 p-3">
-          <h2 className="font-semibold text-white text-xl sm:text-xl drop-shadow-sm/90" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="font-semibold text-white text-2xl sm:text-2xl drop-shadow-sm/90" style={{ fontFamily: "'Playfair Display', serif" }}>
             {bookName}
           </h2>
         </div>
@@ -62,25 +62,63 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         </div>
 
         {difficultyProgress ? (
-          <div className="flex items-center justify-around pt-1">
-            <MiniDonutChart
-              percentage={difficultyProgress.easy.percentage}
-              color={DIFFICULTY_COLORS.easy}
-              label="Easy"
-              size={34}
-            />
-            <MiniDonutChart
-              percentage={difficultyProgress.medium.percentage}
-              color={DIFFICULTY_COLORS.medium}
-              label="Med"
-              size={34}
-            />
-            <MiniDonutChart
-              percentage={difficultyProgress.hard.percentage}
-              color={DIFFICULTY_COLORS.hard}
-              label="Hard"
-              size={34}
-            />
+          <div className="flex items-center justify-around pt-1 pb-1">
+            <div className="flex flex-col items-center">
+              <MiniDonutChart
+                percentage={difficultyProgress.easy.percentage}
+                color={DIFFICULTY_COLORS.easy}
+                label="Easy"
+                size={34}
+              />
+              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
+                {difficultyProgress.easy.completed > 0 ? (
+                  <>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.easy.completed}</span> attempted</span>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.easy.correctPercentage}%</span> avg score</span>
+                  </>
+                ) : (
+                  <span className="opacity-50">—</span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <MiniDonutChart
+                percentage={difficultyProgress.medium.percentage}
+                color={DIFFICULTY_COLORS.medium}
+                label="Med"
+                size={34}
+              />
+              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
+                {difficultyProgress.medium.completed > 0 ? (
+                  <>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.medium.completed}</span> attempted</span>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.medium.correctPercentage}%</span> avg score</span>
+                  </>
+                ) : (
+                  <span className="opacity-50">—</span>
+                )}
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <MiniDonutChart
+                percentage={difficultyProgress.hard.percentage}
+                color={DIFFICULTY_COLORS.hard}
+                label="Hard"
+                size={34}
+              />
+              <div className="text-[9px] text-muted-foreground mt-1 text-center flex flex-col">
+                {difficultyProgress.hard.completed > 0 ? (
+                  <>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.hard.completed}</span> attempted</span>
+                    <span><span className="font-semibold text-foreground/80">{difficultyProgress.hard.correctPercentage}%</span> avg score</span>
+                  </>
+                ) : (
+                  <span className="opacity-50">—</span>
+                )}
+              </div>
+            </div>
           </div>
         ) : (
           <div className="w-full bg-muted rounded-full h-2 overflow-hidden">

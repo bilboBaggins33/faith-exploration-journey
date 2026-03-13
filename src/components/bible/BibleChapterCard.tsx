@@ -3,16 +3,17 @@ import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
 import { CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/auth';
+import type { ChapterDifficultyScores } from '@/hooks/bible/bible-progress-types';
 
 interface BibleChapterCardProps {
   bookId: string;
   chapter: number;
   title?: string;
   isCompleted: boolean;
-  score: number;
+  scores: ChapterDifficultyScores;
   maxScore: number;
   isUnlocked?: boolean;
-  onCardClick: (bookId: string, chapter: number) => void;
+  onCardClick: (bookId: string, chapter: number, difficulty: 'easy' | 'medium' | 'hard') => void;
 }
 
 const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
@@ -20,107 +21,136 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   chapter,
   title,
   isCompleted,
-  score,
+  scores,
   maxScore,
   isUnlocked = true,
   onCardClick,
 }) => {
-  const scorePercentage = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
   const isFirstChapter = chapter === 1;
 
   const { user } = useAuth();
 
-  const handleClick = React.useCallback(() => {
-    onCardClick(bookId, chapter);
-  }, [bookId, chapter, onCardClick]);
+  const handleDifficultyClick = React.useCallback(
+    (e: React.MouseEvent, difficulty: 'easy' | 'medium' | 'hard') => {
+      e.stopPropagation();
+      onCardClick(bookId, chapter, difficulty);
+    },
+    [bookId, chapter, onCardClick]
+  );
 
   // First chapter is always unlocked for everyone
   const effectivelyUnlocked = isFirstChapter || isUnlocked;
 
-  // Bar colors based on score
-  const getBarColor = (index: number) => {
-    if (index >= score) return "bg-gray-300/60";
-    switch (score) {
-      case 1:
-        return "bg-red-400";
-      case 2:
-        return "bg-orange-400";
-      case 3:
-        return "bg-yellow-500";
-      case 4:
-        return "bg-lime-400";
-      case 5:
-        return "bg-green-500";
-      default:
-        return "bg-white/30";
-    }
-  };
-
   // Glassmorphism styling based on state
   const getGlassStyles = () => {
     if (!effectivelyUnlocked) {
-      return "bg-gray-200/80 border-gray-300/50";
+      return "bg-gray-200/80 border-gray-300/50 opacity-70";
     }
     if (isCompleted) {
-      if (scorePercentage === 100) {
-        return "bg-green-100/70 backdrop-blur-sm border-green-300/60";
-      }
-      if (scorePercentage >= 50) {
-        return "bg-amber-100/70 backdrop-blur-sm border-amber-300/60";
-      }
-      return "bg-red-100/70 backdrop-blur-sm border-red-300/60";
+      return "bg-amber-50/70 backdrop-blur-sm border-amber-200/60";
     }
     return "bg-white/70 backdrop-blur-sm border-white/70 hover:bg-white/80";
   };
 
-  return (
-    <motion.div
-      whileHover={{ y: -4, scale: 1.04 }}
-      transition={{ duration: 0.18 }}
-      className={cn(
-        "p-3 rounded-2xl border-0 cursor-pointer transition-all shadow-lg hover:shadow-xl w-full h-full",
-        "overflow-hidden relative text-center",
-        getGlassStyles()
-      )}
-      onClick={handleClick}
-    >
-      <div className="flex flex-col items-center justify-center h-full">
-        <div className="relative w-full">
-          <span className="text-sm font-semibold block mb-1 text-gray-700">{chapter}</span>
-          {title && (
-            <span className="text-xs text-gray-500 block mb-2 truncate" title={title}>
-              {title}
+  const getScoreColor = (score: number, max: number) => {
+    if (max === 0 || score === 0) return null; // no color if no attempts
+    const ratio = Math.min(score / max, 1);
+    // Interpolate hue: 0 (red) → 38 (amber) → 142 (green)
+    const hue = ratio < 0.5
+      ? Math.round(ratio * 2 * 38)           // 0 → 38
+      : Math.round(38 + (ratio - 0.5) * 2 * (142 - 38)); // 38 → 142
+    return `hsl(${hue}, 80%, 45%)`;
+  };
+
+  const renderDifficultyButton = (
+    difficulty: 'easy' | 'medium' | 'hard',
+    label: string,
+    score: number,
+    colorClass: string,
+    _bgClass: string
+  ) => {
+    const isPerfect = score === maxScore && maxScore > 0;
+    const hasScore = score > 0;
+    const dynamicColor = getScoreColor(score, maxScore);
+    
+    return (
+      <button
+        onClick={(e) => handleDifficultyClick(e, difficulty)}
+        disabled={!effectivelyUnlocked}
+        className={cn(
+          "flex-1 flex flex-col items-center justify-center p-1.5 rounded-lg border transition-all relative overflow-hidden",
+          effectivelyUnlocked ? "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md" : "cursor-not-allowed",
+          !hasScore && "bg-white/50 border-gray-200 hover:bg-gray-50",
+          !effectivelyUnlocked && "opacity-60"
+        )}
+        style={hasScore && dynamicColor ? { backgroundColor: dynamicColor, borderColor: dynamicColor } : {}}
+      >
+        <span className={cn(
+          "text-[10px] font-bold uppercase tracking-wider mb-0.5",
+          hasScore ? "text-white drop-shadow-sm" : "text-gray-500"
+        )}>
+          {label}
+        </span>
+        <div className="flex items-center justify-center">
+          {isPerfect ? (
+            <CheckCircle className="w-3.5 h-3.5 text-white drop-shadow-sm" />
+          ) : (
+            <span className={cn(
+              "text-xs font-semibold leading-none",
+              hasScore ? "text-white" : "text-gray-400"
+            )}>
+              {hasScore ? `${score}/${maxScore}` : '-'}
             </span>
           )}
-          <div className="absolute top-0 right-0">
-            {isCompleted ? (
-              <CheckCircle className="w-4 h-4 text-green-500" />
-            ) : null}
-          </div>
         </div>
-        <div className="w-full flex items-center justify-between mt-1">
-          <div className="flex space-x-1 w-full">
-            {[...Array(5)].map((_, index) => (
-              <div
-                key={index}
-                className={cn(
-                  "h-2 flex-1 rounded-full transition-colors",
-                  getBarColor(index)
-                )}
-              />
-            ))}
+      </button>
+    );
+  };
+
+  return (
+    <motion.div
+      whileHover={effectivelyUnlocked ? { y: -2, scale: 1.02 } : {}}
+      transition={{ duration: 0.18 }}
+      className={cn(
+        "p-2.5 rounded-2xl border-0 transition-all shadow-md w-full h-full",
+        "flex flex-col relative",
+        getGlassStyles()
+      )}
+    >
+      <div className="flex-grow flex flex-col">
+        {/* Header section with Chapter number and Title */}
+        <div className="flex flex-col mb-3">
+          <div className="flex items-center justify-between mb-1">
+            <span className="text-sm font-bold text-gray-800 bg-white/60 px-2 py-0.5 rounded-md shadow-sm">
+              Ch. {chapter}
+            </span>
+            {isFirstChapter && !user && (
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700">
+                Free
+              </span>
+            )}
+            {!effectivelyUnlocked && (
+              <span className="px-1.5 py-0.5 rounded text-[9px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700">
+                Lock
+              </span>
+            )}
           </div>
+          
+          {title ? (
+            <span className="text-xs text-gray-600 line-clamp-2 leading-tight font-medium min-h-[32px]" title={title}>
+              {title}
+            </span>
+          ) : (
+            <div className="min-h-[32px]" />
+          )}
         </div>
-        {(!user && isFirstChapter) && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-blue-500/20 backdrop-blur-sm text-blue-700 text-[10px] font-semibold mt-3 border border-blue-300/40">
-            Sample
-          </span>
-        )}
-        {!effectivelyUnlocked && !isFirstChapter && (
-          <span className="inline-block px-2 py-0.5 rounded-full bg-amber-400/20 backdrop-blur-sm text-amber-700 text-[10px] font-semibold mt-3 border border-amber-300/40">
-            Sign in
-          </span>
-        )}
+
+        {/* Difficulty buttons section */}
+        <div className="flex gap-1.5 w-full mt-auto">
+          {renderDifficultyButton('easy', 'Easy', scores.easy, 'text-green-600', 'bg-green-500 border-green-600')}
+          {renderDifficultyButton('medium', 'Med', scores.medium, 'text-amber-500', 'bg-amber-400 border-amber-500')}
+          {renderDifficultyButton('hard', 'Hard', scores.hard, 'text-red-500', 'bg-red-500 border-red-600')}
+        </div>
       </div>
     </motion.div>
   );

@@ -22,7 +22,12 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
 }) => {
   const radius = (size - strokeWidth) / 2;
   const circumference = 2 * Math.PI * radius;
-  const offset = circumference - (Math.min(percentage, 100) / 100) * circumference;
+  const validPercentage = Math.min(Math.max(percentage, 0), 100);
+  const offset = circumference - (validPercentage / 100) * circumference;
+  
+  // Calculate dynamic opacity: at 100% it's 1, at 0% it's 0.3 (or 0 if truly empty)
+  // This satisfies the "midway color" request by making partial completions look somewhat muted
+  const dynamicOpacity = validPercentage === 0 ? 0 : 0.4 + (validPercentage / 100) * 0.6;
 
   return (
     <div className={cn('flex flex-col items-center gap-0.5', className)}>
@@ -49,6 +54,7 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
             strokeDasharray={circumference}
             strokeDashoffset={offset}
             strokeLinecap="round"
+            strokeOpacity={dynamicOpacity}
             className="transition-all duration-700 ease-out"
           />
         </svg>
@@ -56,7 +62,7 @@ const MiniDonutChart: React.FC<MiniDonutChartProps> = ({
           className="absolute inset-0 flex items-center justify-center text-foreground font-bold"
           style={{ fontSize: size * 0.28 }}
         >
-          {Math.round(percentage)}
+          {Math.round(validPercentage)}
         </span>
       </div>
       {label && (

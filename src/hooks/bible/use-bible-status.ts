@@ -1,7 +1,7 @@
 
 import { BibleProgressData } from './bible-progress-types';
 import { isChallengeCompleted, completeChallenge } from './use-bible-challenges';
-import { getChapterStatus as getChapterStatusUtil } from './bible-progress-utils';
+import { getChapterStatus as getChapterStatusUtil, getChapterDifficultyScores as getChapterDifficultyScoresUtil } from './bible-progress-utils';
 
 export const useBibleStatus = (progress: BibleProgressData | null, profile: any) => {
   const isCompleted = (challengeId: string) => {
@@ -16,6 +16,10 @@ export const useBibleStatus = (progress: BibleProgressData | null, profile: any)
       progress.completed_chapters, 
       progress.challenges_completed
     );
+  };
+
+  const getChapterDifficultyScores = (bookId: string, chapter: number) => {
+    return getChapterDifficultyScoresUtil(bookId, chapter, progress?.completed_chapters);
   };
 
   const completeUserChallenge = async (challengeId: string, pointsEarned: number = 10) => {
@@ -40,6 +44,7 @@ export const useBibleStatus = (progress: BibleProgressData | null, profile: any)
   return {
     isCompleted,
     getChapterStatus,
+    getChapterDifficultyScores,
     completeChallenge: completeUserChallenge,
   };
 };

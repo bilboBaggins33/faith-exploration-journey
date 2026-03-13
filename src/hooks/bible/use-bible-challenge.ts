@@ -139,7 +139,6 @@ export function useBibleChallenge(bookId: string, chapter: string) {
 
   useEffect(() => {
     if (state.challenge && state.completed && user && !progressSavedRef.current) {
-      progressSavedRef.current = true;
       const book = bibleBooks.find(b => b.id === bookId);
 
       if (bookId && chapter && updateProgress) {
@@ -161,6 +160,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
             };
 
             await updateProgress(progressData);
+            progressSavedRef.current = true;
 
             toast({
               title: "Challenge Completed!",

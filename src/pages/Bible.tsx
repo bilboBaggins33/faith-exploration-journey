@@ -8,7 +8,7 @@ import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/auth';
 import { getBookImage } from '@/data/bible/book-images';
-import { useDifficultyProgress, getChaptersByDifficulty, Difficulty } from '@/hooks/bible/use-difficulty-progress';
+import { useDifficultyProgress, Difficulty } from '@/hooks/bible/use-difficulty-progress';
 import MiniDonutChart from '@/components/ui/MiniDonutChart';
 
 const DIFFICULTY_COLORS = {
@@ -30,8 +30,7 @@ const Bible: React.FC = () => {
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
   const [searchTerm, setSearchTerm] = useState<string>('');
   const [activeTestament, setActiveTestament] = useState<string>('all');
-  const [activeDifficulty, setActiveDifficulty] = useState<Difficulty>('easy');
-  const { getBookProgress, getBookAverageScore, getChapterScore, progress } = useBibleProgress();
+  const { getBookProgress, getChapterStatus, progress, getChapterDifficultyScores } = useBibleProgress();
   const { getBookDifficultyProgress } = useDifficultyProgress(progress);
   const isMobile = useIsMobile();
   const { user } = useAuth();
@@ -66,18 +65,13 @@ const Bible: React.FC = () => {
     navigate('/bible');
   };
 
-  const handleGoToChallenge = React.useCallback((bookId: string, chapter: number) => {
-    navigate(`/bible/${bookId}/${chapter}`);
+  const handleGoToChallenge = React.useCallback((bookId: string, chapter: number, difficulty?: string) => {
+    navigate(`/bible/${bookId}/${chapter}${difficulty ? `?difficulty=${difficulty}` : ''}`);
   }, [navigate]);
 
   const getBookProgressPercentage = (bookId: string): number => {
     const progress = getBookProgress(bookId);
     return progress.percentage;
-  };
-
-  // Get chapters filtered by active difficulty
-  const getFilteredChapters = (bookId: string): number[] => {
-    return getChaptersByDifficulty(bookId, activeDifficulty);
   };
 
   return (
@@ -180,71 +174,32 @@ const Bible: React.FC = () => {
                       </div>
                     </div>
 
-                    {/* Chapters section with difficulty tabs */}
-                    <div className="p-6 bg-white">
-                      {/* Difficulty tabs */}
-                      <div className="flex items-center gap-2 mb-5">
-                        {(['easy', 'medium', 'hard'] as Difficulty[]).map(diff => {
-                          const chapters = getChaptersByDifficulty(selectedBook.id, diff);
-                          const isActive = activeDifficulty === diff;
+                    {/* Chapters section */}
+                    <div className="p-6 bg-white/95 backdrop-blur shadow-inner">
+                      {/* Chapter cards grid */}
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                        {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
+                          const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                          const { isCompleted } = getChapterStatus(selectedBook.id, chapter);
+                          const scores = getChapterDifficultyScores(selectedBook.id, chapter);
+
                           return (
-                            <button
-                              key={diff}
-                              onClick={() => setActiveDifficulty(diff)}
-                              className={`
-                                flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200
-                                ${isActive
-                                  ? 'text-white shadow-md scale-105'
-                                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
-                                }
-                              `}
-                              style={isActive ? { backgroundColor: DIFFICULTY_COLORS[diff] } : undefined}
-                            >
-                              {DIFFICULTY_LABELS[diff]}
-                              <span className={`
-                                text-xs px-1.5 py-0.5 rounded-full
-                                ${isActive ? 'bg-white/25' : 'bg-background'}
-                              `}>
-                                {chapters.length}
-                              </span>
-                            </button>
+                            <BibleChapterCard
+                              key={chapter}
+                              bookId={selectedBook.id}
+                              chapter={chapter}
+                              title={challengeData?.title}
+                              isCompleted={isCompleted}
+                              scores={scores}
+                              maxScore={5}
+                              isUnlocked={!!user}
+                              onCardClick={handleGoToChallenge}
+                            />
                           );
                         })}
                       </div>
-
-                      {/* Chapter cards grid */}
-                      {(() => {
-                        const chapters = getFilteredChapters(selectedBook.id);
-                        if (chapters.length === 0) {
-                          return (
-                            <div className="text-center py-12 text-muted-foreground">
-                              <p className="text-lg font-medium">No {activeDifficulty} chapters available for {selectedBook.name}</p>
-                              <p className="text-sm mt-1">Try a different difficulty level</p>
-                            </div>
-                          );
-                        }
-                        return (
-                          <div className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-8 gap-2">
-                            {chapters.map(chapter => {
-                              const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
-                              return (
-                                <BibleChapterCard
-                                  key={chapter}
-                                  bookId={selectedBook.id}
-                                  chapter={chapter}
-                                  title={challengeData?.title}
-                                  isCompleted={false}
-                                  score={getChapterScore(selectedBook.id, chapter)}
-                                  maxScore={5}
-                                  isUnlocked={!!user}
-                                  onCardClick={handleGoToChallenge}
-                                />
-                              );
-                            })}
-                          </div>
-                        );
-                      })()}
                     </div>
+
                   </div>
                 </div>
               </div>
@@ -256,8 +211,8 @@ const Bible: React.FC = () => {
                 chapter={selectedChapter}
                 title={getBibleChallengeByBookAndChapter(selectedBook.id, selectedChapter)?.title}
                 isCompleted={false}
-                score={0}
-                maxScore={0}
+                scores={{ easy: 0, medium: 0, hard: 0 }}
+                maxScore={5}
                 isUnlocked={true}
                 onCardClick={handleGoToChallenge}
               />

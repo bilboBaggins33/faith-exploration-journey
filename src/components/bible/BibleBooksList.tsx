@@ -29,14 +29,14 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   isMobile
 }) => {
   const navigate = useNavigate();
-  
+
   const oldTestamentBooks = books.filter(book => book.testament === 'old');
   const newTestamentBooks = books.filter(book => book.testament === 'new');
-  
+
   return (
     <div className="space-y-8">
       <Card className="bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
           {oldTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}
@@ -51,9 +51,9 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
           ))}
         </div>
       </Card>
-      
+
       <Card className="pt-16 bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
           {newTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}

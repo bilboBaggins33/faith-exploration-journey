@@ -6,6 +6,7 @@ export interface BibleProgressData {
     chapter: number;
     completed_at: string;
     score?: number;
+    difficulty?: string;
   }[];
   challenges_completed: string[];
   verses_memorized: string[];
@@ -19,6 +20,12 @@ export interface BookProgressDetails {
   completed: number;
   total: number;
 }
+
+export type ChapterDifficultyScores = {
+  easy: number;
+  medium: number;
+  hard: number;
+};
 
 export interface UseBibleProgressReturn {
   profile: any | null;
@@ -36,4 +43,5 @@ export interface UseBibleProgressReturn {
     score: number;
     maxScore: number;
   };
+  getChapterDifficultyScores: (bookId: string, chapter: number) => ChapterDifficultyScores;
 }
