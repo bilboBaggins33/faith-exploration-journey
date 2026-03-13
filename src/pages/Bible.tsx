@@ -152,32 +152,13 @@ const Bible: React.FC = () => {
                           </button>
                           <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-4">{selectedBook.name}</h1>
                         </div>
-
-                        {/* Difficulty donuts in header */}
-                        {(() => {
-                          const dp = getBookDifficultyProgress(selectedBook.id);
-                          return (
-                            <div className="flex items-center gap-6">
-                              {(['easy', 'medium', 'hard'] as Difficulty[]).map(diff => (
-                                <MiniDonutChart
-                                  key={diff}
-                                  percentage={dp[diff].percentage}
-                                  color={DIFFICULTY_COLORS[diff]}
-                                  label={`${DIFFICULTY_LABELS[diff]} (${dp[diff].completed}/${dp[diff].total})`}
-                                  size={42}
-                                  bgColor="text-white/20"
-                                />
-                              ))}
-                            </div>
-                          );
-                        })()}
                       </div>
                     </div>
 
                     {/* Chapters section */}
                     <div className="p-6 bg-white/95 backdrop-blur shadow-inner">
                       {/* Chapter cards grid */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
                           const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
                           const { isCompleted } = getChapterStatus(selectedBook.id, chapter);

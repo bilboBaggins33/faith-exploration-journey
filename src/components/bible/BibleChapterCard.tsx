@@ -1,9 +1,15 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
 import { useAuth } from '@/context/auth';
 import type { ChapterDifficultyScores } from '@/hooks/bible/bible-progress-types';
+import MiniDonutChart from '@/components/ui/MiniDonutChart';
+
+const DIFFICULTY_COLORS = {
+  easy:   'hsl(142, 71%, 45%)',
+  medium: 'hsl(38,  92%, 50%)',
+  hard:   'hsl(0,   72%, 51%)',
+} as const;
 
 interface BibleChapterCardProps {
   bookId: string;
@@ -52,58 +58,41 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
     return "bg-white/70 backdrop-blur-sm border-white/70 hover:bg-white/80";
   };
 
-  const getScoreColor = (score: number, max: number) => {
-    if (max === 0) return null;
+  const getScoreColor = (score: number, max: number): string => {
+    if (max === 0) return DIFFICULTY_COLORS.easy;
     const ratio = Math.min(score / max, 1);
-    // Interpolate hue: 0 (red) → 38 (amber) → 142 (green)
     const hue = ratio < 0.5
-      ? Math.round(ratio * 2 * 38)           // 0 → 38
-      : Math.round(38 + (ratio - 0.5) * 2 * (142 - 38)); // 38 → 142
+      ? Math.round(ratio * 2 * 38)
+      : Math.round(38 + (ratio - 0.5) * 2 * (142 - 38));
     return `hsl(${hue}, 80%, 45%)`;
   };
 
-  const renderDifficultyButton = (
+  const renderDifficultyDonut = (
     difficulty: 'easy' | 'medium' | 'hard',
     label: string,
     difficultyScore: ChapterDifficultyScores['easy'],
-    colorClass: string,
-    _bgClass: string
   ) => {
-    const score = difficultyScore.score;
-    const isPerfect = score === maxScore && maxScore > 0;
-    const hasAttempt = difficultyScore.attempted;
-    const dynamicColor = getScoreColor(score, maxScore);
-    
+    const { score, attempted } = difficultyScore;
+    const pct = maxScore > 0 ? Math.round((score / maxScore) * 100) : 0;
+    const ringColor = attempted ? getScoreColor(score, maxScore) : DIFFICULTY_COLORS[difficulty];
+
     return (
       <button
+        key={difficulty}
         onClick={(e) => handleDifficultyClick(e, difficulty)}
         disabled={!effectivelyUnlocked}
         className={cn(
-          "flex-1 flex flex-col items-center justify-center p-1.5 rounded-lg border transition-all relative overflow-hidden",
-          effectivelyUnlocked ? "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md" : "cursor-not-allowed",
-          !hasAttempt && "bg-white/50 border-gray-200 hover:bg-gray-50",
-          !effectivelyUnlocked && "opacity-60"
+          "flex-1 flex flex-col items-center rounded-lg transition-all",
+          effectivelyUnlocked ? "hover:scale-105 cursor-pointer" : "cursor-not-allowed opacity-60"
         )}
-        style={hasAttempt && dynamicColor ? { backgroundColor: dynamicColor, borderColor: dynamicColor } : {}}
       >
-        <span className={cn(
-          "text-[10px] font-bold uppercase tracking-wider mb-0.5",
-          hasAttempt ? "text-white drop-shadow-sm" : "text-gray-500"
-        )}>
-          {label}
-        </span>
-        <div className="flex items-center justify-center">
-          {isPerfect ? (
-            <CheckCircle className="w-3.5 h-3.5 text-white drop-shadow-sm" />
-          ) : (
-            <span className={cn(
-              "text-xs font-semibold leading-none",
-              hasAttempt ? "text-white" : "text-gray-400"
-            )}>
-              {hasAttempt ? `${score}/${maxScore}` : '-'}
-            </span>
-          )}
-        </div>
+        <MiniDonutChart
+          percentage={attempted ? pct : 0}
+          color={ringColor}
+          label={label}
+          centerText={attempted ? `${score}/${maxScore}` : '—'}
+          size={38}
+        />
       </button>
     );
   };
@@ -146,11 +135,11 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           )}
         </div>
 
-        {/* Difficulty buttons section */}
-        <div className="flex gap-1.5 w-full mt-auto">
-          {renderDifficultyButton('easy', 'Easy', scores.easy, 'text-green-600', 'bg-green-500 border-green-600')}
-          {renderDifficultyButton('medium', 'Med', scores.medium, 'text-amber-500', 'bg-amber-400 border-amber-500')}
-          {renderDifficultyButton('hard', 'Hard', scores.hard, 'text-red-500', 'bg-red-500 border-red-600')}
+        {/* Difficulty donuts */}
+        <div className="flex gap-1 w-full mt-auto">
+          {renderDifficultyDonut('easy',   'Easy', scores.easy)}
+          {renderDifficultyDonut('medium', 'Med',  scores.medium)}
+          {renderDifficultyDonut('hard',   'Hard', scores.hard)}
         </div>
       </div>
     </motion.div>
