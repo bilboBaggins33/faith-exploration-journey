@@ -78,7 +78,7 @@ export const bibleBookThumbnails: Record<string, string> = Object.keys(bibleBook
     // Convert "/assets/bible/genesis.jpg" to "/assets/bible/thumbnail/genesis.jpg"
     const mainImage = bibleBookImages[key];
     const imageName = mainImage.split('/').pop(); // Get filename
-    acc[key] = `/assets/bible/thumbnail/${imageName}`;
+    acc[key] = `/assets/bible/${imageName}`;
     return acc;
   },
   {} as Record<string, string>

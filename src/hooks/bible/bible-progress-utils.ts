@@ -53,7 +53,11 @@ export const getChapterDifficultyScores = (
   chapter: number,
   completedChapters: { book_id: string; chapter: number; score?: number; difficulty?: string }[] | undefined
 ) => {
-  const scores = { easy: 0, medium: 0, hard: 0 };
+  const scores = {
+    easy: { score: 0, attempted: false },
+    medium: { score: 0, attempted: false },
+    hard: { score: 0, attempted: false },
+  };
   
   if (!completedChapters) return scores;
   
@@ -62,9 +66,19 @@ export const getChapterDifficultyScores = (
   );
   
   chaptersData.forEach(c => {
-    if (c.difficulty === 'easy' && c.score !== undefined) scores.easy = c.score;
-    if (c.difficulty === 'medium' && c.score !== undefined) scores.medium = c.score;
-    if (c.difficulty === 'hard' && c.score !== undefined) scores.hard = c.score;
+    // Backward compatibility: legacy rows without difficulty are treated as easy.
+    const difficulty = c.difficulty ?? 'easy';
+    const nextScore = c.score ?? 0;
+
+    if (difficulty === 'easy') {
+      scores.easy = { score: nextScore, attempted: true };
+    }
+    if (difficulty === 'medium') {
+      scores.medium = { score: nextScore, attempted: true };
+    }
+    if (difficulty === 'hard') {
+      scores.hard = { score: nextScore, attempted: true };
+    }
   });
   
   return scores;

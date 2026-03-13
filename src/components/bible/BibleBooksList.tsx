@@ -36,7 +36,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   return (
     <div className="space-y-8">
       <Card className="bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
           {oldTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}
@@ -53,7 +53,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
       </Card>
 
       <Card className="pt-16 bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-5">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {newTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}

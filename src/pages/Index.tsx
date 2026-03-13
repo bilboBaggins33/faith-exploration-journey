@@ -100,20 +100,31 @@ const ChallengeTypes = () => {
               animate={inView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.6, delay: index * 0.2 }}
             >
-              <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card">
-                <CardContent className="p-0">
-                  <div className={`bg-gradient-to-br p-6 text-white bg-cover bg-center`} style={{ backgroundImage: `url(${challenge.image})` }}>
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="p-3 bg-white/20 rounded-xl backdrop-blur-sm">
-                        <challenge.icon className="h-8 w-8" />
+              <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card flex flex-col">
+                <CardContent className="p-0 flex flex-col flex-1">
+                  <div
+                    className="h-44 bg-cover bg-center relative overflow-hidden"
+                    style={{ backgroundImage: `url(${challenge.image})` }}
+                  >
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
+                      <div className="flex items-center justify-between">
+                        <div className="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm">
+                          <challenge.icon className="h-6 w-6 text-white" />
+                        </div>
+                        <ChevronRight className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
                       </div>
-                      <ChevronRight className="h-6 w-6 opacity-0 group-hover:opacity-100 transform translate-x-0 group-hover:translate-x-2 transition-all" />
+                      <h3
+                        className="text-xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
+                        style={{ fontFamily: "'Playfair Display', serif" }}
+                      >
+                        {challenge.title}
+                      </h3>
                     </div>
-                    <h3 className="text-2xl font-bold mb-2 drop-shadow-[0_3px_3px_rgba(0,0,0,0.75)]" style={{ fontFamily: "'Playfair Display', serif" }}>{challenge.title}</h3>
                   </div>
-                  <div className="p-6">
-                    <p className="text-muted-foreground text-sm mb-6">{challenge.description}</p>
-                    <ul className="space-y-3 mb-6">
+                  <div className="p-6 flex flex-col flex-1">
+                    <p className="text-muted-foreground text-sm mb-5 flex-1">{challenge.description}</p>
+                    <ul className="space-y-2.5 mb-6">
                       {challenge.features.map((feature, i) => (
                         <li key={i} className="flex items-center gap-2 text-sm text-foreground">
                           <CheckCircle2 className="h-4 w-4 text-bible-blue flex-shrink-0" />
@@ -163,7 +174,7 @@ const CallToAction = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-3 gap-6 mb-16"
+          className="grid grid-cols-3 gap-4 md:gap-6 mb-16"
         >
           {stats.map((stat, index) => (
             <motion.div
@@ -171,11 +182,11 @@ const CallToAction = () => {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={inView ? { opacity: 1, scale: 1 } : {}}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-6 text-center text-white border border-white/20"
+              className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 text-center text-white border border-white/20"
             >
-              <stat.icon className="h-8 w-8 mx-auto mb-3 text-bible-gold" />
-              <div className="text-3xl md:text-4xl font-bold mb-1">{stat.value}</div>
-              <div className="text-white/70 text-sm">{stat.label}</div>
+              <stat.icon className="h-6 w-6 md:h-8 md:w-8 mx-auto mb-2 md:mb-3 text-bible-gold" />
+              <div className="text-2xl md:text-4xl font-bold mb-1">{stat.value}</div>
+              <div className="text-white/70 text-xs md:text-sm">{stat.label}</div>
             </motion.div>
           ))}
         </motion.div>

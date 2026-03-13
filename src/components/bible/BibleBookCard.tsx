@@ -48,18 +48,17 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-lg" />
         <div className="absolute bottom-0 left-0 p-3">
-          <h2 className="font-semibold text-white text-2xl sm:text-2xl drop-shadow-sm/90" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="font-semibold text-white text-2xl sm:text-2xl drop-shadow-[0_0px_2px_rgba(0,0,0,0.5)]" style={{ fontFamily: "'Playfair Display', serif" }}>
             {bookName}
           </h2>
+          <p className="text-white text-xs sm:text-sm flex justify-between">
+          <span className="text-white drop-shadow-[0_0px_2px_rgba(0,0,0,0.5)]">{totalChapters} chapters</span>
+          </p>
         </div>
       </div>
 
       {/* Bottom section with donuts */}
       <div className="p-3 mt-auto bg-white border-t border-border/10">
-        <div className="flex justify-between items-center text-xs mb-2">
-          <span className="text-muted-foreground">{totalChapters} chapters</span>
-          <span className="font-medium text-foreground">{progressPercent}%</span>
-        </div>
 
         {difficultyProgress ? (
           <div className="flex items-center justify-around pt-1 pb-1">

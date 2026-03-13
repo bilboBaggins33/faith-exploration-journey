@@ -21,10 +21,15 @@ export interface BookProgressDetails {
   total: number;
 }
 
+export type DifficultyScore = {
+  score: number;
+  attempted: boolean;
+};
+
 export type ChapterDifficultyScores = {
-  easy: number;
-  medium: number;
-  hard: number;
+  easy: DifficultyScore;
+  medium: DifficultyScore;
+  hard: DifficultyScore;
 };
 
 export interface UseBibleProgressReturn {

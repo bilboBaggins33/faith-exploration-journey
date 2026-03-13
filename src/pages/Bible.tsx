@@ -211,7 +211,11 @@ const Bible: React.FC = () => {
                 chapter={selectedChapter}
                 title={getBibleChallengeByBookAndChapter(selectedBook.id, selectedChapter)?.title}
                 isCompleted={false}
-                scores={{ easy: 0, medium: 0, hard: 0 }}
+                scores={{
+                  easy: { score: 0, attempted: false },
+                  medium: { score: 0, attempted: false },
+                  hard: { score: 0, attempted: false },
+                }}
                 maxScore={5}
                 isUnlocked={true}
                 onCardClick={handleGoToChallenge}

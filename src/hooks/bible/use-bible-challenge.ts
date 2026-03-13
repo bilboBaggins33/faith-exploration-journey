@@ -31,8 +31,9 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { updateProgress, getChapterStatus } = useBibleProgress();
+  const { updateProgress, getChapterStatus, getChapterDifficultyScores } = useBibleProgress();
   const progressSavedRef = useRef(false);
+  const savePromiseRef = useRef<Promise<void> | null>(null);
 
   // Get difficulty from URL or default to 'easy'
   const urlDifficulty = searchParams.get('difficulty') as DifficultyLevel | null;
@@ -75,17 +76,18 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     return filtered.slice(0, 5);
   };
 
-  // Check if medium difficulty is unlocked (easy completed)
+  // Check if medium difficulty is unlocked (easy completed with score >= 3)
   const isMediumUnlocked = (): boolean => {
     if (!user) return false;
-    const { isCompleted, score } = getChapterStatus(bookId, parseInt(chapter, 10));
-    return isCompleted && score >= 3; // Need at least 3/5 to unlock medium
+    const scores = getChapterDifficultyScores(bookId, parseInt(chapter, 10));
+    return scores.easy.score >= 3;
   };
 
-  // Check if hard difficulty is unlocked (medium completed)
+  // Check if hard difficulty is unlocked (medium completed with score >= 3)
   const isHardUnlocked = (): boolean => {
-    // For now, hard is not implemented - would need to track medium completion separately
-    return false;
+    if (!user) return false;
+    const scores = getChapterDifficultyScores(bookId, parseInt(chapter, 10));
+    return scores.medium.score >= 3;
   };
 
   useEffect(() => {
@@ -176,7 +178,8 @@ export function useBibleChallenge(bookId: string, chapter: string) {
           }
         };
 
-        saveProgress();
+        // Store the promise so handleGoBack can await it before navigating
+        savePromiseRef.current = saveProgress();
       }
     }
   }, [state.completed, state.challenge, user]);
@@ -255,6 +258,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
 
   const handleRetry = useCallback(() => {
     progressSavedRef.current = false;
+    savePromiseRef.current = null;
     setState(prev => ({
       ...prev,
       currentQuestion: 0,
@@ -280,7 +284,16 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     }));
   }, [state.challenge, state.answeredQuestions]);
 
-  const handleGoBack = useCallback(() => {
+  const handleGoBack = useCallback(async () => {
+    // Wait for the save to complete before navigating so the Bible page
+    // fetches up-to-date scores when it mounts.
+    if (savePromiseRef.current) {
+      try {
+        await savePromiseRef.current;
+      } catch {
+        // Error already handled in saveProgress; navigate anyway
+      }
+    }
     navigate(`/bible/${bookId}`);
   }, [navigate, bookId]);
 
@@ -290,6 +303,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
     if (newDifficulty === 'hard' && !isHardUnlocked()) return;
 
     progressSavedRef.current = false;
+    savePromiseRef.current = null;
     setState(prev => ({
       ...prev,
       difficulty: newDifficulty,

@@ -89,10 +89,13 @@ export const updateBibleProgress = async (userId: string, data: Partial<BiblePro
       const existingChapters = existingData.completed_chapters || [];
       const newChapters = data.completed_chapters || [];
       
-      // Remove any existing entry for the same book/chapter combination
+      // Remove any existing entry for the same book/chapter/difficulty combination
       const filteredExistingChapters = existingChapters.filter(
         (existing: any) => !newChapters.some(
-          (newChapter: any) => existing.book_id === newChapter.book_id && existing.chapter === newChapter.chapter
+          (newChapter: any) => 
+            existing.book_id === newChapter.book_id && 
+            existing.chapter === newChapter.chapter &&
+            existing.difficulty === newChapter.difficulty
         )
       );
       

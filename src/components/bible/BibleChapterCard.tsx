@@ -53,7 +53,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   };
 
   const getScoreColor = (score: number, max: number) => {
-    if (max === 0 || score === 0) return null; // no color if no attempts
+    if (max === 0) return null;
     const ratio = Math.min(score / max, 1);
     // Interpolate hue: 0 (red) → 38 (amber) → 142 (green)
     const hue = ratio < 0.5
@@ -65,12 +65,13 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
   const renderDifficultyButton = (
     difficulty: 'easy' | 'medium' | 'hard',
     label: string,
-    score: number,
+    difficultyScore: ChapterDifficultyScores['easy'],
     colorClass: string,
     _bgClass: string
   ) => {
+    const score = difficultyScore.score;
     const isPerfect = score === maxScore && maxScore > 0;
-    const hasScore = score > 0;
+    const hasAttempt = difficultyScore.attempted;
     const dynamicColor = getScoreColor(score, maxScore);
     
     return (
@@ -80,14 +81,14 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
         className={cn(
           "flex-1 flex flex-col items-center justify-center p-1.5 rounded-lg border transition-all relative overflow-hidden",
           effectivelyUnlocked ? "hover:scale-105 cursor-pointer shadow-sm hover:shadow-md" : "cursor-not-allowed",
-          !hasScore && "bg-white/50 border-gray-200 hover:bg-gray-50",
+          !hasAttempt && "bg-white/50 border-gray-200 hover:bg-gray-50",
           !effectivelyUnlocked && "opacity-60"
         )}
-        style={hasScore && dynamicColor ? { backgroundColor: dynamicColor, borderColor: dynamicColor } : {}}
+        style={hasAttempt && dynamicColor ? { backgroundColor: dynamicColor, borderColor: dynamicColor } : {}}
       >
         <span className={cn(
           "text-[10px] font-bold uppercase tracking-wider mb-0.5",
-          hasScore ? "text-white drop-shadow-sm" : "text-gray-500"
+          hasAttempt ? "text-white drop-shadow-sm" : "text-gray-500"
         )}>
           {label}
         </span>
@@ -97,9 +98,9 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
           ) : (
             <span className={cn(
               "text-xs font-semibold leading-none",
-              hasScore ? "text-white" : "text-gray-400"
+              hasAttempt ? "text-white" : "text-gray-400"
             )}>
-              {hasScore ? `${score}/${maxScore}` : '-'}
+              {hasAttempt ? `${score}/${maxScore}` : '-'}
             </span>
           )}
         </div>

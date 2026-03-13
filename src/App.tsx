@@ -25,6 +25,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/auth';
 import { CookieProvider } from '@/context/CookieContext';
+import { BibleProgressProvider } from '@/context/BibleProgressContext';
 import CookieConsent from '@/components/CookieConsent';
 import Layout from '@/components/Layout';
 
@@ -142,14 +143,16 @@ function App() {
     <>
       <CookieProvider>
         <AuthProvider>
-          <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
-            <QueryClientProvider client={queryClient}>
-              <div className="app">
-                <RouterProvider router={router} />
-              </div>
-              <Toaster />
-            </QueryClientProvider>
-          </ThemeProvider>
+          <BibleProgressProvider>
+            <ThemeProvider defaultTheme="light" storageKey="bible-app-theme">
+              <QueryClientProvider client={queryClient}>
+                <div className="app">
+                  <RouterProvider router={router} />
+                </div>
+                <Toaster />
+              </QueryClientProvider>
+            </ThemeProvider>
+          </BibleProgressProvider>
         </AuthProvider>
       </CookieProvider>
     </>

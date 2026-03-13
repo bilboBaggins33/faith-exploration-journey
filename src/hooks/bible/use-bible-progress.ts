@@ -1,12 +1,12 @@
 
-import { useBibleFetch } from './use-bible-fetch';
+import { useBibleProgressContext } from '@/context/BibleProgressContext';
 import { useBibleCalculations } from './use-bible-calculations';
 import { useBibleStatus } from './use-bible-status';
 import { updateUserProfile, updateBibleProgress } from './use-bible-data';
 import type { BibleProgressData } from './bible-progress-types';
 
 export const useBibleProgress = () => {
-  const { profile, progress, loading, refreshData, setProgress } = useBibleFetch();
+  const { profile, progress, loading, refreshData, setProgress } = useBibleProgressContext();
   const { getBookProgress, getBookAverageScore, getChapterScore } = useBibleCalculations(progress);
   const { isCompleted, getChapterStatus, completeChallenge, getChapterDifficultyScores } = useBibleStatus(progress, profile);
 
