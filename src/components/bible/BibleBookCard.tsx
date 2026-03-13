@@ -46,7 +46,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       </div>
 
       {/* Glassmorphic bottom section */}
-      <div className="p-3 mt-auto  bg-white/50 border-t border-white/20">
+      <div className="p-3 mt-auto bg-white border-t border-border/10">
         <div className="flex justify-between items-center text-xs mb-1">
           <span className="text-gray-700">{totalChapters} chapters</span>
           <span className="font-medium text-gray-800">{progressPercent}%</span>
