@@ -24,7 +24,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
 
   return (
     <div
-      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-2xl backdrop-blur-md border border-white/30 shadow-lg bg-white/10"
+      className="overflow-hidden transition-all hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-xl border-0 shadow-lg bg-card"
       onClick={onClick}
     >
       {/* Image section with rounded top corners */}
@@ -32,12 +32,12 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
         <img
           src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
-          className="absolute inset-0 object-cover w-full h-full rounded-t-2xl"
+          className="absolute inset-0 object-cover w-full h-full rounded-t-xl"
           loading="lazy"
           decoding="async"
           onError={() => setImageError(true)}
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-2xl" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-xl" />
         <div className="absolute bottom-0 left-0 p-3">
           <h2 className="font-semibold text-white text-xl sm:text-xl drop-shadow-sm/90" style={{ fontFamily: "'Playfair Display', serif" }}>
             {bookName}
@@ -46,7 +46,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       </div>
 
       {/* Glassmorphic bottom section */}
-      <div className="p-3 mt-auto  bg-white/50 border-t border-white/20">
+      <div className="p-3 mt-auto bg-white border-t border-border/10">
         <div className="flex justify-between items-center text-xs mb-1">
           <span className="text-gray-700">{totalChapters} chapters</span>
           <span className="font-medium text-gray-800">{progressPercent}%</span>
