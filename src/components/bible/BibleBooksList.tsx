@@ -16,23 +16,48 @@ interface BibleBooksListProps {
   getBookProgress: (bookId: string) => number;
   getBookDifficultyProgress?: (bookId: string) => DifficultyProgress;
   isMobile: boolean;
+  groupByTestament?: boolean;
 }
 
 const BibleBooksList: React.FC<BibleBooksListProps> = ({
   books,
   getBookProgress,
   getBookDifficultyProgress,
-  isMobile
+  isMobile,
+  groupByTestament = true,
 }) => {
   const navigate = useNavigate();
 
   const oldTestamentBooks = books.filter(book => book.testament === 'old');
   const newTestamentBooks = books.filter(book => book.testament === 'new');
 
+  if (!groupByTestament) {
+    return (
+      <div>
+        <Card className="bg-transparent border-0 rounded-2xl">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {books.map(book => (
+              <BibleBookCard
+                key={book.id}
+                bookId={book.id}
+                bookName={book.name}
+                totalChapters={book.chapters}
+                progressPercent={getBookProgress(book.id)}
+                testament={book.testament}
+                difficultyProgress={getBookDifficultyProgress?.(book.id)}
+                onClick={() => navigate(`/bible/${book.id}`)}
+              />
+            ))}
+          </div>
+        </Card>
+      </div>
+    );
+  }
+
   return (
-    <div className="space-y-8">
+    <div className="">
       <Card className="bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {oldTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}
@@ -49,7 +74,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
       </Card>
 
       <Card className="bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-6">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {newTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}

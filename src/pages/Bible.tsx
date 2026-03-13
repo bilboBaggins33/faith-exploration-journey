@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
@@ -29,6 +29,11 @@ const Bible: React.FC = () => {
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
   const [activeTab, setActiveTab] = useState<'recent' | 'ot' | 'nt'>('ot');
+  const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
+  const [indicatorStyle, setIndicatorStyle] = useState<{ left: number; width: number }>({
+    left: 0,
+    width: 0,
+  });
   const { getBookProgress, getChapterStatus, progress, getChapterDifficultyScores } = useBibleProgress();
   const { getBookDifficultyProgress } = useDifficultyProgress(progress);
   const isMobile = useIsMobile();
@@ -64,16 +69,35 @@ const Bible: React.FC = () => {
     }
   }, [bookId, user]);
 
-  const tabs = user
-    ? [
-        { id: 'recent' as const, label: 'Recent' },
-        { id: 'ot' as const, label: 'OT' },
-        { id: 'nt' as const, label: 'NT' },
-      ]
-    : [
-        { id: 'ot' as const, label: 'OT' },
-        { id: 'nt' as const, label: 'NT' },
-      ];
+  const tabs = useMemo(
+    () =>
+      user
+        ? [
+            { id: 'recent' as const, label: 'Recent' },
+            { id: 'ot' as const, label: 'OT' },
+            { id: 'nt' as const, label: 'NT' },
+          ]
+        : [
+            { id: 'ot' as const, label: 'OT' },
+            { id: 'nt' as const, label: 'NT' },
+          ],
+    [user]
+  );
+
+  useEffect(() => {
+    const activeIndex = tabs.findIndex(t => t.id === activeTab);
+    const activeButton = tabRefs.current[activeIndex];
+
+    if (!activeButton) {
+      return;
+    }
+
+    const underlineWidth = 28; // small fixed width for a subtle indicator
+    const { offsetLeft, offsetWidth } = activeButton;
+    const left = offsetLeft + offsetWidth / 2 - underlineWidth / 2;
+
+    setIndicatorStyle({ left, width: underlineWidth });
+  }, [activeTab, tabs, tabs.length]);
 
   const getDisplayedBooks = () => {
     if (activeTab === 'recent' && user) {
@@ -134,14 +158,17 @@ const Bible: React.FC = () => {
             {!selectedBook && (
               <div>
                 <div className="flex justify-center mb-6">
-                  <div className="relative inline-flex border-b border-white/20">
-                    {tabs.map(tab => {
+                  <div className="relative inline-flex">
+                    {tabs.map((tab, index) => {
                       const isActive = tab.id === activeTab;
 
                       return (
                         <button
                           key={tab.id}
                           type="button"
+                          ref={el => {
+                            tabRefs.current[index] = el;
+                          }}
                           onClick={() => setActiveTab(tab.id)}
                           className={`relative px-4 pb-2 pt-1 text-sm font-serif tracking-wide uppercase transition-colors ${
                             isActive ? 'text-white' : 'text-white/70 hover:text-white'
@@ -152,10 +179,10 @@ const Bible: React.FC = () => {
                       );
                     })}
                     <span
-                      className="pointer-events-none absolute -bottom-[1px] left-0 h-[2px] bg-white transition-all duration-300 ease-out"
+                      className="pointer-events-none absolute -bottom-[2px] h-[2px] bg-white transition-all duration-300 ease-out"
                       style={{
-                        width: `${100 / tabs.length}%`,
-                        transform: `translateX(${tabs.findIndex(t => t.id === activeTab) * 100}%)`,
+                        width: `${indicatorStyle.width}px`,
+                        left: `${indicatorStyle.left}px`,
                       }}
                     />
                   </div>
@@ -165,6 +192,7 @@ const Bible: React.FC = () => {
                   getBookProgress={getBookProgressPercentage}
                   getBookDifficultyProgress={getBookDifficultyProgress}
                   isMobile={isMobile}
+                  groupByTestament={activeTab !== 'recent'}
                 />
               </div>
             )}
