@@ -1,4 +1,4 @@
-import { ChapterChallenge } from '../types/index'; // Ensure correct import path
+import { ChapterChallenge } from './bible/types';
 
 export const jeremiah: ChapterChallenge[] = [
 
