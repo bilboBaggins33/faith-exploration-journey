@@ -51,7 +51,7 @@ const BibleExplorer = () => {
     <div className="min-h-screen flex flex-col">
 
       <main className="flex-1 pt-24 pb-10 px-4 md:px-6 bg-bible-beige">
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-screen-xl mx-auto">
           {!selectedBook && (
             <div className="mb-10 text-center">
               <h1 className="text-3xl md:text-4xl font-serif font-bold text-bible-dark mb-4">

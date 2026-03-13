@@ -78,7 +78,7 @@ const BibleChapterCard: React.FC<BibleChapterCardProps> = ({
       whileHover={{ y: -4, scale: 1.04 }}
       transition={{ duration: 0.18 }}
       className={cn(
-        "p-3 rounded-2xl border cursor-pointer transition-all shadow-lg w-full h-full",
+        "p-3 rounded-2xl border-0 cursor-pointer transition-all shadow-lg hover:shadow-xl w-full h-full",
         "overflow-hidden relative text-center",
         getGlassStyles()
       )}

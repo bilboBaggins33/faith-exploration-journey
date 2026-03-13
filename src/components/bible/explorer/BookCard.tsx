@@ -23,7 +23,7 @@ const BookCard: React.FC<BookCardProps> = ({ book, progress, averageScore, index
       whileHover={{ y: -6, scale: 1.03 }}
       whileTap={{ scale: 0.97 }}
       onClick={() => onSelect(book.id)}
-      className="group overflow-hidden bg-card rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 flex flex-col h-full text-left"
+      className="group overflow-hidden rounded-2xl border-0 shadow-lg hover:shadow-2xl transition-all duration-500 flex flex-col h-full text-left bg-card"
     >
       {/* Image */}
       <div className="relative pb-[66.67%] w-full overflow-hidden">
