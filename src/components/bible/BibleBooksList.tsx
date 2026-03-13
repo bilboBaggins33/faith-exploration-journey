@@ -15,8 +15,6 @@ interface BibleBooksListProps {
   }[];
   getBookProgress: (bookId: string) => number;
   getBookDifficultyProgress?: (bookId: string) => DifficultyProgress;
-  searchTerm: string;
-  activeTestament: string;
   isMobile: boolean;
 }
 
@@ -24,8 +22,6 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   books,
   getBookProgress,
   getBookDifficultyProgress,
-  searchTerm,
-  activeTestament,
   isMobile
 }) => {
   const navigate = useNavigate();
@@ -36,7 +32,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   return (
     <div className="space-y-8">
       <Card className="bg-transparent border-0 rounded-2xl">
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-5">
+        <div className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-4 gap-10 sm:gap-6">
           {oldTestamentBooks.map(book => (
             <BibleBookCard
               key={book.id}

@@ -28,14 +28,21 @@ const Bible: React.FC = () => {
   const navigate = useNavigate();
   const [selectedChapter, setSelectedChapter] = useState<number | null>(null);
   const [recentlyReadBooks, setRecentlyReadBooks] = useState<string[]>([]);
-  const [searchTerm, setSearchTerm] = useState<string>('');
-  const [activeTestament, setActiveTestament] = useState<string>('all');
+  const [activeTab, setActiveTab] = useState<'recent' | 'ot' | 'nt'>('ot');
   const { getBookProgress, getChapterStatus, progress, getChapterDifficultyScores } = useBibleProgress();
   const { getBookDifficultyProgress } = useDifficultyProgress(progress);
   const isMobile = useIsMobile();
   const { user } = useAuth();
 
   const selectedBook = bookId ? bibleBooks.find(book => book.id === bookId) : null;
+
+  useEffect(() => {
+    if (user) {
+      setActiveTab('recent');
+    } else {
+      setActiveTab('ot');
+    }
+  }, [user]);
 
   useEffect(() => {
     setSelectedChapter(null);
@@ -56,6 +63,37 @@ const Bible: React.FC = () => {
       setRecentlyReadBooks([]);
     }
   }, [bookId, user]);
+
+  const tabs = user
+    ? [
+        { id: 'recent' as const, label: 'Recent' },
+        { id: 'ot' as const, label: 'OT' },
+        { id: 'nt' as const, label: 'NT' },
+      ]
+    : [
+        { id: 'ot' as const, label: 'OT' },
+        { id: 'nt' as const, label: 'NT' },
+      ];
+
+  const getDisplayedBooks = () => {
+    if (activeTab === 'recent' && user) {
+      const recentBooks = recentlyReadBooks
+        .map(id => bibleBooks.find(book => book.id === id))
+        .filter((book): book is NonNullable<typeof book> => Boolean(book));
+
+      return recentBooks;
+    }
+
+    if (activeTab === 'ot') {
+      return bibleBooks.filter(book => book.testament === 'old');
+    }
+
+    if (activeTab === 'nt') {
+      return bibleBooks.filter(book => book.testament === 'new');
+    }
+
+    return bibleBooks;
+  };
 
   const handleBookSelect = (id: string) => {
     navigate(`/bible/${id}`);
@@ -95,12 +133,37 @@ const Bible: React.FC = () => {
           <div className="w-full max-w-screen-xl">
             {!selectedBook && (
               <div>
+                <div className="flex justify-center mb-6">
+                  <div className="relative inline-flex border-b border-white/20">
+                    {tabs.map(tab => {
+                      const isActive = tab.id === activeTab;
+
+                      return (
+                        <button
+                          key={tab.id}
+                          type="button"
+                          onClick={() => setActiveTab(tab.id)}
+                          className={`relative px-4 pb-2 pt-1 text-sm font-serif tracking-wide uppercase transition-colors ${
+                            isActive ? 'text-white' : 'text-white/70 hover:text-white'
+                          } bg-transparent`}
+                        >
+                          {tab.label}
+                        </button>
+                      );
+                    })}
+                    <span
+                      className="pointer-events-none absolute -bottom-[1px] left-0 h-[2px] bg-white transition-all duration-300 ease-out"
+                      style={{
+                        width: `${100 / tabs.length}%`,
+                        transform: `translateX(${tabs.findIndex(t => t.id === activeTab) * 100}%)`,
+                      }}
+                    />
+                  </div>
+                </div>
                 <BibleBooksList
-                  books={bibleBooks}
+                  books={getDisplayedBooks()}
                   getBookProgress={getBookProgressPercentage}
                   getBookDifficultyProgress={getBookDifficultyProgress}
-                  searchTerm={searchTerm}
-                  activeTestament={activeTestament}
                   isMobile={isMobile}
                 />
               </div>
