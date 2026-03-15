@@ -321,7 +321,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
               <button
                 key={qIndex}
                 onClick={() => {
-                  if (containerRef.current) {
+                  // Only allow jumping to answered questions or the next unanswered one
+                  const canJump = isAnswered || qIndex === 0 || !!answeredQuestions[qIndex - 1];
+                  if (canJump && containerRef.current) {
                     const el = containerRef.current.children[qIndex] as HTMLElement;
                     el?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
                   }
