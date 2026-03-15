@@ -47,22 +47,15 @@ const CardContainer = React.memo(({
     <div
       key={q.id}
       data-index={index}
-      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:min-h-screen"
+      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh"
     >
       <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
-        {/* Logo overlapping the top edge */}
-        <div className="absolute left-1/2 -translate-x-1/2 -top-4 z-20">
-          <img
-            src="/BibleQuestLogo.png"
-            alt="Bible Quest Logo"
-            className="h-7 md:h-8 w-auto drop-shadow-lg"
-          />
-        </div>
+        {/* Card container */}
 
         {/* Semi-transparent dark bg for contrast with white text */}
-        <div className="bg-black/20 backdrop-blur-md rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/20 overflow-hidden">
+        <div className="bg-black/20 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
           {/* Question Numbers inside card */}
-          <div className="pt-9 md:pt-10 pb-3 md:pb-4 px-4 md:px-6">
+          <div className="pt-5 md:pt-6 pb-3 md:pb-4 px-4 md:px-6">
             <div className="flex items-center justify-center gap-3 md:gap-4">
               {challenge.questions.map((_: any, qIndex: number) => {
                 const questionResult = answeredQuestions[qIndex];
@@ -209,7 +202,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     }
   }, [challenge]);
 
-  const handleScrollToNext = (index: number) => {
+  const handleScrollToNext = useCallback((index: number) => {
+    // Only allow scrolling to next if current question is answered
+    const currentAnswered = !!answeredQuestions[index];
+    if (!currentAnswered) return;
+    
     if (containerRef.current) {
       const nextIndex = index + 1;
       if (nextIndex < (challenge?.questions.length || 0)) {
@@ -219,9 +216,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         onNextQuestion();
       }
     }
-  };
+  }, [answeredQuestions, challenge, onNextQuestion]);
 
-  const handleScrollToPrev = (index: number) => {
+  const handleScrollToPrev = useCallback((index: number) => {
     if (containerRef.current) {
       const prevIndex = index - 1;
       if (prevIndex >= 0) {
@@ -229,7 +226,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         prevEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }
     }
-  };
+  }, []);
 
   if (!challenge) {
     return null;
@@ -267,7 +264,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   };
 
   return (
-    <div className="relative h-[calc(100dvh-4rem)] w-full overflow-hidden">
+    <div className="relative h-dvh w-full overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img
@@ -324,7 +321,9 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
               <button
                 key={qIndex}
                 onClick={() => {
-                  if (containerRef.current) {
+                  // Only allow jumping to answered questions or the next unanswered one
+                  const canJump = isAnswered || qIndex === 0 || !!answeredQuestions[qIndex - 1];
+                  if (canJump && containerRef.current) {
                     const el = containerRef.current.children[qIndex] as HTMLElement;
                     el?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
                   }
@@ -337,10 +336,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         </div>
       </div>
 
-      {/* Scroll Container */}
+      {/* Scroll Container - controlled scroll only */}
       <div
         ref={containerRef}
-        className="w-full h-full flex md:flex-row flex-col overflow-y-auto md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide snap-scroll-mobile touch-pan-y items-center"
+        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center touch-none"
+        style={{ overscrollBehavior: 'none' }}
       >
         {challenge.questions.map((q, index) => (
           <CardContainer
@@ -373,7 +373,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             <div />
           )}
 
-          {currentQuestion < (challenge?.questions.length || 0) - 1 ? (
+          {currentQuestion < (challenge?.questions.length || 0) - 1 && !!answeredQuestions[currentQuestion] ? (
             <button
               onClick={() => handleScrollToNext(currentQuestion)}
               className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"

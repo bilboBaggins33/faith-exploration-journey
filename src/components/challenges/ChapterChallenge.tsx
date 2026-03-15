@@ -68,23 +68,19 @@ const ChapterChallengeComponent: React.FC<ChapterChallengeProps> = ({ type }) =>
     }
 
     return (
-        <div className="flex flex-col min-h-screen overflow-x-hidden">
-            <main className="flex-grow">
-                <div className="max-w-4xl mx-auto">
-                    <ChallengeFeedback
-                        state={state}
-                        bookId={bookId}
-                        chapter={chapter}
-                        onSelectAnswer={handleSelectAnswer}
-                        onCheckAnswer={handleCheckAnswer}
-                        onNextQuestion={handleNextQuestion}
-                        onPreviousQuestion={handlePreviousQuestion}
-                        onJumpToQuestion={handleJumpToQuestion}
-                        onRetry={handleRetry}
-                        onGoBack={handleGoBack}
-                    />
-                </div>
-            </main>
+        <div className="w-full">
+            <ChallengeFeedback
+                state={state}
+                bookId={bookId}
+                chapter={chapter}
+                onSelectAnswer={handleSelectAnswer}
+                onCheckAnswer={handleCheckAnswer}
+                onNextQuestion={handleNextQuestion}
+                onPreviousQuestion={handlePreviousQuestion}
+                onJumpToQuestion={handleJumpToQuestion}
+                onRetry={handleRetry}
+                onGoBack={handleGoBack}
+            />
         </div>
     );
 };
