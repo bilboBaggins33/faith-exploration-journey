@@ -50,14 +50,7 @@ const CardContainer = React.memo(({
       className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh"
     >
       <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
-        {/* Logo overlapping the top edge */}
-        <div className="absolute left-1/2 -translate-x-1/2 -top-4 z-20">
-          <img
-            src="/BibleQuestLogo.png"
-            alt="Bible Quest Logo"
-            className="h-7 md:h-8 w-auto drop-shadow-lg"
-          />
-        </div>
+        {/* Card container */}
 
         {/* Semi-transparent dark bg for contrast with white text */}
         <div className="bg-black/20 backdrop-blur-md rounded-[28px] md:rounded-[32px] shadow-2xl border border-white/20 overflow-hidden">
