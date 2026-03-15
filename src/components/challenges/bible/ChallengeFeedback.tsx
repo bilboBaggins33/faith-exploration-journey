@@ -209,7 +209,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     }
   }, [challenge]);
 
-  const handleScrollToNext = (index: number) => {
+  const handleScrollToNext = useCallback((index: number) => {
+    // Only allow scrolling to next if current question is answered
+    const currentAnswered = !!answeredQuestions[index];
+    if (!currentAnswered) return;
+    
     if (containerRef.current) {
       const nextIndex = index + 1;
       if (nextIndex < (challenge?.questions.length || 0)) {
@@ -219,7 +223,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         onNextQuestion();
       }
     }
-  };
+  }, [answeredQuestions, challenge, onNextQuestion]);
 
   const handleScrollToPrev = (index: number) => {
     if (containerRef.current) {
