@@ -14,8 +14,7 @@ interface ChaptersGridProps {
 const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigate = useNavigate();
   const { user } = useAuth();
-  const { getChapterStatus } = useBibleProgress();
-  
+  const { getChapterStatus, getChapterDifficultyScores } = useBibleProgress();
   if (!bookId) return null;
   
   const book = bibleBooks.find(book => book.id === bookId);
