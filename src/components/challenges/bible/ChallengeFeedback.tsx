@@ -271,7 +271,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   };
 
   return (
-    <div className="relative h-[calc(100dvh-4rem)] w-full overflow-hidden">
+    <div className="relative h-dvh w-full overflow-hidden">
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img
