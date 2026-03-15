@@ -30,7 +30,8 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
     <div className="p-4">
       <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
         {bookChapters.map(chapter => {
-          const { isCompleted, score } = getChapterStatus(bookId, chapter);
+          const { isCompleted } = getChapterStatus(bookId, chapter);
+          const scores = getChapterDifficultyScores(bookId, chapter);
           const isFirstChapter = chapter === 1;
           const challengeData = getBibleChallengeByBookAndChapter(bookId, chapter);
           
@@ -41,10 +42,10 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
                 chapter={chapter}
                 title={challengeData?.title}
                 isCompleted={isCompleted}
-                score={score}
+                scores={scores}
                 maxScore={10}
-                isUnlocked={isFirstChapter || (user ? true : false)} // First chapter is always unlocked
-                onCardClick={(bookId, chapter) => navigateToChapter(bookId, chapter)}
+                isUnlocked={isFirstChapter || (user ? true : false)}
+                onCardClick={(bookId, chapter, difficulty) => navigateToChapter(bookId, chapter)}
               />
             </div>
           );
