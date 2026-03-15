@@ -47,7 +47,7 @@ const CardContainer = React.memo(({
     <div
       key={q.id}
       data-index={index}
-      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:min-h-screen"
+      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh"
     >
       <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
         {/* Logo overlapping the top edge */}
