@@ -225,7 +225,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     }
   }, [answeredQuestions, challenge, onNextQuestion]);
 
-  const handleScrollToPrev = (index: number) => {
+  const handleScrollToPrev = useCallback((index: number) => {
     if (containerRef.current) {
       const prevIndex = index - 1;
       if (prevIndex >= 0) {
@@ -233,7 +233,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         prevEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
       }
     }
-  };
+  }, []);
 
   if (!challenge) {
     return null;
