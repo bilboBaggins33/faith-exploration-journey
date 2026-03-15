@@ -9,15 +9,18 @@ const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
   const isDarkHeroPage = ['/dashboard', '/achievements', '/profile'].includes(location.pathname);
+  
+  // Hide navbar and footer on challenge pages (bible/theology chapter routes)
+  const isChallengePage = /^\/(bible|theology)\/[^/]+\/\d+/.test(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col">
       <ScrollToTop />
-      <Navbar />
-      <div className={`flex-1 flex flex-col ${!isHomePage && !isDarkHeroPage && location.pathname !== '/auth' && location.pathname !== '/about' ? 'pt-16' : ''}`}>
+      {!isChallengePage && <Navbar />}
+      <div className={`flex-1 flex flex-col ${!isChallengePage && !isHomePage && !isDarkHeroPage && location.pathname !== '/auth' && location.pathname !== '/about' ? 'pt-16' : ''}`}>
         <Outlet />
       </div>
-      <Footer />
+      {!isChallengePage && <Footer />}
       <CookieConsent />
     </div>
   );
