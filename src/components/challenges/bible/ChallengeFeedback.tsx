@@ -373,7 +373,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
             <div />
           )}
 
-          {currentQuestion < (challenge?.questions.length || 0) - 1 ? (
+          {currentQuestion < (challenge?.questions.length || 0) - 1 && !!answeredQuestions[currentQuestion] ? (
             <button
               onClick={() => handleScrollToNext(currentQuestion)}
               className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
