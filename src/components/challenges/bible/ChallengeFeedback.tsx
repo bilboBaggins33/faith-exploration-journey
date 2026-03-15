@@ -341,10 +341,11 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         </div>
       </div>
 
-      {/* Scroll Container - disable free scroll, only programmatic navigation */}
+      {/* Scroll Container - controlled scroll only */}
       <div
         ref={containerRef}
-        className="w-full h-full flex flex-col overflow-hidden snap-y snap-mandatory scrollbar-hide items-center"
+        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center touch-none"
+        style={{ overscrollBehavior: 'none' }}
       >
         {challenge.questions.map((q, index) => (
           <CardContainer
