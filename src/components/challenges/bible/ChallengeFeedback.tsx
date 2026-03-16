@@ -166,6 +166,16 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   }, [currentQuestion, challenge]);
 
   // Observer to track visible card
+  // Compute the max allowed index: the first unanswered question (you can view it, but not past it)
+  const maxAllowedIndex = React.useMemo(() => {
+    if (!challenge) return 0;
+    for (let i = 0; i < challenge.questions.length; i++) {
+      if (!answeredQuestions[i]) return i;
+    }
+    return challenge.questions.length - 1;
+  }, [challenge, answeredQuestions]);
+
+  // Observer to track visible card — snaps back if user lands beyond allowed
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !challenge) return;
@@ -175,7 +185,13 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-            debouncedJump(index);
+            if (index > maxAllowedIndex) {
+              // Snap back to the furthest allowed card
+              const allowedEl = container.children[maxAllowedIndex] as HTMLElement;
+              allowedEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
+            } else {
+              debouncedJump(index);
+            }
           }
         });
       },
@@ -188,7 +204,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     Array.from(container.children).forEach((child) => observer.observe(child));
 
     return () => observer.disconnect();
-  }, [challenge, debouncedJump]);
+  }, [challenge, debouncedJump, maxAllowedIndex]);
 
   // Block touch scrolling when current question is unanswered (must be non-passive to preventDefault)
   useEffect(() => {
