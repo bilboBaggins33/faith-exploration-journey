@@ -339,8 +339,31 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       {/* Scroll Container - controlled scroll only */}
       <div
         ref={containerRef}
-        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center touch-none"
+        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center"
         style={{ overscrollBehavior: 'none' }}
+        onTouchMove={(e) => {
+          // Block swiping forward past unanswered questions
+          const container = containerRef.current;
+          if (!container) return;
+          const scrollTop = container.scrollTop;
+          const cardHeight = container.clientHeight;
+          const visibleIndex = Math.round(scrollTop / cardHeight);
+          // If swiping up (forward) and current question not answered, prevent
+          const touch = e.touches[0];
+          const startY = (container as any).__touchStartY;
+          if (startY !== undefined && touch.clientY < startY) {
+            // Swiping up = going forward
+            if (!answeredQuestions[visibleIndex]) {
+              e.preventDefault();
+            }
+          }
+        }}
+        onTouchStart={(e) => {
+          const container = containerRef.current;
+          if (container) {
+            (container as any).__touchStartY = e.touches[0].clientY;
+          }
+        }}
       >
         {challenge.questions.map((q, index) => (
           <CardContainer
