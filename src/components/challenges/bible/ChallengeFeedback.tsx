@@ -356,12 +356,6 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         ref={containerRef}
         className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center"
         style={{ overscrollBehavior: 'none' }}
-        onTouchMove={(e) => {
-          // Block swipe if current question is unanswered
-          if (!answeredQuestions[currentQuestion]) {
-            e.preventDefault();
-          }
-        }}
       >
         {challenge.questions.map((q, index) => (
           <CardContainer
