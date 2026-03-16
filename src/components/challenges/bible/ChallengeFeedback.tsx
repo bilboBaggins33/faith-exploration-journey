@@ -206,19 +206,33 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     return () => observer.disconnect();
   }, [challenge, debouncedJump, maxAllowedIndex]);
 
-  // Block touch scrolling when current question is unanswered (must be non-passive to preventDefault)
+  // Block forward (upward) touch scrolling when current question is unanswered, allow backward
+  const touchStartY = useRef<number | null>(null);
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0].clientY;
+    };
+
     const handleTouchMove = (e: TouchEvent) => {
-      if (!answeredQuestions[currentQuestion]) {
-        e.preventDefault();
+      if (!answeredQuestions[currentQuestion] && touchStartY.current !== null) {
+        const deltaY = e.touches[0].clientY - touchStartY.current;
+        // deltaY < 0 means swiping up (scrolling forward/down) — block it
+        if (deltaY < 0) {
+          e.preventDefault();
+        }
       }
     };
 
+    container.addEventListener('touchstart', handleTouchStart, { passive: true });
     container.addEventListener('touchmove', handleTouchMove, { passive: false });
-    return () => container.removeEventListener('touchmove', handleTouchMove);
+    return () => {
+      container.removeEventListener('touchstart', handleTouchStart);
+      container.removeEventListener('touchmove', handleTouchMove);
+    };
   }, [answeredQuestions, currentQuestion]);
 
   // Scroll to first card on mount
