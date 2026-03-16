@@ -190,6 +190,21 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     return () => observer.disconnect();
   }, [challenge, debouncedJump]);
 
+  // Block touch scrolling when current question is unanswered (must be non-passive to preventDefault)
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!answeredQuestions[currentQuestion]) {
+        e.preventDefault();
+      }
+    };
+
+    container.addEventListener('touchmove', handleTouchMove, { passive: false });
+    return () => container.removeEventListener('touchmove', handleTouchMove);
+  }, [answeredQuestions, currentQuestion]);
+
   // Scroll to first card on mount
   useEffect(() => {
     if (containerRef.current && challenge && challenge.questions.length > 0) {
@@ -341,12 +356,6 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         ref={containerRef}
         className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center"
         style={{ overscrollBehavior: 'none' }}
-        onTouchMove={(e) => {
-          // Block swipe if current question is unanswered
-          if (!answeredQuestions[currentQuestion]) {
-            e.preventDefault();
-          }
-        }}
       >
         {challenge.questions.map((q, index) => (
           <CardContainer
