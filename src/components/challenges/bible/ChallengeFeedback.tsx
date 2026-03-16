@@ -166,16 +166,6 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   }, [currentQuestion, challenge]);
 
   // Observer to track visible card
-  // Compute the max allowed index: the first unanswered question (you can view it, but not past it)
-  const maxAllowedIndex = React.useMemo(() => {
-    if (!challenge) return 0;
-    for (let i = 0; i < challenge.questions.length; i++) {
-      if (!answeredQuestions[i]) return i;
-    }
-    return challenge.questions.length - 1;
-  }, [challenge, answeredQuestions]);
-
-  // Observer to track visible card — snaps back if user lands beyond allowed
   useEffect(() => {
     const container = containerRef.current;
     if (!container || !challenge) return;
@@ -185,13 +175,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const index = parseInt(entry.target.getAttribute('data-index') || '0', 10);
-            if (index > maxAllowedIndex) {
-              // Snap back to the furthest allowed card
-              const allowedEl = container.children[maxAllowedIndex] as HTMLElement;
-              allowedEl?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'center' });
-            } else {
-              debouncedJump(index);
-            }
+            debouncedJump(index);
           }
         });
       },
@@ -204,36 +188,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
     Array.from(container.children).forEach((child) => observer.observe(child));
 
     return () => observer.disconnect();
-  }, [challenge, debouncedJump, maxAllowedIndex]);
-
-  // Block forward (upward) touch scrolling when current question is unanswered, allow backward
-  const touchStartY = useRef<number | null>(null);
-
-  useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
-
-    const handleTouchStart = (e: TouchEvent) => {
-      touchStartY.current = e.touches[0].clientY;
-    };
-
-    const handleTouchMove = (e: TouchEvent) => {
-      if (!answeredQuestions[currentQuestion] && touchStartY.current !== null) {
-        const deltaY = e.touches[0].clientY - touchStartY.current;
-        // deltaY < 0 means swiping up (scrolling forward/down) — block it
-        if (deltaY < 0) {
-          e.preventDefault();
-        }
-      }
-    };
-
-    container.addEventListener('touchstart', handleTouchStart, { passive: true });
-    container.addEventListener('touchmove', handleTouchMove, { passive: false });
-    return () => {
-      container.removeEventListener('touchstart', handleTouchStart);
-      container.removeEventListener('touchmove', handleTouchMove);
-    };
-  }, [answeredQuestions, currentQuestion]);
+  }, [challenge, debouncedJump]);
 
   // Scroll to first card on mount
   useEffect(() => {
@@ -381,10 +336,10 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         </div>
       </div>
 
-      {/* Scroll Container - swipe only allowed after answering */}
+      {/* Scroll Container - controlled scroll only */}
       <div
         ref={containerRef}
-        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center"
+        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center touch-none"
         style={{ overscrollBehavior: 'none' }}
       >
         {challenge.questions.map((q, index) => (
