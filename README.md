@@ -30,7 +30,7 @@ git clone <YOUR_GIT_URL>
 cd <YOUR_PROJECT_NAME>
 
 # Step 3: Install the necessary dependencies.
-npm i
+npm ci
 
 # Step 4: Start the development server with auto-reloading and an instant preview.
 npm run dev
@@ -59,6 +59,18 @@ This project is built with .
 - React
 - shadcn-ui
 - Tailwind CSS
+
+## Cloud agent environment setup
+
+This repo includes `.cursor/environment.json` with:
+
+```json
+{
+  "install": "npm ci"
+}
+```
+
+That ensures Cursor Cloud Agents preinstall Node/npm dependencies exactly from `package-lock.json` before running tasks.
 
 ## How can I deploy this project?
 
