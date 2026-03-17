@@ -43,7 +43,8 @@ const Bible: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      setActiveTab('recent');
+      const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
+      setActiveTab(recent.length > 0 ? 'recent' : 'ot');
     } else {
       setActiveTab('ot');
     }
@@ -71,7 +72,7 @@ const Bible: React.FC = () => {
 
   const tabs = useMemo(
     () =>
-      user
+      user && recentlyReadBooks.length > 0
         ? [
             { id: 'recent' as const, label: 'Recent' },
             { id: 'ot' as const, label: 'OT' },
@@ -81,7 +82,7 @@ const Bible: React.FC = () => {
             { id: 'ot' as const, label: 'OT' },
             { id: 'nt' as const, label: 'NT' },
           ],
-    [user]
+    [user, recentlyReadBooks.length]
   );
 
   useEffect(() => {
