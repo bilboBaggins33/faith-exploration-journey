@@ -43,7 +43,8 @@ const Bible: React.FC = () => {
 
   useEffect(() => {
     if (user) {
-      setActiveTab('recent');
+      const recent = JSON.parse(localStorage.getItem('recentBooks') || '[]');
+      setActiveTab(recent.length > 0 ? 'recent' : 'ot');
     } else {
       setActiveTab('ot');
     }
