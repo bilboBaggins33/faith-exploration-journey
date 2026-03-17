@@ -72,7 +72,7 @@ const Bible: React.FC = () => {
 
   const tabs = useMemo(
     () =>
-      user
+      user && recentlyReadBooks.length > 0
         ? [
             { id: 'recent' as const, label: 'Recent' },
             { id: 'ot' as const, label: 'OT' },
@@ -82,7 +82,7 @@ const Bible: React.FC = () => {
             { id: 'ot' as const, label: 'OT' },
             { id: 'nt' as const, label: 'NT' },
           ],
-    [user]
+    [user, recentlyReadBooks.length]
   );
 
   useEffect(() => {
