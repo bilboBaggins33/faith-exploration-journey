@@ -1,52 +1,63 @@
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
-import { BookOpen, BookText, Target, Award, Users, MessageSquare, Heart } from 'lucide-react';
+import { BookOpen, Target, Award, Users, MessageSquare } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import ScrollToTop from '@/components/ScrollToTop';
 
 const About = () => {
   return (
-    <div className="min-h-screen w-full relative bg-bible-dark text-white font-sans">
+    <div className="flex flex-col min-h-screen">
       <ScrollToTop />
 
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0 fixed">
-        <img
-          src="/assets/bible/default.jpg"
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-black/60 backdrop-blur-[4px]" />
-      </div>
+      {/* Hero section with dark background */}
+      <section className="relative w-full pt-32 pb-20 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <img
+            src="/assets/bible/default.jpg"
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-black/60 backdrop-blur-[4px]" />
+        </div>
 
-      <div className="relative z-10 container mx-auto px-4 py-20 max-w-4xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-10"
-        >
-          <h1 className="text-3xl md:text-4xl font-serif font-medium text-white mb-2 tracking-wide drop-shadow-lg">
-            Our Mission & Story
-          </h1>
-          <p className="text-base text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
-            Encouraging families to grow together through Scripture and thoughtful reading.
-          </p>
-        </motion.div>
+        <div className="relative z-10 container mx-auto px-4 max-w-4xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center"
+          >
+            <h1 className="text-3xl md:text-4xl font-serif font-medium text-white mb-2 tracking-wide drop-shadow-lg">
+              Our Mission & Story
+            </h1>
+            <p className="text-base text-white/80 max-w-2xl mx-auto leading-relaxed font-light">
+              Encouraging families to grow together through Scripture and thoughtful reading.
+            </p>
+          </motion.div>
+        </div>
+      </section>
 
-        <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl overflow-hidden p-6 md:p-8 space-y-10">
+      {/* Main content on white background */}
+      <main className="flex-grow bg-background">
+        <div className="container mx-auto px-4 max-w-4xl py-12 space-y-16">
 
           {/* Founder's Story Section */}
-          <section className="flex flex-col md:flex-row gap-8 items-center">
-            <div className="bg-white/5 rounded-xl p-2 border border-white/10 shadow-xl md:w-5/12">
-              <div className="aspect-video bg-black/20 rounded-lg flex items-center justify-center overflow-hidden">
-                <Users className="w-12 h-12 text-white/20" />
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="flex flex-col md:flex-row gap-8 items-center"
+          >
+            <div className="bg-muted rounded-xl p-2 border border-border shadow-sm md:w-5/12">
+              <div className="aspect-video bg-muted-foreground/10 rounded-lg flex items-center justify-center overflow-hidden">
+                <Users className="w-12 h-12 text-muted-foreground/30" />
               </div>
             </div>
 
             <div className="md:w-7/12 space-y-4">
-              <h2 className="text-2xl font-serif text-white mb-2">A Father's Mission</h2>
-              <div className="space-y-3 text-white/70 text-sm font-light leading-relaxed">
+              <h2 className="text-2xl font-serif text-foreground mb-2">A Father's Mission</h2>
+              <div className="space-y-3 text-muted-foreground text-sm leading-relaxed">
                 <p>
                   As a Christian parent, I created Bible Quest with a simple vision: to make Bible reading and theological exploration engaging, interactive, and meaningful for families.
                 </p>
@@ -63,44 +74,55 @@ const About = () => {
                 </p>
               </div>
             </div>
-          </section>
+          </motion.section>
 
-          <div className="w-full h-px bg-white/10 flex-shrink-0" />
+          <div className="w-full h-px bg-border" />
 
           {/* Our Approach Section */}
-          <section>
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+          >
             <div className="text-center mb-8">
-              <h2 className="text-2xl font-serif text-white mb-2">Our Approach</h2>
-              <p className="text-sm text-white/60 font-light max-w-xl mx-auto">
+              <h2 className="text-2xl font-serif text-foreground mb-2">Our Approach</h2>
+              <p className="text-sm text-muted-foreground max-w-xl mx-auto">
                 How we make Bible reading and theological exploration engaging for children and families.
               </p>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <FeatureCard
-                icon={<MessageSquare className="w-5 h-5 text-blue-400" />}
+                icon={<MessageSquare className="w-5 h-5 text-bible-blue" />}
                 title="Asking Questions"
                 description="Questions are the gateway to deeper understanding. Our challenges are designed to prompt thoughtful inquiry."
               />
               <FeatureCard
-                icon={<Target className="w-5 h-5 text-emerald-400" />}
+                icon={<Target className="w-5 h-5 text-emerald-500" />}
                 title="Engaging Challenges"
                 description="Interactive quizzes keep engagement high and help reinforce key lessons from Scripture."
               />
               <FeatureCard
-                icon={<Award className="w-5 h-5 text-amber-400" />}
+                icon={<Award className="w-5 h-5 text-bible-gold" />}
                 title="Progress Tracking"
                 description="Visualizing progress encourages consistency and builds a sense of accomplishment."
               />
             </div>
-          </section>
+          </motion.section>
 
-          <div className="w-full h-px bg-white/10 flex-shrink-0" />
+          <div className="w-full h-px bg-border" />
 
           {/* CTA Section */}
-          <section className="text-center py-4">
-            <h2 className="text-2xl font-serif text-white mb-3">Join Our Community</h2>
-            <p className="text-sm text-white/70 mb-6 max-w-xl mx-auto font-light">
+          <motion.section
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5 }}
+            className="text-center py-4"
+          >
+            <h2 className="text-2xl font-serif text-foreground mb-3">Join Our Community</h2>
+            <p className="text-sm text-muted-foreground mb-6 max-w-xl mx-auto">
               Bible Quest is more than just an app—it's a community of families committed to growing in faith together.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
@@ -110,26 +132,26 @@ const About = () => {
                 </Button>
               </Link>
               <Link to="/bible">
-                <Button variant="outline" className="bg-transparent border-white/20 text-white hover:bg-white/10 px-6 h-10 rounded-lg text-sm w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-[0.98]">
+                <Button variant="outline" className="border-border text-foreground hover:bg-muted px-6 h-10 rounded-lg text-sm w-full sm:w-auto transition-all hover:scale-[1.02] active:scale-[0.98]">
                   Explore Challenges
                 </Button>
               </Link>
             </div>
-          </section>
+          </motion.section>
 
         </div>
-      </div>
+      </main>
     </div>
   );
 };
 
 const FeatureCard = ({ icon, title, description }: { icon: React.ReactNode, title: string, description: string }) => (
-  <div className="bg-white/5 border border-white/10 p-5 rounded-2xl hover:bg-white/10 transition-colors duration-300">
-    <div className="mb-3 bg-black/40 p-2.5 rounded-xl inline-block">
+  <div className="bg-card border border-border p-5 rounded-2xl hover:shadow-md transition-all duration-300">
+    <div className="mb-3 bg-muted p-2.5 rounded-xl inline-block">
       {icon}
     </div>
-    <h3 className="text-sm font-medium text-white mb-1.5">{title}</h3>
-    <p className="text-xs text-white/60 font-light leading-relaxed">
+    <h3 className="text-sm font-medium text-foreground mb-1.5">{title}</h3>
+    <p className="text-xs text-muted-foreground leading-relaxed">
       {description}
     </p>
   </div>
