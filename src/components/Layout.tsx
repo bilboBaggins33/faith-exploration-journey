@@ -8,7 +8,7 @@ import Navbar from './Navbar';
 const Layout = () => {
   const location = useLocation();
   const isHomePage = location.pathname === '/';
-  const isDarkHeroPage = ['/dashboard', '/achievements', '/profile'].includes(location.pathname);
+  const isDarkHeroPage = ['/dashboard', '/achievements', '/profile', '/daily-reading'].includes(location.pathname);
   
   // Hide navbar and footer on challenge pages (bible/theology chapter routes)
   const isChallengePage = /^\/(bible|theology)\/[^/]+\/\d+/.test(location.pathname);
