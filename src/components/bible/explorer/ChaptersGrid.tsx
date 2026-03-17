@@ -27,8 +27,8 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   };
 
   return (
-    <div className="p-4">
-      <div className="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-8 lg:grid-cols-10 gap-2">
+    <div className="p-3 sm:p-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 sm:gap-4">
         {bookChapters.map(chapter => {
           const { isCompleted } = getChapterStatus(bookId, chapter);
           const scores = getChapterDifficultyScores(bookId, chapter);
@@ -36,7 +36,7 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
           const challengeData = getBibleChallengeByBookAndChapter(bookId, chapter);
           
           return (
-            <div key={chapter} className="w-full aspect-square">
+            <div key={chapter} className="w-full">
               <BibleChapterCard
                 bookId={bookId}
                 chapter={chapter}

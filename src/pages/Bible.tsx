@@ -248,26 +248,27 @@ const Bible: React.FC = () => {
                     </div>
 
                     {/* Chapters section */}
-                    <div className="p-6 bg-white/95 backdrop-blur shadow-inner">
+                    <div className="p-4 sm:p-6 bg-white/95 backdrop-blur shadow-inner">
                       {/* Chapter cards grid */}
-                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
                           const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
                           const { isCompleted } = getChapterStatus(selectedBook.id, chapter);
                           const scores = getChapterDifficultyScores(selectedBook.id, chapter);
 
                           return (
-                            <BibleChapterCard
-                              key={chapter}
-                              bookId={selectedBook.id}
-                              chapter={chapter}
-                              title={challengeData?.title}
-                              isCompleted={isCompleted}
-                              scores={scores}
-                              maxScore={5}
-                              isUnlocked={!!user}
-                              onCardClick={handleGoToChallenge}
-                            />
+                            <div key={chapter} className="w-full">
+                              <BibleChapterCard
+                                bookId={selectedBook.id}
+                                chapter={chapter}
+                                title={challengeData?.title}
+                                isCompleted={isCompleted}
+                                scores={scores}
+                                maxScore={5}
+                                isUnlocked={!!user}
+                                onCardClick={handleGoToChallenge}
+                              />
+                            </div>
                           );
                         })}
                       </div>
