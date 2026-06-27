@@ -9,3 +9,11 @@ verify_jwt = true
 
 [functions.check-subscription]
 verify_jwt = true
+
+[functions.customer-portal]
+verify_jwt = true
+
+# Stripe calls this endpoint directly, so JWT verification must be disabled.
+# Authenticity is enforced via the Stripe webhook signature instead.
+[functions.stripe-webhook]
+verify_jwt = false

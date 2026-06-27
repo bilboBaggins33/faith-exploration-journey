@@ -107,10 +107,43 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [loggingIn, setLoggingIn] = useState(false);
   const [loggingInWithGoogle, setLoggingInWithGoogle] = useState(false);
+  const [resetMode, setResetMode] = useState(false);
+  const [sendingReset, setSendingReset] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
   const { signIn, signInWithGoogle } = useAuth();
   const { toast } = useToast();
+
+  const handleSendReset = async () => {
+    if (!email) {
+      toast({
+        title: 'Enter your email',
+        description: 'Type your account email above, then tap “Send reset link”.',
+        variant: 'destructive',
+      });
+      return;
+    }
+    try {
+      setSendingReset(true);
+      const { error } = await supabase.auth.resetPasswordForEmail(email, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+      if (error) throw error;
+      toast({
+        title: 'Check your inbox',
+        description: `If an account exists for ${email}, a password reset link is on its way.`,
+      });
+      setResetMode(false);
+    } catch (error) {
+      toast({
+        title: 'Could not send reset link',
+        description: (error as Error).message || 'Please try again in a moment.',
+        variant: 'destructive',
+      });
+    } finally {
+      setSendingReset(false);
+    }
+  };
 
   const getReturnUrl = () => {
     const state = location.state as { from?: string } | null;
@@ -173,82 +206,115 @@ const LoginForm = () => {
           </div>
         </div>
 
-        <div className="space-y-2">
-          <div className="relative group">
-            <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-bible-gold transition-colors" />
-            <Input
-              id="password"
-              type={showPassword ? "text" : "password"}
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="bg-white/5 border-white/10 text-white placeholder:text-white/30 pl-10 pr-10 h-12 rounded-xl focus:bg-white/10 focus:border-bible-gold/50 transition-all hover:bg-white/10"
-              placeholder="Password"
-              required
-            />
+        {!resetMode && (
+          <div className="space-y-2">
+            <div className="relative group">
+              <Key className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-white/50 group-focus-within:text-bible-gold transition-colors" />
+              <Input
+                id="password"
+                type={showPassword ? "text" : "password"}
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="bg-white/5 border-white/10 text-white placeholder:text-white/30 pl-10 pr-10 h-12 rounded-xl focus:bg-white/10 focus:border-bible-gold/50 transition-all hover:bg-white/10"
+                placeholder="Password"
+                required
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition-colors"
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+          </div>
+        )}
+
+        {resetMode ? (
+          <div className="space-y-4">
+            <p className="text-white/60 text-sm leading-relaxed">
+              Enter your account email above and we'll send you a secure link to reset your password.
+            </p>
+            <Button
+              type="button"
+              onClick={handleSendReset}
+              disabled={sendingReset}
+              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+            >
+              {sendingReset ? (
+                <span className="flex items-center justify-center gap-2">
+                  <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin" />
+                  Sending…
+                </span>
+              ) : 'Send reset link'}
+            </Button>
             <button
               type="button"
-              onClick={() => setShowPassword(!showPassword)}
-              className="absolute right-3 top-1/2 transform -translate-y-1/2 text-white/50 hover:text-white transition-colors"
+              onClick={() => setResetMode(false)}
+              className="w-full text-center text-sm text-white/60 hover:text-white transition-colors"
             >
-              {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              ← Back to sign in
             </button>
           </div>
-        </div>
+        ) : (
+          <>
+            <div className="flex items-center justify-end text-sm">
+              <button
+                type="button"
+                onClick={() => setResetMode(true)}
+                className="text-bible-gold hover:text-bible-gold/80 transition-colors"
+              >
+                Forgot password?
+              </button>
+            </div>
 
-        <div className="flex items-center justify-between text-sm">
-          <label className="flex items-center text-white/70 hover:text-white cursor-pointer transition-colors">
-            <input
-              type="checkbox"
-              className="rounded border-white/30 bg-white/10 text-bible-gold focus:ring-bible-gold mr-2"
-            />
-            Remember me
-          </label>
-          <a href="#" className="text-bible-gold hover:text-bible-gold/80 transition-colors">
-            Forgot password?
-          </a>
-        </div>
-
-        <Button
-          type="submit"
-          className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
-          disabled={loggingIn}
-        >
-          {loggingIn ? (
-            <span className="flex items-center justify-center gap-2">
-              <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin" />
-              Signing in...
-            </span>
-          ) : 'Sign In'}
-        </Button>
+            <Button
+              type="submit"
+              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+              disabled={loggingIn}
+            >
+              {loggingIn ? (
+                <span className="flex items-center justify-center gap-2">
+                  <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin" />
+                  Signing in...
+                </span>
+              ) : 'Sign In'}
+            </Button>
+          </>
+        )}
       </form>
 
-      <div className="relative my-8">
-        <div className="absolute inset-0 flex items-center">
-          <span className="w-full border-t border-white/10" />
-        </div>
-        <div className="relative flex justify-center text-xs uppercase tracking-widest">
-          <span className="px-4 bg-transparent text-white/40">Or continue with</span>
-        </div>
-      </div>
+      {!resetMode && (
+        <>
+          <div className="relative my-8">
+            <div className="absolute inset-0 flex items-center">
+              <span className="w-full border-t border-white/10" />
+            </div>
+            <div className="relative flex justify-center text-xs uppercase tracking-widest">
+              <span className="px-4 bg-transparent text-white/40">Or continue with</span>
+            </div>
+          </div>
 
-      <button
-        type="button"
-        onClick={handleGoogleSignIn}
-        disabled={loggingInWithGoogle}
-        className="w-full h-10 bg-white text-bible-dark hover:bg-gray-50 font-medium text-sm rounded-lg flex items-center justify-center transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
-      >
-        {loggingInWithGoogle ? (
-          <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin mr-2" />
-        ) : (
-          <svg className="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
-            <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
-            <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
-            <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
-            <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
-          </svg>
-        )}
-        Continue with Google
-      </button>
+          <button
+            type="button"
+            onClick={handleGoogleSignIn}
+            disabled={loggingInWithGoogle}
+            className="w-full h-10 bg-white text-bible-dark hover:bg-gray-50 font-medium text-sm rounded-lg flex items-center justify-center transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
+          >
+            {loggingInWithGoogle ? (
+              <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin mr-2" />
+            ) : (
+              <svg className="h-4 w-4 mr-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48">
+                <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z" />
+                <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.961,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z" />
+                <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z" />
+                <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.002l6.19,5.238C36.971,39.205,44,34,44,24C44,22.659,43.862,21.35,43.611,20.083z" />
+              </svg>
+            )}
+            Continue with Google
+          </button>
+        </>
+      )}
     </motion.div>
   );
 };
@@ -262,7 +328,7 @@ const RegisterForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [registering, setRegistering] = useState(false);
   const navigate = useNavigate();
-  const { signUp, createSubscription } = useAuth();
+  const { signUp } = useAuth();
   const { toast } = useToast();
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -282,16 +348,9 @@ const RegisterForm = () => {
     try {
       setRegistering(true);
       await signUp(email, password, name);
-      // Removed subscription automatic redirect for simpler flow, or keep as needed. 
-      // Keeping original logic of checking out subscription.
-      const checkoutUrl = await createSubscription();
-      if (checkoutUrl) {
-        window.location.href = checkoutUrl;
-      } else {
-        navigate('/profile');
-      }
+      // Free account by default; users can upgrade to Premium from their profile.
+      navigate('/dashboard');
     } catch (error) {
-      console.error('Registration error:', error);
       setRegistering(false);
     }
   };
@@ -309,9 +368,9 @@ const RegisterForm = () => {
           <CreditCard className="text-bible-gold h-5 w-5" />
         </div>
         <div>
-          <h3 className="text-white font-medium text-sm">Premium Membership - $2.99/mo</h3>
+          <h3 className="text-white font-medium text-sm">Start free</h3>
           <p className="text-white/60 text-xs mt-1">
-            Includes full access to all challenges & theology books.
+            Create your account to play the first chapter of every book. Upgrade to Premium ($2.99/mo) anytime for full access.
           </p>
         </div>
       </div>
@@ -408,7 +467,7 @@ const RegisterForm = () => {
               <div className="h-3 w-3 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin" />
               Creating Account...
             </span>
-          ) : 'Sign Up & Subscribe'}
+          ) : 'Create Free Account'}
         </Button>
       </form>
     </motion.div>

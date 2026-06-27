@@ -19,6 +19,12 @@ serve(async (req) => {
     Deno.env.get("SUPABASE_ANON_KEY") ?? ""
   );
 
+  // Service-role client for reading the cached subscribers table (bypasses RLS).
+  const serviceRoleKey = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY");
+  const adminClient = serviceRoleKey
+    ? createClient(Deno.env.get("SUPABASE_URL") ?? "", serviceRoleKey)
+    : null;
+
   try {
     // Retrieve user from auth header
     const authHeader = req.headers.get("Authorization")!;
@@ -27,12 +33,34 @@ serve(async (req) => {
     const user = data.user;
     if (!user?.email) throw new Error("User not authenticated or email not available");
 
-    // Initialize Stripe
+    // 1. Fast path: read the cached status synced by the Stripe webhook.
+    if (adminClient) {
+      const { data: subscriberRow } = await adminClient
+        .from("subscribers")
+        .select("status, current_period_end")
+        .eq("user_id", user.id)
+        .maybeSingle();
+
+      if (subscriberRow) {
+        const periodEnd = subscriberRow.current_period_end
+          ? new Date(subscriberRow.current_period_end).getTime()
+          : 0;
+        const isActive =
+          (subscriberRow.status === "active" || subscriberRow.status === "trialing") &&
+          (!periodEnd || periodEnd > Date.now());
+
+        return new Response(JSON.stringify({ subscribed: isActive }), {
+          headers: { ...corsHeaders, "Content-Type": "application/json" },
+          status: 200,
+        });
+      }
+    }
+
+    // 2. Fallback: query Stripe directly (works before the webhook is set up).
     const stripe = new Stripe(Deno.env.get("STRIPE_SECRET_KEY") || "", {
       apiVersion: "2023-10-16",
     });
 
-    // Check if an existing Stripe customer record exists
     const customers = await stripe.customers.list({ email: user.email, limit: 1 });
     if (customers.data.length === 0) {
       return new Response(JSON.stringify({ subscribed: false }), {
@@ -41,7 +69,6 @@ serve(async (req) => {
       });
     }
 
-    // Check if customer has an active subscription
     const subscriptions = await stripe.subscriptions.list({
       customer: customers.data[0].id,
       status: "active",

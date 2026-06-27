@@ -14,5 +14,7 @@ export type AuthContextType = {
   refreshUserProfile: () => Promise<void>;
   getUserAvatar: () => string | null;
   createSubscription: () => Promise<string | null>;
+  createBillingPortal: () => Promise<string | null>;
   checkSubscription: () => Promise<boolean>;
+  refreshSubscription: () => Promise<void>;
 };

@@ -1,9 +1,12 @@
-import React from 'react';
+import { Suspense } from 'react';
 import { Outlet, useLocation } from 'react-router-dom';
 import CookieConsent from './CookieConsent';
 import Footer from './Footer';
 import ScrollToTop from './ScrollToTop';
 import Navbar from './Navbar';
+import AchievementWatcher from './achievements/AchievementWatcher';
+import SilentErrorBoundary from './SilentErrorBoundary';
+import PageLoader from './PageLoader';
 
 const Layout = () => {
   const location = useLocation();
@@ -18,10 +21,15 @@ const Layout = () => {
       <ScrollToTop />
       {!isChallengePage && <Navbar />}
       <div className={`flex-1 flex flex-col ${!isChallengePage && !isHomePage && !isDarkHeroPage && location.pathname !== '/auth' && location.pathname !== '/about' ? 'pt-16' : ''}`}>
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </div>
       {!isChallengePage && <Footer />}
       <CookieConsent />
+      <SilentErrorBoundary>
+        <AchievementWatcher />
+      </SilentErrorBoundary>
     </div>
   );
 };

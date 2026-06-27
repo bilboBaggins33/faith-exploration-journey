@@ -7,7 +7,7 @@ import TheologyChapterCard from '@/components/theology/TheologyChapterCard';
 import { theologyBooks } from '@/data/theology';
 import { useTheologyProgress } from '@/hooks/theology/use-theology-progress';
 import { getTheologyBookImage } from '@/data/theology/book-images';
-import { useAuth } from '@/context/auth';
+import { useAccess } from '@/hooks/use-access';
 
 const fadeUp = {
   hidden: { opacity: 0, y: 20 },
@@ -21,12 +21,11 @@ const fadeUp = {
 const Theology = () => {
   const { bookId } = useParams<{ bookId?: string }>();
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { canAccess } = useAccess();
   const [selectedBookId, setSelectedBookId] = useState<string | null>(bookId || null);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const { getBookProgress, getBookAverageScore, getChapterScore: baseGetChapterScore } = useTheologyProgress();
   const getChapterScore = baseGetChapterScore || ((_bookId: string, _chapter: number) => 0);
-  console.log('Theology page using hook, getChapterScore type:', typeof baseGetChapterScore);
 
   useEffect(() => {
     setSelectedBookId(bookId || null);
@@ -116,7 +115,7 @@ const Theology = () => {
                             isCompleted={score > 0}
                             score={score}
                             maxScore={5}
-                            isUnlocked={!!user}
+                            isUnlocked={canAccess('theology', selectedBook.id, chapter)}
                             onClick={() => handleGoToChallenge(selectedBook.id, chapter)}
                           />
                         );

@@ -3,6 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { LogOut, BookText, Info, LogIn, LayoutDashboard, User, Settings, BookOpen } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import NavLink from './NavLink';
+import LevelPill from '@/components/gamification/LevelPill';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 import {
   DropdownMenu,
@@ -58,6 +59,8 @@ const DesktopNav = ({ isHomePage, isDarkBg, user, handleSignOut }: DesktopNavPro
         </NavLink>
 
         {user ? (
+          <div className="flex items-center gap-4">
+          <LevelPill dark={isDarkBg} />
           <DropdownMenu open={isOpen} onOpenChange={setIsOpen}>
             <DropdownMenuTrigger asChild
               onMouseEnter={() => setIsOpen(true)}
@@ -70,7 +73,7 @@ const DesktopNav = ({ isHomePage, isDarkBg, user, handleSignOut }: DesktopNavPro
                   : 'text-bible-dark hover:text-bible-blue'
                 }`}>
                 <User className="h-4 w-4 mr-1" />
-                <span>Admin</span>
+                <span>{user.user_metadata?.full_name?.split(' ')[0] || user.email?.split('@')[0] || 'Account'}</span>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent
@@ -98,6 +101,7 @@ const DesktopNav = ({ isHomePage, isDarkBg, user, handleSignOut }: DesktopNavPro
               </DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
+          </div>
         ) : (
           <Link to="/auth">
             <Button

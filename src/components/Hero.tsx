@@ -53,7 +53,7 @@ const Hero = () => {
       })}
 
       {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/50 via-bible-dark/40 to-bible-dark/20" />
+      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/70 via-bible-dark/55 to-bible-dark/45" />
 
       {/* Content Container */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -63,10 +63,18 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.2 }}
           className="mb-8"
         >
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-bible-gold text-sm font-medium">
+            <BookOpen className="h-4 w-4" />
+            Bible & theology, gamified
+          </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
             Learn Scripture Through<br />
             Questions and Answers
           </h1>
+          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
+            Read a chapter, take the quiz, build your streak. Track your journey through
+            all 66 books and the classics of Christian thought.
+          </p>
         </motion.div>
 
         <motion.div

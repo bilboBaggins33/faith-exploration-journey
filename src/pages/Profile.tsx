@@ -6,14 +6,16 @@ import ResetProgressSection from '@/components/profile/ResetProgressSection';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { Card } from "@/components/ui/card";
-import { Loader2, LayoutDashboard, UserCircle, Mail } from 'lucide-react';
+import { Loader2, LayoutDashboard, UserCircle, Mail, Sparkles, Flame } from 'lucide-react';
 import { Button } from "@/components/ui/button";
+import { useGamification } from '@/hooks/use-gamification';
 
 const Profile = () => {
-  const { user, isLoading, session, refreshUserProfile } = useAuth();
+  const { user, isLoading, refreshUserProfile, refreshSubscription } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const { toast } = useToast();
+  const { level, totalPoints, streak } = useGamification();
   const [fullName, setFullName] = useState<string>('');
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
 
@@ -27,6 +29,8 @@ const Profile = () => {
 
     if (subscriptionStatus) {
       if (subscriptionStatus === 'success') {
+        // Force a fresh check so the UI reflects the new subscription immediately.
+        refreshSubscription();
         toast({
           title: "Subscription Active",
           description: "Your premium subscription has been activated successfully.",
@@ -86,7 +90,6 @@ const Profile = () => {
                   <UserCircle className="h-16 w-16 text-white/50" />
                 )}
               </div>
-              <div className="absolute bottom-0 right-0 bg-green-500 w-6 h-6 rounded-full border-4 border-[#1a1a3e]"></div>
             </div>
 
             <div className="text-center md:text-left flex-1">
@@ -96,6 +99,17 @@ const Profile = () => {
               <div className="flex items-center justify-center md:justify-start text-white/70 gap-2 mb-4">
                 <Mail className="h-4 w-4" />
                 <span>{user?.email}</span>
+              </div>
+              <div className="flex items-center justify-center md:justify-start gap-2">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-sm text-white">
+                  <Sparkles className="h-3.5 w-3.5 text-bible-gold" />
+                  Level {level}
+                  <span className="text-white/50">· {totalPoints.toLocaleString()} pts</span>
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 border border-white/10 px-3 py-1 text-sm text-white">
+                  <Flame className="h-3.5 w-3.5 text-orange-400" />
+                  {streak} day streak
+                </span>
               </div>
             </div>
 

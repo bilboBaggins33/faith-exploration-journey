@@ -1,15 +1,28 @@
 
 import { useState, useEffect, useRef, useCallback } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import confetti from 'canvas-confetti';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
+import { recordActivity } from '@/lib/gamification';
+import { getStarsForScore } from '@/hooks/bible/bible-progress-utils';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { ChapterChallenge, ChapterQuestion } from '@/data/bible/types';
 import { BibleProgressData } from '@/hooks/bible/bible-progress-types';
 
 export type DifficultyLevel = 'easy' | 'medium' | 'hard';
+
+/** Gold confetti burst to celebrate fully mastering a chapter (9/9 stars). */
+const celebrateMastery = () => {
+  const colors = ['#f59e0b', '#fbbf24', '#fcd34d', '#ffffff'];
+  confetti({ particleCount: 120, spread: 80, origin: { y: 0.6 }, colors });
+  setTimeout(() => {
+    confetti({ particleCount: 60, angle: 60, spread: 70, origin: { x: 0 }, colors });
+    confetti({ particleCount: 60, angle: 120, spread: 70, origin: { x: 1 }, colors });
+  }, 200);
+};
 
 export interface BibleChallengeState {
   challenge: ChapterChallenge | null;
@@ -31,7 +44,7 @@ export function useBibleChallenge(bookId: string, chapter: string) {
   const [searchParams] = useSearchParams();
   const { user } = useAuth();
   const { toast } = useToast();
-  const { updateProgress, getChapterStatus, getChapterDifficultyScores } = useBibleProgress();
+  const { updateProgress, getChapterStatus, getChapterDifficultyScores, refreshProfile } = useBibleProgress();
   const progressSavedRef = useRef(false);
   const savePromiseRef = useRef<Promise<void> | null>(null);
 
@@ -147,6 +160,22 @@ export function useBibleChallenge(bookId: string, chapter: string) {
         const saveProgress = async () => {
           try {
             const chapterNumber = parseInt(chapter, 10);
+
+            // Capture the chapter's mastery state *before* recording this run so
+            // we only celebrate the moment it first becomes fully mastered (9/9).
+            const STAR_MAX = 5;
+            const prevScores = getChapterDifficultyScores(bookId, chapterNumber);
+            const wasMastered = (['easy', 'medium', 'hard'] as const).every(
+              d => prevScores[d].attempted && getStarsForScore(prevScores[d].score, STAR_MAX) === 3
+            );
+            const mergedStars = (['easy', 'medium', 'hard'] as const).map(d => {
+              const ds = d === state.difficulty
+                ? { score: state.score, attempted: true }
+                : prevScores[d];
+              return ds.attempted ? getStarsForScore(ds.score, STAR_MAX) : 0;
+            });
+            const nowMastered = mergedStars.every(s => s === 3);
+
             const completedChapter = {
               book_id: bookId,
               chapter: chapterNumber,
@@ -162,12 +191,23 @@ export function useBibleChallenge(bookId: string, chapter: string) {
             };
 
             await updateProgress(progressData);
+            // Maintain the daily streak, then refresh so the dashboard reflects it.
+            await recordActivity(user.id);
+            await refreshProfile();
             progressSavedRef.current = true;
 
-            toast({
-              title: "Challenge Completed!",
-              description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
-            });
+            if (nowMastered && !wasMastered) {
+              celebrateMastery();
+              toast({
+                title: "Chapter Mastered! 👑",
+                description: `Perfect stars across every difficulty in ${book?.name} ${chapter}.`,
+              });
+            } else {
+              toast({
+                title: "Challenge Completed!",
+                description: `You scored ${state.score} out of ${state.challenge.questions.length} in ${book?.name} ${chapter}.`,
+              });
+            }
           } catch (error) {
             console.error("Error updating progress:", error);
             toast({

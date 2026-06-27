@@ -11,7 +11,11 @@ interface ContactFormData {
   name: string;
   email: string;
   message: string;
+  // Honeypot field: real users never fill this; bots usually do.
+  company?: string;
 }
+
+const isValidEmail = (email: string) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
 
 const handler = async (req: Request): Promise<Response> => {
   // Handle CORS preflight requests
@@ -20,13 +24,31 @@ const handler = async (req: Request): Promise<Response> => {
   }
 
   try {
-    const { name, email, message }: ContactFormData = await req.json();
+    // This function is intentionally public (verify_jwt = false) so the public
+    // contact form works. Basic abuse protection: honeypot + input validation.
+    // For higher volume, add IP-based rate limiting (e.g. a Supabase table or
+    // an upstream WAF / Cloudflare Turnstile).
+    const { name, email, message, company }: ContactFormData = await req.json();
+
+    // Honeypot tripped — pretend success so bots don't retry, but send nothing.
+    if (company && company.trim().length > 0) {
+      return new Response(
+        JSON.stringify({ success: true, message: "Message sent successfully!" }),
+        { status: 200, headers: { "Content-Type": "application/json", ...corsHeaders } }
+      );
+    }
 
     if (!name || !email || !message) {
       throw new Error("Missing required fields");
     }
 
-    console.log(`Received contact form submission from ${name} (${email})`);
+    if (!isValidEmail(email)) {
+      throw new Error("Invalid email address");
+    }
+
+    if (name.length > 100 || email.length > 200 || message.length > 5000) {
+      throw new Error("Input exceeds allowed length");
+    }
 
     const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");
     if (!RESEND_API_KEY) {
@@ -55,8 +77,7 @@ const handler = async (req: Request): Promise<Response> => {
         `,
       }),
     });
-
-    console.log("User confirmation email result:", await userEmailResponse.json());
+    await userEmailResponse.json();
 
     // Send notification email to admin
     const adminEmailResponse = await fetch("https://api.resend.com/emails", {
@@ -80,8 +101,7 @@ const handler = async (req: Request): Promise<Response> => {
         `,
       }),
     });
-
-    console.log("Admin notification email result:", await adminEmailResponse.json());
+    await adminEmailResponse.json();
 
     return new Response(
       JSON.stringify({ 

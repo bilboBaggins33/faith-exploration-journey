@@ -15,7 +15,7 @@ interface SubscriptionCache {
 
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const { user, session, isLoading, refreshUserProfile, getUserAvatar } = useSupabaseAuth();
-  const { signIn, signInWithGoogle, signUp, signOut, createSubscription, checkSubscription } = useAuthOperations();
+  const { signIn, signInWithGoogle, signUp, signOut, createSubscription, createBillingPortal, checkSubscription } = useAuthOperations();
   const [hasSubscription, setHasSubscription] = useState(false);
   const [checkingSubscription, setCheckingSubscription] = useState(false);
 
@@ -83,6 +83,20 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return result;
   };
 
+  // Force a fresh subscription check (e.g. after returning from Stripe checkout).
+  const refreshSubscription = async () => {
+    if (!user) return;
+    localStorage.removeItem(SUBSCRIPTION_CACHE_KEY);
+    setCheckingSubscription(true);
+    const isSubscribed = await checkSubscription();
+    setHasSubscription(isSubscribed);
+    setCheckingSubscription(false);
+    localStorage.setItem(
+      SUBSCRIPTION_CACHE_KEY,
+      JSON.stringify({ hasSubscription: isSubscribed, timestamp: Date.now(), userId: user.id })
+    );
+  };
+
   const value = {
     user,
     session,
@@ -96,7 +110,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     refreshUserProfile,
     getUserAvatar,
     createSubscription: createSubscriptionWithCacheInvalidation,
-    checkSubscription
+    createBillingPortal,
+    checkSubscription,
+    refreshSubscription
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;

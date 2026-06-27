@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import { Star, Crown } from 'lucide-react';
 import { bibleBooks } from '@/data/bible';
 import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
@@ -7,21 +8,10 @@ import BibleBooksList from '@/components/bible/BibleBooksList';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { useIsMobile } from '@/hooks/use-mobile';
 import { useAuth } from '@/context/auth';
+import { useAccess } from '@/hooks/use-access';
 import { getBookImage } from '@/data/bible/book-images';
-import { useDifficultyProgress, Difficulty } from '@/hooks/bible/use-difficulty-progress';
-import MiniDonutChart from '@/components/ui/MiniDonutChart';
-
-const DIFFICULTY_COLORS = {
-  easy: 'hsl(142, 71%, 45%)',
-  medium: 'hsl(38, 92%, 50%)',
-  hard: 'hsl(0, 72%, 51%)',
-};
-
-const DIFFICULTY_LABELS: Record<Difficulty, string> = {
-  easy: 'Easy',
-  medium: 'Medium',
-  hard: 'Hard',
-};
+import { useDifficultyProgress } from '@/hooks/bible/use-difficulty-progress';
+import { getBookStars } from '@/hooks/bible/bible-progress-utils';
 
 const Bible: React.FC = () => {
   const { bookId } = useParams<{ bookId: string }>();
@@ -38,6 +28,7 @@ const Bible: React.FC = () => {
   const { getBookDifficultyProgress } = useDifficultyProgress(progress);
   const isMobile = useIsMobile();
   const { user } = useAuth();
+  const { canAccess } = useAccess();
 
   const selectedBook = bookId ? bibleBooks.find(book => book.id === bookId) : null;
 
@@ -137,6 +128,16 @@ const Bible: React.FC = () => {
     return progress.percentage;
   };
 
+  const bookStars = selectedBook ? getBookStars(selectedBook.id, progress?.completed_chapters) : null;
+  const bookProgressPct = selectedBook ? getBookProgressPercentage(selectedBook.id) : 0;
+  const chaptersStarted = selectedBook
+    ? new Set(
+        (progress?.completed_chapters || [])
+          .filter(c => c.book_id === selectedBook.id)
+          .map(c => c.chapter)
+      ).size
+    : 0;
+
   return (
     <div className="flex flex-col flex-1">
 
@@ -192,6 +193,7 @@ const Bible: React.FC = () => {
                   books={getDisplayedBooks()}
                   getBookProgress={getBookProgressPercentage}
                   getBookDifficultyProgress={getBookDifficultyProgress}
+                  getBookStars={(id) => getBookStars(id, progress?.completed_chapters)}
                   isMobile={isMobile}
                   groupByTestament={activeTab !== 'recent'}
                 />
@@ -234,23 +236,79 @@ const Bible: React.FC = () => {
                         <div className="absolute inset-0 bg-black/20" />
                       </div>
 
-                      <div className="relative z-10 p-5 pt-2 pb-4">
-                        <div className="mb-4">
-                          <button
-                            onClick={handleBackToBooks}
-                            className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-3 text-sm"
-                          >
-                            <span className="mr-1">←</span> Back to All Books
-                          </button>
-                          <h1 className="text-2xl leading-tight font-bold font-serif text-white drop-shadow-lg mb-4">{selectedBook.name}</h1>
+                      <div className="relative z-10 p-5 pt-3 pb-6">
+                        <button
+                          onClick={handleBackToBooks}
+                          className="text-white/90 hover:text-white transition-colors inline-flex items-center mb-4 text-sm backdrop-blur-sm bg-black/20 rounded-full px-3 py-1.5"
+                        >
+                          <span className="mr-1">←</span> Back to All Books
+                        </button>
+
+                        <div className="flex flex-wrap items-end justify-between gap-4">
+                          <div className="min-w-0">
+                            <span className="inline-block text-[11px] font-semibold uppercase tracking-wider text-white/80 mb-1.5">
+                              {selectedBook.testament === 'old' ? 'Old Testament' : 'New Testament'}
+                            </span>
+                            <h1 className="text-3xl leading-tight font-bold font-serif text-white drop-shadow-lg">
+                              {selectedBook.name}
+                            </h1>
+                            <p className="text-white/80 text-sm mt-1">
+                              {selectedBook.chapters} chapters
+                              {chaptersStarted > 0 && ` · ${chaptersStarted} started`}
+                            </p>
+                          </div>
+
+                          <div className="flex flex-col items-start sm:items-end gap-2 w-full sm:w-auto">
+                            {bookStars && bookStars.mastered ? (
+                              <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-gradient-to-r from-amber-400 to-amber-500 text-white inline-flex items-center gap-1.5 shadow-md">
+                                <Crown className="h-3.5 w-3.5" />
+                                Book Mastered
+                              </span>
+                            ) : bookStars && bookStars.earned > 0 ? (
+                              <span className="px-3 py-1 rounded-full text-sm font-bold bg-black/35 text-white backdrop-blur-sm inline-flex items-center gap-1.5">
+                                <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+                                {bookStars.earned}/{bookStars.total} stars
+                              </span>
+                            ) : null}
+
+                            <div className="w-full sm:w-48">
+                              <div className="flex items-center justify-between text-[11px] text-white/80 mb-1">
+                                <span>Progress</span>
+                                <span>{bookProgressPct}%</span>
+                              </div>
+                              <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
+                                <div
+                                  className="h-full bg-gradient-to-r from-amber-300 to-amber-500 rounded-full transition-all duration-500"
+                                  style={{ width: `${bookProgressPct}%` }}
+                                />
+                              </div>
+                            </div>
+                          </div>
                         </div>
                       </div>
                     </div>
 
                     {/* Chapters section */}
                     <div className="p-4 sm:p-6 bg-white/95 backdrop-blur shadow-inner">
+                      {/* Legend */}
+                      <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-xs text-gray-500 mb-4">
+                        <span className="inline-flex items-center gap-1 font-medium text-gray-600">
+                          <Star className="h-3.5 w-3.5 fill-amber-400 text-amber-400" />
+                          Up to 3 stars per difficulty
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Easy
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Medium
+                        </span>
+                        <span className="inline-flex items-center gap-1.5">
+                          <span className="w-2.5 h-2.5 rounded-full bg-rose-400" /> Hard
+                        </span>
+                      </div>
+
                       {/* Chapter cards grid */}
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-4">
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
                           const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
                           const { isCompleted } = getChapterStatus(selectedBook.id, chapter);
@@ -265,7 +323,7 @@ const Bible: React.FC = () => {
                                 isCompleted={isCompleted}
                                 scores={scores}
                                 maxScore={5}
-                                isUnlocked={!!user}
+                                isUnlocked={canAccess('bible', selectedBook.id, chapter)}
                                 onCardClick={handleGoToChallenge}
                               />
                             </div>

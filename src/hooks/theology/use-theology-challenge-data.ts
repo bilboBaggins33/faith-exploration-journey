@@ -68,7 +68,14 @@ export const useTheologyChallengeData = () => {
 
   // Computed values
   const chapterTitle = chapterInfo?.title || `Chapter ${chapter}`;
-  const passageText = `This is a placeholder for the text of ${bookInfo?.title || 'the book'}, chapter ${chapter}. In a real application, this would contain the actual text of the chapter from the theological work.`;
+  // The theology works are under copyright, so we point readers to the source
+  // and surface the key themes we do have, rather than reproducing the text.
+  const themes = chapterInfo?.key_themes?.length
+    ? ` Key themes: ${chapterInfo.key_themes.join(', ')}.`
+    : '';
+  const passageText = `Read ${chapterTitle}${
+    bookInfo?.title ? ` of ${bookInfo.title}` : ''
+  }${bookInfo?.author ? ` by ${bookInfo.author}` : ''} before taking the challenge.${themes}`;
 
   return {
     bookId,

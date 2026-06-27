@@ -2,7 +2,7 @@
 import { useBibleProgress } from './use-bible-progress';
 import { useTheologyProgress } from './use-theology-progress';
 import { ACHIEVEMENTS, Achievement } from '@/data/achievements';
-import { bibleBooks } from '@/data/bible';
+import { bibleBooks } from '@/data/bible/books';
 import { theologyBooks } from '@/data/theology';
 
 export interface UserAchievement extends Achievement {
@@ -132,8 +132,8 @@ export const useAchievements = () => {
                     break;
 
                 case 'perfect-score':
-                    // Score tracking not yet implemented; kept at 0 until scores are stored
-                    current = 0;
+                    // A perfect score is a completed chapter with the full 5/5.
+                    current = (completedChapters?.filter(c => (c.score ?? 0) >= 5).length || 0) > 0 ? 1 : 0;
                     break;
 
                 case 'challenge-10':
@@ -174,9 +174,18 @@ export const useAchievements = () => {
     const unlockedCount = achievements.filter(a => a.isUnlocked).length;
     const totalCount = achievements.length;
 
-    const getRecentAchievements = () => {
-        // Return up to 3 unlocked achievements; in a real app we'd sort by unlock date
-        return achievements.filter(a => a.isUnlocked).slice(0, 3);
+    const getRecentAchievements = (unlockedAt?: Record<string, string>) => {
+        const unlocked = achievements.filter(a => a.isUnlocked);
+        if (unlockedAt) {
+            return [...unlocked]
+                .sort((a, b) => {
+                    const ta = unlockedAt[a.id] ? new Date(unlockedAt[a.id]).getTime() : 0;
+                    const tb = unlockedAt[b.id] ? new Date(unlockedAt[b.id]).getTime() : 0;
+                    return tb - ta;
+                })
+                .slice(0, 3);
+        }
+        return unlocked.slice(0, 3);
     };
 
     return {

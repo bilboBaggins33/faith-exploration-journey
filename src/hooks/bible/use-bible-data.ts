@@ -10,13 +10,23 @@ export const fetchUserProfile = async (userId: string) => {
     .from('user_profiles')
     .select('*')
     .eq('user_id', userId)
-    .single();
+    .maybeSingle();
 
   if (error) {
     throw error;
   }
 
-  return data;
+  // Gracefully fall back to a default profile if no row exists yet (e.g. an
+  // OAuth user whose row is still being bootstrapped).
+  return (
+    data || {
+      user_id: userId,
+      full_name: null,
+      streak: 0,
+      points: 0,
+      last_active: new Date().toISOString().split('T')[0],
+    }
+  );
 };
 
 /**

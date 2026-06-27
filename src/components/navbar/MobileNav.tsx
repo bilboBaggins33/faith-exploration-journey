@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { BookOpen, User, LogOut, Book, BookText, Info, LayoutDashboard, ChevronDown, ChevronUp, Instagram, Twitter, Facebook, Youtube } from 'lucide-react';
+import { BookOpen, User, LogOut, Book, BookText, Info, LayoutDashboard, ChevronDown, ChevronUp, Sparkles, Flame } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Sheet, SheetContent } from '@/components/ui/sheet';
 import MobileNavLink from './MobileNavLink';
+import { useGamification } from '@/hooks/use-gamification';
 import { User as SupabaseUser } from '@supabase/supabase-js';
 
 interface MobileNavProps {
@@ -17,6 +18,7 @@ const MobileNav = ({ isOpen, onOpenChange, user, handleSignOut }: MobileNavProps
   const location = useLocation();
   const isActive = (path: string) => location.pathname === path;
   const [adminExpanded, setAdminExpanded] = useState(false);
+  const { level, streak } = useGamification();
 
   return (
     <Sheet open={isOpen} onOpenChange={onOpenChange}>
@@ -37,8 +39,20 @@ const MobileNav = ({ isOpen, onOpenChange, user, handleSignOut }: MobileNavProps
               </Link>
             </div>
             <p className="text-white/60 text-xs font-light tracking-wide uppercase mt-1">
-              Faith Exploration Journey
+              Learn Scripture · Grow in Faith
             </p>
+            {user && (
+              <div className="flex items-center gap-2 mt-4">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-bible-gold/15 text-bible-gold px-3 py-1 text-xs font-semibold">
+                  <Sparkles className="h-3.5 w-3.5" />
+                  Level {level}
+                </span>
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 text-white px-3 py-1 text-xs font-semibold">
+                  <Flame className="h-3.5 w-3.5 text-orange-400" />
+                  {streak} day streak
+                </span>
+              </div>
+            )}
           </div>
 
           {/* Scrollable Content */}
@@ -165,28 +179,33 @@ const MobileNav = ({ isOpen, onOpenChange, user, handleSignOut }: MobileNavProps
             </div>
           </div>
 
-          {/* Footer with Socials */}
+          {/* Footer */}
           <div className="p-6 border-t border-white/10 bg-black/20">
-            <div className="flex items-center justify-center space-x-6">
-              <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Instagram className="h-5 w-5" />
-                <span className="sr-only">Instagram</span>
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Twitter className="h-5 w-5" />
-                <span className="sr-only">Twitter</span>
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Facebook className="h-5 w-5" />
-                <span className="sr-only">Facebook</span>
-              </a>
-              <a href="#" className="text-white/60 hover:text-white transition-colors hover:scale-110 transform duration-200">
-                <Youtube className="h-5 w-5" />
-                <span className="sr-only">YouTube</span>
-              </a>
+            <div className="flex items-center justify-center gap-5 text-sm">
+              <Link
+                to="/about"
+                onClick={() => onOpenChange(false)}
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                About
+              </Link>
+              <Link
+                to="/contact"
+                onClick={() => onOpenChange(false)}
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                Contact
+              </Link>
+              <Link
+                to="/privacy"
+                onClick={() => onOpenChange(false)}
+                className="text-white/60 hover:text-white transition-colors"
+              >
+                Privacy
+              </Link>
             </div>
             <p className="text-center text-white/30 text-[10px] mt-4">
-              © 2024 Faith Exploration Journey. All rights reserved.
+              © {new Date().getFullYear()} Bible Quest. All rights reserved.
             </p>
           </div>
         </div>

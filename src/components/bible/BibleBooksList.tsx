@@ -5,6 +5,7 @@ import { BookOpen } from 'lucide-react';
 import BibleBookCard from './BibleBookCard';
 import { Card } from '@/components/ui/card';
 import { DifficultyProgress } from '@/hooks/bible/use-difficulty-progress';
+import type { BookStars } from '@/hooks/bible/bible-progress-utils';
 
 interface BibleBooksListProps {
   books: {
@@ -15,6 +16,7 @@ interface BibleBooksListProps {
   }[];
   getBookProgress: (bookId: string) => number;
   getBookDifficultyProgress?: (bookId: string) => DifficultyProgress;
+  getBookStars?: (bookId: string) => BookStars;
   isMobile: boolean;
   groupByTestament?: boolean;
 }
@@ -23,6 +25,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
   books,
   getBookProgress,
   getBookDifficultyProgress,
+  getBookStars,
   isMobile,
   groupByTestament = true,
 }) => {
@@ -45,6 +48,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
                 progressPercent={getBookProgress(book.id)}
                 testament={book.testament}
                 difficultyProgress={getBookDifficultyProgress?.(book.id)}
+                stars={getBookStars?.(book.id)}
                 onClick={() => navigate(`/bible/${book.id}`)}
               />
             ))}
@@ -67,6 +71,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
               progressPercent={getBookProgress(book.id)}
               testament="old"
               difficultyProgress={getBookDifficultyProgress?.(book.id)}
+              stars={getBookStars?.(book.id)}
               onClick={() => navigate(`/bible/${book.id}`)}
             />
           ))}
@@ -84,6 +89,7 @@ const BibleBooksList: React.FC<BibleBooksListProps> = ({
               progressPercent={getBookProgress(book.id)}
               testament="new"
               difficultyProgress={getBookDifficultyProgress?.(book.id)}
+              stars={getBookStars?.(book.id)}
               onClick={() => navigate(`/bible/${book.id}`)}
             />
           ))}

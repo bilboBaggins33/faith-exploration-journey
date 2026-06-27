@@ -6,22 +6,31 @@ import { Button } from "@/components/ui/button";
 import { Loader2, Check, X, CreditCard } from 'lucide-react';
 
 const SubscriptionStatus = () => {
-  const { hasSubscription, checkingSubscription, createSubscription } = useAuth();
+  const { hasSubscription, checkingSubscription, createSubscription, createBillingPortal } = useAuth();
   const [isCreatingSubscription, setIsCreatingSubscription] = useState(false);
-  
+  const [isOpeningPortal, setIsOpeningPortal] = useState(false);
+
   const handleSubscribe = async () => {
     setIsCreatingSubscription(true);
     try {
       const checkoutUrl = await createSubscription();
       if (checkoutUrl) {
         window.location.href = checkoutUrl;
-      } else {
-        throw new Error('Failed to create subscription.');
       }
-    } catch (error) {
-      console.error('Subscription error:', error);
     } finally {
       setIsCreatingSubscription(false);
+    }
+  };
+
+  const handleManageBilling = async () => {
+    setIsOpeningPortal(true);
+    try {
+      const portalUrl = await createBillingPortal();
+      if (portalUrl) {
+        window.location.href = portalUrl;
+      }
+    } finally {
+      setIsOpeningPortal(false);
     }
   };
   
@@ -43,6 +52,24 @@ const SubscriptionStatus = () => {
           <p className="text-sm text-gray-600">
             You have an active Bible Explorer Premium subscription. Enjoy full access to all content!
           </p>
+          <Button
+            onClick={handleManageBilling}
+            disabled={isOpeningPortal}
+            variant="outline"
+            className="flex items-center"
+          >
+            {isOpeningPortal ? (
+              <>
+                <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                Opening...
+              </>
+            ) : (
+              <>
+                <CreditCard className="h-4 w-4 mr-2" />
+                Manage Billing
+              </>
+            )}
+          </Button>
         </div>
       ) : (
         <div className="space-y-4">

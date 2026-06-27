@@ -1,5 +1,6 @@
 
 import { supabase, isSupabaseConfigured } from '@/lib/supabase';
+import { ensureUserRecords } from '@/lib/ensure-user-records';
 import { useToast } from '@/hooks/use-toast';
 
 export const useAuthOperations = () => {
@@ -16,13 +17,9 @@ export const useAuthOperations = () => {
         return;
       }
       
-      const { error, data } = await supabase.auth.signInWithPassword({ email, password });
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
       if (error) throw error;
-      
-      console.log('Sign in successful:', data.user?.id);
-      
     } catch (error: any) {
-      console.error('Sign in error:', error.message);
       toast({
         title: "Login failed",
         description: error.message || "An error occurred during login",
@@ -43,20 +40,15 @@ export const useAuthOperations = () => {
         return;
       }
       
-      console.log('Initiating Google sign-in...');
-      const { data, error } = await supabase.auth.signInWithOAuth({
+      const { error } = await supabase.auth.signInWithOAuth({
         provider: 'google',
         options: {
           redirectTo: `${window.location.origin}/profile`,
         },
       });
-      
-      console.log('Google sign-in result:', { data, error });
-      
+
       if (error) throw error;
-      
     } catch (error: any) {
-      console.error('Google sign-in error:', error.message);
       toast({
         title: "Google login failed",
         description: error.message || "An error occurred during Google login",
@@ -88,48 +80,19 @@ export const useAuthOperations = () => {
       });
       
       if (error) throw error;
-      
-      console.log('Sign up successful, creating profile for user:', data.user?.id);
-      
-      if (data.user) {
-        // Create profile entry
-        const { error: profileError } = await supabase.from('user_profiles').insert({
-          user_id: data.user.id,
-          full_name: name,
-          streak: 0,
-          points: 0,
-          last_active: new Date().toISOString().split('T')[0],
-        });
-        
-        if (profileError) {
-          console.error('Error creating profile:', profileError);
-          throw profileError;
-        }
-        
-        // Create bible progress entry
-        const { error: progressError } = await supabase.from('bible_progress').insert({
-          user_id: data.user.id,
-          challenges_completed: [],
-          verses_memorized: [],
-          total_points: 0,
-          books_progress: {},
-          completed_chapters: [],
-          total_chapters_read: 0
-        });
-        
-        if (progressError) {
-          console.error('Error creating bible progress:', progressError);
-          throw progressError;
-        }
+
+      // Bootstrap the per-user rows (profile + progress). When a session exists
+      // immediately (email confirmation disabled) this runs under the user's
+      // auth; otherwise the auth-state listener will bootstrap on first sign-in.
+      if (data.user && data.session) {
+        await ensureUserRecords(data.user);
       }
-      
+
       toast({
         title: "Account created!",
-        description: "Redirecting to payment...",
+        description: "Welcome to Bible Quest.",
       });
-      
     } catch (error: any) {
-      console.error('Sign up error:', error.message);
       toast({
         title: "Registration failed",
         description: error.message || "An error occurred during registration",
@@ -188,6 +151,30 @@ export const useAuthOperations = () => {
     }
   };
 
+  const createBillingPortal = async (): Promise<string | null> => {
+    try {
+      const { data, error } = await supabase.functions.invoke('customer-portal');
+
+      if (error) {
+        toast({
+          title: "Billing portal error",
+          description: "Could not open the billing portal. Please try again.",
+          variant: "destructive",
+        });
+        return null;
+      }
+
+      return data.url;
+    } catch (error: any) {
+      toast({
+        title: "Billing portal error",
+        description: error.message || "An error occurred while opening the billing portal",
+        variant: "destructive",
+      });
+      return null;
+    }
+  };
+
   const checkSubscription = async (): Promise<boolean> => {
     try {
       const { data, error } = await supabase.functions.invoke('check-subscription');
@@ -210,6 +197,7 @@ export const useAuthOperations = () => {
     signUp,
     signOut,
     createSubscription,
+    createBillingPortal,
     checkSubscription
   };
 };

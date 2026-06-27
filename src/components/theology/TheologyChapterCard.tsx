@@ -1,7 +1,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { motion } from 'framer-motion';
-import { CheckCircle } from 'lucide-react';
+import { CheckCircle, Lock } from 'lucide-react';
 import { useAuth } from '@/context/auth';
 
 interface TheologyChapterCardProps {
@@ -64,7 +64,7 @@ const TheologyChapterCard: React.FC<TheologyChapterCardProps> = ({
                 getBorderColorClass(),
                 effectivelyUnlocked ? "bg-gradient-to-br from-white via-white-50 to-gray-50" : "bg-gray-50"
             )}
-            onClick={effectivelyUnlocked ? onClick : undefined}
+            onClick={onClick}
         >
             <div className="flex flex-col items-center justify-center h-full">
                 <div className="relative w-full">
@@ -99,7 +99,10 @@ const TheologyChapterCard: React.FC<TheologyChapterCardProps> = ({
                     <span className="inline-block px-2 py-0.5 rounded-full bg-bible-blue/10 text-bible-blue text-[10px] font-semibold mt-3 border border-bible-blue/20">Sample Chapter</span>
                 )}
                 {!effectivelyUnlocked && !isFirstChapter && (
-                    <span className="inline-block px-2 py-0.5 rounded-full bg-orange-100 text-orange-700 text-[10px] font-semibold mt-3 border border-orange-200">Sign in</span>
+                    <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-bible-gold/20 text-amber-700 text-[10px] font-semibold mt-3 border border-bible-gold/30">
+                        <Lock className="h-2.5 w-2.5" />
+                        Premium
+                    </span>
                 )}
             </div>
         </motion.div>

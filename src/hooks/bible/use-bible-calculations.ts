@@ -1,5 +1,5 @@
 
-import { bibleBooks } from '@/data/bible';
+import { bibleBooks } from '@/data/bible/books';
 import { BibleProgressData, BookProgressDetails } from './bible-progress-types';
 
 export const useBibleCalculations = (progress: BibleProgressData | null) => {

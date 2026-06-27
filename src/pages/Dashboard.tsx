@@ -9,15 +9,17 @@ import { theologyBooks } from '@/data/theology';
 import DashboardStats from '@/components/dashboard/DashboardStats';
 import ContentSection from '@/components/dashboard/ContentSection';
 import DashboardLoading from '@/components/dashboard/DashboardLoading';
-import StreakCounter from '@/components/dashboard/StreakCounter';
-import { Flame } from 'lucide-react';
+import { useGamification } from '@/hooks/use-gamification';
+import { Flame, Sparkles } from 'lucide-react';
 
-const fadeUp = {
-  hidden: { opacity: 0, y: 20 },
+const container = 'max-w-6xl mx-auto px-4 sm:px-6 lg:px-8';
+
+const fade = {
+  hidden: { opacity: 0, y: 12 },
   visible: (i: number) => ({
     opacity: 1,
     y: 0,
-    transition: { delay: i * 0.15, duration: 0.5, ease: 'easeOut' },
+    transition: { delay: i * 0.08, duration: 0.4, ease: [0.25, 0.1, 0.25, 1] },
   }),
 };
 
@@ -26,138 +28,130 @@ const Dashboard = () => {
   const { user, isLoading } = useAuth();
   const { getBookProgress, progress, profile } = useBibleProgress();
   const { getBookProgress: getTheologyBookProgress } = useTheologyProgress();
+  const { level, pointsIntoLevel, pointsForLevel, pointsToNext, progress: levelProgress } = useGamification();
 
-  // Redirect to login if not authenticated
   React.useEffect(() => {
-    if (!isLoading && !user) {
-      navigate('/auth', { replace: true });
-    }
+    if (!isLoading && !user) navigate('/auth', { replace: true });
   }, [user, isLoading, navigate]);
 
-  if (isLoading) {
-    return <DashboardLoading />;
-  }
+  if (isLoading) return <DashboardLoading />;
+  if (!user) return null;
 
-  if (!user) {
-    return null;
-  }
-
-  const calculateOverallProgress = () => {
-    if (!progress || !progress.completed_chapters) return 0;
-    const totalChapters = bibleBooks.reduce((sum, book) => sum + book.chapters, 0);
-    const completedChapters = progress.completed_chapters.length;
-    return Math.round((completedChapters / totalChapters) * 100);
-  };
-
-  const getRecentlyReadBooks = () => {
-    if (!progress || !progress.completed_chapters) return [];
-    const sortedCompletedChapters = [...progress.completed_chapters]
-      .sort((a, b) => new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime());
-    const uniqueBooks = Array.from(new Set(
-      sortedCompletedChapters.map(chapter => chapter.book_id)
-    )).slice(0, 3);
-    return uniqueBooks.map(bookId => {
-      const book = bibleBooks.find(b => b.id === bookId);
-      const bookProgress = getBookProgress(bookId);
-      return {
-        id: bookId,
-        name: book?.name || bookId,
-        progress: bookProgress.percentage
-      };
-    });
-  };
-
-  const getRecentTheologyBooks = () => {
-    return theologyBooks.filter(book => {
-      const progressValue = getTheologyBookProgress(book.id);
-      return progressValue > 0;
-    }).slice(0, 3).map(book => {
-      const progressValue = getTheologyBookProgress(book.id);
-      return {
-        id: book.id,
-        name: book.title,
-        progress: progressValue,
-        author: book.author
-      };
-    });
-  };
-
-  const recentlyReadBooks = getRecentlyReadBooks();
-  const recentTheologyBooks = getRecentTheologyBooks();
-  const overallProgress = calculateOverallProgress();
   const totalChaptersRead = progress?.completed_chapters?.length || 0;
   const challengesCompleted = progress?.challenges_completed?.length || 0;
   const streak = profile?.streak || 0;
+  const overallProgress = (() => {
+    if (!progress?.completed_chapters) return 0;
+    const total = bibleBooks.reduce((s, b) => s + b.chapters, 0);
+    return Math.round((progress.completed_chapters.length / total) * 100);
+  })();
 
-  const getGreeting = () => {
-    const hour = new Date().getHours();
-    if (hour < 12) return 'Good Morning';
-    if (hour < 17) return 'Good Afternoon';
-    return 'Good Evening';
-  };
+  const recentlyReadBooks = (() => {
+    if (!progress?.completed_chapters) return [];
+    const sorted = [...progress.completed_chapters]
+      .sort((a, b) => new Date(b.completed_at).getTime() - new Date(a.completed_at).getTime());
+    return Array.from(new Set(sorted.map(c => c.book_id))).slice(0, 3).map(id => ({
+      id,
+      name: bibleBooks.find(b => b.id === id)?.name || id,
+      progress: getBookProgress(id).percentage,
+    }));
+  })();
 
+  const recentTheologyBooks = theologyBooks
+    .filter(b => getTheologyBookProgress(b.id) > 0)
+    .slice(0, 3)
+    .map(b => ({
+      id: b.id,
+      name: b.title,
+      progress: getTheologyBookProgress(b.id),
+      author: b.author,
+    }));
+
+  const hour = new Date().getHours();
+  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
   const displayName = user.user_metadata?.full_name || user.email?.split('@')[0] || 'Explorer';
+  const hasStarted = totalChaptersRead > 0;
 
   return (
-    <div className="flex flex-col flex-1">
-      {/* Dark Hero Banner */}
-      <div className="relative bg-gradient-to-br from-bible-dark via-[#1a1a3e] to-[#0f2027] pt-24 md:pt-20 pb-20 md:pb-24 px-4 md:px-6 overflow-hidden">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-10 right-10 w-64 h-64 bg-bible-blue rounded-full blur-[100px]" />
-          <div className="absolute bottom-0 left-10 w-48 h-48 bg-bible-gold rounded-full blur-[80px]" />
-        </div>
+    <div className="flex flex-col flex-1 min-h-screen bg-background">
+      {/* ── Hero: typographic, calm ── */}
+      <header className="relative bg-bible-dark text-white pt-24 pb-10 md:pb-12">
+        <div className="absolute inset-0 bg-gradient-to-b from-bible-blue/[0.08] to-transparent pointer-events-none" />
 
-        <div className="max-w-7xl mx-auto relative z-10">
-          <motion.div
-            className="flex flex-col md:flex-row md:items-end md:justify-between gap-4"
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0}
-          >
-            <div>
-              <p className="text-bible-sky/80 text-xs md:text-sm font-medium tracking-wide uppercase mb-1">{getGreeting()}</p>
-              <h1 className="text-2xl md:text-4xl font-serif font-bold text-white mb-1 md:mb-2">
-                {displayName}
-              </h1>
-              <p className="text-white/60 text-sm md:text-base">
-                Track your Bible reading journey and progress
-              </p>
+        <div className={`${container} relative`}>
+          <motion.div variants={fade} initial="hidden" animate="visible" custom={0}>
+            <p className="text-sm text-white/50 mb-2">{greeting}</p>
+            <h1 className="font-serif text-3xl md:text-[2.5rem] font-bold tracking-tight !leading-[1.15] mb-3">
+              {displayName}
+            </h1>
+            <p className="text-white/60 text-sm md:text-[15px] max-w-lg !leading-relaxed">
+              {hasStarted
+                ? `${totalChaptersRead} chapter${totalChaptersRead === 1 ? '' : 's'} read · ${overallProgress}% of the Bible`
+                : 'Pick up where you left off — or start with Genesis 1 today.'}
+            </p>
+
+            {/* Inline vitals */}
+            <div className="mt-8 flex flex-wrap items-center gap-x-8 gap-y-4">
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-bible-gold/20 text-bible-gold">
+                  <Sparkles className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-2xl font-serif font-bold leading-none tabular-nums">{level}</p>
+                  <p className="text-xs text-white/45 mt-1">Level</p>
+                </div>
+              </div>
+              <div className="hidden sm:block w-px h-10 bg-white/10" />
+              <div className="flex items-center gap-3">
+                <span className={`flex h-10 w-10 items-center justify-center rounded-full bg-orange-500/15 text-orange-400 ${streak === 0 ? 'animate-pulse' : ''}`}>
+                  <Flame className="h-4 w-4" />
+                </span>
+                <div>
+                  <p className="text-2xl font-serif font-bold leading-none tabular-nums">{streak}</p>
+                  <p className="text-xs text-white/45 mt-1">Day streak</p>
+                </div>
+              </div>
+              {streak === 0 && (
+                <p className="text-xs text-orange-300/80 sm:ml-2">
+                  Read a chapter today to begin your streak
+                </p>
+              )}
             </div>
 
-            <div className="flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-xl px-4 md:px-5 py-2.5 md:py-3 border border-white/10 self-start md:self-auto">
-              <div className="flex items-center justify-center w-9 h-9 md:w-10 md:h-10 rounded-full bg-gradient-to-br from-amber-400 to-orange-500 shadow-lg shadow-orange-500/30">
-                <Flame className="h-4 w-4 md:h-5 md:w-5 text-white" />
+            {/* XP */}
+            <div className="mt-8 max-w-xl">
+              <div className="flex justify-between text-xs text-white/45 mb-2">
+                <span>{pointsIntoLevel} / {pointsForLevel} pts</span>
+                <span>{pointsToNext.toLocaleString()} pts to level {level + 1}</span>
               </div>
-              <div>
-                <div className="text-xl md:text-2xl font-bold text-white leading-none">{streak}</div>
-                <div className="text-white/50 text-xs mt-0.5">Day Streak</div>
+              <div className="h-1.5 rounded-full bg-white/10">
+                <div
+                  className="h-full rounded-full bg-bible-gold transition-all duration-500"
+                  style={{ width: `${Math.max(levelProgress, levelProgress > 0 ? 3 : 0)}%` }}
+                />
               </div>
             </div>
           </motion.div>
         </div>
-      </div>
+      </header>
 
-      {/* Main Content */}
-      <main className="flex-1 pb-12 px-4 md:px-6">
-        <div className="max-w-7xl mx-auto -mt-6 md:-mt-8 relative z-20 space-y-6 md:space-y-8">
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={1}>
-            <DashboardStats
-              totalChaptersRead={totalChaptersRead}
-              overallProgress={overallProgress}
-              challengesCompleted={challengesCompleted}
-              streak={streak}
-            />
-          </motion.div>
+      {/* ── Body ── */}
+      <main className={`${container} py-8 md:py-10 space-y-8 flex-1`}>
+        <motion.div variants={fade} initial="hidden" animate="visible" custom={1}>
+          <ContentSection
+            recentlyReadBooks={recentlyReadBooks}
+            recentTheologyBooks={recentTheologyBooks}
+            hasStartedReading={hasStarted}
+          />
+        </motion.div>
 
-          <motion.div variants={fadeUp} initial="hidden" animate="visible" custom={2}>
-            <ContentSection
-              recentlyReadBooks={recentlyReadBooks}
-              recentTheologyBooks={recentTheologyBooks}
-              overallProgress={overallProgress}
-            />
-          </motion.div>
-        </div>
+        <motion.div variants={fade} initial="hidden" animate="visible" custom={2}>
+          <DashboardStats
+            totalChaptersRead={totalChaptersRead}
+            overallProgress={overallProgress}
+            challengesCompleted={challengesCompleted}
+          />
+        </motion.div>
       </main>
     </div>
   );

@@ -1,13 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import ChapterChallenge from '@/components/challenges/ChapterChallenge';
 import LoadingState from '@/components/challenges/bible/LoadingState';
 import ErrorState from '@/components/challenges/bible/ErrorState';
 import { bibleBooks } from '@/data/bible';
-import { useAuth } from '@/context/auth';
 import { ChapterChallenge as ChapterChallengeType } from '@/data/bible/types';
-import SubscriptionRequired from '@/components/bible/SubscriptionRequired';
-import ChallengeSkeleton from '@/components/challenges/bible/ChallengeSkeleton';
+import ChapterAccessGate from '@/components/access/ChapterAccessGate';
 
 const Chapter = () => {
   const { bookId, chapter } = useParams<{ bookId: string; chapter: string }>();
@@ -15,17 +13,6 @@ const Chapter = () => {
   const [challenge, setChallenge] = useState<ChapterChallengeType | null>(null);
   const [error, setError] = useState<string | null>(null);
   const navigate = useNavigate();
-  const location = useLocation();
-  const { user } = useAuth();
-
-  const isFirstChapter = parseInt(chapter || '0', 10) === 1;
-
-  // Redirect to auth if not logged in and not first chapter
-  useEffect(() => {
-    if (!user && !isFirstChapter && !loading) {
-      navigate('/auth', { state: { from: location.pathname } });
-    }
-  }, [user, isFirstChapter, loading, navigate, location.pathname]);
 
   useEffect(() => {
     if (!bookId || !chapter) {
@@ -99,13 +86,10 @@ const Chapter = () => {
       );
     }
 
-    // First chapter should be accessible to everyone
-    // Non-first chapters will redirect via useEffect
     return (
-      // TODO: decide who can see chapters
-      <SubscriptionRequired allowViewOnly={isFirstChapter || (!isFirstChapter)}>
+      <ChapterAccessGate type="bible">
         <ChapterChallenge type="bible" />
-      </SubscriptionRequired>
+      </ChapterAccessGate>
     );
   };
 

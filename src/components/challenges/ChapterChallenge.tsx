@@ -1,6 +1,5 @@
-import React, { useEffect } from 'react';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
-import { useAuth } from '@/context/auth';
+import React from 'react';
+import { useParams } from 'react-router-dom';
 import LoadingState from './bible/LoadingState';
 import ErrorState from './bible/ErrorState';
 import ChallengeFeedback from './bible/ChallengeFeedback';
@@ -13,16 +12,12 @@ interface ChapterChallengeProps {
 
 const ChapterChallengeComponent: React.FC<ChapterChallengeProps> = ({ type }) => {
     const { bookId = '', chapter = '' } = useParams<{ bookId: string; chapter: string }>();
-    const navigate = useNavigate();
-    const location = useLocation();
-    const { user } = useAuth();
 
     const bibleChallenge = useBibleChallenge(bookId, chapter);
     const theologyChallenge = useTheologyChallengeAdapter();
 
     const {
         state,
-        isFirstChapter,
         handleSelectAnswer,
         handleCheckAnswer,
         handleNextQuestion,
@@ -31,18 +26,6 @@ const ChapterChallengeComponent: React.FC<ChapterChallengeProps> = ({ type }) =>
         handleRetry,
         handleGoBack
     } = type === 'bible' ? bibleChallenge : theologyChallenge;
-
-    // Redirect to auth if not logged in and not first chapter
-    useEffect(() => {
-        if (!user && !isFirstChapter && !state.loading) {
-            navigate('/auth', { state: { from: location.pathname } });
-        }
-    }, [user, isFirstChapter, state.loading, navigate, location.pathname]);
-
-    // Show loading while redirecting or checking auth
-    if (!user && !isFirstChapter) {
-        return null; // Will redirect via useEffect
-    }
 
     if (state.loading) {
         return (

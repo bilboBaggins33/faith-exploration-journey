@@ -74,7 +74,7 @@ const ResultsCard = ({
               transition={{ delay: 0.1 }}
               className="p-5 md:p-6 pb-3 md:pb-4 text-center border-b border-white/20"
             >
-              <h1 className="text-lg md:text-xl font-bold text-white drop-shadow-lg" style={{ fontFamily: "'Playfair Display', serif" }}>
+              <h1 className="font-serif text-lg md:text-xl font-bold text-white drop-shadow-lg">
                 {book?.name} - Chapter {parseInt(chapter, 10)}
               </h1>
               <p className="text-white/80 text-sm mt-1">Challenge Complete!</p>
@@ -153,8 +153,7 @@ const ResultsCard = ({
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
-                className="text-xl md:text-2xl font-bold text-white text-center mb-2"
-                style={{ fontFamily: "'Playfair Display', serif" }}
+                className="font-serif text-xl md:text-2xl font-bold text-white text-center mb-2"
               >
                 {normalizedScore === safeTotalQuestions ? "Perfect Score!" : "Challenge Completed!"}
               </motion.h2>

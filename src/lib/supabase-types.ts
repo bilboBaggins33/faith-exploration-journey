@@ -110,6 +110,52 @@ export interface ExtendedDatabase extends OriginalDatabase {
           total_chapters_read?: number | null;
         };
       };
+      subscribers: {
+        Row: {
+          user_id: string;
+          email: string | null;
+          stripe_customer_id: string | null;
+          stripe_subscription_id: string | null;
+          status: string;
+          current_period_end: string | null;
+          updated_at: string;
+        };
+        Insert: {
+          user_id: string;
+          email?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          status?: string;
+          current_period_end?: string | null;
+          updated_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          email?: string | null;
+          stripe_customer_id?: string | null;
+          stripe_subscription_id?: string | null;
+          status?: string;
+          current_period_end?: string | null;
+          updated_at?: string;
+        };
+      };
+      user_achievements: {
+        Row: {
+          user_id: string;
+          achievement_id: string;
+          unlocked_at: string;
+        };
+        Insert: {
+          user_id: string;
+          achievement_id: string;
+          unlocked_at?: string;
+        };
+        Update: {
+          user_id?: string;
+          achievement_id?: string;
+          unlocked_at?: string;
+        };
+      };
     } & OriginalDatabase['public']['Tables'];
     Views: OriginalDatabase['public']['Views'];
     Functions: OriginalDatabase['public']['Functions'];

@@ -139,8 +139,8 @@ export default {
 				'map-texture': "url('/map-texture.jpg')"
 			},
 			fontFamily: {
-				sans: ['Poppins', 'sans-serif'],
-				serif: ['Poppins', 'sans-serif']
+				sans: ['Inter', 'system-ui', 'sans-serif'],
+				serif: ['"Playfair Display"', 'Georgia', 'serif']
 			}
 		}
 	},

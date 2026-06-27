@@ -114,10 +114,7 @@ const ChallengeTypes = () => {
                         </div>
                         <ChevronRight className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
                       </div>
-                      <h3
-                        className="text-xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]"
-                        style={{ fontFamily: "'Playfair Display', serif" }}
-                      >
+                      <h3 className="font-serif text-xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
                         {challenge.title}
                       </h3>
                     </div>
@@ -161,12 +158,14 @@ const CallToAction = () => {
   ];
 
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 bg-gradient-to-br" />
-      <div className="absolute inset-0 opacity-100" style={{
-        backgroundImage: `url("/assets/bible/revelation.png")`
-      }} />
+    <section ref={ref} className="py-24 relative overflow-hidden bg-bible-dark">
+      {/* Background image */}
+      <div
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url("/assets/bible/revelation.png")` }}
+      />
+      {/* Dark overlay guarantees text contrast regardless of the image */}
+      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/85 via-bible-dark/80 to-bible-dark/95" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Stats Grid */}

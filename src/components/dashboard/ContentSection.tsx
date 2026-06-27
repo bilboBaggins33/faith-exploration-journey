@@ -22,29 +22,29 @@ interface TheologyBook {
 interface ContentSectionProps {
   recentlyReadBooks: BookProgress[];
   recentTheologyBooks: TheologyBook[];
-  overallProgress: number;
+  hasStartedReading?: boolean;
 }
 
-const ContentSection = ({ 
-  recentlyReadBooks, 
-  recentTheologyBooks, 
-  overallProgress 
+const ContentSection = ({
+  recentlyReadBooks,
+  recentTheologyBooks,
+  hasStartedReading = false,
 }: ContentSectionProps) => {
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 md:gap-8">
-      <div className="lg:col-span-2 space-y-6">
-        {/* Bible Reading Card */}
+    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      {/* Primary column — reading */}
+      <div className="lg:col-span-7 xl:col-span-8 space-y-6">
+        {!hasStartedReading && <DailyReadingCard featured />}
         <BibleReadingCard recentlyReadBooks={recentlyReadBooks} />
-        
-        {/* Theology Books Card */}
         <TheologyBooksCard recentTheologyBooks={recentTheologyBooks} />
       </div>
-      
-      <div className="space-y-6">
+
+      {/* Sidebar — progress & goals */}
+      <aside className="lg:col-span-5 xl:col-span-4 space-y-6">
         <AchievementsCard />
-        <TestamentProgressCard overallProgress={overallProgress} />
-        <DailyReadingCard />
-      </div>
+        <TestamentProgressCard />
+        {hasStartedReading && <DailyReadingCard />}
+      </aside>
     </div>
   );
 };

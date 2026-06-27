@@ -14,7 +14,6 @@ import {
 
 export const useTheologyProgress = (): UseTheologyProgressReturn => {
   const { user } = useAuth();
-  console.log('useTheologyProgress hook called, user:', user?.id);
   const [progress, setProgress] = useState<TheologyProgressData | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -98,10 +97,22 @@ export const useTheologyProgress = (): UseTheologyProgressReturn => {
     if (!user) return;
 
     try {
+      // Upsert (instead of update) so the first completion succeeds even when
+      // no theology_progress row exists yet for this user.
       const { error } = await supabase
         .from('theology_progress')
-        .update(data)
-        .eq('user_id', user.id);
+        .upsert(
+          {
+            user_id: user.id,
+            completed_chapters: progress?.completed_chapters || [],
+            books_started: progress?.books_started || [],
+            books_completed: progress?.books_completed || [],
+            total_chapters_read: progress?.total_chapters_read || 0,
+            total_points: progress?.total_points || 0,
+            ...data,
+          },
+          { onConflict: 'user_id' }
+        );
 
       if (error) {
         throw error;

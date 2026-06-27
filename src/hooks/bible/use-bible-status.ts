@@ -1,6 +1,6 @@
 
 import { BibleProgressData } from './bible-progress-types';
-import { isChallengeCompleted, completeChallenge } from './use-bible-challenges';
+import { isChallengeCompleted, completeChallenge } from './bible-completion-utils';
 import { getChapterStatus as getChapterStatusUtil, getChapterDifficultyScores as getChapterDifficultyScoresUtil } from './bible-progress-utils';
 
 export const useBibleStatus = (progress: BibleProgressData | null, profile: any) => {

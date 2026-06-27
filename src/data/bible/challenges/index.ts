@@ -220,13 +220,20 @@ export {
   revelation5Challenges,
 };
 
-// Create a lookup map for faster access
-const challengesMap = new Map<string, ChapterChallenge>();
+// Lazily-built lookup map. Building it lazily (rather than at module load) keeps
+// this module free of top-level side effects, so bundlers can tree-shake the
+// (very large) challenge data out of any module that only needs other exports.
+let challengesMap: Map<string, ChapterChallenge> | null = null;
 
-// Populate the map
-allChallenges.forEach(challenge => {
-  challengesMap.set(`${challenge.bookId}-${challenge.chapter}`, challenge);
-});
+const getChallengesMap = (): Map<string, ChapterChallenge> => {
+  if (!challengesMap) {
+    challengesMap = new Map<string, ChapterChallenge>();
+    allChallenges.forEach(challenge => {
+      challengesMap!.set(`${challenge.bookId}-${challenge.chapter}`, challenge);
+    });
+  }
+  return challengesMap;
+};
 
 /**
  * Get a specific Bible challenge by book ID and chapter number
@@ -236,5 +243,5 @@ export const getBibleChallengeByBookAndChapter = (
   bookId: string,
   chapter: number
 ): ChapterChallenge | undefined => {
-  return challengesMap.get(`${bookId}-${chapter}`);
+  return getChallengesMap().get(`${bookId}-${chapter}`);
 };

@@ -1,84 +1,94 @@
-
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Calendar } from '@/components/ui/calendar';
+import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
 import { bibleBooks } from '@/data/bible/books';
 import { getTodaysReading, getReadingForDate } from '@/data/bible/reading-plans/mcheyne';
 import { BibleReading } from '@/data/bible/types';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
-import { CalendarIcon, BookOpen, CheckCircle, Lock } from 'lucide-react';
+import { CalendarDays, Lock } from 'lucide-react';
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@/components/ui/popover";
+} from '@/components/ui/popover';
 import { format } from 'date-fns';
 import { useAuth } from '@/context/auth';
-import GlassCard from '@/components/ui/GlassCard';
+import PageCard from '@/components/ui/PageCard';
+import { cn } from '@/lib/utils';
+
+const READING_SLOTS = [
+  'Family 1',
+  'Family 2',
+  'Private 1',
+  'Private 2',
+];
 
 interface ReadingItemProps {
   reading: BibleReading;
   index: number;
   isCompleted: boolean;
-  isFirstChapter: boolean;
-  onClick: () => void;
+  requiresAuth: boolean;
+  onNavigate: () => void;
 }
 
-const ReadingItem = ({ reading, index, isCompleted, isFirstChapter, onClick }: ReadingItemProps) => {
-  const { user } = useAuth();
-  const book = bibleBooks.find(b => b.id === reading.bookId);
-  const requiresAuth = !isFirstChapter && !user;
+const ReadingItem = ({
+  reading,
+  index,
+  isCompleted,
+  requiresAuth,
+  onNavigate,
+}: ReadingItemProps) => {
+  const book = bibleBooks.find((b) => b.id === reading.bookId);
+  const label = `${book?.name || reading.bookId} ${reading.chapter}`;
+
+  if (requiresAuth) {
+    return (
+      <li className="flex items-center justify-between gap-3 rounded-xl px-3 py-3 bg-muted/30 text-muted-foreground">
+        <div className="min-w-0">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground/70">
+            {READING_SLOTS[index] ?? `Reading ${index + 1}`}
+          </p>
+          <p className="text-sm font-medium truncate mt-0.5">{label}</p>
+        </div>
+        <Link
+          to="/auth"
+          className="inline-flex items-center gap-1.5 text-xs font-medium text-bible-deepBlue shrink-0"
+        >
+          <Lock className="h-3.5 w-3.5" />
+          Sign in
+        </Link>
+      </li>
+    );
+  }
 
   return (
-    <div
-      className={`flex items-center justify-between p-4 rounded-2xl mb-2 backdrop-blur-md border transition-all ${requiresAuth
-          ? 'bg-white/10 border-white/20'
-          : isCompleted
-            ? 'bg-green-500/20 border-green-400/30'
-            : 'bg-white/10 border-white/20 hover:bg-white/20 cursor-pointer'
-        }`}
-      onClick={!requiresAuth ? onClick : undefined}
-    >
-      <div className="flex items-center flex-1">
-        <div className="w-8 h-8 rounded-full bg-amber-500/30 flex items-center justify-center mr-3 text-sm font-medium text-white">
-          {index + 1}
-        </div>
-        <div>
-          <h4 className="font-medium text-lg text-white">{book?.name || reading.bookId}</h4>
-          <p className="text-sm text-white/70">
-            Chapter {reading.chapter}
-            {isCompleted && (
-              <span className="inline-flex items-center text-green-400 ml-2">
-                <CheckCircle className="h-4 w-4 mr-1" />
-                Completed
-              </span>
-            )}
-          </p>
-        </div>
-      </div>
+    <li>
       <button
-        className={`ml-4 px-4 py-2 rounded-full font-medium backdrop-blur-md border transition-all flex items-center gap-2 ${requiresAuth
-            ? 'bg-white/10 text-white/70 border-white/20'
-            : 'bg-gradient-to-r from-amber-400/90 to-amber-500/90 text-white border-amber-300/50 hover:scale-105'
-          }`}
-        onClick={(e) => {
-          e.stopPropagation();
-          onClick();
-        }}
-      >
-        {requiresAuth ? (
-          <>
-            <Lock className="h-4 w-4" />
-            Sign in
-          </>
-        ) : (
-          <>
-            <BookOpen className="h-4 w-4" />
-            {isCompleted ? 'Review' : 'Read'}
-          </>
+        type="button"
+        onClick={onNavigate}
+        className={cn(
+          'w-full flex items-center justify-between gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
+          isCompleted
+            ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100/80'
+            : 'hover:bg-muted/60 text-foreground',
         )}
+      >
+        <div className="min-w-0">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">
+            {READING_SLOTS[index] ?? `Reading ${index + 1}`}
+          </p>
+          <p className="font-medium truncate mt-0.5">{label}</p>
+        </div>
+        <span className={cn(
+          'shrink-0 text-xs font-medium',
+          isCompleted ? 'text-emerald-600' : 'text-bible-deepBlue',
+        )}>
+          {isCompleted ? 'Done' : 'Read →'}
+        </span>
       </button>
-    </div>
+    </li>
   );
 };
 
@@ -91,129 +101,96 @@ const DailyReadingPlan = () => {
 
   const readings = selectedDate ? getReadingForDate(selectedDate) : getTodaysReading();
   const todaysReadings = getTodaysReading();
-  const isToday = selectedDate && format(selectedDate, 'MM-dd') === format(new Date(), 'MM-dd');
+  const isToday = format(selectedDate, 'MM-dd') === format(new Date(), 'MM-dd');
 
   const navigateToChapter = (bookId: string, chapter: number) => {
-    // Pass from=daily so the back button returns to daily reading
     navigate(`/bible/${bookId}/${chapter}?from=daily`);
   };
 
-  const getCompletionStatus = (bookId: string, chapter: number) => {
-    if (!user) return false;
-    const { isCompleted } = getChapterStatus(bookId, chapter);
-    return isCompleted;
-  };
+  const isCompleted = (bookId: string, chapter: number) =>
+    !!user && getChapterStatus(bookId, chapter).isCompleted;
 
-  const getTodayCompletionPercentage = () => {
-    if (!user || !todaysReadings.length) return 0;
+  const completedCount = todaysReadings.filter((r) => isCompleted(r.bookId, r.chapter)).length;
+  const progressPct = user && todaysReadings.length
+    ? Math.round((completedCount / todaysReadings.length) * 100)
+    : 0;
 
-    const completedCount = todaysReadings.filter(reading =>
-      getCompletionStatus(reading.bookId, reading.chapter)
-    ).length;
-
-    return Math.round((completedCount / todaysReadings.length) * 100);
-  };
+  const dateLabel = format(selectedDate, isToday ? "'Today,' MMMM d" : 'MMMM d, yyyy');
 
   return (
-    <GlassCard>
-      {/* Header */}
-      <div className="p-6 border-b border-white/20">
-        <div className="flex items-center justify-between">
-          <div>
-            <h2
-              className="text-2xl font-bold text-white"
-              style={{ fontFamily: "'Playfair Display', serif" }}
-            >
-              M'Cheyne Reading Plan
-            </h2>
-            <p className="text-white/60 text-sm">
-              Readings for {format(selectedDate, 'MMMM d, yyyy')}
-            </p>
+    <PageCard
+      accent={isToday}
+      title="M'Cheyne reading plan"
+      description={`Readings for ${dateLabel}`}
+      icon={<CalendarDays className="h-4 w-4" />}
+      action={
+        <Popover open={open} onOpenChange={setOpen}>
+          <PopoverTrigger asChild>
+            <Button variant="outline" size="sm" className="shrink-0 h-8 text-xs">
+              Change date
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="end">
+            <Calendar
+              mode="single"
+              selected={selectedDate}
+              onSelect={(date) => {
+                setSelectedDate(date || new Date());
+                setOpen(false);
+              }}
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
+      }
+      bodyClassName="pt-3"
+    >
+      {isToday && user && todaysReadings.length > 0 && (
+        <div className="mb-5 pb-5 border-b border-border/60">
+          <div className="flex justify-between text-xs text-muted-foreground mb-2">
+            <span>Today's progress</span>
+            <span className="tabular-nums font-medium text-foreground">{completedCount}/{todaysReadings.length}</span>
           </div>
-
-          <Popover open={open} onOpenChange={setOpen}>
-            <PopoverTrigger asChild>
-              <button className="px-4 py-2 rounded-full bg-white/10 text-white/90 font-medium backdrop-blur-md border border-white/30 hover:bg-white/20 transition-all flex items-center gap-2">
-                <CalendarIcon className="h-4 w-4" />
-                Change Date
-              </button>
-            </PopoverTrigger>
-            <PopoverContent className="w-auto p-0" align="end">
-              <Calendar
-                mode="single"
-                selected={selectedDate}
-                onSelect={(date) => {
-                  setSelectedDate(date || new Date());
-                  setOpen(false);
-                }}
-                initialFocus
-              />
-            </PopoverContent>
-          </Popover>
+          <Progress value={progressPct} className="h-1.5" />
         </div>
+      )}
 
-        {isToday && user && (
-          <div className="mt-4">
-            <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-white/80">Today's Progress</span>
-              <span className="text-sm font-medium text-white">{getTodayCompletionPercentage()}%</span>
-            </div>
-            <div className="w-full bg-white/20 rounded-full h-2 overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-amber-400 to-amber-500 rounded-full transition-all duration-500"
-                style={{ width: `${getTodayCompletionPercentage()}%` }}
-              />
-            </div>
-            <p className="text-sm text-white/60 mt-2">
-              {todaysReadings.filter(r => getCompletionStatus(r.bookId, r.chapter)).length} of {todaysReadings.length} readings completed
-            </p>
-          </div>
-        )}
-      </div>
+      {readings.length > 0 ? (
+        <ul className="space-y-1">
+          {readings.map((reading, index) => (
+            <ReadingItem
+              key={`${reading.bookId}-${reading.chapter}`}
+              reading={reading}
+              index={index}
+              isCompleted={isCompleted(reading.bookId, reading.chapter)}
+              requiresAuth={!user && reading.chapter !== 1}
+              onNavigate={() => navigateToChapter(reading.bookId, reading.chapter)}
+            />
+          ))}
+        </ul>
+      ) : (
+        <p className="text-sm text-muted-foreground py-4 text-center">
+          No readings for this date.
+        </p>
+      )}
 
-      {/* Reading Items */}
-      <div className="p-6">
-        {readings.length > 0 ? (
-          <div className="space-y-2">
-            {readings.map((reading, index) => (
-              <ReadingItem
-                key={`${reading.bookId}-${reading.chapter}`}
-                reading={reading}
-                index={index}
-                isCompleted={getCompletionStatus(reading.bookId, reading.chapter)}
-                isFirstChapter={reading.chapter === 1}
-                onClick={() => navigateToChapter(reading.bookId, reading.chapter)}
-              />
-            ))}
-          </div>
-        ) : (
-          <div className="text-center py-6">
-            <BookOpen className="mx-auto h-12 w-12 text-white/30 mb-3" />
-            <p className="text-white/50">No readings available for this date</p>
-          </div>
-        )}
-      </div>
-
-      {/* Footer */}
-      <div className="p-6 border-t border-white/20 flex justify-between items-center">
-        <button
-          onClick={() => setSelectedDate(new Date())}
+      <div className="mt-4 pt-4 border-t border-border/60 flex items-center justify-between gap-3">
+        <Button
+          variant="ghost"
+          size="sm"
           disabled={isToday}
-          className={`px-4 py-2 rounded-full font-medium backdrop-blur-md border transition-all ${isToday
-              ? 'bg-white/5 text-white/30 border-white/10 cursor-not-allowed'
-              : 'bg-white/10 text-white/90 border-white/30 hover:bg-white/20'
-            }`}
+          onClick={() => setSelectedDate(new Date())}
+          className="text-muted-foreground h-8 px-2"
         >
-          Today's Reading
-        </button>
-
+          Jump to today
+        </Button>
         {isToday && (
-          <span className="px-3 py-1 rounded-full bg-amber-500/20 text-amber-300 text-sm border border-amber-400/30">
-            {format(new Date(), 'MMMM d')}
+          <span className="text-xs text-muted-foreground tabular-nums">
+            {format(new Date(), 'EEEE, MMM d')}
           </span>
         )}
       </div>
-    </GlassCard>
+    </PageCard>
   );
 };
 

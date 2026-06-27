@@ -1,6 +1,6 @@
 
 import { LucideIcon, BookOpen, Trophy, CalendarDays, Star, Award, Medal, Book, Crown, Scroll, BookMarked, Flame, Zap, Target, Heart } from 'lucide-react';
-import { bibleBooks } from '@/data/bible';
+import { bibleBooks } from '@/data/bible/books';
 
 export interface Achievement {
     id: string;

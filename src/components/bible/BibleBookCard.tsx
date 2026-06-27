@@ -1,8 +1,11 @@
 
 import React, { useState } from 'react';
+import { Star, Crown } from 'lucide-react';
+import { cn } from '@/lib/utils';
 import { getBookThumbnail } from '@/data/bible/book-images';
 import MiniDonutChart from '@/components/ui/MiniDonutChart';
 import { DifficultyProgress } from '@/hooks/bible/use-difficulty-progress';
+import type { BookStars } from '@/hooks/bible/bible-progress-utils';
 
 interface BibleBookCardProps {
   bookId: string;
@@ -11,6 +14,7 @@ interface BibleBookCardProps {
   progressPercent: number;
   testament: 'old' | 'new';
   difficultyProgress?: DifficultyProgress;
+  stars?: BookStars;
   onClick: () => void;
 }
 
@@ -38,13 +42,20 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   progressPercent,
   testament,
   difficultyProgress,
+  stars,
   onClick
 }) => {
   const [imageError, setImageError] = useState(false);
 
+  const hasStars = !!stars && stars.total > 0;
+  const mastered = !!stars?.mastered;
+
   return (
     <div
-      className="overflow-hidden transition-all duration-500 ease hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-lg border-0 shadow-lg bg-card"
+      className={cn(
+        'overflow-hidden transition-all duration-500 ease hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-lg shadow-lg bg-card',
+        mastered ? 'border-2 border-amber-300 shadow-amber-200/50' : 'border-0'
+      )}
       onClick={onClick}
     >
       {/* Image section */}
@@ -58,8 +69,22 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
           onError={() => setImageError(true)}
         />
         <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/10 rounded-t-lg" />
+
+        {/* Stars / mastery badge */}
+        {mastered ? (
+          <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-gradient-to-r from-amber-400 to-amber-500 text-white inline-flex items-center gap-1 shadow-md">
+            <Crown className="h-3 w-3" />
+            Mastered
+          </span>
+        ) : hasStars ? (
+          <span className="absolute top-2 right-2 px-2 py-0.5 rounded-full text-[10px] font-bold bg-black/55 text-white backdrop-blur-sm inline-flex items-center gap-1 shadow-sm">
+            <Star className="h-3 w-3 fill-amber-400 text-amber-400" />
+            {stars!.earned}/{stars!.total}
+          </span>
+        ) : null}
+
         <div className="absolute bottom-0 left-0 p-3">
-          <h2 className="font-semibold text-white text-2xl sm:text-2xl drop-shadow-[0_0px_2px_rgba(0,0,0,0.5)]" style={{ fontFamily: "'Playfair Display', serif" }}>
+          <h2 className="font-serif font-semibold text-white text-2xl sm:text-2xl drop-shadow-[0_0px_2px_rgba(0,0,0,0.5)]">
             {bookName}
           </h2>
           <p className="text-white text-xs sm:text-sm flex justify-between">

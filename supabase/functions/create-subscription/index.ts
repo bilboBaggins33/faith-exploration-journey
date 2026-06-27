@@ -39,21 +39,29 @@ serve(async (req) => {
       customerId = customers.data[0].id;
     }
 
-    // Create a subscription session
-    const session = await stripe.checkout.sessions.create({
-      customer: customerId,
-      customer_email: customerId ? undefined : user.email,
-      line_items: [
-        {
+    // Prefer a real Stripe Price ID (set STRIPE_PRICE_ID in Supabase secrets).
+    // Fall back to inline price_data so checkout still works before it's set.
+    const priceId = Deno.env.get("STRIPE_PRICE_ID");
+    const lineItem = priceId
+      ? { price: priceId, quantity: 1 }
+      : {
           price_data: {
             currency: "usd",
             product_data: { name: "Bible Explorer Premium" },
             unit_amount: 299, // $2.99
-            recurring: { interval: "month" },
+            recurring: { interval: "month" as const },
           },
           quantity: 1,
-        },
-      ],
+        };
+
+    // Create a subscription session
+    const session = await stripe.checkout.sessions.create({
+      customer: customerId,
+      customer_email: customerId ? undefined : user.email,
+      client_reference_id: user.id,
+      metadata: { supabase_user_id: user.id },
+      subscription_data: { metadata: { supabase_user_id: user.id } },
+      line_items: [lineItem],
       mode: "subscription",
       success_url: `${req.headers.get("origin")}/profile?subscription=success`,
       cancel_url: `${req.headers.get("origin")}/profile?subscription=canceled`,

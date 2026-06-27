@@ -45,7 +45,7 @@ const QuestionCard = ({
       <Dialog open={isModalOpen} onOpenChange={setIsModalOpen}>
         <DialogContent className="w-[calc(100%-2rem)] max-w-sm rounded-2xl bg-[#f5efe6] border border-amber-200/60 shadow-2xl p-5">
           <DialogHeader>
-            <DialogTitle className="text-base font-semibold text-amber-900" style={{ fontFamily: "'Playfair Display', serif" }}>
+            <DialogTitle className="font-serif text-base font-semibold text-amber-900">
               Answer Explanation
             </DialogTitle>
           </DialogHeader>
@@ -59,7 +59,7 @@ const QuestionCard = ({
         transition={{ duration: 0.3 }}
       >
         {/* Question Text */}
-        <h2 className="text-lg md:text-xl text-center text-white mb-4 md:mb-6 leading-relaxed text-balance drop-shadow-md" style={{ fontFamily: "'Playfair Display', serif" }}>
+        <h2 className="font-serif text-lg md:text-xl text-center text-white mb-4 md:mb-6 leading-relaxed text-balance drop-shadow-md">
           {question}
         </h2>
 

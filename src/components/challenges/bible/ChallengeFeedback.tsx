@@ -47,7 +47,7 @@ const CardContainer = React.memo(({
     <div
       key={q.id}
       data-index={index}
-      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh"
+      className="w-full flex-shrink-0 snap-center px-4 md:px-8 py-2 flex items-center justify-center h-dvh md:h-full"
     >
       <div className="w-full max-w-[92vw] sm:max-w-sm relative" tabIndex={-1}>
         {/* Card container */}
@@ -354,7 +354,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       {/* Scroll Container - controlled scroll only */}
       <div
         ref={containerRef}
-        className="w-full h-full flex flex-col overflow-y-auto snap-y snap-mandatory scrollbar-hide items-center"
+        className="w-full h-full flex flex-col md:flex-row overflow-y-auto md:overflow-y-hidden md:overflow-x-auto snap-y md:snap-x snap-mandatory scrollbar-hide items-center"
         style={{ overscrollBehavior: 'none' }}
         onTouchMove={(e) => {
           // Block swiping forward past unanswered questions

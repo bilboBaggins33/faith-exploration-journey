@@ -1,38 +1,43 @@
-import React from 'react';
+import { lazy } from 'react';
 import {
   createBrowserRouter,
   RouterProvider,
-  Outlet,
 } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import Index from '@/pages/Index';
-import Auth from '@/pages/Auth';
-import Profile from '@/pages/Profile';
-import Bible from '@/pages/Bible';
-import Chapter from '@/pages/Chapter';
-import DailyReading from '@/pages/DailyReading';
-import Dashboard from '@/pages/Dashboard';
-import Achievements from '@/pages/Achievements';
-import Theology from '@/pages/Theology';
-import ChapterChallenge from '@/components/challenges/ChapterChallenge';
-import Contact from '@/pages/Contact';
-import About from '@/pages/About';
-import NotFound from '@/pages/NotFound';
-import TermsOfService from '@/pages/TermsOfService';
-import PrivacyPolicy from '@/pages/PrivacyPolicy';
-import CookiePolicy from '@/pages/CookiePolicy';
+import RouteError from '@/pages/RouteError';
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { AuthProvider } from '@/context/auth';
 import { CookieProvider } from '@/context/CookieContext';
 import { BibleProgressProvider } from '@/context/BibleProgressContext';
-import CookieConsent from '@/components/CookieConsent';
 import Layout from '@/components/Layout';
+
+// Route-level code splitting: heavy pages (especially Bible/Chapter, which pull
+// in the large challenge dataset) load on demand instead of on first paint.
+const Index = lazy(() => import('@/pages/Index'));
+const Auth = lazy(() => import('@/pages/Auth'));
+const ResetPassword = lazy(() => import('@/pages/ResetPassword'));
+const Profile = lazy(() => import('@/pages/Profile'));
+const Bible = lazy(() => import('@/pages/Bible'));
+const Chapter = lazy(() => import('@/pages/Chapter'));
+const DailyReading = lazy(() => import('@/pages/DailyReading'));
+const Dashboard = lazy(() => import('@/pages/Dashboard'));
+const Achievements = lazy(() => import('@/pages/Achievements'));
+const Theology = lazy(() => import('@/pages/Theology'));
+const ChapterChallenge = lazy(() => import('@/components/challenges/ChapterChallenge'));
+const ChapterAccessGate = lazy(() => import('@/components/access/ChapterAccessGate'));
+const Contact = lazy(() => import('@/pages/Contact'));
+const About = lazy(() => import('@/pages/About'));
+const NotFound = lazy(() => import('@/pages/NotFound'));
+const TermsOfService = lazy(() => import('@/pages/TermsOfService'));
+const PrivacyPolicy = lazy(() => import('@/pages/PrivacyPolicy'));
+const CookiePolicy = lazy(() => import('@/pages/CookiePolicy'));
 
 const router = createBrowserRouter([
   {
     path: '/',
     element: <Layout />,
+    errorElement: <RouteError />,
     children: [
       {
         path: '',
@@ -41,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: 'auth',
         element: <Auth />,
+      },
+      {
+        path: 'reset-password',
+        element: <ResetPassword />,
       },
       {
         path: 'profile',
@@ -80,7 +89,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'theology/:bookId/:chapter',
-        element: <ChapterChallenge type="theology" />,
+        element: (
+          <ChapterAccessGate type="theology">
+            <ChapterChallenge type="theology" />
+          </ChapterAccessGate>
+        ),
       },
       {
         path: 'contact',
@@ -111,34 +124,16 @@ const router = createBrowserRouter([
   },
 ]);
 
-function App() {
-  const [isOnline, setIsOnline] = React.useState(navigator.onLine);
-
-  React.useEffect(() => {
-    setIsOnline(navigator.onLine);
-
-    const handleOnline = () => setIsOnline(true);
-    const handleOffline = () => setIsOnline(false);
-
-    window.addEventListener('online', handleOnline);
-    window.addEventListener('offline', handleOffline);
-
-    return () => {
-      window.removeEventListener('online', handleOnline);
-      window.removeEventListener('offline', handleOffline);
-    };
-  }, []);
-
-  // Create a client for React Query
-  const queryClient = new QueryClient({
-    defaultOptions: {
-      queries: {
-        staleTime: 1000 * 60 * 5, // 5 minutes
-        refetchOnWindowFocus: false,
-      },
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 1000 * 60 * 5, // 5 minutes
+      refetchOnWindowFocus: false,
     },
-  });
+  },
+});
 
+function App() {
   return (
     <>
       <CookieProvider>

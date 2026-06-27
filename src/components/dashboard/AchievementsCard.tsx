@@ -1,18 +1,18 @@
 
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
-import { Trophy, Star, CalendarDays, BookOpen } from 'lucide-react';
+import { Trophy, Lock } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAchievements } from '@/hooks/use-achievements';
+import { useUnlockedTimestamps } from '@/hooks/use-unlocked-timestamps';
+import DashboardCard from './DashboardCard';
 
 const AchievementsCard = () => {
   const navigate = useNavigate();
   const { achievements, getRecentAchievements } = useAchievements();
+  const unlockedAt = useUnlockedTimestamps();
 
-  // Get up to 3 achievements to show
-  // Priority: 1. Recently unlocked, 2. Closest to completion (in progress), 3. Just the first few
-  const unlocked = getRecentAchievements();
+  const unlocked = getRecentAchievements(unlockedAt);
   const inProgress = achievements
     .filter(a => !a.isUnlocked && a.progress > 0)
     .sort((a, b) => b.progress - a.progress)
@@ -20,7 +20,6 @@ const AchievementsCard = () => {
 
   const displayAchievements = [...unlocked, ...inProgress].slice(0, 3);
 
-  // If we still don't have enough, fill with initial/easy locked ones
   if (displayAchievements.length < 3) {
     const locked = achievements
       .filter(a => !a.isUnlocked && a.progress === 0)
@@ -28,66 +27,50 @@ const AchievementsCard = () => {
     displayAchievements.push(...locked);
   }
 
+  const nextGoal = displayAchievements.find(a => !a.isUnlocked);
+
   return (
-    <Card className="border-0 shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center">
-          <Trophy className="w-5 h-5 mr-2 text-bible-blue" />
-          Achievements
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-4">
-          {displayAchievements.map(achievement => (
-            <div
-              key={achievement.id}
-              className={`flex items-center space-x-3 p-3 border rounded-lg transition-all duration-200 hover:shadow-sm ${achievement.isUnlocked
-                ? 'bg-gradient-to-r from-amber-50 to-orange-50 border-amber-200/60'
-                : 'bg-gray-50/80 border-gray-100 opacity-80'
-                }`}
-            >
-              <div className={`p-2.5 rounded-xl ${achievement.isUnlocked ? 'bg-gradient-to-br from-amber-400 to-orange-500 shadow-md shadow-amber-400/20' : 'bg-gray-200'
-                }`}>
-                <achievement.icon className={`h-5 w-5 ${achievement.isUnlocked ? 'text-white' : 'text-gray-500'
-                  }`} />
-              </div>
-              <div className="flex-1">
-                <div className="flex justify-between items-center mb-1">
-                  <h3 className="font-medium text-sm">{achievement.title}</h3>
-                  {achievement.isUnlocked && (
-                    <span className="text-xs font-bold text-amber-600 bg-amber-100 px-2 py-0.5 rounded-full">Unlocked!</span>
-                  )}
-                </div>
-                <p className="text-xs text-gray-500">{achievement.description}</p>
-
-                {!achievement.isUnlocked && (
-                  <div className="w-full bg-gray-200 rounded-full h-1.5 mt-2">
-                    <div
-                      className="bg-bible-blue h-1.5 rounded-full"
-                      style={{ width: `${achievement.progress}%` }}
-                    ></div>
-                  </div>
-                )}
-              </div>
+    <DashboardCard
+      title="Achievements"
+      description={nextGoal ? `Next: ${nextGoal.title}` : undefined}
+      icon={<Trophy className="h-4 w-4" />}
+    >
+      <ul className="space-y-2">
+        {displayAchievements.map((achievement) => (
+          <li
+            key={achievement.id}
+            className={`flex gap-3 rounded-xl p-3 ${
+              achievement.isUnlocked
+                ? 'bg-amber-50/80 border border-amber-100'
+                : 'border border-transparent bg-muted/30'
+            }`}
+          >
+            <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
+              achievement.isUnlocked ? 'bg-amber-400 text-white' : 'bg-muted text-muted-foreground'
+            }`}>
+              {achievement.isUnlocked ? (
+                <achievement.icon className="h-4 w-4" />
+              ) : (
+                <Lock className="h-3.5 w-3.5" />
+              )}
+            </span>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-medium leading-tight">{achievement.title}</p>
+              <p className="text-xs text-muted-foreground mt-0.5 line-clamp-2">{achievement.description}</p>
             </div>
-          ))}
+          </li>
+        ))}
+      </ul>
 
-          {displayAchievements.length === 0 && (
-            <div className="text-center py-4 text-gray-500 text-sm">
-              Start reading to unlock achievements!
-            </div>
-          )}
-        </div>
-
-        <Button
-          variant="outline"
-          className="w-full mt-4 border-bible-blue/20 text-bible-blue hover:bg-bible-blue/5"
-          onClick={() => navigate('/achievements')}
-        >
-          View All Achievements
-        </Button>
-      </CardContent>
-    </Card>
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-full mt-4"
+        onClick={() => navigate('/achievements')}
+      >
+        All achievements
+      </Button>
+    </DashboardCard>
   );
 };
 

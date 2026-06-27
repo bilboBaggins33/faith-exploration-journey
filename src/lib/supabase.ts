@@ -11,14 +11,7 @@ export const isSupabaseConfigured = () => {
   // Use the values directly from the client.ts file instead of env variables
   const SUPABASE_URL = "https://fwjfbenicnnprhkmnsmm.supabase.co";
   const SUPABASE_PUBLISHABLE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ3amZiZW5pY25ucHJoa21uc21tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI1MDc1MzQsImV4cCI6MjA1ODA4MzUzNH0.EymH5YEyTZG0pCD9eJwz5Hc1L7CxWlvbSn6HjiBDD_A";
-  
-  console.log('Checking Supabase config:', { 
-    url: SUPABASE_URL,
-    keyLength: SUPABASE_PUBLISHABLE_KEY.length,
-    isUrlValid: SUPABASE_URL.includes('supabase.co'),
-    isKeyValid: SUPABASE_PUBLISHABLE_KEY.length > 20
-  });
-  
+
   return Boolean(SUPABASE_URL && SUPABASE_PUBLISHABLE_KEY && 
     SUPABASE_URL.includes('supabase.co') && 
     SUPABASE_PUBLISHABLE_KEY.length > 20);

@@ -1,78 +1,66 @@
 
 import React from 'react';
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
-import { BookOpen, BarChart2, Trophy, ChevronRight } from 'lucide-react';
-import { Button } from '@/components/ui/button';
+import { Progress } from '@/components/ui/progress';
+import { ChevronRight } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 
 interface DashboardStatsProps {
   totalChaptersRead: number;
   overallProgress: number;
   challengesCompleted: number;
-  streak: number;
 }
 
-const DashboardStats = ({ totalChaptersRead, overallProgress, challengesCompleted, streak }: DashboardStatsProps) => {
+const DashboardStats = ({ totalChaptersRead, overallProgress, challengesCompleted }: DashboardStatsProps) => {
   const navigate = useNavigate();
 
+  const metrics = [
+    {
+      label: 'Chapters read',
+      value: totalChaptersRead.toLocaleString(),
+      detail: 'of 1,189',
+      onClick: () => navigate('/bible'),
+    },
+    {
+      label: 'Bible progress',
+      value: `${overallProgress}%`,
+      detail: overallProgress === 0 ? 'Not started' : undefined,
+      progress: overallProgress,
+      onClick: () => navigate('/bible'),
+    },
+    {
+      label: 'Achievements',
+      value: challengesCompleted.toLocaleString(),
+      detail: 'completed',
+      link: true,
+      onClick: () => navigate('/achievements'),
+    },
+  ];
+
   return (
-    <div>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 md:gap-5">
-        {/* Chapters Read */}
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-          <CardContent className="pt-4 pb-4 md:pt-6 md:pb-5">
-            <div className="flex items-center sm:items-start gap-3 md:gap-4">
-              <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-blue-500 to-bible-deepBlue shadow-md shadow-blue-500/20 flex-shrink-0">
-                <BookOpen className="w-5 h-5 md:w-6 md:h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs md:text-sm font-medium text-muted-foreground">Chapters Read</p>
-                <div className="text-2xl md:text-3xl font-bold mt-0.5 md:mt-1 tracking-tight">{totalChaptersRead}</div>
-                <p className="text-xs text-muted-foreground mt-0.5 md:mt-1">Out of 1,189 total</p>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Overall Progress */}
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-          <CardContent className="pt-4 pb-4 md:pt-6 md:pb-5">
-            <div className="flex items-center sm:items-start gap-3 md:gap-4">
-              <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-emerald-400 to-emerald-600 shadow-md shadow-emerald-500/20 flex-shrink-0">
-                <BarChart2 className="w-5 h-5 md:w-6 md:h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs md:text-sm font-medium text-muted-foreground">Overall Progress</p>
-                <div className="text-2xl md:text-3xl font-bold mt-0.5 md:mt-1 tracking-tight">{overallProgress}%</div>
-                <Progress value={overallProgress} className="h-1.5 mt-1.5 md:mt-2" />
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Achievements */}
-        <Card className="border-0 shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden">
-          <CardContent className="pt-4 pb-4 md:pt-6 md:pb-5">
-            <div className="flex items-center sm:items-start gap-3 md:gap-4">
-              <div className="flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-amber-400 to-bible-gold shadow-md shadow-amber-500/20 flex-shrink-0">
-                <Trophy className="w-5 h-5 md:w-6 md:h-6 text-white" />
-              </div>
-              <div className="flex-1 min-w-0">
-                <p className="text-xs md:text-sm font-medium text-muted-foreground">Achievements</p>
-                <div className="text-2xl md:text-3xl font-bold mt-0.5 md:mt-1 tracking-tight">{challengesCompleted}</div>
-                <div className="flex justify-between items-center mt-0.5 md:mt-1">
-                  <p className="text-xs text-muted-foreground">Challenges completed</p>
-                  <Button variant="ghost" size="sm" onClick={() => navigate('/achievements')} className="text-bible-blue h-auto p-0 text-xs hover:bg-transparent">
-                    View All
-                    <ChevronRight className="ml-0.5 h-3 w-3" />
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </CardContent>
-        </Card>
-      </div>
+    <div className="rounded-2xl bg-card border border-border/70 shadow-sm divide-y sm:divide-y-0 sm:divide-x divide-border/70 grid grid-cols-1 sm:grid-cols-3">
+      {metrics.map((m) => (
+        <button
+          key={m.label}
+          type="button"
+          onClick={m.onClick}
+          className="group text-left px-6 py-5 hover:bg-muted/30 transition-colors first:rounded-t-2xl last:rounded-b-2xl sm:first:rounded-l-2xl sm:first:rounded-tr-none sm:last:rounded-r-2xl sm:last:rounded-bl-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-bible-blue/40"
+        >
+          <p className="text-xs font-medium uppercase tracking-wider text-muted-foreground">{m.label}</p>
+          <p className="mt-1 font-serif text-3xl font-bold text-foreground tabular-nums leading-none">{m.value}</p>
+          {m.progress !== undefined ? (
+            <Progress value={m.progress} className="h-1.5 mt-3 bg-muted" />
+          ) : null}
+          <div className="mt-2 flex items-center justify-between gap-2">
+            {m.detail && <span className="text-xs text-muted-foreground">{m.detail}</span>}
+            {m.link && (
+              <span className="ml-auto inline-flex items-center text-xs font-medium text-bible-deepBlue opacity-0 group-hover:opacity-100 transition-opacity">
+                View all
+                <ChevronRight className="h-3 w-3 ml-0.5" />
+              </span>
+            )}
+          </div>
+        </button>
+      ))}
     </div>
   );
 };

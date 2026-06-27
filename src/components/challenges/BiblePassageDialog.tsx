@@ -41,8 +41,13 @@ const BiblePassageDialog = ({ bookName, chapter, passageText }: BiblePassageDial
                 {passageText}
               </div>
             ) : (
-              <div className="text-center py-8 text-muted-foreground italic">
-                Please connect to a Bible API to view the full text of {bookName} {chapter}.
+              <div className="text-center py-8 text-muted-foreground">
+                <p className="italic mb-2">
+                  Open your Bible to {bookName} {chapter} and read the chapter before taking the challenge.
+                </p>
+                <p className="text-sm">
+                  Take your time — understanding the passage is the best preparation.
+                </p>
               </div>
             )}
           </div>

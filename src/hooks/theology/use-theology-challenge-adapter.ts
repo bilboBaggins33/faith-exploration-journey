@@ -3,6 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { useAuth } from '@/context/auth';
 import { useToast } from '@/hooks/use-toast';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
+import { recordActivity } from '@/lib/gamification';
 import { theologyBooks } from '@/data/theology';
 import { useTheologyChallenge } from './use-theology-challenge';
 import { ChapterChallenge } from '@/data/bible/types';
@@ -104,6 +105,7 @@ export function useTheologyChallengeAdapter() {
                 try {
                     const chapterNumber = parseInt(chapter, 10);
                     await completeChallenge(bookId, chapterNumber, score);
+                    await recordActivity(user.id);
 
                     toast({
                         title: "Challenge Completed!",

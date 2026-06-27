@@ -1,60 +1,78 @@
-
 import React from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from '@/components/ui/button';
 import { Link, useNavigate } from 'react-router-dom';
-import { CalendarDays, Clock } from 'lucide-react';
+import { CalendarDays, ArrowRight } from 'lucide-react';
+import { getTodaysReading } from '@/data/bible/reading-plans/mcheyne';
+import { bibleBooks } from '@/data/bible/books';
+import { useBibleProgress } from '@/hooks/use-bible-progress';
+import DashboardCard from './DashboardCard';
 
-const DailyReadingCard = () => {
+interface DailyReadingCardProps {
+  featured?: boolean;
+}
+
+const DailyReadingCard = ({ featured = false }: DailyReadingCardProps) => {
   const navigate = useNavigate();
+  const { getChapterStatus } = useBibleProgress();
+  const readings = getTodaysReading().slice(0, featured ? 4 : 3);
+  const completedCount = readings.filter(
+    (r) => getChapterStatus(r.bookId, r.chapter).isCompleted
+  ).length;
 
   return (
-    <Card className="mt-6 border-0 shadow-lg">
-      <CardHeader>
-        <CardTitle className="text-lg flex items-center">
-          <CalendarDays className="w-5 h-5 mr-2 text-bible-blue" />
-          Daily Reading Plan
-        </CardTitle>
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2">
-          <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
-                <Clock className="h-4 w-4" />
-              </div>
-              <span>Genesis 1</span>
-            </div>
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/bible/GEN/1">
-                Read
-              </Link>
-            </Button>
-          </div>
-          <div className="p-2 bg-gray-50 rounded-md flex items-center justify-between">
-            <div className="flex items-center">
-              <div className="bg-bible-blue/10 text-bible-blue p-1 rounded mr-3">
-                <Clock className="h-4 w-4" />
-              </div>
-              <span>Matthew 1</span>
-            </div>
-            <Button variant="ghost" size="sm" asChild>
-              <Link to="/bible/MAT/1">
-                Read
-              </Link>
-            </Button>
-          </div>
-        </div>
+    <DashboardCard
+      accent={featured}
+      title="Today's reading"
+      description={featured ? "M'Cheyne plan — four chapters through the whole Bible." : undefined}
+      icon={<CalendarDays className="h-4 w-4" />}
+      action={
+        readings.length > 0 ? (
+          <span className="text-xs font-medium text-muted-foreground tabular-nums shrink-0 pt-1">
+            {completedCount}/{readings.length}
+          </span>
+        ) : undefined
+      }
+    >
+      <ul className="space-y-1">
+        {readings.length === 0 ? (
+          <li className="text-sm text-muted-foreground py-2">Nothing scheduled for today.</li>
+        ) : (
+          readings.map((reading) => {
+            const book = bibleBooks.find((b) => b.id === reading.bookId);
+            const { isCompleted } = getChapterStatus(reading.bookId, reading.chapter);
+            const label = `${book?.name || reading.bookId} ${reading.chapter}`;
 
-        <Button
-          variant="outline"
-          className="w-full mt-4"
-          onClick={() => navigate('/daily-reading')}
-        >
-          View Full Plan
-        </Button>
-      </CardContent>
-    </Card>
+            return (
+              <li key={`${reading.bookId}-${reading.chapter}`}>
+                <Link
+                  to={`/bible/${reading.bookId}/${reading.chapter}`}
+                  className={`flex items-center justify-between gap-3 rounded-xl px-3 py-3 text-sm transition-colors ${
+                    isCompleted
+                      ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100/80'
+                      : 'hover:bg-muted/60 text-foreground'
+                  }`}
+                >
+                  <span className="font-medium truncate">{label}</span>
+                  <span className={`shrink-0 text-xs font-medium ${isCompleted ? 'text-emerald-600' : 'text-bible-deepBlue'}`}>
+                    {isCompleted ? 'Done' : 'Read →'}
+                  </span>
+                </Link>
+              </li>
+            );
+          })
+        )}
+      </ul>
+
+      <Button
+        variant="outline"
+        size="sm"
+        className="w-full mt-4 border-border text-foreground hover:bg-muted/50"
+        onClick={() => navigate('/daily-reading')}
+      >
+        Full reading plan
+        <ArrowRight className="ml-1.5 h-3.5 w-3.5" />
+      </Button>
+    </DashboardCard>
   );
 };
 
