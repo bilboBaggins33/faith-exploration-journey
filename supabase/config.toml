@@ -17,3 +17,8 @@ verify_jwt = true
 # Authenticity is enforced via the Stripe webhook signature instead.
 [functions.stripe-webhook]
 verify_jwt = false
+
+# Auth is enforced inside the function so logged-out users can still load
+# designated preview chapters (Genesis 1 / Mere Christianity 1).
+[functions.get-challenge]
+verify_jwt = false

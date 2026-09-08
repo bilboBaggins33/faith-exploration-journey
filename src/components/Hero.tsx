@@ -1,139 +1,83 @@
-
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, BookOpen, BookText, GraduationCap, Heart } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Link } from 'react-router-dom';
-import { useIsMobile } from '@/hooks/use-mobile';
 
-const heroBackgroundUrls = [
-  'assets/bible/exodus.png'
-];
+const HERO_IMAGE = '/assets/bible/exodus.webp';
+const ease = [0.22, 1, 0.36, 1] as const;
 
 const Hero = () => {
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const [imageLoadError, setImageLoadError] = useState<Record<string, boolean>>({});
-  const [imageLoaded, setImageLoaded] = useState<Record<string, boolean>>({});
-  const isMobile = useIsMobile();
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) =>
-        prevIndex === heroBackgroundUrls.length - 1 ? 0 : prevIndex + 1
-      );
-    }, 6000);
-
-    return () => clearInterval(interval);
-  }, []);
+  const [src, setSrc] = useState(HERO_IMAGE);
+  const [loaded, setLoaded] = useState(false);
 
   return (
-    <div className="relative min-h-screen flex items-center justify-center overflow-hidden" style={{ background: 'linear-gradient(to bottom, #1a1a2e, #16213e, #0f3460)' }}>
-      {/* Background Image with Parallax Effect */}
-      {heroBackgroundUrls.map((url, index) => {
-        const imgSrc = imageLoadError[url] ? '/assets/bible/default.jpg' : url;
-        const isLoaded = imageLoaded[imgSrc];
-        return (
-          <div
-            key={url}
-            className="absolute inset-0 w-full h-full bg-cover bg-center transition-opacity duration-1000"
-            style={{
-              backgroundImage: `url(${imgSrc})`,
-              opacity: currentImageIndex === index && isLoaded ? 1 : 0,
-            }}
-          >
-            <img
-              src={imgSrc}
-              className="hidden"
-              alt="Preload"
-              onLoad={() => setImageLoaded(prev => ({ ...prev, [imgSrc]: true }))}
-              onError={() => setImageLoadError(prev => ({ ...prev, [url]: true }))}
-            />
-          </div>
-        );
-      })}
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden bg-bible-dark">
+      <motion.div
+        initial={{ scale: 1.08 }}
+        animate={{ scale: loaded ? 1 : 1.08 }}
+        transition={{ duration: 8, ease: 'linear' }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{
+          backgroundImage: `url(${src})`,
+          opacity: loaded ? 1 : 0,
+          transition: 'opacity 0.8s ease',
+        }}
+      />
+      <img
+        src={HERO_IMAGE}
+        alt=""
+        className="hidden"
+        onLoad={() => setLoaded(true)}
+        onError={() => {
+          setSrc('/assets/bible/default.webp');
+          setLoaded(true);
+        }}
+      />
 
-      {/* Overlay Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/70 via-bible-dark/55 to-bible-dark/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/75 via-bible-dark/55 to-bible-dark/70" />
 
-      {/* Content Container */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 24 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-          className="mb-8"
+          transition={{ duration: 0.8, delay: 0.15, ease }}
         >
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 mb-6 rounded-full bg-white/10 border border-white/20 backdrop-blur-sm text-bible-gold text-sm font-medium">
-            <BookOpen className="h-4 w-4" />
-            Bible & theology, gamified
-          </span>
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-white mb-6 leading-tight">
-            Learn Scripture Through<br />
-            Questions and Answers
+          <h1 className="font-serif text-5xl sm:text-6xl md:text-7xl lg:text-[5.5rem] font-bold text-white tracking-tight">
+            Bible Quest
           </h1>
-          <p className="text-lg md:text-xl text-white/80 max-w-2xl mx-auto leading-relaxed">
-            Read a chapter, take the quiz, build your streak. Track your journey through
-            all 66 books and the classics of Christian thought.
+          <p className="mt-6 text-lg sm:text-xl md:text-2xl text-white/80 max-w-xl mx-auto leading-relaxed">
+            Learn Scripture through questions and answers.
           </p>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          transition={{ duration: 0.7, delay: 0.4, ease }}
+          className="mt-10 flex flex-col items-center gap-5"
         >
-          <Link to="/bible">
-            <Button size="lg" className="bg-bible-blue hover:bg-bible-deepBlue text-white px-8 h-12 rounded-md font-medium transition-all duration-300 transform hover:scale-105">
-              Start the Journey
-              <ArrowRight className="ml-2 h-4 w-4" />
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <Button asChild size="lg">
+              <Link to="/bible">
+                Explore the Bible
+                <ArrowRight className="h-4 w-4" />
+              </Link>
             </Button>
-          </Link>
-          <Link to="/auth">
-            <Button variant="outline" size="lg" className="bg-white/20 border-white text-white hover:bg-white/40 px-8 h-12 rounded-md font-medium transition-all duration-300">
-              Free Sign Up
+            <Button asChild variant="onDark" size="lg">
+              <Link to="/theology">Explore theology</Link>
             </Button>
+          </div>
+          <Link
+            to="/auth"
+            className="text-sm text-white/55 hover:text-white/90 transition-colors underline-offset-4 hover:underline"
+          >
+            Create account
           </Link>
         </motion.div>
-
-        {/* Feature Icons */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-16 grid grid-cols-2 md:grid-cols-3 gap-8"
-        >
-          <FeatureIcon
-            icon={<BookOpen className="h-8 w-8 text-bible-gold" />}
-            text="Bible Reading"
-          />
-          <FeatureIcon
-            icon={<BookText className="h-8 w-8 text-bible-gold" />}
-            text="Theology Study"
-          />
-          <FeatureIcon
-            icon={<GraduationCap className="h-8 w-8 text-bible-gold" />}
-            text="Track Growth"
-          />
-        </motion.div> */}
       </div>
-
-    </div>
+    </section>
   );
 };
-
-interface FeatureIconProps {
-  icon: React.ReactNode;
-  text: string;
-}
-
-const FeatureIcon = ({ icon, text }: FeatureIconProps) => (
-  <div className="flex flex-col items-center">
-    <div className="flex items-center justify-center w-16 h-16 rounded-full bg-white/10 backdrop-blur-sm mb-3">
-      {icon}
-    </div>
-    <p className="text-white text-sm">{text}</p>
-  </div>
-);
 
 export default Hero;

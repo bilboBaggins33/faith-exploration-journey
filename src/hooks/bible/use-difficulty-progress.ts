@@ -1,6 +1,4 @@
 import { useMemo } from 'react';
-import { allChallenges } from '@/data/bible/challenges';
-import { ChapterChallenge } from '@/data/bible/types';
 import { BibleProgressData } from './bible-progress-types';
 import { bibleBooks } from '@/data/bible/books';
 
@@ -12,25 +10,12 @@ export interface DifficultyProgress {
   hard: { completed: number; total: number; percentage: number; correctPercentage: number };
 }
 
-// Build a lookup: bookId -> difficulty -> chapter numbers
-const bookDifficultyMap = new Map<string, Record<Difficulty, number[]>>();
+const DEFAULT_MAX_SCORE = 5;
 
-allChallenges.forEach((c: ChapterChallenge) => {
-  if (!bookDifficultyMap.has(c.bookId)) {
-    bookDifficultyMap.set(c.bookId, { easy: [], medium: [], hard: [] });
-  }
-  const entry = bookDifficultyMap.get(c.bookId)!;
-  entry[c.difficulty].push(c.chapter);
-});
-
-export const getChaptersByDifficulty = (bookId: string, difficulty: Difficulty): number[] => {
-  return bookDifficultyMap.get(bookId)?.[difficulty] ?? [];
-};
-
-export const getChallengesByBookAndDifficulty = (bookId: string, difficulty: Difficulty): ChapterChallenge[] => {
-  return allChallenges.filter(c => c.bookId === bookId && c.difficulty === difficulty);
-};
-
+/**
+ * Progress by difficulty uses chapter counts from bibleBooks and the user's
+ * completed_chapters — it no longer depends on shipping full challenge payloads.
+ */
 export const useDifficultyProgress = (progress: BibleProgressData | null) => {
   const getBookDifficultyProgress = useMemo(() => {
     return (bookId: string): DifficultyProgress => {
@@ -43,45 +28,37 @@ export const useDifficultyProgress = (progress: BibleProgressData | null) => {
         hard: { completed: 0, total: totalBookChapters, percentage: 0, correctPercentage: 0 },
       };
 
-      const diffMap = bookDifficultyMap.get(bookId);
-
       (['easy', 'medium', 'hard'] as Difficulty[]).forEach(diff => {
-        const diffChallenges = allChallenges.filter(c => c.bookId === bookId && c.difficulty === diff);
-        const chapters = diffMap ? diffMap[diff] : [];
-        
-        // Find all progress entries for this book that match the current difficulty
         const relevantProgress = (progress?.completed_chapters ?? []).filter(
-          c => c.book_id === bookId && (c.difficulty === diff || (!c.difficulty && diff === 'easy')) && chapters.includes(c.chapter)
+          c =>
+            c.book_id === bookId &&
+            (c.difficulty === diff || (!c.difficulty && diff === 'easy'))
         );
-        
-        const completed = relevantProgress.length;
-        
-        let validScoresCount = 0;
-        let sumScorePercent = 0;
-        
+
+        // Deduplicate by chapter (keep best score).
+        const bestByChapter = new Map<number, number>();
         relevantProgress.forEach(p => {
-          const ch = diffChallenges.find(c => c.chapter === p.chapter);
-          if (ch && p.score !== undefined) {
-             const maxScore = ch.questions.length;
-             if (maxScore > 0) {
-                 sumScorePercent += (p.score / maxScore) * 100;
-                 validScoresCount++;
-             }
-          } else if (p.score !== undefined) {
-             // Fallback if challenge definition isn't found exactly but we have a score
-             // Assume max score is 5 based on standard
-             sumScorePercent += (p.score / 5) * 100;
-             validScoresCount++;
-          }
+          const score = p.score ?? 0;
+          bestByChapter.set(p.chapter, Math.max(bestByChapter.get(p.chapter) ?? 0, score));
         });
-        
-        const correctPercentage = validScoresCount > 0 ? Math.round(sumScorePercent / validScoresCount) : 0;
-        
+
+        const completed = bestByChapter.size;
+        let sumScorePercent = 0;
+        bestByChapter.forEach(score => {
+          sumScorePercent += (score / DEFAULT_MAX_SCORE) * 100;
+        });
+
+        const correctPercentage =
+          completed > 0 ? Math.round(sumScorePercent / completed) : 0;
+
         result[diff] = {
           total: totalBookChapters,
           completed,
-          percentage: totalBookChapters > 0 ? Math.round((completed / totalBookChapters) * 100) : 0,
-          correctPercentage
+          percentage:
+            totalBookChapters > 0
+              ? Math.round((completed / totalBookChapters) * 100)
+              : 0,
+          correctPercentage,
         };
       });
 

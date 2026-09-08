@@ -1,11 +1,10 @@
-
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAuth } from '@/context/auth';
+import { useAccess } from '@/hooks/use-access';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
 import { bibleBooks } from '@/data/bible';
-import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
+import { getBibleChallengeTitle } from '@/data/bible/challenges';
 
 interface ChaptersGridProps {
   bookId: string | null;
@@ -13,7 +12,7 @@ interface ChaptersGridProps {
 
 const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
   const navigate = useNavigate();
-  const { user } = useAuth();
+  const { canAccess } = useAccess();
   const { getChapterStatus, getChapterDifficultyScores } = useBibleProgress();
   if (!bookId) return null;
   
@@ -32,20 +31,19 @@ const ChaptersGrid = ({ bookId }: ChaptersGridProps) => {
         {bookChapters.map(chapter => {
           const { isCompleted } = getChapterStatus(bookId, chapter);
           const scores = getChapterDifficultyScores(bookId, chapter);
-          const isFirstChapter = chapter === 1;
-          const challengeData = getBibleChallengeByBookAndChapter(bookId, chapter);
+          const challengeTitle = getBibleChallengeTitle(bookId, chapter);
           
           return (
             <div key={chapter} className="w-full">
               <BibleChapterCard
                 bookId={bookId}
                 chapter={chapter}
-                title={challengeData?.title}
+                title={challengeTitle}
                 isCompleted={isCompleted}
                 scores={scores}
                 maxScore={10}
-                isUnlocked={isFirstChapter || (user ? true : false)}
-                onCardClick={(bookId, chapter, difficulty) => navigateToChapter(bookId, chapter)}
+                isUnlocked={canAccess('bible', bookId, chapter)}
+                onCardClick={(bookId, chapter) => navigateToChapter(bookId, chapter)}
               />
             </div>
           );

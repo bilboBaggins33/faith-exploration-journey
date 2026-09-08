@@ -1,7 +1,5 @@
-
 import React, { useState } from 'react';
 import { useAuth } from '@/context/auth';
-import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Loader2, Check, X, CreditCard } from 'lucide-react';
 
@@ -33,39 +31,38 @@ const SubscriptionStatus = () => {
       setIsOpeningPortal(false);
     }
   };
-  
+
   return (
-    <Card className="p-5">
-      <h3 className="text-lg font-medium mb-4">Subscription Status</h3>
-      
+    <div>
+      <h3 className="text-lg font-serif font-semibold mb-4">Subscription</h3>
+
       {checkingSubscription ? (
-        <div className="flex items-center space-x-2 text-gray-500">
+        <div className="flex items-center space-x-2 text-muted-foreground">
           <Loader2 className="animate-spin h-4 w-4" />
           <span>Checking subscription...</span>
         </div>
       ) : hasSubscription ? (
         <div className="space-y-4">
-          <div className="flex items-center space-x-2 text-green-600">
+          <div className="flex items-center space-x-2 text-bible-success">
             <Check className="h-5 w-5" />
             <span className="font-medium">Active Subscription</span>
           </div>
-          <p className="text-sm text-gray-600">
+          <p className="text-sm text-muted-foreground">
             You have an active Bible Explorer Premium subscription. Enjoy full access to all content!
           </p>
           <Button
             onClick={handleManageBilling}
             disabled={isOpeningPortal}
             variant="outline"
-            className="flex items-center"
           >
             {isOpeningPortal ? (
               <>
-                <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                <Loader2 className="animate-spin h-4 w-4" />
                 Opening...
               </>
             ) : (
               <>
-                <CreditCard className="h-4 w-4 mr-2" />
+                <CreditCard className="h-4 w-4" />
                 Manage Billing
               </>
             )}
@@ -73,33 +70,29 @@ const SubscriptionStatus = () => {
         </div>
       ) : (
         <div className="space-y-4">
-          <div className="flex items-center space-x-2 text-red-500">
+          <div className="flex items-center space-x-2 text-destructive">
             <X className="h-5 w-5" />
             <span className="font-medium">No Active Subscription</span>
           </div>
-          <p className="text-sm text-gray-600 mb-4">
+          <p className="text-sm text-muted-foreground mb-4">
             Upgrade to Bible Explorer Premium for $2.99/month to unlock all content and features.
           </p>
-          <Button 
-            onClick={handleSubscribe} 
-            disabled={isCreatingSubscription}
-            className="flex items-center space-x-2"
-          >
+          <Button onClick={handleSubscribe} disabled={isCreatingSubscription}>
             {isCreatingSubscription ? (
               <>
-                <Loader2 className="animate-spin h-4 w-4 mr-2" />
+                <Loader2 className="animate-spin h-4 w-4" />
                 Processing...
               </>
             ) : (
               <>
-                <CreditCard className="h-4 w-4 mr-2" />
-                Subscribe Now - $2.99/month
+                <CreditCard className="h-4 w-4" />
+                Subscribe Now — $2.99/month
               </>
             )}
           </Button>
         </div>
       )}
-    </Card>
+    </div>
   );
 };
 

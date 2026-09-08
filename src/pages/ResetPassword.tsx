@@ -67,7 +67,7 @@ const ResetPassword = () => {
     <div className="min-h-screen w-full flex items-center justify-center relative overflow-hidden bg-bible-dark">
       <ScrollToTop />
       <div className="absolute inset-0 z-0">
-        <img src="/assets/bible/default.jpg" alt="" className="w-full h-full object-cover" />
+        <img src="/assets/bible/default.webp" alt="" className="w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/50 backdrop-blur-[2px]" />
       </div>
 
@@ -89,7 +89,7 @@ const ResetPassword = () => {
         <div className="bg-black/30 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8">
           {done ? (
             <div className="text-center py-6">
-              <CheckCircle2 className="mx-auto h-12 w-12 text-emerald-400 mb-4" />
+              <CheckCircle2 className="mx-auto h-12 w-12 text-bible-success mb-4" />
               <p className="text-white/90">Password updated — redirecting you in…</p>
             </div>
           ) : hasRecoverySession === false ? (
@@ -141,7 +141,7 @@ const ResetPassword = () => {
               <Button
                 type="submit"
                 disabled={submitting}
-                className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+                className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl"
               >
                 {submitting ? (
                   <span className="flex items-center justify-center gap-2">

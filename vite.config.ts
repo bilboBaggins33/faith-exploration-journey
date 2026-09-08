@@ -24,12 +24,8 @@ export default defineConfig(({ mode }) => ({
     rollupOptions: {
       output: {
         manualChunks(id) {
-          if (id.includes('data/bible/challenges')) {
-            return 'bible-challenges';
-          }
-          if (id.includes('data/theology/challenges')) {
-            return 'theology-challenges';
-          }
+          // Challenge quiz payloads are served by the get-challenge edge
+          // function — only titles/preview remain in the client graph.
           if (id.includes('node_modules')) {
             return 'vendor';
           }

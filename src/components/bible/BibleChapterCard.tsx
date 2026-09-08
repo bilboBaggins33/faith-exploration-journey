@@ -14,24 +14,24 @@ const DIFFICULTY_THEME: Record<
 > = {
   easy: {
     label: 'Easy',
-    text: 'text-emerald-600',
-    dot: 'bg-emerald-400',
-    idle: 'bg-white border-emerald-200 hover:bg-emerald-50',
-    active: 'bg-emerald-50 border-emerald-300',
+    text: 'text-bible-success',
+    dot: 'bg-bible-success',
+    idle: 'bg-card border-bible-success/30 hover:bg-bible-success/5',
+    active: 'bg-bible-success/10 border-bible-success/40',
   },
   medium: {
     label: 'Med',
-    text: 'text-amber-600',
-    dot: 'bg-amber-400',
-    idle: 'bg-white border-amber-200 hover:bg-amber-50',
-    active: 'bg-amber-50 border-amber-300',
+    text: 'text-bible-deepBlue',
+    dot: 'bg-bible-gold',
+    idle: 'bg-card border-bible-gold/40 hover:bg-bible-gold/10',
+    active: 'bg-bible-gold/15 border-bible-gold/50',
   },
   hard: {
     label: 'Hard',
-    text: 'text-rose-600',
-    dot: 'bg-rose-400',
-    idle: 'bg-white border-rose-200 hover:bg-rose-50',
-    active: 'bg-rose-50 border-rose-300',
+    text: 'text-destructive',
+    dot: 'bg-destructive',
+    idle: 'bg-card border-destructive/30 hover:bg-destructive/5',
+    active: 'bg-destructive/10 border-destructive/40',
   },
 };
 

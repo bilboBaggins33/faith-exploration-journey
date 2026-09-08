@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { motion } from 'framer-motion';
+import { QUIZ_FROST } from '@/components/challenges/QuizChrome';
 import QuestionCard from './QuestionCard';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import ResultsCard from './ResultsCard';
@@ -53,7 +54,7 @@ const CardContainer = React.memo(({
         {/* Card container */}
 
         {/* Semi-transparent dark bg for contrast with white text */}
-        <div className="bg-black/20 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-2xl border border-white/20 overflow-hidden">
+        <div className={QUIZ_FROST}>
           {/* Question Numbers inside card */}
           <div className="pt-5 md:pt-6 pb-3 md:pb-4 px-4 md:px-6">
             <div className="flex items-center justify-center gap-3 md:gap-4">
@@ -252,6 +253,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
   const bookName = book?.name || theologyBook?.title || '';
 
   if (completed) {
+    const isTheology = !!theologyBook;
     return (
       <ResultsCard
         score={score}
@@ -260,10 +262,13 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
         keyVerse={challenge.key_verse}
         onRestartQuiz={onRetry}
         onNavigateToBook={() => onGoBack()}
-        onNavigateToBible={() => window.location.href = '/bible'}
-        bookName={book?.name || ''}
+        onNavigateToBible={() => {
+          window.location.href = isTheology ? '/theology' : '/bible';
+        }}
+        bookName={bookName}
         bookId={bookId}
         chapter={chapter}
+        contentType={isTheology ? 'theology' : 'bible'}
       />
     );
   }
@@ -283,7 +288,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
       {/* Background */}
       <div className="fixed inset-0 -z-10">
         <img
-          src={imageError ? '/assets/bible/default.jpg' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
+          src={imageError ? '/assets/bible/default.webp' : (theologyBook ? getTheologyBookImage(bookId) : getBookImage(bookId))}
           alt={`${bookName || 'Book'} background`}
           className="w-full h-full object-cover scale-110"
           onError={() => setImageError(true)}
@@ -402,7 +407,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           {currentQuestion > 0 ? (
             <button
               onClick={() => handleScrollToPrev(currentQuestion)}
-              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all"
               aria-label="Previous question"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m15 18-6-6 6-6" /></svg>
@@ -414,7 +419,7 @@ const ChallengeFeedback: React.FC<ChallengeFeedbackProps> = ({
           {currentQuestion < (challenge?.questions.length || 0) - 1 && !!answeredQuestions[currentQuestion] ? (
             <button
               onClick={() => handleScrollToNext(currentQuestion)}
-              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all hover:scale-110"
+              className="pointer-events-auto p-2 rounded-full bg-white/20 hover:bg-white/40 backdrop-blur text-white transition-all"
               aria-label="Next question"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="m9 18 6-6-6-6" /></svg>

@@ -6,12 +6,27 @@ import { supabase } from '@/lib/supabase';
 import { UserAchievement } from '@/hooks/use-achievements';
 
 const celebrate = () => {
+  const colors = ['#E6C988', '#6AADDF', '#4A7AA8', '#F5F0E5', '#ffffff'];
+
   confetti({
-    particleCount: 120,
-    spread: 80,
-    origin: { y: 0.7 },
-    colors: ['#E6C988', '#6AADDF', '#4A7AA8', '#ffffff'],
+    particleCount: 80,
+    spread: 70,
+    origin: { y: 0.65 },
+    colors,
+    startVelocity: 35,
   });
+
+  // Second burst — gold-forward streak celebration
+  window.setTimeout(() => {
+    confetti({
+      particleCount: 50,
+      spread: 100,
+      origin: { y: 0.55, x: 0.5 },
+      colors: ['#E6C988', '#F5F0E5', '#ffffff'],
+      scalar: 1.1,
+      ticks: 200,
+    });
+  }, 180);
 };
 
 /**

@@ -8,7 +8,7 @@ import { useBibleProgress } from '@/hooks/use-bible-progress';
 import { recordActivity } from '@/lib/gamification';
 import { getStarsForScore } from '@/hooks/bible/bible-progress-utils';
 import { bibleBooks } from '@/data/bible';
-import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
+import { fetchChallenge } from '@/lib/fetch-challenge';
 import { ChapterChallenge, ChapterQuestion } from '@/data/bible/types';
 import { BibleProgressData } from '@/hooks/bible/bible-progress-types';
 
@@ -117,17 +117,11 @@ export function useBibleChallenge(bookId: string, chapter: string) {
           throw new Error("Invalid chapter number.");
         }
 
-        const loadedChallenge = getBibleChallengeByBookAndChapter(bookId, chapterNumber);
-
-        if (!loadedChallenge) {
-          const book = bibleBooks.find(b => b.id === bookId);
-          setState(prev => ({
-            ...prev,
-            error: `Challenge not found for ${book?.name || bookId} chapter ${chapterNumber}.`,
-            loading: false
-          }));
-          return;
-        }
+        const loadedChallenge = (await fetchChallenge(
+          'bible',
+          bookId,
+          chapterNumber
+        )) as ChapterChallenge;
 
         // Filter questions by current difficulty
         const filteredQuestions = filterQuestionsByDifficulty(loadedChallenge.questions, state.difficulty);
@@ -145,7 +139,14 @@ export function useBibleChallenge(bookId: string, chapter: string) {
           loading: false
         }));
       } catch (err: any) {
-        setState(prev => ({ ...prev, error: err.message || "Failed to load challenge.", loading: false }));
+        const book = bibleBooks.find(b => b.id === bookId);
+        setState(prev => ({
+          ...prev,
+          error:
+            err.message ||
+            `Challenge not found for ${book?.name || bookId} chapter ${chapter}.`,
+          loading: false,
+        }));
       }
     };
 

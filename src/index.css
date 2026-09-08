@@ -43,6 +43,18 @@
 
 @layer base {
   :root {
+    /* Brand palette (single source of truth) */
+    --bible-blue: 203 61% 64%;
+    --bible-deep-blue: 207 38% 47%;
+    --bible-gold: 39 55% 72%;
+    --bible-beige: 45 38% 93%;
+    --bible-dark: 240 27% 12%;
+    --bible-light: 0 0% 100%;
+    --bible-sand: 36 36% 85%;
+    --bible-stone: 36 12% 68%;
+    --bible-sky: 210 85% 87%;
+    --bible-success: 152 35% 42%;
+
     --background: 45 38% 95%;
     --foreground: 224 12% 23%;
 
@@ -52,16 +64,16 @@
     --popover: 0 0% 100%;
     --popover-foreground: 224 12% 23%;
 
-    --primary: 203 61% 64%;
+    --primary: var(--bible-blue);
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 39 55% 72%;
+    --secondary: var(--bible-gold);
     --secondary-foreground: 224 12% 23%;
 
     --muted: 39 20% 90%;
     --muted-foreground: 224 8% 50%;
 
-    --accent: 39 55% 72%;
+    --accent: var(--bible-gold);
     --accent-foreground: 224 12% 23%;
 
     --destructive: 0 84% 60%;
@@ -69,7 +81,7 @@
 
     --border: 39 20% 85%;
     --input: 39 20% 85%;
-    --ring: 203 61% 64%;
+    --ring: var(--bible-blue);
 
     --radius: 0.5rem;
 
@@ -84,6 +96,17 @@
   }
 
   .dark {
+    --bible-blue: 203 61% 54%;
+    --bible-deep-blue: 207 38% 52%;
+    --bible-gold: 39 45% 62%;
+    --bible-beige: 45 20% 18%;
+    --bible-dark: 240 27% 8%;
+    --bible-light: 0 0% 100%;
+    --bible-sand: 36 20% 28%;
+    --bible-stone: 36 10% 55%;
+    --bible-sky: 210 50% 70%;
+    --bible-success: 152 35% 48%;
+
     --background: 224 30% 10%;
     --foreground: 210 40% 98%;
 
@@ -93,16 +116,16 @@
     --popover: 224 30% 12%;
     --popover-foreground: 210 40% 98%;
 
-    --primary: 203 61% 54%;
+    --primary: var(--bible-blue);
     --primary-foreground: 210 40% 98%;
 
-    --secondary: 39 45% 62%;
+    --secondary: var(--bible-gold);
     --secondary-foreground: 210 40% 98%;
 
     --muted: 224 25% 25%;
     --muted-foreground: 210 40% 80%;
 
-    --accent: 39 45% 62%;
+    --accent: var(--bible-gold);
     --accent-foreground: 210 40% 98%;
 
     --destructive: 0 62.8% 30.6%;
@@ -110,7 +133,7 @@
 
     --border: 224 25% 25%;
     --input: 224 25% 25%;
-    --ring: 203 61% 54%;
+    --ring: var(--bible-blue);
     
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;

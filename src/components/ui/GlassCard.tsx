@@ -1,38 +1,28 @@
-import React from 'react';
 import { cn } from '@/lib/utils';
+import { QUIZ_FROST } from '@/components/challenges/QuizChrome';
 
 interface GlassCardProps {
-    children: React.ReactNode;
-    className?: string;
-    variant?: 'default' | 'light' | 'dark';
+  children: React.ReactNode;
+  className?: string;
+  variant?: 'default' | 'light' | 'dark';
 }
 
 /**
- * Reusable glassmorphism card component with frosted glass effect.
- * 
- * Variants:
- * - default: Semi-transparent white with strong blur
- * - light: More transparent, lighter glass effect
- * - dark: Darker glass effect for light backgrounds
+ * Frosted glass panel aligned with the live quiz shell.
+ * Default matches ChallengeFeedback question cards.
  */
 const GlassCard = ({ children, className, variant = 'default' }: GlassCardProps) => {
-    const variantStyles = {
-        default: 'bg-white/20 border-white/30',
-        light: 'bg-white/10 border-white/20',
-        dark: 'bg-black/20 border-white/10',
-    };
+  const variantStyles = {
+    default: QUIZ_FROST,
+    light: 'bg-white/10 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-2xl border border-white/20 overflow-hidden',
+    dark: 'bg-black/30 backdrop-blur-md rounded-2xl md:rounded-3xl shadow-2xl border border-white/15 overflow-hidden',
+  };
 
-    return (
-        <div
-            className={cn(
-                'backdrop-blur-xl rounded-[32px] shadow-2xl border overflow-hidden',
-                variantStyles[variant],
-                className
-            )}
-        >
-            {children}
-        </div>
-    );
+  return (
+    <div className={cn(variantStyles[variant], className)}>
+      {children}
+    </div>
+  );
 };
 
 export default GlassCard;

@@ -1,20 +1,17 @@
+import { getTheologyChallengeTitle } from './titles';
+import type { TheologyChallenge } from '../types';
 
-import { TheologyChallenge } from '../types';
-import { mereChristianityChallenges } from './mere-christianity/index';
-import { knowingGodChallenges } from './knowing-god/index';
-import { westminsterConfessionChallenges } from './westminster-confession/index';
-import { desiringGodChallenges } from './desiring-god/index';
-// Add imports for other book challenges as they are created
-// import { tacticsChallengess } from './tactics/index';
-// etc.
+export { theologyChallengeTitles, getTheologyChallengeTitle } from './titles';
+export { previewTheologyChallenge } from './preview';
 
-// Combine all challenges
-export const theologyChapterChallenges: TheologyChallenge[] = [
-  ...mereChristianityChallenges,
-  ...knowingGodChallenges,
-  ...westminsterConfessionChallenges,
-  ...desiringGodChallenges
-  // Add more challenges as they are created
-  // ...tacticsChallengess,
-  // etc.
-];
+/**
+ * @deprecated Full challenge payloads are no longer bundled. Use fetchChallenge().
+ * Kept as an empty array so accidental imports don't pull megabytes of content.
+ */
+export const theologyChapterChallenges: TheologyChallenge[] = [];
+
+export const getTheologyChallengeTitleOrFallback = (
+  bookId: string,
+  chapter: number,
+  fallback?: string
+) => getTheologyChallengeTitle(bookId, chapter) ?? fallback ?? `Chapter ${chapter}`;

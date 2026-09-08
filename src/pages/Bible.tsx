@@ -2,7 +2,7 @@ import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { Star, Crown } from 'lucide-react';
 import { bibleBooks } from '@/data/bible';
-import { getBibleChallengeByBookAndChapter } from '@/data/bible/challenges';
+import { getBibleChallengeTitle } from '@/data/bible/challenges';
 import { useBibleProgress } from '@/hooks/use-bible-progress';
 import BibleBooksList from '@/components/bible/BibleBooksList';
 import BibleChapterCard from '@/components/bible/BibleChapterCard';
@@ -145,7 +145,7 @@ const Bible: React.FC = () => {
         {!selectedBook && (
           <div className="fixed inset-0 -z-10 bg-[#2b1306]">
             <img
-              src="/assets/bible/default.jpg"
+              src="/assets/bible/default.webp"
               alt="Bible background"
               className="w-full h-full object-cover scale-110 opacity-40"
               loading="eager"
@@ -211,7 +211,7 @@ const Bible: React.FC = () => {
                     loading="eager"
                     decoding="async"
                     onError={(e) => {
-                      e.currentTarget.src = '/assets/bible/default.jpg';
+                      e.currentTarget.src = '/assets/bible/default.webp';
                     }}
                   />
                   <div className="absolute inset-0 bg-black/50" />
@@ -230,7 +230,7 @@ const Bible: React.FC = () => {
                           loading="eager"
                           decoding="async"
                           onError={(e) => {
-                            e.currentTarget.src = '/assets/bible/default.jpg';
+                            e.currentTarget.src = '/assets/bible/default.webp';
                           }}
                         />
                         <div className="absolute inset-0 bg-black/20" />
@@ -297,20 +297,20 @@ const Bible: React.FC = () => {
                           Up to 3 stars per difficulty
                         </span>
                         <span className="inline-flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400" /> Easy
+                          <span className="w-2.5 h-2.5 rounded-full bg-bible-success" /> Easy
                         </span>
                         <span className="inline-flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-amber-400" /> Medium
+                          <span className="w-2.5 h-2.5 rounded-full bg-bible-gold" /> Medium
                         </span>
                         <span className="inline-flex items-center gap-1.5">
-                          <span className="w-2.5 h-2.5 rounded-full bg-rose-400" /> Hard
+                          <span className="w-2.5 h-2.5 rounded-full bg-destructive" /> Hard
                         </span>
                       </div>
 
                       {/* Chapter cards grid */}
                       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4">
                         {Array.from({ length: selectedBook.chapters }, (_, i) => i + 1).map(chapter => {
-                          const challengeData = getBibleChallengeByBookAndChapter(selectedBook.id, chapter);
+                          const challengeTitle = getBibleChallengeTitle(selectedBook.id, chapter);
                           const { isCompleted } = getChapterStatus(selectedBook.id, chapter);
                           const scores = getChapterDifficultyScores(selectedBook.id, chapter);
 
@@ -319,7 +319,7 @@ const Bible: React.FC = () => {
                               <BibleChapterCard
                                 bookId={selectedBook.id}
                                 chapter={chapter}
-                                title={challengeData?.title}
+                                title={challengeTitle}
                                 isCompleted={isCompleted}
                                 scores={scores}
                                 maxScore={5}
@@ -341,7 +341,7 @@ const Bible: React.FC = () => {
               <BibleChapterCard
                 bookId={selectedBook.id}
                 chapter={selectedChapter}
-                title={getBibleChallengeByBookAndChapter(selectedBook.id, selectedChapter)?.title}
+                title={getBibleChallengeTitle(selectedBook.id, selectedChapter)}
                 isCompleted={false}
                 scores={{
                   easy: { score: 0, attempted: false },

@@ -16,10 +16,10 @@ const LevelPill: React.FC<{ dark?: boolean }> = ({ dark = false }) => {
       className={`inline-flex items-center gap-1.5 rounded-full pl-1.5 pr-3 py-1 text-sm font-semibold transition-colors ${
         dark
           ? 'bg-white/10 text-white hover:bg-white/20'
-          : 'bg-bible-gold/15 text-amber-700 hover:bg-bible-gold/25'
+          : 'bg-bible-gold/15 text-bible-deepBlue hover:bg-bible-gold/25'
       }`}
     >
-      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-br from-bible-gold to-amber-500 text-white">
+      <span className="flex h-6 w-6 items-center justify-center rounded-full bg-bible-gold text-bible-dark">
         <Sparkles className="h-3.5 w-3.5" />
       </span>
       Lv {level}

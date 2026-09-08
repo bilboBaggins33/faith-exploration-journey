@@ -44,7 +44,7 @@ const BookHeader = ({ book, onBack }: BookHeaderProps) => {
     <div className="relative">
       <AspectRatio ratio={3/1} className="bg-muted">
         <img 
-          src={imageError ? '/assets/bible/default.jpg' : getBookImage(book.id)} 
+          src={imageError ? '/assets/bible/default.webp' : getBookImage(book.id)} 
           alt={`${book.name} book cover`}
           className="w-full h-full object-cover"
           onError={() => setImageError(true)}

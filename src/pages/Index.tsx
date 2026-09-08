@@ -1,226 +1,149 @@
-import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useInView } from 'react-intersection-observer';
 import { Button } from '@/components/ui/button';
-import { Card, CardContent } from '@/components/ui/card';
 import Hero from '@/components/Hero';
-import {
-  BookOpen,
-  Trophy,
-  Flame,
-  BookMarked,
-  Users,
-  Target,
-  ChevronRight,
-  Sparkles,
-  Star,
-  Award,
-  Zap,
-  Heart,
-  Crown,
-  Compass,
-  CheckCircle2
-} from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+
+const ease = [0.22, 1, 0.36, 1] as const;
+const shell = 'max-w-7xl mx-auto px-4 sm:px-6 lg:px-8';
 
 const Index = () => {
   return (
     <div className="flex flex-col min-h-screen">
       <Hero />
       <main className="flex-grow">
-        <ChallengeTypes />
-        <CallToAction />
+        <Pathway
+          eyebrow="Scripture"
+          title="The Bible"
+          description="Read a chapter, answer the questions, and build lasting knowledge across all 66 books."
+          cta="Explore the Bible"
+          link="/bible"
+          image="/assets/bible/genesis.webp"
+          align="left"
+        />
+        <Pathway
+          eyebrow="Study"
+          title="Theology"
+          description="Go deeper with classic Christian works—chapter by chapter, the same way you learn Scripture."
+          cta="Explore theology"
+          link="/theology"
+          image="/assets/pilgrims-progress-cover.webp"
+          align="right"
+        />
+        <QuietClose />
       </main>
     </div>
   );
 };
 
-const ChallengeTypes = () => {
+interface PathwayProps {
+  eyebrow: string;
+  title: string;
+  description: string;
+  cta: string;
+  link: string;
+  image: string;
+  align: 'left' | 'right';
+}
+
+const Pathway = ({
+  eyebrow,
+  title,
+  description,
+  cta,
+  link,
+  image,
+  align,
+}: PathwayProps) => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.2,
   });
 
-  const challenges = [
-    {
-      icon: BookOpen,
-      title: "Bible Challenges",
-      description: "Test your knowledge of Scripture with chapter-by-chapter quizzes covering all 66 books.",
-      color: "from-bible-blue to-bible-blue/80",
-      link: "/bible",
-      image: "/assets/bible/genesis.png",
-      features: ["1,189 Chapters", "Comprehension Questions", "Progress Tracking"]
-    },
-    {
-      icon: BookMarked,
-      title: "Theology Challenges",
-      description: "Explore classic Christian works and deepen your understanding of foundational doctrines.",
-      color: "from-bible-gold to-amber-500",
-      link: "/theology",
-      image: "/assets/pilgrims-progress-cover.jpg",
-      features: ["Classic Books", "Chapter Summaries", "Knowledge Quizzes"]
-    },
-    {
-      icon: Trophy,
-      title: "Achievements",
-      description: "Earn badges and track your spiritual growth as you complete challenges and milestones.",
-      color: "from-emerald-500 to-emerald-600",
-      link: "/achievements",
-      image: "/assets/bible/matthew.jpg",
-      features: ["Milestone Badges", "Streak Rewards", "Progress Stats"]
-    }
-  ];
+  const isRight = align === 'right';
 
   return (
-    <section ref={ref} className="py-24 bg-gradient-to-b from-background to-muted/30">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-16"
-        >
-          <span className="inline-flex items-center gap-2 px-4 py-2 bg-bible-blue/10 text-bible-blue rounded-full text-sm font-medium mb-4">
-            <Sparkles className="h-4 w-4" />
-            Explore Our Features
-          </span>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold text-foreground mb-4">
-            Your Quest Awaits
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Whether you're a new believer or a seasoned scholar, we have challenges designed to deepen your faith.
-          </p>
-        </motion.div>
+    <section
+      ref={ref}
+      className="relative min-h-[75svh] md:min-h-[80svh] flex items-end overflow-hidden bg-bible-dark"
+    >
+      <motion.div
+        initial={{ scale: 1.06 }}
+        animate={inView ? { scale: 1 } : {}}
+        transition={{ duration: 1.4, ease }}
+        className="absolute inset-0 bg-cover bg-center"
+        style={{ backgroundImage: `url(${image})` }}
+      />
+      <div
+        className={`absolute inset-0 ${
+          isRight
+            ? 'bg-gradient-to-l from-bible-dark/90 via-bible-dark/55 to-bible-dark/20'
+            : 'bg-gradient-to-r from-bible-dark/90 via-bible-dark/55 to-bible-dark/20'
+        }`}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-bible-dark/40 via-transparent to-bible-dark/20" />
 
-        <div className="grid md:grid-cols-3 gap-8">
-          {challenges.map((challenge, index) => (
-            <motion.div
-              key={challenge.title}
-              initial={{ opacity: 0, y: 30 }}
-              animate={inView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-            >
-              <Card className="group h-full border-0 shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden bg-card flex flex-col">
-                <CardContent className="p-0 flex flex-col flex-1">
-                  <div
-                    className="h-44 bg-cover bg-center relative overflow-hidden"
-                    style={{ backgroundImage: `url(${challenge.image})` }}
-                  >
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
-                    <div className="absolute inset-0 p-5 flex flex-col justify-between">
-                      <div className="flex items-center justify-between">
-                        <div className="p-2.5 bg-white/20 rounded-xl backdrop-blur-sm">
-                          <challenge.icon className="h-6 w-6 text-white" />
-                        </div>
-                        <ChevronRight className="h-5 w-5 text-white opacity-0 group-hover:opacity-100 group-hover:translate-x-1 transition-all duration-300" />
-                      </div>
-                      <h3 className="font-serif text-xl font-bold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.8)]">
-                        {challenge.title}
-                      </h3>
-                    </div>
-                  </div>
-                  <div className="p-6 flex flex-col flex-1">
-                    <p className="text-muted-foreground text-sm mb-5 flex-1">{challenge.description}</p>
-                    <ul className="space-y-2.5 mb-6">
-                      {challenge.features.map((feature, i) => (
-                        <li key={i} className="flex items-center gap-2 text-sm text-foreground">
-                          <CheckCircle2 className="h-4 w-4 text-bible-blue flex-shrink-0" />
-                          {feature}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link to={challenge.link}>
-                      <Button className="w-full group-hover:bg-bible-blue group-hover:text-white transition-colors">
-                        Get Started
-                      </Button>
-                    </Link>
-                  </div>
-                </CardContent>
-              </Card>
-            </motion.div>
-          ))}
-        </div>
+      <div className={`relative z-10 w-full ${shell} py-16 md:py-24`}>
+        <motion.div
+          initial={{ opacity: 0, y: 28 }}
+          animate={inView ? { opacity: 1, y: 0 } : {}}
+          transition={{ duration: 0.7, delay: 0.1, ease }}
+          className={`max-w-md ${isRight ? 'md:ml-auto md:text-right' : ''}`}
+        >
+          <p className="text-bible-gold/90 text-sm font-medium tracking-[0.18em] uppercase mb-4">
+            {eyebrow}
+          </p>
+          <h2 className="font-serif text-4xl sm:text-5xl md:text-6xl font-bold text-white tracking-tight mb-5">
+            {title}
+          </h2>
+          <p
+            className={`text-base md:text-lg text-white/75 leading-relaxed mb-8 ${
+              isRight ? 'md:ml-auto' : ''
+            }`}
+          >
+            {description}
+          </p>
+          <Link
+            to={link}
+            className="group inline-flex items-center gap-2.5 text-white text-base font-medium border-b border-white/35 pb-0.5 hover:border-white transition-colors duration-300"
+          >
+            {cta}
+            <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
       </div>
     </section>
   );
 };
 
-const CallToAction = () => {
+const QuietClose = () => {
   const { ref, inView } = useInView({
     triggerOnce: true,
-    threshold: 0.1,
+    threshold: 0.35,
   });
 
-  const stats = [
-    { icon: BookOpen, value: "1,189", label: "Chapters to Master" },
-    { icon: Star, value: "4000+", label: "Challenges to Complete" },
-    { icon: Award, value: "100+", label: "Achievements to Earn" }
-  ];
-
   return (
-    <section ref={ref} className="py-24 relative overflow-hidden bg-bible-dark">
-      {/* Background image */}
-      <div
-        className="absolute inset-0 bg-cover bg-center"
-        style={{ backgroundImage: `url("/assets/bible/revelation.png")` }}
-      />
-      {/* Dark overlay guarantees text contrast regardless of the image */}
-      <div className="absolute inset-0 bg-gradient-to-b from-bible-dark/85 via-bible-dark/80 to-bible-dark/95" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Stats Grid */}
+    <section ref={ref} className="bg-background border-b border-border/60">
+      <div className={`${shell} py-20 md:py-28`}>
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 16 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6 }}
-          className="grid grid-cols-3 gap-4 md:gap-6 mb-16"
+          transition={{ duration: 0.6, ease }}
+          className="max-w-lg mx-auto text-center"
         >
-          {stats.map((stat, index) => (
-            <motion.div
-              key={stat.label}
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={inView ? { opacity: 1, scale: 1 } : {}}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 md:p-6 text-center text-white border border-white/20"
-            >
-              <stat.icon className="h-6 w-6 md:h-8 md:w-8 mx-auto mb-2 md:mb-3 text-bible-gold" />
-              <div className="text-2xl md:text-4xl font-bold mb-1">{stat.value}</div>
-              <div className="text-white/70 text-xs md:text-sm">{stat.label}</div>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* CTA Content */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center text-white"
-        >
-          <div className="inline-flex items-center gap-2 px-4 py-2 bg-bible-gold/20 text-bible-gold rounded-full text-sm font-medium mb-6">
-            <Flame className="h-4 w-4" />
-            Start Your Journey Today
-          </div>
-          <h2 className="text-4xl md:text-5xl font-serif font-bold mb-6">
-            Ready to Grow in Your Faith?
-          </h2>
-          <p className="text-xl text-white/80 max-w-2xl mx-auto mb-10">
-            Join other believers who are deepening their understanding of Scripture and theology through engaging challenges.
+          <p className="text-bible-deepBlue/80 text-sm font-medium tracking-[0.18em] uppercase mb-4">
+            Your journey
           </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/bible">
-              <Button size="lg" className="bg-white text-bible-blue hover:bg-white/90 shadow-lg px-8 py-6 text-lg">
-                <BookOpen className="mr-2 h-5 w-5" />
-                Explore Bible
-              </Button>
-            </Link>
-            <Link to="/auth">
-              <Button size="lg" variant="outline" className="border-2 border-white text-white hover:bg-white/10 px-8 py-6 text-lg bg-transparent">
-                <Crown className="mr-2 h-5 w-5" />
-                Create Free Account
-              </Button>
-            </Link>
-          </div>
+          <h2 className="font-serif text-3xl md:text-4xl font-bold text-foreground mb-4">
+            Save your progress
+          </h2>
+          <p className="text-muted-foreground text-base md:text-lg leading-relaxed mb-9">
+            Create a free account to track chapters, streaks, and achievements as you learn.
+          </p>
+          <Button asChild size="lg" variant="outline">
+            <Link to="/auth">Create account</Link>
+          </Button>
         </motion.div>
       </div>
     </section>

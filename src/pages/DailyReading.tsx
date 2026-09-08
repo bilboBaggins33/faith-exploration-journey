@@ -62,7 +62,7 @@ const DailyReading = () => {
                 <>
                   <div className="hidden sm:block w-px h-10 bg-white/10" />
                   <div className="flex items-center gap-3">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-500/15 text-emerald-400">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-bible-success/15 text-bible-success">
                       <BookOpen className="h-4 w-4" />
                     </span>
                     <div>
@@ -107,11 +107,11 @@ const DailyReading = () => {
             <div className="grid md:grid-cols-5 gap-6 items-center">
               <div className="md:col-span-2">
                 <img
-                  src="/assets/bible/luke.jpg"
+                  src="/assets/bible/luke.webp"
                   alt=""
                   className="w-full aspect-[4/3] object-cover rounded-xl"
                   onError={(e) => {
-                    (e.target as HTMLImageElement).src = '/assets/bible/default.jpg';
+                    (e.target as HTMLImageElement).src = '/assets/bible/default.webp';
                   }}
                 />
               </div>

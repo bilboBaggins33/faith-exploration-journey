@@ -25,13 +25,6 @@ const DesktopNav = ({ isHomePage, isDarkBg, user, handleSignOut }: DesktopNavPro
   const isActive = (path: string) => location.pathname === path;
   const [isOpen, setIsOpen] = useState(false);
 
-  const getSignInButtonClasses = () => {
-    if (isDarkBg) {
-      return 'bg-bible-blue text-white hover:bg-bible-deepBlue';
-    }
-    return 'bg-bible-dark text-white hover:bg-bible-dark/90';
-  };
-
   return (
     <div className="hidden md:block">
       <div className="flex items-center space-x-8">
@@ -103,15 +96,12 @@ const DesktopNav = ({ isHomePage, isDarkBg, user, handleSignOut }: DesktopNavPro
           </DropdownMenu>
           </div>
         ) : (
-          <Link to="/auth">
-            <Button
-              size="sm"
-              className={`ml-4 transition-colors duration-300 flex items-center ${getSignInButtonClasses()}`}
-            >
-              <LogIn className="h-4 w-4 mr-2" />
+          <Button asChild size="sm" className="ml-4">
+            <Link to="/auth">
+              <LogIn className="h-4 w-4" />
               Sign In
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         )}
       </div>
     </div>

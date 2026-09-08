@@ -79,7 +79,7 @@ const TheologyExplorer: React.FC = () => {
         {/* Blurred background */}
         <div className="fixed inset-0 -z-10 bg-[#2b1306]">
           <img
-            src="/assets/bible/default.jpg"
+            src="/assets/bible/default.webp"
             alt="Theology background"
             className="w-full h-full object-cover blur-sm scale-110"
             loading="eager"
@@ -109,7 +109,6 @@ const TheologyExplorer: React.FC = () => {
               <BookList
                 books={sortedBooks}
                 getBookProgress={getBookProgress}
-                getBookAverageScore={getBookAverageScore}
               />
             )}
           </div>

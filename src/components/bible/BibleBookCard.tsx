@@ -29,7 +29,7 @@ const DIFFICULTY_LABELS = { easy: 'Easy', medium: 'Med', hard: 'Hard' } as const
 function scoreColor(pct: number, attempted: boolean): string {
   if (!attempted) return 'text-muted-foreground/30';
   if (pct >= 90) return 'text-green-600';
-  if (pct >= 70) return 'text-emerald-500';
+  if (pct >= 70) return 'text-bible-success';
   if (pct >= 50) return 'text-amber-500';
   if (pct >= 30) return 'text-orange-500';
   return 'text-red-500';
@@ -53,7 +53,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
   return (
     <div
       className={cn(
-        'overflow-hidden transition-all duration-500 ease hover:shadow-2xl hover:scale-105 cursor-pointer h-full flex flex-col rounded-lg shadow-lg bg-card',
+        'overflow-hidden transition-all duration-500 ease hover:shadow-2xl cursor-pointer h-full flex flex-col rounded-lg shadow-lg bg-card',
         mastered ? 'border-2 border-amber-300 shadow-amber-200/50' : 'border-0'
       )}
       onClick={onClick}
@@ -61,7 +61,7 @@ const BibleBookCard: React.FC<BibleBookCardProps> = ({
       {/* Image section */}
       <div className="relative pb-[46.67%]">
         <img
-          src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail(bookId)}
+          src={imageError ? '/assets/bible/default.webp' : getBookThumbnail(bookId)}
           alt={`${bookName} cover`}
           className="absolute inset-0 object-cover w-full h-full rounded-t-lg"
           loading="lazy"

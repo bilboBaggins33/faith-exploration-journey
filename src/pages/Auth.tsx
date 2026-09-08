@@ -36,7 +36,7 @@ const AuthPage = () => {
       {/* Background Image with Overlay */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/assets/bible/default.jpg"
+          src="/assets/bible/default.webp"
           alt="Background"
           className="w-full h-full object-cover"
         />
@@ -239,7 +239,7 @@ const LoginForm = () => {
               type="button"
               onClick={handleSendReset}
               disabled={sendingReset}
-              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl"
             >
               {sendingReset ? (
                 <span className="flex items-center justify-center gap-2">
@@ -270,7 +270,7 @@ const LoginForm = () => {
 
             <Button
               type="submit"
-              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className="w-full h-12 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-lg rounded-xl"
               disabled={loggingIn}
             >
               {loggingIn ? (
@@ -299,7 +299,7 @@ const LoginForm = () => {
             type="button"
             onClick={handleGoogleSignIn}
             disabled={loggingInWithGoogle}
-            className="w-full h-10 bg-white text-bible-dark hover:bg-gray-50 font-medium text-sm rounded-lg flex items-center justify-center transition-all hover:scale-[1.02] active:scale-[0.98] disabled:opacity-70"
+            className="w-full h-10 bg-white text-bible-dark hover:bg-muted font-medium text-sm rounded-lg flex items-center justify-center disabled:opacity-70"
           >
             {loggingInWithGoogle ? (
               <div className="h-4 w-4 border-2 border-bible-dark/30 border-t-bible-dark rounded-full animate-spin mr-2" />
@@ -459,7 +459,7 @@ const RegisterForm = () => {
 
         <Button
           type="submit"
-          className="w-full h-10 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-sm rounded-lg transition-all hover:scale-[1.02] active:scale-[0.98] mt-2"
+          className="w-full h-10 bg-bible-gold hover:bg-bible-gold/90 text-bible-dark font-medium text-sm rounded-lg mt-2"
           disabled={registering}
         >
           {registering ? (

@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { BookOpen, Cookie } from 'lucide-react';
+import { Cookie } from 'lucide-react';
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -9,15 +9,16 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-10">
           <div className="col-span-2 md:col-span-2 max-w-sm">
-            <div className="flex items-center mb-3">
-              <BookOpen className="h-6 w-6 text-bible-gold mr-2" />
-              <span className="text-lg font-serif font-semibold tracking-tight">
-                Bible Quest
-              </span>
-            </div>
+            <Link to="/" className="inline-flex items-center mb-4">
+              <img
+                src="/BibleQuestLogo.png"
+                alt="Bible Quest"
+                className="h-10 w-auto"
+              />
+            </Link>
             <p className="text-white/60 text-sm leading-relaxed">
-              An interactive way to read Scripture and the classics of Christian thought —
-              take chapter quizzes, build streaks, and track your growth in faith.
+              Learn Scripture and Christian thought through chapter quizzes,
+              streaks, and tracked growth in faith.
             </p>
           </div>
 

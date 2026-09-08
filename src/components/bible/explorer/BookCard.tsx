@@ -1,5 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
+import { getBookThumbnail, DEFAULT_BOOK_IMAGE } from '@/data/bible/book-images';
 
 interface BookCardProps {
   book: {
@@ -28,11 +29,11 @@ const BookCard: React.FC<BookCardProps> = ({ book, progress, averageScore, index
       {/* Image */}
       <div className="relative pb-[66.67%] w-full overflow-hidden">
         <img
-          src={`/assets/bible/thumbnail/${book.id.toLowerCase()}.jpg`}
+          src={getBookThumbnail(book.id)}
           alt={`${book.name} cover`}
           className="absolute inset-0 object-cover w-full h-full transition-transform duration-500 group-hover:scale-110"
           onError={(e) => {
-            (e.target as HTMLImageElement).src = '/assets/bible/default.jpg';
+            (e.target as HTMLImageElement).src = DEFAULT_BOOK_IMAGE;
           }}
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent flex flex-col justify-end p-3 transition-all duration-300">

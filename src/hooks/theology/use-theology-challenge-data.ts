@@ -1,9 +1,10 @@
 
 import { useParams } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { theologyChapterChallenges, theologyChapters, theologyBooks } from '@/data/theology';
+import { theologyChapters, theologyBooks } from '@/data/theology';
 import { isSupabaseConfigured } from '@/lib/supabase';
 import { supabase } from '@/lib/supabase';
+import { fetchChallenge } from '@/lib/fetch-challenge';
 import { useTheologyProgress } from '@/hooks/use-theology-progress';
 import { TheologyChallenge } from '@/data/theology/types';
 
@@ -21,13 +22,11 @@ export const useTheologyChallengeData = () => {
     queryKey: ['theology-challenge', bookId, chapter],
     queryFn: async () => {
       const chapterNum = parseInt(chapter);
-      const found = theologyChapterChallenges.find(
-        c => c.bookId === bookId && c.chapter === chapterNum
-      );
-      
-      if (!found) {
-        throw new Error('Challenge not found');
-      }
+      const found = (await fetchChallenge(
+        'theology',
+        bookId,
+        chapterNum
+      )) as TheologyChallenge;
       
       if (isSupabaseConfigured()) {
         const { data: { session } } = await supabase.auth.getSession();

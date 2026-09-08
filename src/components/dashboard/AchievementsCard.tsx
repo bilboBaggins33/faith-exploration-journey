@@ -41,12 +41,12 @@ const AchievementsCard = () => {
             key={achievement.id}
             className={`flex gap-3 rounded-xl p-3 ${
               achievement.isUnlocked
-                ? 'bg-amber-50/80 border border-amber-100'
+                ? 'bg-bible-gold/15 border border-bible-gold/25'
                 : 'border border-transparent bg-muted/30'
             }`}
           >
             <span className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg ${
-              achievement.isUnlocked ? 'bg-amber-400 text-white' : 'bg-muted text-muted-foreground'
+              achievement.isUnlocked ? 'bg-bible-gold text-bible-dark' : 'bg-muted text-muted-foreground'
             }`}>
               {achievement.isUnlocked ? (
                 <achievement.icon className="h-4 w-4" />

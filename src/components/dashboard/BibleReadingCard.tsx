@@ -55,7 +55,7 @@ const BibleReadingCard = ({ recentlyReadBooks }: BibleReadingCardProps) => {
       ) : (
         <div className="flex flex-col sm:flex-row gap-5 sm:gap-6 items-center sm:items-start">
           <img
-            src={imageError ? '/assets/bible/default.jpg' : getBookThumbnail('genesis')}
+            src={imageError ? '/assets/bible/default.webp' : getBookThumbnail('genesis')}
             alt=""
             className="w-[88px] h-[120px] rounded-lg object-cover shadow-md shrink-0"
             loading="lazy"

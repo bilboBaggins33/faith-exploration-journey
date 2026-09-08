@@ -1,14 +1,13 @@
 import { useAuth } from '@/context/auth';
+import {
+  canAccessContent,
+  isFreeContent,
+  isPreviewChapter,
+  needsLoginForContent,
+  type ContentType,
+} from '@/lib/access-rules';
 
-export type ContentType = 'bible' | 'theology';
-
-/**
- * Designated preview chapters that anyone (even logged-out visitors) can sample.
- */
-const PREVIEW_CHAPTERS: Record<ContentType, { bookId: string; chapter: number }> = {
-  bible: { bookId: 'genesis', chapter: 1 },
-  theology: { bookId: 'mere-christianity', chapter: 1 },
-};
+export type { ContentType };
 
 /**
  * Centralized freemium access rules, used by every gated surface so the model
@@ -21,31 +20,22 @@ const PREVIEW_CHAPTERS: Record<ContentType, { bookId: string; chapter: number }>
  */
 export const useAccess = () => {
   const { user, hasSubscription, checkingSubscription } = useAuth();
-
-  const isPreview = (type: ContentType, bookId: string, chapter: number): boolean => {
-    const preview = PREVIEW_CHAPTERS[type];
-    return chapter === preview.chapter && bookId === preview.bookId;
+  const ctx = {
+    userId: user?.id ?? null,
+    hasSubscription: Boolean(hasSubscription),
   };
 
-  /** Content that is available without a subscription for the current user. */
-  const isFree = (type: ContentType, bookId: string, chapter: number): boolean => {
-    if (chapter === 1) {
-      if (user) return true; // logged-in free tier: first chapter of every book
-      return isPreview(type, bookId, chapter); // logged-out: preview chapters only
-    }
-    return false; // later chapters are premium
-  };
+  const isPreview = (type: ContentType, bookId: string, chapter: number): boolean =>
+    isPreviewChapter(type, bookId, chapter);
 
-  /** Whether the current user can actually open this content right now. */
-  const canAccess = (type: ContentType, bookId: string, chapter: number): boolean => {
-    if (hasSubscription) return true;
-    return isFree(type, bookId, chapter);
-  };
+  const isFree = (type: ContentType, bookId: string, chapter: number): boolean =>
+    isFreeContent(type, bookId, chapter, ctx);
 
-  /** Content the user can't reach because they aren't signed in at all. */
-  const needsLogin = (type: ContentType, bookId: string, chapter: number): boolean => {
-    return !user && !isFree(type, bookId, chapter);
-  };
+  const canAccess = (type: ContentType, bookId: string, chapter: number): boolean =>
+    canAccessContent(type, bookId, chapter, ctx);
+
+  const needsLogin = (type: ContentType, bookId: string, chapter: number): boolean =>
+    needsLoginForContent(type, bookId, chapter, ctx);
 
   return {
     isFree,

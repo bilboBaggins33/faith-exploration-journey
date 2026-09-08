@@ -1,11 +1,12 @@
 
 import { useQuery } from '@tanstack/react-query';
 import { bibleBooks } from '@/data/bible/books';
+import { fetchChallenge } from '@/lib/fetch-challenge';
+import type { ChapterChallenge } from '@/data/bible/types';
 
 /**
  * Hook to fetch Bible challenge data for a specific book and chapter.
- * The (large) challenge dataset is imported dynamically so it is only fetched
- * when a chapter challenge is actually requested.
+ * Payloads come from the gated get-challenge edge function.
  */
 export const useBibleChallenges = (bookId: string, chapter: number) => {
   return useQuery({
@@ -17,17 +18,7 @@ export const useBibleChallenges = (bookId: string, chapter: number) => {
         throw new Error(`Invalid book ID ${bookId} or chapter ${chapter}`);
       }
 
-      const { getBibleChallengeByBookAndChapter } = await import('@/data/bible/challenges');
-      const challenge = getBibleChallengeByBookAndChapter(bookId, chapter);
-
-      if (!challenge) {
-        return {
-          title: `${book.name} Chapter ${chapter}`,
-          questions: [],
-        };
-      }
-
-      return challenge;
+      return (await fetchChallenge('bible', bookId, chapter)) as ChapterChallenge;
     },
   });
 };

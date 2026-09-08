@@ -48,7 +48,8 @@ export function useTheologyChallengeAdapter() {
         error: null,
         completed: false,
         answeredQuestions: {},
-        difficulty: 'medium',
+        // Theology challenges have a single path (no Easy/Med/Hard picker).
+        difficulty: undefined,
         filteredQuestions: []
     });
 

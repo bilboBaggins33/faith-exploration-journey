@@ -1,17 +1,20 @@
+import { useParams } from 'react-router-dom';
+import { QuizFrostPanel, QuizStage } from '@/components/challenges/QuizChrome';
 
-import React from 'react';
-import ChallengeSkeleton from './ChallengeSkeleton';
+interface LoadingStateProps {
+  type?: 'bible' | 'theology';
+}
 
-const LoadingState = () => {
+const LoadingState = ({ type = 'bible' }: LoadingStateProps) => {
+  const { bookId } = useParams<{ bookId: string }>();
+
   return (
-    <ChallengeSkeleton>
-      <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-bible-blue mx-auto mb-4"></div>
-          <p className="text-lg">Loading challenge...</p>
-        </div>
-      </div>
-    </ChallengeSkeleton>
+    <QuizStage bookId={bookId} type={type}>
+      <QuizFrostPanel className="w-full max-w-sm px-8 py-12 text-center text-white">
+        <div className="animate-spin rounded-full h-10 w-10 border-2 border-white/20 border-t-bible-sky mx-auto mb-5" />
+        <p className="text-white/80">Loading challenge…</p>
+      </QuizFrostPanel>
+    </QuizStage>
   );
 };
 

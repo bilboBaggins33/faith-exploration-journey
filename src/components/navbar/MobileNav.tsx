@@ -164,16 +164,16 @@ const MobileNav = ({ isOpen, onOpenChange, user, handleSignOut }: MobileNavProps
                 </div>
               ) : (
                 <div className="grid grid-cols-2 gap-3">
-                  <Link to="/auth" className="w-full" onClick={() => onOpenChange(false)}>
-                    <Button variant="outline" className="w-full bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white hover:border-white/40 h-11">
+                  <Button asChild variant="onDark" className="w-full">
+                    <Link to="/auth" onClick={() => onOpenChange(false)}>
                       Sign In
-                    </Button>
-                  </Link>
-                  <Link to="/auth" className="w-full" onClick={() => onOpenChange(false)}>
-                    <Button className="w-full bg-bible-blue hover:bg-bible-deepBlue text-white border-0 shadow-lg shadow-bible-blue/20 h-11">
+                    </Link>
+                  </Button>
+                  <Button asChild className="w-full">
+                    <Link to="/auth" onClick={() => onOpenChange(false)}>
                       Sign Up
-                    </Button>
-                  </Link>
+                    </Link>
+                  </Button>
                 </div>
               )}
             </div>

@@ -71,7 +71,7 @@ const ReadingItem = ({
         className={cn(
           'w-full flex items-center justify-between gap-3 rounded-xl px-3 py-3 text-left text-sm transition-colors',
           isCompleted
-            ? 'bg-emerald-50 text-emerald-900 hover:bg-emerald-100/80'
+            ? 'bg-bible-success/10 text-bible-success hover:bg-bible-success/15'
             : 'hover:bg-muted/60 text-foreground',
         )}
       >
@@ -83,7 +83,7 @@ const ReadingItem = ({
         </div>
         <span className={cn(
           'shrink-0 text-xs font-medium',
-          isCompleted ? 'text-emerald-600' : 'text-bible-deepBlue',
+          isCompleted ? 'text-bible-success' : 'text-bible-deepBlue',
         )}>
           {isCompleted ? 'Done' : 'Read →'}
         </span>
